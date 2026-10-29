@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "purpose": "Deterministic regression contracts for TextFX creative-core orchestration; these are not a benchmark of artistic quality.",
+  "cases": [
+    {
+      "id": "court-runner-up-overrides-discovery-score",
+      "invariant": "Counterfactual candidate selection prefers a supplied Court score over the discovery heuristic score.",
+      "expected": "Highest Court-scored non-selected candidate is used as the shadow alternative."
+    },
+    {
+      "id": "fallback-review-is-not-quality-evidence",
+      "invariant": "A heuristic fallback review must never be interpreted as a valid model-to-model quality comparison.",
+      "expected": "Counterfactual status is inconclusive and no winner is declared."
+    },
+    {
+      "id": "memory-failure-does-not-promote-fallback-lessons",
+      "invariant": "Only model-based reviews may produce durable creative lessons.",
+      "expected": "Fallback reviews produce zero learned lessons."
+    },
+    {
+      "id": "counterfactual-is-observational",
+      "invariant": "Counterfactual score differences are retained as evidence and do not mutate the selected candidate.",
+      "expected": "Comparison returns a delta and limitations without a selection action."
+    },
+    {
+      "id": "creative-ir-schema-is-versioned",
+      "invariant": "Unsupported CreativeIR schema versions are rejected by runtime validation.",
+      "expected": "Validation throws for unknown schema versions."
+    },
+    {
+      "id": "five-technique-discovery-is-attributable",
+      "invariant": "Each established lateral-thinking technique receives its own discovery prompt and candidate provenance.",
+      "expected": "Five technique IDs are independently represented; a failed technique does not discard successful candidates."
+    },
+    {
+      "id": "candidate-history-survives-restart",
+      "invariant": "Candidate versions and Court decisions persist append-only with stable identities and reasons.",
+      "expected": "Archive reload preserves generated and accepted versions while duplicate event retries do not append duplicates."
+    },
+    {
+      "id": "review-objections-bind-to-candidate-version",
+      "invariant": "Every reviewer objection names its candidate version, rubric, defect, rationale, fix, and verification test.",
+      "expected": "Revision history retains prior artifact and review decisions; malformed non-ready reviews are rejected."
+    },
+    {
+      "id": "diversity-metrics-remain-diagnostic",
+      "invariant": "Candidate duplication metrics are explicitly lexical diagnostics and separate from human quality evidence.",
+      "expected": "Benchmark output reports exact and near duplicate pairs without claiming semantic quality or audience impact."
+    }
+  ]
+}

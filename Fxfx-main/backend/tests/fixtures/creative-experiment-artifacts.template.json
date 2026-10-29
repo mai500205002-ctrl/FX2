@@ -1,0 +1,12 @@
+[
+  {
+    "caseId": "human-tension-01",
+    "engineVersion": "v1.0.0",
+    "artifact": "Paste the final creative output only. Remove model names, version labels, timestamps, and identifying metadata before blind review."
+  },
+  {
+    "caseId": "human-tension-01",
+    "engineVersion": "v1.1.0",
+    "artifact": "Paste the corresponding output for the exact same benchmark case."
+  }
+]

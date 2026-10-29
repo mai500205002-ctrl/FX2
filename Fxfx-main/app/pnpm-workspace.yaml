@@ -1,0 +1,7 @@
+allowBuilds:
+  core-js: set this to true or false
+  esbuild: set this to true or false
+overrides:
+  '@xmldom/xmldom': 0.9.12
+  brace-expansion: 2.1.7
+  source-map-js: 1.2.2

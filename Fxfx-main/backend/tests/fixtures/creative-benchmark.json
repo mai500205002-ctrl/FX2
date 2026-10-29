@@ -1,0 +1,23 @@
+{
+  "benchmarkVersion": "1.0.0",
+  "purpose": "Stable prompts for controlled creative evaluation; this file does not assign automatic artistic truth scores.",
+  "scoringProtocol": {
+    "method": "blind-human-review",
+    "reviewersPerArtifact": 3,
+    "criteria": [
+      { "id": "brief_alignment", "weight": 0.25 },
+      { "id": "originality", "weight": 0.25 },
+      { "id": "emotional_coherence", "weight": 0.2 },
+      { "id": "visual_executability", "weight": 0.15 },
+      { "id": "clarity_and_pacing", "weight": 0.15 }
+    ],
+    "controls": ["Hide model/version labels", "Randomize artifact order", "Score artifacts independently before discussion", "Report inter-rater agreement", "Do not treat model self-review as audience evidence"]
+  },
+  "cases": [
+    { "id": "human-tension-01", "goal": "Create a short film for a product that helps people learn", "brief": "Audience: adults who feel embarrassed to be beginners. Tension: they want progress but fear looking incompetent. Avoid generic motivational speeches." },
+    { "id": "category-reversal-02", "goal": "Create a launch idea for a reusable water bottle", "brief": "Audience: commuters. Challenge the category assumption that hydration advertising must show athletes or mountains. The idea must be filmable on a modest budget." },
+    { "id": "emotional-ambiguity-03", "goal": "Create a 30-second public-interest film about reconnecting with family", "brief": "Audience: busy adults. Show affection without sentimentality. Avoid voice-over explaining the message; let a concrete action carry the emotional turn." },
+    { "id": "distant-analogy-04", "goal": "Create a memorable concept for a neighborhood library", "brief": "Audience: teenagers who see libraries as irrelevant. Borrow a mechanism from a distant domain, but make the analogy understandable and practical rather than surreal for its own sake." },
+    { "id": "constraint-pressure-05", "goal": "Create a low-budget launch film for a repair service", "brief": "Audience: people who replace broken items too quickly. Only one room, one actor, no more than three props. The film should make repair feel empowering, not preachy." }
+  ]
+}
