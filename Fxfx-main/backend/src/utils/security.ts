@@ -63,7 +63,9 @@ export function apiAuthenticationMiddleware(req: Request, res: Response, next: N
     req.path === '/session' || req.path === '/browser' || req.path.startsWith('/browser/')
   ) return next()
   if (authenticateApi(req)) return next()
-  if (hasApiSession(req)) {
+  // A cookie session is valid only while API-key authentication is configured.
+  // If the key is removed at runtime, stale sessions must not keep remote access alive.
+  if (process.env.TEXTFX_API_KEY?.trim() && hasApiSession(req)) {
     if (!['GET', 'HEAD', 'OPTIONS'].includes(req.method) && !isTrustedApiOrigin(req)) {
       res.status(403).json({ error: 'Request origin is not allowed' })
       return
