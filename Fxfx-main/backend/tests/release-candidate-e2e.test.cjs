@@ -181,7 +181,7 @@ test('RC E2E: complete creative workflow generates verified CreativeIR and prove
   assert.equal(result.creativeIR.concept.title, 'The Reverse Clock')
   assert.equal(result.creativeIR.script.beats.length, 3)
   assert.equal(result.creativeIR.provenance.provider, 'Gemini')
-  assert.equal(result.creativeIR.provenance.rubricVersions.court, '1.0.1')
+  assert.equal(result.creativeIR.provenance.rubricVersions.court, '1.0.2')
   assert.equal(result.creativeIR.provenance.rubricVersions.scriptReview, '1.0.0')
   assert.ok(result.creativeIR.lineage.events.includes('run.queued'))
   assert.ok(result.creativeIR.lineage.events.includes('evaluation.completed'))
