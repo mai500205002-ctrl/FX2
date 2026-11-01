@@ -61,7 +61,7 @@ export async function judgeConceptCandidates(args: {
     `Strategic insight: ${args.insight}`,
     'Evaluate the following candidate concepts as an independent creative judge. Do not reward verbosity or merely complete fields.',
     'Score each candidate from 0 to 100 using: brief/goal fit (25%), insight depth (20%), originality and non-obviousness (20%), emotional/strategic coherence (15%), execution clarity (10%), and risk/ethical awareness (10%).',
-    'Select exactly one candidateId. Give evidence-based reasons tied to the supplied concepts. Do not invent audience research or factual claims.',
+    'Select exactly one candidateId. The selected candidate must have verdict advance; never select a candidate marked revise or reject. Give evidence-based reasons tied to the supplied concepts. Do not invent audience research or factual claims.',
     `Write every natural-language value in ${language}. Return JSON only with keys: selectedCandidateId, summary, rubric (array of strings), reviews (array). Each review must contain candidateId, score, verdict (advance|revise|reject), rationale (array), strengths (array), weaknesses (array), nextActions (array). Include one review per candidate.`,
     `Candidates: ${JSON.stringify(args.candidates.map(candidate => ({ id: candidate.id, lens: candidate.lens, heuristicScore: candidate.score, concept: candidate.concept })))}`,
   ].join('\n\n')
@@ -78,6 +78,10 @@ export async function judgeConceptCandidates(args: {
     if (typeof review.score !== 'number' || !Number.isFinite(review.score) || review.score < 0 || review.score > 100) throw new Error('Creative Court score must be between 0 and 100.')
     if (!['advance', 'revise', 'reject'].includes(review.verdict)) throw new Error('Creative Court returned an invalid verdict.')
     for (const field of ['rationale', 'strengths', 'weaknesses', 'nextActions'] as const) if (!validStrings(review[field])) throw new Error(`Creative Court returned invalid ${field}.`)
+  }
+  const selectedReview = payload.reviews.find(review => review.candidateId === payload.selectedCandidateId)
+  if (!selectedReview || selectedReview.verdict !== 'advance') {
+    throw new Error('Creative Court selected a candidate that was not approved to advance.')
   }
   assertLanguageMatch(payload, args.context.language || 'en', 'Creative Court')
   return { source: 'model', selectedCandidateId: payload.selectedCandidateId, reviews: payload.reviews, summary: payload.summary, rubric: payload.rubric }
