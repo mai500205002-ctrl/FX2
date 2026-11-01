@@ -305,13 +305,13 @@ test('creative memory balances both polarities and Anti-Taste searches the full 
       lesson: `Preserve a strong visual idea number ${index}.`,
       tags: ['campaign story launch'],
     })),
-    {
+    ...Array.from({ length: 10 }, (_, index) => ({
       ...base,
-      id: 'avoid-relevant',
+      id: `avoid-relevant-${index}`,
       polarity: 'avoid',
-      lesson: 'Avoid predictable campaign endings.',
+      lesson: `Avoid predictable campaign endings number ${index}.`,
       tags: ['campaign story'],
-    },
+    })),
   ]
   fs.writeFileSync(statePath, JSON.stringify({
     schemaVersion: 1, lessons, counterfactualEvidence: [],
@@ -325,8 +325,8 @@ test('creative memory balances both polarities and Anti-Taste searches the full 
     const avoidCount = general.lessons.filter(item => item.polarity === 'avoid').length
     if (reinforceCount !== 3 || avoidCount !== 3) process.exit(41)
     const antiTaste = memory.retrieveAntiTasteMemory('campaign story launch', 4)
-    if (antiTaste.lessons.length !== 1 || antiTaste.lessons[0].id !== 'avoid-relevant') process.exit(42)
-    if (!antiTaste.prompt.includes('Avoid predictable campaign endings.')) process.exit(43)
+    if (antiTaste.lessons.length !== 4 || antiTaste.lessons[0].id !== 'avoid-relevant-0') process.exit(42)
+    if (!antiTaste.prompt.includes('Avoid predictable campaign endings number 0.')) process.exit(43)
     const onlyReinforce = memory.retrieveCreativeMemory('campaign story launch', 1)
     if (onlyReinforce.lessons.length !== 1) process.exit(44)
     const emptyAvoid = memory.retrieveAntiTasteMemory('unrelated topic', 4)
