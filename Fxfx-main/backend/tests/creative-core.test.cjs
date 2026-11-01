@@ -88,6 +88,33 @@ test('creative memory learns only from model reviews and persists bounded eviden
 
   const learned = learnFromCreativeReview({ runId: 'model-run', query: 'campaign story', review: review() })
   assert.ok(learned.length > 0)
+  const lessonCountBeforeRepeat = getCreativeMemoryStatus().lessonCount
+  const reinforcedLessonId = learned.find(item => item.polarity === 'reinforce').id
+  const repeated = learnFromCreativeReview({
+    runId: 'model-run-repeat',
+    query: 'portrait film music',
+    review: review({ strengths: ['  CONCRETE   VISUAL contrast works well. '], weaknesses: [] }),
+  })
+  assert.equal(repeated.length, 0)
+  assert.equal(getCreativeMemoryStatus().lessonCount, lessonCountBeforeRepeat)
+  assert.ok(
+    require('../dist/modules/creative-memory.js')
+      .retrieveCreativeMemory('portrait film music')
+      .lessons.some(item => item.id === reinforcedLessonId),
+    'a repeated lesson should gain bounded context tags without duplicating its provenance',
+  )
+
+  const invalidScoreLessons = learnFromCreativeReview({
+    runId: 'invalid-score-run', query: 'campaign story',
+    review: review({ score: Number.NaN }),
+  })
+  const malformedReviewLessons = learnFromCreativeReview({
+    runId: 'malformed-review-run', query: 'campaign story',
+    review: review({ strengths: 'not-an-array' }),
+  })
+  assert.equal(invalidScoreLessons.length, 0)
+  assert.equal(malformedReviewLessons.length, 0)
+  assert.equal(getCreativeMemoryStatus().lessonCount, lessonCountBeforeRepeat)
   const validEvidence = {
     status: 'compared', method: 'bounded-shadow-script-review-v1',
     selectedCandidateId: 'main', alternativeCandidateId: 'shadow',
