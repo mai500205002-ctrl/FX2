@@ -127,6 +127,8 @@ test('Creative Court calculates its weighted score from six independently valida
   assert.match(capturedPrompt, /The backend calculates the overall weighted score/)
   assert.match(capturedPrompt, /riskEthicalAwareness \(10%\)/)
   assert.match(capturedPrompt, /Do not return a rubric or aggregate score/)
+  assert.match(capturedPrompt, /Use a blind review/)
+  assert.doesNotMatch(capturedPrompt, /discoveryHeuristicScore|heuristicScore|\"lens\"/)
 })
 
 test('Creative Court rejects a selected candidate below another advance candidate', async () => {
