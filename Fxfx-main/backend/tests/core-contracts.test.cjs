@@ -157,7 +157,7 @@ test('versioning: system prompt, court rubric and review rubric carry explicit v
   const { COURT_RUBRIC_VERSION } = require('../dist/modules/creative-court.js')
   const { REVIEW_RUBRIC_VERSION } = require('../dist/modules/creative-reviewer.js')
   assert.equal(SYSTEM_PROMPT_VERSION, '1.0.1')
-  assert.equal(COURT_RUBRIC_VERSION, '1.0.1')
+  assert.equal(COURT_RUBRIC_VERSION, '1.0.2')
   assert.equal(REVIEW_RUBRIC_VERSION, '1.0.0')
 })
 
@@ -180,7 +180,7 @@ test('versioning: a completed run provenance records provider, promptVersion and
   }
   const result = await runAgentWithDependencies({ goal: 'g', brief: 'b', language: 'en' }, deps)
   assert.equal(result.creativeIR.provenance.promptVersion, '1.0.1')
-  assert.deepEqual(result.creativeIR.provenance.rubricVersions, { court: '1.0.1', scriptReview: '1.0.0' })
+  assert.deepEqual(result.creativeIR.provenance.rubricVersions, { court: '1.0.2', scriptReview: '1.0.0' })
   assert.equal(result.creativeIR.provenance.provider, 'Gemini')
   validateCreativeIR(result.creativeIR)
 })
