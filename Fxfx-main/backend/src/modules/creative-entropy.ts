@@ -27,6 +27,17 @@ function similarity(a: Set<string>, b: Set<string>): number {
   return intersection / (a.size + b.size - intersection)
 }
 
+function averageSimilarityToPeers(
+  candidate: CreativeCandidate,
+  candidates: CreativeCandidate[],
+  excludedPeerId: string,
+): number {
+  const peers = candidates.filter(other => other.id !== candidate.id && other.id !== excludedPeerId)
+  if (!peers.length) return 0
+  const candidateWords = words(candidate)
+  return peers.reduce((sum, peer) => sum + similarity(candidateWords, words(peer)), 0) / peers.length
+}
+
 function measure(candidates: CreativeCandidate[]) {
   let maxSimilarity = 0
   let pair: [string, string] | undefined
@@ -47,8 +58,9 @@ function measure(candidates: CreativeCandidate[]) {
 
 /**
  * A bounded novelty thermostat: measures lexical overlap, then makes at most one
- * targeted regeneration of the weaker member of the most similar pair. Scores are
- * diagnostic heuristics, not a claim to measure artistic value.
+ * targeted regeneration of the more redundant member of the most similar pair.
+ * The pair's similarity to the wider pool determines redundancy; candidate score
+ * is only a tie-breaker. Scores are diagnostics, not artistic-quality measurements.
  */
 export async function regulateCreativeEntropy(args: {
   candidates: CreativeCandidate[]
@@ -71,7 +83,11 @@ export async function regulateCreativeEntropy(args: {
   const [firstId, secondId] = initial.pair
   const first = args.candidates.find(candidate => candidate.id === firstId)!
   const second = args.candidates.find(candidate => candidate.id === secondId)!
-  const target = first.score <= second.score ? first : second
+  const firstExternalSimilarity = averageSimilarityToPeers(first, args.candidates, second.id)
+  const secondExternalSimilarity = averageSimilarityToPeers(second, args.candidates, first.id)
+  const target = firstExternalSimilarity === secondExternalSimilarity
+    ? (first.score <= second.score ? first : second)
+    : (firstExternalSimilarity > secondExternalSimilarity ? first : second)
   const other = target.id === first.id ? second : first
   const antiTaste = args.antiTasteMemory.prompt ? `\n\n${args.antiTasteMemory.prompt}` : ''
   const instruction = [
