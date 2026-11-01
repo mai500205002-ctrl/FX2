@@ -69,6 +69,35 @@ function overlap(queryTokens: string[], lessonTokens: string[]): number {
   return common / Math.sqrt(queryTokens.length * lessonTokens.length)
 }
 
+function rankLessons(
+  queryTokens: string[],
+  polarity?: CreativeLesson['polarity'],
+): Array<{ lesson: CreativeLesson; score: number }> {
+  return memory
+    .filter(lesson => !polarity || lesson.polarity === polarity)
+    .map(lesson => {
+      const tagTokens = [...new Set(lesson.tags.flatMap(tag => tokens(tag)))]
+      return { lesson, score: overlap(queryTokens, tagTokens) }
+    })
+    .filter(item => item.score > 0)
+    .sort((a, b) => b.score - a.score || b.lesson.createdAt.localeCompare(a.lesson.createdAt))
+}
+
+function safeRetrievalLimit(limit: number, fallback: number, maximum: number): number {
+  return Number.isFinite(limit) ? Math.max(0, Math.min(maximum, Math.floor(limit))) : fallback
+}
+
+function toMemoryContext(lessons: CreativeLesson[], polarityLabel = 'REINFORCE / AVOID'): CreativeMemoryContext {
+  const prompt = lessons.length
+    ? [
+        `TextFX Creative Memory — contextual guidance, not universal law (${polarityLabel}):`,
+        ...lessons.map((lesson, index) => `${index + 1}. ${lesson.polarity === 'reinforce' ? 'REINFORCE' : 'AVOID'}: ${lesson.lesson}`),
+        'Apply only lessons relevant to this brief; preserve originality and use judgment rather than copying prior concepts.',
+      ].join('\\n')
+    : ''
+  return { lessons: lessons.map(lesson => ({ ...lesson, tags: [...lesson.tags] })), prompt }
+}
+
 function isLesson(value: unknown): value is CreativeLesson {
   if (!value || typeof value !== 'object' || Array.isArray(value)) return false
   const item = value as Partial<CreativeLesson>
@@ -155,28 +184,28 @@ function isComparableCounterfactualEvidence(value: unknown): value is Counterfac
 export function retrieveCreativeMemory(query: string, limit = 5): CreativeMemoryContext {
   if (typeof query !== 'string' || !query.trim()) return { lessons: [], prompt: '' }
   const queryTokens = tokens(query)
-  const safeLimit = Number.isFinite(limit) ? Math.max(0, Math.min(8, Math.floor(limit))) : 5
+  const safeLimit = safeRetrievalLimit(limit, 5, 8)
   if (!safeLimit || !queryTokens.length) return { lessons: [], prompt: '' }
 
-  const ranked = memory
-    .map(lesson => {
-      // Persisted tags may be legacy phrases, mixed-case text, or contain punctuation.
-      // Tokenize them exactly like the query rather than requiring exact tag-string matches.
-      const tagTokens = [...new Set(lesson.tags.flatMap(tag => tokens(tag)))]
-      return { lesson, score: overlap(queryTokens, tagTokens) }
-    })
-    .filter(item => item.score > 0)
-    .sort((a, b) => b.score - a.score || b.lesson.createdAt.localeCompare(a.lesson.createdAt))
-    .slice(0, safeLimit)
-  const lessons = ranked.map(item => item.lesson)
-  const prompt = lessons.length
-    ? [
-        'TextFX Creative Memory — use as contextual guidance, not universal law:',
-        ...lessons.map((lesson, index) => `${index + 1}. ${lesson.polarity === 'reinforce' ? 'REINFORCE' : 'AVOID'}: ${lesson.lesson}`),
-        'Do not copy prior concepts. Apply only lessons relevant to this brief, and preserve originality.',
-      ].join('\n')
-    : ''
-  return { lessons: lessons.map(lesson => ({ ...lesson, tags: [...lesson.tags] })), prompt }
+  const ranked = rankLessons(queryTokens)
+  if (safeLimit === 1) return toMemoryContext(ranked.slice(0, 1).map(item => item.lesson))
+
+  // Reserve a place for both learning polarities when each has relevant evidence.
+  // If one side has too few matches, fill the remaining slots from the global ranking.
+  const selected = [
+    ...rankLessons(queryTokens, 'reinforce').slice(0, Math.ceil(safeLimit / 2)),
+    ...rankLessons(queryTokens, 'avoid').slice(0, Math.floor(safeLimit / 2)),
+  ]
+  const selectedIds = new Set(selected.map(item => item.lesson.id))
+  for (const item of ranked) {
+    if (selected.length >= safeLimit) break
+    if (!selectedIds.has(item.lesson.id)) {
+      selected.push(item)
+      selectedIds.add(item.lesson.id)
+    }
+  }
+  selected.sort((a, b) => b.score - a.score || b.lesson.createdAt.localeCompare(a.lesson.createdAt))
+  return toMemoryContext(selected.slice(0, safeLimit).map(item => item.lesson))
 }
 
 /** Learn only from model-based review; structural fallbacks are not evidence of creative quality. */
@@ -283,14 +312,22 @@ export function getCreativeMemoryStatus() {
 /** Return anti-taste constraints separately so diversity control can use them without treating
  * every historical weakness as a universal prohibition. */
 export function retrieveAntiTasteMemory(query: string, limit = 4): CreativeMemoryContext {
-  const result = retrieveCreativeMemory(query, MAX_LESSONS)
-  const lessons = result.lessons.filter(lesson => lesson.polarity === 'avoid').slice(0, Math.max(0, Math.min(6, limit)))
+  if (typeof query !== 'string' || !query.trim()) return { lessons: [], prompt: '' }
+  const queryTokens = tokens(query)
+  const safeLimit = safeRetrievalLimit(limit, 4, 6)
+  if (!safeLimit || !queryTokens.length) return { lessons: [], prompt: '' }
+
+  // Rank avoid lessons independently across the full memory; do not let reinforce
+  // lessons consume the general retrieval window before anti-taste filtering.
+  const lessons = rankLessons(queryTokens, 'avoid')
+    .slice(0, safeLimit)
+    .map(item => item.lesson)
   const prompt = lessons.length
     ? [
-        'ANTI-TASTE MEMORY — these are context-specific patterns to challenge, not absolute bans:',
+        'ANTI-TASTE MEMORY — context-specific patterns to challenge, not absolute bans:',
         ...lessons.map((lesson, index) => `${index + 1}. Avoid repeating: ${lesson.lesson}`),
         'If a pattern is strategically necessary, justify it through the brief rather than blindly obeying this memory.',
-      ].join('\n')
+      ].join('\\n')
     : ''
   return { lessons: lessons.map(lesson => ({ ...lesson, tags: [...lesson.tags] })), prompt }
 }
