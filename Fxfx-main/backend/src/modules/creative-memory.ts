@@ -112,6 +112,15 @@ function loadState(): void {
 
 loadState()
 
+function isComparableCounterfactualEvidence(item: CounterfactualEvidence): boolean {
+  if (item.status !== 'compared' || item.primarySource !== 'model' || item.shadowSource !== 'model') return false
+  if (!Number.isFinite(item.primaryScore) || item.primaryScore < 0 || item.primaryScore > 100) return false
+  if (typeof item.shadowScore !== 'number' || !Number.isFinite(item.shadowScore) || item.shadowScore < 0 || item.shadowScore > 100) return false
+  if (typeof item.scoreDelta !== 'number' || !Number.isFinite(item.scoreDelta)) return false
+  // The stored delta must be mathematically consistent with the two recorded scores.
+  return Math.abs(item.scoreDelta - (item.shadowScore - item.primaryScore)) <= 1e-9
+}
+
 /** Retrieve relevant lessons without exposing prior full briefs or scripts to new generation. */
 export function retrieveCreativeMemory(query: string, limit = 5): CreativeMemoryContext {
   const queryTokens = tokens(query)
@@ -183,7 +192,7 @@ export function recordCounterfactualEvidence(runId: string, replay: Counterfactu
 }
 
 export function getCreativeMemoryStatus() {
-  const comparable = counterfactualEvidence.filter(item => item.status === 'compared' && item.primarySource === 'model' && item.shadowSource === 'model' && typeof item.scoreDelta === 'number')
+  const comparable = counterfactualEvidence.filter(isComparableCounterfactualEvidence)
   const deltaTotal = comparable.reduce((sum, item) => sum + (item.scoreDelta ?? 0), 0)
   const positive = comparable.filter(item => (item.scoreDelta ?? 0) > 0).length
   const negative = comparable.filter(item => (item.scoreDelta ?? 0) < 0).length
