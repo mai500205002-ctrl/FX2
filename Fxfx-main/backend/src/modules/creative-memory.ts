@@ -33,13 +33,13 @@ interface CounterfactualEvidence {
 interface PersistedCreativeMemory {
   schemaVersion: 1
   lessons: CreativeLesson[]
-  counterfactualEvidence: CounterfactualEvidence[]
+  counterfactualEvidence: unknown[]
 }
 
 const MAX_LESSONS = 160
 const MAX_COUNTERFACTUAL_EVIDENCE = 200
 const memory: CreativeLesson[] = []
-const counterfactualEvidence: CounterfactualEvidence[] = []
+const counterfactualEvidence: unknown[] = []
 const memoryPath = resolve(process.env.TEXTFX_CREATIVE_MEMORY_PATH || resolve(process.cwd(), 'data', 'creative-memory.json'))
 let persistence: 'durable' | 'volatile' = 'volatile'
 let persistenceError: string | undefined
@@ -97,10 +97,10 @@ function loadState(): void {
       return
     }
     for (const lesson of parsed.lessons.filter(isLesson).slice(-MAX_LESSONS)) memory.push({ ...lesson, tags: [...lesson.tags] })
+    // Preserve the bounded raw audit history exactly as parsed. Statistical eligibility
+    // is validated separately; malformed historical records must not vanish on the next save.
     for (const item of parsed.counterfactualEvidence.slice(-MAX_COUNTERFACTUAL_EVIDENCE)) {
-      if (item && typeof item === 'object' && typeof item.runId === 'string' && typeof item.recordedAt === 'string' &&
-          ['compared', 'inconclusive', 'skipped', 'failed'].includes(item.status) &&
-          typeof item.primaryScore === 'number') counterfactualEvidence.push(item as CounterfactualEvidence)
+      counterfactualEvidence.push(item)
     }
     persistence = 'durable'
     persistenceError = undefined
@@ -112,11 +112,16 @@ function loadState(): void {
 
 loadState()
 
-function isComparableCounterfactualEvidence(item: CounterfactualEvidence): boolean {
+function isComparableCounterfactualEvidence(value: unknown): value is CounterfactualEvidence {
+  if (!value || typeof value !== 'object' || Array.isArray(value)) return false
+  const item = value as Partial<CounterfactualEvidence>
   if (item.status !== 'compared' || item.primarySource !== 'model' || item.shadowSource !== 'model') return false
-  if (!Number.isFinite(item.primaryScore) || item.primaryScore < 0 || item.primaryScore > 100) return false
+  if (typeof item.runId !== 'string' || !item.runId.trim() || typeof item.recordedAt !== 'string' || !item.recordedAt.trim()) return false
+  if (typeof item.primaryScore !== 'number' || !Number.isFinite(item.primaryScore) || item.primaryScore < 0 || item.primaryScore > 100) return false
   if (typeof item.shadowScore !== 'number' || !Number.isFinite(item.shadowScore) || item.shadowScore < 0 || item.shadowScore > 100) return false
   if (typeof item.scoreDelta !== 'number' || !Number.isFinite(item.scoreDelta)) return false
+  if (typeof item.selectedCandidateId !== 'string' || !item.selectedCandidateId.trim()) return false
+  if (typeof item.alternativeCandidateId !== 'string' || !item.alternativeCandidateId.trim()) return false
   // The stored delta must be mathematically consistent with the two recorded scores.
   return Math.abs(item.scoreDelta - (item.shadowScore - item.primaryScore)) <= 1e-9
 }
