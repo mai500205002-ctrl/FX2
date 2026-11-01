@@ -245,6 +245,49 @@ test('creative memory quarantines invalid lessons without using or deleting them
   ))
 })
 
+test('creative memory tokenizes legacy phrase tags and ranks relevance before recency', t => {
+  const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'textfx-memory-retrieval-'))
+  t.after(() => fs.rmSync(directory, { recursive: true, force: true }))
+  const statePath = path.join(directory, 'creative-memory.json')
+  const base = {
+    polarity: 'reinforce',
+    sourceRunId: 'retrieval-fixture',
+    sourceScore: 80,
+    createdAt: '2026-10-01T12:00:00.000Z',
+    lesson: 'A useful lesson for a creative brief.',
+  }
+  const lessons = [
+    { ...base, id: 'older-high-relevance', createdAt: '2026-09-01T12:00:00.000Z', tags: ['Campaign Story'] },
+    { ...base, id: 'newer-low-relevance', createdAt: '2026-10-30T12:00:00.000Z', tags: ['CAMPAIGN'] },
+    ...Array.from({ length: 9 }, (_, index) => ({
+      ...base,
+      id: `cap-${index}`,
+      createdAt: `2026-10-${String(index + 10).padStart(2, '0')}T12:00:00.000Z`,
+      tags: ['campaign'],
+    })),
+  ]
+  fs.writeFileSync(statePath, JSON.stringify({
+    schemaVersion: 1, lessons, counterfactualEvidence: [],
+  }))
+
+  const modulePath = path.resolve(__dirname, '../dist/modules/creative-memory.js')
+  const childScript = `
+    const memory = require(${JSON.stringify(modulePath)})
+    const result = memory.retrieveCreativeMemory('campaign story documentary', 20)
+    if (result.lessons[0]?.id !== 'older-high-relevance') process.exit(31)
+    if (result.lessons.length !== 8) process.exit(32)
+    const one = memory.retrieveCreativeMemory('campaign story documentary', 1)
+    if (one.lessons.length !== 1) process.exit(33)
+    const empty = memory.retrieveCreativeMemory('   ', 5)
+    if (empty.lessons.length !== 0 || empty.prompt !== '') process.exit(34)
+  `
+  const child = spawnSync(process.execPath, ['-e', childScript], {
+    encoding: 'utf8',
+    env: { ...process.env, TEXTFX_CREATIVE_MEMORY_PATH: statePath },
+  })
+  assert.equal(child.status, 0, child.stderr || child.stdout)
+})
+
 test('temporary test state is cleaned up', () => {
   fs.rmSync(tempRoot, { recursive: true, force: true })
   assert.equal(fs.existsSync(tempRoot), false)
