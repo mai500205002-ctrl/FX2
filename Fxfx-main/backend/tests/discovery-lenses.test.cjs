@@ -5,6 +5,7 @@ const assert = require('node:assert/strict')
 const { discoverConcepts } = require('../dist/modules/discovery-engine.js')
 const { metabolizeIdeas } = require('../dist/modules/idea-metabolism.js')
 const conceptMapper = require('../dist/modules/concept-mapper.js')
+const { regulateCreativeEntropy } = require('../dist/modules/creative-entropy.js')
 
 const insight = {
   mainInsight: 'A strategic synthesis',
@@ -150,6 +151,71 @@ test('idea metabolism crosses the strongest seed with its most distinct availabl
     assert.deepEqual(result.offspring[0].parentIds, ['primary'])
     assert.deepEqual(result.offspring[1].parentIds, ['primary', 'distinct-partner'])
     assert.equal(result.events[1].type, 'crossover')
+  } finally {
+    conceptMapper.mapConcept = originalMapConcept
+  }
+})
+
+function entropyCandidate(id, score, tokenText) {
+  return {
+    id,
+    lens: id,
+    lensId: id,
+    version: 1,
+    runId: context.runId,
+    promptVersion: context.promptVersion,
+    concept: {
+      title: tokenText,
+      tagline: '',
+      coreIdea: '',
+      visualNotes: '',
+      creativeDevice: '',
+      emotionalArc: '',
+      targetParadox: '',
+      lateralThinkingTechniques: [],
+    },
+    score,
+    rationale: [],
+    generation: 0,
+  }
+}
+
+test('creative entropy regenerates the more redundant pair member, not merely the lower-scored one', async () => {
+  const candidates = [
+    entropyCandidate('networked-direction', 95, 'alpha bravo charlie delta echo foxtrot'),
+    entropyCandidate('lower-score-direction', 60, 'alpha bravo charlie delta echo golf'),
+    entropyCandidate('external-neighbor', 80, 'alpha bravo charlie juliet kilo lima'),
+  ]
+  let generationTarget = ''
+  const originalMapConcept = conceptMapper.mapConcept
+  conceptMapper.mapConcept = async (_insight, generationContext) => {
+    generationTarget = generationContext.target
+    return {
+      title: 'quartz nebula',
+      tagline: 'violet orbit',
+      coreIdea: 'gravity conducts silence',
+      visualNotes: 'luminous tidal chamber',
+      creativeDevice: 'resonant prism',
+      emotionalArc: 'distance becomes intimacy',
+      targetParadox: 'stillness creates motion',
+      lateralThinkingTechniques: ['analogy'],
+    }
+  }
+
+  try {
+    const result = await regulateCreativeEntropy({
+      candidates,
+      insight: { mainInsight: 'A concise strategic insight' },
+      context,
+      antiTasteMemory: { lessons: [], prompt: '' },
+      threshold: 0.68,
+    })
+
+    assert.equal(result.report.action, 'diversified')
+    assert.match(generationTarget, /Candidate to differentiate: alpha bravo charlie delta echo foxtrot/)
+    assert.equal(result.candidates.find(item => item.id === 'networked-direction').version, 2)
+    assert.equal(result.candidates.find(item => item.id === 'lower-score-direction').version, 1)
+    assert.equal(result.candidates.find(item => item.id === 'external-neighbor').version, 1)
   } finally {
     conceptMapper.mapConcept = originalMapConcept
   }
