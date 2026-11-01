@@ -45,6 +45,11 @@ function secureRequest(req: Request): boolean {
   return req.secure
 }
 
+function isLoopbackRequest(req: Request): boolean {
+  const address = req.socket.remoteAddress?.toLowerCase()
+  return address === '127.0.0.1' || address === '::1' || address === '::ffff:127.0.0.1'
+}
+
 function safeSecretEqual(left: string, right: string): boolean {
   const leftHash = createHash('sha256').update(left).digest()
   const rightHash = createHash('sha256').update(right).digest()
@@ -57,13 +62,16 @@ function cookieValue(req: Request, token: string, maxAgeSeconds: number): string
 }
 
 export function getApiSessionStatus(req: Request): { authRequired: boolean; authenticated: boolean } {
-  const authRequired = !!process.env.TEXTFX_API_KEY?.trim()
+  const configuredKey = process.env.TEXTFX_API_KEY?.trim() || ''
+  const authRequired = !!configuredKey
+  if (!authRequired) {
+    return { authRequired: false, authenticated: isLoopbackRequest(req) }
+  }
   const authorization = req.header('authorization')?.trim() || ''
   const bearer = authorization.startsWith('Bearer ') ? authorization.slice(7).trim() : ''
-  const configuredKey = process.env.TEXTFX_API_KEY?.trim() || ''
   return {
-    authRequired,
-    authenticated: !authRequired || validSession(req) || (!!bearer && !!configuredKey && safeSecretEqual(bearer, configuredKey)),
+    authRequired: true,
+    authenticated: validSession(req) || (!!bearer && safeSecretEqual(bearer, configuredKey)),
   }
 }
 
