@@ -5,6 +5,7 @@ const assert = require('node:assert/strict')
 const fs = require('node:fs')
 const os = require('node:os')
 const path = require('node:path')
+const { spawnSync } = require('node:child_process')
 
 const tempRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'textfx-creative-tests-'))
 process.env.TEXTFX_CREATIVE_MEMORY_PATH = path.join(tempRoot, 'creative-memory.json')
@@ -110,6 +111,53 @@ test('creative memory learns only from model reviews and persists bounded eviden
   assert.equal(persisted.schemaVersion, 1)
   assert.ok(persisted.lessons.length > 0)
   assert.equal(persisted.counterfactualEvidence.length, 4)
+})
+
+test('creative memory preserves malformed historical audit entries across reload and later writes', t => {
+  const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'textfx-memory-reload-'))
+  t.after(() => fs.rmSync(directory, { recursive: true, force: true }))
+  const statePath = path.join(directory, 'creative-memory.json')
+  const malformedAuditEntry = {
+    runId: 'legacy-bad-run',
+    recordedAt: 'legacy timestamp',
+    status: 'compared',
+    primarySource: 'model',
+    shadowSource: 'model',
+    primaryScore: null,
+    shadowScore: 84,
+    scoreDelta: null,
+  }
+  fs.writeFileSync(statePath, JSON.stringify({
+    schemaVersion: 1,
+    lessons: [],
+    counterfactualEvidence: [null, malformedAuditEntry],
+  }))
+
+  const modulePath = path.resolve(__dirname, '../dist/modules/creative-memory.js')
+  const childScript = `
+    const memory = require(${JSON.stringify(modulePath)})
+    const before = memory.getCreativeMemoryStatus()
+    if (before.evaluation.evidenceCount !== 2 || before.evaluation.comparableModelReviewCount !== 0) process.exit(11)
+    memory.learnFromCreativeReview({
+      runId: 'reload-test-run',
+      query: 'memory persistence integrity',
+      review: {
+        source: 'model', score: 80, verdict: 'ready', criterionScores: {},
+        strengths: ['Preserve traceable historical evidence.'],
+        weaknesses: [], revisionBrief: [], summary: 'Persistence regression fixture.',
+      },
+    })
+  `
+  const child = spawnSync(process.execPath, ['-e', childScript], {
+    encoding: 'utf8',
+    env: { ...process.env, TEXTFX_CREATIVE_MEMORY_PATH: statePath },
+  })
+  assert.equal(child.status, 0, child.stderr || child.stdout)
+  const persisted = JSON.parse(fs.readFileSync(statePath, 'utf8'))
+  assert.equal(persisted.counterfactualEvidence.length, 2)
+  assert.equal(persisted.counterfactualEvidence[0], null)
+  assert.deepEqual(persisted.counterfactualEvidence[1], malformedAuditEntry)
+  assert.ok(persisted.lessons.length > 0)
 })
 
 test('temporary test state is cleaned up', () => {
