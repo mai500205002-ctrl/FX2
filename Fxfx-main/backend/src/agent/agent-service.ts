@@ -558,7 +558,7 @@ async function runAgentInternal(input: AgentRunRequest, dependencies: AgentPipel
       recordCandidateDecision({ runId, candidate, decision, reason, source: 'creative-court' })
     }
     const concept = selected.concept
-    pushAudit(runId, 'court', 'Creative Court decision recorded', { source: court.source, selectedCandidateId: selected.id, selectedLens: selected.lens, selectedScore: court.reviews.find(review => review.candidateId === selected.id)?.score, summary: court.summary, reviews: court.reviews.map(review => ({ candidateId: review.candidateId, score: review.score, verdict: review.verdict })) })
+    pushAudit(runId, 'court', 'Creative Court decision recorded', { source: court.source, selectedCandidateId: selected.id, selectedLens: selected.lens, selectedScore: court.reviews.find(review => review.candidateId === selected.id)?.score, summary: court.summary, reviews: court.reviews.map(review => ({ candidateId: review.candidateId, score: review.score, criterionScores: review.criterionScores, verdict: review.verdict })) })
     record.concept = concept
     record.runtime.timestamp = now()
     record.updatedAt = now()
