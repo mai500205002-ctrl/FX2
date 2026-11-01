@@ -50,3 +50,36 @@ test('a failed technique is recorded without discarding other valid candidates',
   assert.deepEqual(result.failedLenses, [{ lensId: 'analogy', error: 'fixture lens failure' }])
   assert.ok(!result.candidates.some(item => item.lensId === 'analogy'))
 })
+
+test('discovery uses Jaccard similarity so a subset concept is not misclassified as a duplicate', async () => {
+  const sharedFields = {
+    title: 'ember',
+    tagline: 'lantern',
+    coreIdea: 'signal',
+    visualNotes: 'silver',
+    creativeDevice: 'compass',
+    emotionalArc: 'threshold',
+    targetParadox: 'horizon',
+  }
+  const richer = { ...sharedFields, lateralThinkingTechniques: ['cobalt'] }
+  const concise = { ...sharedFields }
+
+  const result = await discoverConcepts(insight, context, 2, async (_text, lensContext) => (
+    lensContext.problem.includes('Provocation') ? richer : concise
+  ))
+
+  assert.equal(result.candidates.length, 2)
+  assert.ok(result.candidates.every(candidate =>
+    candidate.rationale.includes('Relative distinctiveness heuristic: 13%.')
+  ))
+})
+
+test('discovery compares separate lenses even when a mapper reuses the same concept object', async () => {
+  const sharedConcept = concept('shared concept')
+  const result = await discoverConcepts(insight, context, 2, async () => sharedConcept)
+
+  assert.equal(result.candidates.length, 2)
+  assert.ok(result.candidates.every(candidate =>
+    candidate.rationale.includes('Relative distinctiveness heuristic: 0%.')
+  ))
+})
