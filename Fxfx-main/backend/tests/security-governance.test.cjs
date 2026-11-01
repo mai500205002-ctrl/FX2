@@ -541,3 +541,51 @@ test('security: session status matches loopback-only access when the API key is 
     else process.env.TEXTFX_API_KEY = previous
   }
 })
+
+
+test('security: removing the API key revokes previously issued remote sessions', () => {
+  const previousKey = process.env.TEXTFX_API_KEY
+  const previousOrigin = process.env.CORS_ORIGIN
+  process.env.TEXTFX_API_KEY = 'session-key-fixture-value'
+  process.env.CORS_ORIGIN = 'http://localhost:5000'
+  let cookie = ''
+  try {
+    const creationRequest = {
+      secure: false,
+      socket: { remoteAddress: '203.0.113.10' },
+      header: name => name.toLowerCase() === 'origin' ? 'http://localhost:5000' : undefined,
+    }
+    assert.equal(createApiSession(creationRequest, { setHeader: (name, value) => { if (name === 'Set-Cookie') cookie = value } }, process.env.TEXTFX_API_KEY), true)
+    assert.match(cookie, /textfx_session=/)
+
+    delete process.env.TEXTFX_API_KEY
+    const request = {
+      method: 'POST',
+      path: '/protected',
+      socket: { remoteAddress: '203.0.113.10' },
+      header: name => {
+        if (name.toLowerCase() === 'cookie') return cookie.split(';')[0]
+        if (name.toLowerCase() === 'origin') return 'http://localhost:5000'
+        return undefined
+      },
+    }
+    assert.deepEqual(getApiSessionStatus(request), { authRequired: false, authenticated: false })
+
+    let nextCalled = false
+    let statusCode
+    let responseBody
+    const response = {
+      status(code) { statusCode = code; return this },
+      json(body) { responseBody = body; return this },
+    }
+    apiAuthenticationMiddleware(request, response, () => { nextCalled = true })
+    assert.equal(nextCalled, false)
+    assert.equal(statusCode, 401)
+    assert.match(responseBody.error, /API key required/)
+  } finally {
+    if (previousKey === undefined) delete process.env.TEXTFX_API_KEY
+    else process.env.TEXTFX_API_KEY = previousKey
+    if (previousOrigin === undefined) delete process.env.CORS_ORIGIN
+    else process.env.CORS_ORIGIN = previousOrigin
+  }
+})
