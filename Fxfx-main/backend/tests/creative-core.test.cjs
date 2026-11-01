@@ -12,7 +12,7 @@ process.env.TEXTFX_CREATIVE_MEMORY_PATH = path.join(tempRoot, 'creative-memory.j
 
 const { selectCounterfactualCandidate, compareCounterfactualReviews } = require('../dist/modules/counterfactual-replay.js')
 const { validateCreativeIR, CREATIVE_IR_VERSION } = require('../dist/core/creative-ir.js')
-const { learnFromCreativeReview, recordCounterfactualEvidence, getCreativeMemoryStatus } = require('../dist/modules/creative-memory.js')
+const { learnFromCreativeReview, recordCounterfactualEvidence, getCreativeMemoryStatus, retrieveCreativeMemory, retrieveAntiTasteMemory } = require('../dist/modules/creative-memory.js')
 
 function candidate(id, score) {
   return { id, score, lens: 'test', rationale: [], concept: { title: id, coreIdea: `idea ${id}` } }
@@ -280,6 +280,57 @@ test('creative memory tokenizes legacy phrase tags and ranks relevance before re
     if (one.lessons.length !== 1) process.exit(33)
     const empty = memory.retrieveCreativeMemory('   ', 5)
     if (empty.lessons.length !== 0 || empty.prompt !== '') process.exit(34)
+  `
+  const child = spawnSync(process.execPath, ['-e', childScript], {
+    encoding: 'utf8',
+    env: { ...process.env, TEXTFX_CREATIVE_MEMORY_PATH: statePath },
+  })
+  assert.equal(child.status, 0, child.stderr || child.stdout)
+})
+
+test('creative memory balances both polarities and Anti-Taste searches the full avoid pool', t => {
+  const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'textfx-memory-balance-'))
+  t.after(() => fs.rmSync(directory, { recursive: true, force: true }))
+  const statePath = path.join(directory, 'creative-memory.json')
+  const base = {
+    sourceRunId: 'balance-fixture',
+    sourceScore: 80,
+    createdAt: '2026-10-01T12:00:00.000Z',
+  }
+  const lessons = [
+    ...Array.from({ length: 10 }, (_, index) => ({
+      ...base,
+      id: `reinforce-${index}`,
+      polarity: 'reinforce',
+      lesson: `Preserve a strong visual idea number ${index}.`,
+      tags: ['campaign story launch'],
+    })),
+    {
+      ...base,
+      id: 'avoid-relevant',
+      polarity: 'avoid',
+      lesson: 'Avoid predictable campaign endings.',
+      tags: ['campaign story'],
+    },
+  ]
+  fs.writeFileSync(statePath, JSON.stringify({
+    schemaVersion: 1, lessons, counterfactualEvidence: [],
+  }))
+
+  const modulePath = path.resolve(__dirname, '../dist/modules/creative-memory.js')
+  const childScript = `
+    const memory = require(${JSON.stringify(modulePath)})
+    const general = memory.retrieveCreativeMemory('campaign story launch', 6)
+    const reinforceCount = general.lessons.filter(item => item.polarity === 'reinforce').length
+    const avoidCount = general.lessons.filter(item => item.polarity === 'avoid').length
+    if (reinforceCount !== 3 || avoidCount !== 3) process.exit(41)
+    const antiTaste = memory.retrieveAntiTasteMemory('campaign story launch', 4)
+    if (antiTaste.lessons.length !== 1 || antiTaste.lessons[0].id !== 'avoid-relevant') process.exit(42)
+    if (!antiTaste.prompt.includes('Avoid predictable campaign endings.')) process.exit(43)
+    const onlyReinforce = memory.retrieveCreativeMemory('campaign story launch', 1)
+    if (onlyReinforce.lessons.length !== 1) process.exit(44)
+    const emptyAvoid = memory.retrieveAntiTasteMemory('unrelated topic', 4)
+    if (emptyAvoid.lessons.length !== 0 || emptyAvoid.prompt !== '') process.exit(45)
   `
   const child = spawnSync(process.execPath, ['-e', childScript], {
     encoding: 'utf8',
