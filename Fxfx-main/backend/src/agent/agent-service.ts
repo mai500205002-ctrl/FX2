@@ -523,6 +523,12 @@ async function runAgentInternal(input: AgentRunRequest, dependencies: AgentPipel
     let court: CreativeCourtDecision
     try {
       court = await (dependencies.judgeConceptCandidates || judgeConceptCandidates)({ goal, brief, insight: insight.mainInsight, candidates, context })
+      if (court.source === 'model') {
+        const selectedReview = court.reviews.find(review => review.candidateId === court.selectedCandidateId)
+        if (!selectedReview || selectedReview.verdict !== 'advance') {
+          throw new Error('Creative Court selected a candidate that was not approved to advance.')
+        }
+      }
     } catch (courtError) {
       const reason = courtError instanceof Error ? courtError.message : String(courtError)
       court = fallbackCourtDecision(candidates, reason)
