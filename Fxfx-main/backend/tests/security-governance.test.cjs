@@ -442,16 +442,17 @@ test('security: human approval gate and consequential action enforcement', async
     assert.equal(approveBody.ok, true)
     assert.ok(approveBody.approval.approvalId)
 
-    // After approval, consequential action succeeds
+    // Approval is valid, but the backend has no external action executor.
+    // The route must not report a side effect as successful.
     const execRes = await fetch(`http://127.0.0.1:${port}/api/agent/runs/${testRunId}/execute-action`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ action: 'publish-campaign' }),
     })
-    assert.equal(execRes.status, 200)
+    assert.equal(execRes.status, 501)
     const execBody = await execRes.json()
-    assert.equal(execBody.ok, true)
-    assert.equal(execBody.approvedBy, 'Lead Creative Director')
+    assert.equal(execBody.code, 'CONSEQUENTIAL_ACTION_EXECUTOR_UNAVAILABLE')
+    assert.match(execBody.error, /no external action was executed/i)
   } finally {
     delete process.env.TEXTFX_APPROVER_TOKEN
     deleteAgentRun(testRunId)
