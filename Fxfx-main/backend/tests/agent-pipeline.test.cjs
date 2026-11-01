@@ -16,6 +16,7 @@ const tempRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'textfx-agent-e2e-'))
 process.env.TEXTFX_CREATIVE_MEMORY_PATH = path.join(tempRoot, 'memory.json')
 process.env.TEXTFX_AGENT_DATA_DIR = path.join(tempRoot, 'agent-state')
 const { runAgentWithDependencies } = require('../dist/agent/agent-service.js')
+const { judgeConceptCandidates } = require('../dist/modules/creative-court.js')
 
 function concept(title) {
   return { title, tagline: `${title} tagline`, coreIdea: `${title} core idea`, visualNotes: 'A filmable image', creativeDevice: 'A reversible visual rule', emotionalArc: 'Tension then relief', targetParadox: 'People want change but fear it' }
@@ -55,6 +56,124 @@ function dependencies(options = {}) {
 }
 
 const request = { goal: 'Create a memorable launch film', brief: 'Audience: curious people. Show the tension between wanting change and fearing it.', language: 'en' }
+
+const courtScores = {
+  briefGoalFit: 80,
+  insightDepth: 70,
+  originality: 90,
+  emotionalStrategicCoherence: 60,
+  executionClarity: 100,
+  riskEthicalAwareness: 50,
+}
+
+function courtPayload(reviews, selectedCandidateId) {
+  return { selectedCandidateId, summary: 'Evidence-based Court assessment.', reviews }
+}
+
+function courtReview(candidateId, verdict, criterionScores = courtScores) {
+  return {
+    candidateId,
+    criterionScores,
+    verdict,
+    rationale: ['Reason tied to the supplied concept.'],
+    strengths: ['A specific creative strength.'],
+    weaknesses: ['A concrete remaining weakness.'],
+    nextActions: ['Test the proposed execution.'],
+  }
+}
+
+test('Creative Court calculates its weighted score from six independently validated criteria', async () => {
+  let capturedPrompt = ''
+  const payload = courtPayload([
+    courtReview('candidate-a', 'advance'),
+    courtReview('candidate-b', 'revise', {
+      briefGoalFit: 70, insightDepth: 70, originality: 70,
+      emotionalStrategicCoherence: 70, executionClarity: 70, riskEthicalAwareness: 70,
+    }),
+  ], 'candidate-a')
+  const result = await judgeConceptCandidates({
+    goal: request.goal,
+    brief: request.brief,
+    insight: 'People want change but fear losing themselves.',
+    candidates: [candidate('candidate-a', 'Human Truth', 82), candidate('candidate-b', 'System Reversal', 80)],
+    context: {
+      domain: 'creative campaign',
+      problem: request.brief,
+      target: 'curious people',
+      language: 'en',
+      provider: {
+        generateCreativeText: async prompt => {
+          capturedPrompt = prompt
+          return { text: JSON.stringify(payload) }
+        },
+      },
+      providerConfig: null,
+    },
+  })
+
+  assert.equal(result.source, 'model')
+  assert.equal(result.reviews[0].score, 76)
+  assert.deepEqual(result.reviews[0].criterionScores, courtScores)
+  assert.equal(result.reviews[1].score, 70)
+  assert.deepEqual(result.rubric, [
+    'Brief / goal fit: 25%',
+    'Insight depth: 20%',
+    'Originality and non-obviousness: 20%',
+    'Emotional / strategic coherence: 15%',
+    'Execution clarity: 10%',
+    'Risk and ethical awareness: 10%',
+    'Overall score: backend-calculated weighted sum, rounded to one decimal place.',
+  ])
+  assert.match(capturedPrompt, /The backend calculates the overall weighted score/)
+  assert.match(capturedPrompt, /riskEthicalAwareness \(10%\)/)
+  assert.doesNotMatch(capturedPrompt, /Do not return a rubric or aggregate score/)
+})
+
+test('Creative Court rejects a selected candidate below another advance candidate', async () => {
+  const payload = courtPayload([
+    courtReview('candidate-a', 'advance', {
+      briefGoalFit: 90, insightDepth: 90, originality: 90,
+      emotionalStrategicCoherence: 90, executionClarity: 90, riskEthicalAwareness: 90,
+    }),
+    courtReview('candidate-b', 'advance', {
+      briefGoalFit: 70, insightDepth: 70, originality: 70,
+      emotionalStrategicCoherence: 70, executionClarity: 70, riskEthicalAwareness: 70,
+    }),
+  ], 'candidate-b')
+  await assert.rejects(
+    judgeConceptCandidates({
+      goal: request.goal,
+      brief: request.brief,
+      insight: 'Strategic insight.',
+      candidates: [candidate('candidate-a', 'Higher scoring', 80), candidate('candidate-b', 'Selected', 82)],
+      context: {
+        domain: 'creative campaign', problem: request.brief, target: 'audience', language: 'en',
+        provider: { generateCreativeText: async () => ({ text: JSON.stringify(payload) }) },
+        providerConfig: null,
+      },
+    }),
+    /below the highest-scoring advance candidate/,
+  )
+})
+
+test('Creative Court rejects missing or out-of-range criterion scores instead of accepting a total', async () => {
+  const invalidScores = { ...courtScores, riskEthicalAwareness: 101 }
+  const payload = courtPayload([courtReview('candidate-a', 'advance', invalidScores)], 'candidate-a')
+  await assert.rejects(
+    judgeConceptCandidates({
+      goal: request.goal,
+      brief: request.brief,
+      insight: 'Strategic insight.',
+      candidates: [candidate('candidate-a', 'Human Truth', 82)],
+      context: {
+        domain: 'creative campaign', problem: request.brief, target: 'audience', language: 'en',
+        provider: { generateCreativeText: async () => ({ text: JSON.stringify(payload) }) },
+        providerConfig: null,
+      },
+    }),
+    /riskEthicalAwareness must be between 0 and 100/,
+  )
+})
 
 test('end-to-end mocked pipeline completes and preserves the Court-selected output during counterfactual replay', async () => {
   const deps = dependencies()
