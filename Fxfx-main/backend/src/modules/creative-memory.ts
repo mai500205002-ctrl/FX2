@@ -51,7 +51,7 @@ let persistenceError: string | undefined
 const STOP_WORDS = new Set(['the','and','for','with','that','this','from','into','your','you','are','was','were','have','has','will','can','not','but','من','في','على','إلى','عن','مع','هذا','هذه','الذي','التي','هو','هي','كل','بين','عند','لكن'])
 
 function tokens(value: string): string[] {
-  return [...new Set((value.toLocaleLowerCase().match(/[\p{L}\p{N}]{3,}/gu) ?? []).filter(word => !STOP_WORDS.has(word)))]
+  return [...new Set((value.normalize('NFC').toLocaleLowerCase().match(/[\\p{L}\\p{N}]{3,}/gu) ?? []).filter(word => !STOP_WORDS.has(word)))]
 }
 
 function normalizeLessonText(value: string): string {
@@ -153,12 +153,21 @@ function isComparableCounterfactualEvidence(value: unknown): value is Counterfac
 
 /** Retrieve relevant lessons without exposing prior full briefs or scripts to new generation. */
 export function retrieveCreativeMemory(query: string, limit = 5): CreativeMemoryContext {
+  if (typeof query !== 'string' || !query.trim()) return { lessons: [], prompt: '' }
   const queryTokens = tokens(query)
+  const safeLimit = Number.isFinite(limit) ? Math.max(0, Math.min(8, Math.floor(limit))) : 5
+  if (!safeLimit || !queryTokens.length) return { lessons: [], prompt: '' }
+
   const ranked = memory
-    .map(lesson => ({ lesson, score: overlap(queryTokens, lesson.tags) }))
+    .map(lesson => {
+      // Persisted tags may be legacy phrases, mixed-case text, or contain punctuation.
+      // Tokenize them exactly like the query rather than requiring exact tag-string matches.
+      const tagTokens = [...new Set(lesson.tags.flatMap(tag => tokens(tag)))]
+      return { lesson, score: overlap(queryTokens, tagTokens) }
+    })
     .filter(item => item.score > 0)
     .sort((a, b) => b.score - a.score || b.lesson.createdAt.localeCompare(a.lesson.createdAt))
-    .slice(0, Math.max(0, Math.min(8, limit)))
+    .slice(0, safeLimit)
   const lessons = ranked.map(item => item.lesson)
   const prompt = lessons.length
     ? [
