@@ -113,6 +113,9 @@ router.post('/runs/:runId/execute-action', (req: Request, res: Response) => {
   } catch (err: unknown) {
     const msg = err instanceof Error ? err.message : String(err)
     if (msg.includes('Run not found')) return void res.status(404).json({ error: msg })
+    if (msg.includes('No consequential-action executor is configured')) {
+      return void res.status(501).json({ error: redactText(msg), code: 'CONSEQUENTIAL_ACTION_EXECUTOR_UNAVAILABLE' })
+    }
     if (msg.includes('blocked') || msg.includes('approval required')) {
       return void res.status(403).json({ error: redactText(msg) })
     }
