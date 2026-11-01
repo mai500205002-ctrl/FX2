@@ -521,3 +521,23 @@ test('security: configured API and approver secrets are compared without ordinar
     else process.env.TEXTFX_APPROVER_TOKEN = previousApprover
   }
 })
+
+
+test('security: session status matches loopback-only access when the API key is not configured', () => {
+  const previous = process.env.TEXTFX_API_KEY
+  delete process.env.TEXTFX_API_KEY
+  const request = address => ({
+    socket: { remoteAddress: address },
+    header: () => undefined,
+  })
+  try {
+    assert.deepEqual(getApiSessionStatus(request('127.0.0.1')), { authRequired: false, authenticated: true })
+    assert.deepEqual(getApiSessionStatus(request('::1')), { authRequired: false, authenticated: true })
+    assert.deepEqual(getApiSessionStatus(request('::ffff:127.0.0.1')), { authRequired: false, authenticated: true })
+    assert.deepEqual(getApiSessionStatus(request('203.0.113.10')), { authRequired: false, authenticated: false })
+    assert.deepEqual(getApiSessionStatus(request(undefined)), { authRequired: false, authenticated: false })
+  } finally {
+    if (previous === undefined) delete process.env.TEXTFX_API_KEY
+    else process.env.TEXTFX_API_KEY = previous
+  }
+})
