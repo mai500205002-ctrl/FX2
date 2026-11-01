@@ -160,6 +160,64 @@ test('creative memory preserves malformed historical audit entries across reload
   assert.ok(persisted.lessons.length > 0)
 })
 
+test('creative memory quarantines invalid lessons without using or deleting them', t => {
+  const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'textfx-lesson-quarantine-'))
+  t.after(() => fs.rmSync(directory, { recursive: true, force: true }))
+  const statePath = path.join(directory, 'creative-memory.json')
+  const validLesson = {
+    id: 'valid-lesson',
+    polarity: 'reinforce',
+    lesson: 'Use a concrete visual reversal.',
+    sourceRunId: 'source-run',
+    sourceScore: 82,
+    createdAt: '2026-10-01T12:00:00.000Z',
+    tags: ['campaign', 'visual'],
+  }
+  const invalidLessons = [
+    { ...validLesson, id: '' },
+    { ...validLesson, sourceScore: 1e999 },
+    { ...validLesson, createdAt: 'not-a-date' },
+    { ...validLesson, tags: ['campaign', 42] },
+    { ...validLesson, lesson: 'x'.repeat(321) },
+  ]
+  fs.writeFileSync(statePath, JSON.stringify({
+    schemaVersion: 1,
+    lessons: [validLesson, ...invalidLessons],
+    counterfactualEvidence: [],
+  }))
+
+  const modulePath = path.resolve(__dirname, '../dist/modules/creative-memory.js')
+  const childScript = `
+    const memory = require(${JSON.stringify(modulePath)})
+    const status = memory.getCreativeMemoryStatus()
+    if (status.lessonCount !== 1 || status.quarantinedLessonCount !== 5) process.exit(21)
+    const retrieved = memory.retrieveCreativeMemory('campaign visual', 8)
+    if (retrieved.lessons.length !== 1 || retrieved.lessons[0].id !== 'valid-lesson') process.exit(22)
+    memory.learnFromCreativeReview({
+      runId: 'new-run',
+      query: 'new campaign visual',
+      review: {
+        source: 'model', score: 80, verdict: 'ready', criterionScores: {},
+        strengths: ['Keep the visual reveal concrete.'],
+        weaknesses: [], revisionBrief: [], summary: 'Persistence fixture.',
+      },
+    })
+    const after = memory.getCreativeMemoryStatus()
+    if (after.quarantinedLessonCount !== 5) process.exit(23)
+  `
+  const child = spawnSync(process.execPath, ['-e', childScript], {
+    encoding: 'utf8',
+    env: { ...process.env, TEXTFX_CREATIVE_MEMORY_PATH: statePath },
+  })
+  assert.equal(child.status, 0, child.stderr || child.stdout)
+  const persisted = JSON.parse(fs.readFileSync(statePath, 'utf8'))
+  assert.equal(persisted.lessons.length, 2)
+  assert.equal(persisted.quarantinedLessons.length, 5)
+  assert.deepEqual(persisted.quarantinedLessons, invalidLessons.map((item, index) =>
+    index === 1 ? { ...item, sourceScore: null } : item
+  ))
+})
+
 test('temporary test state is cleaned up', () => {
   fs.rmSync(tempRoot, { recursive: true, force: true })
   assert.equal(fs.existsSync(tempRoot), false)
