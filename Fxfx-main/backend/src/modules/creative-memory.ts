@@ -51,7 +51,7 @@ let persistenceError: string | undefined
 const STOP_WORDS = new Set(['the','and','for','with','that','this','from','into','your','you','are','was','were','have','has','will','can','not','but','من','في','على','إلى','عن','مع','هذا','هذه','الذي','التي','هو','هي','كل','بين','عند','لكن'])
 
 function tokens(value: string): string[] {
-  return [...new Set((value.normalize('NFC').toLocaleLowerCase().match(/[\\p{L}\\p{N}]{3,}/gu) ?? []).filter(word => !STOP_WORDS.has(word)))]
+  return [...new Set((value.normalize('NFC').toLocaleLowerCase().match(/[\p{L}\p{N}]{3,}/gu) ?? []).filter(word => !STOP_WORDS.has(word)))]
 }
 
 function normalizeLessonText(value: string): string {
