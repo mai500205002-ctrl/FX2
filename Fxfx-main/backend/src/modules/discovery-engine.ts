@@ -46,11 +46,18 @@ function words(value: string): Set<string> {
 }
 const STOP_WORDS = new Set(['the','and','for','with','that','this','from','into','your','you','are','but','not','was','were','have','has','will','can','من','في','على','إلى','عن','مع','هذا','هذه','ذلك','التي','الذي','هو','هي','كل','بين','عند','عشان','لكن'])
 
-function overlap(a: Set<string>, b: Set<string>): number {
+function overlapCoefficient(a: Set<string>, b: Set<string>): number {
   if (!a.size || !b.size) return 0
   let common = 0
   for (const token of a) if (b.has(token)) common++
   return common / Math.max(1, Math.min(a.size, b.size))
+}
+
+function jaccardSimilarity(a: Set<string>, b: Set<string>): number {
+  if (!a.size || !b.size) return 0
+  let common = 0
+  for (const token of a) if (b.has(token)) common++
+  return common / (a.size + b.size - common)
 }
 
 function conceptText(c: Concept): string {
@@ -96,10 +103,13 @@ export async function discoverConcepts(
   const insightWords = words(insightText)
   const candidates: CreativeCandidate[] = generated.map(({ lens, concept }) => {
     const ownWords = words(conceptText(concept))
-    const otherConcepts = generated.filter(other => other.concept !== concept)
-    const relevance = overlap(ownWords, insightWords)
+    // Relevance intentionally uses overlap coefficient so a concise concept can align
+    // strongly with a longer insight. Distinctiveness uses Jaccard, matching the entropy
+    // thermostat's metric and preventing subset concepts from being treated as duplicates.
+    const otherConcepts = generated.filter(other => other.lens.id !== lens.id)
+    const relevance = overlapCoefficient(ownWords, insightWords)
     const similarityToOthers = otherConcepts.length
-      ? otherConcepts.reduce((sum, other) => sum + overlap(ownWords, words(conceptText(other.concept))), 0) / otherConcepts.length
+      ? otherConcepts.reduce((sum, other) => sum + jaccardSimilarity(ownWords, words(conceptText(other.concept))), 0) / otherConcepts.length
       : 0.5
     const distinctiveness = Math.max(0, 1 - similarityToOthers)
     const completeness = [concept.title, concept.tagline, concept.coreIdea, concept.visualNotes, concept.creativeDevice, concept.emotionalArc, concept.targetParadox].filter(v => typeof v === 'string' && v.trim()).length / 7
