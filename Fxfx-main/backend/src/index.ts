@@ -509,27 +509,27 @@ app.get('/api/metrics', (_req, res) => {
 })
 
 // ── GET /api/key-status  (check if key is configured — never returns the key) ─
+app.get('/api/session', (req: Request, res: Response) => {
+  res.setHeader('Cache-Control', 'no-store')
+  res.json(getApiSessionStatus(req))
+})
+
+app.post('/api/session', (req: Request, res: Response) => {
+  res.setHeader('Cache-Control', 'no-store')
+  if (!createApiSession(req, res, req.body?.apiKey)) {
+    return void res.status(401).json({ error: 'Authentication failed' })
+  }
+  res.json({ authRequired: true, authenticated: true })
+})
+
+app.delete('/api/session', (req: Request, res: Response) => {
+  res.setHeader('Cache-Control', 'no-store')
+  if (!isTrustedApiOrigin(req)) return void res.status(403).json({ error: 'Request origin is not allowed' })
+  destroyApiSession(req, res)
+  res.status(204).end()
+})
+
 app.get('/api/key-status', async (_req: Request, res: Response) => {
-
-  app.get('/api/session', (req: Request, res: Response) => {
-    res.setHeader('Cache-Control', 'no-store')
-    res.json(getApiSessionStatus(req))
-  })
-
-  app.post('/api/session', (req: Request, res: Response) => {
-    res.setHeader('Cache-Control', 'no-store')
-    if (!createApiSession(req, res, req.body?.apiKey)) {
-      return void res.status(401).json({ error: 'Authentication failed' })
-    }
-    res.json({ authRequired: true, authenticated: true })
-  })
-
-  app.delete('/api/session', (req: Request, res: Response) => {
-    res.setHeader('Cache-Control', 'no-store')
-    if (!isTrustedApiOrigin(req)) return void res.status(403).json({ error: 'Request origin is not allowed' })
-    destroyApiSession(req, res)
-    res.status(204).end()
-  })
   const providers = getProviderStatus()
   res.json({
     configured: providers.some(provider => provider.configured),
