@@ -105,7 +105,7 @@ export interface LateralThinkingOutput {
 
 /** Versioned system prompt: this version identifier is recorded in every run's provenance.
  * Prompt content changes bump this version independently of schema changes. */
-export const SYSTEM_PROMPT_VERSION = '1.0.0' as const
+export const SYSTEM_PROMPT_VERSION = '1.0.1' as const
 
 export function getLateralThinkingSystemPrompt(context?: LateralThinkingContext): string {
   const language  = context?.language  || 'en'
