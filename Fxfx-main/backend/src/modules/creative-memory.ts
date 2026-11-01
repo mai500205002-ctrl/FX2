@@ -23,6 +23,8 @@ interface CounterfactualEvidence {
   runId: string
   recordedAt: string
   status: CounterfactualReplay['status']
+  selectedCandidateId?: string
+  alternativeCandidateId?: string
   primarySource: CreativeScriptReview['source']
   shadowSource?: CreativeScriptReview['source']
   primaryScore: number
@@ -186,6 +188,8 @@ export function recordCounterfactualEvidence(runId: string, replay: Counterfactu
     runId,
     recordedAt: new Date().toISOString(),
     status: replay.status,
+    selectedCandidateId: replay.selectedCandidateId,
+    alternativeCandidateId: replay.alternativeCandidateId,
     primarySource: replay.primaryReviewSource,
     shadowSource: replay.shadowReviewSource,
     primaryScore: replay.primaryScore,
