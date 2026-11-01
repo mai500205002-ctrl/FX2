@@ -84,7 +84,7 @@ test('pipeline falls back instead of scripting a Court-selected candidate marked
   assert.equal(result.creativeIR.discovery.selectedCandidateId, 'candidate-a')
   assert.equal(result.creativeIR.concept.title, 'Human Truth')
   assert.equal(result.script.script, 'Human Truth screenplay version 1')
-  assert.ok(result.trace.some(item => item.message.includes('not approved to advance')))
+  assert.ok(result.trace.some(item => item.meta?.reason?.includes('not approved to advance')))
 })
 
 test('end-to-end pipeline performs at most one targeted revision before the shadow replay', async () => {
