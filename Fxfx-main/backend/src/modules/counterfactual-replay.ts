@@ -24,11 +24,15 @@ export function selectCounterfactualCandidate(
   selectedCandidateId: string,
   court?: CreativeCourtDecision,
 ): CreativeCandidate | undefined {
-  const alternatives = candidates.filter(candidate => candidate.id !== selectedCandidateId)
+  const courtReviews = new Map((court?.reviews ?? []).map(review => [review.candidateId, review]))
+  // A shadow replay may examine a candidate that needs revision, but must never
+  // spend generation/review work on a candidate the Court explicitly rejected.
+  const alternatives = candidates.filter(candidate =>
+    candidate.id !== selectedCandidateId && courtReviews.get(candidate.id)?.verdict !== 'reject'
+  )
   if (!alternatives.length) return undefined
-  const courtScores = new Map((court?.reviews ?? []).map(review => [review.candidateId, review.score]))
   return [...alternatives].sort((a, b) =>
-    (courtScores.get(b.id) ?? b.score) - (courtScores.get(a.id) ?? a.score)
+    (courtReviews.get(b.id)?.score ?? b.score) - (courtReviews.get(a.id)?.score ?? a.score)
   )[0]
 }
 
