@@ -32,10 +32,28 @@ function review(overrides = {}) {
   }
 }
 
-test('counterfactual runner-up excludes selected candidate and prefers Court score', () => {
+test('counterfactual runner-up excludes rejected candidates and prefers Court score', () => {
   const candidates = [candidate('chosen', 90), candidate('runner-up-a', 88), candidate('runner-up-b', 70)]
-  const court = { reviews: [{ candidateId: 'runner-up-a', score: 61 }, { candidateId: 'runner-up-b', score: 94 }] }
-  assert.equal(selectCounterfactualCandidate(candidates, 'chosen', court).id, 'runner-up-b')
+  const court = { reviews: [
+    { candidateId: 'runner-up-a', score: 61, verdict: 'revise' },
+    { candidateId: 'runner-up-b', score: 94, verdict: 'reject' },
+  ] }
+  assert.equal(selectCounterfactualCandidate(candidates, 'chosen', court).id, 'runner-up-a')
+})
+
+test('counterfactual replay is skipped when every alternative was explicitly rejected', () => {
+  const candidates = [candidate('chosen', 90), candidate('rejected-a', 99), candidate('rejected-b', 95)]
+  const court = { reviews: [
+    { candidateId: 'chosen', score: 90, verdict: 'advance' },
+    { candidateId: 'rejected-a', score: 99, verdict: 'reject' },
+    { candidateId: 'rejected-b', score: 95, verdict: 'reject' },
+  ] }
+  assert.equal(selectCounterfactualCandidate(candidates, 'chosen', court), undefined)
+})
+
+test('counterfactual selection still uses discovery scores when no Court decision exists', () => {
+  const candidates = [candidate('chosen', 90), candidate('runner-up-a', 88), candidate('runner-up-b', 70)]
+  assert.equal(selectCounterfactualCandidate(candidates, 'chosen').id, 'runner-up-a')
 })
 
 test('counterfactual review comparison reports positive shadow delta without claiming causality', () => {
