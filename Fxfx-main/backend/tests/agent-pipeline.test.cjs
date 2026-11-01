@@ -42,7 +42,7 @@ function dependencies(options = {}) {
     discoverConcepts: async () => ({ candidates, selected: candidates[0], strategy: 'multi-lens-v1' }),
     metabolizeIdeas: async (seeds) => ({ candidates: seeds, offspring: [], events: [{ type: 'skipped', message: 'Fixture disables offspring generation', parentIds: [] }] }),
     regulateCreativeEntropy: async ({ candidates: incoming }) => ({ candidates: incoming, report: { diversityScore: 0.75, maxSimilarity: 0.25, threshold: 0.68, action: 'unchanged', candidateCount: incoming.length, antiTasteLessonIds: [], notes: ['Deterministic fixture'] } }),
-    judgeConceptCandidates: async ({ candidates: incoming }) => ({ source: 'model', selectedCandidateId: 'candidate-b', summary: 'Fixture Court selected the strongest fit.', rubric: ['Fit', 'Originality'], reviews: incoming.map((item) => ({ candidateId: item.id, score: item.id === 'candidate-b' ? 92 : item.id === 'candidate-c' ? 87 : 80, verdict: item.id === 'candidate-b' ? 'advance' : 'revise', rationale: ['Fixture judgment'], strengths: ['Distinct mechanism'], weaknesses: ['Needs human validation'], nextActions: ['Validate with audience'] })) }),
+    judgeConceptCandidates: async ({ candidates: incoming }) => ({ source: 'model', selectedCandidateId: 'candidate-b', summary: 'Fixture Court selected the strongest fit.', rubric: ['Fit', 'Originality'], reviews: incoming.map((item) => ({ candidateId: item.id, score: item.id === 'candidate-b' ? 92 : item.id === 'candidate-c' ? 87 : 80, verdict: item.id === 'candidate-b' ? (options.selectedCourtVerdict || 'advance') : 'revise', rationale: ['Fixture judgment'], strengths: ['Distinct mechanism'], weaknesses: ['Needs human validation'], nextActions: ['Validate with audience'] })) }),
     writeScript: async (selectedConcept, _context, revisionBrief) => { scriptCalls++; return script(selectedConcept.title, revisionBrief ? 2 : 1) },
     reviewCreativeScript: async ({ concept: selectedConcept, script: currentScript }) => {
       reviewCalls++
@@ -73,6 +73,18 @@ test('end-to-end mocked pipeline completes and preserves the Court-selected outp
   assert.ok(result.trace.some((item) => item.message.includes('without changing the delivered result')))
   assert.equal(deps.getCounters().scriptCalls, 2, 'one primary script and one bounded shadow script')
   assert.equal(deps.getCounters().reviewCalls, 2, 'one primary review and one bounded shadow review')
+})
+
+test('pipeline falls back instead of scripting a Court-selected candidate marked reject', async () => {
+  const deps = dependencies({ selectedCourtVerdict: 'reject' })
+  const result = await runAgentWithDependencies(request, deps)
+
+  assert.equal(result.status, 'done')
+  assert.equal(result.creativeIR.court.source, 'heuristic-fallback')
+  assert.equal(result.creativeIR.discovery.selectedCandidateId, 'candidate-a')
+  assert.equal(result.creativeIR.concept.title, 'Human Truth')
+  assert.equal(result.script.script, 'Human Truth screenplay version 1')
+  assert.ok(result.trace.some(item => item.message.includes('not approved to advance')))
 })
 
 test('end-to-end pipeline performs at most one targeted revision before the shadow replay', async () => {
