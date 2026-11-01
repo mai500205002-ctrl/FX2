@@ -3,6 +3,8 @@
 const test = require('node:test')
 const assert = require('node:assert/strict')
 const { discoverConcepts } = require('../dist/modules/discovery-engine.js')
+const { metabolizeIdeas } = require('../dist/modules/idea-metabolism.js')
+const conceptMapper = require('../dist/modules/concept-mapper.js')
 
 const insight = {
   mainInsight: 'A strategic synthesis',
@@ -82,4 +84,73 @@ test('discovery compares separate lenses even when a mapper reuses the same conc
   assert.ok(result.candidates.every(candidate =>
     candidate.rationale.includes('Relative distinctiveness heuristic: 0%.')
   ))
+})
+
+function metabolismSeed(id, score, conceptValue) {
+  return {
+    id,
+    lens: id,
+    lensId: id,
+    version: 1,
+    runId: context.runId,
+    promptVersion: context.promptVersion,
+    concept: conceptValue,
+    score,
+    rationale: [],
+    generation: 0,
+  }
+}
+
+test('idea metabolism crosses the strongest seed with its most distinct available partner', async () => {
+  const primary = concept('solar lantern')
+  Object.assign(primary, {
+    tagline: 'glass beacon',
+    coreIdea: 'reflective light',
+    visualNotes: 'copper mirror',
+    creativeDevice: 'prismatic lens',
+    emotionalArc: 'fear becomes wonder',
+    targetParadox: 'darkness reveals path',
+  })
+  const nearDuplicate = {
+    ...primary,
+    title: 'solar lamp',
+    tagline: 'glass beacon',
+    coreIdea: 'reflective light',
+    visualNotes: 'copper mirror',
+    creativeDevice: 'prismatic lens',
+    emotionalArc: 'fear becomes wonder',
+    targetParadox: 'darkness reveals path',
+  }
+  const distinct = {
+    title: 'tidal orchestra',
+    tagline: 'submerged rhythm',
+    coreIdea: 'currents conduct sound',
+    visualNotes: 'blue pressure chamber',
+    creativeDevice: 'hydrophone choir',
+    emotionalArc: 'isolation becomes belonging',
+    targetParadox: 'silence carries music',
+    lateralThinkingTechniques: ['analogy'],
+  }
+  const seeds = [
+    metabolismSeed('primary', 96, primary),
+    metabolismSeed('near-duplicate', 92, nearDuplicate),
+    metabolismSeed('distinct-partner', 78, distinct),
+  ]
+  const originalMapConcept = conceptMapper.mapConcept
+  conceptMapper.mapConcept = async () => concept('generated offspring')
+
+  try {
+    const result = await metabolizeIdeas(
+      seeds,
+      { mainInsight: 'A brief insight' },
+      context,
+      2,
+    )
+    assert.equal(result.offspring.length, 2)
+    assert.deepEqual(result.offspring[0].parentIds, ['primary'])
+    assert.deepEqual(result.offspring[1].parentIds, ['primary', 'distinct-partner'])
+    assert.equal(result.events[1].type, 'crossover')
+  } finally {
+    conceptMapper.mapConcept = originalMapConcept
+  }
 })
