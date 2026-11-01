@@ -177,6 +177,7 @@ export function learnFromCreativeReview(args: {
   review: CreativeScriptReview
 }): CreativeLesson[] {
   if (
+    !args.review || typeof args.review !== 'object' ||
     args.review.source !== 'model' ||
     typeof args.runId !== 'string' || !args.runId.trim() || args.runId.length > 128 ||
     typeof args.query !== 'string' || args.query.length > 4096 ||
