@@ -54,6 +54,14 @@ function tokens(value: string): string[] {
   return [...new Set((value.toLocaleLowerCase().match(/[\p{L}\p{N}]{3,}/gu) ?? []).filter(word => !STOP_WORDS.has(word)))]
 }
 
+function normalizeLessonText(value: string): string {
+  return value.normalize('NFC').replace(/\s+/g, ' ').trim().slice(0, 320)
+}
+
+function lessonFingerprint(polarity: CreativeLesson['polarity'], value: string): string {
+  return `${polarity}:${normalizeLessonText(value).toLocaleLowerCase()}`
+}
+
 function overlap(queryTokens: string[], lessonTokens: string[]): number {
   if (!queryTokens.length || !lessonTokens.length) return 0
   const lessonSet = new Set(lessonTokens)
@@ -168,18 +176,38 @@ export function learnFromCreativeReview(args: {
   query: string
   review: CreativeScriptReview
 }): CreativeLesson[] {
-  if (args.review.source !== 'model') return []
+  if (
+    args.review.source !== 'model' ||
+    typeof args.runId !== 'string' || !args.runId.trim() || args.runId.length > 128 ||
+    typeof args.query !== 'string' || args.query.length > 4096 ||
+    !Number.isFinite(args.review.score) || args.review.score < 0 || args.review.score > 100 ||
+    !Array.isArray(args.review.strengths) || !Array.isArray(args.review.weaknesses)
+  ) return []
+
   const baseTags = tokens(args.query).slice(0, 24)
+  const strengths = args.review.strengths.filter((value): value is string => typeof value === 'string')
+  const weaknesses = args.review.weaknesses.filter((value): value is string => typeof value === 'string')
   const candidates: Array<{ polarity: CreativeLesson['polarity']; lesson: string }> = [
-    ...args.review.strengths.slice(0, 2).map(lesson => ({ polarity: 'reinforce' as const, lesson })),
-    ...args.review.weaknesses.slice(0, 3).map(lesson => ({ polarity: 'avoid' as const, lesson })),
+    ...strengths.slice(0, 2).map(lesson => ({ polarity: 'reinforce' as const, lesson })),
+    ...weaknesses.slice(0, 3).map(lesson => ({ polarity: 'avoid' as const, lesson })),
   ]
   const added: CreativeLesson[] = []
+  let memoryChanged = false
   for (const candidate of candidates) {
-    const lessonText = candidate.lesson.replace(/\s+/g, ' ').trim().slice(0, 320)
+    const lessonText = normalizeLessonText(candidate.lesson)
     if (!lessonText) continue
-    const duplicate = memory.some(existing => existing.polarity === candidate.polarity && existing.lesson.toLocaleLowerCase() === lessonText.toLocaleLowerCase())
-    if (duplicate) continue
+    const fingerprint = lessonFingerprint(candidate.polarity, lessonText)
+    const duplicate = memory.find(existing => lessonFingerprint(existing.polarity, existing.lesson) === fingerprint)
+    const contextualTags = [...new Set([...baseTags, ...tokens(lessonText).slice(0, 12)])]
+    if (duplicate) {
+      // Keep original lesson provenance; repeated appearances add bounded retrieval context only.
+      const mergedTags = [...new Set([...duplicate.tags, ...contextualTags])].slice(0, 36)
+      if (mergedTags.length !== duplicate.tags.length || mergedTags.some((tag, index) => tag !== duplicate.tags[index])) {
+        duplicate.tags = mergedTags
+        memoryChanged = true
+      }
+      continue
+    }
     const lesson: CreativeLesson = {
       id: randomUUID(),
       polarity: candidate.polarity,
@@ -187,13 +215,14 @@ export function learnFromCreativeReview(args: {
       sourceRunId: args.runId,
       sourceScore: args.review.score,
       createdAt: new Date().toISOString(),
-      tags: [...new Set([...baseTags, ...tokens(lessonText).slice(0, 12)])],
+      tags: contextualTags.slice(0, 36),
     }
     memory.push(lesson)
     added.push(lesson)
+    memoryChanged = true
   }
   while (memory.length > MAX_LESSONS) memory.shift()
-  if (added.length) persistState()
+  if (memoryChanged) persistState()
   return added.map(lesson => ({ ...lesson, tags: [...lesson.tags] }))
 }
 
