@@ -18,6 +18,28 @@ function tokenSet(value: string): Set<string> {
   return new Set((value.toLocaleLowerCase().match(/[\p{L}\p{N}]{3,}/gu) ?? []))
 }
 
+function jaccardSimilarity(a: string, b: string): number {
+  const left = tokenSet(a)
+  const right = tokenSet(b)
+  if (!left.size || !right.size) return 0
+  let intersection = 0
+  for (const token of left) if (right.has(token)) intersection++
+  return intersection / (left.size + right.size - intersection)
+}
+
+/**
+ * Keep the highest-scoring seed as the primary crossover parent, but choose
+ * its partner by lexical complementarity. Score is only a tie-breaker:
+ * Creative Court still evaluates every seed and offspring.
+ */
+function selectCrossoverPartner(primary: CreativeCandidate, alternatives: CreativeCandidate[]): CreativeCandidate {
+  return [...alternatives].sort((a, b) => {
+    const similarityDelta = jaccardSimilarity(conceptText(primary), conceptText(a))
+      - jaccardSimilarity(conceptText(primary), conceptText(b))
+    return similarityDelta || b.score - a.score
+  })[0]
+}
+
 function novelty(candidate: string, parents: string[]): number {
   const own = tokenSet(candidate)
   const parentTokens = new Set(parents.flatMap(parent => [...tokenSet(parent)]))
@@ -51,9 +73,10 @@ export async function metabolizeIdeas(
     instruction: 'MUTATION: Preserve the parent concept\'s strategic core, but change its creative mechanism, emotional turn, or visual execution in a genuinely meaningful way. Do not merely rephrase it. State a clearly executable new variant.',
   })
   if (limit > 1 && ranked.length > 1) {
+    const crossoverPartner = selectCrossoverPartner(ranked[0], ranked.slice(1))
     plans.push({
-      kind: 'crossover', parents: [ranked[0], ranked[1]],
-      instruction: 'CROSSOVER: Combine the strongest non-overlapping mechanisms of both parent concepts into one coherent third concept. Do not concatenate them. Resolve contradictions and preserve a single clear strategic idea.',
+      kind: 'crossover', parents: [ranked[0], crossoverPartner],
+      instruction: 'CROSSOVER: Combine the strongest complementary mechanisms of both parent concepts into one coherent third concept. Prefer genuinely different metaphor families and creative mechanisms; do not concatenate them. Resolve contradictions and preserve a single clear strategic idea.',
     })
   }
 
