@@ -35,12 +35,15 @@ interface CounterfactualEvidence {
 interface PersistedCreativeMemory {
   schemaVersion: 1
   lessons: CreativeLesson[]
+  quarantinedLessons?: unknown[]
   counterfactualEvidence: unknown[]
 }
 
 const MAX_LESSONS = 160
+const MAX_QUARANTINED_LESSONS = 160
 const MAX_COUNTERFACTUAL_EVIDENCE = 200
 const memory: CreativeLesson[] = []
+const quarantinedLessons: unknown[] = []
 const counterfactualEvidence: unknown[] = []
 const memoryPath = resolve(process.env.TEXTFX_CREATIVE_MEMORY_PATH || resolve(process.cwd(), 'data', 'creative-memory.json'))
 let persistence: 'durable' | 'volatile' = 'volatile'
@@ -59,12 +62,16 @@ function overlap(queryTokens: string[], lessonTokens: string[]): number {
 }
 
 function isLesson(value: unknown): value is CreativeLesson {
-  if (!value || typeof value !== 'object') return false
+  if (!value || typeof value !== 'object' || Array.isArray(value)) return false
   const item = value as Partial<CreativeLesson>
-  return typeof item.id === 'string' && (item.polarity === 'reinforce' || item.polarity === 'avoid') &&
-    typeof item.lesson === 'string' && typeof item.sourceRunId === 'string' &&
-    typeof item.sourceScore === 'number' && typeof item.createdAt === 'string' &&
-    Array.isArray(item.tags) && item.tags.every(tag => typeof tag === 'string')
+  if (typeof item.id !== 'string' || !item.id.trim() || item.id.length > 128) return false
+  if (item.polarity !== 'reinforce' && item.polarity !== 'avoid') return false
+  if (typeof item.lesson !== 'string' || !item.lesson.trim() || item.lesson.length > 320) return false
+  if (typeof item.sourceRunId !== 'string' || !item.sourceRunId.trim() || item.sourceRunId.length > 128) return false
+  if (typeof item.sourceScore !== 'number' || !Number.isFinite(item.sourceScore) || item.sourceScore < 0 || item.sourceScore > 100) return false
+  if (typeof item.createdAt !== 'string' || item.createdAt.length > 40 || !Number.isFinite(Date.parse(item.createdAt))) return false
+  if (!Array.isArray(item.tags) || item.tags.length > 36) return false
+  return item.tags.every(tag => typeof tag === 'string' && !!tag.trim() && tag.length <= 64)
 }
 
 function persistState(): void {
@@ -73,6 +80,7 @@ function persistState(): void {
     const state: PersistedCreativeMemory = {
       schemaVersion: 1,
       lessons: memory.slice(-MAX_LESSONS),
+      quarantinedLessons: quarantinedLessons.slice(-MAX_QUARANTINED_LESSONS),
       counterfactualEvidence: counterfactualEvidence.slice(-MAX_COUNTERFACTUAL_EVIDENCE),
     }
     const temporaryPath = `${memoryPath}.${process.pid}.tmp`
@@ -98,7 +106,14 @@ function loadState(): void {
       persistenceError = 'Creative memory state has an unsupported or invalid schema; the existing file was preserved and memory started empty.'
       return
     }
-    for (const lesson of parsed.lessons.filter(isLesson).slice(-MAX_LESSONS)) memory.push({ ...lesson, tags: [...lesson.tags] })
+    for (const item of (Array.isArray(parsed.quarantinedLessons) ? parsed.quarantinedLessons : []).slice(-MAX_QUARANTINED_LESSONS)) {
+      quarantinedLessons.push(item)
+    }
+    for (const lesson of parsed.lessons.slice(-MAX_LESSONS)) {
+      if (isLesson(lesson)) memory.push({ ...lesson, tags: [...lesson.tags] })
+      else quarantinedLessons.push(lesson)
+    }
+    while (quarantinedLessons.length > MAX_QUARANTINED_LESSONS) quarantinedLessons.shift()
     // Preserve the bounded raw audit history exactly as parsed. Statistical eligibility
     // is validated separately; malformed historical records must not vanish on the next save.
     for (const item of parsed.counterfactualEvidence.slice(-MAX_COUNTERFACTUAL_EVIDENCE)) {
@@ -208,6 +223,7 @@ export function getCreativeMemoryStatus() {
   const neutral = comparable.length - positive - negative
   return {
     lessonCount: memory.length,
+    quarantinedLessonCount: quarantinedLessons.length,
     reinforceCount: memory.filter(item => item.polarity === 'reinforce').length,
     avoidCount: memory.filter(item => item.polarity === 'avoid').length,
     capacity: MAX_LESSONS,
