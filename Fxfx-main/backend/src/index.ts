@@ -334,18 +334,15 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 // ── GET /healthz ──────────────────────────────────────────────────────────────
 app.get('/healthz', (_req, res) => res.status(200).json({ ok: true, ts: new Date().toISOString() }))
 
-// ── POST /agent/run ───────────────────────────────────────────────────────────
-app.post('/agent/run', (req: Request, res: Response) => {
-  const id = crypto.randomUUID()
-  try {
-    spawnAgent(id)
-    log('info', 'agent spawned', { id })
-    res.json({ ok: true, id })
-  } catch (err: unknown) {
-    const msg = err instanceof Error ? err.message : String(err)
-    log('error', 'agent spawn failed', { msg })
-    res.status(500).json({ ok: false, error: msg })
-  }
+// ── POST /agent/run — retired legacy placeholder ───────────────────────────────
+// The former handler only spawned "node --version"; it never executed a creative run.
+// Keep the route explicit so old clients cannot mistake a placeholder process for success.
+app.post('/agent/run', (_req: Request, res: Response) => {
+  res.status(410).json({
+    error: 'This legacy endpoint is retired.',
+    code: 'LEGACY_AGENT_ENDPOINT_RETIRED',
+    replacement: '/api/agent/run',
+  })
 })
 
 // ── POST /llm ─────────────────────────────────────────────────────────────────
