@@ -1,4 +1,5 @@
 import type { NextFunction, Request, Response } from 'express'
+import { createHash, timingSafeEqual } from 'node:crypto'
 import { redactText } from '../browser/redact'
 import { hasApiSession, isTrustedApiOrigin } from './api-session'
 
@@ -37,12 +38,23 @@ export function validateRunId(runId: unknown): boolean {
   return /^[a-zA-Z0-9_-]{1,64}$/.test(runId)
 }
 
+function safeSecretEqual(left: string, right: string): boolean {
+  const leftHash = createHash('sha256').update(left).digest()
+  const rightHash = createHash('sha256').update(right).digest()
+  return timingSafeEqual(leftHash, rightHash)
+}
+
+function isLoopbackRequest(req: Request): boolean {
+  const address = req.socket.remoteAddress?.toLowerCase()
+  return address === '127.0.0.1' || address === '::1' || address === '::ffff:127.0.0.1'
+}
+
 export function authenticateApi(req: Request): boolean {
   const apiKey = process.env.TEXTFX_API_KEY?.trim()
-  if (!apiKey) return true // Default loopback/dev mode when no TEXTFX_API_KEY configured
+  if (!apiKey) return isLoopbackRequest(req)
   const authHeader = req.header('authorization')?.trim()
   const token = authHeader?.startsWith('Bearer ') ? authHeader.slice(7).trim() : authHeader
-  return token === apiKey
+  return !!token && safeSecretEqual(token, apiKey)
 }
 
 export function apiAuthenticationMiddleware(req: Request, res: Response, next: NextFunction): void {
@@ -70,7 +82,7 @@ export function authorizeApproverToken(req: Request): { authorized: boolean; rea
   }
   const authHeader = req.header('authorization')?.trim()
   const token = authHeader?.startsWith('Bearer ') ? authHeader.slice(7).trim() : authHeader
-  if (!token || token !== requiredToken) {
+  if (!token || !safeSecretEqual(token, requiredToken)) {
     return { authorized: false, reason: 'Unauthorized approver credentials.' }
   }
   return { authorized: true }
