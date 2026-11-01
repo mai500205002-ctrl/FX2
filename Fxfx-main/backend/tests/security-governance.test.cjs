@@ -478,3 +478,46 @@ test('security: security headers are applied to HTTP responses', async () => {
     try { fs.rmSync(tempRoot, { recursive: true, force: true }) } catch { /* ignore */ }
   }
 })
+
+
+test('security: missing API key permits only direct loopback requests', () => {
+  const previous = process.env.TEXTFX_API_KEY
+  delete process.env.TEXTFX_API_KEY
+  try {
+    const request = address => ({
+      socket: { remoteAddress: address },
+      header: () => undefined,
+    })
+    assert.equal(authenticateApi(request('127.0.0.1')), true)
+    assert.equal(authenticateApi(request('::1')), true)
+    assert.equal(authenticateApi(request('::ffff:127.0.0.1')), true)
+    assert.equal(authenticateApi(request('192.0.2.10')), false)
+    assert.equal(authenticateApi(request('::ffff:192.0.2.10')), false)
+    assert.equal(authenticateApi(request(undefined)), false)
+  } finally {
+    if (previous === undefined) delete process.env.TEXTFX_API_KEY
+    else process.env.TEXTFX_API_KEY = previous
+  }
+})
+
+test('security: configured API and approver secrets are compared without ordinary string equality', () => {
+  const previousApi = process.env.TEXTFX_API_KEY
+  const previousApprover = process.env.TEXTFX_APPROVER_TOKEN
+  process.env.TEXTFX_API_KEY = 'api-secret-value'
+  process.env.TEXTFX_APPROVER_TOKEN = 'approver-secret-value'
+  try {
+    const request = token => ({
+      socket: { remoteAddress: '203.0.113.5' },
+      header: name => name === 'authorization' ? `Bearer ${token}` : undefined,
+    })
+    assert.equal(authenticateApi(request('api-secret-value')), true)
+    assert.equal(authenticateApi(request('api-secret-valu')), false)
+    assert.equal(authorizeApproverToken(request('approver-secret-value')).authorized, true)
+    assert.equal(authorizeApproverToken(request('approver-secret-valu')).authorized, false)
+  } finally {
+    if (previousApi === undefined) delete process.env.TEXTFX_API_KEY
+    else process.env.TEXTFX_API_KEY = previousApi
+    if (previousApprover === undefined) delete process.env.TEXTFX_APPROVER_TOKEN
+    else process.env.TEXTFX_APPROVER_TOKEN = previousApprover
+  }
+})
