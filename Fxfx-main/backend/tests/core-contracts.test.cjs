@@ -156,7 +156,7 @@ test('versioning: system prompt, court rubric and review rubric carry explicit v
   const { SYSTEM_PROMPT_VERSION } = require('../dist/modules/lateral-thinking-agent.js')
   const { COURT_RUBRIC_VERSION } = require('../dist/modules/creative-court.js')
   const { REVIEW_RUBRIC_VERSION } = require('../dist/modules/creative-reviewer.js')
-  assert.equal(SYSTEM_PROMPT_VERSION, '1.0.0')
+  assert.equal(SYSTEM_PROMPT_VERSION, '1.0.1')
   assert.equal(COURT_RUBRIC_VERSION, '1.0.0')
   assert.equal(REVIEW_RUBRIC_VERSION, '1.0.0')
 })
