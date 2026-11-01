@@ -303,33 +303,10 @@ export function executeConsequentialAction(args: { runId: string; action: string
   if (!validation.valid) {
     throw new Error(`Consequential action '${args.action}' blocked: human approval required. (${validation.reason || 'unapproved'})`)
   }
-  const timestamp = now()
-  const traceItem: AgentTraceItem = {
-    phase: record.status,
-    message: `Consequential action '${args.action}' executed with verified approval ${record.approval?.approvalId}.`,
-    ts: timestamp,
-    meta: { action: args.action, approvedBy: record.approval?.approvedBy },
-  }
-  record.trace.push(traceItem)
-  record.updatedAt = timestamp
-  appendAgentRunEvent({
-    runId: record.runId,
-    previousPhase: record.status,
-    phase: record.status,
-    trace: traceItem,
-    actor: 'human',
-    eventType: 'run.phase.changed',
-    detail: `Action '${args.action}' approved by ${record.approval?.approvedBy}`,
-  })
-  persistAgentRun(record)
-  auditTrail.push(traceItem)
-  return {
-    ok: true,
-    runId: args.runId,
-    action: args.action,
-    approvedBy: record.approval!.approvedBy,
-    executedAt: timestamp,
-  }
+
+  // Approval proves authorization, not execution. No external action adapter is
+  // configured in this backend, so never record or report a side effect as done.
+  throw new Error('No consequential-action executor is configured; approval is valid but no external action was executed.')
 }
 
 export function deleteAgentRun(runId: string): boolean {
