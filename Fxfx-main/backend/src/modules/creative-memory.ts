@@ -93,7 +93,7 @@ function toMemoryContext(lessons: CreativeLesson[], polarityLabel = 'REINFORCE /
         `TextFX Creative Memory — contextual guidance, not universal law (${polarityLabel}):`,
         ...lessons.map((lesson, index) => `${index + 1}. ${lesson.polarity === 'reinforce' ? 'REINFORCE' : 'AVOID'}: ${lesson.lesson}`),
         'Apply only lessons relevant to this brief; preserve originality and use judgment rather than copying prior concepts.',
-      ].join('\\n')
+      ].join('\n')
     : ''
   return { lessons: lessons.map(lesson => ({ ...lesson, tags: [...lesson.tags] })), prompt }
 }
@@ -327,7 +327,7 @@ export function retrieveAntiTasteMemory(query: string, limit = 4): CreativeMemor
         'ANTI-TASTE MEMORY — context-specific patterns to challenge, not absolute bans:',
         ...lessons.map((lesson, index) => `${index + 1}. Avoid repeating: ${lesson.lesson}`),
         'If a pattern is strategically necessary, justify it through the brief rather than blindly obeying this memory.',
-      ].join('\\n')
+      ].join('\n')
     : ''
   return { lessons: lessons.map(lesson => ({ ...lesson, tags: [...lesson.tags] })), prompt }
 }
