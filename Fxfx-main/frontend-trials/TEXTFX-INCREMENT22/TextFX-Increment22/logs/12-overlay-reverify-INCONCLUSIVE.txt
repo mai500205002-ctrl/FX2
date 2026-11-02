@@ -1,0 +1,16 @@
+OVERLAY RE-VERIFY — INCONCLUSIVE (recorded honestly)
+
+Attempt: unzip the Increment20 archive into a clean dir, overlay Increment22 files,
+re-copy node_modules, then tsc + node --test.
+
+Result: FAILED TO SET UP, not a code failure.
+  tsc       -> exit 2: Cannot find module 'express' / 'ipaddr.js' / 'playwright' / '@google/genai'
+  node --test -> 56 tests, 50 pass, 6 fail (all "Cannot find module" cascades)
+
+Cause: `cp -r <repo>/backend/node_modules .` did not materialise inside the sandbox
+copy step, so the overlay tree had no dependencies. This is an environment/setup
+failure, NOT evidence about the Increment22 code.
+
+Therefore: the authoritative build/test evidence for this archive remains the run
+INSIDE the real repository (logs 09/10/11), on files whose md5 equals the files in
+this archive. The independent extracted-copy rebuild is UNCONFIRMED.

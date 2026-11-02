@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "purpose": "Deterministic regression contracts for TextFX creative-core orchestration; these are not a benchmark of artistic quality.",
+  "cases": [
+    {
+      "id": "court-runner-up-overrides-discovery-score",
+      "invariant": "Counterfactual candidate selection prefers a supplied Court score over the discovery heuristic score.",
+      "expected": "Highest Court-scored non-selected candidate is used as the shadow alternative."
+    },
+    {
+      "id": "fallback-review-is-not-quality-evidence",
+      "invariant": "A heuristic fallback review must never be interpreted as a valid model-to-model quality comparison.",
+      "expected": "Counterfactual status is inconclusive and no winner is declared."
+    },
+    {
+      "id": "memory-failure-does-not-promote-fallback-lessons",
+      "invariant": "Only model-based reviews may produce durable creative lessons.",
+      "expected": "Fallback reviews produce zero learned lessons."
+    },
+    {
+      "id": "counterfactual-is-observational",
+      "invariant": "Counterfactual score differences are retained as evidence and do not mutate the selected candidate.",
+      "expected": "Comparison returns a delta and limitations without a selection action."
+    },
+    {
+      "id": "creative-ir-schema-is-versioned",
+      "invariant": "Unsupported CreativeIR schema versions are rejected by runtime validation.",
+      "expected": "Validation throws for unknown schema versions."
+    }
+  ]
+}
