@@ -1,0 +1,10 @@
+{
+  "description": "Transforms creative briefs into strategic insights, concepts, and cinematic scripts using innovative thinking engines for elite creative professionals.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}

@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&amp;family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-tertiary": "#68000c", "tertiary-fixed": "#ffdad7", "error-container": "#93000a", "surface-dim": "#131313", "on-primary-fixed": "#410001", "surface-container": "#201f1f", "surface-container-highest": "#353534", "surface-container-lowest": "#0e0e0e", "secondary-fixed-dim": "#ffb5a0", "on-primary": "#690003", "surface-bright": "#393939", "tertiary": "#ffb3ae", "on-tertiary-fixed-variant": "#930016", "on-surface-variant": "#e9bcb6", "on-primary-fixed-variant": "#930007", "primary": "#ffb4aa", "inverse-primary": "#c0000c", "on-secondary": "#5f1500", "on-secondary-container": "#fffbff", "surface-variant": "#353534", "on-surface": "#e5e2e1", "outline": "#af8782", "on-error": "#690005", "inverse-surface": "#e5e2e1", "background": "#131313", "inverse-on-surface": "#313030", "surface": "#131313", "on-secondary-fixed-variant": "#862200", "tertiary-fixed-dim": "#ffb3ae", "primary-container": "#e50914", "secondary-fixed": "#ffdbd1", "surface-tint": "#ffb4aa", "on-secondary-fixed": "#3b0900", "on-background": "#e5e2e1", "primary-fixed": "#ffdad5", "on-error-container": "#ffdad6", "on-tertiary-container": "#fff7f6", "error": "#ffb4ab", "secondary-container": "#d73b00", "primary-fixed-dim": "#ffb4aa", "on-tertiary-fixed": "#410005", "surface-container-low": "#1c1b1b", "tertiary-container": "#e40b2b", "surface-container-high": "#2a2a2a", "outline-variant": "#5e3f3b", "secondary": "#ffb5a0", "on-primary-container": "#fff7f6" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "margin": "2rem", "space-md": "1rem", "gutter-mobile": "0.75rem", "space-xs": "0.25rem", "space-lg": "1.5rem", "margin-mobile": "1rem", "space-sm": "0.5rem", "space-xl": "2.5rem", "gutter": "1.5rem" }, "fontFamily": { "label-md": ["Geist"], "headline-sm": ["Geist"], "headline-xl": ["Geist"], "headline-md": ["Geist"], "headline-xl-mobile": ["Geist"], "body-md": ["Inter"], "headline-lg": ["Geist"], "label-sm": ["Geist"], "body-sm": ["Inter"], "body-lg": ["Inter"], "headline-lg-mobile": ["Geist"] }, "fontSize": { "label-md": ["0.8125rem", { "lineHeight": "1rem", "letterSpacing": "0.02em", "fontWeight": "500" }], "headline-sm": ["1.125rem", { "lineHeight": "1.625rem", "letterSpacing": "-0.01em", "fontWeight": "500" }], "headline-xl": ["3rem", { "lineHeight": "3.5rem", "letterSpacing": "-0.03em", "fontWeight": "600" }], "headline-md": ["1.5rem", { "lineHeight": "2rem", "letterSpacing": "-0.015em", "fontWeight": "500" }], "headline-xl-mobile": ["2rem", { "lineHeight": "2.5rem", "letterSpacing": "-0.02em", "fontWeight": "600" }], "body-md": ["0.875rem", { "lineHeight": "1.4rem", "letterSpacing": "0em", "fontWeight": "400" }], "headline-lg": ["2.25rem", { "lineHeight": "2.75rem", "letterSpacing": "-0.025em", "fontWeight": "600" }], "label-sm": ["0.6875rem", { "lineHeight": "0.875rem", "letterSpacing": "0.05em", "fontWeight": "600" }], "body-sm": ["0.75rem", { "lineHeight": "1.2rem", "letterSpacing": "0.01em", "fontWeight": "400" }], "body-lg": ["1rem", { "lineHeight": "1.6rem", "letterSpacing": "-0.005em", "fontWeight": "400" }], "headline-lg-mobile": ["1.625rem", { "lineHeight": "2.125rem", "letterSpacing": "-0.02em", "fontWeight": "600" }] } } } };</script></head><body class="bg-background font-body-md text-body-md text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-container min-h-screen"><aside class="fixed left-0 top-0 h-full w-72 bg-surface-container-lowest z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.5)]"><div class="flex flex-col flex-1 overflow-y-auto"><div class="h-16 px-space-lg flex items-center gap-space-sm bg-surface-container-lowest"><div class="w-8 h-8 rounded-lg bg-primary-container flex items-center justify-center shadow-[0_0_16px_rgba(229,9,20,0.45)]"><span class="material-symbols-outlined text-on-primary-container text-[20px]">videocam</span></div><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-on-surface font-semibold tracking-tight">FX-2026</span><span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Studio Intelligence</span></div></div><div class="px-space-md py-space-sm"><div class="px-space-sm py-space-xs font-label-sm text-label-sm uppercase tracking-wider text-outline">Features</div><nav class="mt-space-xs flex flex-col gap-space-xs" data-active-classes="bg-primary-container text-on-primary-container shadow-[0_0_20px_rgba(229,9,20,0.35)]"><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all duration-200 group" data-path="screenplay-narrative" href="#"><span class="material-symbols-outlined text-[20px] transition-transform group-hover:scale-110">auto_stories</span><span class="font-body-md text-body-md font-medium">Screenplay &amp; Narrative</span></a><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all duration-200 group" data-path="storyboard-breakdown" href="#"><span class="material-symbols-outlined text-[20px] transition-transform group-hover:scale-110">view_kanban</span><span class="font-body-md text-body-md font-medium">Storyboard Breakdown</span></a><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all duration-200 group" data-path="video-director" href="#"><span class="material-symbols-outlined text-[20px] transition-transform group-hover:scale-110">movie_filter</span><span class="font-body-md text-body-md font-medium">Video Director</span></a><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all duration-200 group" data-path="3d-spatial-assets" href="#"><span class="material-symbols-outlined text-[20px] transition-transform group-hover:scale-110">view_in_ar</span><span class="font-body-md text-body-md font-medium">3D Spatial Assets</span></a><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all duration-200 group" data-path="concept-studio" href="#"><span class="material-symbols-outlined text-[20px] transition-transform group-hover:scale-110">palette</span><span class="font-body-md text-body-md font-medium">Concept Studio</span></a></nav></div><div class="px-space-md py-space-sm"><div class="px-space-sm py-space-xs font-label-sm text-label-sm uppercase tracking-wider text-outline">Intelligence</div><nav class="mt-space-xs flex flex-col gap-space-xs" data-active-classes="bg-primary-container text-on-primary-container shadow-[0_0_20px_rgba(229,9,20,0.35)]"><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all duration-200 group" data-path="neural-models" href="#"><span class="material-symbols-outlined text-[20px] transition-transform group-hover:scale-110">psychology</span><span class="font-body-md text-body-md font-medium">Neural Models</span></a><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all duration-200 group" data-path="prompt-vault" href="#"><span class="material-symbols-outlined text-[20px] transition-transform group-hover:scale-110">terminal</span><span class="font-body-md text-body-md font-medium">Prompt Vault</span></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all duration-200 group" data-path="render-queue" href="#"><div class="flex items-center gap-space-md"><span class="material-symbols-outlined text-[20px] transition-transform group-hover:scale-110">motion_blur</span><span class="font-body-md text-body-md font-medium">Render Queue</span></div><span class="w-2 h-2 rounded-full bg-secondary-container animate-pulse shadow-[0_0_8px_rgba(215,59,0,0.8)]"></span></a><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all duration-200 group" data-path="metrics-telemetry" href="#"><span class="material-symbols-outlined text-[20px] transition-transform group-hover:scale-110">speed</span><span class="font-body-md text-body-md font-medium">Metrics &amp; Telemetry</span></a><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all duration-200 group" data-path="c2pa-governance-vault" href="#"><span class="material-symbols-outlined text-[20px] transition-transform group-hover:scale-110">verified_user</span><span class="font-body-md text-body-md font-medium">C2PA Governance Vault</span></a></nav></div></div><div class="p-space-md bg-surface-container-lowest"><div class="p-space-sm rounded-lg bg-surface-container-low flex flex-col gap-space-xs"><div class="flex items-center justify-between"><span class="font-label-sm text-label-sm text-outline uppercase">VRAM Consumption</span><span class="font-label-sm text-label-sm text-primary font-mono">38.4 / 48 GB</span></div><div class="w-full h-1 bg-surface-container rounded-full overflow-hidden"><div class="h-full bg-primary-container rounded-full w-[80%] shadow-[0_0_8px_rgba(229,9,20,0.6)]"></div></div></div></div></aside><div class="pl-72"><header class="fixed top-0 left-72 right-0 h-16 bg-surface-container-lowest/80 backdrop-blur-xl z-40 flex items-center justify-between px-space-lg shadow-[0_1px_8px_rgba(0,0,0,0.3)]"><div class="flex items-center gap-space-lg"><div class="flex items-center gap-space-sm px-space-md py-space-xs bg-surface-container-low rounded-lg text-on-surface-variant cursor-pointer hover:bg-surface-container-high hover:text-on-surface transition-colors w-72 justify-between"><div class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-[18px] text-outline">search</span><span class="font-body-sm text-body-sm">Omni-Search workflows...</span></div><kbd class="px-space-xs py-0.5 rounded bg-surface-container font-mono font-label-sm text-label-sm text-outline">⌘K</kbd></div><div class="hidden xl:flex items-center gap-space-sm px-space-md py-space-xs rounded-full bg-surface-container-low"><span class="w-2 h-2 rounded-full bg-primary-container animate-ping"></span><span class="material-symbols-outlined text-[16px] text-primary">memory</span><span class="font-label-md text-label-md font-mono text-on-surface">RTX-6000 Ada</span><span class="text-outline font-label-md text-label-md">•</span><span class="font-label-md text-label-md text-secondary">Synced 99.8%</span></div></div><div class="flex items-center gap-space-md"><div class="flex items-center bg-surface-container-low rounded-lg p-0.5"><button class="px-space-sm py-0.5 rounded font-label-sm text-label-sm font-semibold bg-surface-container-highest text-on-surface shadow-sm">EN</button><button class="px-space-sm py-0.5 rounded font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface transition-colors font-semibold">العربية</button></div><button class="relative p-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-1 right-1 w-2 h-2 rounded-full bg-tertiary-container shadow-[0_0_6px_rgba(228,11,43,0.9)]"></span></button><div class="h-4 w-px bg-surface-container-high"></div><div class="flex items-center gap-space-sm"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center ring-2 ring-primary/20"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="relative pt-16 min-h-screen bg-background w-full px-space-lg"><div class="flex flex-col w-full pb-16">
+<!-- Ambient Atmospheric Backdrops -->
+<div class="relative w-full">
+<div class="absolute -top-16 left-1/3 w-[580px] h-[340px] bg-primary-container/10 rounded-full blur-[140px] pointer-events-none -z-10"></div>
+<div class="absolute top-48 right-12 w-[420px] h-[280px] bg-secondary-container/10 rounded-full blur-[120px] pointer-events-none -z-10"></div>
+<!-- Top System Breadcrumb & Subsystem Header -->
+<div class="flex flex-col xl:flex-row xl:items-end justify-between gap-space-md pt-space-md mb-space-lg">
+<div class="flex flex-col gap-space-xs">
+<div class="flex flex-wrap items-center gap-space-xs font-mono font-label-sm text-label-sm tracking-wider uppercase">
+<span class="text-primary font-bold">ATLAS CORE</span>
+<span class="text-outline">/</span>
+<span class="text-on-surface-variant">MASTER DELIVERY</span>
+<span class="text-outline">/</span>
+<span class="text-on-surface">DCI CINEMA SERVER INGEST V5.0</span>
+<span class="text-outline">•</span>
+<span class="text-secondary font-sans font-medium" dir="rtl">خادم العرض السينمائي الرقمي</span>
+</div>
+<div class="flex flex-wrap items-center gap-space-md mt-space-xs">
+<h1 class="font-headline-lg text-headline-lg font-semibold text-on-surface tracking-tight flex items-center gap-space-sm">
+<span class="w-3 h-3 rounded-full bg-primary-container animate-ping"></span>
+            NODE #704 TRANSMISSION
+          </h1>
+<span class="px-space-sm py-0.5 rounded-full bg-surface-container-high text-primary font-mono font-label-sm text-label-sm">
+            IMB-4K-SECURE-PIPE
+          </span>
+<span class="font-sans text-body-sm text-on-surface-variant" dir="rtl">
+            إرسال مباشر عالي السرعة إلى خادم السينما الرقمية DCI DCP
+          </span>
+</div>
+</div>
+<!-- Action Group -->
+<div class="flex flex-wrap items-center gap-space-sm">
+<button class="px-space-md py-2.5 rounded-lg bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all flex items-center gap-space-xs font-label-md text-label-md">
+<span class="material-symbols-outlined text-[18px]">cancel</span>
+<span>إلغاء البث (Abort Ingest)</span>
+</button>
+<button class="px-space-md py-2.5 rounded-lg bg-surface-container text-on-surface hover:bg-surface-container-high transition-all flex items-center gap-space-xs font-label-md text-label-md">
+<span class="material-symbols-outlined text-[18px] text-secondary">verified</span>
+<span>فحص الحزمة (Verify DCP Hash)</span>
+</button>
+<button class="relative px-space-lg py-2.5 rounded-lg bg-primary-container text-on-primary-container hover:brightness-110 shadow-[0_0_24px_rgba(229,9,20,0.55)] transition-all flex items-center gap-space-sm font-label-md text-label-md font-semibold">
+<span class="w-2 h-2 rounded-full bg-white animate-pulse"></span>
+<span>تأكيد الإرسال الفوري لغرفة العرض</span>
+<span class="font-mono text-xs opacity-80">(Confirm Live Ingest)</span>
+</button>
+</div>
+</div>
+<!-- Node Operational Status Ribbon -->
+<div class="grid grid-cols-1 lg:grid-cols-4 gap-space-sm bg-surface-container-low p-space-sm rounded-xl mb-space-lg shadow-sm">
+<div class="flex items-center gap-space-md px-space-md py-space-xs bg-surface-container rounded-lg">
+<div class="w-10 h-10 rounded-lg bg-primary-container/20 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[22px]">router</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Connection Protocol</span>
+<span class="font-mono font-label-md text-label-md text-on-surface truncate">Christie / Doremi IMB QSFPD+</span>
+<span class="font-mono text-body-sm text-secondary">10.0 Gbps Ultra-Pipe Linked</span>
+</div>
+</div>
+<div class="flex items-center gap-space-md px-space-md py-space-xs bg-surface-container rounded-lg">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[22px]">theater_comedy</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Target Endpoint</span>
+<span class="font-body-md text-body-md text-on-surface font-medium truncate">Auditorium 1 • IMAX Scope</span>
+<span class="font-mono text-body-sm text-on-surface-variant">IMS3000 Node ID: #704</span>
+</div>
+</div>
+<div class="flex items-center gap-space-md px-space-md py-space-xs bg-surface-container rounded-lg">
+<div class="w-10 h-10 rounded-lg bg-secondary-container/20 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[22px]">encrypted</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Cryptographic Layer</span>
+<span class="font-mono font-label-md text-label-md text-on-surface truncate">AES-128 KDM Handshake</span>
+<span class="font-mono text-body-sm text-primary">C2PA Attested (P-256)</span>
+</div>
+</div>
+<div class="flex items-center gap-space-md px-space-md py-space-xs bg-surface-container rounded-lg">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-on-surface">
+<span class="material-symbols-outlined text-[22px]">verified_user</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Compliance Profile</span>
+<span class="font-mono font-label-md text-label-md text-on-surface truncate">SMPTE ST 429-2 / D-Cinema</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant" dir="rtl">معتمد سينمائياً 4K DCI</span>
+</div>
+</div>
+</div>
+<!-- Main Asymmetric Workspace Layout -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-space-lg">
+<!-- Left 8-col: Ingest Pipeline & Master Package Telemetry -->
+<div class="xl:col-span-8 flex flex-col gap-space-lg min-w-0">
+<!-- Target DCI SMPTE Package Spec Card -->
+<div class="bg-surface-container-low rounded-xl p-space-lg shadow-md flex flex-col gap-space-md relative overflow-hidden">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<span class="px-space-xs py-0.5 rounded bg-primary-container text-on-primary-container font-mono font-label-sm text-label-sm uppercase">DCI Master OV</span>
+<span class="font-mono font-label-sm text-label-sm text-outline uppercase">SMPTE 428 / 429 Interop</span>
+</div>
+<div class="flex items-center gap-space-sm font-mono text-body-sm">
+<span class="text-on-surface-variant">Live Ingest Rate:</span>
+<span class="text-secondary font-semibold">1.15 GB/s</span>
+<span class="text-outline">•</span>
+<span class="text-primary font-semibold">ETA: 00:00:16</span>
+</div>
+</div>
+<!-- Cinema Package Official Identifier -->
+<div class="bg-surface-container-lowest p-space-md rounded-lg flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">SMPTE Composition Playlist Identifier (CPL)</span>
+<span class="font-mono text-body-sm text-primary">UUID: a981c20f-48d9-4b21-992a-6bb83a0029b1</span>
+</div>
+<div class="font-mono text-headline-sm text-headline-sm text-on-surface font-semibold tracking-wide break-all select-all">
+              CHRONOS-REBORN-SCENE43_FTR_S_AR-EN_INT-TL_51-Atmos_4K_FX_20260330_OV
+            </div>
+<div class="flex flex-wrap items-center gap-space-md font-mono text-body-sm text-on-surface-variant pt-space-xs">
+<span>Source: SCENE_43_MASTER_CHRONOS_REBORN_4K_XQ.tar.gz</span>
+<span>•</span>
+<span>Payload: 18.60 GB (19,971,592,192 bytes)</span>
+</div>
+</div>
+<!-- Real-Time Ingest Overall Meter -->
+<div class="flex flex-col gap-space-xs pt-space-xs">
+<div class="flex justify-between items-end font-mono">
+<div class="flex items-center gap-space-sm">
+<span class="font-label-md text-label-md text-on-surface font-medium">حالة نقل الحزمة الرقمية الشاملة</span>
+<span class="font-label-sm text-label-sm text-outline uppercase">Global Transmission Progress</span>
+</div>
+<span class="font-headline-sm text-headline-sm text-primary font-bold">98.4%</span>
+</div>
+<div class="w-full h-3 bg-surface-container-highest rounded-full overflow-hidden p-0.5">
+<div class="h-full bg-gradient-to-r from-secondary-container via-primary-container to-primary rounded-full w-[98.4%] shadow-[0_0_14px_rgba(229,9,20,0.8)] transition-all duration-300"></div>
+</div>
+<div class="flex justify-between font-mono text-body-sm text-on-surface-variant">
+<span>Transferred: 18.30 / 18.60 GB</span>
+<span>6,094 / 6,192 Cinema Frames (DCI D-Cinema 4K)</span>
+</div>
+</div>
+<!-- Pipeline Micro-Stages Breakdown -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md pt-space-sm">
+<!-- Stage 1 -->
+<div class="p-space-md rounded-lg bg-surface-container flex flex-col justify-between gap-space-sm">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="w-7 h-7 rounded bg-surface-container-high flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[16px]">palette</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-medium">Color Space Transform</span>
+<span class="font-mono text-body-sm text-outline">ACEScg → DCI X'Y'Z' Matrix</span>
+</div>
+</div>
+<span class="px-space-xs py-0.5 rounded bg-surface-container-highest text-secondary font-mono font-label-sm text-label-sm">100% PASS</span>
+</div>
+<div class="flex justify-between items-center font-mono text-body-sm text-on-surface-variant">
+<span>Transfer: DCI Gamma 2.6</span>
+<span class="text-on-surface">3D LUT 65^3 Applied</span>
+</div>
+</div>
+<!-- Stage 2 -->
+<div class="p-space-md rounded-lg bg-surface-container flex flex-col justify-between gap-space-sm">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="w-7 h-7 rounded bg-surface-container-high flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[16px]">movie</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-medium">JPEG 2000 Transcoder</span>
+<span class="font-mono text-body-sm text-outline">4096x1714 Scope @ 24.000 fps</span>
+</div>
+</div>
+<span class="px-space-xs py-0.5 rounded bg-primary-container/20 text-primary font-mono font-label-sm text-label-sm">98.4% ACTIVE</span>
+</div>
+<div class="flex justify-between items-center font-mono text-body-sm text-on-surface-variant">
+<span>Bitrate: 248 Mbps (DCI Cap)</span>
+<span class="text-on-surface">6,192 Frames Sealed</span>
+</div>
+</div>
+<!-- Stage 3 -->
+<div class="p-space-md rounded-lg bg-surface-container flex flex-col justify-between gap-space-sm">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="w-7 h-7 rounded bg-surface-container-high flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[16px]">surround_sound</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-medium">Audio Track MXF Wrap</span>
+<span class="font-mono text-body-sm text-outline">Dolby Atmos / 16-ch 24-bit 96kHz</span>
+</div>
+</div>
+<span class="px-space-xs py-0.5 rounded bg-surface-container-highest text-secondary font-mono font-label-sm text-label-sm">SYNC OK</span>
+</div>
+<div class="flex justify-between items-center font-mono text-body-sm text-on-surface-variant">
+<span>L/C/R/LFE + Heights (7.1.4)</span>
+<span class="text-on-surface">LUFS -24.1 LKFS</span>
+</div>
+</div>
+<!-- Stage 4 -->
+<div class="p-space-md rounded-lg bg-surface-container flex flex-col justify-between gap-space-sm">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="w-7 h-7 rounded bg-surface-container-high flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[16px]">receipt_long</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-medium">XML Manifest Vault</span>
+<span class="font-mono text-body-sm text-outline">ASSETMAP • VOLINDEX • PKL • CPL</span>
+</div>
+</div>
+<span class="px-space-xs py-0.5 rounded bg-surface-container-highest text-secondary font-mono font-label-sm text-label-sm">SEALED</span>
+</div>
+<div class="flex justify-between items-center font-mono text-body-sm text-on-surface-variant">
+<span>SHA-1 / SHA-256 Hashes</span>
+<span class="text-primary">ECDSA Sign Verified</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Live Visual Framing & DCI Colorimetry Preview -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-space-md">
+<!-- Cinema Frame Capture Container -->
+<div class="md:col-span-7 bg-surface-container-low rounded-xl p-space-md flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+<span class="font-label-md text-label-md text-on-surface font-medium">Theater Viewport Stream (IMB Echo)</span>
+</div>
+<span class="font-mono font-label-sm text-label-sm text-outline">CH: 4K_DCI_SCOPE</span>
+</div>
+<div class="relative w-full aspect-[2.39/1] bg-surface-container-lowest rounded-lg overflow-hidden group">
+<!-- DCI 4K Scope Visual Mock -->
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="Ultra high resolution cinematic film still from Chronos Reborn in 4K anamorphic aspect ratio 2.39 to 1. Dramatic obsidian and crimson volumetric lighting, futuristic subterranean monolithic architecture, atmospheric smoke, high dynamic range shadows, DCI calibrated color grading with rich deep blacks and ember accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAHJPLl8eEHncZSBzE3DnDMkdddQSkdeJcCs35jsE-eIMl4FTcvwDHZIVZ1rHRbEEin_sc5x2BqKWVrQ3AM5ZfDlSTJqC5hr2GmhrKe1mddZTfhPStTgolUx52dJjV1guVV-uJ6iWB2U25z4VTurhqqaQLmrTYZ28ao3QdExtANthq01g5TUm1fD42Q9ygAFZjVdCWfoa0NXee6MSbNKl9h3pASigDTR_XVXvkHHQPGfrknfl5PlP8"/>
+<!-- Subtle Scope Reticle Overlay -->
+<div class="absolute inset-0 pointer-events-none flex flex-col justify-between p-space-xs bg-gradient-to-t from-black/70 via-transparent to-black/30">
+<div class="flex justify-between font-mono text-body-sm text-white/70">
+<span>DCI SCOPE 2.39:1 [4096 × 1714]</span>
+<span>TC: 01:42:18:04</span>
+</div>
+<div class="flex justify-between items-end font-mono text-body-sm text-white/90">
+<span class="flex items-center gap-space-xs">
+<span class="inline-block w-1.5 h-1.5 rounded-full bg-primary-container animate-pulse"></span>
+                    FRAME 006094 / 006192
+                  </span>
+<span class="text-secondary bg-surface-container-lowest/80 px-space-xs py-0.5 rounded">D-CINEMA D65 REF</span>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between font-mono text-body-sm text-on-surface-variant pt-space-xs">
+<div class="flex items-center gap-space-sm">
+<span>Color Primaries: DCI-P3</span>
+<span>•</span>
+<span>Gamma: 2.60</span>
+</div>
+<div class="flex items-center gap-space-xs text-primary">
+<span class="material-symbols-outlined text-[16px]">hdr_on</span>
+<span>D-Cinema PQ Target</span>
+</div>
+</div>
+</div>
+<!-- Audio Phase & Soundfield Matrix -->
+<div class="md:col-span-5 bg-surface-container-low rounded-xl p-space-md flex flex-col justify-between gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-[18px]">graphic_eq</span>
+<span class="font-label-md text-label-md text-on-surface font-medium">Dolby Atmos Ingest Phase</span>
+</div>
+<span class="font-mono font-label-sm text-label-sm text-secondary">16-CH PCM</span>
+</div>
+<!-- Graphic Audio Bars (16 Channel DCI Cinema Layout) -->
+<div class="grid grid-cols-8 gap-1.5 items-end h-28 bg-surface-container-lowest p-space-sm rounded-lg">
+<div class="flex flex-col items-center gap-1 h-full justify-end">
+<div class="w-full bg-primary-container rounded-sm" style="height: 74%;"></div>
+<span class="font-mono text-[9px] text-outline">L</span>
+</div>
+<div class="flex flex-col items-center gap-1 h-full justify-end">
+<div class="w-full bg-primary-container rounded-sm" style="height: 88%;"></div>
+<span class="font-mono text-[9px] text-outline">C</span>
+</div>
+<div class="flex flex-col items-center gap-1 h-full justify-end">
+<div class="w-full bg-primary-container rounded-sm" style="height: 72%;"></div>
+<span class="font-mono text-[9px] text-outline">R</span>
+</div>
+<div class="flex flex-col items-center gap-1 h-full justify-end">
+<div class="w-full bg-secondary-container rounded-sm" style="height: 94%;"></div>
+<span class="font-mono text-[9px] text-outline">LFE</span>
+</div>
+<div class="flex flex-col items-center gap-1 h-full justify-end">
+<div class="w-full bg-primary-container rounded-sm" style="height: 60%;"></div>
+<span class="font-mono text-[9px] text-outline">Ls</span>
+</div>
+<div class="flex flex-col items-center gap-1 h-full justify-end">
+<div class="w-full bg-primary-container rounded-sm" style="height: 62%;"></div>
+<span class="font-mono text-[9px] text-outline">Rs</span>
+</div>
+<div class="flex flex-col items-center gap-1 h-full justify-end">
+<div class="w-full bg-surface-variant rounded-sm" style="height: 48%;"></div>
+<span class="font-mono text-[9px] text-outline">Tfl</span>
+</div>
+<div class="flex flex-col items-center gap-1 h-full justify-end">
+<div class="w-full bg-surface-variant rounded-sm" style="height: 51%;"></div>
+<span class="font-mono text-[9px] text-outline">Tfr</span>
+</div>
+</div>
+<div class="flex flex-col gap-space-xs font-mono text-body-sm">
+<div class="flex justify-between text-on-surface-variant">
+<span>Phase Coherence:</span>
+<span class="text-secondary font-semibold">+0.98 (Nominal)</span>
+</div>
+<div class="flex justify-between text-on-surface-variant">
+<span>Sample Rate / Bit:</span>
+<span class="text-on-surface">96.000 kHz / 24-bit True</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Live Ingest Console Terminal -->
+<div class="bg-surface-container-low rounded-xl p-space-md flex flex-col gap-space-xs shadow-md">
+<div class="flex items-center justify-between pb-space-xs">
+<div class="flex items-center gap-space-sm font-mono font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[16px] text-primary">terminal</span>
+<span class="text-on-surface font-semibold">DCI SERVER TRANSMISSION TELEMETRY</span>
+<span class="text-outline">/ dev/dci_node704_rx</span>
+</div>
+<div class="flex items-center gap-space-sm font-mono text-body-sm text-outline">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary-container animate-pulse"></span>
+<span>BUFFER DRAIN: 0.04%</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest rounded-lg p-space-md font-mono text-body-sm text-on-surface-variant h-36 overflow-y-auto flex flex-col gap-1 leading-relaxed selection:bg-primary-container selection:text-white">
+<div class="text-outline">[2026-03-30 14:28:10.104 UTC] TLS 1.3 handshake successful with Doremi IMS3000 Node #704. Certificate CN: CHRISTIE-IMB-8F94D2.</div>
+<div class="text-outline">[2026-03-30 14:28:10.982 UTC] CPL integrity check passed: UUID a981c20f-48d9-4b21-992a-6bb83a0029b1 validated against PKL manifest.</div>
+<div class="text-on-surface"><span class="text-secondary">[OK]</span> AES-128 KDM payload decrypted by projector HSM core. Valid window unlocked through 2026-04-30 23:59:59 UTC.</div>
+<div class="text-outline">[2026-03-30 14:28:11.450 UTC] Streaming Picture Track MXF: J2K Chunk 005820..006192 over direct fiber 10GbE channel.</div>
+<div class="text-on-surface"><span class="text-primary">[INGEST ACTIVE]</span> Merkle Tree leaf 384/387 verified with hardware signature (ECDSA-P256-SHA256).</div>
+<div class="text-secondary">[2026-03-30 14:28:12.010 UTC] Finalizing MXF essence interop wrappers. Remaining: 300 MB. Frame sync rock solid at 24.000 fps.</div>
+</div>
+</div>
+</div>
+<!-- Right 4-col: Security, Hardware Endpoint & Ingest Storage Matrix -->
+<div class="xl:col-span-4 flex flex-col gap-space-lg">
+<!-- Target Projector & Server Node Specification -->
+<div class="bg-surface-container-low rounded-xl p-space-lg shadow-md flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Theater Hardware Node</span>
+<span class="px-space-xs py-0.5 rounded bg-surface-container-high text-primary font-mono font-label-sm text-label-sm">ONLINE</span>
+</div>
+<div class="flex items-start gap-space-md">
+<div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[28px]">videocam</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold truncate">Christie CP4450-RGB</span>
+<span class="font-body-sm text-body-sm text-secondary">Real|Laser™ High-Frame-Rate D-Cinema</span>
+<span class="font-mono text-body-sm text-outline">IMB Serial: 0x8F94D2-CPL-AUD1</span>
+</div>
+</div>
+<!-- KDM Security Card -->
+<div class="bg-surface-container rounded-lg p-space-md flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface font-medium flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[16px] text-primary">key</span>
+<span>KDM Security Lock</span>
+</span>
+<span class="font-mono text-body-sm text-secondary font-semibold">VALIDATED</span>
+</div>
+<div class="flex flex-col gap-1 font-mono text-body-sm pt-space-xs">
+<div class="flex justify-between text-outline">
+<span>Start Window:</span>
+<span class="text-on-surface">2026-03-30 00:00 UTC</span>
+</div>
+<div class="flex justify-between text-outline">
+<span>End Window:</span>
+<span class="text-on-surface">2026-04-30 23:59 UTC</span>
+</div>
+<div class="flex justify-between text-outline">
+<span>KDM Payload:</span>
+<span class="text-primary truncate ml-2">kdm_fx2026_aud1_node704.xml</span>
+</div>
+</div>
+</div>
+<!-- Merkle Fingerprint Proof -->
+<div class="bg-surface-container rounded-lg p-space-md flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Merkle Hash Fingerprint</span>
+<span class="font-mono text-body-sm text-primary font-bold">100% MATCH</span>
+</div>
+<div class="font-mono text-body-sm text-on-surface-variant break-all bg-surface-container-lowest p-space-xs rounded select-all">
+              0x9e4f3a992e10c7b12f45812e9b01ca7d8c4e09f5
+            </div>
+<span class="font-body-sm text-body-sm text-outline" dir="rtl">
+              بصمة التشفير الرقمية مطابقة لشهادة العرض المعتمدة
+            </span>
+</div>
+</div>
+<!-- Ingest Storage & Buffer Matrix -->
+<div class="bg-surface-container-low rounded-xl p-space-lg shadow-md flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[18px] text-secondary">storage</span>
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">DCI Server Storage Array</span>
+</div>
+<span class="font-mono text-body-sm text-on-surface font-semibold">14.2 TB FREE</span>
+</div>
+<div class="flex flex-col gap-space-xs">
+<div class="flex justify-between items-baseline font-mono text-body-sm">
+<span class="text-on-surface-variant">8x 3.84TB NVMe RAID-0 DCI Cache</span>
+<span class="text-primary font-bold">42% Occupied</span>
+</div>
+<div class="w-full h-2 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-secondary-container rounded-full w-[42%]"></div>
+</div>
+</div>
+<!-- Drive Bay Grid Visual -->
+<div class="grid grid-cols-4 gap-space-xs pt-space-xs">
+<div class="bg-surface-container p-2 rounded flex flex-col items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container animate-pulse"></span>
+<span class="font-mono text-[10px] text-outline">NVME-0</span>
+<span class="font-mono text-[10px] text-on-surface font-semibold">41°C</span>
+</div>
+<div class="bg-surface-container p-2 rounded flex flex-col items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container animate-pulse"></span>
+<span class="font-mono text-[10px] text-outline">NVME-1</span>
+<span class="font-mono text-[10px] text-on-surface font-semibold">43°C</span>
+</div>
+<div class="bg-surface-container p-2 rounded flex flex-col items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container animate-pulse"></span>
+<span class="font-mono text-[10px] text-outline">NVME-2</span>
+<span class="font-mono text-[10px] text-on-surface font-semibold">39°C</span>
+</div>
+<div class="bg-surface-container p-2 rounded flex flex-col items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container animate-pulse"></span>
+<span class="font-mono text-[10px] text-outline">NVME-3</span>
+<span class="font-mono text-[10px] text-on-surface font-semibold">42°C</span>
+</div>
+<div class="bg-surface-container p-2 rounded flex flex-col items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container animate-pulse"></span>
+<span class="font-mono text-[10px] text-outline">NVME-4</span>
+<span class="font-mono text-[10px] text-on-surface font-semibold">40°C</span>
+</div>
+<div class="bg-surface-container p-2 rounded flex flex-col items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container animate-pulse"></span>
+<span class="font-mono text-[10px] text-outline">NVME-5</span>
+<span class="font-mono text-[10px] text-on-surface font-semibold">44°C</span>
+</div>
+<div class="bg-surface-container p-2 rounded flex flex-col items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container animate-pulse"></span>
+<span class="font-mono text-[10px] text-outline">NVME-6</span>
+<span class="font-mono text-[10px] text-on-surface font-semibold">41°C</span>
+</div>
+<div class="bg-surface-container p-2 rounded flex flex-col items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container animate-pulse"></span>
+<span class="font-mono text-[10px] text-outline">NVME-7</span>
+<span class="font-mono text-[10px] text-on-surface font-semibold">42°C</span>
+</div>
+</div>
+<div class="flex items-center justify-between text-body-sm font-mono text-outline pt-space-xs">
+<span>Direct I/O Throughput:</span>
+<span class="text-on-surface font-semibold">9.24 Gbps Direct DMA</span>
+</div>
+</div>
+<!-- Quick Export & Governance Actions -->
+<div class="flex flex-col gap-space-sm">
+<button class="w-full py-space-sm px-space-md rounded-lg bg-surface-container text-on-surface hover:bg-surface-container-high transition-all flex items-center justify-between font-label-md text-label-md">
+<span class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-[18px] text-primary">open_in_new</span>
+<span>فتح شاشة المعاينة الحية في قاعة العرض</span>
+</span>
+<span class="font-mono text-xs text-outline">IMAX Viewport</span>
+</button>
+<button class="w-full py-space-sm px-space-md rounded-lg bg-surface-container text-on-surface hover:bg-surface-container-high transition-all flex items-center justify-between font-label-md text-label-md">
+<span class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-[18px] text-secondary">verified</span>
+<span>توليد تقرير شهادة العرض DCI QC Certificate</span>
+</span>
+<span class="font-mono text-xs text-outline">PDF / C2PA</span>
+</button>
+<button class="w-full py-space-sm px-space-md rounded-lg bg-surface-container text-on-surface hover:bg-surface-container-high transition-all flex items-center justify-between font-label-md text-label-md">
+<span class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-[18px] text-primary">download</span>
+<span>تنزيل مفتاح التشفير KDM Key (.xml)</span>
+</span>
+<span class="font-mono text-xs text-outline">SMPTE 430-1</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Micro-Interaction Toast Script -->
+<script>
+      (function() {
+        const verifyBtn = document.querySelector('button:has(.text-secondary)');
+        if (verifyBtn) {
+          verifyBtn.addEventListener('click', () => {
+            const originalText = verifyBtn.innerHTML;
+            verifyBtn.innerHTML = '<span class="material-symbols-outlined text-[18px] animate-spin text-secondary">sync</span><span>جاري التحقق من التشفير... (Verifying)</span>';
+            setTimeout(() => {
+              verifyBtn.innerHTML = '<span class="material-symbols-outlined text-[18px] text-secondary">check_circle</span><span>تم فحص الحزمة بنجاح (100% Valid)</span>';
+              setTimeout(() => {
+                verifyBtn.innerHTML = originalText;
+              }, 3000);
+            }, 1200);
+          });
+        }
+      })();
+    </script>
+</div>
+</div></main></div></body></html>

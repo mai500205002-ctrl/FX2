@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+
+<html class="dark" dir="rtl" lang="ar"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><title>FX — AI Creative Lab</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&amp;family=Noto+Serif:ital,wght@0,400;0,600;1,400&amp;family=Space+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "inverse-on-surface": "#313032", "primary-fixed-dim": "#e7c17a", "tertiary-fixed": "#e2e2e6", "tertiary-fixed-dim": "#c6c6ca", "surface-container-low": "#1c1b1d", "surface-container-high": "#2a2a2c", "on-secondary": "#412d00", "inverse-primary": "#765a1d", "secondary": "#e9c176", "on-primary-container": "#63490c", "secondary-container": "#604403", "surface-dim": "#131315", "on-primary": "#402d00", "on-error-container": "#ffdad6", "on-secondary-container": "#dab36a", "error": "#ffb4ab", "on-surface-variant": "#d1c5b4", "on-tertiary-fixed": "#1a1c1f", "surface-bright": "#39393b", "surface-variant": "#353437", "surface-container-lowest": "#0e0e10", "on-primary-fixed": "#261900", "outline-variant": "#4d4639", "on-tertiary": "#2f3034", "tertiary-container": "#bebfc3", "surface-tint": "#e7c17a", "on-tertiary-container": "#4c4e51", "on-background": "#e5e1e4", "surface-container-highest": "#353437", "on-surface": "#e5e1e4", "on-primary-fixed-variant": "#5c4304", "on-secondary-fixed": "#261900", "primary-container": "#dfba73", "on-error": "#690005", "primary-fixed": "#ffdea3", "outline": "#9a8f80", "on-secondary-fixed-variant": "#5d4201", "inverse-surface": "#e5e1e4", "secondary-fixed": "#ffdea5", "error-container": "#93000a", "surface": "#131315", "on-tertiary-fixed-variant": "#45474a", "background": "#131315", "tertiary": "#dbdbdf", "primary": "#fdd68c", "surface-container": "#201f21", "secondary-fixed-dim": "#e9c176" }, "borderRadius": { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, "spacing": { "margin-mobile": "1rem", "space-lg": "1.5rem", "space-md": "1rem", "gutter": "1.5rem", "gutter-mobile": "0.75rem", "margin": "3rem", "space-sm": "0.5rem", "space-xl": "2.5rem", "space-xs": "0.25rem" }, "fontFamily": { "display-hero-mobile": [ "Noto Serif" ], "display-hero": [ "Noto Serif" ], "headline-lg": [ "Noto Serif" ], "headline-lg-mobile": [ "Noto Serif" ], "body-md": [ "IBM Plex Sans Arabic", "IBM Plex Sans" ], "label-cinematic": [ "Space Grotesk" ], "title-editorial": [ "Noto Serif", "IBM Plex Sans Arabic" ], "headline-sm": [ "IBM Plex Sans Arabic", "IBM Plex Sans" ], "label-timecode": [ "Space Grotesk" ], "body-lg": [ "IBM Plex Sans Arabic", "IBM Plex Sans" ], "body-sm": [ "IBM Plex Sans Arabic", "IBM Plex Sans" ], "headline-md": [ "Noto Serif", "IBM Plex Sans Arabic" ] }, "fontSize": { "display-hero-mobile": [ "36px", { "lineHeight": "48px", "fontWeight": "600" } ], "display-hero": [ "56px", { "lineHeight": "72px", "fontWeight": "600" } ], "headline-lg": [ "40px", { "lineHeight": "52px", "fontWeight": "500" } ], "headline-lg-mobile": [ "28px", { "lineHeight": "38px", "fontWeight": "500" } ], "body-md": [ "14px", { "lineHeight": "24px", "fontWeight": "400" } ], "label-cinematic": [ "11px", { "lineHeight": "14px", "letterSpacing": "0.08em", "fontWeight": "600" } ], "title-editorial": [ "18px", { "lineHeight": "26px", "fontWeight": "500" } ], "headline-sm": [ "20px", { "lineHeight": "28px", "fontWeight": "600" } ], "label-timecode": [ "13px", { "lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "500" } ], "body-lg": [ "16px", { "lineHeight": "28px", "fontWeight": "400" } ], "body-sm": [ "12px", { "lineHeight": "20px", "fontWeight": "400" } ], "headline-md": [ "28px", { "lineHeight": "38px", "fontWeight": "500" } ] } } } };</script></head><body class="bg-surface-container-lowest font-body-md text-body-md text-on-surface min-h-screen selection:bg-primary selection:text-on-primary antialiased"><header class="fixed top-0 left-0 right-0 z-50 bg-surface-container-lowest/95 backdrop-blur-xl border-b border-surface-variant/40"><div class="h-16 w-full px-space-lg flex items-center justify-between"><div class="flex items-center gap-space-md"><img alt="FX Creative Lab Monogram" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1XmxtANcuD0nmbOJBaoClzj5upiVw2FqoptRo_rtemru87oehe0GbUJ71mEAZzx4Af0dgupkYLl-ZtVKTVkoaD08oJJMmHV6uU0wi2aO6KjWzEiWz5a_gIky0ejxFY_C4Kj220Bb5AKk74ykkE3rArwSac6opcLIOisAE10cdiQ2Z_eHZxkI3Ari8MsYhcXhvCStJVLrxliWuwlo0EnfR4waB6S1aCAtseI5XqWN2R96VWzwze22I8D5KJK"/><div class="h-5 w-px bg-surface-variant"></div><div class="flex flex-col"><span class="font-label-cinematic text-label-cinematic text-primary tracking-widest uppercase">ATELIER DU CINÉMA</span><span class="font-headline-sm text-title-editorial text-on-surface font-medium leading-none">مختبر الإبداع السينمائي</span></div></div><nav class="hidden xl:flex items-center gap-space-md h-full" data-active-classes="text-primary border-b border-primary font-semibold"><a class="flex items-center gap-space-xs h-full px-space-sm text-on-surface-variant hover:text-on-surface transition-colors" data-path="brief" href="#"><span class="font-label-timecode text-label-cinematic opacity-50">01</span><span class="font-body-md text-body-md">الموجز</span></a><div class="w-4 h-px bg-surface-variant/60"></div><a class="flex items-center gap-space-xs h-full px-space-sm text-on-surface-variant hover:text-on-surface transition-colors" data-path="strategic-insight" href="#"><span class="font-label-timecode text-label-cinematic opacity-50">02</span><span class="font-body-md text-body-md">الرؤية الاستراتيجية</span></a><div class="w-4 h-px bg-surface-variant/60"></div><a class="flex items-center gap-space-xs h-full px-space-sm text-on-surface-variant hover:text-on-surface transition-colors" data-path="creative-concept" href="#"><span class="font-label-timecode text-label-cinematic opacity-50">03</span><span class="font-body-md text-body-md">الفكرة الإبداعية</span></a><div class="w-4 h-px bg-surface-variant/60"></div><a class="flex items-center gap-space-xs h-full px-space-sm text-on-surface-variant hover:text-on-surface transition-colors" data-path="cinematic-screenplay" href="#"><span class="font-label-timecode text-label-cinematic opacity-50">04</span><span class="font-body-md text-body-md">السيناريو السينمائي</span></a></nav><div class="flex items-center gap-space-md"><div class="hidden md:flex items-center gap-space-xs px-space-sm py-1 rounded bg-surface-container-high/60 border border-surface-variant/50"><span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span><span class="font-body-sm text-body-sm text-on-surface-variant">المخرج الذكي:</span><span class="font-body-sm text-body-sm text-primary font-medium">جاهز للإلهام</span></div><div class="hidden lg:flex items-center gap-space-xs px-space-sm py-1 rounded bg-surface-container-low border border-surface-variant/40"><span class="font-label-timecode text-label-cinematic text-on-surface font-semibold">3.4k / 50k CR</span><span class="text-outline-variant font-label-cinematic">•</span><span class="font-body-sm text-body-sm text-on-surface-variant">الاستهلاك الإبداعي</span></div><button class="flex items-center gap-space-xs px-space-sm py-1.5 rounded bg-surface-container border border-surface-variant/80 hover:border-primary/40 text-on-surface-variant hover:text-on-surface transition-all"><span class="material-symbols-outlined text-sm">search</span><span class="font-body-sm text-body-sm hidden sm:inline">بحث سينمائي</span><span class="font-label-cinematic text-label-cinematic bg-surface-container-highest px-1 rounded text-on-surface-variant">⌘K</span></button><div class="relative flex items-center pr-1"><div class="p-0.5 rounded-full border border-primary/60 bg-surface-container-lowest"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAI8f8waPPPuz7ln32H8U5Hb6spTTU_hcXwpteNUnChz5lbCOzKu2IViZL-x-sTHbbvvan4xPFtIsps5MkBW2_Nr6f9ofBljp1qnDfoQELbM9WJVP813mIc5fKFNRXEpzb0OsBE7IJyhsFihPqtH7zz1pLyD__INVkJSChKmoV-kglGMXe7NXLbHl5UQcFJkA19jBWQTlIqHURY2dfm_O5g2Q8Dx5GUWeQE5--dXdXs6fJHZKmENG4e5Q"/></div></div></div></div><div class="h-12 w-full px-space-lg bg-surface-container-lowest/80 border-t border-surface-variant/30 flex items-center justify-between overflow-x-auto"><div class="flex items-center gap-space-xs flex-shrink-0"><span class="font-label-cinematic text-label-cinematic text-outline ml-space-sm flex items-center gap-1"><span class="material-symbols-outlined text-sm text-primary">auto_videocam</span>أدوات التفكير الإبداعي:</span><button class="flex items-center gap-1.5 px-space-sm py-1 rounded bg-surface-container-low hover:bg-surface-container border border-surface-variant/40 text-on-surface hover:text-primary transition-colors text-body-sm font-body-sm"><span class="material-symbols-outlined text-sm text-primary-fixed-dim">bolt</span><span>الاستفزاز الإبداعي</span></button><button class="flex items-center gap-1.5 px-space-sm py-1 rounded bg-surface-container-low hover:bg-surface-container border border-surface-variant/40 text-on-surface hover:text-primary transition-colors text-body-sm font-body-sm"><span class="material-symbols-outlined text-sm text-primary-fixed-dim">compare_arrows</span><span>القياس والتناظر</span></button><button class="flex items-center gap-1.5 px-space-sm py-1 rounded bg-surface-container-low hover:bg-surface-container border border-surface-variant/40 text-on-surface hover:text-primary transition-colors text-body-sm font-body-sm"><span class="material-symbols-outlined text-sm text-primary-fixed-dim">shuffle</span><span>المحفز العشوائي</span></button><button class="flex items-center gap-1.5 px-space-sm py-1 rounded bg-surface-container-low hover:bg-surface-container border border-surface-variant/40 text-on-surface hover:text-primary transition-colors text-body-sm font-body-sm"><span class="material-symbols-outlined text-sm text-primary-fixed-dim">swap_vert</span><span>التفكير المعاكس</span></button><button class="flex items-center gap-1.5 px-space-sm py-1 rounded bg-surface-container-low hover:bg-surface-container border border-surface-variant/40 text-on-surface hover:text-primary transition-colors text-body-sm font-body-sm"><span class="material-symbols-outlined text-sm text-primary-fixed-dim">lock_open</span><span>عكس القيود</span></button></div><div class="hidden md:flex items-center gap-space-sm flex-shrink-0 text-on-surface-variant"><span class="font-label-cinematic text-label-cinematic tracking-wider uppercase text-outline">STUDIO CALIBRATION</span><span class="w-1.5 h-1.5 rounded-full bg-secondary"></span><span class="font-label-timecode text-label-cinematic text-primary-fixed-dim">DCI-P3 99.8%</span></div></div></header><main class="w-full pt-28 pb-12 bg-surface-container-lowest min-h-screen"><div class="flex flex-col w-full text-on-surface">
+<!-- TOP MASTHEAD & DOSSIER CONTROLS -->
+<section class="w-full bg-surface-container-lowest px-space-md sm:px-space-lg lg:px-margin py-space-xl">
+<div class="max-w-7xl mx-auto flex flex-col gap-space-lg">
+<!-- Meta Status Ribbon -->
+<div class="flex flex-wrap items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm flex-wrap">
+<span class="px-space-sm py-0.5 rounded bg-surface-container-high text-primary font-label-cinematic text-label-cinematic tracking-widest uppercase">
+            MASTER CREATIVE DOSSIER // PRD v2.4
+          </span>
+<span class="flex items-center gap-1.5 px-space-sm py-0.5 rounded bg-surface-container text-secondary text-body-sm font-body-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary animate-ping"></span>
+            معتمد ومقفل للإنتاج (Locked &amp; Greenlit)
+          </span>
+<span class="font-label-timecode text-label-cinematic text-on-surface-variant">
+            DCI 4K • SCOPE 2.39:1
+          </span>
+</div>
+<!-- 100% Match Metric -->
+<div class="flex items-center gap-space-sm bg-surface-container-low px-space-md py-1 rounded">
+<div class="flex flex-col text-left">
+<span class="font-label-cinematic text-label-cinematic text-primary">100% SPEC MATCH</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant leading-none">مطابقة الدليل الإبداعي</span>
+</div>
+<svg class="w-7 h-7 text-primary" viewbox="0 0 36 36">
+<circle cx="18" cy="18" fill="none" r="15.9155" stroke="currentColor" stroke-opacity="0.15" stroke-width="3"></circle>
+<circle cx="18" cy="18" fill="none" r="15.9155" stroke="currentColor" stroke-dasharray="100, 100" stroke-linecap="round" stroke-width="3"></circle>
+</svg>
+</div>
+</div>
+<!-- Main Dossier Title & Subhead -->
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center gap-space-xs font-label-cinematic text-label-cinematic text-outline uppercase tracking-wider">
+<span>ATELIER DU CINÉMA</span>
+<span>/</span>
+<span>NEOM 2030 SPECIAL COMMISSION</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-primary-fixed tracking-tight">
+          وثيقة متطلبات المشروع والمواصفات الإبداعية — حملة صحراء النور
+        </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-4xl">
+          الدليل الإخراجي والتقني الشامل لإنتاج الفيلم السينمائي الإعلاني العالمي لدار المجوهرات الراقية في صحراء نيوم. يتضمن البناء الاستراتيجي، الفكرة التوليدية، المحركات الإبداعية، وكادر المشاهد السينمائية بدقة 35mm Anamorphic.
+        </p>
+</div>
+<!-- Production Metadata Bar -->
+<div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-space-sm p-space-md rounded bg-surface-container-low">
+<div class="flex flex-col gap-0.5">
+<span class="font-label-cinematic text-label-cinematic text-outline uppercase">العميل والشريك</span>
+<span class="font-headline-sm text-title-editorial text-on-surface">دار المجوهرات الراقية × نيوم</span>
+</div>
+<div class="flex flex-col gap-0.5">
+<span class="font-label-cinematic text-label-cinematic text-outline uppercase">الإخراج والذكاء الإبداعي</span>
+<span class="font-headline-sm text-title-editorial text-on-surface">إبراهيم النجار &amp; FX AI Co-Director</span>
+</div>
+<div class="flex flex-col gap-0.5">
+<span class="font-label-cinematic text-label-cinematic text-outline uppercase">نظام المعايرة واللون</span>
+<span class="font-headline-sm text-title-editorial text-primary">ACEScc / DCI-P3 99.8%</span>
+</div>
+<div class="flex flex-col gap-0.5">
+<span class="font-label-cinematic text-label-cinematic text-outline uppercase">الترخيص وخاتم الأرشيف</span>
+<span class="font-headline-sm text-title-editorial text-on-surface">FX-STUDIO-DOC-8942-A</span>
+</div>
+</div>
+<!-- Action Utilities -->
+<div class="flex flex-wrap items-center justify-between gap-space-sm pt-space-xs">
+<div class="flex items-center gap-space-sm flex-wrap">
+<button class="flex items-center gap-2 px-space-md py-2 rounded bg-primary text-on-primary font-body-sm font-semibold hover:bg-primary-fixed transition-all" id="exportPdfBtn">
+<span class="material-symbols-outlined text-sm">picture_as_pdf</span>
+<span>تصدير وثيقة الإخراج (Master PDF)</span>
+</button>
+<button class="flex items-center gap-2 px-space-md py-2 rounded bg-surface-container-high hover:bg-surface-variant text-on-surface text-body-sm font-medium transition-all" id="copyShareLink">
+<span class="material-symbols-outlined text-sm">share</span>
+<span id="copyLinkText">مشاركة الرابط المشفر للإنتاج</span>
+</button>
+<button class="flex items-center gap-2 px-space-md py-2 rounded bg-surface-container-high hover:bg-surface-variant text-on-surface-variant hover:text-on-surface text-body-sm font-medium transition-all" id="toggleReaderMode">
+<span class="material-symbols-outlined text-sm">fullscreen</span>
+<span>وضع العرض السينمائي الكامل</span>
+</button>
+</div>
+<div class="flex items-center gap-space-xs text-body-sm text-outline font-label-cinematic">
+<span class="material-symbols-outlined text-sm text-primary">verified_user</span>
+<span>DIGITALLY SIGNED &amp; VERIFIED — FX LEDGER</span>
+</div>
+</div>
+</div>
+</section>
+<!-- WORKSPACE BODY: SMART STICKY DUAL-RAIL ATELIER -->
+<section class="w-full bg-surface-container-lowest px-space-md sm:px-space-lg lg:px-margin pb-space-xl">
+<div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-start">
+<!-- RIGHT ATELIER NAVIGATION RAIL (Sticky in RTL Desktop) -->
+<aside class="lg:col-span-3 sticky top-28 bg-surface-container-low rounded p-space-md flex flex-col gap-space-md shadow-md">
+<div class="flex items-center justify-between pb-space-xs">
+<span class="font-label-cinematic text-label-cinematic text-primary uppercase tracking-widest flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm">list_alt</span>
+            فهرس الوثيقة الإبداعية
+          </span>
+<span class="font-label-timecode text-label-cinematic text-outline">06 أجزاء</span>
+</div>
+<nav class="flex flex-col gap-1 text-body-sm font-body-sm" id="dossierNav">
+<a class="nav-item flex items-center justify-between p-2 rounded bg-surface-container text-primary font-medium transition-all" href="#sec-01">
+<span class="truncate">01. الملخص والرؤية الفنية</span>
+<span class="font-label-timecode text-label-cinematic opacity-60">VISION</span>
+</a>
+<a class="nav-item flex items-center justify-between p-2 rounded hover:bg-surface-container text-on-surface-variant hover:text-on-surface transition-all" href="#sec-02">
+<span class="truncate">02. محركات التفكير الخمسة</span>
+<span class="font-label-timecode text-label-cinematic opacity-60">ENGINES</span>
+</a>
+<a class="nav-item flex items-center justify-between p-2 rounded hover:bg-surface-container text-on-surface-variant hover:text-on-surface transition-all" href="#sec-03">
+<span class="truncate">03. رادار التوتر والرحلة الإبداعية</span>
+<span class="font-label-timecode text-label-cinematic opacity-60">JOURNEY</span>
+</a>
+<a class="nav-item flex items-center justify-between p-2 rounded hover:bg-surface-container text-on-surface-variant hover:text-on-surface transition-all" href="#sec-04">
+<span class="truncate">04. كادر المشاهد والستوريبورد</span>
+<span class="font-label-timecode text-label-cinematic opacity-60">STORYBOARD</span>
+</a>
+<a class="nav-item flex items-center justify-between p-2 rounded hover:bg-surface-container text-on-surface-variant hover:text-on-surface transition-all" href="#sec-05">
+<span class="truncate">05. مصفوفة المواصفات التقنية</span>
+<span class="font-label-timecode text-label-cinematic opacity-60">TECH SPECS</span>
+</a>
+<a class="nav-item flex items-center justify-between p-2 rounded hover:bg-surface-container text-on-surface-variant hover:text-on-surface transition-all" href="#sec-06">
+<span class="truncate">06. خارطة الطريق وخاتم المخرج</span>
+<span class="font-label-timecode text-label-cinematic opacity-60">SIGN-OFF</span>
+</a>
+</nav>
+<!-- Quick Spec Callout Widget -->
+<div class="mt-space-sm p-space-sm rounded bg-surface-container-lowest flex flex-col gap-1.5 text-body-sm">
+<div class="flex items-center gap-1.5 text-secondary">
+<span class="material-symbols-outlined text-sm">lens_blur</span>
+<span class="font-label-cinematic text-label-cinematic uppercase">CAMERA PACK</span>
+</div>
+<span class="text-on-surface font-medium leading-tight">Cooke Anamorphic /i FF + ARRI Alexa 35</span>
+<span class="text-on-surface-variant text-body-sm">ISO 800 • Shutter 172.8° • T2.3</span>
+</div>
+<!-- Co-Director Quick Prompt Prompting -->
+<div class="p-space-sm rounded bg-surface-container-high flex flex-col gap-2">
+<span class="font-label-cinematic text-label-cinematic text-outline uppercase flex items-center gap-1">
+<span class="material-symbols-outlined text-xs text-primary">chat</span>
+            المساعد الإخراجي الذكي
+          </span>
+<p class="text-body-sm text-on-surface-variant leading-relaxed">
+            "يمكن تعديل إيقاع مشهد انفجار النور ليتناغم مع مقطوعة العود الإلكترونية المصممة خصيصاً للمشهد الثاني."
+          </p>
+<button class="w-full py-1 rounded bg-surface-container hover:bg-surface text-primary text-body-sm font-medium transition-colors">
+            استفسار من المساعد
+          </button>
+</div>
+</aside>
+<!-- MAIN MASTER CONTENT AREA (9 Cols Desktop) -->
+<div class="lg:col-span-9 flex flex-col gap-space-xl">
+<!-- SECTION 01: EXECUTIVE SUMMARY & VISION -->
+<article class="scroll-mt-32 p-space-lg rounded bg-surface-container-low flex flex-col gap-space-lg shadow-sm" id="sec-01">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="font-label-timecode text-label-cinematic text-primary px-space-xs py-0.5 rounded bg-surface-container-high">01</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">الملخص التنفيذي والرؤية الفنية</h2>
+</div>
+<button class="text-on-surface-variant hover:text-primary transition-colors text-body-sm flex items-center gap-1" onclick="toggleSection('body-01')">
+<span class="material-symbols-outlined text-sm">unfold_more</span>
+<span>تبديل العرض</span>
+</button>
+</div>
+<div class="flex flex-col gap-space-md" id="body-01">
+<p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
+              تُمثّل حملة <span class="text-primary font-medium">"صحراء النور"</span> عملاً إعلانيًا سينمائيًا مفصليًا صُمم خصيصًا لإعادة تعريف الفخامة الصحراوية لدار المجوهرات الراقية بالتعاون مع المشهد المستقبلي لنيوم ٢٠٣٠. تُبنى التجربة البصرية كقصيدة ضوئية متدرجة تبدأ من سكون السديم وظلمة الأوبسيديان، وتصل ذروتها عند انبلاج أول خيط شمس يُشعل الخاتم الأيقوني المنحوت من الذهب الخام والألماس النقي.
+            </p>
+<!-- Aesthetic Foundation Pillars Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md pt-space-xs">
+<div class="p-space-md rounded bg-surface-container flex flex-col gap-space-xs">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined text-sm">dark_mode</span>
+<span class="font-label-cinematic text-label-cinematic uppercase">OBSIDIAN VELVET NOIR</span>
+</div>
+<h3 class="font-headline-sm text-title-editorial text-on-surface">سواد الأوبسيديان المخملي</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+                  تأسيس فضاء سينمائي غامر بعيد عن السطوع التجاري التقليدي؛ مساحات الظل تمنح الضوء قيمته الرمزية والمادية وتكشف تفاصيل الألماس بدقة فائقة.
+                </p>
+</div>
+<div class="p-space-md rounded bg-surface-container flex flex-col gap-space-xs">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined text-sm">wb_sunny</span>
+<span class="font-label-cinematic text-label-cinematic uppercase">CHAMPAGNE GOLD INCIDENCE</span>
+</div>
+<h3 class="font-headline-sm text-title-editorial text-on-surface">وهج الذهب الشمباني</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+                  درجة حرارة لونية دقيقة (3200K – 4500K) تجسد لون رمال حسمى وقت الشروق، مع انعكاسات مشتتة ناعمة تتناغم مع بشرة عارضة الأزياء ووهج الجواهر.
+                </p>
+</div>
+<div class="p-space-md rounded bg-surface-container flex flex-col gap-space-xs">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined text-sm">aspect_ratio</span>
+<span class="font-label-cinematic text-label-cinematic uppercase">CINEMASCOPE 2.39:1</span>
+</div>
+<h3 class="font-headline-sm text-title-editorial text-on-surface">الأفق السينمائي الممتد</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+                  تأطير أفقي خالص يتيح التباين الدرامي بين الصخور المنحوتة عبر آلاف السنين والكتل المعمارية الانسيابية الطافية في فضاء نيوم المستقبلي.
+                </p>
+</div>
+</div>
+</div>
+</article>
+<!-- SECTION 02: 5 CREATIVE THINKING ENGINES -->
+<article class="scroll-mt-32 p-space-lg rounded bg-surface-container-low flex flex-col gap-space-lg shadow-sm" id="sec-02">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="font-label-timecode text-label-cinematic text-primary px-space-xs py-0.5 rounded bg-surface-container-high">02</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">محركات التفكير الإبداعي الـ 5 (Creative Instruments)</h2>
+</div>
+<span class="font-label-cinematic text-label-cinematic text-outline uppercase hidden sm:inline">COGNITIVE LATERAL TOOLS</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">
+            تم تطبيق الأدوات الإدراكية الخمس لكسر القوالب الإعلانية المعتادة للمجوهرات الفاخرة وتحويل الفيلم إلى بيان سينمائي خالد:
+          </p>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-space-md">
+<!-- Engine 1 -->
+<div class="p-space-md rounded bg-surface-container flex flex-col gap-space-xs group hover:bg-surface-container-high transition-colors">
+<div class="flex items-center justify-between">
+<span class="w-7 h-7 rounded bg-surface-container-highest flex items-center justify-center text-primary font-label-timecode text-label-cinematic">01</span>
+<span class="material-symbols-outlined text-sm text-primary">bolt</span>
+</div>
+<h3 class="font-headline-sm text-title-editorial text-on-surface">الاستفزاز الإبداعي</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+                "ماذا لو كانت المجوهرات لا تلمع في النور، بل تصنع النور في قلب الظلام الحالك؟" — تحويل قطعة المجوهرات من مجرد عاكس للضوء إلى مصدر فيزيائي وطاقي للإشعاع في الصحراء.
+              </p>
+</div>
+<!-- Engine 2 -->
+<div class="p-space-md rounded bg-surface-container flex flex-col gap-space-xs group hover:bg-surface-container-high transition-colors">
+<div class="flex items-center justify-between">
+<span class="w-7 h-7 rounded bg-surface-container-highest flex items-center justify-center text-primary font-label-timecode text-label-cinematic">02</span>
+<span class="material-symbols-outlined text-sm text-primary">compare_arrows</span>
+</div>
+<h3 class="font-headline-sm text-title-editorial text-on-surface">القياس والتناظر</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+                المقاربة التناظرية بين تضاريس الأخاديد الصخرية لنيوم المنحوتة بالرياح عبر ملايين السنين، وثنايا الذهب المنحوت يدويًا في ورشة الدار، وبين انكسارات الألماس وسديم الفجر.
+              </p>
+</div>
+<!-- Engine 3 -->
+<div class="p-space-md rounded bg-surface-container flex flex-col gap-space-xs group hover:bg-surface-container-high transition-colors">
+<div class="flex items-center justify-between">
+<span class="w-7 h-7 rounded bg-surface-container-highest flex items-center justify-center text-primary font-label-timecode text-label-cinematic">03</span>
+<span class="material-symbols-outlined text-sm text-primary">shuffle</span>
+</div>
+<h3 class="font-headline-sm text-title-editorial text-on-surface">المحفز العشوائي</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+                الكلمة المحفزة: "السراب والغيوم المنخفضة". أدى ذلك لابتكار المشهد الافتتاحي حيث تغمر السحب الوادي الصخري ليلاً، ليولد شعور بالطوفان المعلق فوق الجبال.
+              </p>
+</div>
+<!-- Engine 4 -->
+<div class="p-space-md rounded bg-surface-container flex flex-col gap-space-xs group hover:bg-surface-container-high transition-colors">
+<div class="flex items-center justify-between">
+<span class="w-7 h-7 rounded bg-surface-container-highest flex items-center justify-center text-primary font-label-timecode text-label-cinematic">04</span>
+<span class="material-symbols-outlined text-sm text-primary">swap_vert</span>
+</div>
+<h3 class="font-headline-sm text-title-editorial text-on-surface">التفكير المعاكس</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+                عكس الصورة النمطية لبريق المدينة والمجوهرات في الحفلات الصاخبة؛ وضع الفخامة المطلقة في العزلة التامة، في صمت الفضاء الصحراوي الخالي من أي صخب.
+              </p>
+</div>
+<!-- Engine 5 -->
+<div class="p-space-md rounded bg-surface-container flex flex-col gap-space-xs group hover:bg-surface-container-high transition-colors md:col-span-2 lg:col-span-2">
+<div class="flex items-center justify-between">
+<span class="w-7 h-7 rounded bg-surface-container-highest flex items-center justify-center text-primary font-label-timecode text-label-cinematic">05</span>
+<span class="material-symbols-outlined text-sm text-primary">lock_open</span>
+</div>
+<h3 class="font-headline-sm text-title-editorial text-on-surface">عكس القيود (Constraint Reversal)</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+                تحويل التحدي البيئي القاسي للصحراء (حرارة الشمس الحارقة ووعورة التضاريس) إلى بطل الحكاية الجمالي: الشمس تصبح شريكاً في الإضاءة عبر كواسر معمارية معلقة، والرمال تصبح ذرّات ذهبية متطايرة تؤكد نقاء الخام.
+              </p>
+</div>
+</div>
+</article>
+<!-- SECTION 03: RADAR & THE 4 CORE STAGES -->
+<article class="scroll-mt-32 p-space-lg rounded bg-surface-container-low flex flex-col gap-space-lg shadow-sm" id="sec-03">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="font-label-timecode text-label-cinematic text-primary px-space-xs py-0.5 rounded bg-surface-container-high">03</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">رادار التوتر والرحلة الإبداعية (Core Creative Journey)</h2>
+</div>
+<span class="font-label-timecode text-label-cinematic text-secondary">TENSION RADAR: 88% ACTIVE</span>
+</div>
+<!-- Live Visual Tension Radar Indicator -->
+<div class="p-space-md rounded bg-surface-container flex flex-col md:flex-row items-center justify-between gap-space-md">
+<div class="flex flex-col gap-1 max-w-xl">
+<span class="font-label-cinematic text-label-cinematic text-primary uppercase">RADAR ANALYSIS // التوتر الإبداعي المتصاعد</span>
+<h4 class="font-headline-sm text-headline-sm text-on-surface">مفارقة الهدوء الصخري والتوهج الخارق</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                يقيس الرادار النبض الدرامي بين صمت السديم الأزرق البارد في البداية وصولاً إلى التفجّر الذهبي الحارق في ذروة الفيلم، مما يمنع الرتابة الإعلانية.
+              </p>
+</div>
+<!-- Inline SVG Gauge Radar (under 2KB) -->
+<div class="w-36 h-36 flex-shrink-0 flex items-center justify-center relative">
+<svg class="w-full h-full transform -rotate-90" viewbox="0 0 100 100">
+<circle class="text-on-surface" cx="50" cy="50" fill="none" r="42" stroke="currentColor" stroke-opacity="0.1" stroke-width="6"></circle>
+<circle class="text-primary transition-all duration-1000" cx="50" cy="50" fill="none" r="42" stroke="currentColor" stroke-dasharray="264" stroke-dashoffset="31.68" stroke-linecap="round" stroke-width="6"></circle>
+<circle class="text-secondary" cx="50" cy="50" fill="none" r="30" stroke="currentColor" stroke-opacity="0.1" stroke-width="3"></circle>
+<polygon class="text-primary" fill="currentColor" points="50,15 53,23 47,23"></polygon>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center text-center">
+<span class="font-label-timecode text-headline-sm text-primary font-bold">88%</span>
+<span class="font-label-cinematic text-label-cinematic text-outline">DRAMA</span>
+</div>
+</div>
+</div>
+<!-- The Stages Progression Cards -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md">
+<!-- Stage 01 -->
+<div class="p-space-md rounded bg-surface-container flex flex-col gap-space-xs">
+<div class="flex items-center justify-between text-outline">
+<span class="font-label-cinematic text-label-cinematic">STAGE 01</span>
+<span class="material-symbols-outlined text-sm text-primary">assignment</span>
+</div>
+<h3 class="font-headline-sm text-title-editorial text-on-surface">الموجز الاستراتيجي</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                صياغة موازين القوى: الجمع بين ندرة التراث الطبيعي وتكنولوجيا المستقبل دون الوقوع في الطابع الصناعي الجاف؛ إعادة ابتكار مفهوم "الجوهرة التذكارية".
+              </p>
+<div class="mt-auto pt-2 flex items-center gap-1 font-label-cinematic text-label-cinematic text-primary">
+<span>STATUS: 100% APPROVED</span>
+</div>
+</div>
+<!-- Stage 02 -->
+<div class="p-space-md rounded bg-surface-container flex flex-col gap-space-xs">
+<div class="flex items-center justify-between text-outline">
+<span class="font-label-cinematic text-label-cinematic">STAGE 02</span>
+<span class="material-symbols-outlined text-sm text-primary">insights</span>
+</div>
+<h3 class="font-headline-sm text-title-editorial text-on-surface">الرؤية العميقة (Strategy)</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                "الفخامة المعاصرة ليست في الإفراط بالظهور، بل في القدرة على التلاشي داخل الصمت واختيار ما لا يُرى." — خلق هيبة مطلقة لصاحبة الخاتم.
+              </p>
+<div class="mt-auto pt-2 flex items-center gap-1 font-label-cinematic text-label-cinematic text-primary">
+<span>STATUS: LOCKED INSIGHT</span>
+</div>
+</div>
+<!-- Stage 03 -->
+<div class="p-space-md rounded bg-surface-container flex flex-col gap-space-xs">
+<div class="flex items-center justify-between text-outline">
+<span class="font-label-cinematic text-label-cinematic">STAGE 03</span>
+<span class="material-symbols-outlined text-sm text-primary">lightbulb</span>
+</div>
+<h3 class="font-headline-sm text-title-editorial text-on-surface">الفكرة الكبرى (The Big Idea)</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+<span class="text-secondary font-medium">"حين يتكلم الصمت، يُولد النور" (Where Void Ignites).</span> لا وجود لأي حوار صوتي منطوق؛ السرد يعتمد كلياً على حركة الكاميرا وتوهج الحجر الكريم.
+              </p>
+<div class="mt-auto pt-2 flex items-center gap-1 font-label-cinematic text-label-cinematic text-primary">
+<span>STATUS: CONCEPT SIGNED</span>
+</div>
+</div>
+</div>
+</article>
+<!-- SECTION 04: STORYBOARD & MASTER SCENES -->
+<article class="scroll-mt-32 p-space-lg rounded bg-surface-container-low flex flex-col gap-space-lg shadow-sm" id="sec-04">
+<div class="flex flex-wrap items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<span class="font-label-timecode text-label-cinematic text-primary px-space-xs py-0.5 rounded bg-surface-container-high">04</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">كادر المشاهد والستوريبورد السينمائي المعتمد</h2>
+</div>
+<!-- View switch controls -->
+<div class="flex items-center gap-1 p-1 rounded bg-surface-container">
+<button class="px-space-sm py-1 rounded bg-surface-container-highest text-primary text-body-sm font-medium flex items-center gap-1" id="viewListBtn">
+<span class="material-symbols-outlined text-sm">view_agenda</span>
+<span>العرض المفصل</span>
+</button>
+<button class="px-space-sm py-1 rounded hover:bg-surface-container-highest text-on-surface-variant hover:text-on-surface text-body-sm font-medium flex items-center gap-1" id="viewGridBtn">
+<span class="material-symbols-outlined text-sm">grid_view</span>
+<span>الشريط السينمائي</span>
+</button>
+</div>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">
+            تسلسل اللقطات الأربع الأساسية للفيلم مع محددات العدسات، التوقيت الزمني الدقيق (Timecode)، والتعليمات الإخراجية لكل كادر:
+          </p>
+<!-- STORYBOARD CONTAINER -->
+<div class="flex flex-col gap-space-xl" id="storyboardDeck">
+<!-- SCENE 01 -->
+<div class="scene-card p-space-md rounded bg-surface-container flex flex-col gap-space-md">
+<div class="flex flex-wrap items-center justify-between gap-space-xs">
+<div class="flex items-center gap-space-sm">
+<span class="font-label-timecode text-label-cinematic text-primary font-bold">SCENE 01 // 00:00 — 00:18</span>
+<span class="font-headline-sm text-title-editorial text-on-surface">صحوة السديم (The Void Awakening)</span>
+</div>
+<div class="flex items-center gap-space-xs text-body-sm font-label-cinematic text-on-surface-variant">
+<span class="px-2 py-0.5 rounded bg-surface-container-high">35mm Anamorphic</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-primary">T2.8 • 800 ISO</span>
+</div>
+</div>
+<!-- Anamorphic 2.39:1 Frame with Real Generated Scene 01 Asset -->
+<div class="relative w-full aspect-[2.39/1] overflow-hidden rounded bg-surface-container-lowest">
+<img alt="Sahra Al Noor Scene 01 Awakening" class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida/AEtjO1VQTUQM-VsZUB3P_gRaln8UiNEhSl9dEXUM3HvlsA8H4-jPy28i8plDiO-Z15CFV9ke62h2mjQeKdcb5zjxeNAUZ4CWguWTs_uqnwgZ6OP6ektacFLvBwNpPCs8NShpQz2DJ3Nl3PI_JsXeRdk4OpT32wrhat-6hrivaq_8zKTQxXqR5noL6guthZBjPUqX-nF0t5K6BX0VNohzqiZhPJoBqP3GJLgsWU9WRtSUMuhCyXDGx0zJmvcVrr98"/>
+<div class="absolute bottom-0 inset-x-0 p-space-sm bg-gradient-to-t from-surface-container-lowest/90 via-surface-container-lowest/40 to-transparent flex items-center justify-between">
+<span class="font-label-cinematic text-label-cinematic text-tertiary">LOCATION: حسمى — وادي الديسة الطبيعي، نيوم</span>
+<span class="font-label-timecode text-label-cinematic text-primary">FRAME: 0001 - 0432</span>
+</div>
+</div>
+<!-- Scene Director Notes -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-sm pt-space-xs text-body-sm">
+<div class="flex flex-col gap-1 p-space-sm rounded bg-surface-container-low">
+<span class="font-label-cinematic text-label-cinematic text-outline uppercase">حركة الكاميرا</span>
+<span class="text-on-surface">درون ثقيل بحركة أفقية بطيئة (Slow Orbit Tracking) تخترق طبقة الضباب الباردة بين الجبال.</span>
+</div>
+<div class="flex flex-col gap-1 p-space-sm rounded bg-surface-container-low">
+<span class="font-label-cinematic text-label-cinematic text-outline uppercase">التصميم الصوتي</span>
+<span class="text-on-surface">همس الرياح الصحراوية وترددات منخفضة سفلية (Sub-bass drone 32Hz) بدون أي إيقاع.</span>
+</div>
+<div class="flex flex-col gap-1 p-space-sm rounded bg-surface-container-low">
+<span class="font-label-cinematic text-label-cinematic text-outline uppercase">الملاحظة الدرامية</span>
+<span class="text-on-surface">إشعار المشاهد بصمت الكون وسكون ما قبل الولادة الأولى للنور.</span>
+</div>
+</div>
+</div>
+<!-- SCENE 02 -->
+<div class="scene-card p-space-md rounded bg-surface-container flex flex-col gap-space-md">
+<div class="flex flex-wrap items-center justify-between gap-space-xs">
+<div class="flex items-center gap-space-sm">
+<span class="font-label-timecode text-label-cinematic text-primary font-bold">SCENE 02 // 00:18 — 00:45</span>
+<span class="font-headline-sm text-title-editorial text-on-surface">انفجار النور ومواجهة الذهب (The Solar Ignition)</span>
+</div>
+<div class="flex items-center gap-space-xs text-body-sm font-label-cinematic text-on-surface-variant">
+<span class="px-2 py-0.5 rounded bg-surface-container-high">85mm Macro Anamorphic</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-primary">T1.9 • Close Focus</span>
+</div>
+</div>
+<!-- Anamorphic 2.39:1 Frame with Real Generated Scene 02 Asset -->
+<div class="relative w-full aspect-[2.39/1] overflow-hidden rounded bg-surface-container-lowest">
+<img alt="Sahra Al Noor Scene 02 Solar Ignition" class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida/AEtjO1U1D1QBPMNjNtt2wYKw6YfaWt3EqGzTlVdgPUqiK5ZC_tCcWPDFJAPCes_zdI1x9Am0MEbPCGc_ucctGonJPCGOCklZoyPD9r7dMoY0a_UkQu6w-cgfCATrtvOEqGjidI0HgsaYELXCJHwHMrg-KaqmNsdoON8lOnGnN_3KnSmq37f6AbXWdurx8vZU2wJHgY3Rqh0giWRMJtde4PuOGMNC0r8PpWYAQAGx5NBanN04szbUoG6R0TYiMYE"/>
+<div class="absolute bottom-0 inset-x-0 p-space-sm bg-gradient-to-t from-surface-container-lowest/90 via-surface-container-lowest/40 to-transparent flex items-center justify-between">
+<span class="font-label-cinematic text-label-cinematic text-tertiary">HERO OBJECT: خاتم الذهب العضوي عيار 18 والألماس المنشور</span>
+<span class="font-label-timecode text-label-cinematic text-primary">FRAME: 0433 - 1080</span>
+</div>
+</div>
+<!-- Scene Director Notes -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-sm pt-space-xs text-body-sm">
+<div class="flex flex-col gap-1 p-space-sm rounded bg-surface-container-low">
+<span class="font-label-cinematic text-label-cinematic text-outline uppercase">حركة الكاميرا</span>
+<span class="text-on-surface">ماكرو شديد الدقة يتبع انعكاس شعاع الفجر المائل على حجر الألماس وبشرة العارضة.</span>
+</div>
+<div class="flex flex-col gap-1 p-space-sm rounded bg-surface-container-low">
+<span class="font-label-cinematic text-label-cinematic text-outline uppercase">التصميم الصوتي</span>
+<span class="text-on-surface">رنين بلوري متصاعد يشبه احتكاك الزجاج المصقول مع نفس بشري بطيء وعميق.</span>
+</div>
+<div class="flex flex-col gap-1 p-space-sm rounded bg-surface-container-low">
+<span class="font-label-cinematic text-label-cinematic text-outline uppercase">الملاحظة الدرامية</span>
+<span class="text-on-surface">لحظة الالتقاء الروحي بين صلابة الصخر وجمال الصياغة اليدوية الفائقة.</span>
+</div>
+</div>
+</div>
+<!-- SCENE 03 -->
+<div class="scene-card p-space-md rounded bg-surface-container flex flex-col gap-space-md">
+<div class="flex flex-wrap items-center justify-between gap-space-xs">
+<div class="flex items-center gap-space-sm">
+<span class="font-label-timecode text-label-cinematic text-primary font-bold">SCENE 03 // 00:45 — 01:15</span>
+<span class="font-headline-sm text-title-editorial text-on-surface">سيدة الضوء في الجناح المعماري المعلق (Infinite Horizon)</span>
+</div>
+<div class="flex items-center gap-space-xs text-body-sm font-label-cinematic text-on-surface-variant">
+<span class="px-2 py-0.5 rounded bg-surface-container-high">50mm Steadicam 360</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-primary">T2.0 • Golden Hour</span>
+</div>
+</div>
+<!-- Anamorphic 2.39:1 Frame with Real Generated Scene 03 Asset -->
+<div class="relative w-full aspect-[2.39/1] overflow-hidden rounded bg-surface-container-lowest">
+<img alt="Sahra Al Noor Scene 03 Infinite Horizon" class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida/AEtjO1WQvRepHxzWPOgKRYTj_zPbhhFCKvylw2R8s50tZZpC_uDcRBfbWKQ4Lt-ihIuI3qg_g635spaJ93uxsIBp4sQ1z8DpbjzDDVui5Pova_86hb3UOEmLIqyrGN2_tNn76Dv9e6nk3gfCzzjrntcrKye2NKveYIc1EiRwB110xnAd90yQYyecOVQ9bUhpH1K8N62qdaGtC14tnk0-AVhwEeb-0aGzMm5PCZwI9E0IF4U5H_gU97wkuV9xfD9E"/>
+<div class="absolute bottom-0 inset-x-0 p-space-sm bg-gradient-to-t from-surface-container-lowest/90 via-surface-container-lowest/40 to-transparent flex items-center justify-between">
+<span class="font-label-cinematic text-label-cinematic text-tertiary">ARCHITECTURE: الجسر الكابولي المنحني والمشربية الزجاجية</span>
+<span class="font-label-timecode text-label-cinematic text-primary">FRAME: 1081 - 1800</span>
+</div>
+</div>
+<!-- Scene Director Notes -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-sm pt-space-xs text-body-sm">
+<div class="flex flex-col gap-1 p-space-sm rounded bg-surface-container-low">
+<span class="font-label-cinematic text-label-cinematic text-outline uppercase">حركة الكاميرا</span>
+<span class="text-on-surface">متابعة دائرية انسيابية (Fluid Steadicam) ترافق سير العارضة نحو حافة الجسر المطل على الأفق.</span>
+</div>
+<div class="flex flex-col gap-1 p-space-sm rounded bg-surface-container-low">
+<span class="font-label-cinematic text-label-cinematic text-outline uppercase">التصميم الصوتي</span>
+<span class="text-on-surface">دخول تدريجي لآلة القانون المنفرد المعالج بهدوء صدى سينمائي يملأ أرجاء الوادي.</span>
+</div>
+<div class="flex flex-col gap-1 p-space-sm rounded bg-surface-container-low">
+<span class="font-label-cinematic text-label-cinematic text-outline uppercase">الملاحظة الدرامية</span>
+<span class="text-on-surface">تجسيد المرأة كحاكمة للمشهد، متصلة بالأرض ومستشرفة لآفاق نيوم اللامحدودة.</span>
+</div>
+</div>
+</div>
+<!-- SCENE 04 -->
+<div class="scene-card p-space-md rounded bg-surface-container flex flex-col gap-space-md">
+<div class="flex flex-wrap items-center justify-between gap-space-xs">
+<div class="flex items-center gap-space-sm">
+<span class="font-label-timecode text-label-cinematic text-primary font-bold">SCENE 04 // 01:15 — 01:30</span>
+<span class="font-headline-sm text-title-editorial text-on-surface">سكون الأبدية وشعار العلامة (Resolution Title Card)</span>
+</div>
+<div class="flex items-center gap-space-xs text-body-sm font-label-cinematic text-on-surface-variant">
+<span class="px-2 py-0.5 rounded bg-surface-container-high">Typographic Optical Cut</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-primary">Pure Obsidian Black</span>
+</div>
+</div>
+<!-- Anamorphic 2.39:1 Frame with Real Generated Scene 04 Asset -->
+<div class="relative w-full aspect-[2.39/1] overflow-hidden rounded bg-surface-container-lowest">
+<img alt="Sahra Al Noor Scene 04 Title Card" class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida/AEtjO1Vi0JwKFLH8-IM_T6aq5rBPhp9H1-rjFZLLBoTg9gg7eNUUrTdKrzpsNS1fM4f3kMwW-iyaEE6UnJ3mVMmyJ0fqEiuVViTj_PCD-pTI5RrfWjteugTupolGbc3WniKiM9QE7DfDdjjxSFnsuLr7-i9xKE-52HEooQB3Ya0MXRKWvnQ4VpGs4DSByLj2oZqf-kbj7Pp5Vy-PC-btOxKP8dYIgPiJ7JHqXCf7q4kT_0np3IvtNpOPt8osnbE"/>
+<div class="absolute bottom-0 inset-x-0 p-space-sm bg-gradient-to-t from-surface-container-lowest/90 via-surface-container-lowest/40 to-transparent flex items-center justify-between">
+<span class="font-label-cinematic text-label-cinematic text-tertiary">LOCKUP: SAHRA AL NOOR — صحراء النور</span>
+<span class="font-label-timecode text-label-cinematic text-primary">FRAME: 1801 - 2160</span>
+</div>
+</div>
+<!-- Scene Director Notes -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-sm pt-space-xs text-body-sm">
+<div class="flex flex-col gap-1 p-space-sm rounded bg-surface-container-low">
+<span class="font-label-cinematic text-label-cinematic text-outline uppercase">حركة الكاميرا</span>
+<span class="text-on-surface">ثبات مطلق (Static Hold) مع توهج عضوي خافت للذهب وتطاير جزيئات النور في الفضاء الأسود.</span>
+</div>
+<div class="flex flex-col gap-1 p-space-sm rounded bg-surface-container-low">
+<span class="font-label-cinematic text-label-cinematic text-outline uppercase">التصميم الصوتي</span>
+<span class="text-on-surface">تلاشي تام لكافة الأصوات تاركاً فقط رنين الشوكة الرنانة الذهبية بتردد 432Hz.</span>
+</div>
+<div class="flex flex-col gap-1 p-space-sm rounded bg-surface-container-low">
+<span class="font-label-cinematic text-label-cinematic text-outline uppercase">الملاحظة الدرامية</span>
+<span class="text-on-surface">ترسيخ اسم الحملة وعلامة الدار كأيقونة خالدة في ذاكرة المشاهد.</span>
+</div>
+</div>
+</div>
+</div>
+</article>
+<!-- SECTION 05: TECHNICAL & AUDIO-VISUAL SPECS MATRIX -->
+<article class="scroll-mt-32 p-space-lg rounded bg-surface-container-low flex flex-col gap-space-lg shadow-sm" id="sec-05">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="font-label-timecode text-label-cinematic text-primary px-space-xs py-0.5 rounded bg-surface-container-high">05</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">المواصفات التقنية ومعايير الإنتاج (Tech Spec Matrix)</h2>
+</div>
+<span class="font-label-cinematic text-label-cinematic text-outline uppercase">DCI COMPLIANT</span>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-right text-body-sm font-body-sm">
+<thead class="bg-surface-container text-primary font-label-cinematic text-label-cinematic uppercase tracking-wider">
+<tr>
+<th class="p-space-sm">المعيار التقني</th>
+<th class="p-space-sm">المواصفة المعتمدة</th>
+<th class="p-space-sm">التطبيق الإخراجي</th>
+<th class="p-space-sm">حالة الاعتماد</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container-highest/30">
+<tr class="hover:bg-surface-container/50 transition-colors">
+<td class="p-space-sm font-medium text-on-surface">الأبعاد ونسبة العرض</td>
+<td class="p-space-sm font-label-timecode text-secondary">CinemaScope 2.39:1 (4096 × 1716)</td>
+<td class="p-space-sm text-on-surface-variant">تأطير أفقي عريض يستوعب تضاريس نيوم المعمارية</td>
+<td class="p-space-sm text-primary">مقفل (Locked)</td>
+</tr>
+<tr class="hover:bg-surface-container/50 transition-colors">
+<td class="p-space-sm font-medium text-on-surface">منظومة العدسات</td>
+<td class="p-space-sm font-label-timecode text-secondary">Cooke Anamorphic /i Full Frame Plus</td>
+<td class="p-space-sm text-on-surface-variant">نعومة كوك البيضاوية (The Cooke Look) مع بوكيه بيضاوي ساحر</td>
+<td class="p-space-sm text-primary">مقفل (Locked)</td>
+</tr>
+<tr class="hover:bg-surface-container/50 transition-colors">
+<td class="p-space-sm font-medium text-on-surface">محاكاة الفيلم الخام</td>
+<td class="p-space-sm font-label-timecode text-secondary">Kodak Vision3 5219 500T Stock Grain</td>
+<td class="p-space-sm text-on-surface-variant">إضافة حبوب فيلم طبيعية بنسبة 75% لتجنب الجفاف الرقمي</td>
+<td class="p-space-sm text-primary">مقفل (Locked)</td>
+</tr>
+<tr class="hover:bg-surface-container/50 transition-colors">
+<td class="p-space-sm font-medium text-on-surface">الهندسة الصوتية</td>
+<td class="p-space-sm font-label-timecode text-secondary">Dolby Atmos 7.1.4 Spatial Bed</td>
+<td class="p-space-sm text-on-surface-variant">توزيع ثلاثي الأبعاد لرياح الصحراء وانعكاس صدى القانون</td>
+<td class="p-space-sm text-primary">مقفل (Locked)</td>
+</tr>
+<tr class="hover:bg-surface-container/50 transition-colors">
+<td class="p-space-sm font-medium text-on-surface">الفضاء اللوني والمعايرة</td>
+<td class="p-space-sm font-label-timecode text-secondary">ACEScc / DCI-P3 99.8% Calibrated</td>
+<td class="p-space-sm text-on-surface-variant">معايرة أصلية للشاشات السينمائية وقاعات العرض الفاخرة</td>
+<td class="p-space-sm text-primary">مقفل (Locked)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</article>
+<!-- SECTION 06: ROADMAP & DIRECTOR EXECUTIVE SIGN-OFF -->
+<article class="scroll-mt-32 p-space-lg rounded bg-surface-container-low flex flex-col gap-space-lg shadow-sm" id="sec-06">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="font-label-timecode text-label-cinematic text-primary px-space-xs py-0.5 rounded bg-surface-container-high">06</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">خارطة الإنتاج وخاتم الاعتماد الرقمي للمخرج</h2>
+</div>
+<span class="font-label-cinematic text-label-cinematic text-secondary uppercase">GREENLIT FOR SHOOT</span>
+</div>
+<!-- Milestones Timeline Progress -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-space-sm">
+<div class="p-space-sm rounded bg-surface-container flex flex-col gap-1">
+<span class="font-label-cinematic text-label-cinematic text-primary">PHASE 01 • مكتمل</span>
+<h4 class="font-headline-sm text-title-editorial text-on-surface">الموجز والاعتماد الأولي</h4>
+<span class="text-body-sm text-on-surface-variant">تحديد لغة النور والمجوهرات</span>
+</div>
+<div class="p-space-sm rounded bg-surface-container flex flex-col gap-1">
+<span class="font-label-cinematic text-label-cinematic text-primary">PHASE 02 • مكتمل</span>
+<h4 class="font-headline-sm text-title-editorial text-on-surface">الستوريبورد واللوكيشن</h4>
+<span class="text-body-sm text-on-surface-variant">تثبيت كادرات نيوم وتوليد الكادرات</span>
+</div>
+<div class="p-space-sm rounded bg-surface-container flex flex-col gap-1">
+<span class="font-label-cinematic text-label-cinematic text-secondary">PHASE 03 • قيد التنفيذ</span>
+<h4 class="font-headline-sm text-title-editorial text-on-surface">التصوير في نيوم</h4>
+<span class="text-body-sm text-on-surface-variant">معدات ARRI Alexa 35 وممشى حسمى</span>
+</div>
+<div class="p-space-sm rounded bg-surface-container flex flex-col gap-1">
+<span class="font-label-cinematic text-label-cinematic text-outline">PHASE 04 • قادم</span>
+<h4 class="font-headline-sm text-title-editorial text-on-surface">المونتاج ومعايرة اللون</h4>
+<span class="text-body-sm text-on-surface-variant">استوديو ACES باريس ولندن</span>
+</div>
+</div>
+<!-- Master Executive Digital Sign-off Seal -->
+<div class="p-space-lg rounded bg-surface-container flex flex-col md:flex-row items-center justify-between gap-space-lg">
+<div class="flex items-center gap-space-md">
+<!-- Digital Seal Graphic -->
+<div class="w-20 h-20 rounded-full bg-surface-container-highest flex items-center justify-center relative flex-shrink-0">
+<svg class="w-16 h-16 text-primary animate-spin" style="animation-duration: 25s;" viewbox="0 0 100 100">
+<path d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" fill="transparent" id="curve"></path>
+<text class="font-label-cinematic text-[9px] fill-current uppercase tracking-widest">
+<textpath href="#curve">ATELIER DU CINEMA • FX MASTER APPROVED •</textpath>
+</text>
+</svg>
+<span class="material-symbols-outlined text-primary text-xl absolute">verified</span>
+</div>
+<div class="flex flex-col gap-1">
+<span class="font-label-cinematic text-label-cinematic text-primary uppercase">DIGITAL DIRECTOR SIGN-OFF</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">اعتماد نهائي وتصريح إنتاج سينمائي</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant max-w-xl">
+                  أقرّ بصفتي المخرج الرئيسي المشرف على مشروع "صحراء النور" بموافقتي الكاملة على كافة الركائز الإبداعية والتقنية الواردة في هذا المستند لتكون المرجع الرسمي الوحيد لفريق التصوير، الديكور، والمونتاج.
+                </p>
+</div>
+</div>
+<!-- Signatures Column -->
+<div class="flex flex-col gap-space-xs text-left">
+<div class="font-title-editorial text-title-editorial text-primary tracking-wide italic">
+                Ibrahim Al-Najjar
+              </div>
+<span class="text-body-sm text-on-surface font-medium leading-none">إبراهيم النجار — مخرج الفيلم</span>
+<span class="font-label-timecode text-label-cinematic text-outline">HASH: 9F8B-21EC-77A4-FXLAB</span>
+</div>
+</div>
+</article>
+</div>
+</div>
+</section>
+</div>
+<script>
+  // Interactive Section Collapse/Expand
+  function toggleSection(elementId) {
+    const el = document.getElementById(elementId);
+    if (!el) return;
+    if (el.classList.contains('hidden')) {
+      el.classList.remove('hidden');
+    } else {
+      el.classList.add('hidden');
+    }
+  }
+
+  // Copy shareable link micro-interaction
+  const copyBtn = document.getElementById('copyShareLink');
+  const copyText = document.getElementById('copyLinkText');
+  if (copyBtn && copyText) {
+    copyBtn.addEventListener('click', () => {
+      const originalText = copyText.textContent;
+      copyText.textContent = 'تم نسخ رابط الإنتاج بنجاح ✓';
+      copyBtn.classList.add('bg-primary-container', 'text-on-primary-container');
+      setTimeout(() => {
+        copyText.textContent = originalText;
+        copyBtn.classList.remove('bg-primary-container', 'text-on-primary-container');
+      }, 2500);
+    });
+  }
+
+  // Export PDF simulated toast trigger
+  const exportBtn = document.getElementById('exportPdfBtn');
+  if (exportBtn) {
+    exportBtn.addEventListener('click', () => {
+      exportBtn.innerHTML = '<span class="material-symbols-outlined text-sm animate-spin">refresh</span><span>جاري إنشاء المجلد الفني 4K...</span>';
+      setTimeout(() => {
+        exportBtn.innerHTML = '<span class="material-symbols-outlined text-sm">check_circle</span><span>تم تجهيز Master PDF</span>';
+        setTimeout(() => {
+          exportBtn.innerHTML = '<span class="material-symbols-outlined text-sm">picture_as_pdf</span><span>تصدير وثيقة الإخراج (Master PDF)</span>';
+        }, 2000);
+      }, 1500);
+    });
+  }
+
+  // Storyboard view mode toggle (Detailed Cards vs Filmstrip Grid)
+  const viewListBtn = document.getElementById('viewListBtn');
+  const viewGridBtn = document.getElementById('viewGridBtn');
+  const storyboardDeck = document.getElementById('storyboardDeck');
+
+  if (viewListBtn && viewGridBtn && storyboardDeck) {
+    viewGridBtn.addEventListener('click', () => {
+      storyboardDeck.classList.remove('flex-col');
+      storyboardDeck.classList.add('grid', 'grid-cols-1', 'md:grid-cols-2');
+      viewGridBtn.classList.add('bg-surface-container-highest', 'text-primary');
+      viewListBtn.classList.remove('bg-surface-container-highest', 'text-primary');
+      viewListBtn.classList.add('text-on-surface-variant');
+    });
+
+    viewListBtn.addEventListener('click', () => {
+      storyboardDeck.classList.add('flex-col');
+      storyboardDeck.classList.remove('grid', 'grid-cols-1', 'md:grid-cols-2');
+      viewListBtn.classList.add('bg-surface-container-highest', 'text-primary');
+      viewGridBtn.classList.remove('bg-surface-container-highest', 'text-primary');
+      viewGridBtn.classList.add('text-on-surface-variant');
+    });
+  }
+
+  // Fullscreen toggle
+  const readerToggle = document.getElementById('toggleReaderMode');
+  if (readerToggle) {
+    readerToggle.addEventListener('click', () => {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(err => {
+          console.log(err.message);
+        });
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        }
+      }
+    });
+  }
+
+  // Highlight active TOC item on scroll
+  window.addEventListener('scroll', () => {
+    const sections = ['sec-01', 'sec-02', 'sec-03', 'sec-04', 'sec-05', 'sec-06'];
+    const navItems = document.querySelectorAll('#dossierNav a');
+    let current = '';
+
+    sections.forEach(secId => {
+      const section = document.getElementById(secId);
+      if (section) {
+        const sectionTop = section.offsetTop - 180;
+        if (window.scrollY >= sectionTop) {
+          current = secId;
+        }
+      }
+    });
+
+    navItems.forEach(link => {
+      link.classList.remove('bg-surface-container', 'text-primary', 'font-medium');
+      link.classList.add('text-on-surface-variant');
+      if (link.getAttribute('href') === `#${current}`) {
+        link.classList.add('bg-surface-container', 'text-primary', 'font-medium');
+        link.classList.remove('text-on-surface-variant');
+      }
+    });
+  });
+</script></main><footer class="fixed bottom-0 left-0 right-0 z-40 h-8 bg-surface-container-lowest/95 backdrop-blur-md border-t border-surface-variant/40 px-space-lg flex items-center justify-between text-body-sm font-body-sm"><div class="flex items-center gap-space-md text-on-surface-variant truncate"><span class="flex items-center gap-1 text-on-surface"><span class="material-symbols-outlined text-xs text-primary">movie</span><span class="font-medium">نيوم ٢٠٣٠ — صحراء النور</span></span><span class="text-outline-variant font-label-cinematic">•</span><span class="truncate">العميل: علامة فاخرة عالمية</span><span class="text-outline-variant font-label-cinematic hidden sm:inline">•</span><span class="hidden sm:inline">المخرج: إبراهيم النجار</span></div><div class="hidden lg:flex items-center gap-space-md text-on-surface-variant font-label-timecode text-label-cinematic"><span class="text-primary-fixed-dim">35mm Anamorphic</span><span>•</span><span>سرعة التفكير 1.2x</span><span>•</span><span class="text-secondary">ذاكرة الإخراج مفعلة</span></div><div class="flex items-center gap-space-xs text-outline-variant font-label-cinematic text-label-cinematic"><span class="w-1.5 h-1.5 rounded-full bg-outline-variant"></span><span>v2.4 Studio Cut</span></div></footer></body></html>

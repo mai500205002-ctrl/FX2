@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "surface-container-low": "#1c1b1b", "on-primary": "#690003", "inverse-surface": "#e5e2e1", "on-primary-fixed-variant": "#930007", "on-error-container": "#ffdad6", "surface-variant": "#353534", "on-secondary-fixed-variant": "#862200", "primary-fixed": "#ffdad5", "surface-container-highest": "#353534", "surface-tint": "#ffb4aa", "primary": "#ffb4aa", "surface-bright": "#393939", "surface-container-high": "#2a2a2a", "secondary-fixed": "#ffdbd1", "on-secondary-fixed": "#3b0900", "error-container": "#93000a", "inverse-on-surface": "#313030", "primary-container": "#e50914", "surface-container-lowest": "#0e0e0e", "surface-container": "#201f1f", "on-surface-variant": "#e9bcb6", "surface-dim": "#131313", "secondary-container": "#d73b00", "on-primary-fixed": "#410001", "on-surface": "#e5e2e1", "surface": "#131313", "on-tertiary-fixed": "#410005", "secondary-fixed-dim": "#ffb5a0", "tertiary-fixed-dim": "#ffb3ae", "on-primary-container": "#fff7f6", "tertiary": "#ffb3ae", "outline-variant": "#5e3f3b", "on-tertiary": "#68000c", "inverse-primary": "#c0000c", "on-error": "#690005", "tertiary-container": "#e40b2b", "on-tertiary-container": "#fff7f6", "on-tertiary-fixed-variant": "#930016", "secondary": "#ffb5a0", "background": "#131313", "tertiary-fixed": "#ffdad7", "on-secondary-container": "#fffbff", "on-secondary": "#5f1500", "on-background": "#e5e2e1", "error": "#ffb4ab", "primary-fixed-dim": "#ffb4aa", "outline": "af8782" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "space-md": "1rem", "space-lg": "1.5rem", "margin-mobile": "1rem", "margin": "2rem", "gutter-mobile": "0.75rem", "gutter": "1.5rem", "space-xs": "0.25rem", "space-xl": "2.5rem", "space-sm": "0.5rem" }, "fontFamily": { "body-lg": ["Inter"], "headline-xl": ["Geist"], "body-sm": ["Inter"], "headline-md": ["Geist"], "body-md": ["Inter"], "headline-lg": ["Geist"], "headline-xl-mobile": ["Geist"], "headline-sm": ["Geist"], "headline-lg-mobile": ["Geist"], "label-md": ["Geist"], "label-sm": ["Geist"] }, "fontSize": { "body-lg": ["1rem", { "lineHeight": "1.6rem", "letterSpacing": "-0.005em", "fontWeight": "400" }], "headline-xl": ["3rem", { "lineHeight": "3.5rem", "letterSpacing": "-0.03em", "fontWeight": "600" }], "body-sm": ["0.75rem", { "lineHeight": "1.2rem", "letterSpacing": "0.01em", "fontWeight": "400" }], "headline-md": ["1.5rem", { "lineHeight": "2rem", "letterSpacing": "-0.015em", "fontWeight": "500" }], "body-md": ["0.875rem", { "lineHeight": "1.4rem", "letterSpacing": "0em", "fontWeight": "400" }], "headline-lg": ["2.25rem", { "lineHeight": "2.75rem", "letterSpacing": "-0.025em", "fontWeight": "600" }], "headline-xl-mobile": ["2rem", { "lineHeight": "2.5rem", "letterSpacing": "-0.02em", "fontWeight": "600" }], "headline-sm": ["1.125rem", { "lineHeight": "1.625rem", "letterSpacing": "-0.01em", "fontWeight": "500" }], "headline-lg-mobile": ["1.625rem", { "lineHeight": "2.125rem", "letterSpacing": "-0.02em", "fontWeight": "600" }], "label-md": ["0.8125rem", { "lineHeight": "1rem", "letterSpacing": "0.02em", "fontWeight": "500" }], "label-sm": ["0.6875rem", { "lineHeight": "0.875rem", "letterSpacing": "0.05em", "fontWeight": "600" }] } } } }</script></head><body class="bg-surface font-body-md text-body-md text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-container"><aside class="fixed left-0 top-0 h-full w-72 bg-surface-container-lowest z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.5)]"><div class="flex flex-col"><div class="h-16 px-space-lg flex items-center justify-between bg-surface-container-lowest"><div class="flex items-center gap-space-sm"><img alt="FX-2026 Brand Emblem" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD0VvF0aj0DHp2h98MzVkGo_27dTZN0fZVboahqbTwts6bbOXSloSCwpeAslIHSIj3GSXs0y7fPlxijH-s9UIVfsupKP4kEMYxrDTXtCfQb6LWhQ0GAd1R_MD5Shm68oN6Fg3usBRp4V1KVT_GQDBaTavk0qLlvCMT1KBNwQpvPtfydvuxh7e1IvZ2bpAzzdEV7j_98XtEH7Lj0kMukmwUsWrMh_BQtPc1hMVakrVNLWnvLQAkw2ig"/><span class="font-headline-sm text-headline-sm tracking-wider text-on-surface uppercase">FX-2026</span></div><span class="px-space-xs py-0.5 rounded bg-surface-container-high text-primary font-label-sm text-label-sm tracking-widest uppercase">Enterprise</span></div><div class="px-space-md pt-space-sm pb-space-xs"><button class="w-full flex items-center justify-between px-space-md py-space-sm rounded-lg bg-primary-container text-on-primary-container hover:bg-tertiary-container transition-all shadow-[0_4px_16px_rgba(229,9,20,0.25)]" type="button"><span class="flex items-center gap-space-xs font-label-md text-label-md tracking-wide"><span class="material-symbols-outlined text-lg">add_circle</span>New Prompt</span><kbd class="px-space-xs py-0.5 rounded bg-on-primary font-label-sm text-label-sm text-on-primary-container opacity-90">⌘K</kbd></button></div><div class="overflow-y-auto px-space-md py-space-xs space-y-space-md"><div class="space-y-space-xs"><span class="px-space-sm font-label-sm text-label-sm text-outline tracking-wider uppercase">Features</span><nav class="flex flex-col gap-0.5" data-active-classes="bg-surface-container-high text-on-surface font-label-md"><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="chat" href="#"><span class="material-symbols-outlined text-lg">chat_bubble</span><span>Chat</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="architect" href="#"><span class="material-symbols-outlined text-lg">architecture</span><span>Architect</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="memory" href="#"><span class="material-symbols-outlined text-lg">neurology</span><span>Memory</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="analytics" href="#"><span class="material-symbols-outlined text-lg">monitoring</span><span>Analytics</span></a></nav></div><div class="space-y-space-xs"><span class="px-space-sm font-label-sm text-label-sm text-outline tracking-wider uppercase">Workspaces</span><nav class="flex flex-col gap-0.5" data-active-classes="bg-surface-container-high text-on-surface font-label-md"><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="new-project" href="#"><span class="material-symbols-outlined text-lg">create_new_folder</span><span>New Project</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="image-generator" href="#"><span class="material-symbols-outlined text-lg">image</span><span>Image Generator</span></a><a aria-current="page" class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg transition-colors bg-surface-container-high text-on-surface font-label-md" data-path="video-director" href="#"><span class="material-symbols-outlined text-lg">movie_filter</span><span>Video Director</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="audio-soundtrack" href="#"><span class="material-symbols-outlined text-lg">graphic_eq</span><span>Audio / Soundtrack</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="3d-assets" href="#"><span class="material-symbols-outlined text-lg">view_in_ar</span><span>3D Assets</span></a></nav></div><div class="space-y-space-xs"><span class="px-space-sm font-label-sm text-label-sm text-outline tracking-wider uppercase">Intelligence</span><nav class="flex flex-col gap-0.5" data-active-classes="bg-surface-container-high text-on-surface font-label-md"><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="neural-models" href="#"><span class="material-symbols-outlined text-lg">psychology</span><span>Neural Models</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="prompt-vault" href="#"><span class="material-symbols-outlined text-lg">lock</span><span>Prompt Vault</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="render-queue" href="#"><span class="material-symbols-outlined text-lg">layers</span><span>Render Queue</span></a></nav></div></div></div><div class="p-space-md space-y-space-sm bg-surface-container-lowest"><div class="p-space-md rounded-xl bg-surface-container-low shadow-[inset_0_0_24px_rgba(229,9,20,0.08)] flex flex-col gap-space-xs"><div class="flex items-center justify-between"><div class="flex items-center gap-space-xs text-primary"><span class="material-symbols-outlined text-base">diamond</span><span class="font-label-md text-label-md text-on-surface">Enterprise Tier</span></div><span class="font-label-sm text-label-sm text-outline uppercase">PRO</span></div><p class="font-body-sm text-body-sm text-on-surface-variant">Unlock full compute threads and unmetered batch rendering.</p><a class="mt-space-xs inline-flex items-center justify-center py-space-xs px-space-sm rounded bg-surface-container-high text-on-surface hover:bg-surface-bright hover:text-on-surface font-label-sm text-label-sm transition-colors" data-path="manage-plan" href="#">Manage Plan</a></div><div class="px-space-sm py-space-xs rounded bg-surface-container-lowest flex items-center gap-space-xs"><span class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></span><span class="font-label-sm text-label-sm text-outline truncate">Node: US-East GPU Cluster (RTX-6000 Ada)</span></div></div></aside><div class="pl-72"><header class="fixed top-0 left-72 right-0 h-16 bg-surface-container-lowest/90 backdrop-blur-xl z-40 px-space-lg flex items-center justify-between shadow-[0_1px_8px_rgba(0,0,0,0.5)]"><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs font-label-md text-label-md text-on-surface"><span class="text-outline">FX-2026 Studio</span><span class="text-outline">/</span><span class="font-medium text-on-surface">Creative Intelligence v4.2</span><span class="relative flex h-2 w-2 ml-1"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-container opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-primary-container"></span></span></div></div><div class="flex-1 max-w-md mx-space-lg"><div class="relative flex items-center"><span class="material-symbols-outlined absolute left-3 text-outline text-lg pointer-events-none">search</span><input class="w-full bg-surface-container py-space-xs pl-9 pr-12 rounded-lg text-on-surface placeholder:text-outline font-body-sm text-body-sm focus:outline-none focus:ring-1 focus:ring-primary" placeholder="Omni-Search workflows, models, nodes..." type="text"/><kbd class="absolute right-2 px-space-xs py-0.5 rounded bg-surface-container-high text-outline font-label-sm text-label-sm">⌘/</kbd></div></div><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs px-space-sm py-space-xs rounded-lg bg-surface-container-low"><span class="material-symbols-outlined text-primary text-base">speed</span><span class="font-label-sm text-label-sm text-outline">GPU:</span><span class="font-label-sm text-label-sm text-on-surface font-medium">42%</span><div class="w-12 h-1.5 bg-surface-container-high rounded-full overflow-hidden ml-1"><div class="h-full bg-primary-container w-[42%]"></div></div></div><button class="px-space-xs py-space-xs rounded text-outline hover:text-on-surface font-label-sm text-label-sm transition-colors" type="button">العربية / EN</button><button class="relative p-space-xs rounded-lg text-outline hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-lg">notifications</span><span class="absolute top-1.5 right-1.5 w-1.5 h-1.5 rounded-full bg-primary-container"></span></button><a class="p-space-xs rounded-lg text-outline hover:text-on-surface transition-colors" data-path="documentation" href="#" title="Documentation"><span class="material-symbols-outlined text-lg">menu_book</span></a><div class="flex items-center gap-space-xs pl-space-xs"><img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-1 ring-outline-variant" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCA84LSJo3PpfP2pWLm_Cw-072SStUGjZU-hzUD6ulEBNPdDfexoV9Qf9PIyBx9o99-kJwkFH20QyrFGhdNmCVguhmdcAhxwOImgXxKS4sIoFatPT7s-nyaHvHbsj5IJe-bWxyc6up8tbxS1HGVQTuS-KYNmxASO461Xz5h-1wCquC6sM4ka9q9lARBJSW4OR8Rvsnx5Gqrzl6NNUh9rDMxj_6OXoDUQuEk3_bgSs76nP2VMZLis20"/><span class="material-symbols-outlined text-outline text-base">expand_more</span></div></div></header><main class="w-full pt-16 bg-surface min-h-screen"><div class="flex flex-col w-full">
+<!-- Radial Atmosphere Flare Background -->
+<div class="relative w-full overflow-hidden px-space-md lg:px-space-lg py-space-sm pb-space-xl flex flex-col gap-space-md">
+<!-- Ambient Studio Light Emitter -->
+<div class="pointer-events-none absolute -top-40 right-1/4 w-[720px] h-[360px] bg-gradient-to-b from-primary-container/15 via-secondary-container/5 to-transparent blur-3xl rounded-full -z-10"></div>
+<!-- Workspace Master Toolbar -->
+<header class="w-full bg-surface-container-lowest p-space-sm rounded-xl flex flex-wrap items-center justify-between gap-space-sm shadow-xl">
+<!-- Shot & Sequence Identifiers -->
+<div class="flex items-center gap-space-md min-w-0">
+<div class="flex items-center gap-space-xs px-space-sm py-1 rounded-md bg-surface-container">
+<span class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></span>
+<span class="font-label-sm text-label-sm text-primary tracking-widest uppercase">REC ACTIVE</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-space-xs truncate">
+<span class="font-headline-sm text-headline-sm text-on-surface truncate">Project Chronos: Scene 04</span>
+<span class="font-label-md text-label-md text-outline">/</span>
+<span class="font-label-md text-label-md text-secondary truncate">Obsidian Dawn</span>
+</div>
+<span class="font-body-sm text-body-sm text-outline truncate">Master Sequence • HDR Rec.2020 • 4K 10-bit ProRes 4444 XQ</span>
+</div>
+</div>
+<!-- Quick Instrumentation Tags & Technical Selectors -->
+<div class="flex flex-wrap items-center gap-space-xs">
+<!-- Resolution Dropdown Simulation -->
+<div class="flex items-center gap-1.5 px-space-sm py-1.5 rounded-lg bg-surface-container-low text-on-surface hover:bg-surface-container transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-outline text-base">crop_original</span>
+<span class="font-label-sm text-label-sm">4K DCI (4096×1714)</span>
+<span class="material-symbols-outlined text-outline text-xs">expand_more</span>
+</div>
+<!-- Aspect Ratio -->
+<div class="flex items-center gap-1 px-space-sm py-1.5 rounded-lg bg-surface-container-low text-on-surface hover:bg-surface-container transition-colors cursor-pointer">
+<span class="font-label-sm text-label-sm text-primary font-semibold">2.39:1</span>
+<span class="font-label-sm text-label-sm text-outline">Scope</span>
+</div>
+<!-- FPS standard -->
+<div class="flex items-center gap-1 px-space-sm py-1.5 rounded-lg bg-surface-container-low text-on-surface">
+<span class="font-label-sm text-label-sm font-mono text-on-surface">24.000</span>
+<span class="font-label-sm text-label-sm text-outline">fps</span>
+</div>
+<!-- Execute Neural Render Primary CTA -->
+<button class="relative group ml-space-xs px-space-md py-2 rounded-lg bg-primary-container hover:bg-tertiary-container text-on-primary-container font-label-md text-label-md flex items-center gap-space-xs shadow-lg shadow-primary-container/20 transition-all active:scale-95" id="renderBtn" type="button">
+<span class="material-symbols-outlined text-lg animate-spin" id="renderSpinner" style="display: none;">autorenew</span>
+<span class="material-symbols-outlined text-lg" id="renderIcon">bolt</span>
+<span>Execute Neural Render</span>
+<span class="px-1.5 py-0.5 rounded bg-black/30 font-mono text-[10px] text-primary ml-1">⌘↵</span>
+</button>
+</div>
+</header>
+<!-- Main Studio Canvas & Inspector Grid (12-col) -->
+<div class="grid grid-cols-12 gap-space-md">
+<!-- Left & Center: Cinema Viewport & Scrubber (8-col xl:9-col) -->
+<section class="col-span-12 xl:col-span-8 flex flex-col gap-space-sm">
+<!-- Cinema Viewport Monitor Card -->
+<div class="relative w-full rounded-2xl bg-surface-container-lowest overflow-hidden flex flex-col shadow-2xl">
+<!-- Viewport Live Stage -->
+<div class="relative w-full aspect-[21/9] bg-surface-container-lowest flex items-center justify-center overflow-hidden group">
+<!-- Cinematic Background Render Asset -->
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 ease-out group-hover:scale-[1.015]" data-alt="Cinematic widescreen 2.39:1 sci-fi masterpiece showing a colossal obsidian geometric monolith resting in an endless black desert. Volumetric glowing crimson fog and deep blood-orange atmospheric dawn light spilling over razor-sharp mineral edges. Subtle film grain, anamorphic horizontal lens flare, moody dark luxury aesthetic, 8k resolution photorealistic octane render." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCa-U0WuixhI8WycuwFwuPF1SBZypNQuqZuNb1e-eCqrUbzTlSPXXOfNIA0Z3bvpVe0vVWLKstYEEDSkNxzT4vUCOLAJBPo4434GCqMWCe2ewk1GUUf-_khKE_8WtJvQKM8BOHpxnWwN69xPf8mlV2fLLJ56va00OVYIdY00-O9j0d0uKa4zLGxtqJlkD396PD0vcQPob-dUkpmP5xrF9oG29mUgVWlENRI9lX3g_uiELwnl855plY')">
+</div>
+<!-- Soft Vignette & Cinema Letterbox Overlay -->
+<div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/60"></div>
+<!-- Cinema Safe Area Reticles HUD -->
+<div class="pointer-events-none absolute inset-6 flex items-center justify-center opacity-40 group-hover:opacity-80 transition-opacity">
+<div class="w-full h-full relative">
+<!-- Reticle Corner Markers -->
+<div class="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-primary/70"></div>
+<div class="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-primary/70"></div>
+<div class="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-primary/70"></div>
+<div class="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-primary/70"></div>
+<!-- Center Crosshair -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-6 h-6 flex items-center justify-center">
+<div class="w-full h-[1px] bg-primary/50"></div>
+<div class="h-full w-[1px] bg-primary/50 absolute"></div>
+</div>
+</div>
+</div>
+<!-- Top Left HUD Metadata -->
+<div class="absolute top-space-sm left-space-md flex items-center gap-space-xs z-10">
+<div class="px-space-xs py-1 rounded bg-surface-container-lowest/80 backdrop-blur-md flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+<span class="font-mono text-label-sm font-semibold text-on-surface">TC 00:02:14:18</span>
+</div>
+<div class="px-space-xs py-1 rounded bg-surface-container-lowest/80 backdrop-blur-md font-label-sm text-label-sm text-outline">
+                FRAME 3,234 / 8,640
+              </div>
+<div class="px-space-xs py-1 rounded bg-surface-container-lowest/80 backdrop-blur-md font-label-sm text-label-sm text-secondary">
+                COLOR: ACEScc (AP1)
+              </div>
+</div>
+<!-- Top Right HUD Tools -->
+<div class="absolute top-space-sm right-space-md flex items-center gap-space-xs z-10">
+<!-- Live Decibel Peak Meter -->
+<div class="px-space-sm py-1 rounded bg-surface-container-lowest/80 backdrop-blur-md flex items-center gap-1" title="Stereo Master Peak dB">
+<span class="font-label-sm text-label-sm text-outline font-mono mr-1">-6.2dB</span>
+<div class="flex items-end gap-0.5 h-3">
+<div class="w-1 bg-primary-container h-full rounded-sm"></div>
+<div class="w-1 bg-secondary-container h-4/5 rounded-sm"></div>
+<div class="w-1 bg-surface-variant h-2/5 rounded-sm"></div>
+</div>
+</div>
+<button class="p-1.5 rounded-lg bg-surface-container-lowest/80 hover:bg-surface-container backdrop-blur-md text-on-surface transition-colors" title="Toggle False Color / Waveform Scopes" type="button">
+<span class="material-symbols-outlined text-base">insert_chart</span>
+</button>
+<button class="p-1.5 rounded-lg bg-surface-container-lowest/80 hover:bg-surface-container backdrop-blur-md text-on-surface transition-colors" title="Full Cinema Canvas" type="button">
+<span class="material-symbols-outlined text-base">fullscreen</span>
+</button>
+</div>
+<!-- Bottom Left HUD: Neural Model Status Overlay -->
+<div class="absolute bottom-space-sm left-space-md flex items-center gap-space-xs z-10">
+<div class="px-space-sm py-1 rounded-md bg-surface-container-lowest/85 backdrop-blur-md flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-sm">auto_videocam</span>
+<span class="font-label-sm text-label-sm text-on-surface">FX-Cinematic Video v3.8</span>
+<span class="text-outline">•</span>
+<span class="font-label-sm text-label-sm text-secondary">Motion Vector 8.4</span>
+</div>
+</div>
+<!-- Split Screen Before/After Upscale Handle Floating Badge -->
+<div class="absolute bottom-space-sm right-space-md z-10">
+<button class="px-space-sm py-1 rounded bg-surface-container-high/90 hover:bg-surface-bright backdrop-blur-md flex items-center gap-1.5 text-on-surface transition-all" type="button">
+<span class="material-symbols-outlined text-primary text-sm">compare</span>
+<span class="font-label-sm text-label-sm">Split A/B Neural Polish</span>
+</button>
+</div>
+</div>
+<!-- Transport Control Deck -->
+<div class="w-full bg-surface-container-lowest px-space-md py-space-xs flex flex-wrap items-center justify-between gap-space-xs">
+<!-- Left Transport Utilities -->
+<div class="flex items-center gap-space-xs">
+<button class="p-1.5 rounded text-outline hover:text-on-surface hover:bg-surface-container-low transition-colors" title="Mark In Point [I]" type="button">
+<span class="material-symbols-outlined text-lg">first_page</span>
+</button>
+<button class="p-1.5 rounded text-outline hover:text-on-surface hover:bg-surface-container-low transition-colors" title="Step Back 1 Frame [Left Arrow]" type="button">
+<span class="material-symbols-outlined text-lg">chevron_left</span>
+</button>
+<!-- Play / Pause Master Toggle -->
+<button class="w-9 h-9 rounded-full bg-surface-container-high hover:bg-primary-container text-on-surface hover:text-on-primary-container flex items-center justify-center transition-all shadow-md" id="transportPlayBtn" type="button">
+<span class="material-symbols-outlined text-xl" id="transportPlayIcon">play_arrow</span>
+</button>
+<button class="p-1.5 rounded text-outline hover:text-on-surface hover:bg-surface-container-low transition-colors" title="Step Forward 1 Frame [Right Arrow]" type="button">
+<span class="material-symbols-outlined text-lg">chevron_right</span>
+</button>
+<button class="p-1.5 rounded text-outline hover:text-on-surface hover:bg-surface-container-low transition-colors" title="Mark Out Point [O]" type="button">
+<span class="material-symbols-outlined text-lg">last_page</span>
+</button>
+<button class="p-1.5 rounded text-primary hover:bg-surface-container-low transition-colors" title="Loop Sequence Active" type="button">
+<span class="material-symbols-outlined text-lg">repeat</span>
+</button>
+</div>
+<!-- Center Timecode Readout -->
+<div class="flex items-center gap-space-sm font-mono text-body-sm">
+<span class="px-space-xs py-0.5 rounded bg-surface-container text-primary">IN 00:00:00:00</span>
+<span class="text-outline">⟶</span>
+<span class="px-space-xs py-0.5 rounded bg-surface-container text-on-surface font-semibold">DUR 00:06:00:00</span>
+<span class="text-outline">⟶</span>
+<span class="px-space-xs py-0.5 rounded bg-surface-container text-secondary">OUT 00:06:00:00</span>
+</div>
+<!-- Right Controls: Zoom & Audio Vol -->
+<div class="flex items-center gap-space-sm">
+<div class="flex items-center gap-1 text-outline hover:text-on-surface cursor-pointer">
+<span class="material-symbols-outlined text-base">zoom_in</span>
+<span class="font-label-sm text-label-sm">Fit Canvas</span>
+</div>
+<div class="flex items-center gap-1.5 pl-space-xs">
+<span class="material-symbols-outlined text-base text-outline">volume_up</span>
+<div class="w-16 h-1 bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-secondary-container w-[78%]"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Multi-Track Generative Timeline -->
+<div class="w-full bg-surface-container-lowest rounded-xl p-space-sm flex flex-col gap-space-xs shadow-xl">
+<!-- Timeline Track Header Bar -->
+<div class="flex items-center justify-between pb-space-xs">
+<div class="flex items-center gap-space-sm">
+<span class="font-label-md text-label-md text-on-surface uppercase tracking-wider flex items-center gap-1">
+<span class="material-symbols-outlined text-primary text-base">video_library</span>
+                Generative Timeline
+              </span>
+<span class="px-2 py-0.5 rounded bg-surface-container font-label-sm text-label-sm text-outline">3 Clips • 4 Tracks</span>
+</div>
+<!-- Zoom Timeline Resolution Slider -->
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-outline text-sm">remove</span>
+<div class="w-20 h-1 bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-primary-container w-1/2"></div>
+</div>
+<span class="material-symbols-outlined text-outline text-sm">add</span>
+<button class="ml-space-xs px-2 py-1 rounded bg-surface-container hover:bg-surface-container-high text-outline hover:text-on-surface font-label-sm text-label-sm" type="button">Snap [S]</button>
+</div>
+</div>
+<!-- Ruler Seconds / Frames -->
+<div class="w-full h-5 bg-surface-container-low rounded-md px-2 flex items-center justify-between font-mono text-[10px] text-outline select-none">
+<span>00:00</span>
+<span>00:01</span>
+<span class="text-primary font-bold">00:02 (CUR)</span>
+<span>00:03</span>
+<span>00:04</span>
+<span>00:05</span>
+<span>00:06</span>
+</div>
+<!-- Timeline Track 1: Video / Scene Prompts -->
+<div class="w-full flex items-center gap-2">
+<div class="w-24 shrink-0 flex items-center justify-between px-2 py-1.5 rounded bg-surface-container font-label-sm text-label-sm text-on-surface">
+<span class="truncate">V1 Video</span>
+<span class="material-symbols-outlined text-xs text-outline">lock</span>
+</div>
+<!-- Scene Clips Container with Playhead -->
+<div class="relative flex-1 h-14 bg-surface-container-low rounded-lg p-1 flex gap-1.5 overflow-hidden">
+<!-- Active Vertical Playhead Indicator -->
+<div class="pointer-events-none absolute top-0 bottom-0 left-[38%] w-0.5 bg-primary-container z-20 shadow-[0_0_8px_rgba(229,9,20,0.8)]">
+<div class="w-2.5 h-2 -ml-1 bg-primary-container rounded-b-sm"></div>
+</div>
+<!-- Clip 1 -->
+<div class="w-1/3 h-full rounded bg-surface-container-high hover:bg-surface-bright transition-colors p-1.5 flex flex-col justify-between cursor-pointer group">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface font-semibold truncate">01 Atmospheric Establishing</span>
+<span class="font-mono text-[10px] text-outline">00:02:00</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+<span class="font-body-sm text-[11px] text-on-surface-variant truncate">Wide panoramic obsidian spires</span>
+</div>
+</div>
+<!-- Clip 2: Active Focused Shot -->
+<div class="w-1/3 h-full rounded bg-surface-container hover:bg-surface-bright transition-all p-1.5 flex flex-col justify-between cursor-pointer shadow-md">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-primary font-bold truncate">02 Monolith Dawn (Active)</span>
+<span class="font-mono text-[10px] text-primary">00:02:00</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container animate-ping"></span>
+<span class="font-body-sm text-[11px] text-on-surface truncate">Volumetric crimson rim flare + 35mm</span>
+</div>
+</div>
+<!-- Clip 3 -->
+<div class="w-1/3 h-full rounded bg-surface-container-high hover:bg-surface-bright transition-colors p-1.5 flex flex-col justify-between cursor-pointer opacity-75">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface font-semibold truncate">03 Core Surge Reaction</span>
+<span class="font-mono text-[10px] text-outline">00:02:00</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-outline"></span>
+<span class="font-body-sm text-[11px] text-outline truncate">High velocity drone push-in</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Timeline Track 2: Synthesizer & Audio Master Track -->
+<div class="w-full flex items-center gap-2">
+<div class="w-24 shrink-0 flex items-center justify-between px-2 py-1.5 rounded bg-surface-container font-label-sm text-label-sm text-on-surface">
+<span class="truncate">A1 Audio FX</span>
+<span class="material-symbols-outlined text-xs text-primary">volume_up</span>
+</div>
+<!-- Audio Waveform Visualization Simulation -->
+<div class="relative flex-1 h-8 bg-surface-container-low rounded-lg px-2 flex items-center overflow-hidden">
+<!-- Playhead segment -->
+<div class="pointer-events-none absolute top-0 bottom-0 left-[38%] w-0.5 bg-primary-container z-20"></div>
+<!-- Waveform SVG Line -->
+<svg class="w-full h-5 text-secondary-container opacity-80" preserveaspectratio="none" viewbox="0 0 500 20">
+<path d="M0,10 L20,10 L30,4 L40,16 L50,8 L60,12 L80,2 L95,18 L110,6 L130,14 L150,10 L170,1 L190,19 L210,5 L230,15 L250,9 L270,11 L290,3 L310,17 L330,7 L350,13 L380,10 L400,2 L420,18 L440,8 L470,12 L500,10" fill="none" stroke="currentColor" stroke-width="1.8"></path>
+</svg>
+</div>
+</div>
+<!-- Timeline Track 3: Neural Motion & Camera Physics Curve -->
+<div class="w-full flex items-center gap-2">
+<div class="w-24 shrink-0 flex items-center justify-between px-2 py-1.5 rounded bg-surface-container font-label-sm text-label-sm text-on-surface">
+<span class="truncate">M1 Camera</span>
+<span class="material-symbols-outlined text-xs text-secondary">videocam</span>
+</div>
+<!-- Motion Trajectory Bezier Keyframes -->
+<div class="relative flex-1 h-7 bg-surface-container-low rounded-lg px-2 flex items-center justify-between overflow-hidden">
+<div class="pointer-events-none absolute top-0 bottom-0 left-[38%] w-0.5 bg-primary-container z-20"></div>
+<div class="flex items-center gap-1 font-mono text-[10px] text-outline">
+<span class="material-symbols-outlined text-xs text-primary">diamond</span>
+<span>Pan: 14.2°</span>
+</div>
+<div class="flex items-center gap-1 font-mono text-[10px] text-outline">
+<span class="material-symbols-outlined text-xs text-secondary">diamond</span>
+<span>Dolly: +120m</span>
+</div>
+<div class="flex items-center gap-1 font-mono text-[10px] text-outline">
+<span class="material-symbols-outlined text-xs text-primary">diamond</span>
+<span>Tilt: -3.5°</span>
+</div>
+<div class="flex items-center gap-1 font-mono text-[10px] text-outline">
+<span class="material-symbols-outlined text-xs text-secondary">diamond</span>
+<span>Roll: 0.0°</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Prompt Conditioning & Directed Generative Terminal -->
+<div class="w-full bg-surface-container-lowest rounded-xl p-space-md flex flex-col gap-space-sm shadow-xl">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-base">psychology</span>
+<span class="font-label-md text-label-md text-on-surface">Neural Prompt Matrix</span>
+<span class="font-label-sm text-label-sm text-outline">• Frame Guided Synthesis</span>
+</div>
+<div class="flex items-center gap-space-xs">
+<button class="px-space-xs py-1 rounded bg-surface-container hover:bg-surface-container-high text-outline hover:text-on-surface font-label-sm text-label-sm transition-colors" type="button">
+                Load Preset Shot
+              </button>
+<button class="px-space-xs py-1 rounded bg-surface-container hover:bg-surface-container-high text-primary font-label-sm text-label-sm transition-colors" type="button">
+                Prompt Enhancer +
+              </button>
+</div>
+</div>
+<!-- Prompt Input Box -->
+<div class="relative w-full rounded-lg bg-surface-container-low p-space-sm flex flex-col gap-space-xs">
+<textarea class="w-full bg-transparent text-on-surface placeholder:text-outline/60 font-body-md text-body-md resize-none focus:outline-none" placeholder="Direct your scene with multi-modal parameters..." rows="2">Cinematic anamorphic pan of massive black obsidian monolith towering over crimson sand dunes, glowing internal magma veins, soft volumetric red dusk atmosphere, 35mm film grain, 8k raw photo render, ultra high precision.</textarea>
+<!-- Quick Conditioning Attribute Chips -->
+<div class="flex flex-wrap items-center justify-between gap-space-xs pt-space-xs">
+<div class="flex flex-wrap items-center gap-1.5">
+<span class="px-space-xs py-0.5 rounded bg-surface-container font-label-sm text-label-sm text-secondary flex items-center gap-1">
+<span>weight: 1.25</span>
+<span class="material-symbols-outlined text-xs">close</span>
+</span>
+<span class="px-space-xs py-0.5 rounded bg-surface-container font-label-sm text-label-sm text-outline flex items-center gap-1">
+<span>stylize: 650</span>
+<span class="material-symbols-outlined text-xs">close</span>
+</span>
+<span class="px-space-xs py-0.5 rounded bg-surface-container font-label-sm text-label-sm text-primary flex items-center gap-1">
+<span>anamorphic-streak</span>
+<span class="material-symbols-outlined text-xs">close</span>
+</span>
+<button class="px-space-xs py-0.5 rounded bg-surface-container-high hover:bg-surface-bright text-outline hover:text-on-surface font-label-sm text-label-sm transition-colors" type="button">
+                  + Add Modifiers
+                </button>
+</div>
+<!-- Negative Filter Tag -->
+<div class="flex items-center gap-1 text-outline font-label-sm text-label-sm">
+<span>Negative:</span>
+<span class="px-1.5 py-0.5 rounded bg-surface-container text-on-surface-variant font-mono text-[11px]">lowres, chromatic blur, cartoon, flicker</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Right Column: Studio Inspector & Neural Physics Parameters (4-col xl:3-col) -->
+<aside class="col-span-12 xl:col-span-4 flex flex-col gap-space-sm">
+<!-- Inspector Header Card -->
+<div class="w-full bg-surface-container-lowest rounded-xl p-space-md flex flex-col gap-space-md shadow-xl">
+<!-- Inspector Navigation Tabs -->
+<div class="flex items-center justify-between pb-space-xs">
+<div class="flex items-center gap-1">
+<span class="font-headline-sm text-headline-sm text-on-surface">Shot Inspector</span>
+</div>
+<div class="flex items-center gap-1 bg-surface-container p-0.5 rounded-lg">
+<button class="px-space-xs py-1 rounded bg-surface-container-high text-primary font-label-sm text-label-sm" type="button">Optics</button>
+<button class="px-space-xs py-1 rounded text-outline hover:text-on-surface font-label-sm text-label-sm" type="button">Atmosphere</button>
+<button class="px-space-xs py-1 rounded text-outline hover:text-on-surface font-label-sm text-label-sm" type="button">Neural</button>
+</div>
+</div>
+<!-- Section 1: Neural Engine Configuration -->
+<div class="flex flex-col gap-space-xs bg-surface-container-low p-space-sm rounded-lg">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-on-surface flex items-center gap-1">
+<span class="material-symbols-outlined text-primary text-base">memory</span>
+                Synthesizer Core
+              </span>
+<span class="px-1.5 py-0.5 rounded bg-surface-container-high text-secondary font-mono text-[10px]">FP16 TENSOR</span>
+</div>
+<div class="grid grid-cols-2 gap-space-xs pt-1">
+<div class="flex flex-col gap-0.5">
+<span class="font-label-sm text-label-sm text-outline">Model Checkpoint</span>
+<div class="px-space-xs py-1.5 rounded bg-surface-container text-on-surface font-label-sm text-label-sm truncate">
+                  FX-Cine-3.8-Ultra
+                </div>
+</div>
+<div class="flex flex-col gap-0.5">
+<span class="font-label-sm text-label-sm text-outline">Seed Lock</span>
+<div class="px-space-xs py-1.5 rounded bg-surface-container text-on-surface font-mono text-label-sm truncate flex items-center justify-between">
+<span>84920491</span>
+<span class="material-symbols-outlined text-xs text-outline">lock</span>
+</div>
+</div>
+</div>
+<!-- CFG Guidance Scale Slider -->
+<div class="flex flex-col gap-1 pt-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-outline">CFG Prompt Fidelity</span>
+<span class="font-mono text-label-sm text-primary font-semibold">7.5</span>
+</div>
+<div class="relative w-full h-1.5 bg-surface-container-high rounded-full">
+<div class="h-full bg-primary-container rounded-full w-[75%]"></div>
+</div>
+</div>
+<!-- Motion Bucketing Intensity Slider -->
+<div class="flex flex-col gap-1 pt-1">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-outline">Motion Bucketing</span>
+<span class="font-mono text-label-sm text-secondary font-semibold">128</span>
+</div>
+<div class="relative w-full h-1.5 bg-surface-container-high rounded-full">
+<div class="h-full bg-secondary-container rounded-full w-[64%]"></div>
+</div>
+</div>
+</div>
+<!-- Section 2: Virtual Cinema Optics & Rig -->
+<div class="flex flex-col gap-space-xs bg-surface-container-low p-space-sm rounded-lg">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-on-surface flex items-center gap-1">
+<span class="material-symbols-outlined text-secondary text-base">photo_camera</span>
+                Camera Physics &amp; Lens
+              </span>
+<span class="font-label-sm text-label-sm text-outline">ARRI Alexa 65 Sim</span>
+</div>
+<!-- Focal Length & Aperture -->
+<div class="grid grid-cols-2 gap-space-xs pt-1">
+<div class="flex flex-col gap-0.5">
+<span class="font-label-sm text-label-sm text-outline">Focal Length</span>
+<div class="px-space-xs py-1.5 rounded bg-surface-container text-on-surface font-mono text-label-sm flex items-center justify-between">
+<span>35 mm</span>
+<span class="text-outline text-xs">Anamorphic</span>
+</div>
+</div>
+<div class="flex flex-col gap-0.5">
+<span class="font-label-sm text-label-sm text-outline">Aperture (f-stop)</span>
+<div class="px-space-xs py-1.5 rounded bg-surface-container text-on-surface font-mono text-label-sm flex items-center justify-between">
+<span>ƒ/1.8</span>
+<span class="text-primary text-xs">Shallow</span>
+</div>
+</div>
+</div>
+<!-- Camera Rig Trajectory Preset Selector -->
+<div class="flex flex-col gap-1 pt-space-xs">
+<span class="font-label-sm text-label-sm text-outline">Rig Kinetic Trajectory</span>
+<div class="px-space-xs py-2 rounded bg-surface-container text-on-surface font-label-sm text-label-sm flex items-center justify-between hover:bg-surface-container-high transition-colors cursor-pointer">
+<div class="flex items-center gap-1.5 truncate">
+<span class="material-symbols-outlined text-secondary text-sm">precision_manufacturing</span>
+<span class="truncate">Technocrane Arc Pan &amp; Low Push</span>
+</div>
+<span class="material-symbols-outlined text-outline text-xs">unfold_more</span>
+</div>
+</div>
+<!-- Shutter Angle & Motion Blur -->
+<div class="flex items-center justify-between pt-1">
+<span class="font-label-sm text-label-sm text-outline">Shutter Angle</span>
+<span class="font-mono text-label-sm text-on-surface font-medium">180.0° (Cinematic standard)</span>
+</div>
+</div>
+<!-- Section 3: Lighting, Atmosphere & Film Stock -->
+<div class="flex flex-col gap-space-xs bg-surface-container-low p-space-sm rounded-lg">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-on-surface flex items-center gap-1">
+<span class="material-symbols-outlined text-primary text-base">wb_twilight</span>
+                Atmosphere &amp; Stock Emulation
+              </span>
+</div>
+<!-- Volumetric Crimson Density -->
+<div class="flex flex-col gap-1 pt-1">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-outline">Crimson Volumetric Smoke</span>
+<span class="font-mono text-label-sm text-primary font-semibold">82%</span>
+</div>
+<div class="relative w-full h-1.5 bg-surface-container-high rounded-full">
+<div class="h-full bg-primary-container rounded-full w-[82%]"></div>
+</div>
+</div>
+<!-- Ember Rim Light Intensity -->
+<div class="flex flex-col gap-1 pt-1">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-outline">Burnt Orange Edge Specular</span>
+<span class="font-mono text-label-sm text-secondary font-semibold">68%</span>
+</div>
+<div class="relative w-full h-1.5 bg-surface-container-high rounded-full">
+<div class="h-full bg-secondary-container rounded-full w-[68%]"></div>
+</div>
+</div>
+<!-- Film Grain Preset -->
+<div class="flex items-center justify-between pt-2">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-outline text-base">grain</span>
+<span class="font-label-sm text-label-sm text-on-surface">Kodak 5219 Vision3 500T</span>
+</div>
+<span class="px-1.5 py-0.5 rounded bg-surface-container text-primary font-label-sm text-[11px]">Enabled</span>
+</div>
+</div>
+<!-- Section 4: Node Cluster Hardware Telemetry Card -->
+<div class="flex flex-col gap-space-xs bg-surface-container-lowest p-space-sm rounded-lg">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Cluster Telemetry</span>
+<span class="font-label-sm text-label-sm text-secondary font-mono">8x NVIDIA H100 SXM5</span>
+</div>
+<div class="flex items-center justify-between text-body-sm pt-1">
+<span class="text-on-surface-variant font-label-sm text-label-sm">VRAM Allocation:</span>
+<span class="font-mono text-on-surface font-medium text-label-sm">62.4 GB / 80.0 GB</span>
+</div>
+<div class="w-full h-1.5 bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-primary-container w-[78%]"></div>
+</div>
+<div class="flex items-center justify-between text-body-sm pt-1">
+<span class="text-on-surface-variant font-label-sm text-label-sm">Neural Synthesis Latency:</span>
+<span class="font-mono text-primary font-semibold text-label-sm">41.2 ms/frame</span>
+</div>
+</div>
+</div>
+<!-- Render Queue Quick Peek Card -->
+<div class="w-full bg-surface-container-lowest rounded-xl p-space-sm flex items-center justify-between shadow-lg">
+<div class="flex items-center gap-space-xs">
+<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-lg">layers</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface">Background Queue</span>
+<span class="font-body-sm text-[11px] text-outline">1 Render Running • 2 Pending</span>
+</div>
+</div>
+<button class="px-space-xs py-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-label-sm text-label-sm transition-colors" type="button">
+            View Staging
+          </button>
+</div>
+</aside>
+</div>
+<!-- Live Render Modal Alert Overlay (Interactive Mock Trigger) -->
+<div class="fixed bottom-6 right-6 max-w-sm bg-surface-container-lowest p-space-md rounded-xl shadow-2xl flex items-start gap-space-sm transform translate-y-32 opacity-0 transition-all duration-300 pointer-events-none z-50" id="renderBanner">
+<div class="w-9 h-9 rounded-lg bg-primary-container/20 text-primary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-xl animate-pulse">grain</span>
+</div>
+<div class="flex flex-col flex-1 min-w-0">
+<span class="font-label-md text-label-md text-on-surface font-semibold">Neural Diffusion Started</span>
+<span class="font-body-sm text-body-sm text-outline truncate">Generating frames for Project Chronos: Scene 04...</span>
+<div class="w-full h-1 bg-surface-container-high rounded-full mt-2 overflow-hidden">
+<div class="h-full bg-primary-container w-1/3 animate-pulse"></div>
+</div>
+</div>
+<button class="text-outline hover:text-on-surface pointer-events-auto" id="closeBannerBtn" type="button">
+<span class="material-symbols-outlined text-sm">close</span>
+</button>
+</div>
+</div>
+</div>
+<script>
+  (function() {
+    // Interactive Transport Play/Pause toggle
+    const playBtn = document.getElementById('transportPlayBtn');
+    const playIcon = document.getElementById('transportPlayIcon');
+    let isPlaying = false;
+
+    if (playBtn && playIcon) {
+      playBtn.addEventListener('click', () => {
+        isPlaying = !isPlaying;
+        playIcon.textContent = isPlaying ? 'pause' : 'play_arrow';
+      });
+    }
+
+    // Interactive Render Execution simulation
+    const renderBtn = document.getElementById('renderBtn');
+    const renderSpinner = document.getElementById('renderSpinner');
+    const renderIcon = document.getElementById('renderIcon');
+    const banner = document.getElementById('renderBanner');
+    const closeBannerBtn = document.getElementById('closeBannerBtn');
+
+    if (renderBtn) {
+      renderBtn.addEventListener('click', () => {
+        if (renderSpinner && renderIcon) {
+          renderSpinner.style.display = 'inline-block';
+          renderIcon.style.display = 'none';
+        }
+
+        setTimeout(() => {
+          if (renderSpinner && renderIcon) {
+            renderSpinner.style.display = 'none';
+            renderIcon.style.display = 'inline-block';
+          }
+          if (banner) {
+            banner.classList.remove('translate-y-32', 'opacity-0', 'pointer-events-none');
+            banner.classList.add('translate-y-0', 'opacity-100');
+          }
+        }, 1200);
+      });
+    }
+
+    if (closeBannerBtn && banner) {
+      closeBannerBtn.addEventListener('click', () => {
+        banner.classList.add('translate-y-32', 'opacity-0', 'pointer-events-none');
+        banner.classList.remove('translate-y-0', 'opacity-100');
+      });
+    }
+  })();
+</script></main></div></body></html>

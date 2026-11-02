@@ -1,0 +1,476 @@
+<!DOCTYPE html><html dir="rtl" lang="ar"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><meta content="web_dashboard" name="shell-type"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "secondary": "#7bd0ff", "primary-fixed": "#ffe088", "surface-container-high": "#272a30", "on-background": "#e1e2eb", "primary": "#f2ca50", "inverse-on-surface": "#2d3037", "on-error": "#690005", "on-surface-variant": "#d0c5af", "secondary-container": "#00a6e0", "tertiary-fixed-dim": "#bdc2ff", "tertiary-container": "#a5adff", "tertiary-fixed": "#e0e0ff", "on-secondary-fixed": "#001e2c", "on-surface": "#e1e2eb", "error-container": "#93000a", "on-tertiary-container": "#2d38a1", "background": "#101319", "primary-fixed-dim": "#e9c349", "primary-container": "#d4af37", "error": "#ffb4ab", "on-tertiary": "#131e8c", "surface-container-low": "#191c22", "surface-bright": "#363940", "tertiary": "#c7cbff", "on-primary-fixed-variant": "#574500", "on-tertiary-fixed-variant": "#2f3aa3", "surface-container": "#1d2026", "inverse-primary": "#735c00", "surface-tint": "#e9c349", "inverse-surface": "#e1e2eb", "on-primary-container": "#554300", "secondary-fixed": "#c4e7ff", "outline": "#99907c", "outline-variant": "#4d4635", "on-error-container": "#ffdad6", "surface-variant": "#32353b", "on-primary-fixed": "#241a00", "on-secondary": "#00354a", "surface": "#101319", "surface-dim": "#101319", "surface-container-lowest": "#0b0e14", "surface-container-highest": "#32353b", "on-secondary-fixed-variant": "#004c69", "on-secondary-container": "#00374d", "on-primary": "#3c2f00", "secondary-fixed-dim": "#7bd0ff", "on-tertiary-fixed": "#000767" }, "borderRadius": { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, "spacing": { "space-sm": "0.5rem", "margin-desktop": "2rem", "gutter-desktop": "1.5rem", "space-xs": "0.25rem", "space-xl": "2.5rem", "space-md": "1rem", "space-lg": "1.5rem", "gutter": "1rem", "margin": "1rem" }, "fontFamily": { "label-mono-md": [ "JetBrains Mono" ], "headline-md": [ "IBM Plex Sans Arabic", "IBM Plex Sans" ], "display-hero-mobile": [ "IBM Plex Sans Arabic", "IBM Plex Sans" ], "body-sm": [ "IBM Plex Sans Arabic", "IBM Plex Sans" ], "headline-lg": [ "IBM Plex Sans Arabic", "IBM Plex Sans" ], "body-md": [ "IBM Plex Sans Arabic", "IBM Plex Sans" ], "headline-sm": [ "IBM Plex Sans Arabic", "IBM Plex Sans" ], "label-mono-sm": [ "JetBrains Mono" ], "body-lg": [ "IBM Plex Sans Arabic", "IBM Plex Sans" ], "headline-lg-mobile": [ "IBM Plex Sans Arabic", "IBM Plex Sans" ], "display-hero": [ "IBM Plex Sans Arabic", "IBM Plex Sans" ] }, "fontSize": { "label-mono-md": [ "12px", { "lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "500" } ], "headline-md": [ "22px", { "lineHeight": "30px", "letterSpacing": "-0.01em", "fontWeight": "500" } ], "display-hero-mobile": [ "32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" } ], "body-sm": [ "12px", { "lineHeight": "18px", "letterSpacing": "0.01em", "fontWeight": "400" } ], "headline-lg": [ "32px", { "lineHeight": "42px", "letterSpacing": "-0.015em", "fontWeight": "600" } ], "body-md": [ "14px", { "lineHeight": "22px", "letterSpacing": "0", "fontWeight": "400" } ], "headline-sm": [ "18px", { "lineHeight": "26px", "letterSpacing": "0", "fontWeight": "500" } ], "label-mono-sm": [ "10px", { "lineHeight": "14px", "letterSpacing": "0.06em", "fontWeight": "500" } ], "body-lg": [ "16px", { "lineHeight": "26px", "letterSpacing": "0", "fontWeight": "400" } ], "headline-lg-mobile": [ "24px", { "lineHeight": "32px", "letterSpacing": "0", "fontWeight": "600" } ], "display-hero": [ "48px", { "lineHeight": "60px", "letterSpacing": "-0.02em", "fontWeight": "600" } ] } } } };</script></head><body class="bg-surface-container-lowest font-body-md text-body-md text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-container min-h-screen"><aside class="fixed right-0 top-0 h-full w-64 bg-surface-container-lowest z-50 flex flex-col justify-between py-space-md shadow-[0_0_24px_rgba(0,0,0,0.85)]"><div class="flex flex-col gap-space-lg px-space-md"><div class="flex items-center gap-space-sm px-space-xs"><div class="w-9 h-9 rounded-lg bg-surface-container-high flex items-center justify-center font-headline-md text-headline-sm text-primary shadow-[0_0_12px_rgba(212,175,55,0.2)]">FX</div><div class="flex flex-col"><span class="font-headline-sm text-body-md font-bold tracking-tight text-on-surface">جناح الإخراج</span><span class="font-label-mono-sm text-label-mono-sm text-primary uppercase">DIRECTOR SUITE</span></div></div><div class="px-space-xs"><div class="p-space-sm rounded-lg bg-surface-container-low flex flex-col gap-space-xs"><div class="flex items-center justify-between"><span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant">المشروع النشط</span><span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span></div><span class="font-body-sm text-body-sm text-on-surface font-medium truncate">سكب الوعي 2026</span><span class="font-label-mono-sm text-label-mono-sm text-outline">SMPTE 24.00 FPS</span></div></div><nav class="flex flex-col gap-space-xs" data-active-classes="bg-surface-container-high text-primary font-medium rounded-lg shadow-[inset_0_0_8px_rgba(212,175,55,0.15)]"><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="overview" href="#"><span class="font-body-md text-body-md">غرفة العمليات المركزية</span><span class="material-symbols-outlined text-body-lg">dashboard</span></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="genesis-brief" href="#"><span class="font-body-md text-body-md">الموجز الإبداعي</span><span class="material-symbols-outlined text-body-lg">history_edu</span></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="strategic-vision" href="#"><span class="font-body-md text-body-md">الرؤية الاستراتيجية</span><span class="material-symbols-outlined text-body-lg">psychology</span></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="concept-lab" href="#"><span class="font-body-md text-body-md">مختبر الأفكار واللوحات</span><span class="material-symbols-outlined text-body-lg">lightbulb</span></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="cinematic-slate" href="#"><span class="font-body-md text-body-md">السيناريو السينمائي</span><span class="material-symbols-outlined text-body-lg">movie_edit</span></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="render-queue" href="#"><span class="font-body-md text-body-md">طابور المعالجة العصبية</span><span class="material-symbols-outlined text-body-lg">memory</span></a></nav></div><div class="px-space-md flex flex-col gap-space-sm"><div class="p-space-sm rounded-lg bg-surface-container-low flex items-center justify-between"><div class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-secondary text-body-lg">neurology</span><span class="font-label-mono-sm text-label-mono-sm text-on-surface">محرك FX Neural</span></div><span class="font-label-mono-sm text-label-mono-sm text-secondary bg-surface-container-high px-space-xs py-0.5 rounded">99.8%</span></div><div class="flex items-center justify-between px-space-xs pt-space-xs"><div class="flex items-center gap-space-sm"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><div class="flex flex-col"><span class="font-body-sm text-body-sm text-on-surface font-semibold">طارق المخرج</span><span class="font-label-mono-sm text-label-mono-sm text-outline">CREATIVE LEAD</span></div></div><button class="text-on-surface-variant hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-body-lg">tune</span></button></div></div></aside><div class="pr-64"><header class="fixed top-0 right-64 left-0 h-36 bg-surface-container-lowest/90 backdrop-blur-xl z-40 shadow-[0_4px_20px_rgba(0,0,0,0.6)] flex flex-col justify-between"><div class="h-16 px-space-lg flex items-center justify-between"><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs bg-surface-container-high px-space-sm py-1 rounded-lg"><span class="font-label-mono-sm text-label-mono-sm text-primary">إصدار 2.4</span><span class="font-body-sm text-body-sm text-on-surface-variant">|</span><span class="font-body-sm text-body-sm text-on-surface font-medium">مشروع: سكب الوعي — حملة ترطيب العقل 2026</span></div><div class="flex items-center gap-space-xs px-space-sm py-1 rounded-lg bg-surface-container-low"><span class="w-1.5 h-1.5 rounded-full bg-primary"></span><span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant">جلسة نشطة • مسودة محفوظة</span></div><div class="flex items-center gap-space-xs px-space-sm py-1 rounded-lg bg-surface-container-high shadow-[0_0_12px_rgba(212,175,55,0.25)]"><span class="relative flex h-2 w-2"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span></span><span class="font-body-sm text-body-sm text-primary font-bold">الذكاء الاصطناعي: إعادة تفكير راديكالي قيد المعالجة (Radical Lateral Mode: Active)</span><span class="font-label-mono-sm text-label-mono-sm bg-primary-container text-on-primary-container px-1 rounded font-bold">AI AGENT</span></div></div><div class="flex items-center gap-space-sm"><button class="flex items-center gap-space-xs px-space-md py-1.5 rounded-lg bg-surface-container text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-body-md">search</span><span class="font-body-sm text-body-sm">لوحة الأوامر</span><kbd class="font-label-mono-sm text-label-mono-sm bg-surface-container-lowest px-1.5 py-0.5 rounded text-outline">⌘K</kbd></button><div class="flex items-center gap-space-xs"><button class="px-space-md py-1.5 rounded-lg bg-surface-container text-on-surface font-body-sm text-body-sm hover:bg-surface-container-high transition-colors flex items-center gap-space-xs"><span class="material-symbols-outlined text-body-md">ios_share</span><span class="">مشاركة</span></button><button class="px-space-md py-1.5 rounded-lg bg-surface-container text-on-surface font-body-sm text-body-sm hover:bg-surface-container-high transition-colors flex items-center gap-space-xs"><span class="material-symbols-outlined text-body-md">download</span><span class="">تصدير Final Draft</span></button><button class="px-space-md py-1.5 rounded-lg bg-primary-container text-on-primary-container font-body-sm text-body-sm font-semibold hover:bg-primary transition-colors flex items-center gap-space-xs shadow-[0_0_12px_rgba(212,175,55,0.25)]"><span class="material-symbols-outlined text-body-md">save</span><span class="">حفظ نهائي</span></button></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div><div class="h-20 px-space-lg flex items-center justify-between bg-surface-container-low/70"><div class="flex items-center gap-space-sm flex-1"><div class="flex items-center gap-space-xs px-space-md py-2 rounded-lg bg-surface-container-lowest"><span class="material-symbols-outlined text-primary text-body-md">check_circle</span><div class="flex flex-col"><span class="font-label-mono-sm text-label-mono-sm text-primary">المرحلة ٠١</span><span class="font-body-sm text-body-sm text-on-surface font-medium">الموجز (The Genesis)</span></div></div><span class="text-outline font-label-mono-sm text-label-mono-sm">←</span><div class="flex items-center gap-space-xs px-space-md py-2 rounded-lg bg-surface-container-lowest"><span class="material-symbols-outlined text-primary text-body-md">check_circle</span><div class="flex flex-col"><span class="font-label-mono-sm text-label-mono-sm text-primary">المرحلة ٠٢</span><span class="font-body-sm text-body-sm text-on-surface font-medium">الرؤية (Strategic Mind)</span></div></div><span class="text-outline font-label-mono-sm text-label-mono-sm">←</span><div class="flex items-center gap-space-xs px-space-md py-2 rounded-lg bg-surface-container-lowest"><span class="material-symbols-outlined text-primary text-body-md">check_circle</span><div class="flex flex-col"><span class="font-label-mono-sm text-label-mono-sm text-primary">المرحلة ٠٣</span><span class="font-body-sm text-body-sm text-on-surface font-medium">الفكرة (Concept Lab)</span></div></div><span class="text-outline font-label-mono-sm text-label-mono-sm">←</span><div class="flex items-center gap-space-xs px-space-md py-2 rounded-lg bg-surface-container-high shadow-[0_0_12px_rgba(212,175,55,0.15)]"><span class="material-symbols-outlined text-primary text-body-md animate-pulse">radio_button_checked</span><div class="flex flex-col"><span class="font-label-mono-sm text-label-mono-sm text-primary font-bold">المرحلة ٠٤ • قيد التحرير</span><span class="font-body-sm text-body-sm text-on-surface font-bold">السيناريو (Cinematic Slate)</span></div></div></div><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs px-space-sm py-1.5 rounded-lg bg-surface-container-lowest shadow-inner"><span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant">الجرأة الإبداعية:</span><button class="font-label-mono-sm text-label-mono-sm px-2 py-0.5 rounded text-on-surface-variant hover:text-on-surface transition-colors">منضبط</button><button class="font-label-mono-sm text-label-mono-sm px-2 py-0.5 rounded text-on-surface-variant hover:text-on-surface transition-colors">متوازن</button><button class="font-label-mono-sm text-label-mono-sm px-2 py-0.5 rounded bg-primary text-on-primary font-bold shadow-[0_0_10px_rgba(212,175,55,0.4)] animate-pulse">راديكالي ⚡ [نشط]</button></div><div class="flex items-center gap-space-xs px-space-sm py-1.5 rounded-lg bg-surface-container-lowest"><span class="material-symbols-outlined text-outline text-body-md">timeline</span><span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant">المشهد ٠٤ / ١٢</span><span class="font-label-mono-sm text-label-mono-sm text-primary">00:04:12:00</span></div></div></div><div class="w-full bg-surface-container-high border-y border-outline-variant/30 px-space-lg py-1.5 flex flex-wrap items-center justify-between gap-space-sm shadow-md"><div class="flex items-center gap-space-md"><div class="flex items-center gap-1.5 text-primary"><span class="material-symbols-outlined text-body-md animate-spin">sync</span><span class="font-label-mono-sm text-label-mono-sm font-bold">محرك الاستكشاف الجانبي (DE BONO LATERAL AGENT): قيد المعالجة التوليدية الراديكالية</span></div><div class="hidden md:flex items-center gap-space-xs text-outline font-label-mono-sm text-label-mono-sm"><span class="">الدورة: <strong class="text-on-surface">2 / 3</strong></span><span class="">•</span><span class="">الكمون: <strong class="text-secondary">240ms (Vertex AI)</strong></span><span class="">•</span><span class="">درجة التدقيق الاستراتيجي: <strong class="text-primary">88% ➔ 96%</strong></span></div></div><div class="flex items-center gap-space-xs"><span class="px-2 py-0.5 rounded bg-surface-container text-primary font-label-mono-sm text-label-mono-sm border border-primary/20 animate-pulse">الوضع: كسر القيود (Constraint Breaker)</span><button class="px-2 py-0.5 rounded bg-surface-container hover:bg-surface-bright text-on-surface font-label-mono-sm text-label-mono-sm flex items-center gap-1 transition-colors"><span class="material-symbols-outlined text-body-sm text-secondary">terminal</span><span class="">سجل التفكير المباشر</span></button></div></div></header><main class="relative w-full pt-36 bg-surface-container-lowest px-space-lg py-space-lg"><div class="flex flex-col w-full gap-space-lg select-none">
+<!-- Top Governance Status Deck -->
+<div class="relative w-full overflow-hidden rounded-xl bg-surface-container-low p-space-lg shadow-xl">
+<div class="absolute -left-20 -top-20 h-64 w-64 rounded-full bg-primary/5 blur-3xl pointer-events-none"></div>
+<div class="absolute -right-20 -bottom-20 h-64 w-64 rounded-full bg-secondary/5 blur-3xl pointer-events-none"></div>
+<div class="relative flex flex-col lg:flex-row lg:items-center justify-between gap-space-lg">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center gap-space-sm flex-wrap">
+<span class="inline-flex items-center gap-1.5 px-space-sm py-0.5 rounded-full bg-primary-container text-on-primary-container font-label-mono-sm text-label-mono-sm font-semibold tracking-wider">
+<span class="w-2 h-2 rounded-full bg-primary animate-ping"></span>
+            نظام التحكيم الاستراتيجي النشط • V2.4-GOV
+          </span>
+<span class="inline-flex items-center gap-1 px-space-sm py-0.5 rounded bg-surface-container font-label-mono-sm text-label-mono-sm text-secondary">
+<span class="material-symbols-outlined text-[14px]">verified_user</span>
+            بروتوكول حوكمة الأفكار المستقل (AUTONOMOUS AUDIT LOOP)
+          </span>
+<span class="inline-flex items-center gap-1 px-space-sm py-0.5 rounded bg-surface-container-high font-label-mono-sm text-label-mono-sm text-on-surface-variant">
+            عتبة القبول الصارمة: 85.0%
+          </span>
+</div>
+<div class="flex items-baseline gap-space-md mt-1">
+<h1 class="font-headline-lg text-headline-lg text-on-surface font-bold tracking-tight">مسار التحكيم الاستراتيجي والحوكمة الإبداعية</h1>
+<span class="font-label-mono-md text-label-mono-md text-primary font-bold">PROJECT: CONSCIOUS_POUR_2026</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-3xl">
+          فحص وتحكيم آلي ذكي لضمان استيفاء المعايير الإعلانية، كسر الأنماط التقليدية (De Bono Lateral Index)، ومواءمة النبرة الصوتية والبصرية مع استراتيجية البراند المعتمدة قبل منح ترخيص الإنتاج النهائي.
+        </p>
+</div>
+<!-- Quick Metrics Ribbon -->
+<div class="flex items-center gap-space-md flex-wrap lg:flex-nowrap">
+<div class="flex flex-col p-space-md rounded-lg bg-surface-container shadow-md min-w-[130px]">
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant">معدل الامتثال</span>
+<div class="flex items-baseline gap-1 mt-1">
+<span class="font-headline-lg text-headline-lg font-bold text-primary">96.4%</span>
+<span class="font-label-mono-sm text-label-mono-sm text-secondary">+22.4%</span>
+</div>
+<span class="font-label-mono-sm text-label-mono-sm text-outline mt-0.5">مؤشر الجاهزية</span>
+</div>
+<div class="flex flex-col p-space-md rounded-lg bg-surface-container shadow-md min-w-[130px]">
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant">دورة الحوكمة</span>
+<div class="flex items-baseline gap-1 mt-1">
+<span class="font-headline-lg text-headline-lg font-bold text-on-surface">٠٢</span>
+<span class="font-headline-sm text-headline-sm text-outline">/ ٠٣</span>
+</div>
+<span class="font-label-mono-sm text-label-mono-sm text-primary">دورة ناجحة معتمدة</span>
+</div>
+<div class="flex flex-col p-space-md rounded-lg bg-surface-container shadow-md min-w-[140px]">
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant">حالة الفحص الفيدرالي</span>
+<div class="flex items-center gap-1.5 mt-1 text-primary">
+<span class="material-symbols-outlined text-[20px]">task_alt</span>
+<span class="font-headline-sm text-headline-sm font-bold">مجاز بتوجيهات</span>
+</div>
+<span class="font-label-mono-sm text-label-mono-sm text-outline mt-0.5">SMPTE 24.00 VALID</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Main Bento Grid: Executive Dashboard & Pillars -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-space-lg w-full">
+<!-- Left/Primary (RTL: Right side column) - Score & The 5 Pillars (7 Cols) -->
+<div class="xl:col-span-7 flex flex-col gap-space-lg">
+<!-- Master Score Card with Visual Graph -->
+<div class="relative overflow-hidden rounded-xl bg-surface-container p-space-lg shadow-xl">
+<div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-space-md pb-space-md">
+<div class="flex flex-col">
+<div class="flex items-center gap-2">
+<span class="font-label-mono-sm text-label-mono-sm text-primary uppercase">WEIGHTED STRATEGIC SCORE</span>
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+<span class="font-label-mono-sm text-label-mono-sm text-outline">EVAL_ID #9042</span>
+</div>
+<h2 class="font-headline-md text-headline-md font-bold text-on-surface mt-1">النتيجة الاستراتيجية المرجحة للمشروع</h2>
+</div>
+<div class="flex items-center gap-2">
+<span class="px-space-sm py-1 rounded bg-surface-container-high text-primary font-label-mono-sm text-label-mono-sm">
+              ثقة المحرك: 99.1%
+            </span>
+<span class="px-space-sm py-1 rounded bg-primary-container text-on-primary-container font-label-mono-sm text-label-mono-sm font-semibold">
+              PASSED AUDIT
+            </span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-space-lg items-center pt-space-sm">
+<!-- Circular Score Radial Gauge -->
+<div class="md:col-span-5 flex flex-col items-center justify-center p-space-md rounded-lg bg-surface-container-low shadow-inner">
+<div class="relative w-40 h-40 flex items-center justify-center">
+<svg class="w-full h-full transform -rotate-90" viewBox="0 0 140 140">
+<circle class="stroke-surface-container-highest" cx="70" cy="70" fill="none" r="58" stroke-width="10"></circle>
+<!-- 94% circumference (2 * pi * 58 = 364.4) -> dashoffset: 364.4 * 0.06 = ~21.8 -->
+<circle class="stroke-primary" cx="70" cy="70" fill="none" r="58" stroke-dasharray="364.4" stroke-dashoffset="21.8" stroke-linecap="round" stroke-width="10" style="filter: drop-shadow(0 0 8px rgba(242, 202, 80, 0.4));"></circle>
+<!-- Reference Threshold ring marker at 85% -->
+<circle class="stroke-outline-variant/30" cx="70" cy="70" fill="none" r="44" stroke-dasharray="4 4" stroke-width="2"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center text-center">
+<span class="font-display-hero text-headline-lg font-bold text-on-surface tracking-tighter">94<span class="font-headline-sm text-headline-sm text-primary">%</span></span>
+<span class="font-label-mono-sm text-label-mono-sm text-outline">المعيار الموزون</span>
+<span class="font-label-mono-sm text-[9px] text-secondary mt-0.5">حد القبول ≥ 85%</span>
+</div>
+</div>
+<div class="mt-space-sm text-center">
+<span class="font-body-sm text-body-sm text-on-surface-variant font-medium">مستوى الامتياز الإخراجي:</span>
+<span class="font-body-sm text-body-sm text-primary font-bold mr-1">استثنائي ونادر</span>
+</div>
+</div>
+<!-- Radar Breakdown Spark & Stats -->
+<div class="md:col-span-7 flex flex-col justify-between h-full gap-space-sm">
+<div class="p-space-sm rounded bg-surface-container-low flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-body-md">balance</span>
+<span class="font-body-sm text-body-sm text-on-surface font-medium">الوزن النسبي لمعايير التحكيم</span>
+</div>
+<span class="font-label-mono-sm text-label-mono-sm text-outline">MATRIC_V4</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+              اجتاز السيناريو الحالي متطلبات التفكيك البصري بمعدل ارتقاء يتجاوز النموذج التقليدي. تم خفض احتمالية الملل الإعلاني بنسبة <strong class="text-primary">68%</strong> مع تثبيت البصمة الإخراجية الخاصة بحملة "سكب الوعي 2026".
+            </p>
+<div class="grid grid-cols-2 gap-space-sm pt-space-xs">
+<div class="p-space-sm rounded bg-surface-container-high/60 flex flex-col">
+<span class="font-label-mono-sm text-label-mono-sm text-outline">معامل التمايز (Lateral)</span>
+<span class="font-headline-sm text-headline-sm font-bold text-secondary mt-0.5">0.95 / 1.0</span>
+<span class="font-label-mono-sm text-[10px] text-on-surface-variant">انزياح إبداعي غير مسبوق</span>
+</div>
+<div class="p-space-sm rounded bg-surface-container-high/60 flex flex-col">
+<span class="font-label-mono-sm text-label-mono-sm text-outline">احتباس الانتباه المقدر</span>
+<span class="font-headline-sm text-headline-sm font-bold text-primary mt-0.5">8.4 ثانية</span>
+<span class="font-label-mono-sm text-[10px] text-on-surface-variant">ضعف معيار الصناعة (3.2 ث)</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- The 5 Strategic Pillars Breakdown -->
+<div class="rounded-xl bg-surface-container p-space-lg shadow-xl flex flex-col gap-space-md"><div class="flex flex-col md:flex-row md:items-center justify-between gap-space-sm pb-space-xs border-b border-surface-container-high/60"><div class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-headline-sm">account_tree</span><div class="flex flex-col"><h3 class="font-headline-sm text-headline-sm font-bold text-on-surface">الأركان الاستراتيجية الخمسة للحوكمة (The 5 Strategic Pillars)</h3><span class="font-body-sm text-body-sm text-on-surface-variant">تخصيص الأوزان النسبية لكل معيار وتأثيره المباشر على النتيجة الاستراتيجية</span></div></div><div class="flex items-center gap-2"><span class="font-label-mono-sm text-label-mono-sm text-outline">إجمالي الأوزان:</span><span class="px-2 py-0.5 rounded bg-primary/20 text-primary font-label-mono-sm text-label-mono-sm font-bold border border-primary/30">100% (معاير بدقة)</span></div></div><div class="flex flex-col gap-space-xs bg-surface-container-low p-space-sm rounded-lg"><div class="flex items-center justify-between flex-wrap gap-2"><span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant flex items-center gap-1"><span class="material-symbols-outlined text-[16px] text-primary">tune</span>نماذج توزيع الأوزان الجاهزة (Weight Presets):</span><span class="font-label-mono-sm text-[10px] text-secondary">النمط المختار: التركيز الراديكالي الإبداعي</span></div><div class="grid grid-cols-1 sm:grid-cols-3 gap-space-xs mt-1"><button class="flex items-center justify-between px-space-sm py-1.5 rounded bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high font-label-mono-sm text-label-mono-sm border border-transparent transition-all"><span class="truncate">الوضع الصارم الافتراضي</span><span class="text-[10px] text-outline font-bold">20% لكل ركن</span></button><button class="flex items-center justify-between px-space-sm py-1.5 rounded bg-primary-container text-on-primary-container font-label-mono-sm text-label-mono-sm font-bold border border-primary/40 shadow-sm transition-all"><span class="truncate flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>التركيز الراديكالي الإبداعي</span><span class="text-[10px] text-on-primary-container">كسر 40%</span></button><button class="flex items-center justify-between px-space-sm py-1.5 rounded bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high font-label-mono-sm text-label-mono-sm border border-transparent transition-all"><span class="truncate">التركيز التجاري والامتثال</span><span class="text-[10px] text-outline font-bold">موجز 35%</span></button></div></div><div class="flex flex-col gap-space-sm"><div class="p-space-md rounded-lg bg-surface-container-low hover:bg-surface-container-high/70 transition-all flex flex-col gap-space-xs"><div class="flex items-center justify-between mb-1"><div class="flex items-center gap-space-xs"><span class="font-label-mono-md text-label-mono-md text-primary font-bold">٠١</span><span class="font-body-md text-body-md font-semibold text-on-surface">التماسك مع الموجز والمستهلك (Brief &amp; Audience Alignment)</span></div><div class="flex items-center gap-space-sm"><span class="font-label-mono-md text-label-mono-md font-bold text-primary">98%</span><span class="material-symbols-outlined text-primary text-body-md">check_circle</span></div></div><div class="w-full bg-surface-container-highest rounded-full h-1.5 overflow-hidden"><div class="bg-primary h-full rounded-full transition-all duration-700" style="width: 98%"></div></div><div class="flex items-center justify-between gap-space-md pt-space-xs"><div class="flex items-center gap-space-xs flex-1"><span class="font-label-mono-sm text-[10px] text-outline min-w-[70px]">الوزن النسبي:</span><input class="w-full accent-primary h-1 bg-surface-container-highest rounded cursor-pointer" max="50" min="5" type="range" value="15"><span class="font-label-mono-sm text-label-mono-sm text-primary font-bold min-w-[32px] text-left">15%</span></div><span class="font-label-mono-sm text-[10px] text-outline">المساهمة المرجحة: +14.7%</span></div></div><div class="p-space-md rounded-lg bg-surface-container-low hover:bg-surface-container-high/70 transition-all flex flex-col gap-space-xs"><div class="flex items-center justify-between mb-1"><div class="flex items-center gap-space-xs"><span class="font-label-mono-md text-label-mono-md text-primary font-bold">٠٢</span><span class="font-body-md text-body-md font-semibold text-on-surface">كسر النمط والعمق الجانبي (Lateral Divergence &amp; Originality)</span></div><div class="flex items-center gap-space-sm"><span class="font-label-mono-md text-label-mono-md font-bold text-secondary">95%</span><span class="material-symbols-outlined text-secondary text-body-md">psychology</span></div></div><div class="w-full bg-surface-container-highest rounded-full h-1.5 overflow-hidden"><div class="bg-secondary h-full rounded-full transition-all duration-700" style="width: 95%"></div></div><div class="flex items-center justify-between gap-space-md pt-space-xs"><div class="flex items-center gap-space-xs flex-1"><span class="font-label-mono-sm text-[10px] text-outline min-w-[70px]">الوزن النسبي:</span><input class="w-full accent-secondary h-1 bg-surface-container-highest rounded cursor-pointer" max="60" min="10" type="range" value="40"><span class="font-label-mono-sm text-label-mono-sm text-secondary font-bold min-w-[32px] text-left">40%</span></div><span class="font-label-mono-sm text-[10px] text-secondary font-bold">المساهمة المرجحة: +38.0% (ثقل راديكالي)</span></div></div><div class="p-space-md rounded-lg bg-surface-container-low hover:bg-surface-container-high/70 transition-all flex flex-col gap-space-xs"><div class="flex items-center justify-between mb-1"><div class="flex items-center gap-space-xs"><span class="font-label-mono-md text-label-mono-md text-primary font-bold">٠٣</span><span class="font-body-md text-body-md font-semibold text-on-surface">الجدوى الإنتاجية والإخراجية (Cinematic Viability &amp; Feasibility)</span></div><div class="flex items-center gap-space-sm"><span class="font-label-mono-md text-label-mono-md font-bold text-on-surface">92%</span><span class="material-symbols-outlined text-outline text-body-md">movie</span></div></div><div class="w-full bg-surface-container-highest rounded-full h-1.5 overflow-hidden"><div class="bg-primary/80 h-full rounded-full transition-all duration-700" style="width: 92%"></div></div><div class="flex items-center justify-between gap-space-md pt-space-xs"><div class="flex items-center gap-space-xs flex-1"><span class="font-label-mono-sm text-[10px] text-outline min-w-[70px]">الوزن النسبي:</span><input class="w-full accent-primary h-1 bg-surface-container-highest rounded cursor-pointer" max="40" min="5" type="range" value="10"><span class="font-label-mono-sm text-label-mono-sm text-on-surface font-bold min-w-[32px] text-left">10%</span></div><span class="font-label-mono-sm text-[10px] text-outline">المساهمة المرجحة: +9.2%</span></div></div><div class="p-space-md rounded-lg bg-surface-container-low hover:bg-surface-container-high/70 transition-all flex flex-col gap-space-xs"><div class="flex items-center justify-between mb-1"><div class="flex items-center gap-space-xs"><span class="font-label-mono-md text-label-mono-md text-primary font-bold">٠٤</span><span class="font-body-md text-body-md font-semibold text-on-surface">التوتر العاطفي والسردي (Emotional Arc &amp; Narrative Hook)</span></div><div class="flex items-center gap-space-sm"><span class="font-label-mono-md text-label-mono-md font-bold text-primary">97%</span><span class="material-symbols-outlined text-primary text-body-md">auto_graph</span></div></div><div class="w-full bg-surface-container-highest rounded-full h-1.5 overflow-hidden"><div class="bg-primary h-full rounded-full transition-all duration-700" style="width: 97%"></div></div><div class="flex items-center justify-between gap-space-md pt-space-xs"><div class="flex items-center gap-space-xs flex-1"><span class="font-label-mono-sm text-[10px] text-outline min-w-[70px]">الوزن النسبي:</span><input class="w-full accent-primary h-1 bg-surface-container-highest rounded cursor-pointer" max="50" min="5" type="range" value="25"><span class="font-label-mono-sm text-label-mono-sm text-primary font-bold min-w-[32px] text-left">25%</span></div><span class="font-label-mono-sm text-[10px] text-outline">المساهمة المرجحة: +24.25%</span></div></div><div class="p-space-md rounded-lg bg-surface-container-low hover:bg-surface-container-high/70 transition-all flex flex-col gap-space-xs"><div class="flex items-center justify-between mb-1"><div class="flex items-center gap-space-xs"><span class="font-label-mono-md text-label-mono-md text-primary font-bold">٠٥</span><span class="font-body-md text-body-md font-semibold text-on-surface">ملكية النبرة والتميز التجاري (Brand Voice Ownership)</span></div><div class="flex items-center gap-space-sm"><span class="font-label-mono-md text-label-mono-md font-bold text-on-surface">91%</span><span class="material-symbols-outlined text-outline text-body-md">campaign</span></div></div><div class="w-full bg-surface-container-highest rounded-full h-1.5 overflow-hidden"><div class="bg-primary/80 h-full rounded-full transition-all duration-700" style="width: 91%"></div></div><div class="flex items-center justify-between gap-space-md pt-space-xs"><div class="flex items-center gap-space-xs flex-1"><span class="font-label-mono-sm text-[10px] text-outline min-w-[70px]">الوزن النسبي:</span><input class="w-full accent-primary h-1 bg-surface-container-highest rounded cursor-pointer" max="40" min="5" type="range" value="10"><span class="font-label-mono-sm text-label-mono-sm text-on-surface font-bold min-w-[32px] text-left">10%</span></div><span class="font-label-mono-sm text-[10px] text-outline">المساهمة المرجحة: +9.1%</span></div></div></div><div class="p-space-md rounded-lg bg-surface-container-high/70 border border-primary/20 flex flex-col md:flex-row items-center justify-between gap-space-md shadow-inner"><div class="flex flex-col gap-1"><div class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-[18px]">calculate</span><span class="font-label-mono-md text-label-mono-md font-bold text-primary">محاكاة النتيجة المرجحة الجديدة (Audit Recalculation):</span></div><span class="font-label-mono-sm text-[11px] text-on-surface-variant font-mono">النتيجة = (98×0.15) + (95×0.40) + (92×0.10) + (97×0.25) + (91×0.10) = <strong class="text-primary font-bold">95.25%</strong></span></div><div class="flex items-center gap-space-xs shrink-0"><button class="px-space-md py-2 rounded bg-primary text-on-primary font-body-sm text-body-sm font-bold shadow hover:bg-primary-fixed transition-all flex items-center gap-1.5"><span class="material-symbols-outlined text-[16px]">refresh</span><span class="">تطبيق الأوزان وإعادة تقييم الحوكمة</span></button></div></div></div>
+</div>
+<!-- Right/Secondary (RTL: Left side column) - Loop Flow & Governance Iterations (5 Cols) -->
+<div class="xl:col-span-5 flex flex-col gap-space-lg">
+<!-- Autonomous Loop Flow Diagram -->
+<div class="rounded-xl bg-surface-container p-space-lg shadow-xl flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-headline-sm">all_inclusive</span>
+<h3 class="font-headline-sm text-headline-sm font-bold text-on-surface">تدفق حلقة الحوكمة التلقائية</h3>
+</div>
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-secondary font-label-mono-sm text-label-mono-sm animate-pulse">
+            LOOP ACTIVE
+          </span>
+</div>
+<!-- Interactive Flow Visualization -->
+<div class="flex flex-col gap-space-sm p-space-sm rounded-lg bg-surface-container-low">
+<!-- Flow Step 1 -->
+<div class="flex items-center justify-between p-space-sm rounded bg-surface-container">
+<div class="flex items-center gap-space-sm">
+<span class="w-6 h-6 rounded-full bg-surface-container-high flex items-center justify-center font-label-mono-sm text-label-mono-sm text-outline">1</span>
+<span class="font-body-sm text-body-sm text-on-surface font-medium">سياق الموجز الإبداعي (Brief Context)</span>
+</div>
+<span class="material-symbols-outlined text-primary text-[18px]">done</span>
+</div>
+<div class="flex justify-center -my-1 text-outline">
+<span class="material-symbols-outlined text-[16px]">south</span>
+</div>
+<!-- Flow Step 2 -->
+<div class="flex items-center justify-between p-space-sm rounded bg-surface-container">
+<div class="flex items-center gap-space-sm">
+<span class="w-6 h-6 rounded-full bg-surface-container-high flex items-center justify-center font-label-mono-sm text-label-mono-sm text-outline">2</span>
+<span class="font-body-sm text-body-sm text-on-surface font-medium">توليد الرؤى والأفكار (Insight Gen)</span>
+</div>
+<span class="material-symbols-outlined text-primary text-[18px]">done</span>
+</div>
+<div class="flex justify-center -my-1 text-outline">
+<span class="material-symbols-outlined text-[16px]">south</span>
+</div>
+<!-- Flow Step 3: Audit Engine -->
+<div class="flex items-center justify-between p-space-sm rounded bg-surface-container-high shadow-md">
+<div class="flex items-center gap-space-sm">
+<span class="w-6 h-6 rounded-full bg-primary text-on-primary font-label-mono-sm text-label-mono-sm font-bold flex items-center justify-center">3</span>
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm text-primary font-bold">فحص التحكيم المرجح (Audit Evaluator)</span>
+<span class="font-label-mono-sm text-[10px] text-outline">المقارنة بالعتبة المقررة: 0.85</span>
+</div>
+</div>
+<span class="px-2 py-0.5 rounded bg-primary-container text-on-primary-container font-label-mono-sm text-label-mono-sm font-bold">Passed</span>
+</div>
+<div class="flex justify-center -my-1 text-outline">
+<span class="material-symbols-outlined text-[16px]">south</span>
+</div>
+<!-- Flow Step 4 -->
+<div class="flex items-center justify-between p-space-sm rounded bg-surface-container">
+<div class="flex items-center gap-space-sm">
+<span class="w-6 h-6 rounded-full bg-surface-container-high flex items-center justify-center font-label-mono-sm text-label-mono-sm text-outline">4</span>
+<span class="font-body-sm text-body-sm text-on-surface font-medium">إطلاق أمر التعديل الذاتي (Rework Trigger)</span>
+</div>
+<span class="font-label-mono-sm text-label-mono-sm text-secondary font-medium">نُفذ بالدورة 1</span>
+</div>
+<div class="flex justify-center -my-1 text-outline">
+<span class="material-symbols-outlined text-[16px]">south</span>
+</div>
+<!-- Flow Step 5 -->
+<div class="flex items-center justify-between p-space-sm rounded bg-surface-container">
+<div class="flex items-center gap-space-sm">
+<span class="w-6 h-6 rounded-full bg-primary/20 text-primary flex items-center justify-center font-label-mono-sm text-label-mono-sm font-bold">5</span>
+<span class="font-body-sm text-body-sm text-primary font-bold">الاعتماد والتثبيت النهائي (Lock &amp; Ready)</span>
+</div>
+<span class="material-symbols-outlined text-primary text-[18px]">verified</span>
+</div>
+</div>
+</div>
+<!-- Iteration History & Comparative Evolution -->
+<div class="rounded-xl bg-surface-container p-space-lg shadow-xl flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-headline-sm">history_toggle_off</span>
+<h3 class="font-headline-sm text-headline-sm font-bold text-on-surface">تاريخ دورات الحوكمة والتعديل</h3>
+</div>
+<span class="font-label-mono-sm text-label-mono-sm text-outline">2 ITERATIONS LOGGED</span>
+</div>
+<div class="flex flex-col gap-space-md">
+<!-- Iteration 1 Card (Failed/Reworked) -->
+<div class="p-space-md rounded-lg bg-surface-container-low shadow-sm flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="px-2 py-0.5 rounded bg-error-container text-on-error-container font-label-mono-sm text-label-mono-sm font-bold">
+                  الدورة ٠١ • مرفوضة (REJECTED)
+                </span>
+<span class="font-label-mono-sm text-label-mono-sm text-outline">10:14:02 AM</span>
+</div>
+<span class="font-headline-sm text-headline-sm font-bold text-error">74.0%</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+<strong>سبب الرفض:</strong> ظهور كليشيهات إعلانية رياضية مكررة (عداء يعرق، موسيقى حماسية صاخبة)، وضعف التمايز الجانبي عن المنافسين (Lateral Divergence: 58%).
+            </p>
+<!-- Rework Directive Issued -->
+<div class="mt-space-xs p-space-sm rounded bg-surface-container flex flex-col gap-1">
+<div class="flex items-center gap-1 text-primary">
+<span class="material-symbols-outlined text-body-sm">campaign</span>
+<span class="font-label-mono-sm text-label-mono-sm font-bold">توجيه إعادة الصياغة الصادر (REWORK DIRECTIVE):</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface font-medium italic">
+                "استبعاد جميع المؤثرات الرياضية البدنية التقليدية. الانتقال إلى تصوير الميكرو فائق الدقة (Macro Neural) واستبدال الصخب بالصدمة الحسية المائية في اللقطة الافتتاحية."
+              </p>
+</div>
+</div>
+<!-- Iteration 2 Card (Passed) -->
+<div class="p-space-md rounded-lg bg-surface-container-high shadow-lg flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="px-2 py-0.5 rounded bg-primary-container text-on-primary-container font-label-mono-sm text-label-mono-sm font-bold">
+                  الدورة ٠٢ • معتمدة (APPROVED)
+                </span>
+<span class="font-label-mono-sm text-label-mono-sm text-secondary">10:18:44 AM</span>
+</div>
+<span class="font-headline-sm text-headline-sm font-bold text-primary">96.4%</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface mt-1">
+<strong>نتائج التدقيق:</strong> تم استيعاب التوجيه بالكامل. انزياح سردي استثنائي نحو سكون العقل، وزيادة مؤشر الاحتفاظ البصري إلى 97%. تم اجتياز عتبة الحوكمة بنجاح.
+            </p>
+<div class="flex items-center justify-between pt-space-xs text-secondary font-label-mono-sm text-label-mono-sm">
+<span class="">دلتا التحسن: +22.4 نقطة</span>
+<span class="">الحالة: جاهز للإخراج والتصوير</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Scene-by-Scene Compliance Matrix -->
+<div class="rounded-xl bg-surface-container p-space-lg shadow-xl flex flex-col gap-space-md">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-sm">
+<div class="flex flex-col">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-headline-sm">fact_check</span>
+<h3 class="font-headline-sm text-headline-sm font-bold text-on-surface">مصفوفة مطابقة وتدقيق المشاهد الفردية (Scene Compliance Matrix)</h3>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+          مراجعة تفصيلية لكل كادر إخراجي للتحقق من اتساق العدسات، الترددات الصوتية، وموقع الشعار من زاوية الحوكمة الاستراتيجية.
+        </p>
+</div>
+<div class="flex items-center gap-space-xs">
+<button class="px-space-sm py-1 rounded bg-surface-container-low text-on-surface font-label-mono-sm text-label-mono-sm hover:bg-surface-container-high transition-colors">
+          تصفية: الكل (3 مشاهد)
+        </button>
+<button class="px-space-sm py-1 rounded bg-primary-container text-on-primary-container font-label-mono-sm text-label-mono-sm font-semibold">
+          عرض التنبيهات الإخراجية
+        </button>
+</div>
+</div>
+<!-- Scenes Table / Bento Tiles -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-space-md">
+<!-- Scene 01 Card -->
+<div class="rounded-lg bg-surface-container-low p-space-md flex flex-col justify-between gap-space-md shadow-md">
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-mono-md text-label-mono-md text-primary font-bold">المشهد ٠١ • انكسار الصمت</span>
+<span class="px-2 py-0.5 rounded bg-primary-container text-on-primary-container font-label-mono-sm text-label-mono-sm font-semibold">
+              98.2% امتثال
+            </span>
+</div>
+<div class="relative w-full h-32 rounded bg-surface-container-lowest overflow-hidden">
+<img class="w-full h-full object-cover opacity-80 hover:opacity-100 transition-opacity" data-alt="Cinematic extreme macro shot of a crystalline single droplet of water suspended in mid-air in zero gravity, backlit by intense obsidian gold studio lighting, hyper-realistic fluid dynamics, 8k resolution anamorphic cinematic framing" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-zBTMrk0A-MG4tzneL6r6oAoAwMAGADuC4S5ayrruquh-jhMuBwenq411n7RhLn7NCftt9v39WgFAEUeEgjLia1Xd6cp3sEJzeLTniRyDEPM2onqQrQ8l_9vJmBeIogC6piO3gkocgLN2Qp-xgZC1s0aOnJx9wOJdWc5abKJiX-TerK44BEScC5N-v-Bd7Jz9SfDstzoSJoRShzSR1SQpY66feG_YWaeqZiup6nFkVUk3e5fWGv0o">
+<div class="absolute bottom-2 right-2 px-1.5 py-0.5 rounded bg-surface-container-lowest/90 font-label-mono-sm text-[10px] text-primary">
+              EXTREME MACRO • 120 FPS
+            </div>
+</div>
+<div class="flex flex-col gap-space-xs text-on-surface-variant">
+<span class="font-body-sm text-body-sm text-on-surface font-semibold">تدقيق العدسة والمحرك الصوتي:</span>
+<p class="font-body-sm text-body-sm leading-relaxed">
+              تحقق كامل من معيار الصدمة الأولى. تردد صوتي أحادي صامت ينكسر بصوت مائي فائق النقاء عند الثانية 00:01:12.
+            </p>
+</div>
+</div>
+<div class="pt-space-xs flex flex-col gap-1.5 bg-surface-container/60 p-space-xs rounded">
+<div class="flex items-center justify-between font-label-mono-sm text-label-mono-sm">
+<span class="text-outline">رمز الفحص: SC_01_CHK</span>
+<span class="text-primary flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">check</span> معتمد بالكامل</span>
+</div>
+<div class="w-full bg-surface-container-highest rounded-full h-1 overflow-hidden">
+<div class="bg-primary h-full" style="width: 98%"></div>
+</div>
+</div>
+</div>
+<!-- Scene 02 Card -->
+<div class="rounded-lg bg-surface-container-low p-space-md flex flex-col justify-between gap-space-md shadow-md">
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-mono-md text-label-mono-md text-primary font-bold">المشهد ٠٢ • انغمار الحواس</span>
+<span class="px-2 py-0.5 rounded bg-primary-container text-on-primary-container font-label-mono-sm text-label-mono-sm font-semibold">
+              95.8% امتثال
+            </span>
+</div>
+<div class="relative w-full h-32 rounded bg-surface-container-lowest overflow-hidden">
+<img class="w-full h-full object-cover opacity-80 hover:opacity-100 transition-opacity" data-alt="Cinematic slow dolly-in shot of an exhausted thinker in deep contemplative state in a dark brutalist concrete studio, warm amber light pouring gently onto their silhouette, poetic silence, ultra cinematic 35mm film grain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZMkJhQjUZebbGK_2kKnT21c9gZ_n8pQo03gQtMMM17QPht6x-tQlEvF0mfDVImz3psLi4r7PLrl4lwMLMGmci1WSrn4RvvL5Tg7FukmmdAczLhJdQwm6XAcyP2Mu1qLO8MtN1B5T749OdJez2SlD2BmeFNI4LezpAtXQV-HUzRiJKpJRzohZlUu6-24br85yadPvIMowsAy5Xj6hEU1Pi7SG1USQR1obglO8onVMGb8i-_gFXmZmI">
+<div class="absolute bottom-2 right-2 px-1.5 py-0.5 rounded bg-surface-container-lowest/90 font-label-mono-sm text-[10px] text-primary">
+              DOLLY-IN • 35MM PRIME
+            </div>
+</div>
+<div class="flex flex-col gap-space-xs text-on-surface-variant">
+<span class="font-body-sm text-body-sm text-on-surface font-semibold">تدقيق النبرة والسردية:</span>
+<p class="font-body-sm text-body-sm leading-relaxed">
+              خالٍ تماماً من التناقضات السردية. تم التأكد من عدم وجود أي مونولوجات سطحية، والاعتماد كلياً على لغة الجسد والإضاءة التعبيرية.
+            </p>
+</div>
+</div>
+<div class="pt-space-xs flex flex-col gap-1.5 bg-surface-container/60 p-space-xs rounded">
+<div class="flex items-center justify-between font-label-mono-sm text-label-mono-sm">
+<span class="text-outline">رمز الفحص: SC_02_CHK</span>
+<span class="text-secondary flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">tune</span> تعديل طفيف في التدرج</span>
+</div>
+<div class="w-full bg-surface-container-highest rounded-full h-1 overflow-hidden">
+<div class="bg-secondary h-full" style="width: 95%"></div>
+</div>
+</div>
+</div>
+<!-- Scene 03 Card -->
+<div class="rounded-lg bg-surface-container-low p-space-md flex flex-col justify-between gap-space-md shadow-md">
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-mono-md text-label-mono-md text-primary font-bold">المشهد ٠٣ • سيادة الوضوح</span>
+<span class="px-2 py-0.5 rounded bg-primary-container text-on-primary-container font-label-mono-sm text-label-mono-sm font-semibold">
+              96.0% امتثال
+            </span>
+</div>
+<div class="relative w-full h-32 rounded bg-surface-container-lowest overflow-hidden">
+<img class="w-full h-full object-cover opacity-80 hover:opacity-100 transition-opacity" data-alt="High-end luxury commercial closing slate, minimalist premium carbon black bottle with pure gold metallic embossed typography, glowing soft volumetric amber aura in pure dark obsidian environment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAN9_6rcGZDS87SpaPPPFQmfecyxhSt2csgRGMjgcKof3kPEBikesxHfO3IEJFnd9udZzv6gmfRdPkxdaNJLGeDmoSS7XlF3Hf4gZQ7TcIBa_q2i6Mmbx3p9uAUFbk1TQPoTHKzRZQ6EQa6BG0fkZ6aOPEYrUL-JtEmGu819HqGNKo0-rzsDka3z6vWehOrfSdT15Nt7hnXvsnOJat94SYNOWof5gmU2-43mxUlGZhEtqwiGMXmpJiT">
+<div class="absolute bottom-2 right-2 px-1.5 py-0.5 rounded bg-surface-container-lowest/90 font-label-mono-sm text-[10px] text-primary">
+              END SLATE • LOCK 8 SEC
+            </div>
+</div>
+<div class="flex flex-col gap-space-xs text-on-surface-variant">
+<span class="font-body-sm text-body-sm text-on-surface font-semibold">تدقيق تموضع الهوية (Brand Cue):</span>
+<p class="font-body-sm text-body-sm leading-relaxed">
+              ظهور الشعار في آخر 2.4 ثانية بحجم محسوب هندسياً لا يطغى على الحالة الشعرية، مع الشعار اللفظي: "ارتواء يتجاوز العطش".
+            </p>
+</div>
+</div>
+<div class="pt-space-xs flex flex-col gap-1.5 bg-surface-container/60 p-space-xs rounded">
+<div class="flex items-center justify-between font-label-mono-sm text-label-mono-sm">
+<span class="text-outline">رمز الفحص: SC_03_CHK</span>
+<span class="text-primary flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">check</span> متوافق مع دليل الهوية</span>
+</div>
+<div class="w-full bg-surface-container-highest rounded-full h-1 overflow-hidden">
+<div class="bg-primary h-full" style="width: 96%"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Split: Live Auditor Event Log & Executive Control Strip -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-space-lg w-full">
+<!-- Auditor Event Log (Terminal / Telemetry) - 8 Cols -->
+<div class="xl:col-span-8 rounded-xl bg-surface-container p-space-lg shadow-xl flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-body-lg">terminal</span>
+<h3 class="font-headline-sm text-headline-sm font-bold text-on-surface">سجل الاستدلال الحي وأوامر التحكيم (Auditor Execution Trace)</h3>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-secondary animate-ping"></span>
+<span class="font-label-mono-sm text-label-mono-sm text-outline">SYS_STREAM: LIVE</span>
+</div>
+</div>
+<div class="w-full rounded-lg bg-surface-container-lowest p-space-md font-label-mono-sm text-label-mono-sm flex flex-col gap-space-xs overflow-x-auto shadow-inner">
+<div class="flex items-center gap-space-md py-1 border-b border-surface-container-high/40">
+<span class="text-outline">10:14:02.108</span>
+<span class="text-secondary font-bold">[StrategicAuditor]</span>
+<span class="text-on-surface">evaluate_concept_originality</span>
+<span class="text-error font-bold">score: 0.58 &lt; threshold: 0.85</span>
+<span class="text-error bg-error/10 px-1.5 py-0.5 rounded">STATUS: REWORK_REQUIRED</span>
+</div>
+<div class="flex items-center gap-space-md py-1 border-b border-surface-container-high/40">
+<span class="text-outline">10:14:03.420</span>
+<span class="text-primary font-bold">[GovernanceLoop]</span>
+<span class="text-on-surface">generate_rework_directives</span>
+<span class="text-on-surface-variant">prompt_delta: "+macro_fluid, -gym_cliche"</span>
+<span class="text-secondary">LOOP_COUNTER: 1 -&gt; 2</span>
+</div>
+<div class="flex items-center gap-space-md py-1 border-b border-surface-container-high/40">
+<span class="text-outline">10:18:41.012</span>
+<span class="text-secondary font-bold">[StrategicAuditor]</span>
+<span class="text-on-surface">evaluate_brief_alignment</span>
+<span class="text-primary font-bold">score: 0.98 &gt;= threshold: 0.85</span>
+<span class="text-primary bg-primary/10 px-1.5 py-0.5 rounded">STATUS: PASS</span>
+</div>
+<div class="flex items-center gap-space-md py-1 border-b border-surface-container-high/40">
+<span class="text-outline">10:18:42.550</span>
+<span class="text-secondary font-bold">[StrategicAuditor]</span>
+<span class="text-on-surface">evaluate_lateral_divergence</span>
+<span class="text-secondary font-bold">score: 0.95 &gt;= threshold: 0.85</span>
+<span class="text-primary bg-primary/10 px-1.5 py-0.5 rounded">STATUS: PASS</span>
+</div>
+<div class="flex items-center gap-space-md py-1">
+<span class="text-outline">10:18:44.201</span>
+<span class="text-primary font-bold">[MasterGovernor]</span>
+<span class="text-on-surface font-semibold">finalize_governance_report</span>
+<span class="text-primary font-bold">weighted_score: 0.964</span>
+<span class="text-on-primary bg-primary px-2 py-0.5 rounded font-bold">FINAL_STATUS: LICENSED_FOR_PRODUCTION</span>
+</div>
+</div>
+</div>
+<!-- Executive Control Strip & Directives - 4 Cols -->
+<div class="xl:col-span-4 rounded-xl bg-surface-container p-space-lg shadow-xl flex flex-col justify-between gap-space-md">
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-headline-sm">gavel</span>
+<h3 class="font-headline-sm text-headline-sm font-bold text-on-surface">القرارات الإخراجية والتصديق</h3>
+</div>
+<span class="font-label-mono-sm text-label-mono-sm text-outline">DIRECTOR DESK</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+          بناءً على اجتياز معايير الجودة بنسبة <strong class="text-primary">96.4%</strong>، يمكنك الآن إغلاق السيناريو ومنحه ترخيص المعالجة العصبية النهائية، أو تشغيل تدقيق عميق إضافي.
+        </p>
+<!-- Threshold Modifier Widget -->
+<div class="p-space-sm rounded bg-surface-container-low flex flex-col gap-space-xs border border-outline-variant/30"><div class="flex items-center justify-between"><div class="flex items-center gap-1.5"><span class="material-symbols-outlined text-[16px] text-primary">tune</span><span class="font-label-mono-sm text-label-mono-sm text-on-surface font-semibold">عتبة القبول الإلزامية (Acceptance Threshold):</span></div><span class="font-label-mono-sm text-label-mono-md text-primary font-bold bg-surface-container-high px-2 py-0.5 rounded border border-primary/20">85.0% (صارم)</span></div><div class="flex items-center gap-space-sm py-1"><span class="font-label-mono-sm text-[10px] text-secondary">مرن 70%</span><input class="w-full accent-primary h-1.5 bg-surface-container-highest rounded cursor-pointer" max="95" min="70" step="5" type="range" value="85"><span class="font-label-mono-sm text-[10px] text-error font-bold">صارم 95%</span></div><div class="flex items-center justify-between pt-1 border-t border-surface-container-high/40 text-[10px] font-label-mono-sm"><span class="text-secondary flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">info</span>أثر العتبة: خفضها إلى 70% يجيز الدورة ٠١ فوراً (74.0%)</span><span class="text-primary font-medium">الوضع الحالي: متوازن</span></div></div>
+</div>
+<!-- Action Buttons -->
+<div class="flex flex-col gap-space-xs pt-space-sm">
+<button class="w-full py-2.5 px-space-md rounded bg-primary text-on-primary font-body-md text-body-md font-bold shadow-md hover:bg-primary-fixed transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-body-lg">lock</span>
+<span class="">اعتماد السيناريو والإغلاق (Approve &amp; Lock)</span>
+</button>
+<div class="grid grid-cols-2 gap-space-xs">
+<button class="py-2 px-space-sm rounded bg-surface-container-high text-on-surface font-label-mono-sm text-label-mono-sm hover:bg-surface-bright transition-all flex items-center justify-center gap-1.5">
+<span class="material-symbols-outlined text-body-md text-secondary">manage_search</span>
+<span class="">تدقيق إضافي عميق</span>
+</button>
+<button class="py-2 px-space-sm rounded bg-surface-container-high text-on-surface font-label-mono-sm text-label-mono-sm hover:bg-surface-bright transition-all flex items-center justify-center gap-1.5">
+<span class="material-symbols-outlined text-body-md text-primary">verified</span>
+<span class="">تصدير شهادة الحوكمة</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div></main></div>
+
+</body></html>

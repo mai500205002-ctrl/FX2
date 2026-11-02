@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&amp;family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-tertiary": "#68000c", "tertiary-fixed": "#ffdad7", "error-container": "#93000a", "surface-dim": "#131313", "on-primary-fixed": "#410001", "surface-container": "#201f1f", "surface-container-highest": "#353534", "surface-container-lowest": "#0e0e0e", "secondary-fixed-dim": "#ffb5a0", "on-primary": "#690003", "surface-bright": "#393939", "tertiary": "#ffb3ae", "on-tertiary-fixed-variant": "#930016", "on-surface-variant": "#e9bcb6", "on-primary-fixed-variant": "#930007", "primary": "#ffb4aa", "inverse-primary": "#c0000c", "on-secondary": "#5f1500", "on-secondary-container": "#fffbff", "surface-variant": "#353534", "on-surface": "#e5e2e1", "outline": "#af8782", "on-error": "#690005", "inverse-surface": "#e5e2e1", "background": "#131313", "inverse-on-surface": "#313030", "surface": "#131313", "on-secondary-fixed-variant": "#862200", "tertiary-fixed-dim": "#ffb3ae", "primary-container": "#e50914", "secondary-fixed": "#ffdbd1", "surface-tint": "#ffb4aa", "on-secondary-fixed": "#3b0900", "on-background": "#e5e2e1", "primary-fixed": "#ffdad5", "on-error-container": "#ffdad6", "on-tertiary-container": "#fff7f6", "error": "#ffb4ab", "secondary-container": "#d73b00", "primary-fixed-dim": "#ffb4aa", "on-tertiary-fixed": "#410005", "surface-container-low": "#1c1b1b", "tertiary-container": "#e40b2b", "surface-container-high": "#2a2a2a", "outline-variant": "#5e3f3b", "secondary": "#ffb5a0", "on-primary-container": "#fff7f6" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "margin": "2rem", "space-md": "1rem", "gutter-mobile": "0.75rem", "space-xs": "0.25rem", "space-lg": "1.5rem", "margin-mobile": "1rem", "space-sm": "0.5rem", "space-xl": "2.5rem", "gutter": "1.5rem" }, "fontFamily": { "label-md": ["Geist"], "headline-sm": ["Geist"], "headline-xl": ["Geist"], "headline-md": ["Geist"], "headline-xl-mobile": ["Geist"], "body-md": ["Inter"], "headline-lg": ["Geist"], "label-sm": ["Geist"], "body-sm": ["Inter"], "body-lg": ["Inter"], "headline-lg-mobile": ["Geist"] }, "fontSize": { "label-md": ["0.8125rem", { "lineHeight": "1rem", "letterSpacing": "0.02em", "fontWeight": "500" }], "headline-sm": ["1.125rem", { "lineHeight": "1.625rem", "letterSpacing": "-0.01em", "fontWeight": "500" }], "headline-xl": ["3rem", { "lineHeight": "3.5rem", "letterSpacing": "-0.03em", "fontWeight": "600" }], "headline-md": ["1.5rem", { "lineHeight": "2rem", "letterSpacing": "-0.015em", "fontWeight": "500" }], "headline-xl-mobile": ["2rem", { "lineHeight": "2.5rem", "letterSpacing": "-0.02em", "fontWeight": "600" }], "body-md": ["0.875rem", { "lineHeight": "1.4rem", "letterSpacing": "0em", "fontWeight": "400" }], "headline-lg": ["2.25rem", { "lineHeight": "2.75rem", "letterSpacing": "-0.025em", "fontWeight": "600" }], "label-sm": ["0.6875rem", { "lineHeight": "0.875rem", "letterSpacing": "0.05em", "fontWeight": "600" }], "body-sm": ["0.75rem", { "lineHeight": "1.2rem", "letterSpacing": "0.01em", "fontWeight": "400" }], "body-lg": ["1rem", { "lineHeight": "1.6rem", "letterSpacing": "-0.005em", "fontWeight": "400" }], "headline-lg-mobile": ["1.625rem", { "lineHeight": "2.125rem", "letterSpacing": "-0.02em", "fontWeight": "600" }] } } } };</script></head><body class="bg-background font-body-md text-body-md text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-container min-h-screen"><aside class="fixed left-0 top-0 h-full w-72 bg-surface-container-lowest z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.5)]"><div class="flex flex-col flex-1 overflow-y-auto"><div class="h-16 px-space-lg flex items-center gap-space-sm bg-surface-container-lowest"><div class="w-8 h-8 rounded-lg bg-primary-container flex items-center justify-center shadow-[0_0_16px_rgba(229,9,20,0.45)]"><span class="material-symbols-outlined text-on-primary-container text-[20px]">videocam</span></div><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-on-surface font-semibold tracking-tight">FX-2026</span><span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Studio Intelligence</span></div></div><div class="px-space-md py-space-sm"><div class="px-space-sm py-space-xs font-label-sm text-label-sm uppercase tracking-wider text-outline">Features</div><nav class="mt-space-xs flex flex-col gap-space-xs" data-active-classes="bg-primary-container text-on-primary-container shadow-[0_0_20px_rgba(229,9,20,0.35)]"><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all duration-200 group" data-path="screenplay-narrative" href="#"><span class="material-symbols-outlined text-[20px] transition-transform group-hover:scale-110">auto_stories</span><span class="font-body-md text-body-md font-medium">Screenplay &amp; Narrative</span></a><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all duration-200 group" data-path="storyboard-breakdown" href="#"><span class="material-symbols-outlined text-[20px] transition-transform group-hover:scale-110">view_kanban</span><span class="font-body-md text-body-md font-medium">Storyboard Breakdown</span></a><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all duration-200 group" data-path="video-director" href="#"><span class="material-symbols-outlined text-[20px] transition-transform group-hover:scale-110">movie_filter</span><span class="font-body-md text-body-md font-medium">Video Director</span></a><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all duration-200 group" data-path="3d-spatial-assets" href="#"><span class="material-symbols-outlined text-[20px] transition-transform group-hover:scale-110">view_in_ar</span><span class="font-body-md text-body-md font-medium">3D Spatial Assets</span></a><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all duration-200 group" data-path="concept-studio" href="#"><span class="material-symbols-outlined text-[20px] transition-transform group-hover:scale-110">palette</span><span class="font-body-md text-body-md font-medium">Concept Studio</span></a></nav></div><div class="px-space-md py-space-sm"><div class="px-space-sm py-space-xs font-label-sm text-label-sm uppercase tracking-wider text-outline">Intelligence</div><nav class="mt-space-xs flex flex-col gap-space-xs" data-active-classes="bg-primary-container text-on-primary-container shadow-[0_0_20px_rgba(229,9,20,0.35)]"><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all duration-200 group" data-path="neural-models" href="#"><span class="material-symbols-outlined text-[20px] transition-transform group-hover:scale-110">psychology</span><span class="font-body-md text-body-md font-medium">Neural Models</span></a><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all duration-200 group" data-path="prompt-vault" href="#"><span class="material-symbols-outlined text-[20px] transition-transform group-hover:scale-110">terminal</span><span class="font-body-md text-body-md font-medium">Prompt Vault</span></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all duration-200 group" data-path="render-queue" href="#"><div class="flex items-center gap-space-md"><span class="material-symbols-outlined text-[20px] transition-transform group-hover:scale-110">motion_blur</span><span class="font-body-md text-body-md font-medium">Render Queue</span></div><span class="w-2 h-2 rounded-full bg-secondary-container animate-pulse shadow-[0_0_8px_rgba(215,59,0,0.8)]"></span></a><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all duration-200 group" data-path="metrics-telemetry" href="#"><span class="material-symbols-outlined text-[20px] transition-transform group-hover:scale-110">speed</span><span class="font-body-md text-body-md font-medium">Metrics &amp; Telemetry</span></a><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all duration-200 group" data-path="c2pa-governance-vault" href="#"><span class="material-symbols-outlined text-[20px] transition-transform group-hover:scale-110">verified_user</span><span class="font-body-md text-body-md font-medium">C2PA Governance Vault</span></a></nav></div></div><div class="p-space-md bg-surface-container-lowest"><div class="p-space-sm rounded-lg bg-surface-container-low flex flex-col gap-space-xs"><div class="flex items-center justify-between"><span class="font-label-sm text-label-sm text-outline uppercase">VRAM Consumption</span><span class="font-label-sm text-label-sm text-primary font-mono">38.4 / 48 GB</span></div><div class="w-full h-1 bg-surface-container rounded-full overflow-hidden"><div class="h-full bg-primary-container rounded-full w-[80%] shadow-[0_0_8px_rgba(229,9,20,0.6)]"></div></div></div></div></aside><div class="pl-72"><header class="fixed top-0 left-72 right-0 h-16 bg-surface-container-lowest/80 backdrop-blur-xl z-40 flex items-center justify-between px-space-lg shadow-[0_1px_8px_rgba(0,0,0,0.3)]"><div class="flex items-center gap-space-lg"><div class="flex items-center gap-space-sm px-space-md py-space-xs bg-surface-container-low rounded-lg text-on-surface-variant cursor-pointer hover:bg-surface-container-high hover:text-on-surface transition-colors w-72 justify-between"><div class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-[18px] text-outline">search</span><span class="font-body-sm text-body-sm">Omni-Search workflows...</span></div><kbd class="px-space-xs py-0.5 rounded bg-surface-container font-mono font-label-sm text-label-sm text-outline">⌘K</kbd></div><div class="hidden xl:flex items-center gap-space-sm px-space-md py-space-xs rounded-full bg-surface-container-low"><span class="w-2 h-2 rounded-full bg-primary-container animate-ping"></span><span class="material-symbols-outlined text-[16px] text-primary">memory</span><span class="font-label-md text-label-md font-mono text-on-surface">RTX-6000 Ada</span><span class="text-outline font-label-md text-label-md">•</span><span class="font-label-md text-label-md text-secondary">Synced 99.8%</span></div></div><div class="flex items-center gap-space-md"><div class="flex items-center bg-surface-container-low rounded-lg p-0.5"><button class="px-space-sm py-0.5 rounded font-label-sm text-label-sm font-semibold bg-surface-container-highest text-on-surface shadow-sm">EN</button><button class="px-space-sm py-0.5 rounded font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface transition-colors font-semibold">العربية</button></div><button class="relative p-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-1 right-1 w-2 h-2 rounded-full bg-tertiary-container shadow-[0_0_6px_rgba(228,11,43,0.9)]"></span></button><div class="h-4 w-px bg-surface-container-high"></div><div class="flex items-center gap-space-sm"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center ring-2 ring-primary/20"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="relative pt-16 min-h-screen bg-background w-full px-space-lg"><div class="flex flex-col w-full">
+<!-- Subtle Cinematic Atmospheric Background Accent -->
+<div class="pointer-events-none fixed right-0 top-16 w-3/4 h-[550px] bg-gradient-to-b from-primary-container/10 via-secondary-container/5 to-transparent blur-3xl -z-10"></div>
+<!-- Header & Breadcrumbs Command Strip -->
+<div class="w-full pb-space-lg flex flex-col xl:flex-row xl:items-center justify-between gap-space-md">
+<div class="flex flex-col gap-1 min-w-0">
+<div class="flex flex-wrap items-center gap-space-xs font-label-sm text-label-sm uppercase tracking-wider text-outline">
+<span class="hover:text-on-surface cursor-pointer transition-colors">ATLAS CORE</span>
+<span class="text-outline-variant">/</span>
+<span class="hover:text-on-surface cursor-pointer transition-colors">APP</span>
+<span class="text-outline-variant">/</span>
+<span class="text-secondary font-medium">RENDER</span>
+<span class="text-outline-variant">/</span>
+<span class="text-primary font-mono bg-surface-container-high px-space-xs py-0.5 rounded">PRORES-4444-XQ-DISPATCH V4.9</span>
+</div>
+<div class="flex flex-wrap items-center gap-space-sm pt-1">
+<div class="flex items-center gap-2">
+<span class="inline-block w-2.5 h-2.5 rounded-full bg-primary-container shadow-[0_0_12px_rgba(229,9,20,0.85)] animate-pulse"></span>
+<h1 class="font-headline-md text-headline-md text-on-surface font-semibold tracking-tight">قائمة الرندر وعناقيد التصدير السينمائي الماستر</h1>
+</div>
+<div class="hidden sm:flex items-center gap-space-xs bg-surface-container-high/60 px-space-sm py-1 rounded-full text-outline font-label-sm text-label-sm font-mono">
+<span class="text-secondary">CLUSTER: 8 NODES ALLOCATED</span>
+<span>•</span>
+<span class="text-primary flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">verified_user</span>
+            C2PA SEALED
+          </span>
+</div>
+</div>
+</div>
+<!-- Global Quick Actions -->
+<div class="flex flex-wrap items-center gap-space-sm shrink-0">
+<button class="px-space-md py-space-sm rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md flex items-center gap-space-xs transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[18px] text-outline">pause_circle</span>
+<span>Pause All Jobs</span>
+</button>
+<button class="px-space-md py-space-sm rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md flex items-center gap-space-xs transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[18px] text-outline">cleaning_services</span>
+<span>Purge Completed</span>
+</button>
+<button class="px-space-md py-space-sm rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md flex items-center gap-space-xs transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[18px] text-secondary">cloud_upload</span>
+<span>Frame.io / Aspera</span>
+</button>
+<button class="px-space-lg py-space-sm rounded-lg bg-primary-container hover:bg-primary-container/90 text-on-primary-container font-label-md text-label-md font-semibold flex items-center gap-space-xs shadow-[0_0_24px_rgba(229,9,20,0.45)] transition-all transform active:scale-95">
+<span class="material-symbols-outlined text-[18px]">add_task</span>
+<span>+ Dispatch Priority Job</span>
+</button>
+</div>
+</div>
+<!-- Hero Active Master Render Panel: Scene 43 -->
+<section class="w-full rounded-xl bg-surface-container-lowest p-space-lg shadow-xl relative overflow-hidden mb-space-lg">
+<!-- Ambient glowing edge line -->
+<div class="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-primary-container to-secondary-container opacity-80"></div>
+<div class="flex flex-col lg:flex-row lg:items-start justify-between gap-space-lg">
+<!-- Left side: Job specifications -->
+<div class="flex flex-col gap-space-sm max-w-2xl min-w-0">
+<div class="flex flex-wrap items-center gap-space-sm">
+<span class="px-space-xs py-0.5 rounded bg-primary-container/20 text-primary font-mono font-label-sm text-label-sm font-semibold">
+            JOB #RQ-430194
+          </span>
+<span class="text-outline font-label-sm text-label-sm font-mono">SCENE 43 MASTER CINEMATIC COMPOSITE</span>
+<span class="px-space-xs py-0.5 rounded bg-primary-container/20 text-primary font-label-sm text-label-sm flex items-center gap-1 font-semibold"><span class="material-symbols-outlined text-[14px]">verified</span> COMPLETED &amp; SEALED</span>
+</div>
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface font-semibold tracking-tight">
+            INT. SYNCHROTRON CORE — DIVERGENCE CHAMBER
+          </h2>
+<p class="font-body-md text-body-md text-on-surface-variant pt-1">
+            Apple ProRes 4444 XQ (12-bit DCI 4K Scope 4096×1714) + Alpha Channel (Uncompressed)
+          </p>
+<p class="font-body-sm text-body-sm text-outline font-mono">
+            Sub-stream: Secondary 16-bit Half-Float ACEScg OpenEXR Multi-Channel (Beauty, Depth, Optical Flow, Cryptomatte)
+          </p>
+</div>
+<!-- C2PA Enclave Micro Strip -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-sm pt-space-xs font-mono text-body-sm">
+<div class="bg-surface-container-low px-space-sm py-space-xs rounded flex items-center justify-between">
+<span class="text-outline">Hardware Enclave:</span>
+<span class="text-on-surface flex items-center gap-1 font-semibold">
+<span class="material-symbols-outlined text-[15px] text-secondary">memory</span>
+              AMD SEV-SNP #04
+            </span>
+</div>
+<div class="bg-surface-container-low px-space-sm py-space-xs rounded flex items-center justify-between">
+<span class="text-outline">Cryptographic Root:</span>
+<span class="text-primary font-mono truncate max-w-[150px]">0x3e8b8c2...99c</span>
+</div>
+<div class="bg-surface-container-low px-space-sm py-space-xs rounded flex items-center justify-between">
+<span class="text-outline">C2PA 2.1 Manifest:</span>
+<span class="text-secondary flex items-center gap-1 font-semibold">
+<span class="material-symbols-outlined text-[15px] text-secondary">verified</span>
+              Signed / Embedded
+            </span>
+</div>
+<div class="bg-surface-container-low px-space-sm py-space-xs rounded flex items-center justify-between">
+<span class="text-outline">Phase Watermark:</span>
+<span class="text-on-surface font-semibold">Spread-Spectrum 100%</span>
+</div>
+</div>
+</div>
+<!-- Right side: Throughput telemetry cards -->
+<div class="flex flex-col sm:flex-row lg:flex-col gap-space-sm shrink-0 font-mono"><div class="bg-surface-container-low p-space-md rounded-lg flex items-center justify-between gap-space-lg min-w-[240px]"><div><div class="font-label-sm text-label-sm text-outline uppercase">Master Status</div><div class="font-headline-sm text-headline-sm text-primary font-bold flex items-center gap-1"><span class="material-symbols-outlined text-[18px]">verified</span> 100% SEALED</div></div><span class="material-symbols-outlined text-primary text-[28px]">check_circle</span></div><div class="bg-surface-container-low p-space-md rounded-lg flex items-center justify-between gap-space-lg min-w-[240px]"><div><div class="font-label-sm text-label-sm text-outline uppercase">Frames Rendered</div><div class="font-headline-sm text-headline-sm text-on-surface font-bold">2,410 / 2,410</div></div><span class="material-symbols-outlined text-secondary text-[28px]">filter_frames</span></div><div class="bg-surface-container-low p-space-md rounded-lg flex items-center justify-between gap-space-lg min-w-[240px]"><div><div class="font-label-sm text-label-sm text-outline uppercase">Storage Footprint</div><div class="font-headline-sm text-headline-sm text-on-surface font-bold">19.4 / 19.4 GB</div></div><span class="material-symbols-outlined text-outline text-[28px]">hard_drive</span></div></div>
+</div>
+<!-- Active Cluster Render Progress Section -->
+<div class="mt-space-lg pt-space-md bg-surface-container-low/50 rounded-lg p-space-md"><div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-space-xs font-mono"><div class="flex items-center gap-space-xs"><span class="text-primary font-bold flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">task_alt</span> PASS 3/3 COMPLETE</span><span class="text-outline">•</span><span class="text-on-surface font-label-md text-label-md">C2PA HARDWARE ENCLAVE SIGNING VERIFIED &amp; PACKAGED</span></div><div class="flex items-center gap-space-md text-body-sm"><span class="text-outline">Total Time: <strong class="text-on-surface">00:04:12</strong></span><span class="text-outline">ETA: <strong class="text-primary font-semibold">00:00:00 (Ready)</strong></span><span class="font-headline-sm text-headline-sm text-primary font-bold">100%</span></div></div><div class="w-full h-3 bg-surface-container-highest rounded-full overflow-hidden p-0.5 relative"><div class="h-full bg-gradient-to-r from-secondary-container via-primary-container to-primary rounded-full relative transition-all duration-300 shadow-[0_0_12px_rgba(229,9,20,0.7)] w-full"></div></div></div>
+</section>
+<!-- Live Frame Tile Stream / Multi-Cam Rendering Breakdown -->
+<section class="w-full rounded-xl bg-surface-container-lowest p-space-lg shadow-xl relative overflow-hidden mb-space-lg ring-1 ring-primary/30"><div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-secondary-container via-primary-container to-primary"></div><div class="flex flex-col xl:flex-row xl:items-center justify-between gap-space-md pb-space-md border-b border-surface-container-low"><div class="flex items-center gap-space-sm"><div class="w-10 h-10 rounded-lg bg-primary-container/20 flex items-center justify-center text-primary shadow-[0_0_12px_rgba(229,9,20,0.4)]"><span class="material-symbols-outlined text-[24px]">inventory_2</span></div><div><div class="flex items-center gap-2"><h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold tracking-tight">Scene 43 Master Export Package Ready (حزمة التصدير السينمائي الماستر جاهزة للتحميل)</h3><span class="px-space-xs py-0.5 rounded bg-primary-container text-on-primary-container font-mono font-label-sm text-label-sm font-bold flex items-center gap-1"><span class="material-symbols-outlined text-[13px]">verified</span> C2PA SEALED</span></div><p class="font-body-sm text-body-sm text-outline">Cryptographically verified ProRes 4444 XQ master, AMD SEV-SNP enclave certificate, and Dolby Atmos 7.1.4 spatial audio stems.</p></div></div><div class="flex flex-wrap items-center gap-space-xs"><button class="px-space-md py-space-sm rounded-lg bg-primary-container hover:bg-primary-container/90 text-on-primary-container font-label-md text-label-md font-semibold flex items-center gap-2 shadow-[0_0_24px_rgba(229,9,20,0.45)] transition-all active:scale-95"><span class="material-symbols-outlined text-[18px]">download_for_offline</span><span>Download Master Package (.ZIP / 19.42 GB)</span></button><button class="px-space-md py-space-sm rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md flex items-center gap-1.5 transition-colors shadow-sm font-mono"><span class="material-symbols-outlined text-[18px] text-secondary">bolt</span><span>Aspera Fast Transfer</span></button><button class="px-space-md py-space-sm rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md flex items-center gap-1.5 transition-colors shadow-sm"><span class="material-symbols-outlined text-[18px] text-primary">cloud_done</span><span>Frame.io Published</span></button></div></div><div class="grid grid-cols-1 lg:grid-cols-3 gap-space-md pt-space-md font-mono"><div class="bg-surface-container-low p-space-md rounded-lg flex flex-col justify-between gap-space-sm border border-surface-container-low hover:bg-surface-container/60 transition-colors"><div class="flex flex-col gap-1"><div class="flex items-center justify-between"><span class="px-space-xs py-0.5 rounded bg-primary-container/20 text-primary font-label-sm text-label-sm font-bold">PRORES 4444 XQ</span><span class="text-on-surface font-semibold text-label-md">19.4 GB</span></div><div class="font-semibold text-on-surface text-body-sm pt-1 truncate" title="Scene_43_Synchrotron_Core_ProRes4444XQ_DCI4K_ACEScg.mov">Scene_43_Synchrotron_Core_ProRes4444XQ_DCI4K_ACEScg.mov</div><div class="text-outline text-body-sm font-sans">12-bit DCI 4K (4096×1714) @ 24.00fps • Lossless Master Alpha • ACEScg</div></div><button class="mt-2 w-full py-1.5 px-space-sm rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-label-sm text-label-sm flex items-center justify-center gap-1.5 transition-colors"><span class="material-symbols-outlined text-[16px] text-primary">download</span><span>Download .MOV Only</span></button></div><div class="bg-surface-container-low p-space-md rounded-lg flex flex-col justify-between gap-space-sm border border-surface-container-low hover:bg-surface-container/60 transition-colors"><div class="flex flex-col gap-1"><div class="flex items-center justify-between"><span class="px-space-xs py-0.5 rounded bg-secondary-container/20 text-secondary font-label-sm text-label-sm font-bold">C2PA MANIFEST 2.1</span><span class="text-secondary font-semibold text-label-md">14.2 MB</span></div><div class="font-semibold text-on-surface text-body-sm pt-1 truncate" title="Scene_43_C2PA_Manifest_Bundle.c2pa">Scene_43_C2PA_Manifest_Bundle.c2pa</div><div class="text-outline text-body-sm font-sans">AMD SEV-SNP Enclave • Merkle Root 0x3e8b...99c • WGA #2026-NARR-881 &amp; SAG-AFTRA Tokens</div></div><button class="mt-2 w-full py-1.5 px-space-sm rounded bg-surface-container hover:bg-surface-container-high text-secondary font-label-sm text-label-sm flex items-center justify-center gap-1.5 transition-colors"><span class="material-symbols-outlined text-[16px]">verified_user</span><span>Download .C2PA Manifest Only</span></button></div><div class="bg-surface-container-low p-space-md rounded-lg flex flex-col justify-between gap-space-sm border border-surface-container-low hover:bg-surface-container/60 transition-colors"><div class="flex flex-col gap-1"><div class="flex items-center justify-between"><span class="px-space-xs py-0.5 rounded bg-surface-container text-on-surface font-label-sm text-label-sm font-bold">DOLBY ATMOS 7.1.4</span><span class="text-on-surface font-semibold text-label-md">4.1 GB</span></div><div class="font-semibold text-on-surface text-body-sm pt-1 truncate" title="Scene_43_Dolby_Atmos_7.1.4_ADM_BWF.wav">Scene_43_Dolby_Atmos_7.1.4_ADM_BWF.wav</div><div class="text-outline text-body-sm font-sans">Broadcast WAV (ADM BWF) • 24-bit / 48kHz • 12 Bed Channels Synchronized</div></div><button class="mt-2 w-full py-1.5 px-space-sm rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-label-sm text-label-sm flex items-center justify-center gap-1.5 transition-colors"><span class="material-symbols-outlined text-[16px] text-secondary">download</span><span>Download .WAV Audio Only</span></button></div></div></section><section class="w-full mb-space-lg">
+<div class="flex items-center justify-between mb-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[20px]">view_timeline</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold tracking-tight">
+          Scene 43 Live Multi-Camera Node Stream (لقطات المشهد 43 المتزامنة)
+        </h3>
+</div>
+<span class="font-label-sm text-label-sm text-outline font-mono">4 ACTIVE PIPELINES</span>
+</div>
+<!-- Grid of 4 Shots -->
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-space-md">
+<!-- Shot 01: Completed -->
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden flex flex-col shadow-md group hover:bg-surface-container-low transition-colors">
+<div class="relative w-full h-44 bg-surface-container overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="High budget cinematic sci-fi movie frame from a synchrotron core, kinetic gantry high-speed camera tracking, glowing red particle beam, obsidian metallic architecture, 12-bit anamorphic film lens flare, hyper-detailed photorealistic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDYstm0Sgh0yFQS_xuzOm4ZwAV6gofGrgnsIMjrRzkmOQkuXYkQ5aZX9iL5fad4jD3ZayQa5bmZrNeDjt2NzexgBzmXndH1MIODOcV_vQLcF5U8B-VraB8WfMBd52tjBgwCOHIdbiTgCkLPz0L_5RmiPuB5JSsLfkqSCWmDFhhOMeeyzIUe_kpz_LTmafdXLx_9P2LkslPO-197SoaxCV6UfrDCp1q7kGw__3iYt91sgnTag_9UfDk"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-transparent to-transparent"></div>
+<div class="absolute top-2 left-2 px-space-xs py-0.5 rounded bg-surface-container-lowest/80 backdrop-blur font-mono text-label-sm text-on-surface">
+            CAM A • GANTRY RUN
+          </div>
+<div class="absolute top-2 right-2 px-space-xs py-0.5 rounded-full bg-surface-container-highest text-on-surface font-label-sm text-label-sm flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-primary text-[14px]">check_circle</span>
+<span>100%</span>
+</div>
+<div class="absolute bottom-2 left-2 right-2 flex justify-between items-center text-body-sm font-mono text-on-surface-variant">
+<span>4.3s (103 frames)</span>
+<span class="text-primary font-semibold">ProRes 4444 XQ</span>
+</div>
+</div>
+<div class="p-space-sm flex flex-col gap-1">
+<div class="flex items-center justify-between font-label-sm text-label-sm">
+<span class="text-on-surface font-semibold truncate">SHOT 01 — Kinetic Gantry Run</span>
+<span class="text-secondary font-mono">VERIFIED</span>
+</div>
+<div class="w-full bg-surface-container h-1 rounded-full overflow-hidden">
+<div class="bg-primary-container h-full w-full"></div>
+</div>
+</div>
+</div>
+<!-- Shot 02: Completed -->
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden flex flex-col shadow-md group hover:bg-surface-container-low transition-colors">
+<div class="relative w-full h-44 bg-surface-container overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Dramatic cinematic close up shot of a scientist Dr Thorne in a dark futuristic containment suit, crimson red laser reflections on glass helmet, shallow depth of field, anamorphic bokeh, hyper-detailed 8k film still" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2JyQwcNikqt9Kyie2buAdfimbAb01yfhw16HlNbFnLSoaW7_Ueo0eOlmhnmF5eWf78-cw1vA6umPv_-TvxnClQ31Iiesljqg4SQDDnr9FT3WtPk6yA8M-scBQHbafUu5i6e6iRLtRDyHBVD2STd66lHaoJgMsocNB7kPpTzmyqq4aZ0340Q5b2tDWCyPMOo6g_bUKoE7jkeB4KCo9Lg8itFcaNv29JdMnfr5V0gq0joyPkV9IwbU"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-transparent to-transparent"></div>
+<div class="absolute top-2 left-2 px-space-xs py-0.5 rounded bg-surface-container-lowest/80 backdrop-blur font-mono text-label-sm text-on-surface">
+            CAM B • THORNE REVEAL
+          </div>
+<div class="absolute top-2 right-2 px-space-xs py-0.5 rounded-full bg-surface-container-highest text-on-surface font-label-sm text-label-sm flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-primary text-[14px]">check_circle</span>
+<span>100%</span>
+</div>
+<div class="absolute bottom-2 left-2 right-2 flex justify-between items-center text-body-sm font-mono text-on-surface-variant">
+<span>3.8s (91 frames)</span>
+<span class="text-primary font-semibold">ProRes 4444 XQ</span>
+</div>
+</div>
+<div class="p-space-sm flex flex-col gap-1">
+<div class="flex items-center justify-between font-label-sm text-label-sm">
+<span class="text-on-surface font-semibold truncate">SHOT 02 — Dr. Thorne Reveal</span>
+<span class="text-secondary font-mono">VERIFIED</span>
+</div>
+<div class="w-full bg-surface-container h-1 rounded-full overflow-hidden">
+<div class="bg-primary-container h-full w-full"></div>
+</div>
+</div>
+</div>
+<!-- Shot 03: Rendering 84% -->
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden flex flex-col shadow-md group hover:bg-surface-container-low transition-colors"><div class="relative w-full h-44 bg-surface-container overflow-hidden"><img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Extreme macro cinematographic shot inside a quantum plasma chamber, shimmering radiant crimson atomic filament reactions, optical dispersion, micro details, dark obsidian background, 35mm panavision aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDToQ5SFWPXMfituTVxXUtaQtXK0kDW77gdGOniMXS1-FPPGB53I0DqMBvCROWyCXQPY_vI8ICHpl-_XNyl3nBRP11ObQCsXB2FWS9YVbEuZWp12QCqLlx5X8Jtrgln9uNaR9hZs0aaGwfH0l9yf25zMIN48n6nNva3VLziwDb3_WasN0dbIo-DiPvgTHUpATg3jDS3g7C6yM4nXqUQbirWwdP6t_DYkq47DB2W9txgKRTDo7SqSJw"/><div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-transparent to-transparent"></div><div class="absolute top-2 left-2 px-space-xs py-0.5 rounded bg-surface-container-lowest/80 backdrop-blur font-mono text-label-sm text-on-surface">CAM C • CORE DECAY PROBE</div><div class="absolute top-2 right-2 px-space-xs py-0.5 rounded-full bg-surface-container-highest text-on-surface font-label-sm text-label-sm flex items-center gap-1 shadow-sm"><span class="material-symbols-outlined text-primary text-[14px]">check_circle</span><span>100%</span></div><div class="absolute bottom-2 left-2 right-2 flex justify-between items-center text-body-sm font-mono text-on-surface-variant"><span>2.6s (62 frames)</span><span class="text-primary font-semibold">ProRes 4444 XQ</span></div></div><div class="p-space-sm flex flex-col gap-1"><div class="flex items-center justify-between font-label-sm text-label-sm"><span class="text-on-surface font-semibold truncate">SHOT 03 — Core Decay Probe</span><span class="text-secondary font-mono">VERIFIED</span></div><div class="w-full bg-surface-container h-1 rounded-full overflow-hidden"><div class="bg-primary-container h-full w-full"></div></div></div></div>
+<!-- Shot 04: Queued -->
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden flex flex-col shadow-md group hover:bg-surface-container-low transition-colors"><div class="relative w-full h-44 bg-surface-container overflow-hidden"><img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Futuristic cybernetic hologram projection of synthetic human intelligence in a dark high tech laboratory, luminous neon red and warm amber volumetric rays, depth haze, cinematic studio lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCtaeBWYxHoWtYG0PQaKIWjSqpAHTtphUSirfdYEjiOceInE66XqjKOYTb_z8TLAVz6O0o6OKsc7COb9QnOgg0XWt57mRih9sPS_-Bvf9GvkS2JkxER73jt5UM7yx27bNQHatnAR7EDhnYnJhHEDtNNaib_7VvxD5X8Z2R_sSLbkPU09eNlzyFcI_5004iZ3FgCOJzUgrD4Bz3in-naUCtNjrycI5bH77-jGDJhBJtbbBWiKfhRq7A"/><div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-transparent to-transparent"></div><div class="absolute top-2 left-2 px-space-xs py-0.5 rounded bg-surface-container-lowest/80 backdrop-blur font-mono text-label-sm text-on-surface">CAM D • SYNTHETICA HOLOGRAM</div><div class="absolute top-2 right-2 px-space-xs py-0.5 rounded-full bg-surface-container-highest text-on-surface font-label-sm text-label-sm flex items-center gap-1 shadow-sm"><span class="material-symbols-outlined text-primary text-[14px]">check_circle</span><span>100%</span></div><div class="absolute bottom-2 left-2 right-2 flex justify-between items-center text-body-sm font-mono text-on-surface-variant"><span>5.8s (139 frames)</span><span class="text-primary font-semibold">ProRes 4444 XQ</span></div></div><div class="p-space-sm flex flex-col gap-1"><div class="flex items-center justify-between font-label-sm text-label-sm"><span class="text-on-surface font-semibold truncate">SHOT 04 — Synthetica Hologram</span><span class="text-secondary font-mono">VERIFIED</span></div><div class="w-full bg-surface-container h-1 rounded-full overflow-hidden"><div class="bg-primary-container h-full w-full"></div></div></div></div>
+</div>
+</section>
+<!-- Comprehensive Master Job Queue Table -->
+<section class="w-full mb-space-lg">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm mb-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[20px]">table_rows</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold tracking-tight">
+          Cluster Export Queue (عناقيد المهام والتصدير)
+        </h3>
+</div>
+<div class="flex items-center gap-space-xs">
+<button class="px-space-sm py-1 rounded bg-surface-container text-on-surface font-label-sm text-label-sm hover:bg-surface-container-high transition-colors">
+          All (4)
+        </button>
+<button class="px-space-sm py-1 rounded bg-surface-container-low text-outline font-label-sm text-label-sm hover:bg-surface-container-high hover:text-on-surface transition-colors">
+          Active (2)
+        </button>
+<button class="px-space-sm py-1 rounded bg-surface-container-low text-outline font-label-sm text-label-sm hover:bg-surface-container-high hover:text-on-surface transition-colors">
+          Sealed Masters (2)
+        </button>
+</div>
+</div>
+<!-- Job Table Card -->
+<div class="w-full bg-surface-container-lowest rounded-xl overflow-x-auto shadow-xl">
+<table class="w-full text-left border-collapse min-w-[980px]">
+<thead>
+<tr class="bg-surface-container-low text-outline font-label-sm text-label-sm uppercase tracking-wider font-mono">
+<th class="py-space-sm px-space-md">Job ID &amp; Target</th>
+<th class="py-space-sm px-space-md">Source Module</th>
+<th class="py-space-sm px-space-md">Format &amp; Color Space</th>
+<th class="py-space-sm px-space-md">Cluster Nodes</th>
+<th class="py-space-sm px-space-md">Status &amp; Progress</th>
+<th class="py-space-sm px-space-md">C2PA Manifest</th>
+<th class="py-space-sm px-space-md text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container-low font-body-sm text-body-sm">
+<!-- Row 1: Scene 43 Master Stitch -->
+<tr class="bg-surface-container-lowest hover:bg-surface-container/60 transition-colors"><td class="py-space-md px-space-md font-mono"><div class="font-semibold text-on-surface flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-primary"></span><span>#RQ-430194</span></div><div class="text-outline text-body-sm">SCENE 43 MASTER STITCH</div></td><td class="py-space-md px-space-md"><span class="px-space-xs py-0.5 rounded bg-surface-container font-mono text-label-sm text-on-surface">Video Director</span></td><td class="py-space-md px-space-md font-mono"><div class="text-on-surface font-semibold">ProRes 4444 XQ</div><div class="text-outline text-body-sm">4096×1714 @ 24.00fps • ACEScc</div></td><td class="py-space-md px-space-md font-mono"><span class="text-outline">4 Nodes (01-04)</span><div class="text-outline text-body-sm">Total 19.4 GB</div></td><td class="py-space-md px-space-md"><span class="inline-flex items-center gap-1 text-primary font-mono text-label-sm font-semibold"><span class="material-symbols-outlined text-[15px]">check_circle</span> COMPLETED 100%</span></td><td class="py-space-md px-space-md font-mono"><span class="inline-flex items-center gap-1 text-primary text-label-sm bg-primary-container/15 px-2 py-0.5 rounded"><span class="material-symbols-outlined text-[13px]">verified</span> Sealed &amp; Anchored</span></td><td class="py-space-md px-space-md text-right"><div class="flex items-center justify-end gap-1"><button class="p-1 rounded hover:bg-surface-container text-on-surface hover:text-primary transition-colors flex items-center gap-1 font-mono text-label-sm px-2 bg-surface-container-low" title="Download .mov"><span class="material-symbols-outlined text-[16px]">download</span><span>.MOV</span></button><button class="p-1 rounded hover:bg-surface-container text-secondary hover:text-on-surface transition-colors flex items-center gap-1 font-mono text-label-sm px-2 bg-surface-container-low" title="Download C2PA Manifest"><span class="material-symbols-outlined text-[16px]">verified_user</span><span>.C2PA</span></button></div></td></tr>
+<!-- Row 2: Scene 43 ACEScg OpenEXR -->
+<tr class="bg-surface-container-lowest hover:bg-surface-container/60 transition-colors">
+<td class="py-space-md px-space-md font-mono">
+<div class="font-semibold text-on-surface flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-outline-variant"></span>
+<span>#RQ-430195</span>
+</div>
+<div class="text-outline text-body-sm">SCENE 43 OPENEXR MULTI-PASS</div>
+</td>
+<td class="py-space-md px-space-md">
+<span class="px-space-xs py-0.5 rounded bg-surface-container font-mono text-label-sm text-on-surface">
+                Spatial 3D Engine
+              </span>
+</td>
+<td class="py-space-md px-space-md font-mono">
+<div class="text-on-surface font-semibold">OpenEXR 16-bit (DWAA)</div>
+<div class="text-outline text-body-sm">ACEScg • 14 AOVs Layered</div>
+</td>
+<td class="py-space-md px-space-md font-mono">
+<span class="text-on-surface">4 Nodes (05-08)</span>
+<div class="text-outline text-body-sm">Waiting handoff</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-1.5 text-outline font-mono text-label-sm">
+<span class="material-symbols-outlined text-[16px]">hourglass_empty</span>
+<span>Queued (Pass 1 Ready)</span>
+</div>
+</td>
+<td class="py-space-md px-space-md font-mono">
+<span class="inline-flex items-center gap-1 text-outline text-label-sm bg-surface-container px-2 py-0.5 rounded">
+<span class="material-symbols-outlined text-[13px]">shield</span>
+                Pre-Allocated
+              </span>
+</td>
+<td class="py-space-md px-space-md text-right">
+<div class="flex items-center justify-end gap-1">
+<button class="p-1 rounded hover:bg-surface-container text-outline hover:text-primary transition-colors" title="Prioritize">
+<span class="material-symbols-outlined text-[18px]">keyboard_double_arrow_up</span>
+</button>
+<button class="p-1 rounded hover:bg-surface-container text-outline hover:text-on-surface transition-colors" title="Cancel Job">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 3: Scene 42 Monolith Approach Master -->
+<tr class="bg-surface-container-lowest hover:bg-surface-container/60 transition-colors">
+<td class="py-space-md px-space-md font-mono">
+<div class="font-semibold text-on-surface flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span>#RQ-429812</span>
+</div>
+<div class="text-outline text-body-sm">SCENE 42 MONOLITH APPROACH</div>
+</td>
+<td class="py-space-md px-space-md">
+<span class="px-space-xs py-0.5 rounded bg-surface-container font-mono text-label-sm text-on-surface">
+                Concept Studio
+              </span>
+</td>
+<td class="py-space-md px-space-md font-mono">
+<div class="text-on-surface font-semibold">ProRes 422 HQ</div>
+<div class="text-outline text-body-sm">3840×2160 @ 23.98fps • Rec.709</div>
+</td>
+<td class="py-space-md px-space-md font-mono">
+<span class="text-outline">8 Nodes (Archived)</span>
+<div class="text-outline text-body-sm">Total 28.2 GB</div>
+</td>
+<td class="py-space-md px-space-md">
+<span class="inline-flex items-center gap-1 text-primary font-mono text-label-sm font-semibold">
+<span class="material-symbols-outlined text-[15px]">check_circle</span>
+                COMPLETED 100%
+              </span>
+</td>
+<td class="py-space-md px-space-md font-mono">
+<span class="inline-flex items-center gap-1 text-primary text-label-sm bg-primary-container/15 px-2 py-0.5 rounded">
+<span class="material-symbols-outlined text-[13px]">verified</span>
+                Sealed &amp; Anchored
+              </span>
+</td>
+<td class="py-space-md px-space-md text-right">
+<div class="flex items-center justify-end gap-1">
+<button class="p-1 rounded hover:bg-surface-container text-on-surface hover:text-primary transition-colors flex items-center gap-1 font-mono text-label-sm px-2 bg-surface-container-low" title="Download .mov">
+<span class="material-symbols-outlined text-[16px]">download</span>
+<span>.MOV</span>
+</button>
+<button class="p-1 rounded hover:bg-surface-container text-outline hover:text-on-surface transition-colors" title="Inspect C2PA Manifest">
+<span class="material-symbols-outlined text-[18px]">verified_user</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 4: Scene 43 Dolby Atmos 7.1.4 PrintMaster -->
+<tr class="bg-surface-container-lowest hover:bg-surface-container/60 transition-colors">
+<td class="py-space-md px-space-md font-mono">
+<div class="font-semibold text-on-surface flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span>#RQ-430018</span>
+</div>
+<div class="text-outline text-body-sm">SCENE 43 DOLBY ATMOS 7.1.4</div>
+</td>
+<td class="py-space-md px-space-md">
+<span class="px-space-xs py-0.5 rounded bg-surface-container font-mono text-label-sm text-on-surface">
+                Spatial Audio Engine
+              </span>
+</td>
+<td class="py-space-md px-space-md font-mono">
+<div class="text-on-surface font-semibold">Broadcast WAV (ADM BWF)</div>
+<div class="text-outline text-body-sm">24-bit / 48kHz • 12 Bed Channels</div>
+</td>
+<td class="py-space-md px-space-md font-mono">
+<span class="text-outline">2 Audio DSP Cores</span>
+<div class="text-outline text-body-sm">Total 4.1 GB</div>
+</td>
+<td class="py-space-md px-space-md">
+<span class="inline-flex items-center gap-1 text-primary font-mono text-label-sm font-semibold">
+<span class="material-symbols-outlined text-[15px]">check_circle</span>
+                COMPLETED 100%
+              </span>
+</td>
+<td class="py-space-md px-space-md font-mono">
+<span class="inline-flex items-center gap-1 text-primary text-label-sm bg-primary-container/15 px-2 py-0.5 rounded">
+<span class="material-symbols-outlined text-[13px]">verified</span>
+                Signed / Synchronized
+              </span>
+</td>
+<td class="py-space-md px-space-md text-right">
+<div class="flex items-center justify-end gap-1">
+<button class="p-1 rounded hover:bg-surface-container text-on-surface hover:text-primary transition-colors flex items-center gap-1 font-mono text-label-sm px-2 bg-surface-container-low" title="Download .wav">
+<span class="material-symbols-outlined text-[16px]">download</span>
+<span>.WAV</span>
+</button>
+<button class="p-1 rounded hover:bg-surface-container text-outline hover:text-on-surface transition-colors" title="Inspect Audio Metadata">
+<span class="material-symbols-outlined text-[18px]">info</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- Lower Metrics & Cluster Resource Gauges -->
+<section class="w-full pb-space-xl">
+<div class="flex flex-col lg:flex-row gap-space-lg">
+<!-- 8-Node GPU Cluster Monitor -->
+<div class="w-full lg:w-2/3 bg-surface-container-lowest p-space-md rounded-xl shadow-lg flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-space-sm">
+<div class="flex items-center gap-space-xs font-mono">
+<span class="material-symbols-outlined text-primary text-[20px]">grid_view</span>
+<h4 class="font-headline-sm text-headline-sm text-on-surface font-semibold tracking-tight">
+                Neural GPU Cluster Fleet (عناقيد الحوسبة العصبية)
+              </h4>
+</div>
+<div class="flex items-center gap-space-sm font-mono text-label-sm text-label-sm">
+<span class="text-outline">Compute Efficiency:</span>
+<span class="text-primary font-bold">98.4%</span>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-outline mb-space-md">
+            8 × NVIDIA RTX 6000 Ada Generation (48 GB GDDR6 with ECC each) — Total Cluster VRAM: 384 GB
+          </p>
+</div>
+<!-- 8 Micro Node Bars Grid -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-space-sm font-mono text-label-sm">
+<!-- Node 01 -->
+<div class="bg-surface-container-low p-space-sm rounded-lg flex flex-col gap-1">
+<div class="flex justify-between items-center text-outline">
+<span>NODE 01</span>
+<span class="text-primary font-semibold">97%</span>
+</div>
+<div class="w-full bg-surface-container h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary-container h-full w-[97%]"></div>
+</div>
+<div class="text-outline text-body-sm">41.8 / 48 GB</div>
+</div>
+<!-- Node 02 -->
+<div class="bg-surface-container-low p-space-sm rounded-lg flex flex-col gap-1">
+<div class="flex justify-between items-center text-outline">
+<span>NODE 02</span>
+<span class="text-primary font-semibold">99%</span>
+</div>
+<div class="w-full bg-surface-container h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary-container h-full w-[99%]"></div>
+</div>
+<div class="text-outline text-body-sm">42.1 / 48 GB</div>
+</div>
+<!-- Node 03 -->
+<div class="bg-surface-container-low p-space-sm rounded-lg flex flex-col gap-1">
+<div class="flex justify-between items-center text-outline">
+<span>NODE 03</span>
+<span class="text-secondary font-semibold">88%</span>
+</div>
+<div class="w-full bg-surface-container h-1.5 rounded-full overflow-hidden">
+<div class="bg-secondary-container h-full w-[88%]"></div>
+</div>
+<div class="text-outline text-body-sm">38.2 / 48 GB</div>
+</div>
+<!-- Node 04 -->
+<div class="bg-surface-container-low p-space-sm rounded-lg flex flex-col gap-1">
+<div class="flex justify-between items-center text-outline">
+<span>NODE 04</span>
+<span class="text-primary font-semibold">96%</span>
+</div>
+<div class="w-full bg-surface-container h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary-container h-full w-[96%]"></div>
+</div>
+<div class="text-outline text-body-sm">41.0 / 48 GB</div>
+</div>
+<!-- Node 05 -->
+<div class="bg-surface-container-low p-space-sm rounded-lg flex flex-col gap-1">
+<div class="flex justify-between items-center text-outline">
+<span>NODE 05</span>
+<span class="text-secondary font-semibold">91%</span>
+</div>
+<div class="w-full bg-surface-container h-1.5 rounded-full overflow-hidden">
+<div class="bg-secondary-container h-full w-[91%]"></div>
+</div>
+<div class="text-outline text-body-sm">39.4 / 48 GB</div>
+</div>
+<!-- Node 06 -->
+<div class="bg-surface-container-low p-space-sm rounded-lg flex flex-col gap-1">
+<div class="flex justify-between items-center text-outline">
+<span>NODE 06</span>
+<span class="text-primary font-semibold">98%</span>
+</div>
+<div class="w-full bg-surface-container h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary-container h-full w-[98%]"></div>
+</div>
+<div class="text-outline text-body-sm">42.0 / 48 GB</div>
+</div>
+<!-- Node 07 -->
+<div class="bg-surface-container-low p-space-sm rounded-lg flex flex-col gap-1">
+<div class="flex justify-between items-center text-outline">
+<span>NODE 07</span>
+<span class="text-secondary font-semibold">89%</span>
+</div>
+<div class="w-full bg-surface-container h-1.5 rounded-full overflow-hidden">
+<div class="bg-secondary-container h-full w-[89%]"></div>
+</div>
+<div class="text-outline text-body-sm">37.8 / 48 GB</div>
+</div>
+<!-- Node 08 -->
+<div class="bg-surface-container-low p-space-sm rounded-lg flex flex-col gap-1">
+<div class="flex justify-between items-center text-outline">
+<span>NODE 08</span>
+<span class="text-primary font-semibold">94%</span>
+</div>
+<div class="w-full bg-surface-container h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary-container h-full w-[94%]"></div>
+</div>
+<div class="text-outline text-body-sm">40.3 / 48 GB</div>
+</div>
+</div>
+</div>
+<!-- I/O Throughput & SAN Fabric Telemetry -->
+<div class="w-full lg:w-1/3 bg-surface-container-lowest p-space-md rounded-xl shadow-lg flex flex-col justify-between">
+<div class="flex items-center justify-between mb-space-sm">
+<div class="flex items-center gap-space-xs font-mono">
+<span class="material-symbols-outlined text-secondary text-[20px]">lan</span>
+<h4 class="font-headline-sm text-headline-sm text-on-surface font-semibold tracking-tight">
+              Storage &amp; Fiber I/O
+            </h4>
+</div>
+<span class="px-space-xs py-0.5 rounded bg-surface-container font-mono text-label-sm text-primary">ONLINE</span>
+</div>
+<div class="flex flex-col gap-space-sm font-mono text-body-sm my-auto">
+<!-- NVMe Scratch -->
+<div class="bg-surface-container-low p-space-sm rounded-lg flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-outline">speed</span>
+<span class="text-on-surface">NVMe Scratch Direct-to-SAN</span>
+</div>
+<span class="text-primary font-bold">3.8 GB/s</span>
+</div>
+<!-- Cloud Vault Sync -->
+<div class="bg-surface-container-low p-space-sm rounded-lg flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-outline">wifi_tethering</span>
+<span class="text-on-surface">Studio Cloud Fiber Line</span>
+</div>
+<span class="text-secondary font-bold">10 GbE Full Duplex</span>
+</div>
+<!-- Temp / Thermal Envelope -->
+<div class="bg-surface-container-low p-space-sm rounded-lg flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-outline">device_thermostat</span>
+<span class="text-on-surface">Cluster Thermal Delta</span>
+</div>
+<span class="text-on-surface font-semibold">61°C (Nominal)</span>
+</div>
+</div>
+<!-- Terminal Quick Action -->
+<div class="pt-space-sm flex items-center justify-between border-t border-surface-container-low">
+<span class="font-mono text-label-sm text-outline">c2pa-cli export-batch --strict</span>
+<button class="px-space-sm py-1 rounded bg-surface-container text-on-surface font-label-sm text-label-sm hover:bg-surface-container-high transition-colors font-mono">
+            Copy CLI
+          </button>
+</div>
+</div>
+</div>
+</section>
+<!-- Interactive State Controller for Sidebar Activation & Micro-polish -->
+<script>
+    (function initRenderQueue() {
+      // Highlight sidebar active state
+      try {
+        const renderLink = document.querySelector('a[data-path="render-queue"]');
+        if (renderLink) {
+          renderLink.classList.remove('text-on-surface-variant', 'hover:bg-surface-container-high');
+          renderLink.classList.add('bg-primary-container', 'text-on-primary-container', 'shadow-[0_0_20px_rgba(229,9,20,0.35)]');
+          const textSpan = renderLink.querySelector('span.font-body-md');
+          if (textSpan) textSpan.classList.add('font-semibold');
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    })();
+  </script>
+</div></main></div></body></html>

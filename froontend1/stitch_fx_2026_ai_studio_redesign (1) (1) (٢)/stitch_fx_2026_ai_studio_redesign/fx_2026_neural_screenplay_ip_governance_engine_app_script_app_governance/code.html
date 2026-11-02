@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>
+@layer base{
+  html,body{margin:0;padding:0;}
+  body{overscroll-behavior:none;}
+  main>:first-child{margin-top:0!important;}
+  main>:last-child{margin-bottom:0!important;}
+}
+::-webkit-scrollbar{display:none;}
+
+/* Ultra-luxury Cinematic Lighting Keyframes & Ambient Motion */
+@keyframes atmosphericBreathing {
+  0%, 100% {
+    opacity: 0.65;
+    transform: translate(-50%, 0) scale(1);
+  }
+  50% {
+    opacity: 0.95;
+    transform: translate(-50%, -15px) scale(1.08);
+  }
+}
+
+@keyframes ctaPulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 16px rgba(229, 9, 20, 0.4), 0 0 32px rgba(215, 59, 0, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 26px rgba(229, 9, 20, 0.7), 0 0 48px rgba(215, 59, 0, 0.35);
+  }
+}
+
+@keyframes entranceFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.ambient-breathing-bloom {
+  animation: atmosphericBreathing 7s ease-in-out infinite;
+}
+
+.luxury-cta-glow {
+  animation: ctaPulseGlow 4s ease-in-out infinite;
+}
+
+/* Staggered entrance animation classes */
+.animate-entrance {
+  animation: entranceFadeUp 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Interactive Spotlight Card Glassmorphism & Mouse Tracking */
+.interactive-spotlight-card {
+  position: relative;
+  background: rgba(22, 22, 26, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s ease, background 0.35s ease;
+  will-change: transform, box-shadow;
+}
+
+.interactive-spotlight-card:hover {
+  transform: translateY(-5px) scale(1.01);
+  box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.8), 0 0 24px rgba(229, 9, 20, 0.22);
+  border-color: rgba(229, 9, 20, 0.3);
+}
+
+.interactive-spotlight-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(400px circle at var(--mouse-x, -500px) var(--mouse-y, -500px), rgba(229, 9, 20, 0.15), rgba(215, 59, 0, 0.05) 40%, transparent 80%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+}
+
+.interactive-spotlight-card:hover::before {
+  opacity: 1;
+}
+
+/* Disable or soften heavy transitions for prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .ambient-breathing-bloom,
+  .luxury-cta-glow,
+  .animate-entrance {
+    animation: none !important;
+  }
+  .interactive-spotlight-card {
+    transition: none !important;
+  }
+}
+</style><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "surface-container-low": "#1c1b1b", "on-primary": "#690003", "inverse-surface": "#e5e2e1", "on-primary-fixed-variant": "#930007", "on-error-container": "#ffdad6", "surface-variant": "#353534", "on-secondary-fixed-variant": "#862200", "primary-fixed": "#ffdad5", "surface-container-highest": "#353534", "surface-tint": "#ffb4aa", "primary": "#ffb4aa", "surface-bright": "#393939", "surface-container-high": "#2a2a2a", "secondary-fixed": "#ffdbd1", "on-secondary-fixed": "#3b0900", "error-container": "#93000a", "inverse-on-surface": "#313030", "primary-container": "#e50914", "surface-container-lowest": "#0e0e0e", "surface-container": "#201f1f", "on-surface-variant": "#a1a1aa", "surface-dim": "#131313", "secondary-container": "#d73b00", "on-primary-fixed": "#410001", "on-surface": "#f4f4f6", "surface": "#131313", "on-tertiary-fixed": "#410005", "secondary-fixed-dim": "#ffb5a0", "tertiary-fixed-dim": "#ffb3ae", "on-primary-container": "#fff7f6", "tertiary": "#ffb3ae", "outline-variant": "#5e3f3b", "on-tertiary": "#68000c", "inverse-primary": "#c0000c", "on-error": "#690005", "tertiary-container": "#e40b2b", "on-tertiary-container": "#fff7f6", "on-tertiary-fixed-variant": "#930016", "secondary": "#ffb5a0", "background": "#131313", "tertiary-fixed": "#ffdad7", "on-secondary-container": "#fffbff", "on-secondary": "#5f1500", "on-background": "#e5e2e1", "error": "#ffb4ab", "primary-fixed-dim": "#ffb4aa", "outline": "#af8782" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "space-md": "1rem", "space-lg": "1.5rem", "margin-mobile": "1rem", "margin": "2rem", "gutter-mobile": "0.75rem", "gutter": "1.5rem", "space-xs": "0.25rem", "space-xl": "2.5rem", "space-sm": "0.5rem" }, "fontFamily": { "body-lg": ["Inter"], "headline-xl": ["Geist"], "body-sm": ["Inter"], "headline-md": ["Geist"], "body-md": ["Inter"], "headline-lg": ["Geist"], "headline-xl-mobile": ["Geist"], "headline-sm": ["Geist"], "headline-lg-mobile": ["Geist"], "label-md": ["Geist"], "label-sm": ["Geist"] }, "fontSize": { "body-lg": ["1rem", { "lineHeight": "1.6rem", "letterSpacing": "-0.005em", "fontWeight": "400" }], "headline-xl": ["3rem", { "lineHeight": "3.5rem", "letterSpacing": "-0.03em", "fontWeight": "600" }], "body-sm": ["0.75rem", { "lineHeight": "1.2rem", "letterSpacing": "0.01em", "fontWeight": "400" }], "headline-md": ["1.5rem", { "lineHeight": "2rem", "letterSpacing": "-0.015em", "fontWeight": "500" }], "body-md": ["0.875rem", { "lineHeight": "1.4rem", "letterSpacing": "0em", "fontWeight": "400" }], "headline-lg": ["2.25rem", { "lineHeight": "2.75rem", "letterSpacing": "-0.025em", "fontWeight": "600" }], "headline-xl-mobile": ["2rem", { "lineHeight": "2.5rem", "letterSpacing": "-0.02em", "fontWeight": "600" }], "headline-sm": ["1.125rem", { "lineHeight": "1.625rem", "letterSpacing": "-0.01em", "fontWeight": "500" }], "headline-lg-mobile": ["1.625rem", { "lineHeight": "2.125rem", "letterSpacing": "-0.02em", "fontWeight": "600" }], "label-md": ["0.8125rem", { "lineHeight": "1rem", "letterSpacing": "0.02em", "fontWeight": "500" }], "label-sm": ["0.6875rem", { "lineHeight": "0.875rem", "letterSpacing": "0.05em", "fontWeight": "600" }] } } } }</script></head><body class="bg-surface font-body-md text-body-md text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-container"><aside class="fixed left-0 top-0 h-full w-72 bg-surface-container-lowest z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.5)]"><div class="flex flex-col"><div class="h-16 px-space-lg flex items-center justify-between bg-surface-container-lowest"><div class="flex items-center gap-space-sm"><img alt="FX-2026 Brand Emblem" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD0VvF0aj0DHp2h98MzVkGo_27dTZN0fZVboahqbTwts6bbOXSloSCwpeAslIHSIj3GSXs0y7fPlxijH-s9UIVfsupKP4kEMYxrDTXtCfQb6LWhQ0GAd1R_MD5Shm68oN6Fg3usBRp4V1KVT_GQDBaTavk0qLlvCMT1KBNwQpvPtfydvuxh7e1IvZ2bpAzzdEV7j_98XtEH7Lj0kMukmwUsWrMh_BQtPc1hMVakrVNLWnvLQAkw2ig"/><span class="font-headline-sm text-headline-sm tracking-wider text-on-surface uppercase">FX-2026</span></div><span class="px-space-xs py-0.5 rounded bg-surface-container-high text-primary font-label-sm text-label-sm tracking-widest uppercase">Enterprise</span></div><div class="px-space-md pt-space-sm pb-space-xs"><button class="luxury-cta-glow w-full flex items-center justify-between px-space-md py-space-sm rounded-lg bg-primary-container text-on-primary-container hover:bg-tertiary-container transition-all" type="button"><span class="flex items-center gap-space-xs font-label-md text-label-md tracking-wide"><span class="material-symbols-outlined text-lg">add_circle</span>New Prompt</span><kbd class="px-space-xs py-0.5 rounded bg-on-primary font-label-sm text-label-sm text-on-primary-container opacity-90">⌘K</kbd></button></div><div class="overflow-y-auto px-space-md py-space-xs space-y-space-md"><div class="space-y-space-xs"><span class="px-space-sm font-label-sm text-label-sm text-outline tracking-wider uppercase">Features</span><nav class="flex flex-col gap-0.5" data-active-classes="bg-surface-container-high text-on-surface font-label-md"><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="app/script" href="#"><span>Screenplay &amp; Narrative</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="chat" href="#"><span>Chat</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="architect" href="#"><span>Architect</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="memory" href="#"><span>Memory</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="analytics" href="#"><span>Analytics</span></a></nav></div><div class="space-y-space-xs"><span class="px-space-sm font-label-sm text-label-sm text-outline tracking-wider uppercase">Workspaces</span><nav class="flex flex-col gap-0.5" data-active-classes="bg-surface-container-high text-on-surface font-label-md"><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="new-project" href="#"><span>New Project</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="image-generator" href="#"><span>Image Generator</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="video-director" href="#"><span>Video Director</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="audio-soundtrack" href="#"><span>Audio / Soundtrack</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="3d-assets" href="#"><span>3D Assets</span></a></nav></div><div class="space-y-space-xs"><span class="px-space-sm font-label-sm text-label-sm text-outline tracking-wider uppercase">Intelligence</span><nav class="flex flex-col gap-0.5" data-active-classes="bg-surface-container-high text-on-surface font-label-md"><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="neural-models" href="#"><span>Neural Models</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="prompt-vault" href="#"><span>Prompt Vault</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="render-queue" href="#"><span>Render Queue</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="app/metrics" href="#"><span>Metrics &amp; Telemetry</span></a></nav></div></div></div><div class="p-space-md space-y-space-sm bg-surface-container-lowest"><div class="p-space-md rounded-xl bg-surface-container-low shadow-[inset_0_0_24px_rgba(229,9,20,0.08)] flex flex-col gap-space-xs"><div class="flex items-center justify-between"><div class="flex items-center gap-space-xs text-primary"><span class="material-symbols-outlined text-base">diamond</span><span class="font-label-md text-label-md text-on-surface">Enterprise Tier</span></div><span class="font-label-sm text-label-sm text-outline uppercase">PRO</span></div><p class="font-body-sm text-body-sm text-on-surface-variant">Unlock full compute threads and unmetered batch rendering.</p><a class="mt-space-xs inline-flex items-center justify-center py-space-xs px-space-sm rounded bg-surface-container-high text-on-surface hover:bg-surface-bright hover:text-on-surface font-label-sm text-label-sm transition-colors" data-path="manage-plan" href="#">Manage Plan</a></div><div class="px-space-sm py-space-xs rounded bg-surface-container-lowest flex items-center gap-space-xs"><span class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></span><span class="font-label-sm text-label-sm text-outline truncate">Node: US-East GPU Cluster (RTX-6000 Ada)</span></div></div></aside><div class="pl-72"><header class="fixed top-0 left-72 right-0 h-16 bg-surface-container-lowest/90 backdrop-blur-xl z-40 px-space-lg flex items-center justify-between shadow-[0_1px_8px_rgba(0,0,0,0.5)] border-b border-white/[0.04]"><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs font-label-md text-label-md text-on-surface"><span class="text-outline">FX-2026 Studio</span><span class="text-outline">/</span><span class="font-medium text-on-surface">Script &amp; Narrative Suite</span><span class="px-space-xs py-0.5 rounded bg-primary-container/20 text-primary border border-primary-container/40 font-label-sm text-[10px] tracking-widest uppercase ml-1">Active</span><span class="relative flex h-2 w-2 ml-1"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-container opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-primary-container"></span></span></div></div><div class="flex-1 max-w-md mx-space-lg"><div class="relative flex items-center"><span class="material-symbols-outlined absolute left-3 text-outline text-lg pointer-events-none">search</span><input class="w-full bg-surface-container py-space-xs pl-9 pr-12 rounded-lg text-on-surface placeholder:text-outline font-body-sm text-body-sm focus:outline-none focus:ring-1 focus:ring-primary" placeholder="Omni-Search narrative beats, scripts, nodes..." type="text"/><kbd class="absolute right-2 px-space-xs py-0.5 rounded bg-surface-container-high text-outline font-label-sm text-label-sm">⌘/</kbd></div></div><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs px-space-sm py-space-xs rounded-lg bg-surface-container-low"><span class="material-symbols-outlined text-primary text-base">speed</span><span class="font-label-sm text-label-sm text-outline">Narrative Core:</span><span class="font-label-sm text-label-sm text-on-surface font-medium">Synced</span><div class="w-12 h-1.5 bg-surface-container-high rounded-full overflow-hidden ml-1"><div class="h-full bg-primary-container w-[78%]"></div></div></div><button class="px-space-xs py-space-xs rounded text-outline hover:text-on-surface font-label-sm text-label-sm transition-colors" type="button">العربية / EN</button><button class="relative p-space-xs rounded-lg text-outline hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-lg">notifications</span><span class="absolute top-1.5 right-1.5 w-1.5 h-1.5 rounded-full bg-primary-container"></span></button><a class="p-space-xs rounded-lg text-outline hover:text-on-surface transition-colors" data-path="documentation" href="#" title="Documentation"><span class="material-symbols-outlined text-lg">menu_book</span></a><div class="flex items-center gap-space-xs pl-space-xs"><img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-1 ring-outline-variant" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCA84LSJo3PpfP2pWLm_Cw-072SStUGjZU-hzUD6ulEBNPdDfexoV9Qf9PIyBx9o99-kJwkFH20QyrFGhdNmCVguhmdcAhxwOImgXxKS4sIoFatPT7s-nyaHvHbsj5IJe-bWxyc6up8tbxS1HGVQTuS-KYNmxASO461Xz5h-1wCquC6sM4ka9q9lARBJSW4OR8Rvsnx5Gqrzl6NNUh9rDMxj_6OXoDUQuEk3_bgSs76nP2VMZLis20"/><span class="material-symbols-outlined text-outline text-base">expand_more</span></div></div></header><main class="w-full pt-16 bg-surface min-h-screen"><div class="flex flex-col w-full relative overflow-hidden text-on-surface">
+<!-- Subtle Ambient Atmospheric Glow Behind Workspace -->
+<div class="pointer-events-none absolute -top-32 left-1/2 -translate-x-1/2 w-[980px] h-[340px] rounded-full bg-gradient-to-b from-primary-container/10 via-secondary-container/5 to-transparent blur-3xl ambient-breathing-bloom -z-10"></div>
+<div class="pointer-events-none absolute top-96 right-10 w-[420px] h-[420px] rounded-full bg-primary-container/5 blur-3xl -z-10"></div>
+<!-- Subheader & Narrative Telemetry Ribbon -->
+<header class="px-space-lg py-space-md bg-surface-container-lowest/80 backdrop-blur-md flex flex-col gap-space-sm">
+<div class="flex flex-wrap items-center justify-between gap-space-md">
+<!-- Title & Breadcrumb Block -->
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center gap-space-xs font-label-sm text-label-sm tracking-widest text-outline uppercase">
+<span>ATLAS CORE</span>
+<span>/</span>
+<span class="text-on-surface">APP/SCRIPT/PAGE.TSX</span>
+<span>/</span>
+<span class="px-1.5 py-0.5 rounded bg-surface-container-high text-primary font-mono text-[10px]">ENGINE V4.8-PRO</span>
+</div>
+<div class="flex items-baseline gap-space-md flex-wrap">
+<h1 class="font-headline-md text-headline-md text-on-surface tracking-tight flex items-center gap-space-xs">
+            Neural Screenplay &amp; Generative Narrative Engine
+            <span class="inline-block w-2 h-2 rounded-full bg-primary-container luxury-cta-glow"></span>
+</h1>
+<span class="font-body-sm text-body-sm text-on-surface-variant font-normal tracking-wide opacity-80" dir="rtl">
+            محرك السيناريو العصبي والسرد السينمائي التوليدي
+          </span>
+</div>
+</div>
+<!-- Action CTAs -->
+<div class="flex items-center gap-space-sm flex-wrap">
+<button class="luxury-cta-glow px-space-md py-space-xs rounded-lg bg-primary-container hover:bg-tertiary-container text-on-primary-container flex items-center gap-space-xs font-label-md text-label-md transition-all" type="button">
+<span class="material-symbols-outlined text-base">auto_awesome</span>
+<span>Auto-Breakdown to Storyboard</span>
+</button>
+<button class="px-space-md py-space-xs rounded-lg bg-surface-container-high hover:bg-surface-bright text-on-surface flex items-center gap-space-xs font-label-md text-label-md transition-colors" type="button">
+<span class="material-symbols-outlined text-base">file_download</span>
+<span>Export Final Draft</span>
+<span class="font-label-sm text-label-sm text-outline uppercase ml-0.5">(FDX / Fountain)</span>
+</button>
+<button class="px-space-sm py-space-xs rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface flex items-center gap-space-xs font-label-md text-label-md transition-colors" type="button">
+<span class="material-symbols-outlined text-primary text-base">monitoring</span>
+<span>Scene Telemetry</span>
+<kbd class="px-1 py-0.5 rounded bg-surface-container-lowest font-label-sm text-[10px] text-outline">⌘S</kbd>
+</button><a class="px-space-sm py-space-xs rounded-lg bg-surface-container hover:bg-surface-container-high text-primary flex items-center gap-space-xs font-label-md text-label-md border border-primary-container/30 transition-colors" data-path="app/governance" href="#" title="Open Governance &amp; IP Clearance Console"><span class="material-symbols-outlined text-base text-primary">verified_user</span><span>Verify IP &amp; Watermark</span><span class="px-1 py-0.5 rounded bg-primary-container/20 font-label-sm text-[10px] text-primary tracking-wider uppercase">C2PA</span></a>
+</div>
+</div>
+<!-- Real-time Narrative Metrics Badges Strip -->
+<div class="flex flex-wrap items-center gap-space-sm pt-space-xs">
+<div class="flex items-center gap-space-xs px-space-sm py-1 rounded bg-surface-container-low">
+<span class="material-symbols-outlined text-primary text-sm">movie_filter</span>
+<span class="font-label-sm text-label-sm text-outline uppercase">Scene:</span>
+<span class="font-label-sm text-label-sm text-on-surface font-medium">ACT II - THE ABYSS</span>
+</div>
+<div class="flex items-center gap-space-xs px-space-sm py-1 rounded bg-surface-container-low">
+<span class="material-symbols-outlined text-secondary text-sm">speed</span>
+<span class="font-label-sm text-label-sm text-outline uppercase">Pacing Velocity:</span>
+<span class="font-label-sm text-label-sm text-on-surface font-medium">142 WPM (Optimal)</span>
+</div>
+<div class="flex items-center gap-space-xs px-space-sm py-1 rounded bg-surface-container-low">
+<span class="material-symbols-outlined text-primary-container text-sm">psychology_alt</span>
+<span class="font-label-sm text-label-sm text-outline uppercase">Emotive Tension:</span>
+<span class="font-label-sm text-label-sm text-primary font-medium">88% Tense / Noir</span>
+</div>
+<div class="flex items-center gap-space-xs px-space-sm py-1 rounded bg-surface-container-low">
+<span class="material-symbols-outlined text-primary text-sm">tune</span>
+<span class="font-label-sm text-label-sm text-outline uppercase">Character Latents:</span>
+<span class="font-label-sm text-label-sm text-on-surface font-medium">4 Synced</span>
+</div>
+<a class="flex items-center gap-space-xs px-space-sm py-1 rounded bg-surface-container-low border border-primary-container/30 hover:border-primary-container transition-all" data-path="app/governance" href="#"><span class="material-symbols-outlined text-primary text-sm">gshield</span><span class="font-label-sm text-label-sm text-outline uppercase">IP Clearance:</span><span class="font-label-sm text-label-sm text-primary font-medium flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-primary-container animate-pulse"></span>C2PA Attested (100% Pass)</span></a><div class="ml-auto flex items-center gap-space-xs font-label-sm text-label-sm text-outline">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container"></span>
+<span>Neural Synthesis Buffer: 0.12s Latency</span>
+</div>
+</div>
+</header>
+<!-- 3-Column Narrative Studio Layout Canvas -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-space-md p-space-md flex-1">
+<!-- Column 1: Narrative Architecture & Scene Beat Navigator (~22% -> 3 cols) -->
+<aside class="xl:col-span-3 flex flex-col gap-space-md">
+<!-- Scene Breakdown & Beats Navigator -->
+<section class="interactive-spotlight-card rounded-xl p-space-md flex flex-col gap-space-sm">
+<div class="flex items-center justify-between pb-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-base">format_list_bulleted</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">Scene Breakdown &amp; Beats</span>
+</div>
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Act II / IV</span>
+</div>
+<div class="flex flex-col gap-space-xs">
+<!-- Beat 01 -->
+<div class="p-space-sm rounded-lg bg-surface-container-lowest/70 hover:bg-surface-container transition-all cursor-pointer group">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-outline uppercase">Beat 01 • Act I</span>
+<span class="px-1.5 py-0.5 rounded bg-surface-container text-primary text-[10px] font-label-sm">SYNTHESIZED</span>
+</div>
+<p class="font-label-md text-label-md text-on-surface group-hover:text-primary transition-colors mt-0.5 line-clamp-1">
+              EXT. OBSIDIAN MONOLITH - DUSK
+            </p>
+<div class="flex items-center gap-space-xs mt-1 text-on-surface-variant font-body-sm text-[11px]">
+<span>Tension: 45%</span>
+<span>•</span>
+<span class="text-primary/90">Visual Prompt Ready</span>
+</div>
+</div>
+<!-- Beat 02: Active -->
+<div class="p-space-sm rounded-lg bg-surface-container-high/90 shadow-[inset_0_0_12px_rgba(229,9,20,0.18)] cursor-pointer">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-primary uppercase flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container"></span>
+                Beat 02 • Act II (Active)
+              </span>
+<span class="px-1.5 py-0.5 rounded bg-primary-container text-on-primary-container text-[10px] font-label-sm font-semibold">EDITING</span>
+</div>
+<p class="font-label-md text-label-md text-on-surface font-medium mt-0.5">
+              INT. BIO-DOME SANCTUARY - NIGHT
+            </p>
+<div class="flex items-center justify-between mt-1 text-on-surface-variant font-body-sm text-[11px]">
+<span class="text-primary font-medium">Dialogue Driven • Tension 88%</span>
+<span class="text-outline">Camera Rig 02 Synced</span>
+</div>
+</div>
+<!-- Beat 03 -->
+<div class="p-space-sm rounded-lg bg-surface-container-lowest/70 hover:bg-surface-container transition-all cursor-pointer group">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-outline uppercase">Beat 03 • Climax</span>
+<span class="px-1.5 py-0.5 rounded bg-surface-container text-outline text-[10px] font-label-sm">DRAFT</span>
+</div>
+<p class="font-label-md text-label-md text-on-surface group-hover:text-primary transition-colors mt-0.5 line-clamp-1">
+              INT. SYNCHROTRON CORE - DAWN
+            </p>
+<div class="flex items-center gap-space-xs mt-1 text-on-surface-variant font-body-sm text-[11px]">
+<span>Action Climax</span>
+<span>•</span>
+<span>Pacing 188 WPM</span>
+</div>
+</div>
+<!-- Beat 04 -->
+<div class="p-space-sm rounded-lg bg-surface-container-lowest/70 hover:bg-surface-container transition-all cursor-pointer group">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-outline uppercase">Beat 04 • Act III</span>
+<span class="px-1.5 py-0.5 rounded bg-surface-container text-outline text-[10px] font-label-sm">OUTLINE</span>
+</div>
+<p class="font-label-md text-label-md text-on-surface group-hover:text-primary transition-colors mt-0.5 line-clamp-1">
+              EXT. CRIMSON SALT FLATS - EVENT HORIZON
+            </p>
+<div class="flex items-center gap-space-xs mt-1 text-on-surface-variant font-body-sm text-[11px]">
+<span>Resolution Phase</span>
+<span>•</span>
+<span>Pending Latents</span>
+</div>
+</div>
+</div>
+<button class="mt-space-xs py-space-xs px-space-sm rounded-lg bg-surface-container hover:bg-surface-bright text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm flex items-center justify-center gap-space-xs transition-colors" type="button">
+<span class="material-symbols-outlined text-sm">add</span>
+<span>Inject Neural Scene Beat</span>
+</button>
+</section>
+<!-- Character Latent Anchors -->
+<section class="interactive-spotlight-card rounded-xl p-space-md flex flex-col gap-space-sm">
+<div class="flex items-center justify-between pb-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-base">face_6</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">Character Latents</span>
+</div>
+<span class="font-label-sm text-label-sm text-outline uppercase">Weights</span>
+</div>
+<div class="flex flex-col gap-space-xs">
+<!-- Persona 1 -->
+<div class="p-space-sm rounded-lg bg-surface-container-lowest/80 flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+<span class="font-label-md text-label-md text-on-surface font-medium">Commander Vespera</span>
+</div>
+<span class="font-mono text-[10px] text-primary">CFG: 8.5</span>
+</div>
+<div class="flex items-center justify-between text-[11px] text-on-surface-variant font-body-sm">
+<span>Stoic Rebel / Ex-Pilot</span>
+<span class="text-outline">Sub-bass 82Hz</span>
+</div>
+<div class="w-full bg-surface-container h-1 rounded-full overflow-hidden mt-1">
+<div class="bg-primary-container h-full w-[85%]"></div>
+</div>
+</div>
+<!-- Persona 2 -->
+<div class="p-space-sm rounded-lg bg-surface-container-lowest/80 flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-secondary-container"></span>
+<span class="font-label-md text-label-md text-on-surface font-medium">Synthetica Core / AI Eidolon</span>
+</div>
+<span class="font-mono text-[10px] text-secondary">CFG: 9.2</span>
+</div>
+<div class="flex items-center justify-between text-[11px] text-on-surface-variant font-body-sm">
+<span>Cryptic Oracle / Anamorphic</span>
+<span class="text-outline">Harmonic Synth</span>
+</div>
+<div class="w-full bg-surface-container h-1 rounded-full overflow-hidden mt-1">
+<div class="bg-secondary-container h-full w-[92%]"></div>
+</div>
+</div>
+</div>
+<button class="py-space-xs px-space-sm rounded-lg bg-surface-container hover:bg-surface-bright text-on-surface font-label-sm text-label-sm flex items-center justify-center gap-space-xs transition-colors" type="button">
+<span class="material-symbols-outlined text-sm">person_add</span>
+<span>Add Character Persona +</span>
+</button><div class="mt-space-xs p-space-sm rounded-lg bg-surface-container-lowest/90 border border-white/[0.04] flex flex-col gap-1.5"><div class="flex items-center justify-between text-xs"><div class="flex items-center gap-1 text-primary"><span class="material-symbols-outlined text-sm">workspace_premium</span><span class="font-label-sm text-[11px] font-semibold uppercase tracking-wider">Voice &amp; Persona Clearance</span></div><span class="font-mono text-[9px] px-1 py-0.5 rounded bg-primary-container/20 text-primary">SAG-AFTRA 2026</span></div><p class="font-body-sm text-[11px] text-on-surface-variant leading-snug">Commander Vespera &amp; Synthetica Core: 100% commercial safe-harbor, synthetic biometric rights cleared with cryptographic voice enclave keys.</p><div class="flex items-center justify-between text-[10px] text-outline font-mono pt-0.5"><span>Hash: #0x9F4C...E82</span><a class="text-primary hover:underline flex items-center gap-0.5" data-path="app/governance" href="#">License Vault ➔</a></div></div>
+</section>
+<!-- Generative Tone & Texture Tuning Sliders -->
+<section class="interactive-spotlight-card rounded-xl p-space-md flex flex-col gap-space-sm">
+<div class="flex items-center justify-between pb-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-base">sliders</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">Generative Tone Bias</span>
+</div>
+<span class="font-label-sm text-label-sm text-outline">Real-time</span>
+</div>
+<div class="flex flex-col gap-space-sm text-body-sm">
+<!-- Slider 1 -->
+<div class="flex flex-col gap-1">
+<div class="flex justify-between font-label-sm text-label-sm">
+<span class="text-on-surface-variant">Tension &amp; Noir Atmospheric Weight</span>
+<span class="font-mono text-primary font-medium">88%</span>
+</div>
+<input class="w-full h-1.5 bg-surface-container-high rounded-lg appearance-none cursor-pointer accent-primary-container" max="100" min="0" type="range" value="88"/>
+</div>
+<!-- Slider 2 -->
+<div class="flex flex-col gap-1">
+<div class="flex justify-between font-label-sm text-label-sm">
+<span class="text-on-surface-variant">Dialogue Subtext Density</span>
+<span class="font-mono text-primary font-medium">74%</span>
+</div>
+<input class="w-full h-1.5 bg-surface-container-high rounded-lg appearance-none cursor-pointer accent-primary-container" max="100" min="0" type="range" value="74"/>
+</div>
+<!-- Slider 3 -->
+<div class="flex flex-col gap-1">
+<div class="flex justify-between font-label-sm text-label-sm">
+<span class="text-on-surface-variant">Cinematic Stage Direction Granularity</span>
+<span class="font-mono text-primary font-medium">92%</span>
+</div>
+<input class="w-full h-1.5 bg-surface-container-high rounded-lg appearance-none cursor-pointer accent-primary-container" max="100" min="0" type="range" value="92"/>
+</div>
+</div>
+</section>
+</aside>
+<!-- Column 2: Fountain / Courier Prime Screenplay Editor Console (~52% -> 6 cols) -->
+<main class="xl:col-span-6 flex flex-col gap-space-sm">
+<!-- Editor Header & Professional Script Toolbar -->
+<div class="p-space-sm rounded-xl bg-surface-container-low flex flex-col gap-space-xs">
+<!-- Formatting Tool Bar -->
+<div class="flex flex-wrap items-center justify-between gap-space-xs">
+<div class="flex items-center gap-1 overflow-x-auto py-0.5">
+<button class="px-2.5 py-1 rounded bg-surface-container-high text-primary font-mono text-xs hover:bg-surface-bright transition-colors uppercase font-medium" type="button">Scene (INT/EXT)</button>
+<button class="px-2.5 py-1 rounded bg-surface-container text-on-surface font-mono text-xs hover:bg-surface-container-high transition-colors uppercase" type="button">Action</button>
+<button class="px-2.5 py-1 rounded bg-surface-container text-on-surface font-mono text-xs hover:bg-surface-container-high transition-colors uppercase" type="button">Character</button>
+<button class="px-2.5 py-1 rounded bg-surface-container text-on-surface font-mono text-xs hover:bg-surface-container-high transition-colors uppercase" type="button">Dialogue</button>
+<button class="px-2.5 py-1 rounded bg-surface-container text-on-surface font-mono text-xs hover:bg-surface-container-high transition-colors uppercase" type="button">Parenthetical</button>
+<button class="px-2.5 py-1 rounded bg-surface-container text-on-surface font-mono text-xs hover:bg-surface-container-high transition-colors uppercase" type="button">Transition</button>
+</div>
+<div class="flex items-center gap-space-xs">
+<button class="p-1 rounded text-outline hover:text-on-surface hover:bg-surface-container" title="Script View Mode" type="button">
+<span class="material-symbols-outlined text-base">notes</span>
+</button>
+<button class="p-1 rounded text-outline hover:text-on-surface hover:bg-surface-container" title="Full Page Layout" type="button">
+<span class="material-symbols-outlined text-base">aspect_ratio</span>
+</button>
+</div>
+</div>
+<!-- AI Narrative Co-Pilot Inline Quick Action Strip -->
+<div class="flex items-center gap-1.5 pt-1 overflow-x-auto">
+<span class="flex items-center gap-1 font-label-sm text-[11px] text-primary uppercase mr-1">
+<span class="material-symbols-outlined text-sm">neurology</span> Copilot:
+          </span>
+<button class="px-2 py-0.5 rounded-full bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high font-label-sm text-[11px] transition-colors whitespace-nowrap" type="button">
+            ✦ Deepen Subtext
+          </button>
+<button class="px-2 py-0.5 rounded-full bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high font-label-sm text-[11px] transition-colors whitespace-nowrap" type="button">
+            ✦ Punch Up Dialogue
+          </button>
+<button class="px-2 py-0.5 rounded-full bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high font-label-sm text-[11px] transition-colors whitespace-nowrap" type="button">
+            ✦ Synthesize Stage Direction
+          </button>
+<button class="px-2 py-0.5 rounded-full bg-primary-container/15 text-primary hover:bg-primary-container/25 font-label-sm text-[11px] transition-colors whitespace-nowrap" type="button">
+            ✦ Translate to Arabic Cinematic
+          </button>
+</div>
+</div>
+<!-- Professional Industry Screenplay Page (Courier/Monospace layout) -->
+<div class="interactive-spotlight-card rounded-xl p-8 md:p-12 min-h-[720px] flex flex-col justify-between relative shadow-2xl bg-surface-container-lowest font-mono leading-relaxed">
+<!-- Top Script Page Meta -->
+<div class="flex items-center justify-between text-outline text-xs pb-6 border-b border-white/[0.04] uppercase tracking-widest font-mono">
+<span>ATLAS SCENE DRAFT • REV 04</span>
+<span>PAGE 42</span>
+</div>
+<!-- Screenplay Core Body (Courier Standard Flow) -->
+<div class="flex flex-col gap-5 text-on-surface text-sm md:text-base my-4 max-w-2xl mx-auto w-full select-text">
+<!-- Scene Slugline -->
+<div class="font-bold text-on-surface tracking-wider uppercase flex items-center justify-between">
+<span>INT. BIO-DOME SANCTUARY - NIGHT</span>
+<span class="text-[10px] text-outline font-normal px-2 py-0.5 rounded bg-surface-container uppercase">CAM SYNCED</span>
+</div>
+<!-- Action Paragraph -->
+<p class="text-on-surface-variant font-normal leading-relaxed">
+            The rain hammers against the hexagonal fluoropolymer skylight in rhythmic staccato bursts. Crimson warning strobes wash over the brutalist titanium ribs of the chamber, bathing the damp foliage in violent red shadows.
+          </p>
+<p class="text-on-surface-variant font-normal leading-relaxed">
+            VESPERA stands at the razor edge of the neural immersion pool. Liquid mercury ripples beneath the tread of her worn ceramic boots. She touches her ear cuff.
+          </p>
+<!-- Dialogue Block 1 -->
+<div class="flex flex-col items-center mt-2 w-full">
+<span class="font-bold text-on-surface tracking-wider uppercase">VESPERA</span>
+<span class="text-outline text-xs font-normal italic -mt-0.5">(whispering into comm-link; vocal frequency jitter 0.04)</span>
+<p class="max-w-md text-center text-on-surface mt-1 leading-snug">
+              If the cluster collapses before the dawn cycle, the latent seed dies with it. We don't get a second take on this timeline.
+            </p>
+</div>
+<!-- Floating AI Copilot Contextual Suggestion Bubble Hovering Adjacent -->
+<div class="my-2 p-space-sm rounded-lg bg-surface-container-high/95 backdrop-blur-md shadow-xl flex flex-col gap-2 relative">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5 text-primary text-xs font-medium">
+<span class="material-symbols-outlined text-sm">psychology</span>
+<span>AI Copilot Latent Insight</span>
+</div>
+<span class="font-mono text-[10px] text-outline">Confidence 96%</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface font-normal">
+              Subtext detected as <strong class="text-primary font-semibold">92% fatalistic</strong>. Recommend injecting sensory contrast (smell of ozone, cold glass condensation) before Synthetica's reply to heighten emotional verisimilitude.
+            </p>
+<div class="flex items-center gap-2 pt-1">
+<button class="px-2.5 py-1 rounded bg-primary-container text-on-primary-container font-label-sm text-xs font-medium hover:bg-tertiary-container transition-all" type="button">
+                Apply Suggestion
+              </button>
+<button class="px-2 py-1 rounded bg-surface-container text-on-surface-variant font-label-sm text-xs hover:text-on-surface transition-colors" type="button">
+                Dismiss
+              </button>
+</div>
+</div><div class="my-2 p-space-sm rounded-lg bg-surface-container-lowest/90 border border-primary-container/30 backdrop-blur-md shadow-xl flex flex-col gap-2 relative"><div class="flex items-center justify-between"><div class="flex items-center gap-1.5 text-primary text-xs font-medium"><span class="material-symbols-outlined text-sm text-primary">verified</span><span class="font-label-sm uppercase tracking-wide">Atlas Governance • IP &amp; Copyright Audit</span></div><span class="font-mono text-[10px] px-1.5 py-0.5 rounded bg-primary-container/20 text-primary font-semibold">C2PA SEALED</span></div><div class="grid grid-cols-1 md:grid-cols-2 gap-space-xs text-[11px] font-mono"><div class="p-1.5 rounded bg-surface-container flex flex-col gap-0.5"><span class="text-outline text-[10px] uppercase">WGA / C2PA Script Copyright</span><span class="text-on-surface font-medium flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-primary-container"></span>Registered &amp; Enclave Sealed</span></div><div class="p-1.5 rounded bg-surface-container flex flex-col gap-0.5"><span class="text-outline text-[10px] uppercase">Training Data Collision</span><span class="text-primary font-medium">0.00% (Original Latent Synthesis)</span></div></div><div class="flex items-center justify-between pt-1 border-t border-white/[0.04]"><span class="text-[11px] text-on-surface-variant font-body-sm">Chain of Title &amp; Legal Safe-Harbor: Cryptographically Attested</span><a class="luxury-cta-glow px-2.5 py-1 rounded bg-primary-container hover:bg-tertiary-container text-on-primary-container font-label-sm text-xs font-medium flex items-center gap-1 transition-all" data-path="app/governance" href="#"><span>View Full Dossier</span><span class="material-symbols-outlined text-xs">arrow_forward</span></a></div></div>
+<!-- Dialogue Block 2 -->
+<div class="flex flex-col items-center mt-2 w-full">
+<span class="font-bold text-on-surface tracking-wider uppercase">SYNTHETICA (O.S.)</span>
+<span class="text-outline text-xs font-normal italic -mt-0.5">(synthesized harmonics resonant in the sub-bass)</span>
+<p class="max-w-md text-center text-on-surface mt-1 leading-snug">
+              The timeline was never linear, Commander. You are merely observing the denoise step.
+            </p>
+</div>
+<!-- Active Caret Simulation -->
+<div class="flex items-center gap-2 mt-4 text-primary">
+<span class="w-2.5 h-5 bg-primary-container animate-pulse inline-block"></span>
+<span class="text-xs text-outline font-mono">Awaiting screenplay keystroke or voice input...</span>
+</div>
+</div>
+<!-- Script Page Footer Telemetry -->
+<div class="flex items-center justify-between text-outline text-xs pt-4 border-t border-white/[0.04]">
+<span>WORDS: 842</span>
+<span>EST. SCREEN TIME: 1 MIN 14 SEC</span>
+<span class="text-primary font-mono font-medium">AUTO-SAVED TO ATLAS VAULT</span>
+</div>
+</div>
+</main>
+<!-- Column 3: Real-time Generative Storyboard & Scene Visualizer (~26% -> 3 cols) -->
+<aside class="xl:col-span-3 flex flex-col gap-space-md">
+<!-- Visualizer Header -->
+<section class="interactive-spotlight-card rounded-xl p-space-md flex flex-col gap-space-sm">
+<div class="flex items-center justify-between pb-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-base">videocam</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">Neural Visualizer</span>
+</div>
+<span class="px-1.5 py-0.5 rounded bg-primary-container/20 text-primary text-[10px] font-label-sm uppercase font-semibold">Live Sync</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+          Camera rigs synthesize automatically from screenplay action cues and character locations.
+        </p>
+<!-- Shot 01: Wide Anamorphic Angle -->
+<div class="flex flex-col rounded-lg bg-surface-container-lowest overflow-hidden group">
+<div class="relative h-36 w-full overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Cinematic cyberpunk bio-dome interior at night, brutalist titanium arches bathed in pulsing crimson warning lights, heavy rain pouring over hexagonal glass skylights, hyper-realistic reflections on wet polished concrete, 2.39 to 1 widescreen cinematic framing, ACEScg color grading, moody and luxurious dark atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBAyQ6Hy-MKprUL9NnxldXF3-jnEBmzxS_Lw0U3oUhWK7bSuwhLPTm0OUUfAZkpQEDMkygPhZTHyP4IPHyGm-j68whb_hUzQHzqjZ1d5N-wNK9fEYlF-4GDQgETwygiMT6jCuqEhw76x_dZChgHoMiPZDUUGPPColhbbvmtEg52BACL2V4KLkG-Iy2BsDMfSGGJdTfgPgI8wPZ8Hppe34hVGsekkxsOtUVLRDyrk0RUOkmRtJMyvN8"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-transparent to-transparent"></div>
+<span class="absolute top-2 left-2 px-1.5 py-0.5 rounded bg-surface-container-lowest/80 backdrop-blur-sm text-[10px] font-mono text-on-surface">
+              CAM A • 24mm Anamorphic
+            </span>
+<span class="absolute top-2 right-2 px-1.5 py-0.5 rounded bg-primary-container text-on-primary-container text-[9px] font-semibold tracking-wider uppercase">
+              MASTER 8K
+            </span>
+</div>
+<div class="p-space-sm flex flex-col gap-1">
+<div class="flex items-center justify-between text-xs">
+<span class="font-medium text-on-surface">Low-Angle Pedestal • 2.39:1</span>
+<span class="text-outline font-mono">Frame #0412</span>
+</div>
+<p class="text-[11px] text-on-surface-variant font-body-sm line-clamp-1">
+              Rain on skylight / Crimson warning strobes washing over titanium chamber ribs.
+            </p>
+<div class="flex items-center justify-between pt-1">
+<span class="text-[10px] text-primary font-mono">ACEScg Denoised</span>
+<button class="text-[11px] font-label-md text-primary hover:text-tertiary flex items-center gap-0.5 transition-colors" type="button">
+                Push to Director <span class="material-symbols-outlined text-xs">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Shot 02: Close-up / Character Over-The-Shoulder -->
+<div class="flex flex-col rounded-lg bg-surface-container-lowest overflow-hidden group">
+<div class="relative h-36 w-full overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Cinematic over-the-shoulder portrait shot of Commander Vespera with short dark hair, standing near a dark liquid mercury pool, illuminated by warm ruby crimson strobe lighting from the side and soft cold cyan ambient back rim lighting, shallow depth of field, Cooke anamorphic lens flare, photorealistic sci-fi cinematic master still." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCLkhnpQ1Wslrlu6TfG9uGFItvacLLJqXDp59ARLBSzblgBLR_o-RnHUUL3RQ8EaTtFSSzg2r1PnHUTYawoUSZfxliKB2LLgFxTWTRJRQSFhvXJLWEn8jQEXVW3ZcyBvjvVk4U5QL34moonpg7d1xIbWlPTrohPEjds0M-z6uzwcqRLQfGRFO59btwv33W5ivYx0GB2BDg2KgZ7TljaMDHVjNp_jSDnL7JXozgD7AZvYsSmQLVGp4g"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-transparent to-transparent"></div>
+<span class="absolute top-2 left-2 px-1.5 py-0.5 rounded bg-surface-container-lowest/80 backdrop-blur-sm text-[10px] font-mono text-on-surface">
+              CAM B • 85mm Cooke T2.3
+            </span>
+<span class="absolute top-2 right-2 px-1.5 py-0.5 rounded bg-surface-container-high text-primary text-[9px] font-semibold uppercase">
+              Shallow DoF
+            </span>
+</div>
+<div class="p-space-sm flex flex-col gap-1">
+<div class="flex items-center justify-between text-xs">
+<span class="font-medium text-on-surface">Vespera Silhouette / Immersion Pool</span>
+<span class="text-outline font-mono">Frame #0428</span>
+</div>
+<div class="flex items-center gap-2 text-[10px] text-outline font-mono">
+<span>Key: Crimson (1800K)</span>
+<span>•</span>
+<span>Rim: Cyan (7200K)</span>
+</div>
+</div>
+</div>
+<!-- Shot 03: Macro Probe Lens Detail (Active Ingest) -->
+<div class="p-space-sm rounded-lg bg-surface-container-lowest flex flex-col gap-2">
+<div class="flex items-center justify-between text-xs">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary text-sm">center_focus_strong</span>
+<span class="font-medium text-on-surface">CAM C • Macro Probe Lens</span>
+</div>
+<span class="text-primary font-mono text-[10px]">84% Ingest</span>
+</div>
+<p class="text-[11px] text-on-surface-variant font-body-sm">
+            Liquid mercury droplet impact ripples • Seed #901248
+          </p>
+<div class="w-full bg-surface-container h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary-container h-full w-[84%] transition-all"></div>
+</div>
+</div>
+</section>
+<!-- Screenplay-to-Cinematic Audio Bed -->
+<section class="interactive-spotlight-card rounded-xl p-space-md flex flex-col gap-space-sm">
+<div class="flex items-center justify-between pb-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-base">graphic_eq</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">Audio Bed Synthesis</span>
+</div>
+<span class="font-label-sm text-label-sm text-outline">48kHz / 24-bit</span>
+</div>
+<div class="p-space-sm rounded-lg bg-surface-container-lowest flex flex-col gap-2">
+<div class="flex items-center justify-between text-xs">
+<span class="text-on-surface font-medium">Atmospheric Drone &amp; Rain Bed</span>
+<span class="font-mono text-outline text-[10px]">01:14 Synced</span>
+</div>
+<!-- Inline SVG Audio Waveform Graph -->
+<div class="w-full h-10 flex items-center justify-between gap-0.5 px-1 py-1 bg-surface-container-high/40 rounded">
+<div class="w-1 bg-outline-variant h-3 rounded-full"></div>
+<div class="w-1 bg-outline-variant h-5 rounded-full"></div>
+<div class="w-1 bg-primary-container h-7 rounded-full"></div>
+<div class="w-1 bg-primary-container h-9 rounded-full"></div>
+<div class="w-1 bg-primary-container h-6 rounded-full"></div>
+<div class="w-1 bg-secondary-container h-8 rounded-full"></div>
+<div class="w-1 bg-primary-container h-4 rounded-full"></div>
+<div class="w-1 bg-primary-container h-8 rounded-full"></div>
+<div class="w-1 bg-primary-container h-10 rounded-full"></div>
+<div class="w-1 bg-primary h-6 rounded-full"></div>
+<div class="w-1 bg-primary-container h-4 rounded-full"></div>
+<div class="w-1 bg-outline-variant h-2 rounded-full"></div>
+<div class="w-1 bg-primary-container h-7 rounded-full"></div>
+<div class="w-1 bg-primary-container h-9 rounded-full"></div>
+<div class="w-1 bg-secondary-container h-5 rounded-full"></div>
+<div class="w-1 bg-outline-variant h-3 rounded-full"></div>
+<div class="w-1 bg-primary-container h-6 rounded-full"></div>
+<div class="w-1 bg-primary-container h-8 rounded-full"></div>
+<div class="w-1 bg-primary h-4 rounded-full"></div>
+<div class="w-1 bg-outline-variant h-2 rounded-full"></div>
+</div>
+<div class="flex items-center justify-between text-[11px] text-on-surface-variant font-body-sm">
+<span>Staccato rain bursts • Sub-bass drone 40Hz</span>
+<button class="text-primary hover:text-on-primary-container transition-colors flex items-center gap-0.5 font-medium" type="button">
+<span class="material-symbols-outlined text-xs">play_arrow</span> Preview
+            </button>
+</div>
+</div>
+</section>
+</aside>
+</div>
+</div>
+<script>
+  (function initInteractiveSpotlight() {
+    const spotlightCards = document.querySelectorAll('.interactive-spotlight-card');
+    spotlightCards.forEach((card) => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        card.style.setProperty('--mouse-x', `${x}px`);
+        card.style.setProperty('--mouse-y', `${y}px`);
+      });
+    });
+  })();
+</script></main></div></body></html>

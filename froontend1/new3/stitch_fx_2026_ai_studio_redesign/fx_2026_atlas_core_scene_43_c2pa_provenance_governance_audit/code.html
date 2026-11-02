@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "surface-container-low": "#1c1b1b", "on-primary": "#690003", "inverse-surface": "#e5e2e1", "on-primary-fixed-variant": "#930007", "on-error-container": "#ffdad6", "surface-variant": "#353534", "on-secondary-fixed-variant": "#862200", "primary-fixed": "#ffdad5", "surface-container-highest": "#353534", "surface-tint": "#ffb4aa", "primary": "#ffb4aa", "surface-bright": "#393939", "surface-container-high": "#2a2a2a", "secondary-fixed": "#ffdbd1", "on-secondary-fixed": "#3b0900", "error-container": "#93000a", "inverse-on-surface": "#313030", "primary-container": "#e50914", "surface-container-lowest": "#0e0e0e", "surface-container": "#201f1f", "on-surface-variant": "#e9bcb6", "surface-dim": "#131313", "secondary-container": "#d73b00", "on-primary-fixed": "#410001", "on-surface": "#e5e2e1", "surface": "#131313", "on-tertiary-fixed": "#410005", "secondary-fixed-dim": "#ffb5a0", "tertiary-fixed-dim": "#ffb3ae", "on-primary-container": "#fff7f6", "tertiary": "#ffb3ae", "outline-variant": "#5e3f3b", "on-tertiary": "#68000c", "inverse-primary": "#c0000c", "on-error": "#690005", "tertiary-container": "#e40b2b", "on-tertiary-container": "#fff7f6", "on-tertiary-fixed-variant": "#930016", "secondary": "#ffb5a0", "background": "#131313", "tertiary-fixed": "#ffdad7", "on-secondary-container": "#fffbff", "on-secondary": "#5f1500", "on-background": "#e5e2e1", "error": "#ffb4ab", "primary-fixed-dim": "#ffb4aa", "outline": "af8782" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "space-md": "1rem", "space-lg": "1.5rem", "margin-mobile": "1rem", "margin": "2rem", "gutter-mobile": "0.75rem", "gutter": "1.5rem", "space-xs": "0.25rem", "space-xl": "2.5rem", "space-sm": "0.5rem" }, "fontFamily": { "body-lg": ["Inter"], "headline-xl": ["Geist"], "body-sm": ["Inter"], "headline-md": ["Geist"], "body-md": ["Inter"], "headline-lg": ["Geist"], "headline-xl-mobile": ["Geist"], "headline-sm": ["Geist"], "headline-lg-mobile": ["Geist"], "label-md": ["Geist"], "label-sm": ["Geist"] }, "fontSize": { "body-lg": ["1rem", { "lineHeight": "1.6rem", "letterSpacing": "-0.005em", "fontWeight": "400" }], "headline-xl": ["3rem", { "lineHeight": "3.5rem", "letterSpacing": "-0.03em", "fontWeight": "600" }], "body-sm": ["0.75rem", { "lineHeight": "1.2rem", "letterSpacing": "0.01em", "fontWeight": "400" }], "headline-md": ["1.5rem", { "lineHeight": "2rem", "letterSpacing": "-0.015em", "fontWeight": "500" }], "body-md": ["0.875rem", { "lineHeight": "1.4rem", "letterSpacing": "0em", "fontWeight": "400" }], "headline-lg": ["2.25rem", { "lineHeight": "2.75rem", "letterSpacing": "-0.025em", "fontWeight": "600" }], "headline-xl-mobile": ["2rem", { "lineHeight": "2.5rem", "letterSpacing": "-0.02em", "fontWeight": "600" }], "headline-sm": ["1.125rem", { "lineHeight": "1.625rem", "letterSpacing": "-0.01em", "fontWeight": "500" }], "headline-lg-mobile": ["1.625rem", { "lineHeight": "2.125rem", "letterSpacing": "-0.02em", "fontWeight": "600" }], "label-md": ["0.8125rem", { "lineHeight": "1rem", "letterSpacing": "0.02em", "fontWeight": "500" }], "label-sm": ["0.6875rem", { "lineHeight": "0.875rem", "letterSpacing": "0.05em", "fontWeight": "600" }] } } } }</script></head><body class="bg-surface font-body-md text-body-md text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-container"><aside class="fixed left-0 top-0 h-full w-72 bg-surface-container-lowest z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.5)]"><div class="flex flex-col"><div class="h-16 px-space-lg flex items-center justify-between bg-surface-container-lowest"><div class="flex items-center gap-space-sm"><img alt="FX-2026 Brand Emblem" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD0VvF0aj0DHp2h98MzVkGo_27dTZN0fZVboahqbTwts6bbOXSloSCwpeAslIHSIj3GSXs0y7fPlxijH-s9UIVfsupKP4kEMYxrDTXtCfQb6LWhQ0GAd1R_MD5Shm68oN6Fg3usBRp4V1KVT_GQDBaTavk0qLlvCMT1KBNwQpvPtfydvuxh7e1IvZ2bpAzzdEV7j_98XtEH7Lj0kMukmwUsWrMh_BQtPc1hMVakrVNLWnvLQAkw2ig"/><span class="font-headline-sm text-headline-sm tracking-wider text-on-surface uppercase">FX-2026</span></div><span class="px-space-xs py-0.5 rounded bg-surface-container-high text-primary font-label-sm text-label-sm tracking-widest uppercase">Enterprise</span></div><div class="px-space-md pt-space-sm pb-space-xs"><button class="w-full flex items-center justify-between px-space-md py-space-sm rounded-lg bg-primary-container text-on-primary-container hover:bg-tertiary-container transition-all shadow-[0_4px_16px_rgba(229,9,20,0.25)]" type="button"><span class="flex items-center gap-space-xs font-label-md text-label-md tracking-wide"><span class="material-symbols-outlined text-lg">add_circle</span>New Prompt</span><kbd class="px-space-xs py-0.5 rounded bg-on-primary font-label-sm text-label-sm text-on-primary-container opacity-90">⌘K</kbd></button></div><div class="overflow-y-auto px-space-md py-space-xs space-y-space-md"><div class="space-y-space-xs"><span class="px-space-sm font-label-sm text-label-sm text-outline tracking-wider uppercase">Features</span><nav class="flex flex-col gap-0.5" data-active-classes="bg-surface-container-high text-on-surface font-label-md"><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="chat" href="#"><span class="material-symbols-outlined text-lg">chat_bubble</span><span>Chat</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="architect" href="#"><span class="material-symbols-outlined text-lg">architecture</span><span>Architect</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="memory" href="#"><span class="material-symbols-outlined text-lg">neurology</span><span>Memory</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="analytics" href="#"><span class="material-symbols-outlined text-lg">monitoring</span><span>Analytics</span></a></nav></div><div class="space-y-space-xs"><span class="px-space-sm font-label-sm text-label-sm text-outline tracking-wider uppercase">Workspaces</span><nav class="flex flex-col gap-0.5" data-active-classes="bg-surface-container-high text-on-surface font-label-md"><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="new-project" href="#"><span class="material-symbols-outlined text-lg">create_new_folder</span><span>New Project</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="image-generator" href="#"><span class="material-symbols-outlined text-lg">image</span><span>Image Generator</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="video-director" href="#"><span class="material-symbols-outlined text-lg">movie_filter</span><span>Video Director</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="audio-soundtrack" href="#"><span class="material-symbols-outlined text-lg">graphic_eq</span><span>Audio / Soundtrack</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="3d-assets" href="#"><span class="material-symbols-outlined text-lg">view_in_ar</span><span>3D Assets</span></a></nav></div><div class="space-y-space-xs"><span class="px-space-sm font-label-sm text-label-sm text-outline tracking-wider uppercase">Intelligence</span><nav class="flex flex-col gap-0.5" data-active-classes="bg-surface-container-high text-on-surface font-label-md"><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="neural-models" href="#"><span class="material-symbols-outlined text-lg">psychology</span><span>Neural Models</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="prompt-vault" href="#"><span class="material-symbols-outlined text-lg">lock</span><span>Prompt Vault</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="render-queue" href="#"><span class="material-symbols-outlined text-lg">layers</span><span>Render Queue</span></a></nav></div></div></div><div class="p-space-md space-y-space-sm bg-surface-container-lowest"><div class="p-space-md rounded-xl bg-surface-container-low shadow-[inset_0_0_24px_rgba(229,9,20,0.08)] flex flex-col gap-space-xs"><div class="flex items-center justify-between"><div class="flex items-center gap-space-xs text-primary"><span class="material-symbols-outlined text-base">diamond</span><span class="font-label-md text-label-md text-on-surface">Enterprise Tier</span></div><span class="font-label-sm text-label-sm text-outline uppercase">PRO</span></div><p class="font-body-sm text-body-sm text-on-surface-variant">Unlock full compute threads and unmetered batch rendering.</p><a class="mt-space-xs inline-flex items-center justify-center py-space-xs px-space-sm rounded bg-surface-container-high text-on-surface hover:bg-surface-bright hover:text-on-surface font-label-sm text-label-sm transition-colors" data-path="manage-plan" href="#">Manage Plan</a></div><div class="px-space-sm py-space-xs rounded bg-surface-container-lowest flex items-center gap-space-xs"><span class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></span><span class="font-label-sm text-label-sm text-outline truncate">Node: US-East GPU Cluster (RTX-6000 Ada)</span></div></div></aside><div class="pl-72"><header class="fixed top-0 left-72 right-0 h-16 bg-surface-container-lowest/90 backdrop-blur-xl z-40 px-space-lg flex items-center justify-between shadow-[0_1px_8px_rgba(0,0,0,0.5)]"><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs font-label-md text-label-md text-on-surface"><span class="text-outline">FX-2026 Studio</span><span class="text-outline">/</span><span class="font-medium text-on-surface">Creative Intelligence v4.2</span><span class="relative flex h-2 w-2 ml-1"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-container opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-primary-container"></span></span></div></div><div class="flex-1 max-w-md mx-space-lg"><div class="relative flex items-center"><span class="material-symbols-outlined absolute left-3 text-outline text-lg pointer-events-none">search</span><input class="w-full bg-surface-container py-space-xs pl-9 pr-12 rounded-lg text-on-surface placeholder:text-outline font-body-sm text-body-sm focus:outline-none focus:ring-1 focus:ring-primary" placeholder="Omni-Search workflows, models, nodes..." type="text"/><kbd class="absolute right-2 px-space-xs py-0.5 rounded bg-surface-container-high text-outline font-label-sm text-label-sm">⌘/</kbd></div></div><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs px-space-sm py-space-xs rounded-lg bg-surface-container-low"><span class="material-symbols-outlined text-primary text-base">speed</span><span class="font-label-sm text-label-sm text-outline">GPU:</span><span class="font-label-sm text-label-sm text-on-surface font-medium">42%</span><div class="w-12 h-1.5 bg-surface-container-high rounded-full overflow-hidden ml-1"><div class="h-full bg-primary-container w-[42%]"></div></div></div><button class="px-space-xs py-space-xs rounded text-outline hover:text-on-surface font-label-sm text-label-sm transition-colors" type="button">العربية / EN</button><button class="relative p-space-xs rounded-lg text-outline hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-lg">notifications</span><span class="absolute top-1.5 right-1.5 w-1.5 h-1.5 rounded-full bg-primary-container"></span></button><a class="p-space-xs rounded-lg text-outline hover:text-on-surface transition-colors" data-path="documentation" href="#" title="Documentation"><span class="material-symbols-outlined text-lg">menu_book</span></a><div class="flex items-center gap-space-xs pl-space-xs"><img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-1 ring-outline-variant" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCA84LSJo3PpfP2pWLm_Cw-072SStUGjZU-hzUD6ulEBNPdDfexoV9Qf9PIyBx9o99-kJwkFH20QyrFGhdNmCVguhmdcAhxwOImgXxKS4sIoFatPT7s-nyaHvHbsj5IJe-bWxyc6up8tbxS1HGVQTuS-KYNmxASO461Xz5h-1wCquC6sM4ka9q9lARBJSW4OR8Rvsnx5Gqrzl6NNUh9rDMxj_6OXoDUQuEk3_bgSs76nP2VMZLis20"/><span class="material-symbols-outlined text-outline text-base">expand_more</span></div></div></header><main class="w-full pt-16 bg-surface min-h-screen"><div class="flex flex-col w-full">
+<!-- Atmospheric Glow Backdrop (Contained Canvas) -->
+<div class="relative w-full overflow-hidden px-margin py-space-lg flex flex-col gap-space-lg">
+<!-- Ambient Red Studio Radiance -->
+<div class="absolute -top-32 left-1/4 w-[720px] h-[360px] bg-primary-container/10 blur-[140px] pointer-events-none rounded-full"></div>
+<div class="absolute top-96 -right-24 w-[540px] h-[400px] bg-secondary-container/5 blur-[160px] pointer-events-none rounded-full"></div>
+<!-- Top Audit Telemetry & Context Command Bar -->
+<section class="relative z-10 flex flex-col gap-space-sm bg-surface-container-lowest p-space-md rounded-xl shadow-xl">
+<!-- Breadcrumb, Arabesque Subtitle & Telemetry -->
+<div class="flex flex-wrap items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-xs font-label-sm text-label-sm tracking-wider uppercase text-outline">
+<span class="text-primary font-semibold">ATLAS CORE</span>
+<span>/</span>
+<span class="text-on-surface">app/governance/page.tsx</span>
+<span>/</span>
+<span class="text-primary-container">C2PA PROVENANCE &amp; MANIFEST VAULT</span>
+</div>
+<div class="flex items-center gap-space-sm">
+<span class="font-label-sm text-label-sm text-outline tracking-widest text-right">تدقيق الحوكمة وشهادات المنشأ C2PA v2.1</span>
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container animate-ping"></span>
+</div>
+</div>
+<!-- Main Target Title & Attestation Status -->
+<div class="flex flex-col xl:flex-row xl:items-center justify-between gap-space-md pt-space-xs">
+<div class="flex flex-col gap-1">
+<div class="flex flex-wrap items-center gap-space-sm">
+<span class="px-space-xs py-0.5 rounded bg-primary-container/15 text-primary font-label-sm text-label-sm uppercase tracking-widest">
+              Live Verified Vault
+            </span>
+<span class="font-label-md text-label-md font-mono text-outline">
+              ROOT HASH: <span class="text-on-surface font-semibold">0x3E8B...99C</span>
+</span>
+<span class="flex items-center gap-1 px-space-xs py-0.5 rounded bg-surface-container-high text-primary-fixed-dim font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-sm text-primary">verified</span>
+              SEALED &amp; HARDWARE VERIFIED
+            </span>
+</div>
+<h1 class="font-headline-md text-headline-md text-on-surface tracking-tight mt-1">
+            AUDIT CONTEXT: SCENE 43 STORYBOARD &amp; KEYFRAME MATRIX
+          </h1>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            INT. SYNCHROTRON CORE — DIVERGENCE CHAMBER (ACT II / SCENE 43) • MULTI-CAM C2PA CRYPTOGRAPHIC LEDGER
+          </p>
+</div>
+<!-- Compliance Mini-Badges -->
+<div class="flex flex-wrap items-center gap-space-xs">
+<div class="flex items-center gap-1.5 px-space-sm py-1 rounded bg-surface-container-low text-on-surface font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-primary text-sm">gavel</span>
+<span>WGA #2026-NARR-881</span>
+</div>
+<div class="flex items-center gap-1.5 px-space-sm py-1 rounded bg-surface-container-low text-on-surface font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-secondary text-sm">record_voice_over</span>
+<span>SAG-AFTRA 2026 VOICE CLEAR</span>
+</div>
+<div class="flex items-center gap-1.5 px-space-sm py-1 rounded bg-surface-container-low text-primary font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-sm">shield</span>
+<span>C2PA 2.1 CONFORMANT (100%)</span>
+</div>
+<div class="flex items-center gap-1.5 px-space-sm py-1 rounded bg-surface-container-low text-on-surface font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-outline text-sm">palette</span>
+<span>ACEScg 8K COLOR ENCLAVE</span>
+</div>
+</div>
+</div>
+<!-- Action Buttons Row -->
+<div class="flex flex-wrap items-center justify-between gap-space-sm pt-space-xs">
+<div class="flex flex-wrap items-center gap-space-xs">
+<button class="flex items-center gap-space-xs px-space-md py-space-xs rounded-lg bg-primary-container text-on-primary-container font-label-md text-label-md hover:bg-tertiary-container transition-all shadow-[0_4px_16px_rgba(229,9,20,0.3)]" type="button">
+<span class="material-symbols-outlined text-base">radar</span>
+<span>Audit Keyframe Stream</span>
+</button>
+<button class="flex items-center gap-space-xs px-space-md py-space-xs rounded-lg bg-surface-container text-on-surface font-label-md text-label-md hover:bg-surface-container-high transition-colors" type="button">
+<span class="material-symbols-outlined text-base text-primary">lock_reset</span>
+<span>Trigger Enclave Resign</span>
+</button>
+<button class="flex items-center gap-space-xs px-space-md py-space-xs rounded-lg bg-surface-container text-on-surface font-label-md text-label-md hover:bg-surface-container-high transition-colors" type="button">
+<span class="material-symbols-outlined text-base text-secondary">file_download</span>
+<span>Export C2PA Bundle (.c2pa / .jsonld)</span>
+</button>
+</div>
+<button class="flex items-center gap-space-xs px-space-md py-space-xs rounded-lg bg-surface-container-high text-primary font-label-md text-label-md hover:bg-surface-bright transition-colors" type="button">
+<span class="material-symbols-outlined text-base">balance</span>
+<span>Generate Judicial Attestation</span>
+</button>
+</div>
+</section>
+<!-- 1. High-Level Compliance & Provenance Matrix (Cards Grid) -->
+<section class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-gutter">
+<!-- Card 1: Provenance Hash Integrity -->
+<div class="p-space-md rounded-xl bg-surface-container-low flex flex-col justify-between gap-space-md shadow-md relative overflow-hidden group">
+<div class="absolute top-0 right-0 w-24 h-24 bg-primary-container/10 rounded-full blur-xl pointer-events-none group-hover:bg-primary-container/20 transition-all"></div>
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-outline tracking-wider uppercase">Cryptographic Integrity</span>
+<span class="material-symbols-outlined text-primary text-xl">fingerprint</span>
+</div>
+<span class="font-headline-md text-headline-md text-on-surface font-semibold tracking-tight">100% Match</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">0 tampering detected across 4/4 hardware keyframe streams.</p>
+</div>
+<div class="flex flex-col gap-1.5 pt-space-xs">
+<div class="flex items-center justify-between font-label-sm text-label-sm">
+<span class="text-outline font-mono">Merkle Root Verification</span>
+<span class="text-primary font-mono">SHA-256 Valid</span>
+</div>
+<div class="w-full h-1.5 bg-surface-container rounded-full overflow-hidden">
+<div class="w-full h-full bg-primary-container"></div>
+</div>
+</div>
+</div>
+<!-- Card 2: C2PA Manifest Status -->
+<div class="p-space-md rounded-xl bg-surface-container-low flex flex-col justify-between gap-space-md shadow-md relative overflow-hidden group">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-outline tracking-wider uppercase">Manifest Envelope</span>
+<span class="material-symbols-outlined text-secondary text-xl">verified_user</span>
+</div>
+<span class="font-headline-md text-headline-md text-on-surface font-semibold tracking-tight">4/4 Signed</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">CAM-A (Gantry), CAM-B (Thorne), CAM-C (Core), CAM-D (Synthetica).</p>
+</div>
+<div class="flex items-center gap-2 pt-space-xs font-mono font-label-sm text-label-sm text-outline">
+<span class="px-2 py-0.5 rounded bg-surface-container text-primary font-semibold">JUMBF Valid</span>
+<span class="text-xs truncate">Enclave: AMD SEV-SNP</span>
+</div>
+</div>
+<!-- Card 3: SAG-AFTRA Synthetic Persona Clearance -->
+<div class="p-space-md rounded-xl bg-surface-container-low flex flex-col justify-between gap-space-md shadow-md relative overflow-hidden group">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-outline tracking-wider uppercase">Synthetic Actors</span>
+<span class="material-symbols-outlined text-tertiary text-xl">co_present</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold">Dr. Aris Thorne (CFG 7.9)</span>
+<span class="font-body-sm text-body-sm text-primary">Biometric Enclave Cleared</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Cmdr Vespera: Voice identity locked (Sub-bass 88Hz calibrated).</p>
+</div>
+<div class="flex items-center justify-between pt-space-xs font-label-sm text-label-sm">
+<span class="text-outline">SAG-AFTRA 2026 Code</span>
+<span class="text-on-surface font-mono">SEC-VOX-994</span>
+</div>
+</div>
+<!-- Card 4: WGA Narrative Copyright Collision -->
+<div class="p-space-md rounded-xl bg-surface-container-low flex flex-col justify-between gap-space-md shadow-md relative overflow-hidden group">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-outline tracking-wider uppercase">WGA Copyright Collision</span>
+<span class="material-symbols-outlined text-primary text-xl">auto_stories</span>
+</div>
+<span class="font-headline-md text-headline-md text-on-surface font-semibold tracking-tight">0.00% Overlap</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Fully original latent diffusion synthesis. 0 registered WGA matches.</p>
+</div>
+<div class="flex items-center justify-between pt-space-xs font-label-sm text-label-sm font-mono">
+<span class="text-outline">Latent Distance</span>
+<span class="text-primary font-semibold">Δ 0.994 Cosine</span>
+</div>
+</div>
+</section>
+<!-- 2. Scene 43 Multi-Angle Keyframe C2PA Manifest Breakdown Table / Inspector -->
+<section class="flex flex-col gap-space-md bg-surface-container-lowest p-space-md rounded-xl shadow-xl">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-sm">
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-xl">view_column</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold">
+              Scene 43 Multi-Angle Keyframe C2PA Manifest Breakdown
+            </h2>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            Granular inspection of JUMBF metadata boxes, hardware enclave signatures, and frequency-domain watermarks.
+          </p>
+</div>
+<!-- Status Indicator Pill -->
+<div class="flex items-center gap-space-xs px-space-sm py-1 rounded bg-surface-container font-label-sm text-label-sm text-on-surface">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+<span>Spread-Spectrum Frequency Domain Watermark: <strong class="text-primary">100% Detectable</strong></span>
+</div>
+</div>
+<!-- Shots Inspector Grid (Desktop 4-Col Split Layout) -->
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-gutter">
+<!-- Shot 01: CAM A - Kinetic Gantry Run -->
+<div class="flex flex-col bg-surface-container-low rounded-xl overflow-hidden shadow-md hover:bg-surface-container transition-all">
+<div class="relative w-full h-44 overflow-hidden bg-surface-container-highest">
+<img class="w-full h-full object-cover" data-alt="Cinematic wide keyframe shot from CAM A inside a dark industrial synchrotron core divergence chamber. Glowing crimson energy beams pulse through geometric magnetic gantry rings. A suspended industrial metal walkway stretches into atmospheric haze with warm ember reflections, high contrast cinematic sci-fi film aesthetic in 8K resolution." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBP6dyO307L394ZrkYY_aak5ZhZWAXFBs7hCLXXrTjSDD_NJtsiIHYQgs59JaJyQZOXIM9YH-uT8Jq7E5Dn_tTfA1TkVR8yl77Z2KUxuhW3jZ6OUey8MJZzuODKtFsztYANuRKi1eX8oO0AApDRrpScLkPXowaXNHRCiDUsUvTDY8FL3tTZDWYyEd5x3lD_vVjaaGZlbJXV86jMud0TCEVAd-cFE7X_1PI0T4Y13A"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-low via-transparent to-black/40"></div>
+<div class="absolute top-2 left-2 flex items-center gap-1 px-2 py-0.5 rounded bg-black/70 backdrop-blur-md text-on-surface font-mono font-label-sm text-label-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container"></span>
+<span>CAM A • SHOT 01</span>
+</div>
+<div class="absolute top-2 right-2 px-2 py-0.5 rounded bg-primary-container/90 text-on-primary-container font-label-sm text-label-sm font-semibold">
+              SYNTHESIZED
+            </div>
+<div class="absolute bottom-2 left-2 right-2 flex items-center justify-between text-on-surface font-mono font-label-sm text-label-sm">
+<span class="truncate">Kinetic Gantry Run</span>
+<span class="text-primary font-semibold">Cooke T1.9</span>
+</div>
+</div>
+<div class="p-space-sm flex flex-col gap-space-xs font-body-sm text-body-sm">
+<div class="flex items-center justify-between py-1 bg-surface-container-lowest/50 px-2 rounded font-mono font-label-sm text-label-sm">
+<span class="text-outline">Hash:</span>
+<span class="text-on-surface font-semibold">0x3e8b...1a0</span>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm">
+<span>Hardware Sign:</span>
+<span class="text-on-surface font-mono font-medium">AMD SEV-SNP Enclave</span>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm">
+<span>C2PA Assertions:</span>
+<span class="text-primary font-mono text-xs">c2pa.actions.synthesized</span>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm">
+<span>Training Protect:</span>
+<span class="text-on-surface font-mono text-xs">strict (no-harvest)</span>
+</div>
+<div class="mt-space-xs pt-space-xs flex items-center justify-between bg-surface-container-high/40 p-2 rounded">
+<span class="font-label-sm text-label-sm text-outline">JUMBF Box Validation</span>
+<span class="text-primary font-label-sm text-label-sm flex items-center gap-1 font-semibold">
+<span class="material-symbols-outlined text-sm">check_circle</span> VALID
+              </span>
+</div>
+</div>
+</div>
+<!-- Shot 02: CAM B - Dr. Thorne Reveal -->
+<div class="flex flex-col bg-surface-container-low rounded-xl overflow-hidden shadow-md hover:bg-surface-container transition-all">
+<div class="relative w-full h-44 overflow-hidden bg-surface-container-highest">
+<img class="w-full h-full object-cover" data-alt="Dramatic high-contrast close-up shot of Dr. Aris Thorne, a middle-aged cybernetic physicist with intense focused expression. Soft crimson sidelight illuminates facial features and micro-cybernetic ocular augments. Dark obsidian background with out-of-focus synchrotron divergence particle sparks, cinematic Cooke anamorphic lens flare." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBcHgqD4CVrgpznKzDMaCIFBqgyHAkFFpRgx-sWRRoRQKoAmB9LAqQz7Ho7h6Ay8jmcj_rC-a78N6_9P6wdrX_HwOoIWOtTZluBe22ZDpuGwzpFMUkwdoFD2VB9fMs0xFBlI7j8BKxuNhSA1urkfiH4WbAKrPZDjqfWISQkO5NlKtrcJLcdnBnSDyHrpNFFgbSpuOS8TRg2YxlAFMiDcNFs0FSu1pnikFadHvo3sQ"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-low via-transparent to-black/40"></div>
+<div class="absolute top-2 left-2 flex items-center gap-1 px-2 py-0.5 rounded bg-black/70 backdrop-blur-md text-on-surface font-mono font-label-sm text-label-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary-container"></span>
+<span>CAM B • SHOT 02</span>
+</div>
+<div class="absolute top-2 right-2 px-2 py-0.5 rounded bg-surface-container-highest/90 text-secondary font-label-sm text-label-sm font-semibold">
+              SAG-AFTRA CLEAR
+            </div>
+<div class="absolute bottom-2 left-2 right-2 flex items-center justify-between text-on-surface font-mono font-label-sm text-label-sm">
+<span class="truncate">Dr. Thorne Reveal</span>
+<span class="text-secondary font-semibold">85mm Macro</span>
+</div>
+</div>
+<div class="p-space-sm flex flex-col gap-space-xs font-body-sm text-body-sm">
+<div class="flex items-center justify-between py-1 bg-surface-container-lowest/50 px-2 rounded font-mono font-label-sm text-label-sm">
+<span class="text-outline">Hash:</span>
+<span class="text-on-surface font-semibold">0x7c41...89f</span>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm">
+<span>Digital Double:</span>
+<span class="text-secondary font-mono font-medium truncate">THORNE_VOX_V4.2</span>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm">
+<span>Biometric Assertion:</span>
+<span class="text-on-surface font-mono text-xs">watermark: embedded</span>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm">
+<span>Actor Voice Enclave:</span>
+<span class="text-primary font-mono text-xs">Nitro KMS #9081</span>
+</div>
+<div class="mt-space-xs pt-space-xs flex items-center justify-between bg-surface-container-high/40 p-2 rounded">
+<span class="font-label-sm text-label-sm text-outline">Persona Rights Token</span>
+<span class="text-secondary font-label-sm text-label-sm flex items-center gap-1 font-semibold">
+<span class="material-symbols-outlined text-sm">verified</span> VERIFIED
+              </span>
+</div>
+</div>
+</div>
+<!-- Shot 03: CAM C - Core Decay Macro Probe -->
+<div class="flex flex-col bg-surface-container-low rounded-xl overflow-hidden shadow-md hover:bg-surface-container transition-all">
+<div class="relative w-full h-44 overflow-hidden bg-surface-container-highest">
+<img class="w-full h-full object-cover" data-alt="Microscopic volumetric particle simulation of a collapsing quantum plasma reaction within the synchrotron core. Glowing crimson and ember filaments twist in zero-gravity with volumetric smoke, dark magnetic confinement fields, chromatic aberration, photorealistic physics rendering." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCMiyA1kMe1BUvPD5sgR47FdC0KmPbRZyQaow2-pMCVrulgFIgwFCMD1xE0-xbaLunVJmzrBKIRhzY_DYqEvq9d437vpReHfdsXJDzh7p6wcZobmQTFxBlKL8S3tZJ2KK2liSQAVYouiCdLgxRpkZlb-naBdoWGF8z79t4ej9QETlWSFxHM2SNHrvpC9zxwiMQ-63n3wNWtw5ZJjUHapHiM1LbUpK2-Bdr53vfA1w"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-low via-transparent to-black/40"></div>
+<div class="absolute top-2 left-2 flex items-center gap-1 px-2 py-0.5 rounded bg-black/70 backdrop-blur-md text-on-surface font-mono font-label-sm text-label-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+<span>CAM C • SHOT 03</span>
+</div>
+<div class="absolute top-2 right-2 px-2 py-0.5 rounded bg-surface-container-highest/90 text-primary-fixed-dim font-label-sm text-label-sm font-semibold">
+              OpenVDB SIM
+            </div>
+<div class="absolute bottom-2 left-2 right-2 flex items-center justify-between text-on-surface font-mono font-label-sm text-label-sm">
+<span class="truncate">Core Decay Macro Probe</span>
+<span class="text-primary font-semibold">Probe Telemetry</span>
+</div>
+</div>
+<div class="p-space-sm flex flex-col gap-space-xs font-body-sm text-body-sm">
+<div class="flex items-center justify-between py-1 bg-surface-container-lowest/50 px-2 rounded font-mono font-label-sm text-label-sm">
+<span class="text-outline">Hash:</span>
+<span class="text-on-surface font-semibold">0x92f0...e41</span>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm">
+<span>Volumetric Sim:</span>
+<span class="text-on-surface font-mono font-medium truncate">OpenVDB Latent Match</span>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm">
+<span>Fluid Solvers:</span>
+<span class="text-on-surface font-mono text-xs">Houdini FX Engine 20.5</span>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm">
+<span>Color Transform:</span>
+<span class="text-primary font-mono text-xs">ACEScg AP1 Rec709</span>
+</div>
+<div class="mt-space-xs pt-space-xs flex items-center justify-between bg-surface-container-high/40 p-2 rounded">
+<span class="font-label-sm text-label-sm text-outline">Physics Origin Hash</span>
+<span class="text-primary font-label-sm text-label-sm flex items-center gap-1 font-semibold">
+<span class="material-symbols-outlined text-sm">lock</span> ATTESTED
+              </span>
+</div>
+</div>
+</div>
+<!-- Shot 04: CAM D - Synthetica Hologram Manifestation -->
+<div class="flex flex-col bg-surface-container-low rounded-xl overflow-hidden shadow-md hover:bg-surface-container transition-all">
+<div class="relative w-full h-44 overflow-hidden bg-surface-container-highest">
+<img class="w-full h-full object-cover" data-alt="Holographic humanoid intelligence avatar Synthetica manifesting inside the divergence chamber airlock. Ethereal glowing vector wireframes dissolve into volumetric crimson particles, digital scanlines, reflective metallic surfaces below, Unreal Engine 5.4 Lumen global illumination." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxh5XiXGJWxz08l06hyqAgfb7-yCOnLKVGW7cpCJMBqF6QbW4_bGXNEDw4Ix6H8qc3ZTmqAxIK3Bd8xau-xyLd_DNjqGGZ9AsnkPeSHBR4aIizBCAwiw4WXbtvPYL-s_kkBSkSFWghFYQkBxVglF8HTF9P_p9pKMvHc5dDTfXrq_O8galfWp_N_h2FQNhUUDcY4UBPCfqqQOnjbzMa4mh9Bv_QWLWEjyoN2Q_vYg"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-low via-transparent to-black/40"></div>
+<div class="absolute top-2 left-2 flex items-center gap-1 px-2 py-0.5 rounded bg-black/70 backdrop-blur-md text-on-surface font-mono font-label-sm text-label-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container"></span>
+<span>CAM D • SHOT 04</span>
+</div>
+<div class="absolute top-2 right-2 px-2 py-0.5 rounded bg-surface-container-highest/90 text-primary font-label-sm text-label-sm font-semibold">
+              UE 5.4 LIVELINK
+            </div>
+<div class="absolute bottom-2 left-2 right-2 flex items-center justify-between text-on-surface font-mono font-label-sm text-label-sm">
+<span class="truncate">Synthetica Hologram</span>
+<span class="text-secondary font-semibold">Virtual Rail</span>
+</div>
+</div>
+<div class="p-space-sm flex flex-col gap-space-xs font-body-sm text-body-sm">
+<div class="flex items-center justify-between py-1 bg-surface-container-lowest/50 px-2 rounded font-mono font-label-sm text-label-sm">
+<span class="text-outline">Hash:</span>
+<span class="text-on-surface font-semibold">0x51b8...c02</span>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm">
+<span>Cryptographic Anchor:</span>
+<span class="text-primary font-mono font-medium truncate">UE5-SECURE-SOCKET-PASS</span>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm">
+<span>Spatial LiveLink:</span>
+<span class="text-on-surface font-mono text-xs">SMPTE 2110 Stream</span>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm">
+<span>Shader Integrity:</span>
+<span class="text-on-surface font-mono text-xs">SHA3-512 Compliant</span>
+</div>
+<div class="mt-space-xs pt-space-xs flex items-center justify-between bg-surface-container-high/40 p-2 rounded">
+<span class="font-label-sm text-label-sm text-outline">Stage Root Trust</span>
+<span class="text-primary font-label-sm text-label-sm flex items-center gap-1 font-semibold">
+<span class="material-symbols-outlined text-sm">verified_user</span> ATTESTED
+              </span>
+</div>
+</div>
+</div>
+</div>
+<!-- C2PA Assertion Tree Deep Dive Bar -->
+<div class="p-space-md rounded-lg bg-surface-container-low flex flex-col md:flex-row items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary text-2xl">account_tree</span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold text-on-surface">C2PA Assertion Manifest Tree (JUMBF Envelope v2.1)</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Includes c2pa.actions, c2pa.hash.data, c2pa.thumbnail.claim, and wga.script.binding</span>
+</div>
+</div>
+<div class="flex items-center gap-space-xs font-mono font-label-sm text-label-sm">
+<span class="px-space-sm py-1 rounded bg-surface-container-high text-primary">JSON-LD Claim: VALID</span>
+<span class="px-space-sm py-1 rounded bg-surface-container-high text-on-surface">X.509 Hardware Cert: AMD-CA-2026</span>
+</div>
+</div>
+</section>
+<!-- Bottom Asymmetric Section: Real-Time Ledger + ExportSuite Compliance -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- 3. Real-Time Cryptographic Ledger & Audit Stream (8 Columns) -->
+<section class="lg:col-span-7 xl:col-span-8 flex flex-col gap-space-md bg-surface-container-lowest p-space-md rounded-xl shadow-xl">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-xl">dataset</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold">
+              Real-Time Cryptographic Ledger &amp; Audit Stream
+            </h2>
+</div>
+<span class="font-label-sm text-label-sm text-outline font-mono">NODE #US-EAST-NITRO-4</span>
+</div>
+<!-- Ledger Log Feed -->
+<div class="flex flex-col gap-2 font-mono text-body-sm">
+<!-- Item 1 -->
+<div class="p-space-sm rounded-lg bg-surface-container-low hover:bg-surface-container transition-colors flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+<div class="flex items-start sm:items-center gap-space-sm">
+<span class="text-primary font-semibold text-xs whitespace-nowrap">14:48:02.119</span>
+<span class="material-symbols-outlined text-primary text-base">check_circle</span>
+<span class="text-on-surface">C2PA Manifest generated for Scene 43 Shot 01–04</span>
+</div>
+<div class="flex items-center gap-2 text-outline text-xs">
+<span class="px-1.5 py-0.5 rounded bg-surface-container-high text-on-surface">usr_lead_narrative</span>
+<span class="text-primary font-mono">0x4a...c9</span>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="p-space-sm rounded-lg bg-surface-container-low hover:bg-surface-container transition-colors flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+<div class="flex items-start sm:items-center gap-space-sm">
+<span class="text-secondary font-semibold text-xs whitespace-nowrap">14:48:01.884</span>
+<span class="material-symbols-outlined text-secondary text-base">mic</span>
+<span class="text-on-surface">Dr. Aris Thorne biometric voiceprint attestation sealed in Nitro Enclave</span>
+</div>
+<div class="flex items-center gap-2 text-outline text-xs">
+<span class="px-1.5 py-0.5 rounded bg-surface-container-high text-secondary">SAG-CLEAR-OK</span>
+<span class="text-on-surface font-mono">KMS:NITRO_AWS</span>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="p-space-sm rounded-lg bg-surface-container-low hover:bg-surface-container transition-colors flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+<div class="flex items-start sm:items-center gap-space-sm">
+<span class="text-outline font-semibold text-xs whitespace-nowrap">14:47:59.012</span>
+<span class="material-symbols-outlined text-outline text-base">palette</span>
+<span class="text-on-surface">4-cam ACEScg color transform matrix cryptographic fingerprint locked</span>
+</div>
+<div class="flex items-center gap-2 text-outline text-xs">
+<span class="px-1.5 py-0.5 rounded bg-surface-container-high text-on-surface">ACES 1.3 / OCIO</span>
+<span class="text-primary font-mono">MATCH</span>
+</div>
+</div>
+<!-- Item 4 -->
+<div class="p-space-sm rounded-lg bg-surface-container-low hover:bg-surface-container transition-colors flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+<div class="flex items-start sm:items-center gap-space-sm">
+<span class="text-outline font-semibold text-xs whitespace-nowrap">14:47:40.550</span>
+<span class="material-symbols-outlined text-primary text-base">vpn_key</span>
+<span class="text-on-surface">Latent noise seed #430194 signed by Hardware Root of Trust</span>
+</div>
+<div class="flex items-center gap-2 text-outline text-xs">
+<span class="px-1.5 py-0.5 rounded bg-surface-container-high text-primary">AMD SEV-SNP</span>
+<span class="text-outline font-mono">SEED#430194</span>
+</div>
+</div>
+</div>
+<!-- Inline SVG Visualization: Cryptographic Trust Chain Sparkline -->
+<div class="pt-space-xs flex flex-col gap-1">
+<div class="flex items-center justify-between font-label-sm text-label-sm text-outline">
+<span>Hardware Enclave Attestation Stability (Last 240 Blocks)</span>
+<span class="text-primary font-mono font-medium">99.999% SLA • 0 Faults</span>
+</div>
+<div class="w-full h-12 bg-surface-container-low rounded-lg p-2 flex items-center">
+<svg class="w-full h-full text-primary-container" preserveaspectratio="none" viewbox="0 0 400 30">
+<path d="M 0,15 L 20,15 L 30,10 L 40,15 L 70,15 L 80,12 L 90,18 L 100,15 L 140,15 L 150,6 L 160,20 L 170,15 L 210,15 L 220,11 L 230,15 L 270,15 L 280,8 L 290,17 L 300,15 L 340,15 L 350,14 L 360,15 L 400,15" fill="none" stroke="currentColor" stroke-width="2"></path>
+</svg>
+</div>
+</div>
+</section>
+<!-- 4. ExportSuite™ Compliance & Legal Packages (4-5 Columns) -->
+<section class="lg:col-span-5 xl:col-span-4 flex flex-col gap-space-md bg-surface-container-lowest p-space-md rounded-xl shadow-xl">
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-xl">inventory_2</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold">
+              ExportSuite™ Compliance
+            </h2>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            Judicial and studio distribution legal bundles.
+          </p>
+</div>
+<!-- Certified Package Download Items -->
+<div class="flex flex-col gap-space-xs">
+<!-- Package 1 -->
+<div class="p-space-sm rounded-lg bg-surface-container-low hover:bg-surface-container transition-colors flex items-center justify-between gap-space-sm group">
+<div class="flex items-center gap-space-sm min-w-0">
+<span class="material-symbols-outlined text-primary text-2xl group-hover:scale-110 transition-transform">verified</span>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md font-semibold text-on-surface truncate">Scene 43 Master C2PA (.c2pa + .pdf)</span>
+<span class="font-body-sm text-body-sm text-outline truncate">Full manifest tree, camera metadata &amp; WGA</span>
+</div>
+</div>
+<button class="p-space-xs rounded bg-surface-container-high text-primary hover:bg-primary-container hover:text-on-primary-container transition-colors" type="button">
+<span class="material-symbols-outlined text-lg">download</span>
+</button>
+</div>
+<!-- Package 2 -->
+<div class="p-space-sm rounded-lg bg-surface-container-low hover:bg-surface-container transition-colors flex items-center justify-between gap-space-sm group">
+<div class="flex items-center gap-space-sm min-w-0">
+<span class="material-symbols-outlined text-secondary text-2xl group-hover:scale-110 transition-transform">policy</span>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md font-semibold text-on-surface truncate">SAG-AFTRA 2026 Clearance (.jsonld)</span>
+<span class="font-body-sm text-body-sm text-outline truncate">Biometric persona clearance certificates</span>
+</div>
+</div>
+<button class="p-space-xs rounded bg-surface-container-high text-secondary hover:bg-secondary-container hover:text-on-secondary-container transition-colors" type="button">
+<span class="material-symbols-outlined text-lg">download</span>
+</button>
+</div>
+<!-- Package 3 -->
+<div class="p-space-sm rounded-lg bg-surface-container-low hover:bg-surface-container transition-colors flex items-center justify-between gap-space-sm group">
+<div class="flex items-center gap-space-sm min-w-0">
+<span class="material-symbols-outlined text-tertiary text-2xl group-hover:scale-110 transition-transform">folder_zip</span>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md font-semibold text-on-surface truncate">Keyframe ACEScg Raw Manifest (.zip)</span>
+<span class="font-body-sm text-body-sm text-outline truncate">High-bitdepth camera logs &amp; EXR claims</span>
+</div>
+</div>
+<button class="p-space-xs rounded bg-surface-container-high text-tertiary hover:bg-tertiary-container hover:text-on-tertiary-container transition-colors" type="button">
+<span class="material-symbols-outlined text-lg">download</span>
+</button>
+</div>
+<!-- Package 4 -->
+<div class="p-space-sm rounded-lg bg-surface-container-low hover:bg-surface-container transition-colors flex items-center justify-between gap-space-sm group">
+<div class="flex items-center gap-space-sm min-w-0">
+<span class="material-symbols-outlined text-outline text-2xl group-hover:scale-110 transition-transform">shield_with_heart</span>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md font-semibold text-on-surface truncate">Hardware Attestation Token</span>
+<span class="font-body-sm text-body-sm text-outline truncate">AMD SEV / Intel SGX cryptographic quote</span>
+</div>
+</div>
+<button class="p-space-xs rounded bg-surface-container-high text-on-surface hover:bg-surface-bright transition-colors" type="button">
+<span class="material-symbols-outlined text-lg">download</span>
+</button>
+</div>
+</div>
+<!-- Quick Verification Hash Terminal Snippet -->
+<div class="p-space-sm rounded-lg bg-surface-container-lowest font-mono text-body-sm flex flex-col gap-1">
+<div class="flex items-center justify-between text-outline text-xs">
+<span>QUICK CLI VERIFY:</span>
+<button class="text-primary hover:underline" type="button">Copy</button>
+</div>
+<p class="text-on-surface text-xs select-all truncate">
+            atlas-c2pa verify --manifest-id urn:c2pa:scene43 --enclave-root 0x3E8B...99C
+          </p>
+</div>
+</section>
+</div>
+</div>
+</div></main></div></body></html>

@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,600&amp;family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&amp;family=Space+Mono:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={"darkMode":"class","theme":{"extend":{"colors":{"on-secondary-fixed":"#410008","surface":"#fbf9f6","surface-tint":"#5f5e5e","on-primary-container":"#858383","tertiary-fixed":"#ffdad4","error-container":"#ffdad6","inverse-primary":"#c8c6c5","secondary-fixed-dim":"#ffb3b2","outline":"#747878","surface-container-high":"#eae8e5","surface-dim":"#dbdad7","on-tertiary-fixed":"#410000","error":"#ba1a1a","on-tertiary":"#ffffff","secondary-fixed":"#ffdad8","on-primary-fixed-variant":"#474646","on-tertiary-container":"#ea4c3a","secondary":"#a23c40","on-primary-fixed":"#1c1b1b","surface-bright":"#fbf9f6","background":"#fbf9f6","tertiary":"#000000","outline-variant":"#c4c7c7","surface-container-highest":"#e4e2df","on-surface":"#1b1c1a","on-tertiary-fixed-variant":"#920703","primary":"#000000","on-error-container":"#93000a","on-secondary":"#ffffff","primary-container":"#1c1b1b","on-surface-variant":"#444748","primary-fixed-dim":"#c8c6c5","inverse-on-surface":"#f2f0ed","tertiary-fixed-dim":"#ffb4a8","surface-variant":"#e4e2df","surface-container":"#efeeeb","on-background":"#1b1c1a","on-secondary-container":"#761b22","surface-container-lowest":"#ffffff","secondary-container":"#ff8485","on-primary":"#ffffff","surface-container-low":"#f5f3f0","inverse-surface":"#30312f","on-secondary-fixed-variant":"#82252a","tertiary-container":"#410000","on-error":"#ffffff","primary-fixed":"#e5e2e1"},"borderRadius":{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},"spacing":{"gutter-lg":"2.5rem","space-xs":"0.25rem","space-xl":"3rem","space-lg":"1.75rem","margin-lg":"4rem","margin":"1.5rem","space-sm":"0.5rem","space-md":"1rem","gutter":"1.5rem"},"fontFamily":{"label-md":["Space Mono"],"headline-lg":["Playfair Display"],"folio-numeral":["Playfair Display"],"body-md":["EB Garamond"],"display-hero-mobile":["Playfair Display"],"headline-md":["Playfair Display"],"headline-lg-mobile":["Playfair Display"],"body-lg":["EB Garamond"],"body-sm":["EB Garamond"],"headline-sm":["Playfair Display"],"display-hero":["Playfair Display"],"screenplay-slug":["Space Mono"],"label-sm":["Space Mono"]},"fontSize":{"label-md":["12px",{"lineHeight":"16px","letterSpacing":"0.08em","fontWeight":"400"}],"headline-lg":["44px",{"lineHeight":"52px","letterSpacing":"-0.015em","fontWeight":"600"}],"folio-numeral":["14px",{"lineHeight":"16px","letterSpacing":"0.05em","fontWeight":"400"}],"body-md":["17px",{"lineHeight":"28px","letterSpacing":"0.01em","fontWeight":"400"}],"display-hero-mobile":["40px",{"lineHeight":"48px","letterSpacing":"-0.01em","fontWeight":"700"}],"headline-md":["32px",{"lineHeight":"40px","letterSpacing":"-0.01em","fontWeight":"500"}],"headline-lg-mobile":["30px",{"lineHeight":"38px","letterSpacing":"-0.01em","fontWeight":"600"}],"body-lg":["20px",{"lineHeight":"32px","letterSpacing":"0.01em","fontWeight":"400"}],"body-sm":["14px",{"lineHeight":"22px","letterSpacing":"0.015em","fontWeight":"400"}],"headline-sm":["24px",{"lineHeight":"32px","letterSpacing":"0em","fontWeight":"500"}],"display-hero":["64px",{"lineHeight":"72px","letterSpacing":"-0.02em","fontWeight":"700"}],"screenplay-slug":["13px",{"lineHeight":"20px","letterSpacing":"0.14em","fontWeight":"700"}],"label-sm":["10px",{"lineHeight":"14px","letterSpacing":"0.12em","fontWeight":"700"}]}}}};</script></head><body class="bg-surface font-body-md text-on-surface antialiased selection:bg-secondary selection:text-on-secondary"><header class="fixed top-0 left-0 right-0 z-50 bg-surface/95 backdrop-blur-md border-b border-primary/10"><div class="w-full px-margin-lg"><div class="h-20 flex items-center justify-between border-b border-primary/10"><div class="flex items-center gap-space-lg"><div class="flex flex-col"><span class="font-headline-md text-headline-md tracking-tight leading-none text-primary">TextFX</span><span class="font-screenplay-slug text-label-sm tracking-widest text-secondary mt-space-xs uppercase">HAUTE EDITORIAL // VOL. IV</span></div><div class="h-8 w-px bg-primary/10 mx-space-xs hidden lg:block"></div><div class="hidden xl:flex items-center p-space-xs bg-surface-container-low border border-primary/15 rounded"><button class="flex items-center gap-space-xs px-space-sm py-1 bg-surface border border-secondary text-secondary font-label-md text-label-sm rounded uppercase" type="button"><span class="w-1.5 h-1.5 rounded-full bg-secondary"></span><span>🖋️ Haute Editorial</span></button><button class="flex items-center gap-space-xs px-space-sm py-1 text-on-surface-variant hover:text-on-surface font-label-md text-label-sm rounded uppercase transition-colors" type="button"><span>🎬 Director's Noir</span></button><button class="flex items-center gap-space-xs px-space-sm py-1 text-on-surface-variant hover:text-on-surface font-label-md text-label-sm rounded uppercase transition-colors" type="button"><span>⚡ Quantum Deck</span></button></div></div><div class="flex items-center gap-space-md"><div class="hidden md:flex items-center gap-space-md border-r border-primary/10 pr-space-md"><div class="flex flex-col text-right"><span class="font-label-md text-label-sm text-on-surface-variant uppercase">PARIS BUREAU</span><span class="font-folio-numeral text-folio-numeral text-primary tracking-wide">CET 16:42</span></div><div class="flex flex-col text-right"><span class="font-label-md text-label-sm text-secondary uppercase">PROOFS</span><span class="inline-flex items-center gap-1 font-label-md text-label-sm text-on-surface"><span class="inline-block w-1.5 h-1.5 rounded-full bg-secondary"></span>Typeset Validated</span></div><div class="px-space-sm py-1 border border-primary/15 bg-surface-container-lowest font-screenplay-slug text-label-sm text-primary uppercase">FOLIO N° 44</div></div><div class="flex items-center gap-space-sm pl-space-xs"><div class="hidden 2xl:flex flex-col text-right"><span class="font-headline-sm text-body-sm leading-tight text-primary">Alexandre Vance</span><span class="font-label-md text-label-sm text-on-surface-variant uppercase">Editor-in-Chief</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></div><div class="h-12 flex items-center justify-between"><nav class="flex items-center gap-space-lg h-full" data-active-classes="border-b-2 border-primary text-primary font-bold"><a aria-current="page" class="h-full flex items-center uppercase transition-colors border-b-2 border-primary text-primary font-bold" data-path="editorial-desk" href="#">Editorial Desk</a><a class="h-full flex items-center font-label-md text-label-md text-on-surface-variant hover:text-on-surface uppercase transition-colors" data-path="screenplay-foundry" href="#">Screenplay Foundry</a><a class="h-full flex items-center font-label-md text-label-md text-on-surface-variant hover:text-on-surface uppercase transition-colors" data-path="typography-vault" href="#">Typography Vault</a><a class="h-full flex items-center font-label-md text-label-md text-on-surface-variant hover:text-on-surface uppercase transition-colors" data-path="monocle-proofs" href="#">Monocle Proofs</a><a class="h-full flex items-center font-label-md text-label-md text-on-surface-variant hover:text-on-surface uppercase transition-colors" data-path="print-and-press-output" href="#">Print &amp; Press Output</a></nav><div class="flex items-center gap-space-sm"><span class="font-screenplay-slug text-label-sm text-on-surface-variant uppercase hidden sm:inline">REV. 4.02 // ARCHIVAL DISPATCH</span><span class="inline-block w-1 h-1 bg-secondary rounded-full"></span><span class="font-label-md text-label-sm text-secondary uppercase">LIVE TELETYPE</span></div></div></div></header><main class="w-full pt-32 bg-surface min-h-screen"><div class="flex flex-col w-full">
+<!-- Archival Broadsheet Marquee & Folio Masthead -->
+<section class="w-full px-margin-lg pt-space-md pb-space-lg bg-surface border-b border-primary/10">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-space-md pb-space-sm border-b border-primary/15">
+<div class="flex flex-col">
+<div class="flex items-center gap-space-sm mb-space-xs">
+<span class="px-space-sm py-0.5 bg-secondary text-on-secondary font-label-md text-label-sm tracking-widest uppercase">REVUE OFFICIELLE</span>
+<span class="font-screenplay-slug text-label-sm text-secondary tracking-widest uppercase">ISSUE NO. 44 — CAHIERS DU STYLE // PARIS — MILAN</span>
+<span class="text-on-surface-variant font-label-md text-label-sm">• MMXXV</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg tracking-tight text-primary">The Generative Atelier &amp; Typographic Foundry</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1 italic">
+          Auteur screenplay synthesis, editorial layout composition, and photogravure proofing for tactile publication.
+        </p>
+</div>
+<!-- Quick Action Desk Bar -->
+<div class="flex flex-wrap items-center gap-space-xs">
+<button class="group flex items-center gap-1.5 px-space-sm py-1.5 bg-surface-container-lowest border border-primary/20 hover:border-primary text-primary transition-all" type="button">
+<span class="material-symbols-outlined text-[16px] text-secondary">grid_goldenratio</span>
+<span class="font-label-md text-label-sm tracking-wider uppercase">Golden Grid</span>
+</button>
+<button class="group flex items-center gap-1.5 px-space-sm py-1.5 bg-surface-container-lowest border border-primary/20 hover:border-primary text-primary transition-all" type="button">
+<span class="material-symbols-outlined text-[16px] text-secondary">print</span>
+<span class="font-label-md text-label-sm tracking-wider uppercase">Gravure Simulation</span>
+</button>
+<button class="flex items-center gap-1.5 px-space-md py-1.5 bg-primary text-on-primary hover:bg-secondary transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px]">picture_as_pdf</span>
+<span class="font-label-md text-label-sm tracking-wider uppercase">Export Proof (PDF)</span>
+</button>
+</div>
+</div>
+<!-- Live Telemetry Coordinates Ribbon -->
+<div class="grid grid-cols-2 md:grid-cols-6 gap-space-sm pt-space-xs text-on-surface-variant font-label-md text-label-sm uppercase">
+<div><span class="text-secondary font-bold">GRID:</span> 6-COL GOLDEN FOLD</div>
+<div><span class="text-secondary font-bold">INK:</span> OXBLOOD &amp; CARBON 98%</div>
+<div><span class="text-secondary font-bold">PAPER:</span> HAHNEMÜHLE 308G</div>
+<div><span class="text-secondary font-bold">DPI:</span> 2400 GRAVURE OPTICAL</div>
+<div><span class="text-secondary font-bold">RHYTHM:</span> 1.618033 PHI</div>
+<div class="text-right md:col-span-1 col-span-2 text-secondary font-bold">STATUS: PROOF READY</div>
+</div>
+</section>
+<!-- Main Three-Column Bespoke Broadsheet Studio -->
+<div class="w-full px-margin-lg py-space-lg grid grid-cols-1 lg:grid-cols-12 gap-gutter-lg bg-surface">
+<!-- COLUMN A: Typographic & Stylistic Controls (Width ~28%) -->
+<aside class="lg:col-span-3 flex flex-col gap-space-md">
+<!-- Section Header -->
+<div class="border-b border-primary pb-space-xs flex items-center justify-between">
+<span class="font-screenplay-slug text-label-sm uppercase text-primary">I. TYPOGRAPHIC FOUNDRY</span>
+<span class="font-folio-numeral text-folio-numeral text-secondary">§ 01</span>
+</div>
+<!-- Curated Typefaces -->
+<div class="bg-surface-container-lowest border border-primary/15 p-space-md flex flex-col gap-space-sm">
+<span class="font-label-md text-label-sm uppercase tracking-widest text-on-surface-variant">CURATED HIERARCHY</span>
+<div class="p-space-sm border border-secondary/30 bg-surface-container-low flex flex-col">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-sm font-bold text-secondary uppercase">Display Headline</span>
+<span class="font-folio-numeral text-folio-numeral text-primary">68 pt</span>
+</div>
+<span class="font-headline-md text-headline-md text-primary mt-1 tracking-tight">Didot Roman Bold</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant italic">High-contrast modern serif with razor hair lines.</span>
+</div>
+<div class="p-space-sm border border-primary/10 hover:border-primary/30 transition-colors flex flex-col">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-sm text-on-surface-variant uppercase">Continuous Body</span>
+<span class="font-folio-numeral text-folio-numeral text-primary">11.5 pt</span>
+</div>
+<span class="font-body-lg text-body-lg text-primary font-semibold mt-1">Bodoni Old Style Book</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant italic">Strict French Continental x-height rhythm.</span>
+</div>
+<div class="p-space-sm border border-primary/10 hover:border-primary/30 transition-colors flex flex-col">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-sm text-on-surface-variant uppercase">Subtitles &amp; Pull-Quotes</span>
+<span class="font-folio-numeral text-folio-numeral text-primary">16 pt</span>
+</div>
+<span class="font-headline-sm text-headline-sm italic text-secondary mt-1">Amiri &amp; Garamond Italic</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Dramatic lyrical slant with historical ligatures.</span>
+</div>
+</div>
+<!-- Typographic Precision Sliders -->
+<div class="bg-surface-container-lowest border border-primary/15 p-space-md flex flex-col gap-space-md">
+<span class="font-label-md text-label-sm uppercase tracking-widest text-on-surface-variant">METRIC PARAMETERS</span>
+<!-- Kerning -->
+<div class="flex flex-col gap-1">
+<div class="flex justify-between font-label-md text-label-sm">
+<span class="uppercase text-on-surface">Paragraph Kerning</span>
+<span class="text-secondary font-bold">+0.024 em</span>
+</div>
+<div class="w-full bg-surface-container-high h-1.5 relative flex items-center">
+<div class="bg-secondary h-1.5 w-3/5"></div>
+<div class="w-2.5 h-2.5 bg-primary absolute left-[60%] -translate-x-1/2 cursor-pointer shadow-sm"></div>
+</div>
+</div>
+<!-- Baseline Rhythm -->
+<div class="flex flex-col gap-1">
+<div class="flex justify-between font-label-md text-label-sm">
+<span class="uppercase text-on-surface">Baseline Rhythm</span>
+<span class="text-primary font-bold">1.618 φ</span>
+</div>
+<div class="w-full bg-surface-container-high h-1.5 relative flex items-center">
+<div class="bg-primary h-1.5 w-4/5"></div>
+<div class="w-2.5 h-2.5 bg-primary absolute left-[80%] -translate-x-1/2 cursor-pointer shadow-sm"></div>
+</div>
+</div>
+<!-- Ink Bleed Simulation -->
+<div class="flex flex-col gap-1">
+<div class="flex justify-between font-label-md text-label-sm">
+<span class="uppercase text-on-surface">Ink Bleed Density</span>
+<span class="text-secondary font-bold">0.42 pt</span>
+</div>
+<div class="w-full bg-surface-container-high h-1.5 relative flex items-center">
+<div class="bg-secondary h-1.5 w-1/3"></div>
+<div class="w-2.5 h-2.5 bg-primary absolute left-[33%] -translate-x-1/2 cursor-pointer shadow-sm"></div>
+</div>
+</div>
+<!-- Ligatures & Glyphs -->
+<div class="pt-space-xs border-t border-primary/10 flex flex-col gap-space-xs">
+<label class="flex items-center gap-space-sm cursor-pointer">
+<input checked="" class="w-3.5 h-3.5 accent-secondary border-primary/20" type="checkbox"/>
+<span class="font-label-md text-label-sm uppercase text-on-surface">Historical Long ‘s’ &amp; ‘ct’ Glyphs</span>
+</label>
+<label class="flex items-center gap-space-sm cursor-pointer">
+<input checked="" class="w-3.5 h-3.5 accent-secondary border-primary/20" type="checkbox"/>
+<span class="font-label-md text-label-sm uppercase text-on-surface">Discretionary &amp; Contextual Ligatures</span>
+</label>
+<label class="flex items-center gap-space-sm cursor-pointer">
+<input class="w-3.5 h-3.5 accent-secondary border-primary/20" type="checkbox"/>
+<span class="font-label-md text-label-sm uppercase text-on-surface">Old Style Non-Lining Numerals</span>
+</label>
+</div>
+</div>
+<!-- Editorial Swatches Palette -->
+<div class="bg-surface-container-lowest border border-primary/15 p-space-md flex flex-col gap-space-sm">
+<span class="font-label-md text-label-sm uppercase tracking-widest text-on-surface-variant">INKS &amp; SUBSTRATES</span>
+<div class="grid grid-cols-4 gap-space-xs">
+<div class="flex flex-col items-center gap-1 group cursor-pointer">
+<div class="w-full h-8 bg-primary border border-primary"></div>
+<span class="font-label-md text-label-sm uppercase text-on-surface-variant">Ink</span>
+</div>
+<div class="flex flex-col items-center gap-1 group cursor-pointer">
+<div class="w-full h-8 bg-secondary border border-secondary"></div>
+<span class="font-label-md text-label-sm uppercase text-secondary font-bold">Oxblood</span>
+</div>
+<div class="flex flex-col items-center gap-1 group cursor-pointer">
+<div class="w-full h-8 bg-surface border border-primary/20"></div>
+<span class="font-label-md text-label-sm uppercase text-on-surface-variant">Vellum</span>
+</div>
+<div class="flex flex-col items-center gap-1 group cursor-pointer">
+<div class="w-full h-8 bg-surface-container-lowest border border-primary/20"></div>
+<span class="font-label-md text-label-sm uppercase text-on-surface-variant">Chalk</span>
+</div>
+</div>
+</div>
+</aside>
+<!-- COLUMN B: The Auteur Generative Manuscript & Prompt Foundry (Width ~42%) -->
+<main class="lg:col-span-5 flex flex-col gap-space-md">
+<!-- Section Header -->
+<div class="border-b border-primary pb-space-xs flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="font-screenplay-slug text-label-sm uppercase text-primary">II. AUTEUR MANUSCRIPT &amp; PROMPT FORGE</span>
+<span class="inline-block w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+</div>
+<span class="font-folio-numeral text-folio-numeral text-secondary">ACTE VII</span>
+</div>
+<!-- Master Literary Prompt & Screenplay Plate -->
+<div class="bg-surface-container-lowest border border-primary p-space-lg relative flex flex-col gap-space-md shadow-sm">
+<!-- Top Metadata Slate -->
+<div class="flex items-center justify-between border-b border-primary/10 pb-space-sm font-label-md text-label-sm uppercase">
+<div class="flex items-center gap-space-xs text-secondary font-bold">
+<span class="material-symbols-outlined text-[16px]">edit_note</span>
+<span>GENESIS MANIFESTO DRAFT</span>
+</div>
+<div class="flex items-center gap-space-sm text-on-surface-variant">
+<span>LOC: PARIS 6TH ARR.</span>
+<span>TEMPO: NOIR</span>
+</div>
+</div>
+<!-- Dramatic Slugline Header -->
+<div class="bg-surface-container-low p-space-sm border-l-2 border-secondary font-screenplay-slug text-screenplay-slug text-primary uppercase">
+          SCENE VII — THE SALON D'AUTOMNE. PARIS, 1928. CONTINUOUS.
+        </div>
+<!-- Generative Text Prompt Area -->
+<div class="relative">
+<label class="sr-only" for="manifesto-prompt">Screenplay Generative Prompt</label>
+<textarea class="w-full p-space-md bg-surface border border-primary/20 focus:border-secondary focus:outline-none font-body-lg text-body-lg text-primary leading-relaxed resize-none italic selection:bg-secondary selection:text-on-secondary" id="manifesto-prompt" placeholder="Enter generative direction or auteur screenplay beats..." rows="7">A low-key chiaroscuro composition. The model wears an architectural draped wool cape in obsidian black, silhouetted against tall Haussmannian French casement windows. Rain-dappled zinc rooftops reflect diffuse overcast pearl sky. 35mm grain, photogravure depth, high optical sharpness, cinematic silence.</textarea>
+<span class="absolute bottom-2 right-3 font-label-md text-label-sm text-on-surface-variant">428 TOKENS // PHI 1.618</span>
+</div>
+<!-- Synthesizer Parameter Tags -->
+<div class="flex flex-wrap gap-space-xs font-label-md text-label-sm">
+<span class="px-space-sm py-1 bg-surface-container border border-primary/20 text-primary">--ar 4:5 [PORTRAIT]</span>
+<span class="px-space-sm py-1 bg-surface-container border border-secondary/40 text-secondary font-bold">--style haute-editorial-v4</span>
+<span class="px-space-sm py-1 bg-surface-container border border-primary/20 text-primary">--lighting diffuse-nordic</span>
+<span class="px-space-sm py-1 bg-surface-container border border-primary/20 text-primary">--ink-contrast 94%</span>
+<span class="px-space-sm py-1 bg-surface-container border border-primary/20 text-primary">--cmyk gravure-rich-black</span>
+</div>
+<!-- Literary Rhetoric & Polish Dials -->
+<div class="grid grid-cols-3 gap-space-sm pt-space-sm border-t border-primary/10">
+<div class="flex flex-col p-space-xs bg-surface-container-low border border-primary/10">
+<span class="font-label-md text-label-sm uppercase text-on-surface-variant">Metaphor Depth</span>
+<span class="font-headline-sm text-headline-sm text-secondary font-bold mt-1">88%</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant italic">High allegorical layer</span>
+</div>
+<div class="flex flex-col p-space-xs bg-surface-container-low border border-primary/10">
+<span class="font-label-md text-label-sm uppercase text-on-surface-variant">Cadence &amp; Meter</span>
+<span class="font-headline-sm text-headline-sm text-primary font-bold mt-1">Iambic</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant italic">Syncopated pause</span>
+</div>
+<div class="flex flex-col p-space-xs bg-surface-container-low border border-primary/10">
+<span class="font-label-md text-label-sm uppercase text-on-surface-variant">Auteur Resonance</span>
+<span class="font-headline-sm text-headline-sm text-secondary font-bold mt-1">M. Duras</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant italic">Continental sparseness</span>
+</div>
+</div>
+<!-- Marginalia Editorial Pin -->
+<div class="bg-surface-container-lowest border-l-2 border-secondary p-space-sm bg-surface-container-low/60 flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-secondary text-[18px] shrink-0 mt-0.5">bookmark</span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-sm font-bold uppercase text-secondary">EDITORIAL MARGINALIA // CÉSAR V.</span>
+<p class="font-body-sm text-body-sm text-on-surface italic mt-0.5">
+              “Emphasize the architecture of the shoulder silhouette against the zinc roofs. Ensure the caption remains strictly in Bodoni Old Style italic.”
+            </p>
+</div>
+</div>
+<!-- Prominent Monograph Dispatch Button -->
+<button class="w-full py-space-md bg-primary text-on-primary hover:bg-secondary transition-all flex items-center justify-center gap-space-sm shadow-md group" type="button">
+<span class="material-symbols-outlined text-[20px] text-secondary group-hover:text-on-primary transition-colors">history_edu</span>
+<span class="font-label-md text-label-md tracking-widest uppercase font-bold">Typeset &amp; Synthesize Spread</span>
+<span class="font-folio-numeral text-folio-numeral ml-2 text-on-primary/60">[SHIFT + ↵]</span>
+</button>
+</div>
+<!-- Screenplay Dialog Output Preview Block -->
+<div class="bg-surface-container-lowest border border-primary/15 p-space-md flex flex-col gap-space-xs">
+<div class="flex items-center justify-between border-b border-primary/10 pb-space-xs">
+<span class="font-label-md text-label-sm uppercase text-on-surface-variant">AUTEUR TRANSCRIPT BUFFER</span>
+<span class="font-screenplay-slug text-label-sm text-secondary">REEL 04 // VANCE ARCHIVE</span>
+</div>
+<div class="pt-space-xs font-body-md text-body-md leading-relaxed text-on-surface">
+<p class="text-center font-bold tracking-widest text-primary uppercase font-screenplay-slug text-label-sm mb-1">ÉLÉONORE</p>
+<p class="text-center italic px-space-xl mb-space-sm">
+            “There is no geometry without shadow. What the camera catches is not the garment, but the space it refuses to inhabit.”
+          </p>
+<p class="font-body-sm text-body-sm text-on-surface-variant text-center italic">
+            [She turns toward the terrace. The wet limestone of Saint-Germain glimmers below.]
+          </p>
+</div>
+</div>
+</main>
+<!-- COLUMN C: Live Proofing Gallery & Monocle Viewport (Width ~30%) -->
+<aside class="lg:col-span-4 flex flex-col gap-space-md">
+<!-- Section Header -->
+<div class="border-b border-primary pb-space-xs flex items-center justify-between">
+<span class="font-screenplay-slug text-label-sm uppercase text-primary">III. MONOCLE PROOF VIEWPORT</span>
+<span class="font-folio-numeral text-folio-numeral text-secondary">FOLIO 44</span>
+</div>
+<!-- Spread Mockup Substrate Plate -->
+<div class="bg-surface-container-lowest border border-primary p-space-md shadow-md flex flex-col gap-space-sm">
+<!-- Spreads Ribbon Header -->
+<div class="flex items-center justify-between font-label-md text-label-sm border-b border-primary/10 pb-1">
+<span class="text-secondary uppercase font-bold">DOUBLE SPREAD PROOF // 1:1 SCALE</span>
+<span class="text-on-surface-variant">2400 DPI GRAVURE</span>
+</div>
+<!-- Authentic Printed Editorial Spread Simulation -->
+<div class="bg-surface border border-primary/15 p-space-md flex flex-col gap-space-sm relative">
+<!-- Spread Gutter Line (Physical Print Fold) -->
+<div class="absolute inset-y-0 left-1/2 w-px bg-primary/15 pointer-events-none hidden sm:block"></div>
+<!-- Editorial Photography in Layout -->
+<div class="relative w-full h-56 overflow-hidden border border-primary/10 bg-surface-container-highest">
+<img class="w-full h-full object-cover grayscale contrast-125" data-alt="Editorial black and white haute couture fashion photography. A statuesque model in an avant-garde architectural wool cape stands by tall French casement windows overlooking Paris rain-slicked zinc rooftops. High-contrast dramatic lighting, fine 35mm silver gelatin grain, subtle film shadows, literary cinematic atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNOznq-32CVN1mAPs1IwHV7u_b67bphDfgfKV35EpRYEwfjYc0-WtjdZzEmOceEbSbZtfhrIarDD2VxF0SZvclFvxco5aRdHKq8O7jxH-M324JtbDVWHB3l1Ne59PPm4uDQpECJ3rF1-EK5hOWeF68SBK0IjHC3XiiIGPVB-UrjGTzXph64q4p9cSgwdaSqYh_dHXmvF7cO8o0oiwGA7d4dxA-YO10sbnLY4WUOsnMMcRu0pP4GGUtew"/>
+<div class="absolute bottom-2 left-2 bg-surface/90 px-space-xs py-0.5 border border-primary/20">
+<span class="font-label-md text-label-sm uppercase text-primary">FIG. 04 / LE SALON NOIR</span>
+</div>
+</div>
+<!-- Two-Column Typeset Article with Grand Drop-Cap -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md pt-space-xs">
+<div class="font-body-sm text-body-sm text-on-surface leading-normal text-justify">
+<span class="float-left font-headline-lg text-headline-lg leading-none pr-2 pt-1 font-bold text-secondary">L</span>
+<span class="font-bold tracking-wide uppercase text-label-sm font-label-md">orsque la forme</span> transcende l'ornement, le silence devient la matière première de la coupe. L'épaule tombe dans une rigueur géométrique presque ecclésiastique.
+            </div>
+<div class="font-body-sm text-body-sm text-on-surface leading-normal text-justify">
+              Chaque pli de la cape en laine feutrée dialogue avec l'angle strict des fenêtres haussmanniennes. Une écriture de la forme où le mot n'est que le fil conducteur d'un geste plus vaste.
+            </div>
+</div>
+<!-- Publication Folio Foot -->
+<div class="flex items-center justify-between pt-space-xs border-t border-primary/10 font-label-md text-label-sm text-on-surface-variant">
+<span>CAHIERS DU STYLE</span>
+<span class="font-folio-numeral text-secondary">PAGE 89</span>
+<span>PARIS MMXXV</span>
+</div>
+</div>
+<!-- Plate Diagnostics & CMYK Slurry Balance -->
+<div class="p-space-sm bg-surface-container-low border border-primary/10 flex flex-col gap-space-xs">
+<div class="flex justify-between items-center font-label-md text-label-sm">
+<span class="uppercase text-on-surface">CMYK DENSITY DISTRIBUTION</span>
+<span class="text-secondary font-bold">TOTAL: 256% TIC</span>
+</div>
+<!-- CMYK Color Bars Visualization -->
+<div class="grid grid-cols-4 gap-1 text-center font-label-md text-label-sm">
+<div class="bg-surface-container-lowest p-1 border border-primary/10">
+<div class="h-1 bg-cyan-700 w-full mb-1"></div>
+<span class="text-on-surface-variant">C: 12%</span>
+</div>
+<div class="bg-surface-container-lowest p-1 border border-primary/10">
+<div class="h-1 bg-secondary w-full mb-1"></div>
+<span class="text-secondary font-bold">M: 94%</span>
+</div>
+<div class="bg-surface-container-lowest p-1 border border-primary/10">
+<div class="h-1 bg-yellow-600 w-full mb-1"></div>
+<span class="text-on-surface-variant">Y: 88%</span>
+</div>
+<div class="bg-surface-container-lowest p-1 border border-primary/10">
+<div class="h-1 bg-primary w-full mb-1"></div>
+<span class="text-primary font-bold">K: 62%</span>
+</div>
+</div>
+</div>
+<!-- Paper Stock Verification Module -->
+<div class="flex items-center justify-between p-space-xs bg-surface-container border border-primary/10 font-label-md text-label-sm">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[16px] text-secondary">texture</span>
+<span class="uppercase text-primary">Hahnemühle Photo Rag 308g</span>
+</div>
+<span class="text-secondary uppercase font-bold">Uncoated Cotton</span>
+</div>
+<!-- Archival Proofing History Strip -->
+<div class="flex flex-col gap-space-xs pt-space-xs">
+<span class="font-label-md text-label-sm uppercase text-on-surface-variant">HISTORICAL PROOFS ARCHIVE</span>
+<div class="grid grid-cols-3 gap-space-xs">
+<div class="relative group cursor-pointer border border-primary/20 hover:border-secondary transition-colors">
+<img class="w-full h-16 object-cover grayscale" data-alt="Editorial magazine cover mock with severe monochrome typography and minimalist model portrait in stark high contrast black and white lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuARHTN_tHgB6HP9-DqJhxZ500Vlm2W-mMKgnd7wjSYIjZzGAR1pJcEO3o7XC6_vEBPFD7YmZNNreKKsHuN7cDPTwC4h2G00M07orfantxoUMTwG-M7rVuoUKETNZ1E7nBM_E0kNejSUw9VEUwVOPWjsUs61XAjdUtWhDLvZVZDLH1nI4BzVzx8RiueKVHuFUC96QKHlu4b8UCTU9-H7noHUgFWQxwZXOiQcIMw4Xz3jPHZTDvrMyLg9Kg"/>
+<span class="absolute bottom-0 inset-x-0 bg-primary/80 text-on-primary font-label-md text-[9px] text-center uppercase py-0.5">VOGUE PROOF</span>
+</div>
+<div class="relative group cursor-pointer border border-primary/20 hover:border-secondary transition-colors">
+<img class="w-full h-16 object-cover" data-alt="Literary review cover page with deep oxblood background, dense serif typography in ivory, and ornate printer borders." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQNt_BmWrqzZbs5astSAjv8vVZguqG9RUCZCWXW5aG6mgNICcDSC6UmnGjFVYr04H4qBq3NQYvExaJ5uEbNyPK_s93wfOQuk_RfJj1f8VRmwHzsA-ekqq8ao0HxkD0wWFNRs6uc1_BwX9TiRgcYVYP3AabN7fjqXd54VtFj-XGcELwGChFbfbmyjeyeTy-MT9uCVd_6L8hkAEf1BTuwCUzD8lmSlG9KIbpQk094tREpH7XTN9Fb8oMHw"/>
+<span class="absolute bottom-0 inset-x-0 bg-secondary/90 text-on-secondary font-label-md text-[9px] text-center uppercase py-0.5">PARIS ESSAY</span>
+</div>
+<div class="relative group cursor-pointer border border-primary/20 hover:border-secondary transition-colors">
+<img class="w-full h-16 object-cover grayscale" data-alt="Atmospheric 1960s Nouvelle Vague film still in grainy black and white showing a cinema director framing a scene through hands." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAjkLHm8LiRKtnC5mnUgPetb06Zr4kk3Jv8ITLwJmZjm-zW7oHdRAqEmFlS2FGkPCstjfexQV0qfj8RtHO-pQ92VQ70mB0SoAsWjGUwmW4UyPT9mxS94L4w2qTK17PSlDsp2Ms6qmDcjye-eruxYYCTt68vuIjRHnoiWBJQViW5EOmD52vKWWBND5MDf8mgHmJPnIM_s5jBfZP-OGwfAswy6To_-eH_M9rvHDqhFbIEZrfdUg_uWB9lsw"/>
+<span class="absolute bottom-0 inset-x-0 bg-primary/80 text-on-primary font-label-md text-[9px] text-center uppercase py-0.5">CAHIERS STILL</span>
+</div>
+</div>
+</div>
+<!-- Dispatch Actions -->
+<div class="flex flex-col gap-space-xs pt-space-sm border-t border-primary/15">
+<button class="w-full py-2 bg-secondary text-on-secondary hover:bg-on-secondary-fixed transition-colors font-label-md text-label-sm tracking-wider uppercase font-bold flex items-center justify-center gap-1.5" type="button">
+<span class="material-symbols-outlined text-[16px]">send</span>
+<span>Dispatch to Print House</span>
+</button>
+<button class="w-full py-2 bg-surface-container-lowest border border-primary/30 hover:border-primary text-primary transition-colors font-label-md text-label-sm tracking-wider uppercase flex items-center justify-center gap-1.5" type="button">
+<span class="material-symbols-outlined text-[16px] text-secondary">draw</span>
+<span>Sign &amp; Validate Press Sheet</span>
+</button>
+</div>
+</div>
+</aside>
+</div>
+<!-- Editorial Colophon & Printing Chamber Footer Bar -->
+<footer class="w-full px-margin-lg py-space-md bg-surface-container-low border-t border-primary/15 mt-space-lg flex flex-col md:flex-row items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-md font-label-md text-label-sm text-on-surface-variant">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="text-primary font-bold">ROTOGRAVURE ENGINE ACTIVE</span>
+</div>
+<span>|</span>
+<span>PLATE BATCH: #9842-P</span>
+<span>|</span>
+<span>TOTAL PROOFS RUN: 1,420 IMPRESSIONS</span>
+</div>
+<div class="flex items-center gap-space-lg font-screenplay-slug text-label-sm text-secondary">
+<span>ZÜRICH // MILANO // PARIS</span>
+<span class="font-folio-numeral text-folio-numeral text-primary">COLOPHON MMXXV</span>
+</div>
+</footer>
+</div></main><footer class="w-full bg-surface-container-low border-t border-primary/10 py-space-xl"><div class="w-full px-margin-lg flex flex-col md:flex-row items-center justify-between gap-space-md"><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-primary">TextFX Auteur Systems</span><span class="font-body-sm text-body-sm text-on-surface-variant italic">Cahiers &amp; Monocle Editions of Computational Typography</span></div><div class="font-label-md text-label-sm text-on-surface-variant uppercase text-center md:text-right"><p>© MMXXIV TEXTFX LABORATOIRES D'ÉCRITURE. ALL RIGHTS RESERVED.</p><p class="text-secondary mt-space-xs">PARIS — ZÜRICH — MILANO</p></div></div></footer></body></html>

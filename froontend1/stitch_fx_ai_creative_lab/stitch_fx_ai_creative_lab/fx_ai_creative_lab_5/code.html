@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+
+<html class="dark" dir="rtl" lang="ar"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><title>FX — AI Creative Lab | مختبر الأفكار الإبداعية</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&amp;family=IBM+Plex+Sans:wght@300;400;500;600;700&amp;family=Noto+Serif:ital,wght@0,400;0,500;0,600;0,700;1,400&amp;family=Space+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "on-secondary-fixed": "#261900",
+          "on-tertiary": "#2f3034",
+          "secondary-fixed-dim": "#e9c176",
+          "tertiary-container": "#bebfc3",
+          "tertiary": "#dbdbdf",
+          "on-tertiary-container": "#4c4e51",
+          "secondary": "#e9c176",
+          "inverse-surface": "#e5e1e4",
+          "secondary-fixed": "#ffdea5",
+          "error-container": "#93000a",
+          "surface-tint": "#e7c17a",
+          "on-primary-container": "#63490c",
+          "primary-fixed-dim": "#e7c17a",
+          "tertiary-fixed": "#e2e2e6",
+          "on-primary": "#402d00",
+          "on-error": "#690005",
+          "on-secondary-fixed-variant": "#5d4201",
+          "on-tertiary-fixed": "#1a1c1f",
+          "surface-bright": "#39393b",
+          "surface-dim": "#131315",
+          "on-primary-fixed-variant": "#5c4304",
+          "outline-variant": "#4d4639",
+          "on-tertiary-fixed-variant": "#45474a",
+          "tertiary-fixed-dim": "#c6c6ca",
+          "on-primary-fixed": "#261900",
+          "primary-container": "#dfba73",
+          "on-surface": "#e5e1e4",
+          "on-secondary": "#412d00",
+          "surface-variant": "#353437",
+          "outline": "#9a8f80",
+          "surface-container-low": "#1c1b1d",
+          "inverse-on-surface": "#313032",
+          "error": "#ffb4ab",
+          "surface-container-lowest": "#0e0e10",
+          "on-secondary-container": "#dab36a",
+          "inverse-primary": "#765a1d",
+          "surface-container-high": "#2a2a2c",
+          "primary": "#fdd68c",
+          "on-background": "#e5e1e4",
+          "surface-container": "#201f21",
+          "surface-container-highest": "#353437",
+          "background": "#131315",
+          "secondary-container": "#604403",
+          "on-error-container": "#ffdad6",
+          "primary-fixed": "#ffdea3",
+          "surface": "#131315",
+          "on-surface-variant": "#d1c5b4"
+        },
+        "borderRadius": {
+          "DEFAULT": "0.125rem",
+          "lg": "0.25rem",
+          "xl": "0.5rem",
+          "full": "0.75rem"
+        },
+        "spacing": {
+          "space-xs": "0.25rem",
+          "space-sm": "0.5rem",
+          "space-xl": "2.5rem",
+          "gutter-mobile": "0.75rem",
+          "margin": "3rem",
+          "gutter": "1.5rem",
+          "space-lg": "1.5rem",
+          "space-md": "1rem",
+          "margin-mobile": "1rem"
+        },
+        "fontFamily": {
+          "headline-lg-mobile": ["Noto Serif"],
+          "display-hero-mobile": ["Noto Serif"],
+          "body-sm": ["IBM Plex Sans"],
+          "label-timecode": ["Space Grotesk"],
+          "headline-lg": ["Noto Serif"],
+          "label-cinematic": ["Space Grotesk"],
+          "body-lg": ["IBM Plex Sans"],
+          "display-hero": ["Noto Serif"],
+          "body-md": ["IBM Plex Sans"],
+          "title-editorial": ["Noto Serif"],
+          "headline-md": ["Noto Serif"],
+          "headline-sm": ["IBM Plex Sans"]
+        },
+        "fontSize": {
+          "headline-lg-mobile": ["28px", {"lineHeight": "38px", "fontWeight": "500"}],
+          "display-hero-mobile": ["36px", {"lineHeight": "48px", "fontWeight": "600"}],
+          "body-sm": ["12px", {"lineHeight": "20px", "fontWeight": "400"}],
+          "label-timecode": ["13px", {"lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "500"}],
+          "headline-lg": ["40px", {"lineHeight": "52px", "fontWeight": "500"}],
+          "label-cinematic": ["11px", {"lineHeight": "14px", "letterSpacing": "0.08em", "fontWeight": "600"}],
+          "body-lg": ["16px", {"lineHeight": "28px", "fontWeight": "400"}],
+          "display-hero": ["56px", {"lineHeight": "72px", "fontWeight": "600"}],
+          "body-md": ["14px", {"lineHeight": "24px", "fontWeight": "400"}],
+          "title-editorial": ["18px", {"lineHeight": "26px", "fontWeight": "500"}],
+          "headline-md": ["28px", {"lineHeight": "38px", "fontWeight": "500"}],
+          "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}]
+        }
+      }
+    }
+  }</script></head><body class="bg-surface text-on-surface font-body-md text-body-md selection:bg-primary-container selection:text-on-primary-container min-h-screen"><header class="fixed top-0 w-full z-50 bg-surface/85 backdrop-blur-xl shadow-[0_1px_12px_rgba(0,0,0,0.5)]"><div class="h-20 w-full px-gutter flex items-center justify-between"><div class="flex items-center gap-space-lg"><a class="flex items-center gap-space-sm group" data-path="product-and-ideation-lab" href="#"><div class="w-9 h-9 rounded bg-surface-container-high flex items-center justify-center text-primary font-headline-sm text-headline-sm transition-transform duration-300 group-hover:scale-95"><span class="material-symbols-outlined text-primary text-[20px]">movie_edit</span></div><div class="flex flex-col text-right"><span class="font-label-cinematic text-label-cinematic text-primary uppercase">FX CREATIVE LAB</span><span class="font-body-sm text-body-sm text-on-surface-variant">مختبر الأفكار الإبداعية</span></div></a><div class="hidden xl:flex items-center gap-space-xs bg-surface-container-low px-space-sm py-1 rounded"><span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span><span class="font-label-cinematic text-label-cinematic text-secondary-fixed-dim">المخرج الذكي:</span><span class="font-body-sm text-body-sm text-on-surface">جاهز للإلهام وتفكيك المنتج</span></div></div><nav class="hidden lg:flex items-center gap-space-xs" data-active-classes="bg-primary-container text-on-primary-container font-semibold rounded"><a aria-current="page" class="px-space-sm py-space-xs transition-colors bg-primary-container text-on-primary-container font-semibold rounded" data-path="product-and-ideation-lab" href="#">مختبر الأفكار والمنتج</a><a class="px-space-sm py-space-xs text-on-surface-variant font-body-md text-body-md hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="creative-instruments" href="#">محركات التفكير الخمسة</a><a class="px-space-sm py-space-xs text-on-surface-variant font-body-md text-body-md hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="dual-review-panel" href="#">التحكيم والمراجعة الثنائية</a><a class="px-space-sm py-space-xs text-on-surface-variant font-body-md text-body-md hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="the-big-idea" href="#">الفكرة الإعلانية الكبرى</a><a class="px-space-sm py-space-xs text-on-surface-variant font-body-md text-body-md hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="cinematic-production-deck" href="#">التخريج والإنتاج السينمائي</a></nav><div class="flex items-center gap-space-md"><div class="hidden sm:flex flex-col items-end gap-0.5 bg-surface-container-lowest px-space-sm py-1 rounded"><div class="flex items-center gap-space-xs"><span class="font-label-timecode text-label-timecode text-secondary">3.4k</span><span class="font-label-timecode text-label-timecode text-outline">/</span><span class="font-label-timecode text-label-timecode text-on-surface-variant">50k CR</span></div><div class="w-24 h-1 bg-surface-container-highest rounded-full overflow-hidden"><div class="bg-secondary h-full rounded-full" style="width: 6.8%"></div></div></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-20 bg-surface"><div class="flex flex-col w-full">
+<!-- Top Ambient Halo -->
+<div class="relative w-full overflow-hidden">
+<div class="absolute -top-32 right-1/4 w-[540px] h-[340px] bg-secondary/5 rounded-full blur-[140px] pointer-events-none"></div>
+<div class="absolute -top-20 left-1/3 w-[360px] h-[280px] bg-primary/5 rounded-full blur-[120px] pointer-events-none"></div>
+<!-- Section 1: Command Header & Orchestrator Telemetry -->
+<section class="w-full px-gutter pt-space-lg pb-space-md">
+<div class="flex flex-col lg:flex-row lg:items-end justify-between gap-space-md">
+<!-- Title & Editorial Metadata -->
+<div class="flex flex-col gap-space-xs max-w-4xl">
+<div class="flex items-center gap-space-sm flex-wrap">
+<span class="inline-flex items-center gap-1.5 px-space-sm py-0.5 bg-surface-container-high rounded text-secondary font-label-cinematic text-label-cinematic uppercase tracking-widest">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>
+              ORCHESTRATOR 01 // DECONSTRUCTION &amp; GENESIS
+            </span>
+<span class="text-outline font-label-cinematic text-label-cinematic">|</span>
+<span class="font-label-timecode text-label-timecode text-on-surface-variant">SESSION ID: #FX-8842-LUXE</span>
+<span class="text-outline font-label-cinematic text-label-cinematic">|</span>
+<span class="font-label-cinematic text-label-cinematic text-tertiary">مختبر التفكير الجانبي المتقدم</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight mt-1">
+            مختبر توليد الأفكار الإعلانية — <span class="text-primary italic">تفكيك المنتج وصناعة المفهوم الإبداعي</span>
+</h1>
+<div class="flex items-center gap-space-sm mt-1 text-on-surface-variant font-body-md text-body-md flex-wrap">
+<span class="text-primary flex items-center gap-1">
+<span class="material-symbols-outlined text-[18px]">diamond</span>
+              حملة إطلاق: خاتم الذهب وسر السكون — مجوهرات فاخرة عصرية
+            </span>
+<span class="text-outline">•</span>
+<span class="font-label-timecode text-label-timecode text-secondary-fixed-dim">API GATEWAY: CONNECTED (v2.4-Orchestrator) • LATENCY: 24ms • STREAMING ACTIVE</span>
+</div>
+</div>
+<!-- Action CTAs -->
+<div class="flex items-center gap-space-sm shrink-0">
+<button class="flex items-center gap-space-xs px-space-md py-2.5 bg-surface-container-high text-on-surface hover:text-primary hover:bg-surface-container-highest transition-all duration-200 rounded font-headline-sm text-body-md shadow-sm" id="exportDossierBtn">
+<span class="material-symbols-outlined text-[18px]">download_for_offline</span>
+<span>تصدير وثيقة الحملة (Dossier)</span>
+</button>
+<button class="flex items-center gap-space-xs px-space-lg py-2.5 bg-primary text-on-primary hover:bg-primary-container hover:text-on-primary-container transition-all duration-200 rounded font-headline-sm text-body-md shadow-lg shadow-primary/10" id="runAllEnginesBtn">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">bolt</span>
+<span>توليد مصفوفة الأفكار (Run 5 Engines)</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Section 2: Input Deck & Editorial Prompt Studio -->
+<section class="w-full px-gutter py-space-md">
+<div class="bg-surface-container-low rounded-xl shadow-xl overflow-hidden p-space-lg">
+<!-- Header row of the input canvas -->
+<div class="flex flex-col md:flex-row md:items-center justify-between pb-space-md gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="w-7 h-7 rounded bg-surface-container-highest flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[18px]">readiness_score</span>
+</div>
+<div>
+<span class="font-label-cinematic text-label-cinematic text-secondary-fixed-dim uppercase tracking-wider block">PHASE 01: RAW PRODUCT INGESTION</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">منطقة تغذية وإدخال المنتج أو الخدمة (Product / Prompt Input Deck)</h2>
+</div>
+</div>
+<!-- Parameter Pills -->
+<div class="flex items-center gap-space-xs flex-wrap">
+<span class="bg-surface-container-highest px-space-sm py-1 rounded text-on-surface-variant font-label-cinematic text-label-cinematic flex items-center gap-1">
+<span class="text-outline">الصنف:</span>
+<strong class="text-on-surface font-normal">سلع فاخرة ومجوهرات</strong>
+</span>
+<span class="bg-surface-container-highest px-space-sm py-1 rounded text-on-surface-variant font-label-cinematic text-label-cinematic flex items-center gap-1">
+<span class="text-outline">الجمهور:</span>
+<strong class="text-on-surface font-normal">نخبة متذوقي الفن والباحثين عن الأصالة</strong>
+</span>
+<span class="bg-surface-container-highest px-space-sm py-1 rounded text-on-surface-variant font-label-cinematic text-label-cinematic flex items-center gap-1">
+<span class="text-outline">النبرة:</span>
+<strong class="text-secondary font-normal">فلسفية، سكون، غير مألوفة</strong>
+</span>
+<span class="bg-secondary-container text-on-secondary-container px-space-sm py-1 rounded font-label-cinematic text-label-cinematic">
+              HIGH-TIER PRODUCTION
+            </span>
+</div>
+</div>
+<!-- Two Column Studio: Left Prompt Editor, Right Narrative Visual Anchor -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg mt-space-sm">
+<!-- Text Ingestion Field (8 Cols) -->
+<div class="lg:col-span-8 flex flex-col gap-space-sm">
+<div class="relative bg-surface-container-lowest rounded-lg p-space-md shadow-inner">
+<div class="flex items-center justify-between mb-space-xs text-outline font-label-cinematic text-label-cinematic">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px] text-primary">edit_note</span>
+                  وصف المنتج، الميزة التنافسية، والتحدي النفسي (Prompt &amp; Raw Concept)
+                </span>
+<span class="font-label-timecode text-label-timecode text-secondary">318 حرفاً • مكتمل</span>
+</div>
+<textarea class="w-full bg-transparent text-on-surface font-body-lg text-body-lg focus:outline-none resize-none leading-relaxed placeholder-outline" placeholder="صف منتجك، ميزته التنافسية، أو النص الأولي الذي تريد تحويله إلى فكرة إعلانية خارقة..." rows="5">مجوهرات فاخرة مصنوعة من الذهب الأصفر الخام وألماس نقي مستخرج بأسلوب مستدام، مستوحاة من صخور الصحراء الأزلية والهدوء المطلق في نيوم والعُلا. التحدي: الابتعاد عن إعلانات المجوهرات النمطية الفاقدة للهوية وصناعة إعلان يرسخ أن الفخامة هي القدرة على الصمت والانسحاب من صخب العالم.</textarea>
+<div class="flex items-center justify-between pt-space-sm mt-space-sm bg-surface-container-lowest">
+<div class="flex items-center gap-space-xs text-on-surface-variant font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-[16px] text-secondary">auto_fix_high</span>
+<span>التحليل الدلالي: تباين حاد (صخب المدينة مقابل سكون الصحراء) • رمزية الذهب الأبدي</span>
+</div>
+<div class="flex items-center gap-space-xs">
+<button class="px-space-sm py-1 bg-surface-container-high hover:bg-surface-container-highest text-on-surface text-body-sm font-body-sm rounded flex items-center gap-1 transition-colors">
+<span class="material-symbols-outlined text-[15px]">refresh</span>
+<span>إعادة ضبط العينة</span>
+</button>
+<button class="px-space-sm py-1 bg-secondary text-on-secondary text-body-sm font-headline-sm rounded flex items-center gap-1 transition-colors">
+<span class="material-symbols-outlined text-[15px]">tune</span>
+<span>تعديل المتغيرات</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Contextual Quick Sliders -->
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-space-sm pt-space-xs">
+<div class="bg-surface-container p-space-sm rounded">
+<div class="flex justify-between items-center text-label-cinematic font-label-cinematic text-outline mb-1">
+<span>معيار التجريد الفني</span>
+<span class="text-primary font-label-timecode text-label-timecode">88%</span>
+</div>
+<div class="w-full h-1.5 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 88%"></div>
+</div>
+</div>
+<div class="bg-surface-container p-space-sm rounded">
+<div class="flex justify-between items-center text-label-cinematic font-label-cinematic text-outline mb-1">
+<span>حدة الاستفزاز الإدراكي</span>
+<span class="text-secondary font-label-timecode text-label-timecode">92%</span>
+</div>
+<div class="w-full h-1.5 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="bg-secondary h-full rounded-full" style="width: 92%"></div>
+</div>
+</div>
+<div class="bg-surface-container p-space-sm rounded">
+<div class="flex justify-between items-center text-label-cinematic font-label-cinematic text-outline mb-1">
+<span>الارتباط الجغرافي والثقافي</span>
+<span class="text-tertiary font-label-timecode text-label-timecode">75%</span>
+</div>
+<div class="w-full h-1.5 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="bg-tertiary-fixed-dim h-full rounded-full" style="width: 75%"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Narrative Visual Card (4 Cols) -->
+<div class="lg:col-span-4 bg-surface-container rounded-lg p-space-md flex flex-col justify-between shadow-md">
+<div>
+<div class="flex items-center justify-between pb-space-xs mb-space-sm">
+<span class="font-label-cinematic text-label-cinematic text-secondary uppercase">MOODBOARD &amp; ANCHOR</span>
+<span class="font-label-timecode text-label-timecode text-outline">FRAME #01-A</span>
+</div>
+<!-- Cinematic Frame Preview -->
+<div class="relative w-full h-44 rounded overflow-hidden shadow-inner">
+<img class="w-full h-full object-cover" data-alt="High-contrast ultra-luxury cinematic still of an raw sculpted yellow gold ring resting serenely upon a monolithic dark weathered desert basalt rock in AlUla Saudi Arabia. Dramatic late-afternoon chiaroscuro sunlight rakes across gold textures, obsidian black shadows, fine shimmering sand, minimalist haute-editorial composition with immense negative space and absolute quietude." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7kFCJS43hNSorP00FRO3CigWE8iZALoQv3BDsa7DDBPU8oYLiqDizVj7QAq0-qcubwBdSLfRVZHo4A91dwCrnCdpsRbhixWkMGvcfzjLgEsNb-Lq-s7YUxatyol5lX3yMV9UnqcgWLOHS9xIquoYctdH9JCInq_bUf-6oriaR2k_oakt3lzB6ie7M4M3dTjv0uCeyCaH35cohqf7bsV-mdGxOEuR2GYscxqa5-P3iqUvk5XDMKgRrLA"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-transparent to-transparent"></div>
+<div class="absolute bottom-2 right-2 left-2 flex items-center justify-between text-on-surface">
+<span class="font-label-cinematic text-label-cinematic px-2 py-0.5 bg-surface-container-lowest/80 backdrop-blur rounded text-primary">RAW BASALT // 24K GOLD</span>
+<span class="font-label-timecode text-label-timecode text-secondary-fixed">ISO 100 • 85mm</span>
+</div>
+</div>
+</div>
+<div class="pt-space-sm">
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2">
+                "الذهب ليس وسيلة للظهور، بل هو حجر السكينة في عالم ممتلئ بالضجيج."
+              </p>
+<div class="flex items-center gap-space-sm mt-space-xs text-outline font-label-cinematic text-label-cinematic">
+<span class="flex items-center gap-1 text-secondary"><span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> محاذاة المفهوم: 98%</span>
+<span>المخرج: متأهب للتوليد الخماسي</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 3: The 5 Creative Thinking Instruments (Interactive Matrix) -->
+<section class="w-full px-gutter py-space-lg">
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-space-md gap-space-sm">
+<div>
+<div class="flex items-center gap-space-xs text-primary font-label-cinematic text-label-cinematic uppercase tracking-widest">
+<span class="material-symbols-outlined text-[16px]">grid_view</span>
+<span>THE LATERAL COGNITION MATRIX</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface mt-1">
+            محركات التفكير الإبداعي الخمسة في العمل الحي
+          </h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-0.5">
+            توليد 5 مسارات إعلانية جذرية لكل منها زاوية نفسية وسينمائية مستقلة
+          </p>
+</div>
+<div class="flex items-center gap-space-sm">
+<span class="font-label-timecode text-label-timecode text-outline hidden sm:inline">5 ENGINES LOADED // PARALLEL SYNAPSE</span>
+<div class="flex items-center bg-surface-container-high rounded p-0.5">
+<button class="px-space-sm py-1 rounded bg-primary text-on-primary font-label-cinematic text-label-cinematic font-semibold">عرض المصفوفة</button>
+<button class="px-space-sm py-1 rounded text-on-surface-variant hover:text-on-surface font-label-cinematic text-label-cinematic">مقارنة المقاييس</button>
+</div>
+</div>
+</div>
+<!-- 5-Card High-Altitude Lateral Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-space-md">
+<!-- Engine 1: Provocation -->
+<div class="bg-surface-container rounded-xl p-space-md flex flex-col justify-between transition-all duration-300 hover:scale-[1.01] hover:bg-surface-container-high shadow-lg group">
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="w-7 h-7 rounded bg-secondary-container text-on-secondary-container flex items-center justify-center font-label-cinematic text-label-cinematic font-bold">01</span>
+<span class="inline-flex items-center gap-1 font-label-cinematic text-label-cinematic text-secondary px-2 py-0.5 rounded bg-surface-container-highest">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                نشط
+              </span>
+</div>
+<div>
+<span class="font-label-cinematic text-label-cinematic text-outline block">PROVOCATION ENGINE</span>
+<h3 class="font-title-editorial text-title-editorial text-on-surface mt-0.5">الاستفزاز الإبداعي</h3>
+</div>
+<!-- The Big Pitch -->
+<div class="bg-surface-container-lowest p-space-sm rounded-lg">
+<span class="font-label-cinematic text-label-cinematic text-primary block mb-1">الفكرة الإعلانية:</span>
+<p class="font-body-md text-body-md text-on-surface leading-snug">
+                "إعلان يطلب من الناس ألا يشتروا المنتج إلا إذا كانوا مستعدين للاختفاء التام عن العالم الرقمي."
+              </p>
+</div>
+<div class="text-body-sm font-body-sm text-on-surface-variant leading-relaxed">
+<strong class="text-tertiary font-normal">المبدأ النفسي:</strong> تحويل الامتناع والسرية إلى أعلى مراتب المكانة الاجتماعية (Anti-Consumption as Ultimate Status).
+            </div>
+</div>
+<!-- Metrics & Actions Footer -->
+<div class="pt-space-md mt-space-sm">
+<div class="flex items-center justify-between text-label-timecode font-label-timecode text-body-sm mb-1">
+<span class="text-outline">أصالة الفكرة (Originality)</span>
+<span class="text-primary font-semibold">96%</span>
+</div>
+<div class="w-full h-1 bg-surface-container-highest rounded-full overflow-hidden mb-space-sm">
+<div class="bg-primary h-full rounded-full" style="width: 96%"></div>
+</div>
+<div class="flex items-center justify-between gap-space-xs pt-space-xs">
+<button class="w-full py-1.5 px-space-sm bg-surface-container-highest hover:bg-secondary-container hover:text-on-secondary-container text-on-surface font-body-sm text-body-sm rounded transition-colors text-center">
+                تطوير المسار
+              </button>
+<button class="p-1.5 bg-surface-container-highest hover:text-primary text-outline rounded transition-colors" title="توليد بدائل">
+<span class="material-symbols-outlined text-[16px]">shuffle</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Engine 2: Analogies -->
+<div class="bg-surface-container rounded-xl p-space-md flex flex-col justify-between transition-all duration-300 hover:scale-[1.01] hover:bg-surface-container-high shadow-lg group">
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="w-7 h-7 rounded bg-surface-container-highest text-tertiary flex items-center justify-center font-label-cinematic text-label-cinematic font-bold">02</span>
+<span class="inline-flex items-center gap-1 font-label-cinematic text-label-cinematic text-secondary px-2 py-0.5 rounded bg-surface-container-highest">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                نشط
+              </span>
+</div>
+<div>
+<span class="font-label-cinematic text-label-cinematic text-outline block">ANALOGIES ENGINE</span>
+<h3 class="font-title-editorial text-title-editorial text-on-surface mt-0.5">القياس والتناظر</h3>
+</div>
+<!-- The Big Pitch -->
+<div class="bg-surface-container-lowest p-space-sm rounded-lg">
+<span class="font-label-cinematic text-label-cinematic text-primary block mb-1">الفكرة الإعلانية:</span>
+<p class="font-body-md text-body-md text-on-surface leading-snug">
+                "ربط صناعة الذهب بحركة الكواكب والظواهر الجيولوجية — الذهب ليس زينة، بل ذاكرة الأرض المتجمدة."
+              </p>
+</div>
+<div class="text-body-sm font-body-sm text-on-surface-variant leading-relaxed">
+<strong class="text-tertiary font-normal">المبدأ النفسي:</strong> التعالي بالمنتج إلى بُعد كوني يتجاوز الموضة العابرة (Deep-Time Cosmic Eternity).
+            </div>
+</div>
+<!-- Metrics & Actions Footer -->
+<div class="pt-space-md mt-space-sm">
+<div class="flex items-center justify-between text-label-timecode font-label-timecode text-body-sm mb-1">
+<span class="text-outline">أصالة الفكرة (Originality)</span>
+<span class="text-primary font-semibold">91%</span>
+</div>
+<div class="w-full h-1 bg-surface-container-highest rounded-full overflow-hidden mb-space-sm">
+<div class="bg-primary h-full rounded-full" style="width: 91%"></div>
+</div>
+<div class="flex items-center justify-between gap-space-xs pt-space-xs">
+<button class="w-full py-1.5 px-space-sm bg-surface-container-highest hover:bg-secondary-container hover:text-on-secondary-container text-on-surface font-body-sm text-body-sm rounded transition-colors text-center">
+                تطوير المسار
+              </button>
+<button class="p-1.5 bg-surface-container-highest hover:text-primary text-outline rounded transition-colors" title="توليد بدائل">
+<span class="material-symbols-outlined text-[16px]">shuffle</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Engine 3: Random Stimulus -->
+<div class="bg-surface-container rounded-xl p-space-md flex flex-col justify-between transition-all duration-300 hover:scale-[1.01] hover:bg-surface-container-high shadow-lg group">
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="w-7 h-7 rounded bg-surface-container-highest text-tertiary flex items-center justify-center font-label-cinematic text-label-cinematic font-bold">03</span>
+<span class="inline-flex items-center gap-1 font-label-cinematic text-label-cinematic text-secondary px-2 py-0.5 rounded bg-surface-container-highest">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                نشط
+              </span>
+</div>
+<div>
+<span class="font-label-cinematic text-label-cinematic text-outline block">RANDOM STIMULUS ENGINE</span>
+<h3 class="font-title-editorial text-title-editorial text-on-surface mt-0.5">المحفز العشوائي</h3>
+</div>
+<!-- The Big Pitch -->
+<div class="bg-surface-container-lowest p-space-sm rounded-lg">
+<span class="font-label-cinematic text-label-cinematic text-primary block mb-1">الفكرة الإعلانية:</span>
+<p class="font-body-md text-body-md text-on-surface leading-snug">
+                "دمج عقارب ساعة جدارية عتيقة تغرق في رمال دقيقة مع صوت نبض خافت — الوقت يتوقف حين ترتدي هذا الخاتم."
+              </p>
+</div>
+<div class="text-body-sm font-body-sm text-on-surface-variant leading-relaxed">
+<strong class="text-tertiary font-normal">المبدأ النفسي:</strong> ترويض الزمن ومخاطبة رغبة الثبات النفسي في عصر السرعة الزائلة.
+            </div>
+</div>
+<!-- Metrics & Actions Footer -->
+<div class="pt-space-md mt-space-sm">
+<div class="flex items-center justify-between text-label-timecode font-label-timecode text-body-sm mb-1">
+<span class="text-outline">أصالة الفكرة (Originality)</span>
+<span class="text-primary font-semibold">89%</span>
+</div>
+<div class="w-full h-1 bg-surface-container-highest rounded-full overflow-hidden mb-space-sm">
+<div class="bg-primary h-full rounded-full" style="width: 89%"></div>
+</div>
+<div class="flex items-center justify-between gap-space-xs pt-space-xs">
+<button class="w-full py-1.5 px-space-sm bg-surface-container-highest hover:bg-secondary-container hover:text-on-secondary-container text-on-surface font-body-sm text-body-sm rounded transition-colors text-center">
+                تطوير المسار
+              </button>
+<button class="p-1.5 bg-surface-container-highest hover:text-primary text-outline rounded transition-colors" title="توليد بدائل">
+<span class="material-symbols-outlined text-[16px]">shuffle</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Engine 4: Opposite Thinking (Highlighted Contender) -->
+<div class="bg-surface-container-high rounded-xl p-space-md flex flex-col justify-between transition-all duration-300 hover:scale-[1.01] shadow-xl relative group">
+<div class="absolute -top-2.5 right-4 bg-primary text-on-primary font-label-cinematic text-label-cinematic px-space-sm py-0.5 rounded font-bold uppercase shadow">
+            TOP CONTENDER ★
+          </div>
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between pt-1">
+<span class="w-7 h-7 rounded bg-primary text-on-primary flex items-center justify-center font-label-cinematic text-label-cinematic font-bold">04</span>
+<span class="inline-flex items-center gap-1 font-label-cinematic text-label-cinematic text-primary font-semibold px-2 py-0.5 rounded bg-surface-container-lowest">
+                مرشح الفوز
+              </span>
+</div>
+<div>
+<span class="font-label-cinematic text-label-cinematic text-primary block">OPPOSITE THINKING ENGINE</span>
+<h3 class="font-title-editorial text-title-editorial text-on-surface mt-0.5">التفكير المعاكس</h3>
+</div>
+<!-- The Big Pitch -->
+<div class="bg-surface-container-lowest p-space-sm rounded-lg">
+<span class="font-label-cinematic text-label-cinematic text-secondary block mb-1">الفكرة الإعلانية:</span>
+<p class="font-body-md text-body-md text-on-surface leading-snug font-medium">
+                "بدلاً من إظهار شخصيات تبتسم وتتباهى، الإعلان يصوّر البطلة في سكون مهيب تتجاهل كاميرات الحفلة لتنظر نحو صحراء شاسعة."
+              </p>
+</div>
+<div class="text-body-sm font-body-sm text-on-surface-variant leading-relaxed">
+<strong class="text-secondary font-normal">المبدأ النفسي:</strong> كسر كليشيهات البذخ السطحي؛ الهدوء الداخلي هو العملة الأندر والأكثر إغراءً.
+            </div>
+</div>
+<!-- Metrics & Actions Footer -->
+<div class="pt-space-md mt-space-sm">
+<div class="flex items-center justify-between text-label-timecode font-label-timecode text-body-sm mb-1">
+<span class="text-outline">أصالة الفكرة (Originality)</span>
+<span class="text-primary font-semibold">97%</span>
+</div>
+<div class="w-full h-1 bg-surface-container-highest rounded-full overflow-hidden mb-space-sm">
+<div class="bg-primary h-full rounded-full" style="width: 97%"></div>
+</div>
+<div class="flex items-center justify-between gap-space-xs pt-space-xs">
+<button class="w-full py-1.5 px-space-sm bg-primary text-on-primary font-body-sm text-body-sm rounded hover:bg-primary-container font-medium transition-colors text-center">
+                تطوير المسار المعتمد
+              </button>
+<button class="p-1.5 bg-surface-container-highest hover:text-primary text-outline rounded transition-colors" title="توليد بدائل">
+<span class="material-symbols-outlined text-[16px]">shuffle</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Engine 5: Constraint Reversal -->
+<div class="bg-surface-container rounded-xl p-space-md flex flex-col justify-between transition-all duration-300 hover:scale-[1.01] hover:bg-surface-container-high shadow-lg group">
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="w-7 h-7 rounded bg-surface-container-highest text-tertiary flex items-center justify-center font-label-cinematic text-label-cinematic font-bold">05</span>
+<span class="inline-flex items-center gap-1 font-label-cinematic text-label-cinematic text-secondary px-2 py-0.5 rounded bg-surface-container-highest">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                نشط
+              </span>
+</div>
+<div>
+<span class="font-label-cinematic text-label-cinematic text-outline block">CONSTRAINT REVERSAL ENGINE</span>
+<h3 class="font-title-editorial text-title-editorial text-on-surface mt-0.5">عكس القيود</h3>
+</div>
+<!-- The Big Pitch -->
+<div class="bg-surface-container-lowest p-space-sm rounded-lg">
+<span class="font-label-cinematic text-label-cinematic text-primary block mb-1">الفكرة الإعلانية:</span>
+<p class="font-body-md text-body-md text-on-surface leading-snug">
+                "استغلال صمت الصحراء وعزلتها كنقطة القوة — عدم وجود أي موسيقى صاخبة، فقط رنين نقي للذهب مع الرياح."
+              </p>
+</div>
+<div class="text-body-sm font-body-sm text-on-surface-variant leading-relaxed">
+<strong class="text-tertiary font-normal">المبدأ النفسي:</strong> فرض حضور صوتي وبصري صامت يقطع تشويش الإعلانات المنافسة بنقاء قاطع.
+            </div>
+</div>
+<!-- Metrics & Actions Footer -->
+<div class="pt-space-md mt-space-sm">
+<div class="flex items-center justify-between text-label-timecode font-label-timecode text-body-sm mb-1">
+<span class="text-outline">أصالة الفكرة (Originality)</span>
+<span class="text-primary font-semibold">94%</span>
+</div>
+<div class="w-full h-1 bg-surface-container-highest rounded-full overflow-hidden mb-space-sm">
+<div class="bg-primary h-full rounded-full" style="width: 94%"></div>
+</div>
+<div class="flex items-center justify-between gap-space-xs pt-space-xs">
+<button class="w-full py-1.5 px-space-sm bg-surface-container-highest hover:bg-secondary-container hover:text-on-secondary-container text-on-surface font-body-sm text-body-sm rounded transition-colors text-center">
+                تطوير المسار
+              </button>
+<button class="p-1.5 bg-surface-container-highest hover:text-primary text-outline rounded transition-colors" title="توليد بدائل">
+<span class="material-symbols-outlined text-[16px]">shuffle</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 4: The Dual Review Panel & Adjudication Verdict -->
+<section class="w-full px-gutter py-space-lg mb-space-xl">
+<div class="bg-surface-container-low rounded-xl p-space-lg shadow-2xl">
+<!-- Header of Dual Review -->
+<div class="flex flex-col lg:flex-row lg:items-center justify-between pb-space-md gap-space-md">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded bg-secondary text-on-secondary flex items-center justify-center font-headline-sm">
+<span class="material-symbols-outlined text-[20px]">gavel</span>
+</div>
+<div>
+<span class="font-label-cinematic text-label-cinematic text-secondary uppercase tracking-widest block">PHASE 02: DUAL ARBITRATION &amp; SYNTHESIS</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">لوحة التحكيم والمراجعة الثنائية — مرحلة التقييم والتصفية</h2>
+</div>
+</div>
+<div class="flex items-center gap-space-sm text-on-surface-variant font-body-sm text-body-sm bg-surface-container px-space-md py-1.5 rounded">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span>التقييم المشترك: إجماع استراتيجي وفني على دمج المسار الرابع والخامس</span>
+</div>
+</div>
+<!-- The Two Evaluators Split Deck -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-space-lg mt-space-md">
+<!-- Evaluator 1: Strategic & Commercial Brand Director -->
+<div class="bg-surface-container rounded-lg p-space-md shadow-md flex flex-col justify-between">
+<div>
+<div class="flex items-start justify-between pb-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[22px]">analytics</span>
+</div>
+<div>
+<h3 class="font-title-editorial text-title-editorial text-on-surface">المراجع الاستراتيجي والتجاري</h3>
+<span class="font-label-cinematic text-label-cinematic text-outline">STRATEGIC BRAND DIRECTOR AI</span>
+</div>
+</div>
+<div class="text-left font-label-timecode">
+<span class="text-headline-sm text-primary font-bold">94%</span>
+<span class="block text-label-cinematic text-on-surface-variant">MARKET IMPACT</span>
+</div>
+</div>
+<!-- Critique Body -->
+<div class="mt-space-sm bg-surface-container-lowest p-space-md rounded-lg">
+<div class="flex items-center gap-1.5 text-secondary font-label-cinematic text-label-cinematic mb-1">
+<span class="material-symbols-outlined text-[16px]">verified</span>
+<span>الملاحظة النقدية والتحليل التجاري:</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface leading-relaxed">
+                  "مسار (التفكير المعاكس) يحقق تميزاً كاسحاً في سوق المجوهرات المشبع بالبذخ الاستعراضي المبتذل. من الناحية التسويقية، يُكسب العلامة مكانة «الملاذ الروحي»، ويستهدف بشكل دقيق فئة الأثرياء الذين يضجرون من المظاهر ويبحثون عن الأصالة الصامتة (Quiet Luxury). نسبة العائد الاستثماري على الانطباع (Earned Media) ستتجاوز 3.8x بسبب كسر النمط السائد."
+                </p>
+</div>
+<!-- Metric Breakdown -->
+<div class="grid grid-cols-2 gap-space-sm mt-space-sm text-body-sm font-body-sm">
+<div class="bg-surface-container-high p-space-xs rounded flex justify-between items-center">
+<span class="text-outline">ملاءمة الجمهور المستهدف</span>
+<span class="font-label-timecode text-label-timecode text-primary">96%</span>
+</div>
+<div class="bg-surface-container-high p-space-xs rounded flex justify-between items-center">
+<span class="text-outline">الاستدامة الرمزية للعلامة</span>
+<span class="font-label-timecode text-label-timecode text-secondary">92%</span>
+</div>
+</div>
+</div>
+<div class="pt-space-md mt-space-sm flex items-center justify-between text-body-sm font-body-sm text-outline">
+<span class="flex items-center gap-1 text-primary">
+<span class="material-symbols-outlined text-[15px]">check_circle</span>
+                اعتماد الجدوى التجارية: موصى به للتنفيذ
+              </span>
+<span class="font-label-timecode text-label-timecode">CONFIDENCE: 0.98</span>
+</div>
+</div>
+<!-- Evaluator 2: Creative & Artistic Disruptor Director -->
+<div class="bg-surface-container rounded-lg p-space-md shadow-md flex flex-col justify-between">
+<div>
+<div class="flex items-start justify-between pb-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[22px]">theater_comedy</span>
+</div>
+<div>
+<h3 class="font-title-editorial text-title-editorial text-on-surface">المراجع الإبداعي والفني</h3>
+<span class="font-label-cinematic text-label-cinematic text-outline">CREATIVE DISRUPTOR DIRECTOR AI</span>
+</div>
+</div>
+<div class="text-left font-label-timecode">
+<span class="text-headline-sm text-secondary font-bold">98%</span>
+<span class="block text-label-cinematic text-on-surface-variant">DISRUPTION INDEX</span>
+</div>
+</div>
+<!-- Critique Body -->
+<div class="mt-space-sm bg-surface-container-lowest p-space-md rounded-lg">
+<div class="flex items-center gap-1.5 text-primary font-label-cinematic text-label-cinematic mb-1">
+<span class="material-symbols-outlined text-[16px]">stars</span>
+<span>الملاحظة الفنية والرؤية السينمائية:</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface leading-relaxed">
+                  "الدمج بين (عكس القيود) و(الاستفزاز) سيصنع عملاً يحصد جوائز كان ليونز الإعلانية بلا شك. الشجاعة في تفريغ المشهد كلياً من الموسيقى، والاعتماد الحصري على صوت الرياح ورنين خاتم الذهب عند ملامسته لصخور نيوم، سيعطي تأثيراً حسياً (ASMR سينمائي من العيار الثقيل). إنها لحظة تنويم مغناطيسي للمشاهد لا يمكن تجاوزها."
+                </p>
+</div>
+<!-- Metric Breakdown -->
+<div class="grid grid-cols-2 gap-space-sm mt-space-sm text-body-sm font-body-sm">
+<div class="bg-surface-container-high p-space-xs rounded flex justify-between items-center">
+<span class="text-outline">الصدمة الجمالية الإيجابية</span>
+<span class="font-label-timecode text-label-timecode text-primary">99%</span>
+</div>
+<div class="bg-surface-container-high p-space-xs rounded flex justify-between items-center">
+<span class="text-outline">قابلية التخليد في الذاكرة</span>
+<span class="font-label-timecode text-label-timecode text-secondary">97%</span>
+</div>
+</div>
+</div>
+<div class="pt-space-md mt-space-sm flex items-center justify-between text-body-sm font-body-sm text-outline">
+<span class="flex items-center gap-1 text-secondary">
+<span class="material-symbols-outlined text-[15px]">verified</span>
+                اعتماد التميز الفني: جاهز للتصوير السينمائي
+              </span>
+<span class="font-label-timecode text-label-timecode">FESTIVAL POTENTIAL: HIGH</span>
+</div>
+</div>
+</div>
+<!-- Master Verdict Banner & Progression Gateway -->
+<div class="mt-space-lg bg-surface-container-lowest rounded-xl p-space-md flex flex-col lg:flex-row items-center justify-between gap-space-md shadow-lg">
+<div class="flex items-center gap-space-md">
+<div class="w-12 h-12 rounded-lg bg-primary-container text-on-primary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[28px]">trophy</span>
+</div>
+<div>
+<div class="flex items-center gap-space-xs">
+<span class="font-label-cinematic text-label-cinematic text-primary uppercase tracking-wider font-semibold">THE UNANIMOUS JURY VERDICT // القرار النهائي المعتمد</span>
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+<span class="font-label-timecode text-label-timecode text-secondary-fixed">INDEX: 97.4/100</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface mt-0.5">
+                الفكرة الإعلانية الفائزة: <span class="text-primary">«سيمفونية الفراغ والصمت المطلق»</span>
+</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                دمج التفكير المعاكس مع سكون الصحراء — جاهزة الآن للانتقال إلى مرحلة السيناريو والمشاهد والتخريج السينمائي 4K.
+              </p>
+</div>
+</div>
+<!-- Bottom Action Suite -->
+<div class="flex items-center gap-space-sm w-full lg:w-auto shrink-0 justify-end">
+<button class="px-space-md py-2.5 bg-surface-container-high hover:bg-surface-container-highest text-on-surface rounded font-body-md text-body-md flex items-center gap-1 transition-colors" id="refineLoopBtn">
+<span class="material-symbols-outlined text-[18px]">loop</span>
+<span>طلب جولة تحسين إضافية (Run Refinement)</span>
+</button>
+<a class="px-space-lg py-2.5 bg-primary text-on-primary hover:bg-primary-container hover:text-on-primary-container rounded font-headline-sm text-body-md flex items-center gap-space-xs transition-all shadow-md" data-path="the-big-idea" href="#">
+<span>اعتماد الفكرة والانتقال إلى السيناريو السينمائي</span>
+<span class="material-symbols-outlined text-[18px]">arrow_back</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div>
+<script>
+  (function() {
+    const runBtn = document.getElementById('runAllEnginesBtn');
+    const exportBtn = document.getElementById('exportDossierBtn');
+    const refineBtn = document.getElementById('refineLoopBtn');
+
+    if (runBtn) {
+      runBtn.addEventListener('click', function() {
+        const originalText = this.innerHTML;
+        this.innerHTML = '<span class="material-symbols-outlined text-[20px] animate-spin">sync</span><span>جاري تشغيل محركات التفكير بالتوازي...</span>';
+        this.classList.add('opacity-80', 'pointer-events-none');
+        
+        setTimeout(() => {
+          this.innerHTML = '<span class="material-symbols-outlined text-[20px]">check</span><span>تم توليد وتقييم 5 مسارات بنجاح</span>';
+          this.classList.remove('opacity-80', 'pointer-events-none');
+          setTimeout(() => {
+            this.innerHTML = originalText;
+          }, 2400);
+        }, 1600);
+      });
+    }
+
+    if (exportBtn) {
+      exportBtn.addEventListener('click', function() {
+        alert('جاري إعداد وتحميل وثيقة الحملة الاستراتيجية (Creative Dossier JSON/PDF) لعلامة المجوهرات الفاخرة.');
+      });
+    }
+
+    if (refineBtn) {
+      refineBtn.addEventListener('click', function() {
+        const original = this.innerHTML;
+        this.innerHTML = '<span class="material-symbols-outlined text-[18px] animate-spin">refresh</span><span>جاري التدقيق...</span>';
+        setTimeout(() => {
+          this.innerHTML = original;
+          alert('اكتملت جولة التحسين: تم رفع معامل التأثير الدرامي بمقدار 2.4% بناءً على ملاحظات المراجع الإبداعي.');
+        }, 1200);
+      });
+    }
+  })();
+</script></main><footer class="w-full bg-surface-container-lowest py-space-xl shadow-[0_-1px_12px_rgba(0,0,0,0.4)]"><div class="w-full px-gutter flex flex-col md:flex-row items-center justify-between gap-space-md text-right"><div class="flex items-center gap-space-sm"><span class="font-label-cinematic text-label-cinematic text-primary">FX — ATELIER CINÉMATIQUE</span><span class="font-body-sm text-body-sm text-outline">© 2025 استوديو الإخراج الفني والإبداعي المتقدم. كافة الحقوق محفوظة.</span></div><div class="flex items-center gap-space-lg font-body-sm text-body-sm text-on-surface-variant"><a class="hover:text-primary transition-colors" data-path="product-and-ideation-lab" href="#">المختبر الأساسي</a><a class="hover:text-primary transition-colors" data-path="cinematic-production-deck" href="#">مصفوفة التخريج</a><span class="font-label-timecode text-label-timecode text-secondary-fixed-dim">LATENCY: 12ms • 4K DCI READY</span></div></div></footer></body></html>

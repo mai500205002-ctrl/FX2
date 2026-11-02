@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TextFX — AI Creative Director | Source Code For Sale</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=Fraunces:ital,wght@0,300;0,700;0,900;1,300;1,900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --black: #080808;
+  --cream: #F5F0E8;
+  --gold: #C9A84C;
+  --gold-light: #E8C96A;
+  --rust: #C44B2A;
+  --dim: #1A1A1A;
+  --mid: #2E2E2E;
+  --text-muted: #888;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--black);
+  color: var(--cream);
+  font-family: 'Syne', sans-serif;
+  overflow-x: hidden;
+}
+
+/* NOISE TEXTURE */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 999;
+  opacity: 0.6;
+}
+
+/* NAV */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 24px 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(201,168,76,0.15);
+  background: rgba(8,8,8,0.85);
+  backdrop-filter: blur(12px);
+}
+
+.nav-logo {
+  font-family: 'Fraunces', serif;
+  font-size: 22px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  color: var(--gold);
+}
+
+.nav-cta {
+  background: var(--gold);
+  color: var(--black);
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 10px 24px;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.nav-cta:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 140px 48px 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-bg-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Fraunces', serif;
+  font-size: clamp(120px, 22vw, 340px);
+  font-weight: 900;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(201,168,76,0.06);
+  white-space: nowrap;
+  user-select: none;
+  pointer-events: none;
+  animation: slowDrift 20s ease-in-out infinite alternate;
+}
+
+@keyframes slowDrift {
+  from { transform: translate(-52%, -50%) rotate(-1deg); }
+  to { transform: translate(-48%, -50%) rotate(1deg); }
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  border: 1px solid rgba(201,168,76,0.3);
+  padding: 6px 16px;
+  margin-bottom: 32px;
+  width: fit-content;
+}
+
+.hero-badge::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  background: var(--gold);
+  border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.8); }
+}
+
+.hero h1 {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(52px, 8vw, 110px);
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  position: relative;
+  z-index: 2;
+  max-width: 900px;
+}
+
+.hero h1 em {
+  font-style: italic;
+  color: var(--gold);
+}
+
+.hero-sub {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(16px, 2vw, 24px);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--text-muted);
+  margin-top: 28px;
+  max-width: 600px;
+  line-height: 1.6;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 16px;
+  margin-top: 48px;
+  position: relative;
+  z-index: 2;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.btn-primary {
+  background: var(--gold);
+  color: var(--black);
+  font-family: 'DM Mono', monospace;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 18px 40px;
+  text-decoration: none;
+  display: inline-block;
+  transition: all 0.25s;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.2), transparent);
+  opacity: 0;
+  transition: opacity 0.25s;
+}
+
+.btn-primary:hover { transform: translateY(-2px); background: var(--gold-light); }
+.btn-primary:hover::after { opacity: 1; }
+
+.btn-secondary {
+  font-family: 'DM Mono', monospace;
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--cream);
+  text-decoration: none;
+  padding: 18px 0;
+  border-bottom: 1px solid rgba(245,240,232,0.3);
+  transition: all 0.2s;
+}
+.btn-secondary:hover { color: var(--gold); border-color: var(--gold); }
+
+.hero-price-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 24px;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-price-tag strong {
+  color: var(--gold);
+  font-size: 18px;
+}
+
+/* MARQUEE */
+.marquee-wrap {
+  border-top: 1px solid rgba(201,168,76,0.15);
+  border-bottom: 1px solid rgba(201,168,76,0.15);
+  overflow: hidden;
+  padding: 14px 0;
+  background: rgba(201,168,76,0.03);
+}
+
+.marquee-inner {
+  display: flex;
+  gap: 0;
+  animation: marquee 25s linear infinite;
+  white-space: nowrap;
+}
+
+.marquee-item {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  opacity: 0.6;
+  padding: 0 40px;
+}
+
+.marquee-sep {
+  color: var(--rust);
+  opacity: 0.8;
+  padding: 0 4px;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* SECTION COMMON */
+section { padding: 100px 48px; }
+
+.section-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.section-label::after {
+  content: '';
+  flex: 1;
+  max-width: 60px;
+  height: 1px;
+  background: var(--gold);
+  opacity: 0.4;
+}
+
+.section-title {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(36px, 5vw, 64px);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  max-width: 700px;
+}
+
+.section-title em { font-style: italic; color: var(--gold); }
+
+/* WHAT IS IT */
+.what-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  margin-top: 60px;
+}
+
+.what-text p {
+  font-size: 18px;
+  line-height: 1.8;
+  color: rgba(245,240,232,0.75);
+  margin-bottom: 20px;
+}
+
+.what-text p strong { color: var(--cream); }
+
+.pipeline-visual {
+  background: var(--dim);
+  border: 1px solid rgba(201,168,76,0.15);
+  padding: 40px;
+  position: relative;
+}
+
+.pipeline-step {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  margin-bottom: 28px;
+  position: relative;
+}
+
+.pipeline-step:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  left: 20px;
+  top: 44px;
+  bottom: -28px;
+  width: 1px;
+  background: linear-gradient(to bottom, var(--gold), transparent);
+  opacity: 0.3;
+}
+
+.step-num {
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  color: var(--gold);
+  flex-shrink: 0;
+}
+
+.step-content h4 {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--cream);
+  margin-bottom: 4px;
+}
+
+.step-content p {
+  font-size: 13px;
+  color: var(--text-muted);
+  font-family: 'DM Mono', monospace;
+  line-height: 1.6;
+}
+
+/* TECHNIQUES */
+.techniques { background: var(--dim); }
+
+.tech-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1px;
+  margin-top: 60px;
+  background: rgba(201,168,76,0.1);
+  border: 1px solid rgba(201,168,76,0.1);
+}
+
+.tech-card {
+  background: var(--dim);
+  padding: 32px 24px;
+  transition: background 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.tech-card::before {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transition: transform 0.3s;
+}
+
+.tech-card:hover { background: #222; }
+.tech-card:hover::before { transform: scaleX(1); }
+
+.tech-num {
+  font-family: 'Fraunces', serif;
+  font-size: 64px;
+  font-weight: 900;
+  color: rgba(201,168,76,0.08);
+  line-height: 1;
+  margin-bottom: 16px;
+}
+
+.tech-name {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 12px;
+}
+
+.tech-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--cream);
+  margin-bottom: 10px;
+}
+
+.tech-desc {
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+/* TECH STACK */
+.stack-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 60px;
+}
+
+.stack-card {
+  border: 1px solid rgba(201,168,76,0.12);
+  padding: 32px;
+  background: rgba(201,168,76,0.02);
+  transition: border-color 0.3s, background 0.3s;
+}
+
+.stack-card:hover {
+  border-color: rgba(201,168,76,0.35);
+  background: rgba(201,168,76,0.05);
+}
+
+.stack-icon {
+  font-size: 28px;
+  margin-bottom: 16px;
+}
+
+.stack-card h3 {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--cream);
+  margin-bottom: 8px;
+}
+
+.stack-card p {
+  font-size: 13px;
+  color: var(--text-muted);
+  font-family: 'DM Mono', monospace;
+  line-height: 1.7;
+}
+
+/* API ENDPOINTS */
+.endpoints { background: var(--dim); }
+
+.endpoint-list {
+  margin-top: 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.endpoint-item {
+  display: grid;
+  grid-template-columns: 80px 280px 1fr;
+  gap: 24px;
+  align-items: center;
+  padding: 20px 28px;
+  background: var(--black);
+  border: 1px solid transparent;
+  transition: border-color 0.2s;
+}
+
+.endpoint-item:hover { border-color: rgba(201,168,76,0.2); }
+
+.method {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  padding: 4px 10px;
+  text-align: center;
+}
+.method.post { background: rgba(196,75,42,0.2); color: #E87A5A; border: 1px solid rgba(196,75,42,0.3); }
+.method.get { background: rgba(201,168,76,0.15); color: var(--gold); border: 1px solid rgba(201,168,76,0.25); }
+
+.endpoint-path {
+  font-family: 'DM Mono', monospace;
+  font-size: 13px;
+  color: var(--cream);
+}
+
+.endpoint-desc {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+/* WHAT YOU GET */
+.get-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  margin-top: 60px;
+}
+
+.get-list {
+  list-style: none;
+}
+
+.get-list li {
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(201,168,76,0.08);
+  font-size: 15px;
+  color: rgba(245,240,232,0.8);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.get-list li::before {
+  content: '✓';
+  color: var(--gold);
+  font-family: 'DM Mono', monospace;
+  font-size: 13px;
+  flex-shrink: 0;
+}
+
+/* CODE PREVIEW */
+.code-block {
+  background: #0D0D0D;
+  border: 1px solid rgba(201,168,76,0.15);
+  padding: 32px;
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  line-height: 2;
+  overflow-x: auto;
+}
+
+.code-block .c-comment { color: #555; }
+.code-block .c-key { color: var(--gold); }
+.code-block .c-str { color: #A8D8A8; }
+.code-block .c-num { color: #E87A5A; }
+.code-block .c-kw { color: #88B4D4; }
+
+/* PRICING */
+.pricing { background: var(--dim); }
+
+.pricing-card {
+  max-width: 600px;
+  margin: 60px auto 0;
+  border: 1px solid var(--gold);
+  padding: 60px;
+  text-align: center;
+  position: relative;
+  background: var(--black);
+}
+
+.pricing-badge {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--gold);
+  color: var(--black);
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 6px 20px;
+  white-space: nowrap;
+}
+
+.price {
+  font-family: 'Fraunces', serif;
+  font-size: 96px;
+  font-weight: 900;
+  color: var(--gold);
+  line-height: 1;
+  margin: 20px 0 8px;
+}
+
+.price-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.15em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-bottom: 36px;
+}
+
+.pricing-includes {
+  text-align: left;
+  margin: 36px 0;
+  list-style: none;
+}
+
+.pricing-includes li {
+  padding: 10px 0;
+  font-size: 14px;
+  color: rgba(245,240,232,0.75);
+  display: flex;
+  gap: 12px;
+  border-bottom: 1px solid rgba(201,168,76,0.08);
+}
+
+.pricing-includes li::before {
+  content: '→';
+  color: var(--gold);
+  font-family: 'DM Mono', monospace;
+}
+
+.pricing-note {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 20px;
+  line-height: 1.8;
+}
+
+/* PLATFORMS */
+.platforms-row {
+  display: flex;
+  gap: 24px;
+  margin-top: 48px;
+  flex-wrap: wrap;
+}
+
+.platform-tag {
+  border: 1px solid rgba(201,168,76,0.25);
+  padding: 12px 24px;
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--cream);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.2s;
+}
+.platform-tag:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+  cursor: pointer;
+}
+
+/* FOOTER */
+footer {
+  padding: 60px 48px;
+  border-top: 1px solid rgba(201,168,76,0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: gap;
+}
+
+.footer-logo {
+  font-family: 'Fraunces', serif;
+  font-size: 28px;
+  font-weight: 900;
+  color: var(--gold);
+}
+
+.footer-copy {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--text-muted);
+  letter-spacing: 0.1em;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  .tech-grid { grid-template-columns: repeat(3, 1fr); }
+  .what-grid { grid-template-columns: 1fr; }
+  .get-grid { grid-template-columns: 1fr; }
+  .stack-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 768px) {
+  nav, section, .hero { padding-left: 24px; padding-right: 24px; }
+  .tech-grid { grid-template-columns: 1fr 1fr; }
+  .stack-grid { grid-template-columns: 1fr; }
+  .endpoint-item { grid-template-columns: 60px 1fr; }
+  .endpoint-desc { display: none; }
+  .pricing-card { padding: 40px 24px; }
+  .price { font-size: 72px; }
+  footer { flex-direction: column; gap: 20px; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">TEXTFX</div>
+  <a href="#pricing" class="nav-cta">Buy Source Code →</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg-text">FX</div>
+
+  <div class="hero-badge">Source Code For Sale · Full Stack · TypeScript</div>
+
+  <h1>The AI that thinks like a<br><em>Creative Director.</em></h1>
+
+  <p class="hero-sub">
+    TextFX transforms any marketing brief into breakthrough insights, creative concepts, and production-ready scripts — powered by 5 advanced lateral thinking techniques and your AI provider of choice.
+  </p>
+
+  <div class="hero-actions">
+    <a href="#pricing" class="btn-primary">Get Full Source Code</a>
+    <a href="#demo" class="btn-secondary">See It in Action</a>
+  </div>
+
+  <p class="hero-price-tag">
+    Complete source code · One-time payment · <strong>Immediate download</strong>
+  </p>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-inner">
+    <span class="marquee-item">React 18 + TypeScript</span>
+    <span class="marquee-sep">✦</span>
+    <span class="marquee-item">Node.js + Express API</span>
+    <span class="marquee-sep">✦</span>
+    <span class="marquee-item">Electron Desktop App</span>
+    <span class="marquee-sep">✦</span>
+    <span class="marquee-item">OpenAI + Google Vertex AI</span>
+    <span class="marquee-sep">✦</span>
+    <span class="marquee-item">Arabic & English UI</span>
+    <span class="marquee-sep">✦</span>
+    <span class="marquee-item">5 Lateral Thinking Techniques</span>
+    <span class="marquee-sep">✦</span>
+    <span class="marquee-item">Brief → Insight → Concept → Script</span>
+    <span class="marquee-sep">✦</span>
+    <span class="marquee-item">PDF Export · RAG Knowledge Base</span>
+    <span class="marquee-sep">✦</span>
+    <span class="marquee-item">React 18 + TypeScript</span>
+    <span class="marquee-sep">✦</span>
+    <span class="marquee-item">Node.js + Express API</span>
+    <span class="marquee-sep">✦</span>
+    <span class="marquee-item">Electron Desktop App</span>
+    <span class="marquee-sep">✦</span>
+    <span class="marquee-item">OpenAI + Google Vertex AI</span>
+    <span class="marquee-sep">✦</span>
+    <span class="marquee-item">Arabic & English UI</span>
+    <span class="marquee-sep">✦</span>
+    <span class="marquee-item">5 Lateral Thinking Techniques</span>
+    <span class="marquee-sep">✦</span>
+    <span class="marquee-item">Brief → Insight → Concept → Script</span>
+    <span class="marquee-sep">✦</span>
+    <span class="marquee-item">PDF Export · RAG Knowledge Base</span>
+    <span class="marquee-sep">✦</span>
+  </div>
+</div>
+
+<!-- WHAT IS IT -->
+<section id="demo">
+  <div class="section-label">The Product</div>
+  <h2 class="section-title">One brief.<br><em>A full creative campaign.</em></h2>
+
+  <div class="what-grid">
+    <div class="what-text">
+      <p>TextFX is a <strong>full-stack AI creative tool</strong> that works like a seasoned Creative Director. You give it a product brief, it returns a complete creative campaign output — insight, concept, and cinematic script.</p>
+
+      <p>Under the hood, it runs <strong>5 advanced lateral thinking engines</strong> in parallel: Provocation, Analogies, Random Stimulus, Opposite Thinking, and Constraint Reversal — the same techniques used by the world's top ad agencies.</p>
+
+      <p>Built with <strong>React + TypeScript + Node.js + Electron</strong>, it ships as a web app, API server, OR a native desktop app for macOS and Windows. Plug in your OpenAI or Google Vertex AI key and it's live in minutes.</p>
+    </div>
+
+    <div class="pipeline-visual">
+      <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.2em;color:var(--gold);margin-bottom:28px;opacity:0.7;">THE PIPELINE</div>
+
+      <div class="pipeline-step">
+        <div class="step-num">01</div>
+        <div class="step-content">
+          <h4>Creative Brief</h4>
+          <p>Product, target audience, challenge, emotion</p>
+        </div>
+      </div>
+
+      <div class="pipeline-step">
+        <div class="step-num">02</div>
+        <div class="step-content">
+          <h4>Lateral Thinking Engine</h4>
+          <p>5 techniques run in parallel → synthesized insight</p>
+        </div>
+      </div>
+
+      <div class="pipeline-step">
+        <div class="step-num">03</div>
+        <div class="step-content">
+          <h4>Concept Mapper</h4>
+          <p>Cognitive shift + metaphor strategy + emotional arc</p>
+        </div>
+      </div>
+
+      <div class="pipeline-step">
+        <div class="step-num">04</div>
+        <div class="step-content">
+          <h4>Script Writer</h4>
+          <p>30-second, 3-beat emotional screenplay · production ready</p>
+        </div>
+      </div>
+
+      <div class="pipeline-step" style="margin-bottom:0">
+        <div class="step-num" style="border-color:var(--gold);background:rgba(201,168,76,0.1);">✓</div>
+        <div class="step-content">
+          <h4>PDF Export</h4>
+          <p>Complete campaign brief ready to send to client</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TECHNIQUES -->
+<section class="techniques">
+  <div class="section-label">The Engine</div>
+  <h2 class="section-title">5 Techniques.<br><em>Infinite breakthroughs.</em></h2>
+
+  <div class="tech-grid">
+    <div class="tech-card">
+      <div class="tech-num">01</div>
+      <div class="tech-name">Provocation (PO)</div>
+      <div class="tech-title">Flip the Assumption</div>
+      <div class="tech-desc">"If the opposite were true, what would we discover?" Turns constraints into opportunities by inverting the problem.</div>
+    </div>
+    <div class="tech-card">
+      <div class="tech-num">02</div>
+      <div class="tech-name">Analogies</div>
+      <div class="tech-title">Cross-Domain Links</div>
+      <div class="tech-desc">Links the product to 5 unrelated domains — coffee ceremony, luxury perfume, fitness achievement — to generate unexpected angles.</div>
+    </div>
+    <div class="tech-card">
+      <div class="tech-num">03</div>
+      <div class="tech-name">Random Stimulus</div>
+      <div class="tech-title">Force Connections</div>
+      <div class="tech-desc">Picks a random word, forces a meaningful connection. "Compass → Hydration is your internal compass to wellness."</div>
+    </div>
+    <div class="tech-card">
+      <div class="tech-num">04</div>
+      <div class="tech-name">Opposite Thinking</div>
+      <div class="tech-title">Extremes & Paradox</div>
+      <div class="tech-desc">Pushes ideas to both extremes to find the irresistible middle. Generates the central brand paradox.</div>
+    </div>
+    <div class="tech-card">
+      <div class="tech-num">05</div>
+      <div class="tech-name">Constraint Reversal</div>
+      <div class="tech-title">Invert the Problem</div>
+      <div class="tech-desc">"People forget to hydrate → People already hydrate unconsciously." Turns the problem statement into the solution.</div>
+    </div>
+  </div>
+</section>
+
+<!-- TECH STACK -->
+<section>
+  <div class="section-label">Architecture</div>
+  <h2 class="section-title">Production-grade.<br><em>Modern stack.</em></h2>
+
+  <div class="stack-grid">
+    <div class="stack-card">
+      <div class="stack-icon">⚛️</div>
+      <h3>React 18 + Vite + TypeScript</h3>
+      <p>Full RTL support · Arabic + English UI · Dark/Light mode · PDF export · Iteration archive with compare mode</p>
+    </div>
+    <div class="stack-card">
+      <div class="stack-icon">🚀</div>
+      <h3>Node.js + Express API</h3>
+      <p>5 modular endpoints · TypeScript throughout · RAG knowledge base · Brand voice profiling · Archetype system</p>
+    </div>
+    <div class="stack-card">
+      <div class="stack-icon">🖥️</div>
+      <h3>Electron Desktop App</h3>
+      <p>Packages as macOS .dmg and Windows .exe · Fully scaffolded with electron-builder · Zero browser needed</p>
+    </div>
+    <div class="stack-card">
+      <div class="stack-icon">🤖</div>
+      <h3>Multi-AI Provider</h3>
+      <p>OpenAI (GPT-4) · Google Vertex AI (Gemini) · Local LLM support · Mock mode for dev — plug in any key and go</p>
+    </div>
+    <div class="stack-card">
+      <div class="stack-icon">🧠</div>
+      <h3>RAG Knowledge Base</h3>
+      <p>Inject brand-specific knowledge · Library of creative frameworks · Extend with your own creative assets</p>
+    </div>
+    <div class="stack-card">
+      <div class="stack-icon">🌍</div>
+      <h3>Arabic & English</h3>
+      <p>Complete bilingual UI with RTL layout · All outputs generated in Arabic or English · Localization ready</p>
+    </div>
+  </div>
+</section>
+
+<!-- API ENDPOINTS -->
+<section class="endpoints">
+  <div class="section-label">API</div>
+  <h2 class="section-title">Clean RESTful API.<br><em>Ready to integrate.</em></h2>
+
+  <div class="endpoint-list">
+    <div class="endpoint-item">
+      <span class="method post">POST</span>
+      <span class="endpoint-path">/api/full-pipeline</span>
+      <span class="endpoint-desc">Brief → Insight → Concept → Script (one call, full campaign)</span>
+    </div>
+    <div class="endpoint-item">
+      <span class="method post">POST</span>
+      <span class="endpoint-path">/api/insight</span>
+      <span class="endpoint-desc">Generate lateral insights using all 5 techniques</span>
+    </div>
+    <div class="endpoint-item">
+      <span class="method post">POST</span>
+      <span class="endpoint-path">/api/concept</span>
+      <span class="endpoint-desc">Map insight to creative concept with metaphor strategy</span>
+    </div>
+    <div class="endpoint-item">
+      <span class="method post">POST</span>
+      <span class="endpoint-path">/api/script</span>
+      <span class="endpoint-desc">Write production-ready 30s screenplay (3-beat emotional arc)</span>
+    </div>
+    <div class="endpoint-item">
+      <span class="method get">GET</span>
+      <span class="endpoint-path">/api/providers/status</span>
+      <span class="endpoint-desc">Check OpenAI / Vertex AI / Mock mode status</span>
+    </div>
+    <div class="endpoint-item">
+      <span class="method get">GET</span>
+      <span class="endpoint-path">/api/system-prompt</span>
+      <span class="endpoint-desc">Export the full lateral thinking system prompt</span>
+    </div>
+  </div>
+
+  <div style="margin-top:40px;">
+    <div class="code-block">
+<span class="c-comment">// Example: Full Pipeline in one call</span>
+<span class="c-kw">const</span> response = <span class="c-kw">await</span> fetch(<span class="c-str">'/api/full-pipeline'</span>, {
+  method: <span class="c-str">'POST'</span>,
+  headers: { <span class="c-str">'Content-Type'</span>: <span class="c-str">'application/json'</span> },
+  body: JSON.stringify({
+    <span class="c-key">brief</span>: <span class="c-str">"Water reminder app for urban professionals, 25-40. Challenge: people know hydration matters but forget in daily rush."</span>,
+    <span class="c-key">language</span>: <span class="c-str">'ar'</span>,       <span class="c-comment">// ← Arabic output!</span>
+    <span class="c-key">archetype</span>: <span class="c-str">'Sage'</span>,    <span class="c-comment">// ← Brand archetype</span>
+    <span class="c-key">brandVoice</span>: { <span class="c-key">formalLevel</span>: <span class="c-num">7</span>, <span class="c-key">metaphorLevel</span>: <span class="c-num">9</span>, <span class="c-key">intensity</span>: <span class="c-num">8</span> }
+  })
+})
+
+<span class="c-comment">// Returns: { insight, concept, script, pipelineStatus: 'complete' }</span>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT YOU GET -->
+<section>
+  <div class="section-label">The Package</div>
+  <h2 class="section-title">Everything.<br><em>Nothing held back.</em></h2>
+
+  <div class="get-grid">
+    <ul class="get-list">
+      <li>Complete React + TypeScript frontend source</li>
+      <li>Complete Node.js + Express backend source</li>
+      <li>Electron desktop app (macOS + Windows ready)</li>
+      <li>5 lateral thinking modules (fully documented)</li>
+      <li>OpenAI provider integration (GPT-4)</li>
+      <li>Google Vertex AI integration (Gemini)</li>
+      <li>RAG knowledge base system</li>
+      <li>Brand archetype + voice profiling system</li>
+    </ul>
+    <ul class="get-list">
+      <li>Arabic RTL + English bilingual UI</li>
+      <li>PDF export functionality</li>
+      <li>Iteration archive with compare mode</li>
+      <li>10+ pages of technical documentation</li>
+      <li>Arabic quickstart guide (AR_QUICKSTART.md)</li>
+      <li>Local LLM setup guide (llama.cpp, Ollama)</li>
+      <li>Mock development mode (works without API key)</li>
+      <li>Prompt templates for all major AI providers</li>
+    </ul>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="pricing">
+  <div class="section-label">Pricing</div>
+  <h2 class="section-title" style="text-align:center;max-width:100%">One price.<br><em>Full ownership.</em></h2>
+
+  <div class="pricing-card">
+    <div class="pricing-badge">Complete Source Code License</div>
+
+    <div class="price">$297</div>
+    <div class="price-label">One-time · Instant download · Full rights</div>
+
+    <ul class="pricing-includes">
+      <li>Full TypeScript source code (frontend + backend + desktop)</li>
+      <li>All 5 lateral thinking AI modules</li>
+      <li>Multi-AI provider support (OpenAI, Vertex AI, Local)</li>
+      <li>Arabic + English bilingual interface</li>
+      <li>Complete documentation (10+ files)</li>
+      <li>Commercial use license — sell it, white-label it, SaaS it</li>
+      <li>Works in browser, as API, or native desktop app</li>
+    </ul>
+
+    <a href="#" class="btn-primary" style="display:block;text-align:center;margin-bottom:16px;">Buy Now — $297</a>
+
+    <p class="pricing-note">
+      Available on: Gumroad · CodeCanyon · Lemon Squeezy · Direct
+    </p>
+  </div>
+
+  <div class="section-label" style="margin-top:60px;">Sell it on these platforms</div>
+  <div class="platforms-row">
+    <div class="platform-tag">🍋 Lemon Squeezy</div>
+    <div class="platform-tag">🍬 Gumroad</div>
+    <div class="platform-tag">🏪 CodeCanyon</div>
+    <div class="platform-tag">💎 GitHub Marketplace</div>
+    <div class="platform-tag">🌐 Your own site</div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">TEXTFX</div>
+  <div class="footer-copy">AI Creative Director · Full Source Code · Commercial License</div>
+</footer>
+
+<script>
+// Smooth reveal on scroll
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.style.opacity = '1';
+      e.target.style.transform = 'translateY(0)';
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.tech-card, .stack-card, .endpoint-item, .pipeline-step').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(20px)';
+  el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+  observer.observe(el);
+});
+</script>
+
+</body>
+</html>

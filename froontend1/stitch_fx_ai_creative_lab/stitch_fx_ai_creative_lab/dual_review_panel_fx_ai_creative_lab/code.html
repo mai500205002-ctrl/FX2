@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+
+<html class="dark" dir="rtl" lang="ar"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><title>FX — AI Creative Lab | مختبر الأفكار الإبداعية</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&amp;family=IBM+Plex+Sans:wght@300;400;500;600;700&amp;family=Noto+Serif:ital,wght@0,400;0,500;0,600;0,700;1,400&amp;family=Space+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "on-secondary-fixed": "#261900",
+          "on-tertiary": "#2f3034",
+          "secondary-fixed-dim": "#e9c176",
+          "tertiary-container": "#bebfc3",
+          "tertiary": "#dbdbdf",
+          "on-tertiary-container": "#4c4e51",
+          "secondary": "#e9c176",
+          "inverse-surface": "#e5e1e4",
+          "secondary-fixed": "#ffdea5",
+          "error-container": "#93000a",
+          "surface-tint": "#e7c17a",
+          "on-primary-container": "#63490c",
+          "primary-fixed-dim": "#e7c17a",
+          "tertiary-fixed": "#e2e2e6",
+          "on-primary": "#402d00",
+          "on-error": "#690005",
+          "on-secondary-fixed-variant": "#5d4201",
+          "on-tertiary-fixed": "#1a1c1f",
+          "surface-bright": "#39393b",
+          "surface-dim": "#131315",
+          "on-primary-fixed-variant": "#5c4304",
+          "outline-variant": "#4d4639",
+          "on-tertiary-fixed-variant": "#45474a",
+          "tertiary-fixed-dim": "#c6c6ca",
+          "on-primary-fixed": "#261900",
+          "primary-container": "#dfba73",
+          "on-surface": "#e5e1e4",
+          "on-secondary": "#412d00",
+          "surface-variant": "#353437",
+          "outline": "#9a8f80",
+          "surface-container-low": "#1c1b1d",
+          "inverse-on-surface": "#313032",
+          "error": "#ffb4ab",
+          "surface-container-lowest": "#0e0e10",
+          "on-secondary-container": "#dab36a",
+          "inverse-primary": "#765a1d",
+          "surface-container-high": "#2a2a2c",
+          "primary": "#fdd68c",
+          "on-background": "#e5e1e4",
+          "surface-container": "#201f21",
+          "surface-container-highest": "#353437",
+          "background": "#131315",
+          "secondary-container": "#604403",
+          "on-error-container": "#ffdad6",
+          "primary-fixed": "#ffdea3",
+          "surface": "#131315",
+          "on-surface-variant": "#d1c5b4"
+        },
+        "borderRadius": {
+          "DEFAULT": "0.125rem",
+          "lg": "0.25rem",
+          "xl": "0.5rem",
+          "full": "0.75rem"
+        },
+        "spacing": {
+          "space-xs": "0.25rem",
+          "space-sm": "0.5rem",
+          "space-xl": "2.5rem",
+          "gutter-mobile": "0.75rem",
+          "margin": "3rem",
+          "gutter": "1.5rem",
+          "space-lg": "1.5rem",
+          "space-md": "1rem",
+          "margin-mobile": "1rem"
+        },
+        "fontFamily": {
+          "headline-lg-mobile": ["Noto Serif"],
+          "display-hero-mobile": ["Noto Serif"],
+          "body-sm": ["IBM Plex Sans"],
+          "label-timecode": ["Space Grotesk"],
+          "headline-lg": ["Noto Serif"],
+          "label-cinematic": ["Space Grotesk"],
+          "body-lg": ["IBM Plex Sans"],
+          "display-hero": ["Noto Serif"],
+          "body-md": ["IBM Plex Sans"],
+          "title-editorial": ["Noto Serif"],
+          "headline-md": ["Noto Serif"],
+          "headline-sm": ["IBM Plex Sans"]
+        },
+        "fontSize": {
+          "headline-lg-mobile": ["28px", {"lineHeight": "38px", "fontWeight": "500"}],
+          "display-hero-mobile": ["36px", {"lineHeight": "48px", "fontWeight": "600"}],
+          "body-sm": ["12px", {"lineHeight": "20px", "fontWeight": "400"}],
+          "label-timecode": ["13px", {"lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "500"}],
+          "headline-lg": ["40px", {"lineHeight": "52px", "fontWeight": "500"}],
+          "label-cinematic": ["11px", {"lineHeight": "14px", "letterSpacing": "0.08em", "fontWeight": "600"}],
+          "body-lg": ["16px", {"lineHeight": "28px", "fontWeight": "400"}],
+          "display-hero": ["56px", {"lineHeight": "72px", "fontWeight": "600"}],
+          "body-md": ["14px", {"lineHeight": "24px", "fontWeight": "400"}],
+          "title-editorial": ["18px", {"lineHeight": "26px", "fontWeight": "500"}],
+          "headline-md": ["28px", {"lineHeight": "38px", "fontWeight": "500"}],
+          "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}]
+        }
+      }
+    }
+  }</script></head><body class="bg-surface text-on-surface font-body-md text-body-md selection:bg-primary-container selection:text-on-primary-container min-h-screen"><header class="fixed top-0 w-full z-50 bg-surface/85 backdrop-blur-xl shadow-[0_1px_12px_rgba(0,0,0,0.5)]"><div class="h-20 w-full px-gutter flex items-center justify-between"><div class="flex items-center gap-space-lg"><a class="flex items-center gap-space-sm group" data-path="product-and-ideation-lab" href="#"><div class="w-9 h-9 rounded bg-surface-container-high flex items-center justify-center text-primary font-headline-sm text-headline-sm transition-transform duration-300 group-hover:scale-95"><span class="material-symbols-outlined text-primary text-[20px]">movie_edit</span></div><div class="flex flex-col text-right"><span class="font-label-cinematic text-label-cinematic text-primary uppercase">FX CREATIVE LAB</span><span class="font-body-sm text-body-sm text-on-surface-variant">مختبر الأفكار الإبداعية</span></div></a><div class="hidden xl:flex items-center gap-space-xs bg-surface-container-low px-space-sm py-1 rounded"><span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span><span class="font-label-cinematic text-label-cinematic text-secondary-fixed-dim">المخرج الذكي:</span><span class="font-body-sm text-body-sm text-on-surface">جاهز للإلهام وتفكيك المنتج</span></div></div><nav class="hidden lg:flex items-center gap-space-xs" data-active-classes="bg-primary-container text-on-primary-container font-semibold rounded"><a class="px-space-sm py-space-xs text-on-surface-variant font-body-md text-body-md hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="product-and-ideation-lab" href="#">مختبر الأفكار والمنتج</a><a class="px-space-sm py-space-xs text-on-surface-variant font-body-md text-body-md hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="creative-instruments" href="#">محركات التفكير الخمسة</a><a class="px-space-sm py-space-xs text-on-surface-variant font-body-md text-body-md hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="dual-review-panel" href="#">التحكيم والمراجعة الثنائية</a><a class="px-space-sm py-space-xs text-on-surface-variant font-body-md text-body-md hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="the-big-idea" href="#">الفكرة الإعلانية الكبرى</a><a class="px-space-sm py-space-xs text-on-surface-variant font-body-md text-body-md hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="cinematic-production-deck" href="#">التخريج والإنتاج السينمائي</a></nav><div class="flex items-center gap-space-md"><div class="hidden sm:flex flex-col items-end gap-0.5 bg-surface-container-lowest px-space-sm py-1 rounded"><div class="flex items-center gap-space-xs"><span class="font-label-timecode text-label-timecode text-secondary">3.4k</span><span class="font-label-timecode text-label-timecode text-outline">/</span><span class="font-label-timecode text-label-timecode text-on-surface-variant">50k CR</span></div><div class="w-24 h-1 bg-surface-container-highest rounded-full overflow-hidden"><div class="bg-secondary h-full rounded-full" style="width: 6.8%"></div></div></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-20 bg-surface"><div class="flex flex-col w-full">
+<!-- Top Ambient Glow and Architectural Backdrop -->
+<div class="relative w-full overflow-hidden pb-space-xl">
+<!-- Atmospheric subtle ambient aura -->
+<div class="absolute top-0 right-1/4 w-[640px] h-[340px] bg-gradient-to-br from-primary/10 via-secondary-container/5 to-transparent blur-3xl pointer-events-none rounded-full -translate-y-1/2"></div>
+<div class="absolute top-12 left-10 w-[520px] h-[280px] bg-gradient-to-bl from-tertiary/5 via-primary-container/5 to-transparent blur-3xl pointer-events-none rounded-full"></div>
+<div class="w-full px-gutter max-w-[1720px] mx-auto flex flex-col gap-space-lg">
+<!-- 1. Top Context / Arbitration Header -->
+<section class="flex flex-col gap-space-md pt-space-lg">
+<!-- Breadcrumb & Mode Tag -->
+<div class="flex flex-wrap items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="font-label-cinematic text-label-cinematic text-primary uppercase">ARBITRATION ENGINE // 03</span>
+<span class="font-label-cinematic text-label-cinematic text-outline">/</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">مرحلة التحكيم الثنائي وفض النزاع الإبداعي</span>
+</div>
+<div class="flex items-center gap-space-sm">
+<div class="flex items-center gap-space-xs bg-surface-container-high px-space-sm py-1 rounded shadow-sm">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="font-label-cinematic text-label-cinematic text-primary">SYNTHETIC ARBITRATION ACTIVE</span>
+</div>
+<div class="flex items-center gap-1.5 bg-surface-container-low px-space-sm py-1 rounded text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px] text-secondary">tune</span>
+<span class="font-label-cinematic text-label-cinematic">OVERRIDE READY</span>
+</div>
+</div>
+</div>
+<!-- Main Title & Bilingual Subtitle -->
+<div class="flex flex-col lg:flex-row lg:items-end justify-between gap-space-md pb-space-sm">
+<div class="flex flex-col max-w-4xl">
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">
+              لوحة التحكيم والمراجعة الثنائية وحسم القرار الإبداعي
+            </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mt-2 leading-relaxed">
+              مراجعة نقدية متوازية بين الرؤية الاستراتيجية التجارية وقوة اختراق السوق 
+              <span class="text-secondary font-label-cinematic text-label-cinematic tracking-normal">(BRAND EQUITY &amp; VIABILITY)</span>
+              مقابل الابتكار الإبداعي الجذري وإمكانات حصد الجوائز العالمية 
+              <span class="text-primary font-label-cinematic text-label-cinematic tracking-normal">(CREATIVE DISRUPTION &amp; LIONS POTENTIAL)</span>.
+            </p>
+</div>
+<!-- Active Campaign Badge & Consensus Index -->
+<div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-space-md bg-surface-container-lowest p-space-md rounded-xl shadow-xl min-w-[340px]">
+<div class="flex flex-col">
+<span class="font-label-cinematic text-label-cinematic text-outline uppercase tracking-wider">ACTIVE DOSSIER</span>
+<span class="font-title-editorial text-title-editorial text-primary font-medium mt-0.5">صحراء النور — مجوهرات نيوم</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">فئة: السلع الفاخرة فائقة الندرة</span>
+</div>
+<div class="w-[1px] h-12 bg-surface-container-highest hidden sm:block"></div>
+<div class="flex items-center gap-space-sm bg-surface-container-high px-space-md py-space-sm rounded">
+<div class="flex flex-col text-left">
+<span class="font-label-timecode text-label-timecode text-secondary font-bold text-[24px]">96.5%</span>
+<span class="font-label-cinematic text-label-cinematic text-outline uppercase">CONSENSUS</span>
+</div>
+<div class="w-8 h-8 rounded-full bg-secondary/15 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">gavel</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Metric Pulse Strip -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-space-sm">
+<div class="bg-surface-container-low p-space-sm rounded flex items-center justify-between">
+<span class="font-body-sm text-body-sm text-on-surface-variant">حالة التحكيم:</span>
+<span class="font-label-cinematic text-label-cinematic text-secondary px-2 py-0.5 bg-surface-container rounded">جاهز للاعتماد النهائي</span>
+</div>
+<div class="bg-surface-container-low p-space-sm rounded flex items-center justify-between">
+<span class="font-body-sm text-body-sm text-on-surface-variant">تطابق الرؤية الفنية:</span>
+<span class="font-label-timecode text-label-timecode text-on-surface">DELTA Δ 0.04 (متطابق)</span>
+</div>
+<div class="bg-surface-container-low p-space-sm rounded flex items-center justify-between">
+<span class="font-body-sm text-body-sm text-on-surface-variant">العائد الإعلامي المتوقع:</span>
+<span class="font-label-timecode text-label-timecode text-primary">+380% EARNED MEDIA</span>
+</div>
+<div class="bg-surface-container-low p-space-sm rounded flex items-center justify-between">
+<span class="font-body-sm text-body-sm text-on-surface-variant">مستوى المخاطرة الإبداعية:</span>
+<span class="font-label-cinematic text-label-cinematic text-tertiary">محسوبة / نادرة (TIER-1)</span>
+</div>
+</div>
+</section>
+<!-- 2. The Two Reviewer Personas (Dual Judges Split Grid) -->
+<section class="grid grid-cols-1 lg:grid-cols-2 gap-space-lg items-start">
+<!-- SIDE A: Commercial & Brand Viability Director (Right side in RTL) -->
+<div class="flex flex-col bg-surface-container-low rounded-xl p-space-lg shadow-xl relative overflow-hidden group">
+<!-- Subtle corner accent -->
+<div class="absolute top-0 right-0 w-36 h-36 bg-secondary/5 rounded-bl-full pointer-events-none"></div>
+<!-- Header / Persona Profile -->
+<div class="flex items-start justify-between gap-space-md pb-space-md">
+<div class="flex items-center gap-space-md">
+<div class="w-14 h-14 rounded-lg bg-surface-container-highest flex items-center justify-center text-secondary relative shadow-inner">
+<span class="material-symbols-outlined text-[30px]" style="font-variation-settings: 'FILL' 1;">query_stats</span>
+<span class="absolute -bottom-1 -left-1 w-3.5 h-3.5 rounded-full bg-secondary ring-2 ring-surface-container-low"></span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs">
+<span class="font-label-cinematic text-label-cinematic text-secondary font-bold">SIDE A // STRATEGIC DIRECTOR AI</span>
+<span class="px-1.5 py-0.5 rounded text-[10px] font-label-cinematic bg-surface-container-highest text-on-surface-variant">AGENT 01</span>
+</div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface mt-0.5">المراجع الاستراتيجي والتجاري</h2>
+<span class="font-body-sm text-body-sm text-outline">حماية التموضع، قابلية التوسع، وحساب العائد الاستثماري</span>
+</div>
+</div>
+<!-- Score Pill -->
+<div class="flex flex-col items-end">
+<span class="font-display-hero text-[44px] leading-none text-secondary font-bold">94</span>
+<span class="font-label-cinematic text-label-cinematic text-outline">/ 100 VIABILITY</span>
+</div>
+</div>
+<!-- Persona Evaluation Breakdown -->
+<div class="flex flex-col gap-space-sm py-space-md bg-surface-container-lowest/80 p-space-md rounded-lg">
+<div class="font-label-cinematic text-label-cinematic text-on-surface-variant uppercase flex items-center justify-between">
+<span>CRITICAL METRICS // معايير السوق والاستدامة</span>
+<span class="text-secondary">INDEX COMPOSITE</span>
+</div>
+<!-- Metric 1 -->
+<div class="flex flex-col gap-1">
+<div class="flex justify-between items-center text-body-sm">
+<span class="text-on-surface">ملاءمة الأثرياء الجدد (HNWIs) وجيل الرواد</span>
+<span class="font-label-timecode text-label-timecode text-secondary font-semibold">96%</span>
+</div>
+<div class="w-full h-1.5 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-secondary rounded-full" style="width: 96%"></div>
+</div>
+</div>
+<!-- Metric 2 -->
+<div class="flex flex-col gap-1">
+<div class="flex justify-between items-center text-body-sm">
+<span class="text-on-surface">حماية التموضع الفاخر (Brand Equity Defense)</span>
+<span class="font-label-timecode text-label-timecode text-secondary font-semibold">97%</span>
+</div>
+<div class="w-full h-1.5 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-secondary rounded-full" style="width: 97%"></div>
+</div>
+</div>
+<!-- Metric 3 -->
+<div class="flex flex-col gap-1">
+<div class="flex justify-between items-center text-body-sm">
+<span class="text-on-surface">قابلية التوسع للحملات الرقمية والميدانية (Omnichannel Scalability)</span>
+<span class="font-label-timecode text-label-timecode text-secondary font-semibold">95%</span>
+</div>
+<div class="w-full h-1.5 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-secondary rounded-full" style="width: 95%"></div>
+</div>
+</div>
+<!-- Metric 4 -->
+<div class="flex flex-col gap-1">
+<div class="flex justify-between items-center text-body-sm">
+<span class="text-on-surface">الجدوى الإنتاجية وتكلفة الإنجاز السينمائي (Production Feasibility)</span>
+<span class="font-label-timecode text-label-timecode text-secondary font-semibold">90%</span>
+</div>
+<div class="w-full h-1.5 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-secondary rounded-full" style="width: 90%"></div>
+</div>
+</div>
+</div>
+<!-- Written Strategic Critique -->
+<div class="flex flex-col gap-space-xs mt-space-md bg-surface-container-high/40 p-space-md rounded-lg">
+<div class="flex items-center gap-space-xs text-secondary">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+<span class="font-label-cinematic text-label-cinematic uppercase">VERDICT ANALYSIS // النقد التحليلي الاستراتيجي</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface leading-relaxed text-justify">
+              تتفوق أطروحة <strong class="text-primary font-semibold">«التفكير المعاكس»</strong> جوهرياً على المنافسين؛ حيث تستبدل البهرجة الصاخبة في إعلانات المجوهرات الكلاسيكية بحالة تجريدية من «الصمت التام والسكينة الفائقة». هذا الاختيار يرفع فوراً القيمة المدركة للعلامة وينسجم مع سيكولوجية عملاء الثروات السيادية المعاصرة. نتوقع نمواً بمقدار <span class="font-label-timecode text-secondary font-semibold">3.8x</span> في التفاعل النوعي، مع توصية مشددة بعدم تجاوز ميزانية التصوير في تضاريس وادي الديسة بنيوم عبر استغلال المحاكاة الافتراضية للبيئات الوعرة.
+            </p>
+</div>
+<!-- Mini Key Takeaways Tags -->
+<div class="flex flex-wrap gap-space-xs mt-space-md">
+<span class="bg-surface-container px-2.5 py-1 rounded text-body-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-secondary">check</span> خلو من الابتذال الإعلاني
+            </span>
+<span class="bg-surface-container px-2.5 py-1 rounded text-body-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-secondary">check</span> تماسك مع هوية المستقبل
+            </span>
+<span class="bg-surface-container px-2.5 py-1 rounded text-body-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-secondary">check</span> كفاءة تحويل عالية
+            </span>
+</div>
+</div>
+<!-- SIDE B: Creative Disruption & Cannes Lions Director (Left side in RTL) -->
+<div class="flex flex-col bg-surface-container-low rounded-xl p-space-lg shadow-xl relative overflow-hidden group">
+<!-- Subtle corner accent -->
+<div class="absolute top-0 left-0 w-36 h-36 bg-primary/5 rounded-br-full pointer-events-none"></div>
+<!-- Header / Persona Profile -->
+<div class="flex items-start justify-between gap-space-md pb-space-md">
+<div class="flex items-center gap-space-md">
+<div class="w-14 h-14 rounded-lg bg-surface-container-highest flex items-center justify-center text-primary relative shadow-inner">
+<span class="material-symbols-outlined text-[30px]" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<span class="absolute -bottom-1 -right-1 w-3.5 h-3.5 rounded-full bg-primary ring-2 ring-surface-container-low"></span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs">
+<span class="font-label-cinematic text-label-cinematic text-primary font-bold">SIDE B // CANNES DISRUPTION DIRECTOR AI</span>
+<span class="px-1.5 py-0.5 rounded text-[10px] font-label-cinematic bg-surface-container-highest text-on-surface-variant">AGENT 02</span>
+</div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface mt-0.5">المراجع الإبداعي والفني</h2>
+<span class="font-body-sm text-body-sm text-outline">كسر القوالب، الأصالة التعبيرية، والجرأة السينمائية</span>
+</div>
+</div>
+<!-- Score Pill -->
+<div class="flex flex-col items-end">
+<span class="font-display-hero text-[44px] leading-none text-primary font-bold">98</span>
+<span class="font-label-cinematic text-label-cinematic text-outline">/ 100 DISRUPTION</span>
+</div>
+</div>
+<!-- Persona Evaluation Breakdown -->
+<div class="flex flex-col gap-space-sm py-space-md bg-surface-container-lowest/80 p-space-md rounded-lg">
+<div class="font-label-cinematic text-label-cinematic text-on-surface-variant uppercase flex items-center justify-between">
+<span>DISRUPTION CRITERIA // محاور الاختراق والابتكار</span>
+<span class="text-primary">GOLD LION BENCHMARK</span>
+</div>
+<!-- Metric 1 -->
+<div class="flex flex-col gap-1">
+<div class="flex justify-between items-center text-body-sm">
+<span class="text-on-surface">صدمة الفضول وكسر الكليشيهات (Curiosity Shock Index)</span>
+<span class="font-label-timecode text-label-timecode text-primary font-semibold">99%</span>
+</div>
+<div class="w-full h-1.5 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 99%"></div>
+</div>
+</div>
+<!-- Metric 2 -->
+<div class="flex flex-col gap-1">
+<div class="flex justify-between items-center text-body-sm">
+<span class="text-on-surface">البصمة البصرية والصوتية المستقلة (Sensory Signature)</span>
+<span class="font-label-timecode text-label-timecode text-primary font-semibold">98%</span>
+</div>
+<div class="w-full h-1.5 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 98%"></div>
+</div>
+</div>
+<!-- Metric 3 -->
+<div class="flex flex-col gap-1">
+<div class="flex justify-between items-center text-body-sm">
+<span class="text-on-surface">الشحنة العاطفية والعمق الفلسفي (Philosophical Depth)</span>
+<span class="font-label-timecode text-label-timecode text-primary font-semibold">97%</span>
+</div>
+<div class="w-full h-1.5 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 97%"></div>
+</div>
+</div>
+<!-- Metric 4 -->
+<div class="flex flex-col gap-1">
+<div class="flex justify-between items-center text-body-sm">
+<span class="text-on-surface">فرص التتويج بجوائز كان ليونز (Grand Prix Viability)</span>
+<span class="font-label-timecode text-label-timecode text-primary font-semibold">96%</span>
+</div>
+<div class="w-full h-1.5 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 96%"></div>
+</div>
+</div>
+</div>
+<!-- Written Creative Critique -->
+<div class="flex flex-col gap-space-xs mt-space-md bg-surface-container-high/40 p-space-md rounded-lg">
+<div class="flex items-center gap-space-xs text-primary">
+<span class="material-symbols-outlined text-[18px]">military_tech</span>
+<span class="font-label-cinematic text-label-cinematic uppercase">ARTISTIC CRITIQUE // النقد الفني والجمالي</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface leading-relaxed text-justify">
+              قرار إلغاء الموسيقى التصويرية الملحمية المبتذلة والاعتماد حصراً على هندسة الصوت المعكوس <span class="font-label-cinematic text-primary font-semibold">ASMR</span> (صوت ذرات رمال الكوارتز تصطدم ببريق الذهب عيار 24 وصوت الصدى في فراغ صحراء نيوم) هو ضربة معلم إخراجية. هذا التوجه يخلق ما نطلق عليه «المغناطيسية السلبية»، حيث يجبر المشاهد المشوش في عصر الفيديوهات السريعة على التوقف التام والإنصات بعينيه قبل أذنيه. الفكرة تمتلك مؤهلات واضحة لانتزاع <strong class="text-secondary font-semibold">جائزة كان ليونز الذهبية في Film Craft</strong>.
+            </p>
+</div>
+<!-- Mini Key Takeaways Tags -->
+<div class="flex flex-wrap gap-space-xs mt-space-md">
+<span class="bg-surface-container px-2.5 py-1 rounded text-body-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-primary">star</span> صدمة إيجابية فريدة
+            </span>
+<span class="bg-surface-container px-2.5 py-1 rounded text-body-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-primary">star</span> حس سينمائي غير مكرر
+            </span>
+<span class="bg-surface-container px-2.5 py-1 rounded text-body-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-primary">star</span> تمايز بصري 100%
+            </span>
+</div>
+</div>
+</section>
+<!-- 3. The 5 Lateral Engines Comparative Evaluation Grid -->
+<section class="flex flex-col bg-surface-container-low rounded-xl p-space-lg shadow-xl gap-space-md">
+<!-- Section Header -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm pb-space-xs">
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs">
+<span class="font-label-cinematic text-label-cinematic text-secondary">CROSS-EVALUATION MATRIX</span>
+<span class="text-outline">•</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">مصفوفة المفاضلة الرياضية</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface mt-1">
+              مقارنة مسارات التفكير الإبداعي الخمسة (The 5 Lateral Engines)
+            </h2>
+</div>
+<span class="font-body-sm text-body-sm text-outline">تم التحليل عبر خوارزميات التقييم المزدوج لعام 2025</span>
+</div>
+<!-- Comparative Interactive Table -->
+<div class="w-full overflow-x-auto">
+<table class="w-full text-right border-collapse">
+<thead>
+<tr class="bg-surface-container-lowest text-on-surface-variant font-label-cinematic text-label-cinematic uppercase tracking-wider">
+<th class="py-space-sm px-space-md rounded-r">المحرك التفكيري // ENGINE</th>
+<th class="py-space-sm px-space-md text-center">الرنين التجاري (Market)</th>
+<th class="py-space-sm px-space-md text-center">الاختراق الفني (Disruption)</th>
+<th class="py-space-sm px-space-md text-center">المحصلة المركبة</th>
+<th class="py-space-sm px-space-md">نقاط القوة والتحفظات</th>
+<th class="py-space-sm px-space-md rounded-l text-center">القرار التحكيمي</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container font-body-sm text-body-sm">
+<!-- Engine 01 -->
+<tr class="hover:bg-surface-container-high/40 transition-colors">
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded bg-surface-container flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[18px]">bolt</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-[15px] font-semibold text-on-surface">الاستفزاز الإبداعي</span>
+<span class="font-label-cinematic text-[11px] text-outline">PROVOCATION ENGINE</span>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-md text-center font-label-timecode font-medium text-on-surface">88%</td>
+<td class="py-space-md px-space-md text-center font-label-timecode font-medium text-primary">96%</td>
+<td class="py-space-md px-space-md text-center">
+<span class="font-label-timecode font-bold text-secondary text-[15px]">92.0%</span>
+</td>
+<td class="py-space-md px-space-md text-on-surface-variant">
+                  صدمة بصرية هائلة؛ لكن هناك مخاطرة طفيفة بتباعد بعض شرائح كبار السن التقليديين.
+                </td>
+<td class="py-space-md px-space-md text-center">
+<span class="px-2.5 py-1 rounded font-label-cinematic text-label-cinematic bg-surface-container text-on-surface-variant">محتفظ به كبديل</span>
+</td>
+</tr>
+<!-- Engine 02 -->
+<tr class="hover:bg-surface-container-high/40 transition-colors">
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded bg-surface-container flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[18px]">compare_arrows</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-[15px] font-semibold text-on-surface">القياس والتناظر</span>
+<span class="font-label-cinematic text-[11px] text-outline">ANALOGIES ENGINE</span>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-md text-center font-label-timecode font-medium text-on-surface">93%</td>
+<td class="py-space-md px-space-md text-center font-label-timecode font-medium text-primary">91%</td>
+<td class="py-space-md px-space-md text-center">
+<span class="font-label-timecode font-bold text-secondary text-[15px]">92.0%</span>
+</td>
+<td class="py-space-md px-space-md text-on-surface-variant">
+                  تشبيه حركة الكثبان بحركات صياغة الذهب، فكرة أنيقة وآمنة تجارياً لكنها متوقعة نسبياً.
+                </td>
+<td class="py-space-md px-space-md text-center">
+<span class="px-2.5 py-1 rounded font-label-cinematic text-label-cinematic bg-surface-container text-on-surface-variant">مسار مدعوم</span>
+</td>
+</tr>
+<!-- Engine 03 -->
+<tr class="hover:bg-surface-container-high/40 transition-colors">
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded bg-surface-container flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[18px]">shuffle</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-[15px] font-semibold text-on-surface">المحفز العشوائي</span>
+<span class="font-label-cinematic text-[11px] text-outline">RANDOM STIMULUS</span>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-md text-center font-label-timecode font-medium text-on-surface">82%</td>
+<td class="py-space-md px-space-md text-center font-label-timecode font-medium text-primary">89%</td>
+<td class="py-space-md px-space-md text-center">
+<span class="font-label-timecode font-bold text-on-surface-variant text-[15px]">85.5%</span>
+</td>
+<td class="py-space-md px-space-md text-on-surface-variant">
+                  استخدام عنصر الفضاء والنيتروجين السائل؛ غريب ومثير لكن الارتباط بهوية العلامة هش.
+                </td>
+<td class="py-space-md px-space-md text-center">
+<span class="px-2.5 py-1 rounded font-label-cinematic text-label-cinematic bg-surface-container-highest text-outline">مستبعد حالياً</span>
+</td>
+</tr>
+<!-- Engine 04 (WINNING PATH) -->
+<tr class="bg-primary/10 shadow-inner">
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded bg-primary text-on-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">workspace_premium</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5">
+<span class="font-headline-sm text-[15px] font-bold text-primary">التفكير المعاكس</span>
+<span class="px-1.5 py-0.2 bg-primary text-on-primary font-label-cinematic text-[9px] rounded font-bold">WINNER</span>
+</div>
+<span class="font-label-cinematic text-[11px] text-secondary font-medium">OPPOSITE THINKING ENGINE</span>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-md text-center font-label-timecode font-bold text-primary text-[15px]">96%</td>
+<td class="py-space-md px-space-md text-center font-label-timecode font-bold text-primary text-[15px]">98%</td>
+<td class="py-space-md px-space-md text-center">
+<span class="font-label-timecode font-extrabold text-primary text-[18px]">97.0%</span>
+</td>
+<td class="py-space-md px-space-md text-on-surface font-medium">
+                  إلغاء الضجيج، التركيز على صمت الطبيعة الخام وغموض الذهب؛ أعلى درجة إجماع ثنائي.
+                </td>
+<td class="py-space-md px-space-md text-center">
+<span class="px-3 py-1 rounded font-label-cinematic text-label-cinematic bg-primary text-on-primary font-bold shadow-md">الفكرة المتصدرة</span>
+</td>
+</tr>
+<!-- Engine 05 (RUNNER UP / SYNTHESIS CANDIDATE) -->
+<tr class="hover:bg-surface-container-high/40 transition-colors">
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded bg-surface-container flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[18px]">merge_type</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5">
+<span class="font-headline-sm text-[15px] font-semibold text-on-surface">عكس القيود</span>
+<span class="px-1.5 py-0.2 bg-surface-container-highest text-secondary font-label-cinematic text-[9px] rounded">FUSION</span>
+</div>
+<span class="font-label-cinematic text-[11px] text-outline">CONSTRAINT REVERSAL</span>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-md text-center font-label-timecode font-medium text-on-surface">95%</td>
+<td class="py-space-md px-space-md text-center font-label-timecode font-medium text-primary">94%</td>
+<td class="py-space-md px-space-md text-center">
+<span class="font-label-timecode font-bold text-secondary text-[15px]">94.5%</span>
+</td>
+<td class="py-space-md px-space-md text-on-surface-variant">
+                  تحويل قيد قسوة الصحراء وحرارتها إلى ميزة سردية لإبراز صلابة وبريق القطع الماسية.
+                </td>
+<td class="py-space-md px-space-md text-center">
+<span class="px-2.5 py-1 rounded font-label-cinematic text-label-cinematic bg-surface-container-highest text-secondary">شريك التوليف (SYNTH)</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- 4. The Arbitration Verdict & Creative Synthesis Zone (Decision Room) -->
+<section class="grid grid-cols-1 xl:grid-cols-12 gap-space-lg items-stretch">
+<!-- Main Creative Synthesis Card (8 Cols) -->
+<div class="xl:col-span-8 flex flex-col bg-surface-container-low rounded-xl p-space-lg shadow-xl relative overflow-hidden">
+<!-- Visual accent badge -->
+<div class="flex items-center justify-between pb-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="w-2.5 h-2.5 rounded-full bg-secondary"></span>
+<span class="font-label-cinematic text-label-cinematic text-secondary font-bold uppercase tracking-widest">FINAL ARBITRATION SYNTHESIS // صيغة الحسم الإبداعي</span>
+</div>
+<span class="font-label-timecode text-label-timecode text-outline">DECK REF: FX-SYNTH-994</span>
+</div>
+<!-- Formula & Concept Header -->
+<div class="flex flex-col gap-space-xs mt-space-sm">
+<div class="inline-flex items-center gap-space-xs bg-surface-container px-space-sm py-1 rounded w-fit">
+<span class="material-symbols-outlined text-[16px] text-secondary">cable</span>
+<span class="font-label-cinematic text-label-cinematic text-secondary">FORMULA: OPPOSITE THINKING × CONSTRAINT REVERSAL</span>
+</div>
+<h3 class="font-headline-lg text-headline-lg text-primary mt-2">
+              «سيمفونية الفراغ والصمت المطلق — حين يتكلم الصمت، يُولد النور»
+            </h3>
+<p class="font-body-lg text-body-lg text-on-surface leading-relaxed mt-2 text-justify">
+              تخليق تجربة حسية فريدة تجسد حلي المجوهرات الراقية كقطع نيزكية منحوتة من رحم صحراء نيوم. بدلاً من عرض العارضات التقليديات والموسيقى الكلاسيكية، يقود الإعلان مساراً سينمائياً بطيئاً <span class="font-label-cinematic text-secondary font-semibold">(Ultra High-Speed Phantom Flex 4K)</span> يعزل ضجيج العالم بالكامل، ليُشعر المشاهد بوزن الذهب وقيمته الأبدية المقاومة للزمن.
+            </p>
+</div>
+<!-- 3-Pillar Creative Pillars Visual Graphic -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md my-space-lg pt-space-sm">
+<div class="bg-surface-container-lowest p-space-md rounded flex flex-col gap-space-xs shadow-sm">
+<div class="flex items-center justify-between text-secondary">
+<span class="material-symbols-outlined text-[22px]">volume_off</span>
+<span class="font-label-timecode text-label-timecode">PILLAR 01</span>
+</div>
+<span class="font-title-editorial text-title-editorial text-on-surface">الصمت الاستفزازي</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                حذف تام لكافة المؤثرات الصوتية المعقدة والتركيز على ذبذبات صمت الفراغ الصحراوي.
+              </p>
+</div>
+<div class="bg-surface-container-lowest p-space-md rounded flex flex-col gap-space-xs shadow-sm">
+<div class="flex items-center justify-between text-secondary">
+<span class="material-symbols-outlined text-[22px]">blur_on</span>
+<span class="font-label-timecode text-label-timecode">PILLAR 02</span>
+</div>
+<span class="font-title-editorial text-title-editorial text-on-surface">الإضاءة الحادة الطبيعية</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                استغلال شمس الظهيرة القاسية لكسر ضوء الألماس الطبيعي دون فلاتر تجميلية مصطنعة.
+              </p>
+</div>
+<div class="bg-surface-container-lowest p-space-md rounded flex flex-col gap-space-xs shadow-sm">
+<div class="flex items-center justify-between text-secondary">
+<span class="material-symbols-outlined text-[22px]">timelapse</span>
+<span class="font-label-timecode text-label-timecode">PILLAR 03</span>
+</div>
+<span class="font-title-editorial text-title-editorial text-on-surface">الخلود ومقاومة الزوال</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                رسالة فلسفية واضحة لأصحاب الثروات: "العالم يتسارع، وأنت تملك اللحظة الخالدة".
+              </p>
+</div>
+</div>
+<!-- Action Buttons / Decision Launchers -->
+<div class="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center justify-between gap-space-md pt-space-sm mt-auto">
+<button class="bg-primary text-on-primary font-headline-sm text-[16px] px-space-lg py-3 rounded font-semibold hover:bg-secondary-fixed transition-transform duration-200 active:scale-[0.99] flex items-center justify-center gap-space-sm shadow-xl">
+<span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span>اعتماد الفكرة الفائزة والانتقال للتخريج والسيناريو</span>
+</button>
+<div class="flex items-center gap-space-sm">
+<button class="bg-surface-container-high text-on-surface hover:text-primary hover:bg-surface-container-highest px-space-md py-3 rounded font-body-md text-body-md transition-colors flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[18px]">replay</span>
+<span>طلب جولة تحسين دقيقة</span>
+</button>
+<button class="bg-surface-container text-on-surface-variant hover:text-on-surface px-space-md py-3 rounded font-body-md text-body-md transition-colors flex items-center gap-space-xs" title="تصدير ملف القرار التحكيمي">
+<span class="material-symbols-outlined text-[18px]">ios_share</span>
+<span>تصدير مذكرة التحكيم (PDF)</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Right Side Inspector: Human Override & Live Deliberation Audit (4 Cols) -->
+<div class="xl:col-span-4 flex flex-col gap-space-md">
+<!-- Human Director Manual Override Box -->
+<div class="bg-surface-container-low rounded-xl p-space-md shadow-xl flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-[20px]">person_shield</span>
+<span class="font-title-editorial text-title-editorial text-on-surface font-semibold">التدخل البشري للمخرج الإبداعي</span>
+</div>
+<!-- Luxury Styled Switch -->
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" id="directorOverrideToggle" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-surface-container-lowest after:content-[''] after:absolute after:top-[2px] after:right-[2px] after:bg-secondary after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-secondary-container"></div>
+</label>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+              تفعيل هذا الخيار يمنح المخرج التنفيذي صلاحية التعديل المباشر للأوزان النسبية وكسر حسم الذكاء الاصطناعي قبل التخريج النهائي للكادر السينمائي.
+            </p>
+<div class="flex items-center justify-between pt-space-xs text-body-sm">
+<span class="text-outline">سلطة القرار النهائي:</span>
+<span class="font-label-cinematic text-label-cinematic text-secondary font-bold">CHIEF CREATIVE OFFICER (HUMAN)</span>
+</div>
+</div>
+<!-- Live Deliberation Audit Feed -->
+<div class="bg-surface-container-low rounded-xl p-space-md shadow-xl flex flex-col flex-1 gap-space-md">
+<div class="flex items-center justify-between pb-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[18px]">history_edu</span>
+<span class="font-label-cinematic text-label-cinematic text-on-surface uppercase font-bold">AUDIT TRAIL // سجل المداولة الحية</span>
+</div>
+<span class="font-label-timecode text-label-timecode text-secondary animate-pulse">LIVE FEED</span>
+</div>
+<!-- Feed Items -->
+<div class="flex flex-col gap-space-sm overflow-y-auto max-h-[360px] pr-1">
+<div class="flex items-start gap-space-sm bg-surface-container-lowest p-space-sm rounded">
+<span class="font-label-timecode text-[11px] text-outline mt-0.5">14:32:01</span>
+<div class="flex flex-col">
+<span class="font-headline-sm text-[13px] text-secondary font-semibold">المراجع الاستراتيجي (SIDE A)</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+                    تم اختبار قابلية التوسع لعلامة نيوم، وتمت الموافقة المبدئية على مؤشر حماية الهوية الفاخرة بنسبة 97%.
+                  </p>
+</div>
+</div>
+<div class="flex items-start gap-space-sm bg-surface-container-lowest p-space-sm rounded">
+<span class="font-label-timecode text-[11px] text-outline mt-0.5">14:32:18</span>
+<div class="flex flex-col">
+<span class="font-headline-sm text-[13px] text-primary font-semibold">المراجع الفني (SIDE B)</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+                    توصية قطعية باستبعاد فكرة المحفز العشوائي لضعف الرابط العاطفي مع المشاهدين النخبويين.
+                  </p>
+</div>
+</div>
+<div class="flex items-start gap-space-sm bg-surface-container-lowest p-space-sm rounded">
+<span class="font-label-timecode text-[11px] text-outline mt-0.5">14:33:05</span>
+<div class="flex flex-col">
+<span class="font-headline-sm text-[13px] text-tertiary-fixed font-semibold">خوارزمية فض النزاع الإبداعي (ARBITER)</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+                    دمج مقترح "عكس القيود" مع "التفكير المعاكس" لتخفيض تكلفة الإنتاج الميداني بنسبة 18%.
+                  </p>
+</div>
+</div>
+<div class="flex items-start gap-space-sm bg-surface-container-lowest p-space-sm rounded">
+<span class="font-label-timecode text-[11px] text-secondary mt-0.5">14:33:40</span>
+<div class="flex flex-col">
+<span class="font-headline-sm text-[13px] text-primary font-semibold">اكتمال الإجماع (CONSENSUS REACHED)</span>
+<p class="font-body-sm text-body-sm text-on-surface font-medium mt-0.5">
+                    تم إصدار الضوء الأخضر (Greenlight) بنسبة إجماع 96.5% بانتظار الاعتماد المباشر.
+                  </p>
+</div>
+</div>
+</div>
+<!-- Mini Terminal Footnote -->
+<div class="mt-auto pt-space-xs flex items-center justify-between text-outline font-label-timecode text-[11px]">
+<span>HASH: 8F49-NEOM-2025</span>
+<span>VERIFIED AGENTS: 2/2</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Bottom Reference / Editorial Footnote -->
+<section class="flex flex-col sm:flex-row items-center justify-between gap-space-sm bg-surface-container-lowest px-space-md py-space-sm rounded-lg text-on-surface-variant text-body-sm mt-space-sm">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-secondary text-[18px]">verified_user</span>
+<span>منظومة التحكيم الثنائية خاضعة لمعايير الأخلاقيات الإبداعية وحماية الملكية الفكرية الدولية.</span>
+</div>
+<div class="flex items-center gap-space-md font-label-cinematic text-label-cinematic text-outline">
+<span>LATENCY: 14MS</span>
+<span>MODEL: CLAUDE 3.5 SONNET &amp; HYPER-ARBITER</span>
+</div>
+</section>
+</div>
+</div>
+</div></main><footer class="w-full bg-surface-container-lowest py-space-xl shadow-[0_-1px_12px_rgba(0,0,0,0.4)]"><div class="w-full px-gutter flex flex-col md:flex-row items-center justify-between gap-space-md text-right"><div class="flex items-center gap-space-sm"><span class="font-label-cinematic text-label-cinematic text-primary">FX — ATELIER CINÉMATIQUE</span><span class="font-body-sm text-body-sm text-outline">© 2025 استوديو الإخراج الفني والإبداعي المتقدم. كافة الحقوق محفوظة.</span></div><div class="flex items-center gap-space-lg font-body-sm text-body-sm text-on-surface-variant"><a class="hover:text-primary transition-colors" data-path="product-and-ideation-lab" href="#">المختبر الأساسي</a><a class="hover:text-primary transition-colors" data-path="cinematic-production-deck" href="#">مصفوفة التخريج</a><span class="font-label-timecode text-label-timecode text-secondary-fixed-dim">LATENCY: 12ms • 4K DCI READY</span></div></div></footer></body></html>

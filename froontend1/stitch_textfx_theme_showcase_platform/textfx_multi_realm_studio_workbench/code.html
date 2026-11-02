@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><title>TextFX AI Creative Platform</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500;600&amp;family=Outfit:wght@500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"outline":"#a08e7a","on-primary":"#472a00","tertiary":"#56e5a9","surface-dim":"#121316","secondary-container":"#d97707","tertiary-fixed-dim":"#4edea3","on-tertiary":"#003824","primary":"#ffc174","surface-container-lowest":"#0d0e11","outline-variant":"#534434","on-secondary-container":"#432100","tertiary-fixed":"#6ffbbe","primary-container":"#f59e0b","on-tertiary-container":"#004e34","error":"#ffb4ab","inverse-primary":"#855300","secondary-fixed":"#ffdcc3","secondary-fixed-dim":"#ffb77d","on-background":"#e3e2e5","primary-fixed-dim":"#ffb95f","surface-variant":"#343538","on-primary-fixed-variant":"#653e00","inverse-on-surface":"#2f3033","on-tertiary-fixed":"#002113","error-container":"#93000a","inverse-surface":"#e3e2e5","surface-container-high":"#292a2d","on-primary-fixed":"#2a1700","secondary":"#ffb77d","on-secondary-fixed":"#2f1500","on-error-container":"#ffdad6","tertiary-container":"#30c88f","surface-container-highest":"#343538","surface-bright":"#38393c","on-surface":"#e3e2e5","primary-fixed":"#ffddb8","surface-tint":"#ffb95f","on-primary-container":"#613b00","on-secondary":"#4d2600","surface-container-low":"#1a1c1e","on-tertiary-fixed-variant":"#005236","surface-container":"#1e2022","on-surface-variant":"#d8c3ad","on-secondary-fixed-variant":"#6e3900","background":"#121316","surface":"#121316","on-error":"#690005"},borderRadius:{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},spacing:{"margin-mobile":"1rem","gutter-mobile":"0.75rem","gutter":"1.25rem","space-sm":"0.5rem","space-md":"1rem","space-lg":"1.5rem","margin":"2rem","space-xl":"2.5rem","space-xs":"0.25rem"},fontFamily:{"body-sm":["Inter"],"headline-lg":["Outfit"],"headline-lg-mobile":["Outfit"],"title-md":["Outfit"],"label-mono":["JetBrains Mono"],"display-hero":["Outfit"],"display-hero-mobile":["Outfit"],"body-lg":["Inter"],"headline-sm":["Outfit"],"body-md":["Inter"],"headline-md":["Outfit"],"label-mono-sm":["JetBrains Mono"]},fontSize:{"body-sm":["12px",{"lineHeight":"18px","letterSpacing":"0.01em","fontWeight":"400"}],"headline-lg":["36px",{"lineHeight":"44px","letterSpacing":"-0.02em","fontWeight":"600"}],"headline-lg-mobile":["28px",{"lineHeight":"36px","letterSpacing":"-0.01em","fontWeight":"600"}],"title-md":["16px",{"lineHeight":"24px","letterSpacing":"0em","fontWeight":"600"}],"label-mono":["12px",{"lineHeight":"16px","letterSpacing":"0.04em","fontWeight":"500"}],"display-hero":["56px",{"lineHeight":"64px","letterSpacing":"-0.03em","fontWeight":"700"}],"display-hero-mobile":["36px",{"lineHeight":"44px","letterSpacing":"-0.02em","fontWeight":"700"}],"body-lg":["16px",{"lineHeight":"26px","letterSpacing":"-0.005em","fontWeight":"400"}],"headline-sm":["20px",{"lineHeight":"28px","letterSpacing":"-0.01em","fontWeight":"500"}],"body-md":["14px",{"lineHeight":"22px","letterSpacing":"0em","fontWeight":"400"}],"headline-md":["24px",{"lineHeight":"32px","letterSpacing":"-0.015em","fontWeight":"600"}],"label-mono-sm":["10px",{"lineHeight":"14px","letterSpacing":"0.06em","fontWeight":"600"}]}}}}</script></head><body class="bg-background font-body-md text-body-md text-on-surface antialiased min-h-screen flex flex-col selection:bg-primary-container selection:text-on-primary-container"><header class="fixed top-0 left-0 w-full z-50 bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.4)]"><div class="h-16 w-full px-gutter flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-lg shrink-0"><div class="flex items-center gap-space-sm"><img alt="TextFX Studio Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1XxMPrO5sCi6qVLXW1gw4LvA9odyf2osH_NSwU1BXxeqbMe657zC9BBClpwXgg2_nigptTokxty5X0F_m1l6VRHCdjpfCNjMpYVMT9aeDT-vW7nhK-nRDNbOv3S9tCmbOIJBAzVi8xkyH78UQI_ySefmranKzsfkMbYdnY6XIwDs0czjWZHRsXJGCCiC7KqFTs-1CQsuFuAq9y4XB7Ha9P0ntaZhnHDyZsNS3xsmSwGEY_XiKNO09liP28"/><div class="flex flex-col"><span class="font-title-md text-title-md text-on-surface tracking-wide leading-none">TextFX</span><span class="font-label-mono-sm text-label-mono-sm text-primary tracking-widest uppercase">Studio OS</span></div></div><nav class="hidden xl:flex items-center gap-space-xs" data-active-classes="bg-surface-container-high text-primary font-title-md rounded-lg"><a aria-current="page" class="px-space-md py-space-sm transition-colors bg-surface-container-high text-primary font-title-md rounded-lg" data-path="studio-workbench" href="#">Studio Workbench</a><a class="px-space-md py-space-sm text-on-surface-variant hover:text-on-surface font-body-md text-body-md rounded-lg transition-colors" data-path="model-pipelines" href="#">Model Pipelines</a><a class="px-space-md py-space-sm text-on-surface-variant hover:text-on-surface font-body-md text-body-md rounded-lg transition-colors" data-path="prompt-forge" href="#">Prompt Forge</a><a class="px-space-md py-space-sm text-on-surface-variant hover:text-on-surface font-body-md text-body-md rounded-lg transition-colors" data-path="assets-vault" href="#">Assets Vault</a><a class="px-space-md py-space-sm text-on-surface-variant hover:text-on-surface font-body-md text-body-md rounded-lg transition-colors" data-path="analytics" href="#">Analytics</a></nav></div><div class="hidden 2xl:flex items-center justify-center"><div class="bg-surface-container-lowest p-space-xs rounded-full flex items-center gap-space-xs shadow-inner"><button class="realm-btn px-space-md py-1.5 rounded-full font-label-mono text-label-mono flex items-center gap-space-xs transition-all bg-primary-container text-on-primary-container font-semibold shadow-md" type="button"><span>🎬</span><span>Director's Noir</span></button><button class="realm-btn px-space-md py-1.5 rounded-full font-label-mono text-label-mono flex items-center gap-space-xs transition-all text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high" type="button"><span>🖋️</span><span>Haute Editorial</span></button><button class="realm-btn px-space-md py-1.5 rounded-full font-label-mono text-label-mono flex items-center gap-space-xs transition-all text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high" type="button"><span>⚡</span><span>Quantum Deck</span></button></div></div><div class="flex items-center gap-space-md shrink-0"><div class="hidden lg:flex items-center gap-space-xs px-space-md py-1.5 bg-surface-container-low rounded-lg text-on-surface-variant hover:text-on-surface cursor-pointer transition-colors"><span class="material-symbols-outlined text-[18px] text-primary">movie</span><span class="font-label-mono text-label-mono font-medium truncate max-w-[140px]">Cyberpunk Neo-Noir Ep.4</span><span class="material-symbols-outlined text-[16px]">unfold_more</span></div><div class="hidden sm:flex items-center gap-space-sm px-space-md py-1.5 bg-surface-container-lowest rounded-full"><span class="w-2 h-2 rounded-full bg-tertiary animate-pulse"></span><span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant uppercase tracking-wider">4x H100 Online</span><span class="font-label-mono-sm text-label-mono-sm text-tertiary-container">14ms</span></div><button aria-label="Notifications" class="relative p-space-sm rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" type="button"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-primary-container"></span></button><div class="flex items-center gap-space-sm pl-space-xs"><div class="relative"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAdChO7WR2B9KuIc2MKmeibOoWrEXeWUIJBthhqvdwmPL4TDUZcaYAwc7-8U_C-ggL--4vJehA8wYvuJCi0Ed-r-o2tC6HKqXzvYoAjHOA-NjD845ORLaHsTPSGz9qn3yUfgD92T-36uMEjl6VSLZwcA2PCc-5Z3fDG6UV4c18g09J2z8NWyTfF2Wm7h4efxyR61ZSmCGTCvaTQa-J2crlo8BerPYOzN3JUog5o5_wfdM0L9YZLtw0jvA"/><span class="absolute -bottom-1 -right-1 px-1 py-0.2 bg-primary-container text-on-primary-container font-label-mono-sm text-[8px] font-bold rounded uppercase leading-tight">PRO</span></div><div class="hidden md:flex flex-col"><span class="font-body-sm text-body-sm text-on-surface font-medium leading-none">Alex Vance</span><span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant leading-none mt-1">Director</span></div></div></div></div></header><main class="w-full pt-16 bg-background flex-1 flex flex-col"><div class="flex flex-col w-full">
+<!-- Interactive Workbench & Architectural Showcase Container -->
+<div class="w-full px-gutter py-space-xl flex flex-col gap-space-xl max-w-[1720px] mx-auto">
+<!-- Top Sub-Header & Global Realm Controller -->
+<div class="w-full flex flex-col lg:flex-row items-start lg:items-end justify-between gap-space-lg">
+<div class="flex flex-col gap-space-xs max-w-2xl">
+<div class="flex items-center gap-space-sm">
+<span class="w-2 h-2 rounded-full bg-primary animate-ping"></span>
+<span class="font-label-mono text-label-mono uppercase tracking-widest text-primary">Aesthetic Paradigm Engine v4.8</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">Multi-Realm Studio Interface</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">
+          Experience the same neural generative workbench through three distinct creative dimensions. Seamlessly adapt visual density, lighting acoustics, and typographic hierarchy to your current creative production phase.
+        </p>
+</div>
+<!-- Realm Control Bar -->
+<div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-space-md p-space-xs bg-surface-container-low rounded-xl shadow-lg">
+<div class="flex items-center p-1 bg-surface-container-lowest rounded-lg">
+<button class="px-space-md py-2 rounded font-label-mono text-label-mono flex items-center gap-space-xs transition-all bg-surface-container-high text-primary font-medium shadow-sm" id="view-mode-side" onclick="setViewMode('matrix')">
+<span class="material-symbols-outlined text-[16px]">grid_view</span>
+<span>Tri-Realm Matrix</span>
+</button>
+<button class="px-space-md py-2 rounded font-label-mono text-label-mono flex items-center gap-space-xs transition-all text-on-surface-variant hover:text-on-surface" id="view-mode-focus" onclick="setViewMode('focus')">
+<span class="material-symbols-outlined text-[16px]">crop_free</span>
+<span>Live Workbench</span>
+</button>
+</div>
+<div class="hidden sm:block h-6 w-px bg-surface-variant"></div>
+<!-- Master Interactive Realm Switcher -->
+<div class="flex items-center gap-1 bg-surface-container-lowest p-1 rounded-lg" id="realm-selector-bar">
+<button class="realm-tab px-space-md py-2 rounded-lg font-label-mono text-label-mono flex items-center gap-space-xs transition-all bg-primary-container text-on-primary-container font-semibold shadow-md" id="btn-noir" onclick="setActiveRealm('noir')">
+<span>🎬</span>
+<span>Director's Noir</span>
+</button>
+<button class="realm-tab px-space-md py-2 rounded-lg font-label-mono text-label-mono flex items-center gap-space-xs transition-all text-on-surface-variant hover:text-on-surface" id="btn-editorial" onclick="setActiveRealm('editorial')">
+<span>🖋️</span>
+<span>Haute Editorial</span>
+</button>
+<button class="realm-tab px-space-md py-2 rounded-lg font-label-mono text-label-mono flex items-center gap-space-xs transition-all text-on-surface-variant hover:text-on-surface" id="btn-quantum" onclick="setActiveRealm('quantum')">
+<span>⚡</span>
+<span>Quantum Deck</span>
+</button>
+</div>
+</div>
+</div>
+<!-- COMPARISON SECTION: The 3 Side-by-Side Architectural Deep Dive Columns -->
+<div class="grid grid-cols-1 xl:grid-cols-3 gap-space-lg w-full transition-all duration-500" id="matrix-view">
+<!-- Column 1: Director's Noir -->
+<div class="flex flex-col bg-surface-container-lowest rounded-[20px] p-space-lg shadow-xl relative overflow-hidden group">
+<!-- Ambient Golden Conical Light Background Effect -->
+<div class="absolute -top-24 -left-24 w-80 h-80 rounded-full bg-primary-container/10 blur-[90px] pointer-events-none"></div>
+<!-- Column Header -->
+<div class="flex items-start justify-between mb-space-lg relative z-10">
+<div>
+<div class="flex items-center gap-space-xs">
+<span class="px-2 py-0.5 rounded bg-primary-container/20 text-primary font-label-mono-sm text-label-mono-sm uppercase font-semibold">Cinematic 35mm</span>
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant">Default Realm</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-primary mt-1">Director's Noir</h2>
+</div>
+<span class="text-2xl p-2 rounded-xl bg-surface-container-high text-primary">🎬</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-space-lg">
+          Obsidian carbon baseline with volumetric 3200K tungsten amber luminescence. Designed for low-light screening rooms and high-focus cinematography direction.
+        </p>
+<!-- Mock UI Card: Script-to-Cinematics Engine -->
+<div class="flex flex-col bg-surface-container-low rounded-[20px] p-space-md shadow-inner gap-space-md relative z-10 flex-1">
+<!-- Sub-toolbar -->
+<div class="flex items-center justify-between">
+<span class="font-label-mono text-label-mono text-primary font-medium tracking-wide">SCENE SCRIPT // EXT. NEO-SHIBUYA</span>
+<div class="flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant">ANAMORPHIC T1.8</span>
+</div>
+</div>
+<!-- Prompt Area -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md flex flex-col gap-space-sm">
+<span class="font-label-mono-sm text-label-mono-sm text-outline uppercase">Neural Script Directive</span>
+<p class="font-body-md text-body-md text-on-surface font-headline-sm">
+              "Low camera pan tracking Detective Vance under rain-streaked neon monoliths. Amber refraction over wet asphalt. 65mm panavision depth-of-field."
+            </p>
+<div class="flex flex-wrap gap-1 mt-1">
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-primary font-label-mono-sm text-label-mono-sm">--ar 2.39:1</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-primary font-label-mono-sm text-label-mono-sm">--film Kodak 5219</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-primary font-label-mono-sm text-label-mono-sm">--grain 14</span>
+</div>
+</div>
+<!-- Mini Waveform / Audio Sync Visualization (Inline SVG) -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md flex flex-col gap-space-xs">
+<div class="flex justify-between items-center text-on-surface-variant font-label-mono-sm text-label-mono-sm">
+<span>FOLEY &amp; DIALOGUE STEM TRACK</span>
+<span class="text-primary font-bold">00:04:18:12</span>
+</div>
+<div class="h-10 w-full flex items-center justify-between gap-1 overflow-hidden">
+<svg class="w-full h-8 text-primary/70" preserveaspectratio="none" viewbox="0 0 200 40">
+<rect fill="currentColor" height="12" rx="1" width="3" x="0" y="14"></rect>
+<rect fill="currentColor" height="20" rx="1" width="3" x="5" y="10"></rect>
+<rect fill="currentColor" height="28" rx="1" width="3" x="10" y="6"></rect>
+<rect fill="currentColor" height="16" rx="1" width="3" x="15" y="12"></rect>
+<rect fill="currentColor" height="24" rx="1" width="3" x="20" y="8"></rect>
+<rect fill="currentColor" height="8" rx="1" width="3" x="25" y="16"></rect>
+<rect fill="currentColor" height="32" rx="1" width="3" x="30" y="4"></rect>
+<rect fill="currentColor" height="22" rx="1" width="3" x="35" y="9"></rect>
+<rect fill="currentColor" height="10" rx="1" width="3" x="40" y="15"></rect>
+<rect fill="currentColor" height="18" rx="1" width="3" x="45" y="11"></rect>
+<rect fill="currentColor" height="30" rx="1" width="3" x="50" y="5"></rect>
+<rect fill="currentColor" height="14" rx="1" width="3" x="55" y="13"></rect>
+<rect fill="currentColor" height="20" rx="1" width="3" x="60" y="10"></rect>
+<rect fill="currentColor" height="26" rx="1" width="3" x="65" y="7"></rect>
+<rect fill="currentColor" height="16" rx="1" width="3" x="70" y="12"></rect>
+<rect fill="currentColor" height="10" rx="1" width="3" x="75" y="15"></rect>
+<rect fill="currentColor" height="22" rx="1" width="3" x="80" y="9"></rect>
+<rect fill="currentColor" height="34" rx="1" width="3" x="85" y="3"></rect>
+<rect fill="currentColor" height="16" rx="1" width="3" x="90" y="12"></rect>
+<rect fill="currentColor" height="24" rx="1" width="3" x="95" y="8"></rect>
+<rect fill="currentColor" height="12" rx="1" width="3" x="100" y="14"></rect>
+<rect fill="currentColor" height="28" rx="1" width="3" x="105" y="6"></rect>
+<rect fill="currentColor" height="18" rx="1" width="3" x="110" y="11"></rect>
+<rect fill="currentColor" height="6" rx="1" width="3" x="115" y="17"></rect>
+<rect fill="currentColor" height="30" rx="1" width="3" x="120" y="5"></rect>
+<rect fill="currentColor" height="22" rx="1" width="3" x="125" y="9"></rect>
+<rect fill="currentColor" height="14" rx="1" width="3" x="130" y="13"></rect>
+<rect fill="currentColor" height="26" rx="1" width="3" x="135" y="7"></rect>
+<rect fill="currentColor" height="18" rx="1" width="3" x="140" y="11"></rect>
+<rect fill="currentColor" height="32" rx="1" width="3" x="145" y="4"></rect>
+<rect fill="currentColor" height="24" rx="1" width="3" x="150" y="8"></rect>
+<rect fill="currentColor" height="12" rx="1" width="3" x="155" y="14"></rect>
+<rect fill="currentColor" height="28" rx="1" width="3" x="160" y="6"></rect>
+<rect fill="currentColor" height="20" rx="1" width="3" x="165" y="10"></rect>
+<rect fill="currentColor" height="10" rx="1" width="3" x="170" y="15"></rect>
+<rect fill="currentColor" height="22" rx="1" width="3" x="175" y="9"></rect>
+<rect fill="currentColor" height="30" rx="1" width="3" x="180" y="5"></rect>
+<rect fill="currentColor" height="16" rx="1" width="3" x="185" y="12"></rect>
+<rect fill="currentColor" height="8" rx="1" width="3" x="190" y="16"></rect>
+<rect fill="currentColor" height="18" rx="1" width="3" x="195" y="11"></rect>
+</svg>
+</div>
+</div>
+<!-- Controls: Sliders & Trigger -->
+<div class="grid grid-cols-2 gap-space-sm pt-space-xs">
+<div class="flex flex-col bg-surface-container-lowest p-space-sm rounded-lg">
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant">APERTURE</span>
+<span class="font-label-mono text-label-mono text-primary font-bold">ƒ/1.4 STOP</span>
+</div>
+<div class="flex flex-col bg-surface-container-lowest p-space-sm rounded-lg">
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant">LENS PROFILE</span>
+<span class="font-label-mono text-label-mono text-primary font-bold">50MM COOKE S4</span>
+</div>
+</div>
+<!-- Action Button -->
+<button class="w-full py-3 rounded-xl bg-primary-container text-on-primary-container font-headline-sm text-headline-sm font-semibold flex items-center justify-center gap-space-sm hover:brightness-110 shadow-lg shadow-primary-container/20 transition-all cursor-pointer">
+<span class="material-symbols-outlined text-[20px]">movie_filter</span>
+<span>Render Master Plate</span>
+</button>
+</div>
+</div>
+<!-- Column 2: Haute Editorial -->
+<div class="flex flex-col bg-surface-container-lowest rounded-[6px] p-space-lg shadow-xl relative overflow-hidden group">
+<!-- Editorial Warm Texture Simulation Gradient -->
+<div class="absolute inset-0 bg-gradient-to-b from-primary/5 via-transparent to-primary/5 pointer-events-none"></div>
+<!-- Column Header -->
+<div class="flex items-start justify-between mb-space-lg relative z-10">
+<div>
+<div class="flex items-center gap-space-xs">
+<span class="px-2 py-0.5 rounded-[4px] bg-secondary-container/20 text-secondary-fixed font-label-mono-sm text-label-mono-sm uppercase font-semibold">Prestige Print</span>
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant">Monocle / Paris Issue</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-secondary-fixed mt-1 tracking-tight">Haute Editorial</h2>
+</div>
+<span class="text-2xl p-2 rounded-[6px] bg-surface-container-high text-secondary">🖋️</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-space-lg">
+          Crisp serif hierarchy, stark editorial whiteframes, and deep oxblood/burgundy accents inspired by Parisian publication houses and auteur screenplays.
+        </p>
+<!-- Mock UI Card: Haute Literary Stylist -->
+<div class="flex flex-col bg-surface-container-low rounded-[6px] p-space-md gap-space-md relative z-10 flex-1 shadow-sm">
+<!-- Sub-toolbar -->
+<div class="flex items-center justify-between pb-space-xs">
+<span class="font-label-mono text-label-mono uppercase tracking-widest text-secondary-fixed font-bold">FOLIO NO. 44 — CAHIERS DU STYLE</span>
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant">PARAGRAPH KERNING: +0.02</span>
+</div>
+<!-- Prompt Editorial Frame -->
+<div class="bg-surface-container-lowest rounded-[4px] p-space-md flex flex-col gap-space-xs">
+<span class="font-label-mono-sm text-label-mono-sm text-outline tracking-widest uppercase">Lead Manifesto Draft</span>
+<p class="font-headline-md text-headline-md text-on-surface italic font-medium leading-relaxed">
+              “The architecture of silence in modern brutalist cinema speaks louder than the symphonies of digital spectacle.”
+            </p>
+<div class="flex items-center justify-between pt-2">
+<span class="text-xs text-on-surface-variant font-label-mono-sm">STYLE MATRIX: MONOTONE / METRIC RHYTHM</span>
+<span class="text-xs text-secondary-fixed font-bold font-label-mono-sm">98.4% RHETORICAL POLISH</span>
+</div>
+</div>
+<!-- Typography Preset Grid -->
+<div class="grid grid-cols-2 gap-space-xs">
+<div class="bg-surface-container-lowest p-space-sm rounded-[4px] flex flex-col justify-between">
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant">PRIMARY HEADLINE</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">Didot Bold 64pt</span>
+</div>
+<div class="bg-surface-container-lowest p-space-sm rounded-[4px] flex flex-col justify-between">
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant">RUNNING BODY</span>
+<span class="font-body-sm text-body-sm text-on-surface">Bodoni Old Style 11pt</span>
+</div>
+</div>
+<!-- Editorial Layout Picker -->
+<div class="bg-surface-container-lowest p-space-sm rounded-[4px] flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-secondary-container">auto_stories</span>
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm font-semibold text-on-surface">Asymmetrical Spread No. 8</span>
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant">6-Column Golden Ratio Rule</span>
+</div>
+</div>
+<span class="font-label-mono-sm text-label-mono-sm bg-secondary-container/20 text-secondary-fixed px-2 py-0.5 rounded-[2px] font-semibold">ACTIVE</span>
+</div>
+<!-- Editorial Action Button -->
+<button class="w-full py-3 rounded-[4px] bg-secondary-container text-on-secondary-container font-title-md text-title-md font-bold tracking-wider uppercase hover:opacity-95 transition-all cursor-pointer">
+            Publish Proof Galley
+          </button>
+</div>
+</div>
+<!-- Column 3: Quantum Deck -->
+<div class="flex flex-col bg-surface-container-lowest rounded-[14px] p-space-lg shadow-xl relative overflow-hidden group">
+<!-- Neon Emerald & Cyan Telemetry Grid Overlay -->
+<div class="absolute -bottom-24 -right-24 w-80 h-80 rounded-full bg-tertiary-container/15 blur-[85px] pointer-events-none"></div>
+<!-- Column Header -->
+<div class="flex items-start justify-between mb-space-lg relative z-10">
+<div>
+<div class="flex items-center gap-space-xs">
+<span class="px-2 py-0.5 rounded-full bg-tertiary/20 text-tertiary font-label-mono-sm text-label-mono-sm uppercase font-semibold">Cybernetic Telemetry</span>
+<span class="font-label-mono-sm text-label-mono-sm text-tertiary">NODE: ONLINE [99.8%]</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-tertiary mt-1 font-label-mono tracking-tighter">Quantum Deck</h2>
+</div>
+<span class="text-2xl p-2 rounded-xl bg-surface-container-high text-tertiary">⚡</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-space-lg">
+          Abyssal black glass with phosphor emerald generation vectors, real-time H100 matrix compute readouts, and laser terminal controls.
+        </p>
+<!-- Mock UI Card: Neural Tensor Diffusion Matrix -->
+<div class="flex flex-col bg-surface-container-low rounded-[14px] p-space-md gap-space-md relative z-10 flex-1 shadow-inner">
+<!-- Terminal Status Header -->
+<div class="flex items-center justify-between font-label-mono-sm text-label-mono-sm">
+<span class="text-tertiary font-semibold flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-tertiary animate-pulse"></span>
+              CLUSTER // H100-SX-88
+            </span>
+<span class="text-on-surface-variant">TFLOPS: 194.8</span>
+</div>
+<!-- Vector Prompt Console -->
+<div class="bg-surface-container-lowest rounded-lg p-space-md font-label-mono flex flex-col gap-space-xs">
+<div class="flex items-center justify-between text-outline text-[11px]">
+<span>QUANTUM EMBEDDING VECTOR</span>
+<span class="text-tertiary">DIM: 4096</span>
+</div>
+<p class="font-label-mono text-label-mono text-tertiary leading-relaxed">
+              &gt; exec.diffuse(latent_space="biomech_cyber", seed=83912903, cfg=7.4, steps=45, precision="FP8_E4M3")
+            </p>
+<div class="flex items-center gap-2 pt-1">
+<span class="px-1.5 py-0.5 bg-surface-container-high text-tertiary font-label-mono-sm text-label-mono-sm rounded">SEED 839129</span>
+<span class="px-1.5 py-0.5 bg-surface-container-high text-tertiary font-label-mono-sm text-label-mono-sm rounded">LATENCY 14ms</span>
+<span class="px-1.5 py-0.5 bg-surface-container-high text-tertiary font-label-mono-sm text-label-mono-sm rounded">FP8 ACTIVATED</span>
+</div>
+</div>
+<!-- Live Telemetry Diagnostic Radar Graphic -->
+<div class="bg-surface-container-lowest rounded-lg p-space-md flex items-center justify-between">
+<div class="flex items-center gap-space-md">
+<div class="relative w-12 h-12 rounded-full bg-surface-container flex items-center justify-center">
+<svg class="w-12 h-12 text-tertiary transform -rotate-90" viewbox="0 0 36 36">
+<path class="text-surface-variant stroke-current" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke-dasharray="100, 100" stroke-width="3"></path>
+<path class="text-tertiary stroke-current" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke-dasharray="88, 100" stroke-linecap="round" stroke-width="3"></path>
+</svg>
+<span class="absolute font-label-mono-sm text-label-mono-sm font-bold text-tertiary">88%</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-mono text-label-mono font-bold text-on-surface">VRAM ALLOCATION</span>
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant">70.4 GB / 80.0 GB POOL</span>
+</div>
+</div>
+<div class="text-right flex flex-col">
+<span class="font-label-mono text-label-mono text-tertiary font-bold">14.2 ms</span>
+<span class="font-label-mono-sm text-label-mono-sm text-outline">EPOCH P99</span>
+</div>
+</div>
+<!-- Micro Parameter Toggles -->
+<div class="grid grid-cols-2 gap-space-xs">
+<div class="bg-surface-container-lowest p-space-sm rounded flex items-center justify-between">
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant">K-SAMPLER</span>
+<span class="font-label-mono-sm text-label-mono-sm text-tertiary font-bold">DPM++ 2M</span>
+</div>
+<div class="bg-surface-container-lowest p-space-sm rounded flex items-center justify-between">
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant">SCHEDULER</span>
+<span class="font-label-mono-sm text-label-mono-sm text-tertiary font-bold">KARRAS EXP</span>
+</div>
+</div>
+<!-- Quantum Command Button -->
+<button class="w-full py-3 rounded-lg bg-tertiary-container text-on-tertiary-container font-label-mono text-label-mono font-bold uppercase tracking-wider hover:opacity-90 shadow-lg shadow-tertiary-container/20 transition-all cursor-pointer">
+            &gt; INITIATE TENSOR DIFFUSION
+          </button>
+</div>
+</div>
+</div>
+<!-- LIVE ACTIVE WORKBENCH CANVAS -->
+<div class="w-full flex flex-col transition-all duration-300" id="workbench-container">
+<!-- Section Divider Title -->
+<div class="flex items-center justify-between mb-space-md">
+<div class="flex items-center gap-space-sm">
+<span class="font-title-md text-title-md text-on-surface">Live Studio Workbench</span>
+<span class="px-2.5 py-0.5 rounded-full text-xs font-label-mono-sm uppercase font-semibold bg-primary-container text-on-primary-container" id="active-realm-tag">Director's Noir Active</span>
+</div>
+<div class="flex items-center gap-space-md text-on-surface-variant font-label-mono-sm text-label-mono-sm">
+<span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-tertiary"></span> Model: SD-XL Turbo 1.0</span>
+<span>Latent Grid: 1024x576</span>
+</div>
+</div>
+<!-- Morphing Dynamic Canvas Card -->
+<div class="w-full bg-surface-container-low rounded-[20px] p-space-lg shadow-2xl flex flex-col xl:flex-row gap-space-xl relative overflow-hidden transition-all duration-300" id="dynamic-workbench">
+<!-- Subtle Ambient Backlight Glow -->
+<div class="absolute -top-32 -left-32 w-96 h-96 rounded-full bg-primary-container/10 blur-[100px] pointer-events-none transition-all duration-500" id="ambient-glow"></div>
+<!-- Left Column: Multi-modal Prompt Forge & Directorial Node Deck (60% width on XL) -->
+<div class="flex-1 flex flex-col gap-space-lg relative z-10">
+<!-- Directorial Prompt Bar -->
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<label class="font-title-md text-title-md text-primary font-medium tracking-wide" id="prompt-label">Primary Generative Directive</label>
+<div class="flex items-center gap-space-xs text-on-surface-variant font-label-mono-sm text-label-mono-sm">
+<span>TOKENS: 48/75</span>
+<span>•</span>
+<span class="text-primary font-semibold" id="realm-indicator-sub">DIRECTOR PREVIEW</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest rounded-xl p-space-md flex flex-col gap-space-sm focus-within:ring-2 focus-within:ring-primary/40 transition-all">
+<textarea class="w-full bg-transparent resize-none border-none outline-none font-body-lg text-body-lg text-on-surface placeholder:text-outline" id="prompt-textarea" placeholder="Enter screenplay scene action, stylistic lighting parameters, or aesthetic narrative tags..." rows="3">Cinematic medium wide shot, protagonist wearing vintage shearling coat, illuminated by warm street lamp in drizzling night haze. 35mm film grain, moody anamorphic flares, muted sepia and carbon tones, ultra-photorealistic textures.</textarea>
+<!-- Quick Injection Modifier Chips -->
+<div class="flex flex-wrap items-center justify-between gap-space-sm pt-space-xs">
+<div class="flex flex-wrap gap-1.5" id="token-chips">
+<span class="px-2 py-1 rounded bg-surface-container-high text-on-surface font-label-mono-sm text-label-mono-sm cursor-pointer hover:bg-surface-bright transition-colors">--ar 16:9</span>
+<span class="px-2 py-1 rounded bg-surface-container-high text-on-surface font-label-mono-sm text-label-mono-sm cursor-pointer hover:bg-surface-bright transition-colors">--style photoreal</span>
+<span class="px-2 py-1 rounded bg-surface-container-high text-on-surface font-label-mono-sm text-label-mono-sm cursor-pointer hover:bg-surface-bright transition-colors">--cfg 6.8</span>
+<span class="px-2 py-1 rounded bg-surface-container-high text-on-surface font-label-mono-sm text-label-mono-sm cursor-pointer hover:bg-surface-bright transition-colors">--seed 491022</span>
+</div>
+<div class="flex items-center gap-space-xs">
+<button class="p-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" title="Magic Prompt Polish">
+<span class="material-symbols-outlined text-[18px]">auto_fix_high</span>
+</button>
+<button class="p-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" title="Load Negative Prompt">
+<span class="material-symbols-outlined text-[18px]">block</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Parameter Sliders & Hardware Hyper-Tuning -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-space-md">
+<!-- Parameter 1: CFG Guidance -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl flex flex-col gap-space-xs">
+<div class="flex justify-between items-center">
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant">CFG GUIDANCE</span>
+<span class="font-label-mono text-label-mono text-primary font-bold" id="cfg-val">6.8</span>
+</div>
+<input class="w-full accent-primary bg-surface-container h-1 rounded cursor-pointer" max="15" min="1" oninput="document.getElementById('cfg-val').innerText = this.value" step="0.1" type="range" value="6.8"/>
+<span class="font-label-mono-sm text-[10px] text-outline">Optimal fidelity band: 5.5 - 7.5</span>
+</div>
+<!-- Parameter 2: Diffusion Steps -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl flex flex-col gap-space-xs">
+<div class="flex justify-between items-center">
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant">SAMPLING STEPS</span>
+<span class="font-label-mono text-label-mono text-primary font-bold" id="step-val">38</span>
+</div>
+<input class="w-full accent-primary bg-surface-container h-1 rounded cursor-pointer" max="80" min="10" oninput="document.getElementById('step-val').innerText = this.value" step="1" type="range" value="38"/>
+<span class="font-label-mono-sm text-[10px] text-outline">Euler Ancestral scheduler</span>
+</div>
+<!-- Parameter 3: Denoise Strength -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl flex flex-col gap-space-xs">
+<div class="flex justify-between items-center">
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant">DENOISE RATIO</span>
+<span class="font-label-mono text-label-mono text-primary font-bold" id="denoise-val">0.65</span>
+</div>
+<input class="w-full accent-primary bg-surface-container h-1 rounded cursor-pointer" max="1" min="0" oninput="document.getElementById('denoise-val').innerText = this.value" step="0.05" type="range" value="0.65"/>
+<span class="font-label-mono-sm text-[10px] text-outline">Latent image preservation</span>
+</div>
+<!-- Parameter 4: Cinematic Aspect Ratio -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl flex flex-col justify-between">
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant">FRAME FORMAT</span>
+<div class="flex items-center justify-between pt-1">
+<span class="font-label-mono text-label-mono text-primary font-bold">2.39:1 CinemaScope</span>
+<span class="material-symbols-outlined text-primary text-[18px]">aspect_ratio</span>
+</div>
+<span class="font-label-mono-sm text-[10px] text-outline">1920 × 804 Ultra-wide</span>
+</div>
+</div>
+<!-- Multi-Modal Reference Anchors -->
+<div class="flex flex-col gap-space-xs">
+<span class="font-label-mono-sm text-label-mono-sm uppercase text-on-surface-variant tracking-wider">Multi-Modal Latent Conditioners (IP-Adapter &amp; Depth)</span>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-space-md">
+<!-- Slot 1: Color Grade Target -->
+<div class="bg-surface-container-lowest rounded-xl p-space-sm flex flex-col gap-space-xs group relative overflow-hidden">
+<img class="w-full h-24 object-cover rounded-lg" data-alt="A cinematic color palette swatch showing amber 3200K tungsten tones and deep carbon black shadow gradients with soft film stock patina" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBA1ni7TRLU93XdELa2pJLQWemgJYZSKiWKOg8ygXJojR1YoL7yX6Q_-pN-vnPvRKxehEVd9G5QVutWUGQorcXenq-pOVHjiuUMAVyL2O-GvZJV_5M1m3uxXbfHuTH34Bu_83Wgh9sqfFFzgM6vktvYBnzgan3lQo1LfN_Yse78vWzMTiqZbRgSI9U9t2qxQ6U5wRLwgjQWf7W5pyM5e-BXU1hQuaMCuRDxoCwAfszHPIna1hgcHsyvmA"/>
+<div class="flex items-center justify-between">
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface">Color Palette</span>
+<span class="font-label-mono-sm text-label-mono-sm text-primary font-semibold">0.85 Wgt</span>
+</div>
+</div>
+<!-- Slot 2: Lighting Environment Target -->
+<div class="bg-surface-container-lowest rounded-xl p-space-sm flex flex-col gap-space-xs group relative overflow-hidden">
+<img class="w-full h-24 object-cover rounded-lg" data-alt="Moody cinematic street lighting at night with golden lampposts reflecting in dark rain puddles and soft mist" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCMOjGRV88SQauYhT75fk6ssHvUYhNYI-g0g5B8_IvXjveDr8tmpf6sN5_0RPAnBAHPMNIpaPUCbR3VK8MuqbSw6gBfbkm8rVyRnIQ12Ab7OkItqVjlHabaHYT6vE4cW5u70VdjxiIljkSHWE1HJtcT3kR9NRIwJHaGr1tS4B1QChIuTuWAn57e7tHyUJ4A6J4cXHYAd_GN_lqX0HxmfgMWwiK5bcAjegmk8dYooNHfniaH_0dWZdgpEw"/>
+<div class="flex items-center justify-between">
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface">Lighting Map</span>
+<span class="font-label-mono-sm text-label-mono-sm text-primary font-semibold">0.60 Wgt</span>
+</div>
+</div>
+<!-- Slot 3: Character Pose / Depth Reference -->
+<div class="bg-surface-container-lowest rounded-xl p-space-sm flex flex-col gap-space-xs group relative overflow-hidden">
+<img class="w-full h-24 object-cover rounded-lg" data-alt="Monochrome depth-map silhouette wireframe rendering of a detective standing in dramatic three-quarter profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD3ZDjuYrOkXBzGF73hycwUhiKscyGOEXrCDCD3plD60MEG_TtwkRBxsLhpW10uh3iNogTMQ83A3j2E-BwQQasBeNBNT8UBR_X78XUAJdm9RfXMlFMl0vVdeS_GHY2KxkKNExUHNCdh-QSnaXuk_ILvevmry7sPr6kw4PR297BKzN_o0SFlYgDXQ0kPApcpmusx6-NOP5lUeMAUmDI8hnWW4lc84aBvCH5WgViAfRvZiZnJkn0dJGIF8A"/>
+<div class="flex items-center justify-between">
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface">Depth / Pose</span>
+<span class="font-label-mono-sm text-label-mono-sm text-primary font-semibold">0.90 Wgt</span>
+</div>
+</div>
+<!-- Slot 4: Add New Slot -->
+<div class="bg-surface-container-lowest/50 rounded-xl p-space-sm flex flex-col items-center justify-center gap-space-xs border-dashed border-2 border-surface-variant hover:border-primary cursor-pointer transition-colors h-[132px]">
+<span class="material-symbols-outlined text-outline text-[24px]">add_photo_alternate</span>
+<span class="font-label-mono-sm text-label-mono-sm text-outline group-hover:text-primary">Add Latent Ref</span>
+</div>
+</div>
+</div>
+<!-- Bottom Action Suite -->
+<div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-space-md pt-space-xs">
+<div class="flex items-center gap-space-md text-on-surface-variant font-label-mono-sm text-label-mono-sm">
+<span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-tertiary"></span> Ready to synthesise</span>
+<span>EST. RENDER: 1.84s</span>
+<span>COST: 0.04 TOKENS</span>
+</div>
+<div class="flex items-center gap-space-md">
+<button class="px-space-md py-3 rounded-xl bg-surface-container-high text-on-surface font-title-md text-title-md hover:bg-surface-bright transition-colors cursor-pointer">
+                Queue Variation
+              </button>
+<button class="px-space-xl py-3 rounded-xl bg-primary-container text-on-primary-container font-headline-sm text-headline-sm font-semibold flex items-center gap-space-sm hover:brightness-110 shadow-lg shadow-primary-container/20 transition-all cursor-pointer" id="main-render-btn">
+<span class="material-symbols-outlined text-[22px]">play_arrow</span>
+<span id="main-render-btn-text">Generate Master Cut</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Right Column: Visual Viewport Monitor & Real-Time Output Inspection (40% width on XL) -->
+<div class="w-full xl:w-[480px] flex flex-col gap-space-md relative z-10">
+<div class="flex items-center justify-between">
+<span class="font-title-md text-title-md text-on-surface">Screening Viewport // 4K UHD</span>
+<div class="flex items-center gap-1 bg-surface-container-lowest px-2 py-1 rounded-lg">
+<span class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></span>
+<span class="font-label-mono-sm text-label-mono-sm text-primary">LIVE LATENT PASS</span>
+</div>
+</div>
+<!-- Main Generated Artifact Viewport -->
+<div class="relative rounded-2xl overflow-hidden bg-surface-container-lowest shadow-2xl aspect-[16/10] group" id="artifact-viewport">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Ultra-detailed cinematic film still of a detective in a heavy coat walking in a rain-drenched Tokyo street at night, illuminated by golden neon signage and atmospheric reflections in water puddles" id="main-preview-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBKRkjJIR2H4PPPtPfW1l9MjYhlJ9V89ceFtBmtm_hW2khQtQT-KtnAejjoqi78uNCvpmqxAEyL5-ZQmpg96V6iqtS6Zv8ggGGE0MbRI6ECpLMDTmU_BlY6wtWhsD25xCmCn768WhWfrqz9HnlFyNmTQAJqz79KxINfLDweOnNylQuWjig4aM6XtBlWimZ3YEU1TQNCFzMKhjUdQ-ifsbIH0YcoavfG4W2XzuEIyJOCytoz5U7BD1_m7g"/>
+<!-- Viewport Glass HUD Overlay (Appears on Hover) -->
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest/90 via-surface-container-lowest/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-between p-space-md">
+<div class="flex justify-between items-center">
+<span class="px-2 py-1 bg-surface-container-lowest/80 backdrop-blur rounded font-label-mono-sm text-label-mono-sm text-primary">FRAME #00129</span>
+<div class="flex items-center gap-1 bg-surface-container-lowest/80 backdrop-blur rounded p-1">
+<button class="p-1 rounded text-on-surface hover:text-primary transition-colors"><span class="material-symbols-outlined text-[16px]">zoom_in</span></button>
+<button class="p-1 rounded text-on-surface hover:text-primary transition-colors"><span class="material-symbols-outlined text-[16px]">fullscreen</span></button>
+</div>
+</div>
+<!-- Quick Action HUD -->
+<div class="flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-title-md text-title-md text-on-surface font-semibold">Master Sequence Plate</span>
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant">3840 × 2160 • ProRes 4444XQ</span>
+</div>
+<div class="flex items-center gap-2">
+<button class="px-3 py-1.5 rounded-lg bg-surface-container-high text-on-surface font-label-mono-sm text-label-mono-sm hover:bg-surface-bright transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">tune</span>
+<span>Remix</span>
+</button>
+<button class="px-3 py-1.5 rounded-lg bg-primary-container text-on-primary-container font-label-mono-sm text-label-mono-sm font-semibold hover:brightness-110 transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">download</span>
+<span>Export</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Sequence History Thumbnails Strip -->
+<div class="flex flex-col gap-space-xs">
+<div class="flex justify-between items-center text-on-surface-variant font-label-mono-sm text-label-mono-sm">
+<span>LATENT ITERATION STRIP</span>
+<span class="text-primary cursor-pointer hover:underline">View All 24 Frames</span>
+</div>
+<div class="grid grid-cols-4 gap-space-sm">
+<div class="relative rounded-lg overflow-hidden aspect-video bg-surface-container-lowest ring-2 ring-primary-container cursor-pointer">
+<img class="w-full h-full object-cover" data-alt="Cinematic frame variant 1 with high contrast amber highlights on a rainy cobblestone street" src="https://lh3.googleusercontent.com/aida-public/AB6AXuANmMP-A4hPkC9vUTp6im-13j-s3tHDUTVZmst9cdhwBFnzYbnT3mDt0nDKkkBqO-SUGyG2EKGB1x-kDtGb3eB4q9Uhb5CgfOOSiLgHc472reEmk3kL48Vy6FXgspZEq85wGMBxSP5iFreZxzC_kkCFED_uc5pZEB1DQ3VuN0R79xR4Uwc46k3gZqZB5ZQGRTKy11I6XAbkl7_GwF6IttZyg3S5jYFGkEXcyg7KYEH9UozUxjlU1cj3rw"/>
+<span class="absolute bottom-1 right-1 font-label-mono-sm text-[8px] px-1 bg-surface-container-lowest/90 text-primary rounded">v1</span>
+</div>
+<div class="relative rounded-lg overflow-hidden aspect-video bg-surface-container-lowest opacity-70 hover:opacity-100 transition-opacity cursor-pointer">
+<img class="w-full h-full object-cover" data-alt="Cinematic frame variant 2 with a wide camera angle showing towering skyscrapers glowing with golden windows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDelPoWlMMqFOY8qYTQiA0dy6E_o0f0K5wejU3O8XzPZnv-VYGV0rXinPKVbLIUJZ_tZ41ecbw0b7ATyZb4_ZQoV4n3f7CBdGSEkfP3ViJjciVF8FCQQpVqAsErXwReHfdMvQl-ysAaTi5cGTN0C3pePnXb1bbf_rdyDheM0-AKcv8thikinu7mcUC5U1pwqHABZV4yKxVx-iyN8vb0SwEPcl0E8a8jKhyqrc5oYE6B1EvpkWMvcqRalg"/>
+<span class="absolute bottom-1 right-1 font-label-mono-sm text-[8px] px-1 bg-surface-container-lowest/90 text-on-surface rounded">v2</span>
+</div>
+<div class="relative rounded-lg overflow-hidden aspect-video bg-surface-container-lowest opacity-70 hover:opacity-100 transition-opacity cursor-pointer">
+<img class="w-full h-full object-cover" data-alt="Cinematic frame variant 3 with extreme close up of water droplets on a trench coat fabric in noir amber light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCFWIQOsQHOz8yTq28zrKlfxwBQWg1JH1MCSyUk7v-dEUWPSdZAYVUtj42fmiJIe_0WsM5bQLAxo6mvZTihoj189-lUwvnarkWtERjhtaxOY28d151zGCItY6Bb8KGE9O2wSXfRmivxd33ua51eaj28KDR_ydtZgpTJ6_t6HWQUhvlvKRwxBTpGYXC8r89NMTXAr1CPHHJDfkITnEjF7tciAomndok5Rar0dICJleqEP1ear1sFqU7-3Q"/>
+<span class="absolute bottom-1 right-1 font-label-mono-sm text-[8px] px-1 bg-surface-container-lowest/90 text-on-surface rounded">v3</span>
+</div>
+<div class="relative rounded-lg overflow-hidden aspect-video bg-surface-container-lowest opacity-70 hover:opacity-100 transition-opacity cursor-pointer">
+<img class="w-full h-full object-cover" data-alt="Cinematic frame variant 4 showing silhouette of character under an umbrella with golden rim light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBn_i0Al0qevKRVAJaDtvKDxg9D-b0NgEQzsHnJCvYymbBKLZWvxeTQ0vY6lejhQ4z9kpo-Y6UZ--bVyYxDH20EUutnC1YgnnaIqA2skL776r5P7JEAp5tOvl5EUc9vVsysp9xL4ebLH49ik0Go2-Q4GQ6cJ1gNpdZoIpxa5a_SoutfmMxD8MtuNHvslQlN8_t1h1zfkEN1Od4Xx2nTvqzD0Zhz6ly6P5OligJMByjOFujpevagnOz5Sg"/>
+<span class="absolute bottom-1 right-1 font-label-mono-sm text-[8px] px-1 bg-surface-container-lowest/90 text-on-surface rounded">v4</span>
+</div>
+</div>
+</div>
+<!-- Real-Time Hardware Latency Telemetry Readout -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md flex flex-col gap-space-xs font-label-mono-sm text-label-mono-sm">
+<div class="flex justify-between text-on-surface-variant">
+<span>H100 COMPUTE CLUSTER</span>
+<span class="text-tertiary">LATENCY: 14.1ms</span>
+</div>
+<div class="w-full bg-surface-container h-1.5 rounded-full overflow-hidden">
+<div class="bg-tertiary h-full rounded-full w-[84%] transition-all"></div>
+</div>
+<div class="flex justify-between text-[10px] text-outline pt-0.5">
+<span>ACTIVE THREADS: 64/64</span>
+<span>MEMORY: 68.2 GB POOL</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Interactive Client Behavior Script: Realm Transformation Engine -->
+<script>
+    function setViewMode(mode) {
+      const matrix = document.getElementById('matrix-view');
+      const btnSide = document.getElementById('view-mode-side');
+      const btnFocus = document.getElementById('view-mode-focus');
+
+      if (mode === 'focus') {
+        matrix.classList.add('hidden');
+        btnFocus.classList.add('bg-surface-container-high', 'text-primary', 'shadow-sm');
+        btnFocus.classList.remove('text-on-surface-variant');
+        btnSide.classList.remove('bg-surface-container-high', 'text-primary', 'shadow-sm');
+        btnSide.classList.add('text-on-surface-variant');
+        document.getElementById('workbench-container').scrollIntoView({ behavior: 'smooth' });
+      } else {
+        matrix.classList.remove('hidden');
+        btnSide.classList.add('bg-surface-container-high', 'text-primary', 'shadow-sm');
+        btnSide.classList.remove('text-on-surface-variant');
+        btnFocus.classList.remove('bg-surface-container-high', 'text-primary', 'shadow-sm');
+        btnFocus.classList.add('text-on-surface-variant');
+      }
+    }
+
+    function setActiveRealm(realm) {
+      const btnNoir = document.getElementById('btn-noir');
+      const btnEditorial = document.getElementById('btn-editorial');
+      const btnQuantum = document.getElementById('btn-quantum');
+      const workbench = document.getElementById('dynamic-workbench');
+      const tag = document.getElementById('active-realm-tag');
+      const ambientGlow = document.getElementById('ambient-glow');
+      const promptLabel = document.getElementById('prompt-label');
+      const realmIndicatorSub = document.getElementById('realm-indicator-sub');
+      const mainBtn = document.getElementById('main-render-btn');
+      const mainBtnText = document.getElementById('main-render-btn-text');
+      const promptTextarea = document.getElementById('prompt-textarea');
+
+      // Reset all buttons state
+      [btnNoir, btnEditorial, btnQuantum].forEach(btn => {
+        btn.className = 'realm-tab px-space-md py-2 rounded-lg font-label-mono text-label-mono flex items-center gap-space-xs transition-all text-on-surface-variant hover:text-on-surface';
+      });
+
+      if (realm === 'noir') {
+        btnNoir.className = 'realm-tab px-space-md py-2 rounded-lg font-label-mono text-label-mono flex items-center gap-space-xs transition-all bg-primary-container text-on-primary-container font-semibold shadow-md';
+        tag.innerText = "Director's Noir Active";
+        tag.className = 'px-2.5 py-0.5 rounded-full text-xs font-label-mono-sm uppercase font-semibold bg-primary-container text-on-primary-container';
+        
+        // Workbench styling
+        workbench.style.borderRadius = '20px';
+        ambientGlow.className = 'absolute -top-32 -left-32 w-96 h-96 rounded-full bg-primary-container/10 blur-[100px] pointer-events-none transition-all duration-500';
+        promptLabel.className = 'font-title-md text-title-md text-primary font-medium tracking-wide';
+        promptLabel.innerText = 'Primary Generative Directive';
+        realmIndicatorSub.className = 'text-primary font-semibold';
+        realmIndicatorSub.innerText = 'DIRECTOR PREVIEW';
+        
+        mainBtn.className = 'px-space-xl py-3 rounded-xl bg-primary-container text-on-primary-container font-headline-sm text-headline-sm font-semibold flex items-center gap-space-sm hover:brightness-110 shadow-lg shadow-primary-container/20 transition-all cursor-pointer';
+        mainBtnText.innerText = 'Generate Master Cut';
+
+        promptTextarea.value = 'Cinematic medium wide shot, protagonist wearing vintage shearling coat, illuminated by warm street lamp in drizzling night haze. 35mm film grain, moody anamorphic flares, muted sepia and carbon tones, ultra-photorealistic textures.';
+      } 
+      else if (realm === 'editorial') {
+        btnEditorial.className = 'realm-tab px-space-md py-2 rounded-lg font-label-mono text-label-mono flex items-center gap-space-xs transition-all bg-secondary-container text-on-secondary-container font-semibold shadow-md';
+        tag.innerText = 'Haute Editorial Active';
+        tag.className = 'px-2.5 py-0.5 rounded-[4px] text-xs font-label-mono-sm uppercase font-semibold bg-secondary-container text-on-secondary-container';
+
+        // Workbench styling: sharper corners, editorial voice
+        workbench.style.borderRadius = '6px';
+        ambientGlow.className = 'absolute -top-32 -left-32 w-96 h-96 rounded-full bg-secondary-container/15 blur-[100px] pointer-events-none transition-all duration-500';
+        promptLabel.className = 'font-title-md text-title-md text-secondary-fixed font-bold tracking-tight';
+        promptLabel.innerText = 'Editorial Narrative Composition';
+        realmIndicatorSub.className = 'text-secondary-fixed font-semibold';
+        realmIndicatorSub.innerText = 'EDITORIAL CURATOR';
+
+        mainBtn.className = 'px-space-xl py-3 rounded-[4px] bg-secondary-container text-on-secondary-container font-title-md text-title-md font-bold tracking-wider uppercase hover:opacity-95 shadow-md transition-all cursor-pointer';
+        mainBtnText.innerText = 'Typeset & Publish Galley';
+
+        promptTextarea.value = 'Haute couture editorial monograph study in Paris. Model draped in structured raw linen coat, severe profile against brutalist travertine stone columns. High contrast natural daylight, sharp ink lines, Cormorant serif typography layout.';
+      } 
+      else if (realm === 'quantum') {
+        btnQuantum.className = 'realm-tab px-space-md py-2 rounded-lg font-label-mono text-label-mono flex items-center gap-space-xs transition-all bg-tertiary-container text-on-tertiary-container font-semibold shadow-md';
+        tag.innerText = 'Quantum Deck Active';
+        tag.className = 'px-2.5 py-0.5 rounded-full text-xs font-label-mono-sm uppercase font-semibold bg-tertiary-container text-on-tertiary-container';
+
+        // Workbench styling: tech-oriented, cybernetic matrix
+        workbench.style.borderRadius = '14px';
+        ambientGlow.className = 'absolute -top-32 -left-32 w-96 h-96 rounded-full bg-tertiary-container/15 blur-[100px] pointer-events-none transition-all duration-500';
+        promptLabel.className = 'font-title-md text-title-md text-tertiary font-label-mono font-bold tracking-tight';
+        promptLabel.innerText = 'LATENT VECTOR INGESTION PROTOCOL';
+        realmIndicatorSub.className = 'text-tertiary font-label-mono font-semibold';
+        realmIndicatorSub.innerText = 'TENSOR CLUSTER ACTIVE';
+
+        mainBtn.className = 'px-space-xl py-3 rounded-lg bg-tertiary-container text-on-tertiary-container font-label-mono text-label-mono font-bold uppercase tracking-wider hover:opacity-90 shadow-lg shadow-tertiary-container/20 transition-all cursor-pointer';
+        mainBtnText.innerText = '> EXECUTE LATENT DIFFUSION';
+
+        promptTextarea.value = '> exec.latent_synthesis(domain="cybernetic_biomech", tensor_res=[3840, 2160], model="SD-XL-TURBO-FP8", guidance=7.2, spectral_bias="cyan_emerald_phosphor")';
+      }
+    }
+  </script>
+</div></main><footer class="w-full bg-surface-container-lowest z-40"><div class="w-full px-gutter py-space-md flex flex-col md:flex-row items-center justify-between gap-space-md"><div class="flex flex-wrap items-center gap-space-lg text-on-surface-variant font-label-mono-sm text-label-mono-sm"><div class="flex items-center gap-space-xs"><span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span><span>GPU CLUSTER: ALPHA-US-EAST</span></div><div class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-[14px]">memory</span><span>TENSOR ALLOCATION: 84.2%</span></div><div class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-[14px]">speed</span><span>LATENCY: 14MS (NOMINAL)</span></div></div><div class="flex items-center gap-space-lg"><div class="hidden sm:flex items-center gap-space-md text-on-surface-variant font-label-mono-sm text-label-mono-sm"><div class="flex items-center gap-1"><kbd class="px-1.5 py-0.5 bg-surface-container-high rounded text-on-surface font-medium">⌘K</kbd><span>Quick Switch</span></div><div class="flex items-center gap-1"><kbd class="px-1.5 py-0.5 bg-surface-container-high rounded text-on-surface font-medium">⌘R</kbd><span>Render Node</span></div><div class="flex items-center gap-1"><kbd class="px-1.5 py-0.5 bg-surface-container-high rounded text-on-surface font-medium">⌥T</kbd><span>Realm Toggle</span></div></div><span class="font-label-mono-sm text-label-mono-sm text-outline">© 2025 TextFX Studio OS. All rights reserved.</span></div></div></footer></body></html>

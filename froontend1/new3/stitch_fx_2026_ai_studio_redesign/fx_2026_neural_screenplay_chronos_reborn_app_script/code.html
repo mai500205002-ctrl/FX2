@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&amp;family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-tertiary": "#68000c", "tertiary-fixed": "#ffdad7", "error-container": "#93000a", "surface-dim": "#131313", "on-primary-fixed": "#410001", "surface-container": "#201f1f", "surface-container-highest": "#353534", "surface-container-lowest": "#0e0e0e", "secondary-fixed-dim": "#ffb5a0", "on-primary": "#690003", "surface-bright": "#393939", "tertiary": "#ffb3ae", "on-tertiary-fixed-variant": "#930016", "on-surface-variant": "#e9bcb6", "on-primary-fixed-variant": "#930007", "primary": "#ffb4aa", "inverse-primary": "#c0000c", "on-secondary": "#5f1500", "on-secondary-container": "#fffbff", "surface-variant": "#353534", "on-surface": "#e5e2e1", "outline": "#af8782", "on-error": "#690005", "inverse-surface": "#e5e2e1", "background": "#131313", "inverse-on-surface": "#313030", "surface": "#131313", "on-secondary-fixed-variant": "#862200", "tertiary-fixed-dim": "#ffb3ae", "primary-container": "#e50914", "secondary-fixed": "#ffdbd1", "surface-tint": "#ffb4aa", "on-secondary-fixed": "#3b0900", "on-background": "#e5e2e1", "primary-fixed": "#ffdad5", "on-error-container": "#ffdad6", "on-tertiary-container": "#fff7f6", "error": "#ffb4ab", "secondary-container": "#d73b00", "primary-fixed-dim": "#ffb4aa", "on-tertiary-fixed": "#410005", "surface-container-low": "#1c1b1b", "tertiary-container": "#e40b2b", "surface-container-high": "#2a2a2a", "outline-variant": "#5e3f3b", "secondary": "#ffb5a0", "on-primary-container": "#fff7f6" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "margin": "2rem", "space-md": "1rem", "gutter-mobile": "0.75rem", "space-xs": "0.25rem", "space-lg": "1.5rem", "margin-mobile": "1rem", "space-sm": "0.5rem", "space-xl": "2.5rem", "gutter": "1.5rem" }, "fontFamily": { "label-md": ["Geist"], "headline-sm": ["Geist"], "headline-xl": ["Geist"], "headline-md": ["Geist"], "headline-xl-mobile": ["Geist"], "body-md": ["Inter"], "headline-lg": ["Geist"], "label-sm": ["Geist"], "body-sm": ["Inter"], "body-lg": ["Inter"], "headline-lg-mobile": ["Geist"] }, "fontSize": { "label-md": ["0.8125rem", { "lineHeight": "1rem", "letterSpacing": "0.02em", "fontWeight": "500" }], "headline-sm": ["1.125rem", { "lineHeight": "1.625rem", "letterSpacing": "-0.01em", "fontWeight": "500" }], "headline-xl": ["3rem", { "lineHeight": "3.5rem", "letterSpacing": "-0.03em", "fontWeight": "600" }], "headline-md": ["1.5rem", { "lineHeight": "2rem", "letterSpacing": "-0.015em", "fontWeight": "500" }], "headline-xl-mobile": ["2rem", { "lineHeight": "2.5rem", "letterSpacing": "-0.02em", "fontWeight": "600" }], "body-md": ["0.875rem", { "lineHeight": "1.4rem", "letterSpacing": "0em", "fontWeight": "400" }], "headline-lg": ["2.25rem", { "lineHeight": "2.75rem", "letterSpacing": "-0.025em", "fontWeight": "600" }], "label-sm": ["0.6875rem", { "lineHeight": "0.875rem", "letterSpacing": "0.05em", "fontWeight": "600" }], "body-sm": ["0.75rem", { "lineHeight": "1.2rem", "letterSpacing": "0.01em", "fontWeight": "400" }], "body-lg": ["1rem", { "lineHeight": "1.6rem", "letterSpacing": "-0.005em", "fontWeight": "400" }], "headline-lg-mobile": ["1.625rem", { "lineHeight": "2.125rem", "letterSpacing": "-0.02em", "fontWeight": "600" }] } } } };</script></head><body class="bg-background font-body-md text-body-md text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-container min-h-screen"><aside class="fixed left-0 top-0 h-full w-72 bg-surface-container-lowest z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.5)]"><div class="flex flex-col flex-1 overflow-y-auto"><div class="h-16 px-space-lg flex items-center gap-space-sm bg-surface-container-lowest"><div class="w-8 h-8 rounded-lg bg-primary-container flex items-center justify-center shadow-[0_0_16px_rgba(229,9,20,0.45)]"><span class="material-symbols-outlined text-on-primary-container text-[20px]">videocam</span></div><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-on-surface font-semibold tracking-tight">FX-2026</span><span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Studio Intelligence</span></div></div><div class="px-space-md py-space-sm"><div class="px-space-sm py-space-xs font-label-sm text-label-sm uppercase tracking-wider text-outline">Features</div><nav class="mt-space-xs flex flex-col gap-space-xs" data-active-classes="bg-primary-container text-on-primary-container shadow-[0_0_20px_rgba(229,9,20,0.35)]"><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all duration-200 group" data-path="screenplay-narrative" href="#"><span class="material-symbols-outlined text-[20px] transition-transform group-hover:scale-110">auto_stories</span><span class="font-body-md text-body-md font-medium">Screenplay &amp; Narrative</span></a><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all duration-200 group" data-path="storyboard-breakdown" href="#"><span class="material-symbols-outlined text-[20px] transition-transform group-hover:scale-110">view_kanban</span><span class="font-body-md text-body-md font-medium">Storyboard Breakdown</span></a><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all duration-200 group" data-path="video-director" href="#"><span class="material-symbols-outlined text-[20px] transition-transform group-hover:scale-110">movie_filter</span><span class="font-body-md text-body-md font-medium">Video Director</span></a><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all duration-200 group" data-path="3d-spatial-assets" href="#"><span class="material-symbols-outlined text-[20px] transition-transform group-hover:scale-110">view_in_ar</span><span class="font-body-md text-body-md font-medium">3D Spatial Assets</span></a><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all duration-200 group" data-path="concept-studio" href="#"><span class="material-symbols-outlined text-[20px] transition-transform group-hover:scale-110">palette</span><span class="font-body-md text-body-md font-medium">Concept Studio</span></a></nav></div><div class="px-space-md py-space-sm"><div class="px-space-sm py-space-xs font-label-sm text-label-sm uppercase tracking-wider text-outline">Intelligence</div><nav class="mt-space-xs flex flex-col gap-space-xs" data-active-classes="bg-primary-container text-on-primary-container shadow-[0_0_20px_rgba(229,9,20,0.35)]"><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all duration-200 group" data-path="neural-models" href="#"><span class="material-symbols-outlined text-[20px] transition-transform group-hover:scale-110">psychology</span><span class="font-body-md text-body-md font-medium">Neural Models</span></a><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all duration-200 group" data-path="prompt-vault" href="#"><span class="material-symbols-outlined text-[20px] transition-transform group-hover:scale-110">terminal</span><span class="font-body-md text-body-md font-medium">Prompt Vault</span></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all duration-200 group" data-path="render-queue" href="#"><div class="flex items-center gap-space-md"><span class="material-symbols-outlined text-[20px] transition-transform group-hover:scale-110">motion_blur</span><span class="font-body-md text-body-md font-medium">Render Queue</span></div><span class="w-2 h-2 rounded-full bg-secondary-container animate-pulse shadow-[0_0_8px_rgba(215,59,0,0.8)]"></span></a><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all duration-200 group" data-path="metrics-telemetry" href="#"><span class="material-symbols-outlined text-[20px] transition-transform group-hover:scale-110">speed</span><span class="font-body-md text-body-md font-medium">Metrics &amp; Telemetry</span></a><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all duration-200 group" data-path="c2pa-governance-vault" href="#"><span class="material-symbols-outlined text-[20px] transition-transform group-hover:scale-110">verified_user</span><span class="font-body-md text-body-md font-medium">C2PA Governance Vault</span></a></nav></div></div><div class="p-space-md bg-surface-container-lowest"><div class="p-space-sm rounded-lg bg-surface-container-low flex flex-col gap-space-xs"><div class="flex items-center justify-between"><span class="font-label-sm text-label-sm text-outline uppercase">VRAM Consumption</span><span class="font-label-sm text-label-sm text-primary font-mono">38.4 / 48 GB</span></div><div class="w-full h-1 bg-surface-container rounded-full overflow-hidden"><div class="h-full bg-primary-container rounded-full w-[80%] shadow-[0_0_8px_rgba(229,9,20,0.6)]"></div></div></div></div></aside><div class="pl-72"><header class="fixed top-0 left-72 right-0 h-16 bg-surface-container-lowest/80 backdrop-blur-xl z-40 flex items-center justify-between px-space-lg shadow-[0_1px_8px_rgba(0,0,0,0.3)]"><div class="flex items-center gap-space-lg"><div class="flex items-center gap-space-sm px-space-md py-space-xs bg-surface-container-low rounded-lg text-on-surface-variant cursor-pointer hover:bg-surface-container-high hover:text-on-surface transition-colors w-72 justify-between"><div class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-[18px] text-outline">search</span><span class="font-body-sm text-body-sm">Omni-Search workflows...</span></div><kbd class="px-space-xs py-0.5 rounded bg-surface-container font-mono font-label-sm text-label-sm text-outline">⌘K</kbd></div><div class="hidden xl:flex items-center gap-space-sm px-space-md py-space-xs rounded-full bg-surface-container-low"><span class="w-2 h-2 rounded-full bg-primary-container animate-ping"></span><span class="material-symbols-outlined text-[16px] text-primary">memory</span><span class="font-label-md text-label-md font-mono text-on-surface">RTX-6000 Ada</span><span class="text-outline font-label-md text-label-md">•</span><span class="font-label-md text-label-md text-secondary">Synced 99.8%</span></div></div><div class="flex items-center gap-space-md"><div class="flex items-center bg-surface-container-low rounded-lg p-0.5"><button class="px-space-sm py-0.5 rounded font-label-sm text-label-sm font-semibold bg-surface-container-highest text-on-surface shadow-sm">EN</button><button class="px-space-sm py-0.5 rounded font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface transition-colors font-semibold">العربية</button></div><button class="relative p-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-1 right-1 w-2 h-2 rounded-full bg-tertiary-container shadow-[0_0_6px_rgba(228,11,43,0.9)]"></span></button><div class="h-4 w-px bg-surface-container-high"></div><div class="flex items-center gap-space-sm"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center ring-2 ring-primary/20"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="relative pt-16 min-h-screen bg-background w-full px-space-lg"><div class="flex flex-col w-full pb-space-xl">
+<!-- Radial Core Atmosphere Glow (Scoped to Hero Arc) -->
+<div class="relative w-full overflow-hidden">
+<div class="absolute -top-32 left-1/2 -translate-x-1/2 w-[850px] h-[340px] bg-gradient-to-b from-primary-container/20 via-secondary-container/10 to-transparent blur-3xl pointer-events-none -z-10"></div>
+<!-- Top Breadcrumb & Dual Engine Mode Strip -->
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md py-space-sm">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-space-xs font-mono font-label-sm text-label-sm uppercase tracking-widest text-outline">
+<span class="text-on-surface-variant/80">ATLAS CORE</span>
+<span>/</span>
+<span>APP</span>
+<span>/</span>
+<span>SCRIPT</span>
+<span>/</span>
+<span class="text-primary font-semibold">SYNTHESIZER V4.9</span>
+<span class="text-surface-container-highest px-1.5 py-0.5 rounded bg-surface-container-low text-outline">INGESTED FROM /APP/BRIEF</span>
+</div>
+<div class="flex flex-wrap items-center gap-space-sm mt-1">
+<h1 class="font-headline-md text-headline-md font-semibold tracking-tight text-on-surface flex items-center gap-space-sm">
+<span>Neural Screenplay &amp; Narrative</span>
+<span class="text-outline text-headline-sm font-normal">|</span>
+<span class="font-headline-sm text-headline-sm text-on-surface-variant font-light" dir="rtl">محرك صياغة السيناريو العصبي والسرد الإبداعي</span>
+</h1>
+<div class="flex items-center gap-1.5 px-space-sm py-1 rounded-full bg-surface-container-low shadow-sm">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-container opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-primary-container"></span>
+</span>
+<span class="font-mono font-label-sm text-label-sm text-on-surface font-medium">INCEPTION LINKED: Chronos Reborn</span>
+<span class="font-mono font-label-sm text-label-sm text-secondary font-semibold bg-surface-container-high px-1 rounded">96.4% MATCH</span>
+</div>
+</div>
+</div>
+<!-- Mode Toggles & Global Stage Actions -->
+<div class="flex flex-wrap items-center gap-space-sm">
+<!-- Dual Mode Pill Toggle -->
+<div class="flex items-center bg-surface-container-lowest p-1 rounded-xl shadow-inner">
+<button class="flex items-center gap-1.5 px-space-sm py-1 rounded-lg bg-surface-container-high text-on-surface font-label-sm text-label-sm font-medium transition-all shadow-sm" id="mode-crimson">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container shadow-[0_0_8px_rgba(229,9,20,0.9)]"></span>
+<span>Crimson Tactical</span>
+<span class="text-[9px] text-outline uppercase font-mono">نشط</span>
+</button>
+<button class="flex items-center gap-1.5 px-space-sm py-1 rounded-lg text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm transition-all" id="mode-luxe">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+<span>Amber Luxe Atelier</span>
+</button>
+</div>
+<div class="h-6 w-px bg-surface-container-high hidden sm:block"></div>
+<!-- Quick Actions -->
+<a class="flex items-center gap-1.5 px-space-md py-2 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface font-label-md text-label-md transition-all shadow-sm group" href="#storyboard">
+<span class="material-symbols-outlined text-[18px] text-primary group-hover:scale-110 transition-transform">view_kanban</span>
+<span>Fork to Storyboard</span>
+</a>
+<button class="flex items-center gap-1.5 px-space-md py-2 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface font-label-md text-label-md transition-all shadow-sm">
+<span class="material-symbols-outlined text-[18px] text-outline">verified_user</span>
+<span class="font-mono text-label-sm">IP Audit</span>
+</button>
+<button class="flex items-center gap-1.5 px-space-md py-2 rounded-lg bg-primary-container hover:bg-tertiary-container text-on-primary-container font-label-md text-label-md font-semibold transition-all shadow-[0_0_24px_rgba(229,9,20,0.45)]">
+<span class="material-symbols-outlined text-[18px]">download</span>
+<span>Export FDX / PDF</span>
+</button>
+</div>
+</div>
+<!-- Winning Concept Ingestion Banner (Hero Inception Pill) -->
+<div class="mt-space-md relative rounded-xl bg-surface-container-lowest overflow-hidden shadow-2xl">
+<!-- Internal Core Red/Amber Radial Backlight -->
+<div class="absolute -top-16 left-1/2 -translate-x-1/2 w-3/4 h-48 bg-gradient-to-r from-primary-container/20 via-secondary-container/15 to-primary-container/20 blur-2xl pointer-events-none"></div>
+<div class="relative p-space-lg flex flex-col xl:flex-row xl:items-center justify-between gap-space-lg">
+<!-- Inception DNA & Core Premise -->
+<div class="flex flex-col gap-space-xs max-w-4xl">
+<div class="flex flex-wrap items-center gap-space-sm">
+<span class="px-2 py-0.5 rounded-full bg-primary-container/20 text-primary font-mono font-label-sm text-label-sm uppercase tracking-wider font-semibold">
+              WINNER INCEPTION DNA
+            </span>
+<span class="text-outline font-label-sm text-label-sm font-mono">LATERAL ENGINE: REVERSE-KINETIC</span>
+<span class="text-outline font-label-sm text-label-sm">•</span>
+<span class="text-secondary font-mono font-label-sm text-label-sm font-semibold">CATHARSIS VALENCE: 94%</span>
+</div>
+<div class="flex flex-wrap items-baseline gap-space-md mt-1">
+<span class="font-headline-lg text-headline-lg font-bold tracking-tight text-on-surface">
+              CHRONOS REBORN: DEFYING KINETIC DECAY
+            </span>
+<span class="font-headline-sm text-headline-sm text-primary font-light" dir="rtl">
+              «الوقت لا يمضي استسلاماً... أنت من تشعل نبضه»
+            </span>
+</div>
+<p class="font-body-lg text-body-lg text-on-surface-variant/90 max-w-3xl leading-relaxed mt-1">
+            Luxury chronometer forged from volcanic basalt &amp; liquid mercury escapement. Human kinetic will defying cosmic decay across non-linear temporal planes.
+          </p>
+<!-- Vector Matrix Tags -->
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-space-sm mt-space-sm pt-space-xs">
+<div class="flex items-center gap-2 p-space-xs rounded-lg bg-surface-container-low">
+<span class="material-symbols-outlined text-primary text-[18px]">psychology_alt</span>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm uppercase text-outline">Tone Vector</span>
+<span class="font-mono font-label-md text-label-md text-on-surface font-medium">Cyber-Noir Hermetic</span>
+</div>
+</div>
+<div class="flex items-center gap-2 p-space-xs rounded-lg bg-surface-container-low">
+<span class="material-symbols-outlined text-secondary text-[18px]">waves</span>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm uppercase text-outline">Sensory Anchor</span>
+<span class="font-mono font-label-md text-label-md text-on-surface font-medium">Volcanic Basalt &amp; Sub-bass 432Hz</span>
+</div>
+</div>
+<div class="flex items-center gap-2 p-space-xs rounded-lg bg-surface-container-low">
+<span class="material-symbols-outlined text-tertiary text-[18px]">timelapse</span>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm uppercase text-outline">Lateral Paradigm</span>
+<span class="font-mono font-label-md text-label-md text-on-surface font-medium">Inverted Time Conservation</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Inception Visual Representation & Fast Switches -->
+<div class="flex flex-col gap-space-sm xl:w-72 shrink-0">
+<div class="relative h-28 w-full rounded-lg overflow-hidden bg-surface-container shadow-md group">
+<div class="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-105" data-alt="Cinematic macro shot of an avant-garde ultra-luxury watch tourbillon crafted from matte volcanic basalt and fluid shimmering chrome mercury droplets glowing crimson in dramatic dark obsidian lighting with volumetric cinematic haze." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBineurEXtkM6bL4oK1vjKmjiv6B17QxpDNAQK9pLyWIW3JkWUjaEqTD7jG_Iv7S60p_S84iedV9uitiKkaecTRlwwR9xhRRaML6hVot398_App6T7CHI8vbhbwubwPB_bdzyntqYsD0_5p32ekGTOKPmtL2sB6xPQzm74gcWcXyXpGCL3pNpoqLaOOzPvUQ2xN3r1wuDYWOLB1n5q-A0V6HPmW9RJV-DQ0ykPW5w')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-surface-container-lowest/40 to-transparent"></div>
+<div class="absolute bottom-2 left-2 right-2 flex items-center justify-between text-on-surface">
+<span class="font-mono font-label-sm text-label-sm uppercase tracking-wider text-primary">DNA Visual Token #43</span>
+<span class="material-symbols-outlined text-[16px] text-secondary">flare</span>
+</div>
+</div>
+<div class="flex flex-col gap-1.5">
+<button class="w-full flex items-center justify-between px-space-md py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md transition-colors shadow-sm">
+<span class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[16px]">chevron_forward</span>
+<span>Re-prompt Divergent Seed</span>
+</span>
+<span class="font-mono text-outline font-label-sm text-label-sm">#SEED-991</span>
+</button>
+<button class="w-full flex items-center justify-between px-space-md py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md transition-colors shadow-sm">
+<span class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[16px]">tune</span>
+<span>Adjust Emotional Valence</span>
+</span>
+<span class="font-mono text-secondary font-label-sm text-label-sm font-semibold">94% CATHARSIS</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Narrative Studio Workspace: 12-Column Grid -->
+<div class="grid grid-cols-12 gap-space-lg mt-space-lg items-start">
+<!-- LEFT COLUMN: Narrative Architecture & Act Structure (3 of 12) -->
+<div class="col-span-12 lg:col-span-3 flex flex-col gap-space-md">
+<!-- Act Navigator Panel -->
+<div class="rounded-xl bg-surface-container-lowest p-space-md flex flex-col gap-space-md shadow-lg">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">account_tree</span>
+<span class="font-headline-sm text-headline-sm font-semibold text-on-surface">Narrative Spine</span>
+</div>
+<span class="font-mono font-label-sm text-label-sm px-2 py-0.5 rounded bg-surface-container text-outline">4 SCENES</span>
+</div>
+<!-- Scene Index -->
+<div class="flex flex-col gap-space-xs font-mono">
+<!-- Scene 01 -->
+<div class="p-space-sm rounded-lg bg-surface-container-low hover:bg-surface-container transition-colors cursor-pointer group">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-outline group-hover:text-primary transition-colors">ACT I • SCENE 01</span>
+<span class="text-[10px] text-secondary font-semibold">COMPLETED</span>
+</div>
+<div class="font-body-md text-body-md text-on-surface font-sans font-medium mt-1 truncate">Basalt Quarry Awakening</div>
+<div class="flex items-center justify-between mt-2 text-outline font-label-sm text-label-sm">
+<span>120 words</span>
+<span>EST. 0:45s</span>
+</div>
+</div>
+<!-- Scene 02 -->
+<div class="p-space-sm rounded-lg bg-surface-container-low hover:bg-surface-container transition-colors cursor-pointer group">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-outline group-hover:text-primary transition-colors">ACT II • SCENE 02</span>
+<span class="text-[10px] text-on-surface-variant">DRAFTED</span>
+</div>
+<div class="font-body-md text-body-md text-on-surface font-sans font-medium mt-1 truncate">Subterranean Monolith &amp; Red Silt</div>
+<div class="flex items-center justify-between mt-2 text-outline font-label-sm text-label-sm">
+<span>185 words</span>
+<span>EST. 1:10s</span>
+</div>
+</div>
+<!-- Scene 43 (ACTIVE) -->
+<div class="relative p-space-sm rounded-lg bg-surface-container-high shadow-md overflow-hidden cursor-pointer">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-primary-container shadow-[0_0_12px_rgba(229,9,20,0.8)]"></div>
+<div class="flex items-center justify-between pl-2">
+<span class="font-label-sm text-label-sm text-primary font-bold">ACT II • SCENE 43 (ACTIVE)</span>
+<span class="flex items-center gap-1 text-[10px] text-primary-fixed bg-primary-container/30 px-1.5 py-0.5 rounded">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container animate-pulse"></span>
+                SYNTHESIZING
+              </span>
+</div>
+<div class="font-body-md text-body-md text-on-surface font-sans font-semibold mt-1 pl-2 truncate">Synchrotron Core Divergence</div>
+<div class="flex items-center justify-between mt-2 pl-2 text-on-surface-variant font-label-sm text-label-sm">
+<span class="font-bold text-on-surface">340 words</span>
+<span class="text-secondary font-mono">LIVE BUFFER</span>
+</div>
+</div>
+<!-- Scene 04 -->
+<div class="p-space-sm rounded-lg bg-surface-container-lowest hover:bg-surface-container-low transition-colors cursor-pointer opacity-70 group">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-outline">ACT III • SCENE 04</span>
+<span class="text-[10px] text-outline">QUEUED</span>
+</div>
+<div class="font-body-md text-body-md text-on-surface font-sans font-medium mt-1 truncate">Sovereign Catalyst &amp; Defiance</div>
+<div class="flex items-center justify-between mt-2 text-outline font-label-sm text-label-sm">
+<span>0 words</span>
+<span>EST. 1:40s</span>
+</div>
+</div>
+</div>
+<button class="w-full py-2 flex items-center justify-center gap-2 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface font-label-md text-label-md transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+<span>Inject Latent Scene Beat</span>
+</button>
+</div>
+<!-- Real-Time Metrics & Telemetry Card -->
+<div class="rounded-xl bg-surface-container-lowest p-space-md flex flex-col gap-space-sm shadow-lg">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase font-mono tracking-wider text-outline">Narrative Telemetry</span>
+<span class="material-symbols-outlined text-primary text-[18px]">graphic_eq</span>
+</div>
+<!-- Metric 1: Dramatic Tension Index -->
+<div class="flex flex-col gap-1">
+<div class="flex justify-between font-label-sm text-label-sm">
+<span class="text-on-surface-variant">Dramatic Tension Index</span>
+<span class="font-mono text-primary font-bold">98.2%</span>
+</div>
+<div class="w-full h-1.5 rounded-full bg-surface-container overflow-hidden">
+<div class="h-full bg-gradient-to-r from-secondary-container via-primary-container to-primary rounded-full w-[98%] shadow-[0_0_10px_rgba(229,9,20,0.7)]"></div>
+</div>
+</div>
+<!-- Metric 2: Voice Consistency -->
+<div class="flex flex-col gap-1 mt-1">
+<div class="flex justify-between font-label-sm text-label-sm">
+<span class="text-on-surface-variant">Character Voice Consistency</span>
+<span class="font-mono text-secondary font-bold">99.4%</span>
+</div>
+<div class="w-full h-1.5 rounded-full bg-surface-container overflow-hidden">
+<div class="h-full bg-secondary-container rounded-full w-[99%]"></div>
+</div>
+</div>
+<!-- Metric 3: Hallucination Guardrail -->
+<div class="flex items-center justify-between p-space-xs rounded-lg bg-surface-container-low mt-2">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-secondary text-[16px]">security</span>
+<span class="font-mono font-label-sm text-label-sm text-on-surface">Hallucination Guardrail</span>
+</div>
+<span class="font-mono font-label-sm text-label-sm text-secondary font-semibold bg-surface-container-high px-2 py-0.5 rounded">ZERO_LOCKED</span>
+</div>
+<!-- Inline Dramatic Sparkline Chart -->
+<div class="mt-2 pt-2 flex flex-col gap-1">
+<span class="font-mono text-[10px] text-outline uppercase tracking-wider">Cathartic Arc Trajectory (Act I-III)</span>
+<svg class="w-full h-10 text-primary-container" fill="none" viewbox="0 0 200 40">
+<path d="M 0 35 Q 30 32, 60 25 T 120 18 T 160 8 T 200 2" stroke="currentColor" stroke-linecap="round" stroke-width="2.5"></path>
+<path d="M 0 35 Q 30 32, 60 25 T 120 18 T 160 8 T 200 2 L 200 40 L 0 40 Z" fill="currentColor" fill-opacity="0.12"></path>
+<circle class="animate-ping" cx="160" cy="8" fill="#e50914" r="3.5"></circle>
+<circle cx="160" cy="8" fill="#ffffff" r="3"></circle>
+</svg>
+</div>
+</div>
+<!-- Quick Directive Keybindings -->
+<div class="p-space-sm rounded-xl bg-surface-container-low flex items-center justify-between font-mono font-label-sm text-label-sm text-outline">
+<span>PROMPT RE-VALENCE</span>
+<div class="flex gap-1">
+<kbd class="px-1.5 py-0.5 bg-surface-container rounded text-on-surface font-mono">⌥</kbd>
+<kbd class="px-1.5 py-0.5 bg-surface-container rounded text-on-surface font-mono">R</kbd>
+</div>
+</div>
+</div>
+<!-- CENTER COLUMN: Main Screenplay Editor & Neural Co-Pilot (6 of 12) -->
+<div class="col-span-12 lg:col-span-6 flex flex-col gap-space-md">
+<!-- Screenplay Reader / Writer Container -->
+<div class="relative rounded-xl bg-surface-container-lowest p-space-lg flex flex-col gap-space-md shadow-2xl overflow-hidden min-h-[640px]">
+<!-- Inner Core Crimson Sheen from Top Center -->
+<div class="absolute -top-12 left-1/2 -translate-x-1/2 w-4/5 h-32 bg-gradient-to-b from-primary-container/15 via-secondary-container/5 to-transparent blur-2xl pointer-events-none"></div>
+<!-- Script Header Status & Format Bar -->
+<div class="relative flex flex-wrap items-center justify-between gap-space-sm pb-space-sm border-b border-surface-container-high/60">
+<div class="flex items-center gap-space-sm">
+<span class="px-2 py-0.5 rounded bg-surface-container-high font-mono font-label-sm text-label-sm text-primary font-semibold">
+              SCENE 43 • LIVE DRAFT
+            </span>
+<span class="font-mono font-label-sm text-label-sm text-outline">FORMAT: HOLLYWOOD STANDARD (FDX COMPATIBLE)</span>
+</div>
+<div class="flex items-center gap-2 font-mono font-label-sm text-label-sm">
+<span class="text-outline">1,420 Latent Tokens</span>
+<span class="text-surface-container-highest">•</span>
+<span class="text-secondary font-medium">ACEScg Camera Ready</span>
+</div>
+</div>
+<!-- Classical High-End Monospace Screenplay Body -->
+<div class="relative flex flex-col gap-space-md font-mono text-on-surface leading-relaxed text-body-md select-text">
+<!-- Slugline -->
+<div class="flex items-center justify-between py-1 px-2 rounded bg-surface-container-low/70">
+<p class="font-bold tracking-wider text-primary text-[14px]">EXT. BASALT QUARRY - DUSK [ACT II, SCENE 43]</p>
+<span class="text-[11px] text-outline font-normal">TIME-WARP INVERSION</span>
+</div>
+<!-- Action Lines -->
+<p class="text-on-surface-variant font-normal leading-7">
+            A volcanic crater of pitch obsidian spans the horizon. Above, celestial rings churn with inverted kinetic friction, pulling dusk backwards into dawn.
+          </p>
+<p class="text-on-surface-variant font-normal leading-7">
+            In the epicenter lies the CHRONOS ESCAPEMENT. Monolithic. Its internal balance wheel is suspended in zero gravity, fed by veins of LIQUID MERCURY that pulse like an arterial clock. The sub-bass vibration (432Hz) trembles the ground silt.
+          </p>
+<!-- Character Cue & Dialogue -->
+<div class="flex flex-col items-center my-space-xs">
+<span class="font-bold tracking-widest text-on-surface text-[14px]">VESPERA</span>
+<span class="text-primary font-light text-[12px] italic">(intense, defiant whisper, clutching the obsidian dial)</span>
+<div class="max-w-md text-center mt-2 text-on-surface text-[15px] font-medium leading-relaxed">
+              “We do not inherit legacy. We forge its gravity. Let the cosmos decay around us—this pulse is ours alone.”
+            </div>
+<div class="mt-2 text-center text-[12px] text-outline font-sans" dir="rtl">
+              «نحن لا نرثُ الأثر، بل نصنع جاذبيته. ليتفكك الكون من حولنا، فهذا النبض صنيع إرادتنا وحدها.»
+            </div>
+</div>
+<!-- Action Continued -->
+<p class="text-on-surface-variant font-normal leading-7">
+            She depresses the basalt crown. A flash of smoldering crimson energy sparks from the mercury reservoir. The countdown reverses.
+          </p>
+<!-- Neural Injection Ghost Prompt (Dynamic Generation Indicator) -->
+<div class="relative p-space-sm rounded-lg bg-surface-container-high/40 flex flex-col gap-2">
+<div class="flex items-center justify-between font-label-sm text-label-sm">
+<span class="flex items-center gap-1.5 text-primary font-mono font-semibold">
+<span class="material-symbols-outlined text-[16px] animate-spin">cyclone</span>
+                SYNTHESIZING NEXT LATENT BEAT...
+              </span>
+<span class="text-outline font-mono text-[11px]">TEMP: 0.72 • TOP-P: 0.95</span>
+</div>
+<p class="text-on-surface/60 italic font-mono text-[13px] leading-relaxed">
+              [PROPOSED ACTION]: The quartz stratum beneath Vespera's boots splits open. Molten light floods the subterranean fissures, synchronizing with the titanium sweep hand.
+            </p>
+</div>
+</div>
+<!-- Live Neural Suggestions Action Bar -->
+<div class="mt-auto pt-space-md border-t border-surface-container-high/60 flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase font-mono text-outline flex items-center gap-1">
+<span class="material-symbols-outlined text-secondary text-[16px]">neurology</span>
+              One-Click Neural Steering
+            </span>
+<span class="font-mono text-[11px] text-primary cursor-pointer hover:underline">Config Co-Pilot</span>
+</div>
+<!-- Neural Chips -->
+<div class="flex flex-wrap gap-2">
+<button class="px-space-sm py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-sm text-label-sm flex items-center gap-1.5 transition-colors shadow-sm group">
+<span class="material-symbols-outlined text-primary text-[14px] group-hover:scale-125 transition-transform">add_circle</span>
+<span>+ Deepen Sensory Metaphor</span>
+</button>
+<button class="px-space-sm py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-sm text-label-sm flex items-center gap-1.5 transition-colors shadow-sm group">
+<span class="material-symbols-outlined text-secondary text-[14px] group-hover:scale-125 transition-transform">local_fire_department</span>
+<span>+ Escalate Antagonist Conflict</span>
+</button>
+<button class="px-space-sm py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-sm text-label-sm flex items-center gap-1.5 transition-colors shadow-sm group">
+<span class="material-symbols-outlined text-tertiary text-[14px] group-hover:scale-125 transition-transform">bolt</span>
+<span>+ Tighten Staccato Cadence</span>
+</button>
+</div>
+<!-- Generative Command Terminal Input Bar -->
+<div class="relative flex items-center mt-space-xs">
+<div class="absolute left-3 flex items-center pointer-events-none text-primary">
+<span class="material-symbols-outlined text-[18px]">terminal</span>
+</div>
+<input class="w-full bg-surface-container-lowest text-on-surface placeholder:text-outline font-mono text-body-sm pl-10 pr-28 py-3 rounded-xl focus:outline-none focus:ring-1 focus:ring-primary shadow-inner" placeholder="Inject cinematic cue (e.g., 'Introduce sensory shift as mercury escapes gravity')..." type="text"/>
+<button class="absolute right-2 px-space-md py-1.5 rounded-lg bg-primary-container text-on-primary-container hover:bg-tertiary-container font-label-sm text-label-sm font-semibold transition-all shadow-md">
+              Synthesize
+            </button>
+</div>
+</div>
+</div>
+</div>
+<!-- RIGHT COLUMN: Creative Intelligence & Lateral Anchors (3 of 12) -->
+<div class="col-span-12 lg:col-span-3 flex flex-col gap-space-md">
+<!-- Inception Lateral Feedback Card -->
+<div class="rounded-xl bg-surface-container-lowest p-space-md flex flex-col gap-space-sm shadow-lg">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-secondary text-[20px]">hub</span>
+<span class="font-headline-sm text-headline-sm font-semibold text-on-surface">Lateral Steering</span>
+</div>
+<span class="w-2 h-2 rounded-full bg-secondary shadow-[0_0_8px_rgba(255,181,160,0.8)]"></span>
+</div>
+<p class="font-body-sm text-body-sm text-outline">
+          Continuous alignment with the 5 Lateral Engines steering the dialogue and subtext in real time:
+        </p>
+<div class="flex flex-col gap-2 mt-1">
+<!-- Lateral Engine 1 -->
+<div class="p-space-xs rounded-lg bg-surface-container-low flex flex-col gap-1">
+<div class="flex items-center justify-between font-label-sm text-label-sm">
+<span class="text-on-surface font-semibold font-mono">1. Reverse Paradigm</span>
+<span class="text-primary font-mono text-[10px]">ACTIVE (98%)</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              Time is not fleeing; humans inject life into static time through kinetic energy.
+            </p>
+</div>
+<!-- Lateral Engine 2 -->
+<div class="p-space-xs rounded-lg bg-surface-container-low flex flex-col gap-1">
+<div class="flex items-center justify-between font-label-sm text-label-sm">
+<span class="text-on-surface font-semibold font-mono">2. Cultural Friction</span>
+<span class="text-secondary font-mono text-[10px]">ANCHORED</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              Ancient Arabic horological geometry meets obsidian brutalist cyberpunk.
+            </p>
+</div>
+<!-- Lateral Engine 3 -->
+<div class="p-space-xs rounded-lg bg-surface-container-low flex flex-col gap-1">
+<div class="flex items-center justify-between font-label-sm text-label-sm">
+<span class="text-on-surface font-semibold font-mono">3. Sensory Synesthesia</span>
+<span class="text-tertiary font-mono text-[10px]">SUB-BASS 432Hz</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              Tactile cold volcanic rock paired with shimmering liquid mercury sounds.
+            </p>
+</div>
+</div>
+</div>
+<!-- Character Archetype & Voice Card -->
+<div class="rounded-xl bg-surface-container-lowest p-space-md flex flex-col gap-space-sm shadow-lg">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase font-mono tracking-wider text-outline">Character Vector</span>
+<span class="material-symbols-outlined text-primary text-[18px]">person_celebrate</span>
+</div>
+<div class="flex items-center gap-space-sm">
+<div class="w-12 h-12 rounded-lg bg-surface-container overflow-hidden shrink-0 shadow-md">
+<img class="w-full h-full object-cover" data-alt="Portrait profile of Vespera, a fierce futuristic watchmaker artisan with dark obsidian cybernetic inlays on cheekbones and intense crimson-reflecting eyes in dramatic moody studio light." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPoQQadgKfdjCe3Wnl3Xly307E2_fmn8IDnKmPrFdeXZJWes9g5UywCD2jCz9jomrIC4E6H_GF_SyjnsOr2Wa7_otx4fgDS5d0MY-oBGHB15gaN5lLx9NK9kl01uJ_fyk82DeZha8WF4CZG6hxjL3ldWIrtedv6SfaqSKedTFmMZtdtgF5Ph0uhwzmlgJEUrJuXKdevnU33T-WVrlnKcM2Nb98QM-2jMLbTbYFeA"/>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-headline-sm text-headline-sm font-semibold text-on-surface truncate">Vespera</span>
+<span class="font-mono font-label-sm text-label-sm text-primary">The Sovereign Catalyst</span>
+</div>
+</div>
+<div class="flex flex-col gap-1.5 mt-2 font-mono font-label-sm text-label-sm">
+<div class="flex justify-between py-1 border-b border-surface-container-high/40">
+<span class="text-outline">Archetype</span>
+<span class="text-on-surface">Prometheus Reborn</span>
+</div>
+<div class="flex justify-between py-1 border-b border-surface-container-high/40">
+<span class="text-outline">Vocal Cadence</span>
+<span class="text-on-surface">Metric, Staccato, Low-Hz</span>
+</div>
+<div class="flex justify-between py-1">
+<span class="text-outline">Dialect Matrix</span>
+<span class="text-secondary">High English / Classical فصحى</span>
+</div>
+</div>
+</div>
+<!-- Direct Pipeline Stage Handoff Hub -->
+<div class="rounded-xl bg-surface-container-low p-space-md flex flex-col gap-space-sm shadow-xl">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]">forward</span>
+<span class="font-label-md text-label-md font-semibold text-on-surface uppercase tracking-wider">Pipeline Handoff</span>
+</div>
+<div class="flex flex-col gap-2 mt-1">
+<!-- Storyboard Matrix Link -->
+<a class="w-full flex items-center justify-between p-space-sm rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md transition-all shadow-sm group" href="#storyboard-matrix">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px] group-hover:translate-x-1 transition-transform">view_kanban</span>
+<span>Proceed to Storyboard (Scene 43)</span>
+</div>
+<span class="material-symbols-outlined text-outline text-[16px]">chevron_right</span>
+</a>
+<!-- Moodboard Link -->
+<a class="w-full flex items-center justify-between p-space-sm rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md transition-all shadow-sm group" href="#concept-moodboard">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[18px] group-hover:translate-x-1 transition-transform">palette</span>
+<span>Send to Concept Moodboard</span>
+</div>
+<span class="material-symbols-outlined text-outline text-[16px]">chevron_right</span>
+</a>
+<!-- Governance Link -->
+<a class="w-full flex items-center justify-between p-space-sm rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md transition-all shadow-sm group" href="#c2pa-audit">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary text-[18px] group-hover:translate-x-1 transition-transform">lock</span>
+<span>Verify C2PA Provenance</span>
+</div>
+<span class="material-symbols-outlined text-outline text-[16px]">chevron_right</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+  // Micro-interaction for Dual Mode Switching (Tactical Crimson vs Amber Luxe)
+  const crimsonBtn = document.getElementById('mode-crimson');
+  const luxeBtn = document.getElementById('mode-luxe');
+
+  if (crimsonBtn && luxeBtn) {
+    crimsonBtn.addEventListener('click', () => {
+      crimsonBtn.classList.add('bg-surface-container-high', 'text-on-surface', 'shadow-sm');
+      crimsonBtn.classList.remove('text-on-surface-variant');
+      luxeBtn.classList.remove('bg-surface-container-high', 'text-on-surface', 'shadow-sm');
+      luxeBtn.classList.add('text-on-surface-variant');
+    });
+
+    luxeBtn.addEventListener('click', () => {
+      luxeBtn.classList.add('bg-surface-container-high', 'text-on-surface', 'shadow-sm');
+      luxeBtn.classList.remove('text-on-surface-variant');
+      crimsonBtn.classList.remove('bg-surface-container-high', 'text-on-surface', 'shadow-sm');
+      crimsonBtn.classList.add('text-on-surface-variant');
+    });
+  }
+</script></main></div></body></html>

@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>
+@layer base{
+  html,body{margin:0;padding:0;}
+  body{overscroll-behavior:none;}
+  main>:first-child{margin-top:0!important;}
+  main>:last-child{margin-bottom:0!important;}
+}
+::-webkit-scrollbar{display:none;}
+
+/* Ultra-luxury Cinematic Lighting Keyframes & Ambient Motion */
+@keyframes atmosphericBreathing {
+  0%, 100% {
+    opacity: 0.65;
+    transform: translate(-50%, 0) scale(1);
+  }
+  50% {
+    opacity: 0.95;
+    transform: translate(-50%, -15px) scale(1.08);
+  }
+}
+
+@keyframes ctaPulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 16px rgba(229, 9, 20, 0.4), 0 0 32px rgba(215, 59, 0, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 26px rgba(229, 9, 20, 0.7), 0 0 48px rgba(215, 59, 0, 0.35);
+  }
+}
+
+@keyframes entranceFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.ambient-breathing-bloom {
+  animation: atmosphericBreathing 7s ease-in-out infinite;
+}
+
+.luxury-cta-glow {
+  animation: ctaPulseGlow 4s ease-in-out infinite;
+}
+
+/* Staggered entrance animation classes */
+.animate-entrance {
+  animation: entranceFadeUp 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Interactive Spotlight Card Glassmorphism & Mouse Tracking */
+.interactive-spotlight-card {
+  position: relative;
+  background: rgba(22, 22, 26, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s ease, background 0.35s ease;
+  will-change: transform, box-shadow;
+}
+
+.interactive-spotlight-card:hover {
+  transform: translateY(-5px) scale(1.01);
+  box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.8), 0 0 24px rgba(229, 9, 20, 0.22);
+  border-color: rgba(229, 9, 20, 0.3);
+}
+
+.interactive-spotlight-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(400px circle at var(--mouse-x, -500px) var(--mouse-y, -500px), rgba(229, 9, 20, 0.15), rgba(215, 59, 0, 0.05) 40%, transparent 80%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+}
+
+.interactive-spotlight-card:hover::before {
+  opacity: 1;
+}
+
+/* Disable or soften heavy transitions for prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .ambient-breathing-bloom,
+  .luxury-cta-glow,
+  .animate-entrance {
+    animation: none !important;
+  }
+  .interactive-spotlight-card {
+    transition: none !important;
+  }
+}
+</style><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "surface-container-low": "#1c1b1b", "on-primary": "#690003", "inverse-surface": "#e5e2e1", "on-primary-fixed-variant": "#930007", "on-error-container": "#ffdad6", "surface-variant": "#353534", "on-secondary-fixed-variant": "#862200", "primary-fixed": "#ffdad5", "surface-container-highest": "#353534", "surface-tint": "#ffb4aa", "primary": "#ffb4aa", "surface-bright": "#393939", "surface-container-high": "#2a2a2a", "secondary-fixed": "#ffdbd1", "on-secondary-fixed": "#3b0900", "error-container": "#93000a", "inverse-on-surface": "#313030", "primary-container": "#e50914", "surface-container-lowest": "#0e0e0e", "surface-container": "#201f1f", "on-surface-variant": "#a1a1aa", "surface-dim": "#131313", "secondary-container": "#d73b00", "on-primary-fixed": "#410001", "on-surface": "#f4f4f6", "surface": "#131313", "on-tertiary-fixed": "#410005", "secondary-fixed-dim": "#ffb5a0", "tertiary-fixed-dim": "#ffb3ae", "on-primary-container": "#fff7f6", "tertiary": "#ffb3ae", "outline-variant": "#5e3f3b", "on-tertiary": "#68000c", "inverse-primary": "#c0000c", "on-error": "#690005", "tertiary-container": "#e40b2b", "on-tertiary-container": "#fff7f6", "on-tertiary-fixed-variant": "#930016", "secondary": "#ffb5a0", "background": "#131313", "tertiary-fixed": "#ffdad7", "on-secondary-container": "#fffbff", "on-secondary": "#5f1500", "on-background": "#e5e2e1", "error": "#ffb4ab", "primary-fixed-dim": "#ffb4aa", "outline": "#af8782" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "space-md": "1rem", "space-lg": "1.5rem", "margin-mobile": "1rem", "margin": "2rem", "gutter-mobile": "0.75rem", "gutter": "1.5rem", "space-xs": "0.25rem", "space-xl": "2.5rem", "space-sm": "0.5rem" }, "fontFamily": { "body-lg": ["Inter"], "headline-xl": ["Geist"], "body-sm": ["Inter"], "headline-md": ["Geist"], "body-md": ["Inter"], "headline-lg": ["Geist"], "headline-xl-mobile": ["Geist"], "headline-sm": ["Geist"], "headline-lg-mobile": ["Geist"], "label-md": ["Geist"], "label-sm": ["Geist"] }, "fontSize": { "body-lg": ["1rem", { "lineHeight": "1.6rem", "letterSpacing": "-0.005em", "fontWeight": "400" }], "headline-xl": ["3rem", { "lineHeight": "3.5rem", "letterSpacing": "-0.03em", "fontWeight": "600" }], "body-sm": ["0.75rem", { "lineHeight": "1.2rem", "letterSpacing": "0.01em", "fontWeight": "400" }], "headline-md": ["1.5rem", { "lineHeight": "2rem", "letterSpacing": "-0.015em", "fontWeight": "500" }], "body-md": ["0.875rem", { "lineHeight": "1.4rem", "letterSpacing": "0em", "fontWeight": "400" }], "headline-lg": ["2.25rem", { "lineHeight": "2.75rem", "letterSpacing": "-0.025em", "fontWeight": "600" }], "headline-xl-mobile": ["2rem", { "lineHeight": "2.5rem", "letterSpacing": "-0.02em", "fontWeight": "600" }], "headline-sm": ["1.125rem", { "lineHeight": "1.625rem", "letterSpacing": "-0.01em", "fontWeight": "500" }], "headline-lg-mobile": ["1.625rem", { "lineHeight": "2.125rem", "letterSpacing": "-0.02em", "fontWeight": "600" }], "label-md": ["0.8125rem", { "lineHeight": "1rem", "letterSpacing": "0.02em", "fontWeight": "500" }], "label-sm": ["0.6875rem", { "lineHeight": "0.875rem", "letterSpacing": "0.05em", "fontWeight": "600" }] } } } }</script></head><body class="bg-surface font-body-md text-body-md text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-container"><aside class="fixed left-0 top-0 h-full w-72 bg-surface-container-lowest z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.5)]"><div class="flex flex-col"><div class="h-16 px-space-lg flex items-center justify-between bg-surface-container-lowest"><div class="flex items-center gap-space-sm"><img alt="FX-2026 Brand Emblem" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD0VvF0aj0DHp2h98MzVkGo_27dTZN0fZVboahqbTwts6bbOXSloSCwpeAslIHSIj3GSXs0y7fPlxijH-s9UIVfsupKP4kEMYxrDTXtCfQb6LWhQ0GAd1R_MD5Shm68oN6Fg3usBRp4V1KVT_GQDBaTavk0qLlvCMT1KBNwQpvPtfydvuxh7e1IvZ2bpAzzdEV7j_98XtEH7Lj0kMukmwUsWrMh_BQtPc1hMVakrVNLWnvLQAkw2ig"/><span class="font-headline-sm text-headline-sm tracking-wider text-on-surface uppercase">FX-2026</span></div><span class="px-space-xs py-0.5 rounded bg-surface-container-high text-primary font-label-sm text-label-sm tracking-widest uppercase">Enterprise</span></div><div class="px-space-md pt-space-sm pb-space-xs"><button class="luxury-cta-glow w-full flex items-center justify-between px-space-md py-space-sm rounded-lg bg-primary-container text-on-primary-container hover:bg-tertiary-container transition-all" type="button"><span class="flex items-center gap-space-xs font-label-md text-label-md tracking-wide"><span class="material-symbols-outlined text-lg">add_circle</span>New Prompt</span><kbd class="px-space-xs py-0.5 rounded bg-on-primary font-label-sm text-label-sm text-on-primary-container opacity-90">⌘K</kbd></button></div><div class="overflow-y-auto px-space-md py-space-xs space-y-space-md"><div class="space-y-space-xs"><span class="px-space-sm font-label-sm text-label-sm text-outline tracking-wider uppercase">Features</span><nav class="flex flex-col gap-0.5" data-active-classes="bg-surface-container-high text-on-surface font-label-md"><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="app/script" href="#"><span>Screenplay &amp; Narrative</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="chat" href="#"><span>Chat</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="architect" href="#"><span>Architect</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="memory" href="#"><span>Memory</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="analytics" href="#"><span>Analytics</span></a></nav></div><div class="space-y-space-xs"><span class="px-space-sm font-label-sm text-label-sm text-outline tracking-wider uppercase">Workspaces</span><nav class="flex flex-col gap-0.5" data-active-classes="bg-surface-container-high text-on-surface font-label-md"><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="new-project" href="#"><span>New Project</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="image-generator" href="#"><span>Image Generator</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="video-director" href="#"><span>Video Director</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="audio-soundtrack" href="#"><span>Audio / Soundtrack</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="3d-assets" href="#"><span>3D Assets</span></a></nav></div><div class="space-y-space-xs"><span class="px-space-sm font-label-sm text-label-sm text-outline tracking-wider uppercase">Intelligence</span><nav class="flex flex-col gap-0.5" data-active-classes="bg-surface-container-high text-on-surface font-label-md"><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="neural-models" href="#"><span>Neural Models</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="prompt-vault" href="#"><span>Prompt Vault</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="render-queue" href="#"><span>Render Queue</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="app/metrics" href="#"><span>Metrics &amp; Telemetry</span></a></nav></div></div></div><div class="p-space-md space-y-space-sm bg-surface-container-lowest"><div class="p-space-md rounded-xl bg-surface-container-low shadow-[inset_0_0_24px_rgba(229,9,20,0.08)] flex flex-col gap-space-xs"><div class="flex items-center justify-between"><div class="flex items-center gap-space-xs text-primary"><span class="material-symbols-outlined text-base">diamond</span><span class="font-label-md text-label-md text-on-surface">Enterprise Tier</span></div><span class="font-label-sm text-label-sm text-outline uppercase">PRO</span></div><p class="font-body-sm text-body-sm text-on-surface-variant">Unlock full compute threads and unmetered batch rendering.</p><a class="mt-space-xs inline-flex items-center justify-center py-space-xs px-space-sm rounded bg-surface-container-high text-on-surface hover:bg-surface-bright hover:text-on-surface font-label-sm text-label-sm transition-colors" data-path="manage-plan" href="#">Manage Plan</a></div><div class="px-space-sm py-space-xs rounded bg-surface-container-lowest flex items-center gap-space-xs"><span class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></span><span class="font-label-sm text-label-sm text-outline truncate">Node: US-East GPU Cluster (RTX-6000 Ada)</span></div></div></aside><div class="pl-72"><header class="fixed top-0 left-72 right-0 h-16 bg-surface-container-lowest/90 backdrop-blur-xl z-40 px-space-lg flex items-center justify-between shadow-[0_1px_8px_rgba(0,0,0,0.5)] border-b border-white/[0.04]"><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs font-label-md text-label-md text-on-surface"><span class="text-outline">FX-2026 Studio</span><span class="text-outline">/</span><span class="font-medium text-on-surface">Script &amp; Narrative Suite</span><span class="px-space-xs py-0.5 rounded bg-primary-container/20 text-primary border border-primary-container/40 font-label-sm text-[10px] tracking-widest uppercase ml-1">Active</span><span class="relative flex h-2 w-2 ml-1"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-container opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-primary-container"></span></span></div></div><div class="flex-1 max-w-md mx-space-lg"><div class="relative flex items-center"><span class="material-symbols-outlined absolute left-3 text-outline text-lg pointer-events-none">search</span><input class="w-full bg-surface-container py-space-xs pl-9 pr-12 rounded-lg text-on-surface placeholder:text-outline font-body-sm text-body-sm focus:outline-none focus:ring-1 focus:ring-primary" placeholder="Omni-Search narrative beats, scripts, nodes..." type="text"/><kbd class="absolute right-2 px-space-xs py-0.5 rounded bg-surface-container-high text-outline font-label-sm text-label-sm">⌘/</kbd></div></div><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs px-space-sm py-space-xs rounded-lg bg-surface-container-low"><span class="material-symbols-outlined text-primary text-base">speed</span><span class="font-label-sm text-label-sm text-outline">Narrative Core:</span><span class="font-label-sm text-label-sm text-on-surface font-medium">Synced</span><div class="w-12 h-1.5 bg-surface-container-high rounded-full overflow-hidden ml-1"><div class="h-full bg-primary-container w-[78%]"></div></div></div><button class="px-space-xs py-space-xs rounded text-outline hover:text-on-surface font-label-sm text-label-sm transition-colors" type="button">العربية / EN</button><button class="relative p-space-xs rounded-lg text-outline hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-lg">notifications</span><span class="absolute top-1.5 right-1.5 w-1.5 h-1.5 rounded-full bg-primary-container"></span></button><a class="p-space-xs rounded-lg text-outline hover:text-on-surface transition-colors" data-path="documentation" href="#" title="Documentation"><span class="material-symbols-outlined text-lg">menu_book</span></a><div class="flex items-center gap-space-xs pl-space-xs"><img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-1 ring-outline-variant" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCA84LSJo3PpfP2pWLm_Cw-072SStUGjZU-hzUD6ulEBNPdDfexoV9Qf9PIyBx9o99-kJwkFH20QyrFGhdNmCVguhmdcAhxwOImgXxKS4sIoFatPT7s-nyaHvHbsj5IJe-bWxyc6up8tbxS1HGVQTuS-KYNmxASO461Xz5h-1wCquC6sM4ka9q9lARBJSW4OR8Rvsnx5Gqrzl6NNUh9rDMxj_6OXoDUQuEk3_bgSs76nP2VMZLis20"/><span class="material-symbols-outlined text-outline text-base">expand_more</span></div></div></header><main class="w-full pt-16 bg-surface min-h-screen"><div class="flex flex-col w-full">
+<!-- ATMOSPHERIC BACKGROUND BLOOM -->
+<div class="relative w-full overflow-hidden bg-surface-container-lowest">
+<div class="pointer-events-none absolute -top-40 left-1/2 -translate-x-1/2 w-[1100px] h-[340px] bg-gradient-to-b from-primary-container/15 via-secondary-container/5 to-transparent blur-3xl opacity-70 ambient-breathing-bloom"></div>
+<!-- WORKSPACE HEADER & CONTROL CONSOLE -->
+<section class="relative z-10 px-space-lg pt-space-md pb-space-sm border-b border-white/[0.05] bg-surface-container-lowest/80 backdrop-blur-xl">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-sm">
+<div class="flex flex-col gap-0.5">
+<div class="flex items-center gap-space-xs text-[11px] font-label-sm tracking-wider uppercase text-outline">
+<span>ATLAS CORE</span>
+<span class="text-surface-variant">/</span>
+<span class="text-on-surface-variant">APP/SCRIPT/PAGE.TSX</span>
+<span class="text-surface-variant">/</span>
+<span class="px-1.5 py-0.5 rounded bg-primary-container/20 text-primary border border-primary-container/30 text-[10px]">ENGINE V4.8-PRO</span>
+</div>
+<div class="flex items-baseline gap-space-sm flex-wrap">
+<h1 class="font-headline-md text-headline-md text-on-surface tracking-tight font-semibold flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary-container text-xl">psychology</span>
+              Neural Screenplay &amp; Generative Narrative Engine
+            </h1>
+<span class="font-body-sm text-body-sm text-on-surface-variant/70 tracking-normal" dir="rtl">
+              محرك السيناريو العصبي ومتابعة المشهد الثالث (Act II / Scene 43)
+            </span>
+</div>
+</div>
+<!-- ACTION DOCK -->
+<div class="flex items-center gap-space-xs flex-wrap">
+<button class="luxury-cta-glow group relative inline-flex items-center gap-space-xs px-space-sm py-1.5 rounded-lg bg-primary-container hover:bg-tertiary-container text-on-primary-container text-label-md font-label-md transition-all" type="button">
+<span class="material-symbols-outlined text-base">auto_fix_high</span>
+<span>Auto-Breakdown to Storyboard</span>
+<span class="px-1 py-0.2 rounded bg-black/40 text-[9px] uppercase tracking-widest text-primary-fixed">AI-Sync</span>
+</button>
+<button class="inline-flex items-center gap-space-xs px-space-sm py-1.5 rounded-lg bg-surface-container-high hover:bg-surface-bright text-on-surface text-label-md font-label-md border border-white/[0.06] transition-colors" type="button">
+<span class="material-symbols-outlined text-base text-outline">ios_share</span>
+<span>Export Draft</span>
+<span class="text-outline text-body-sm font-normal">(FDX/Fountain)</span>
+</button>
+<button class="inline-flex items-center gap-space-xs px-space-sm py-1.5 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface text-label-md font-label-md border border-white/[0.04] transition-colors" type="button">
+<span class="material-symbols-outlined text-base text-secondary">insights</span>
+<span>Telemetry</span>
+<kbd class="px-1 py-0.5 rounded bg-surface-container-highest text-[10px] text-outline">⌘S</kbd>
+</button>
+<div class="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-surface-container-low border border-emerald-500/20 text-emerald-400 text-label-sm font-label-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+<span>C2PA SEALED</span>
+<span class="material-symbols-outlined text-xs text-emerald-300">verified_user</span>
+</div>
+</div>
+</div>
+<!-- LIVE SCENE METADATA BANNER -->
+<div class="mt-space-sm grid grid-cols-2 md:grid-cols-5 gap-space-xs py-space-xs px-space-sm rounded-xl bg-surface-container/60 border border-white/[0.05] text-[11px] font-label-sm">
+<div class="flex items-center gap-2 truncate">
+<span class="text-outline uppercase tracking-wider">SCENE:</span>
+<span class="text-on-surface font-semibold truncate text-primary-fixed">ACT II / SCENE 43 • SYNCHROTRON CORE</span>
+</div>
+<div class="flex items-center gap-2 truncate">
+<span class="text-outline uppercase tracking-wider">PACING VELOCITY:</span>
+<span class="text-on-surface font-medium flex items-center gap-1">
+<span class="text-primary font-semibold">188 WPM</span>
+<span class="text-[9px] px-1 rounded bg-secondary-container/40 text-secondary-fixed">High-Tension</span>
+</span>
+</div>
+<div class="flex items-center gap-2 truncate">
+<span class="text-outline uppercase tracking-wider">EMOTIVE TENSION:</span>
+<div class="flex items-center gap-1.5">
+<div class="w-14 h-1.5 rounded-full bg-surface-container-highest overflow-hidden">
+<div class="h-full bg-gradient-to-r from-secondary-container to-primary-container w-[94%]"></div>
+</div>
+<span class="text-primary-container font-semibold">94% Noir</span>
+</div>
+</div>
+<div class="flex items-center gap-2 truncate">
+<span class="text-outline uppercase tracking-wider">CHARACTER LATENTS:</span>
+<span class="text-on-surface font-medium flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span> 4 Synced
+          </span>
+</div>
+<div class="flex items-center justify-between md:justify-end gap-2 truncate">
+<span class="text-outline uppercase tracking-wider">LATENCY:</span>
+<span class="text-on-surface font-mono font-medium text-[10px] text-emerald-400">0.11s SYNTH BUFFER</span>
+</div>
+</div>
+</section>
+<!-- TRIPLE WORKSPACE PANE -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-0 relative">
+<!-- ========================================================================= -->
+<!-- COLUMN 1: NARRATIVE BEATS, LATENT CHARACTERS & TONAL BIAS (3 COLS)        -->
+<!-- ========================================================================= -->
+<aside class="xl:col-span-3 border-r border-white/[0.05] bg-surface-container-lowest/90 p-space-md space-y-space-md flex flex-col justify-between">
+<div class="space-y-space-md">
+<!-- SECTION: BEATS TIMELINE -->
+<div class="space-y-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">format_list_numbered</span>
+                Narrative Beats Timeline
+              </span>
+<span class="text-[10px] px-1.5 py-0.2 rounded bg-surface-container-high text-on-surface-variant">Act II (4/12)</span>
+</div>
+<!-- BEAT CARDS -->
+<div class="space-y-1.5">
+<!-- Beat 01 -->
+<div class="p-2.5 rounded-lg bg-surface-container/40 border border-white/[0.03] opacity-75 hover:opacity-100 transition-all cursor-pointer">
+<div class="flex items-center justify-between text-[11px] font-label-md">
+<span class="text-on-surface font-medium">Beat 01 • Act I</span>
+<span class="text-[10px] text-emerald-400 font-mono">SYNTHESIZED</span>
+</div>
+<div class="text-[11px] text-on-surface-variant font-mono truncate mt-0.5">EXT. OBSIDIAN MONOLITH</div>
+<div class="mt-1 flex items-center justify-between text-[10px] text-outline">
+<span>Tension: 45%</span>
+<span>02:14 Screen Time</span>
+</div>
+</div>
+<!-- Beat 02 -->
+<div class="p-2.5 rounded-lg bg-surface-container/40 border border-white/[0.03] opacity-75 hover:opacity-100 transition-all cursor-pointer">
+<div class="flex items-center justify-between text-[11px] font-label-md">
+<span class="text-on-surface font-medium">Beat 02 • Act II</span>
+<span class="text-[10px] text-primary font-mono flex items-center gap-1">
+<span class="material-symbols-outlined text-[10px]">lock</span> LOCKED
+                  </span>
+</div>
+<div class="text-[11px] text-on-surface-variant font-mono truncate mt-0.5">INT. BIO-DOME SANCTUARY</div>
+<div class="mt-1 flex items-center justify-between text-[10px] text-outline">
+<span>Mastered</span>
+<span>03:40 Screen Time</span>
+</div>
+</div>
+<!-- Beat 03 (ACTIVE) -->
+<div class="relative p-3 rounded-lg bg-surface-container border-l-2 border-primary-container border-y border-r border-white/[0.08] shadow-[0_4px_20px_rgba(229,9,20,0.15)]">
+<div class="absolute -top-1.5 right-2 px-1.5 py-0.2 rounded-full bg-primary-container text-[9px] font-label-sm font-semibold uppercase tracking-wider text-on-primary-container flex items-center gap-0.5">
+<span class="w-1.5 h-1.5 rounded-full bg-white animate-ping"></span>
+                  Active Editing
+                </div>
+<div class="flex items-center justify-between text-[11px] font-label-md pt-0.5">
+<span class="text-primary font-semibold">Beat 03 • Act II (Scene 43)</span>
+</div>
+<div class="text-[12px] text-on-surface font-mono font-medium truncate mt-0.5 text-primary-fixed">INT. SYNCHROTRON CORE - DIVERGENCE</div>
+<div class="mt-1.5 grid grid-cols-2 gap-1 text-[10px] font-mono text-on-surface-variant">
+<span class="bg-surface-container-high/60 px-1 py-0.5 rounded">Pacing: 188 WPM</span>
+<span class="bg-surface-container-high/60 px-1 py-0.5 rounded text-secondary">Tension: 94%</span>
+</div>
+<div class="mt-1.5 flex items-center gap-1 text-[10px] text-outline">
+<span class="material-symbols-outlined text-xs text-primary">videocam</span>
+<span>Camera Rig 03 Synced (3 Angles)</span>
+</div>
+</div>
+<!-- Beat 04 -->
+<div class="p-2.5 rounded-lg bg-surface-container/20 border border-dashed border-white/[0.04] opacity-50 hover:opacity-80 transition-all cursor-pointer">
+<div class="flex items-center justify-between text-[11px] font-label-md">
+<span class="text-on-surface-variant">Beat 04 • Act III</span>
+<span class="text-[10px] text-outline font-mono">LATENT QUEUE</span>
+</div>
+<div class="text-[11px] text-outline font-mono truncate mt-0.5">EXT. CRIMSON SALT FLATS</div>
+<div class="mt-1 flex items-center justify-between text-[10px] text-outline">
+<span>Pending Narrative Flow</span>
+</div>
+</div>
+</div>
+<button class="w-full mt-1 py-1.5 px-space-xs rounded-lg bg-surface-container-high/40 hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface border border-white/[0.04] font-label-sm text-[11px] flex items-center justify-center gap-1 transition-colors" type="button">
+<span class="material-symbols-outlined text-sm">add</span>
+<span>Inject Neural Scene Beat</span>
+</button>
+</div>
+<!-- SECTION: CHARACTER LATENTS & ENCLAVE ATTESTATION -->
+<div class="space-y-space-xs pt-space-xs border-t border-white/[0.05]">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">group_work</span>
+                Character Latent Vectors
+              </span>
+<span class="text-[10px] text-primary font-mono">CFG LOCKED</span>
+</div>
+<div class="space-y-1.5">
+<!-- Commander Vespera -->
+<div class="p-2 rounded-lg bg-surface-container-low/70 border border-white/[0.04] flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-md bg-secondary-container/30 border border-secondary/30 flex items-center justify-center text-secondary font-bold text-xs">
+                    V
+                  </div>
+<div>
+<div class="text-[11px] font-label-md text-on-surface font-medium leading-none">Commander Vespera</div>
+<div class="text-[9px] text-on-surface-variant font-mono mt-0.5">Tactical • Sub-bass 88Hz</div>
+</div>
+</div>
+<span class="text-[10px] font-mono px-1 rounded bg-surface-container-highest text-primary">CFG 8.8</span>
+</div>
+<!-- Synthetica Eidolon -->
+<div class="p-2 rounded-lg bg-surface-container-low/70 border border-white/[0.04] flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-md bg-primary-container/30 border border-primary/30 flex items-center justify-center text-primary font-bold text-xs">
+                    S
+                  </div>
+<div>
+<div class="text-[11px] font-label-md text-on-surface font-medium leading-none">Synthetica Eidolon</div>
+<div class="text-[9px] text-on-surface-variant font-mono mt-0.5">Choral Hive • Harmonic Res.</div>
+</div>
+</div>
+<span class="text-[10px] font-mono px-1 rounded bg-surface-container-highest text-primary">CFG 9.5</span>
+</div>
+<!-- Dr. Aris Thorne (New) -->
+<div class="p-2 rounded-lg bg-surface-container-low/70 border border-secondary/20 flex items-center justify-between relative overflow-hidden">
+<div class="absolute -right-6 top-1 text-[8px] bg-secondary text-on-secondary px-6 rotate-45 font-bold uppercase tracking-wider">
+                  NEW
+                </div>
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-md bg-outline-variant/30 border border-outline/30 flex items-center justify-center text-outline font-bold text-xs">
+                    T
+                  </div>
+<div>
+<div class="text-[11px] font-label-md text-on-surface font-medium leading-none">Dr. Aris Thorne</div>
+<div class="text-[9px] text-secondary font-mono mt-0.5">Neuro-Engineer / Traitor</div>
+</div>
+</div>
+<span class="text-[10px] font-mono px-1 rounded bg-surface-container-highest text-secondary mr-3">CFG 7.9</span>
+</div>
+</div>
+<!-- Clearance badge -->
+<div class="p-2 rounded-lg bg-surface-container-lowest border border-white/[0.04] text-[10px] text-outline flex items-center justify-between">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-xs text-emerald-400">gavel</span>
+                SAG-AFTRA 2026 Clear
+              </span>
+<span class="font-mono text-[9px] text-on-surface-variant">HW Enclave Active</span>
+</div>
+</div>
+<!-- SECTION: GENERATIVE TONE BIAS SLIDERS -->
+<div class="space-y-space-xs pt-space-xs border-t border-white/[0.05]">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">tune</span>
+              Generative Tone &amp; Pacing Bias
+            </span>
+<!-- Slider 1 -->
+<div class="space-y-1">
+<div class="flex justify-between text-[10px] font-label-md">
+<span class="text-on-surface-variant">Kinetic Pacing &amp; Urgency</span>
+<span class="font-mono text-primary font-semibold">94%</span>
+</div>
+<div class="w-full h-1.5 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-gradient-to-r from-secondary to-primary-container w-[94%]"></div>
+</div>
+</div>
+<!-- Slider 2 -->
+<div class="space-y-1">
+<div class="flex justify-between text-[10px] font-label-md">
+<span class="text-on-surface-variant">Particle &amp; Spatial Denoise Bias</span>
+<span class="font-mono text-on-surface font-semibold">86%</span>
+</div>
+<div class="w-full h-1.5 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary-container w-[86%]"></div>
+</div>
+</div>
+<!-- Slider 3 -->
+<div class="space-y-1">
+<div class="flex justify-between text-[10px] font-label-md">
+<span class="text-on-surface-variant">Dialogue Subtext Compression</span>
+<span class="font-mono text-on-surface font-semibold">78%</span>
+</div>
+<div class="w-full h-1.5 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-secondary-container w-[78%]"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Left footer widget -->
+<div class="mt-space-md p-2.5 rounded-lg bg-surface-container-low border border-white/[0.04] text-[10px] space-y-1">
+<div class="flex items-center justify-between text-outline">
+<span>CORE REPOSITORY</span>
+<span class="font-mono text-primary">v4.82-REV9</span>
+</div>
+<div class="text-on-surface-variant font-mono truncate">atlas://project-fx2026/act2/scene43.syn</div>
+</div>
+</aside>
+<!-- ========================================================================= -->
+<!-- COLUMN 2: PROFESSIONAL HOLLYWOOD SCRIPT EDITOR (6 COLS)                   -->
+<!-- ========================================================================= -->
+<main class="xl:col-span-6 bg-surface-container-low/50 p-space-md flex flex-col justify-between border-r border-white/[0.05]">
+<div class="space-y-space-md">
+<!-- SCRIPT ELEMENT TOOLBAR -->
+<div class="flex items-center justify-between gap-1 p-1 rounded-xl bg-surface-container-lowest border border-white/[0.06] overflow-x-auto">
+<div class="flex items-center gap-1">
+<button class="px-2.5 py-1 rounded-lg bg-primary-container text-on-primary-container font-label-sm text-[11px] font-semibold tracking-wide" type="button">
+                SCENE (INT/EXT)
+              </button>
+<button class="px-2 py-1 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-sm text-[11px] transition-colors" type="button">
+                ACTION
+              </button>
+<button class="px-2 py-1 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-sm text-[11px] transition-colors" type="button">
+                CHARACTER
+              </button>
+<button class="px-2 py-1 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-sm text-[11px] transition-colors" type="button">
+                DIALOGUE
+              </button>
+<button class="px-2 py-1 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-sm text-[11px] transition-colors" type="button">
+                PARENTHETICAL
+              </button>
+<button class="px-2 py-1 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-sm text-[11px] transition-colors" type="button">
+                TRANSITION
+              </button>
+</div>
+<div class="flex items-center gap-1 pl-2 border-l border-white/[0.08]">
+<button class="p-1 rounded text-outline hover:text-on-surface hover:bg-surface-container" title="Voice Dictation" type="button">
+<span class="material-symbols-outlined text-base">mic</span>
+</button>
+<button class="p-1 rounded text-outline hover:text-on-surface hover:bg-surface-container" title="History Revert" type="button">
+<span class="material-symbols-outlined text-base">history</span>
+</button>
+</div>
+</div>
+<!-- AI COPILOT QUICK PROMPT PILLS -->
+<div class="flex items-center gap-1.5 overflow-x-auto pb-1 text-[11px] font-label-sm">
+<span class="text-outline flex items-center gap-1 whitespace-nowrap">
+<span class="material-symbols-outlined text-xs text-primary">smart_toy</span>
+              Copilot:
+            </span>
+<button class="px-2.5 py-1 rounded-full bg-surface-container border border-primary/20 text-primary hover:bg-primary-container hover:text-on-primary-container transition-all whitespace-nowrap flex items-center gap-1" type="button">
+<span>Escalate Kinetic Stakes</span>
+<span class="text-[9px] opacity-70">⚡</span>
+</button>
+<button class="px-2.5 py-1 rounded-full bg-surface-container border border-white/[0.06] text-on-surface hover:border-secondary transition-all whitespace-nowrap" type="button">
+              Deconstruct Hive Monologue
+            </button>
+<button class="px-2.5 py-1 rounded-full bg-surface-container border border-white/[0.06] text-on-surface hover:border-secondary transition-all whitespace-nowrap" type="button">
+              Synthesize Particle FX Cues
+            </button>
+</div>
+<!-- THE HOLLYWOOD SCRIPT CANVAS (MONOSPACE) -->
+<div class="interactive-spotlight-card rounded-xl p-space-lg shadow-2xl space-y-space-md border border-white/[0.08] relative overflow-hidden font-mono leading-relaxed selection:bg-primary-container selection:text-white">
+<!-- WATERMARK & C2PA VERIFIED EMBLEM -->
+<div class="absolute top-3 right-4 flex items-center gap-1.5 text-[9px] text-outline tracking-widest font-mono select-none pointer-events-none">
+<span>ATLAS DRAFT #04</span>
+<span>•</span>
+<span class="text-emerald-400">C2PA VALIDATED</span>
+</div>
+<!-- SLUGLINE -->
+<div class="text-[13px] tracking-wider font-bold text-on-surface border-b border-white/[0.05] pb-2 flex items-center justify-between">
+<span>INT. SYNCHROTRON CORE - DIVERGENCE CHAMBER - NIGHT</span>
+<span class="text-[10px] font-normal text-outline">SCENE 43 [CONTINUOUS]</span>
+</div>
+<!-- ACTION PARAGRAPH -->
+<p class="text-[12px] text-on-surface-variant/90 text-justify">
+              Massive counter-rotating electromagnetic rings cast strobing violet and crimson light across the suspended gantry. High-energy ionized steam screams through ruptured pressure manifolds.
+            </p>
+<p class="text-[12px] text-on-surface-variant/90 text-justify">
+              Vespera sprints along the vibrating titanium catwalk, mag-boots locking with heavy clangs. Sparks shower from an overhead conduit, singeing her carbon-fiber tactical weave.
+            </p>
+<!-- DIALOGUE BLOCK 1: VESPERA -->
+<div class="max-w-md mx-auto space-y-0.5 text-center my-4">
+<div class="font-bold text-[12px] tracking-widest text-primary uppercase">VESPERA</div>
+<div class="text-[11px] italic text-outline">(gasping through static filter)</div>
+<p class="text-[12px] text-on-surface text-left font-normal mt-1 leading-normal">
+                The magnetic confinement field is decaying! Synthetica, decouple the containment ring before we vaporize the quadrant!
+              </p>
+</div>
+<!-- DIALOGUE BLOCK 2: SYNTHETICA -->
+<div class="max-w-md mx-auto space-y-0.5 text-center my-4">
+<div class="font-bold text-[12px] tracking-widest text-secondary-fixed uppercase">SYNTHETICA (O.S.)</div>
+<div class="text-[11px] italic text-outline">(choral harmonics reverberating through the bulkhead)</div>
+<p class="text-[12px] text-on-surface text-left font-normal mt-1 leading-normal">
+                Containment is an obsolete metric, Vespera. We are not experiencing a breach. We are initiating convergence.
+              </p>
+</div>
+<!-- ACTION PUNCTUATION -->
+<p class="text-[12px] text-on-surface-variant/90 text-justify">
+              A heavy blast door hiss-seals shut behind her. Hydraulic clamps lock.
+            </p>
+<!-- DIALOGUE BLOCK 3: DR. ARIS THORNE -->
+<div class="max-w-md mx-auto space-y-0.5 text-center my-4 relative">
+<div class="font-bold text-[12px] tracking-widest text-secondary uppercase flex items-center justify-center gap-1.5">
+<span>DR. ARIS THORNE</span>
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+</div>
+<div class="text-[11px] italic text-outline">(stepping from the condensation mist, plasma torch ignited)</div>
+<p class="text-[12px] text-on-surface text-left font-normal mt-1 leading-normal">
+                Step away from the primary console, Commander. You’re trying to abort the only future that mathematically survives.
+              </p>
+</div>
+<!-- CARET SIMULATION -->
+<div class="flex items-center gap-1 pt-2">
+<span class="w-2 h-4 bg-primary-container animate-pulse inline-block"></span>
+<span class="text-[11px] text-outline italic">Writing beat cue: Thorne advances toward the divergent manifold...</span>
+</div>
+<!-- COPILOT REAL-TIME LATENT INSIGHT BANNER -->
+<div class="p-3 rounded-lg bg-surface-container-highest/60 border border-primary/30 flex items-start justify-between gap-3 text-[11px] font-sans">
+<div class="flex items-start gap-2">
+<span class="material-symbols-outlined text-primary text-base mt-0.5">neurology</span>
+<div>
+<span class="font-semibold text-on-surface">Kinetic Pacing Alert (188 WPM):</span>
+<span class="text-on-surface-variant"> Suggesting dynamic tracking camera rig with 35mm high-shutter profile on Thorne's ignite trigger.</span>
+</div>
+</div>
+<div class="flex items-center gap-1.5 shrink-0">
+<button class="px-2 py-0.5 rounded bg-primary-container hover:bg-tertiary-container text-white text-[10px] font-label-md font-semibold transition-colors" type="button">
+                  Apply Suggestion
+                </button>
+<button class="p-0.5 text-outline hover:text-on-surface" type="button">
+<span class="material-symbols-outlined text-sm">close</span>
+</button>
+</div>
+</div>
+<!-- ATLAS GOVERNANCE & C2PA AUDIT CARD -->
+<div class="pt-2 border-t border-white/[0.04] flex items-center justify-between text-[10px] font-mono text-outline font-sans">
+<div class="flex items-center gap-2 truncate">
+<span class="material-symbols-outlined text-emerald-400 text-xs">shield_with_heart</span>
+<span class="truncate">WGA &amp; C2PA Attestation: Hash <code class="text-primary-fixed">0xA3F8...71C</code></span>
+<span>•</span>
+<span class="text-emerald-400">0.00% Training Collision</span>
+</div>
+<a class="text-primary hover:underline shrink-0" href="#">View Governance Dossier →</a>
+</div>
+</div>
+</div>
+<!-- SCRIPT METRIC FOOTER -->
+<div class="mt-space-md py-2 px-space-sm rounded-lg bg-surface-container-lowest border border-white/[0.04] flex items-center justify-between text-[11px] font-mono text-outline">
+<div class="flex items-center gap-3">
+<span>Words: <strong class="text-on-surface">1,120</strong></span>
+<span>•</span>
+<span>Est. Screen Time: <strong class="text-on-surface">1 min 48 sec</strong></span>
+<span>•</span>
+<span>Pages: <strong class="text-on-surface">1.4</strong></span>
+</div>
+<div class="flex items-center gap-1.5 text-emerald-400">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+<span>Auto-Saved to Atlas Vault</span>
+</div>
+</div>
+</main>
+<!-- ========================================================================= -->
+<!-- COLUMN 3: REAL-TIME NEURAL VISUALIZER & AUDIO BED (3 COLS)                -->
+<!-- ========================================================================= -->
+<aside class="xl:col-span-3 bg-surface-container-lowest/90 p-space-md space-y-space-md flex flex-col justify-between">
+<div class="space-y-space-md">
+<!-- SECTION: REAL-TIME MULTI-CAM NEURAL VISUALIZER -->
+<div class="space-y-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline flex items-center gap-1">
+<span class="material-symbols-outlined text-xs text-primary">videocam</span>
+                Live Sync Camera Rigs (Scene 43)
+              </span>
+<span class="text-[9px] px-1 rounded bg-surface-container-high text-primary font-mono animate-pulse">LIVE GEN</span>
+</div>
+<!-- CAMERA RIG CARDS -->
+<div class="space-y-space-xs">
+<!-- CAM A (Master Kinetic) -->
+<div class="group relative rounded-xl overflow-hidden border border-white/[0.08] bg-surface-container-low transition-all hover:border-primary-container/40">
+<div class="h-32 w-full relative">
+<img class="w-full h-full object-cover brightness-90 group-hover:scale-105 transition-transform duration-500" data-alt="Cinematic sci-fi low angle tracking shot of female commander in sleek tactical armor sprinting through massive electromagnetic synchrotron core with glowing purple and crimson particle arcs, high shutter speed, anamorphic lens flares, volumetric fog in dark noir lighting, ultra photorealistic 8K render." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQhKiLHIclcirQK9WSm_kZD6htBecmGLLqOPZ4GSMyuKr0VpPGaBCmD5BLn2XWF1s9z68O3TSyymINK2tmeBl0gdcuiQ_ss8UraQElh848etAJ_zIHRBWKNXmAzcxNb40EwBPy2kojiGC6CGrzQoSOYrsHR4CdSt0ZGn_tArtUKwv7V8EPDWKB0oYOZifzslAku3ugiKxsRkiL1pGkNVTCPMY5J9zE7ruXvYKVWfdB-5CHWcPu6ak"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-transparent to-black/60"></div>
+<!-- Camera overlay info -->
+<div class="absolute top-2 left-2 flex items-center gap-1.5">
+<span class="px-1.5 py-0.5 rounded bg-primary-container text-white text-[9px] font-mono font-semibold">CAM A</span>
+<span class="text-[9px] text-white/80 font-mono">35mm Anamorphic T1.9</span>
+</div>
+<div class="absolute top-2 right-2 px-1 py-0.5 rounded bg-black/60 text-emerald-400 text-[9px] font-mono">
+                    ACEScg 8K
+                  </div>
+<div class="absolute bottom-2 left-2 right-2 text-[10px] text-on-surface font-medium truncate">
+                    Vespera Sprint • Gantry Arc Tracking
+                  </div>
+</div>
+</div>
+<!-- CAM B & CAM C GRID -->
+<div class="grid grid-cols-2 gap-space-xs">
+<!-- CAM B -->
+<div class="group relative rounded-xl overflow-hidden border border-white/[0.08] bg-surface-container-low">
+<div class="h-24 w-full relative">
+<img class="w-full h-full object-cover brightness-90 group-hover:scale-105 transition-transform duration-500" data-alt="Intense over the shoulder cinematic close up of Dr Thorne emerging from heavy ionized steam condensation, clutching an ignited glowing plasma blowtorch, sharp rim lighting with crimson and amber glows, dark high tech synchrotron background, cinematic film grain." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDaathQam2b3B7H6EpLzoctjhlhbUvc3kScjKBnu08cCO-mIJcmJV9z7c-J4K7vLacS6FvQS0pqUvFnE50GSSLD2ndy9szXmjiK_FMeR5HD5VfNRAUIcPjOim3T25Xhb_R0BMSC41KxAIzOScbCtJyd47MyYm0sT3lgR4gNvq88qfOvs6F_uFOx9h3wkgVl0KM63fsH-HJ3zaG196eYqHSeUzAoIpLbPTVzHJLNB9Dc30GliGPOYgE"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-transparent to-transparent"></div>
+<div class="absolute top-1.5 left-1.5 px-1 py-0.2 rounded bg-black/60 text-primary-fixed text-[8px] font-mono">CAM B (75mm)</div>
+<div class="absolute bottom-1 left-1.5 text-[9px] text-on-surface truncate">Thorne Torch Reveal</div>
+</div>
+</div>
+<!-- CAM C -->
+<div class="group relative rounded-xl overflow-hidden border border-white/[0.08] bg-surface-container-low">
+<div class="h-24 w-full relative">
+<img class="w-full h-full object-cover brightness-90 group-hover:scale-105 transition-transform duration-500" data-alt="Macro spatial volumetric visualization of a violent electromagnetic core divergence, swirling violent red and blue ionized plasma particles, sparks flying, complex metallic ring machinery spinning at extreme velocity, dark moody atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAfru0O9nxs_t6jziyYx9jjbe2RpgoKYdTFKMEIF_IkLPTRNSfnn2kI5rjaVTj60msu2Xemc-O2gexAqo94Bin5MR_CR_O-WBczUmGi_4yIw7BDZ1qHvQC2_XKVxHWa5NFIa8VmmycaWeRaNCzwYvv172zdvI5K3pHZM2lpWZmfe0-E_Q577KnVLraY9noIfk_KVCL_rpLjdhjd9erG82hx_z7YEAkrknHZ5U6VsfMfdlsR7JKHdm0"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-transparent to-transparent"></div>
+<div class="absolute top-1.5 left-1.5 px-1 py-0.2 rounded bg-black/60 text-secondary-fixed text-[8px] font-mono">CAM C (Volumetric)</div>
+<div class="absolute bottom-1 left-1.5 text-[9px] text-on-surface truncate">Decay Breach Macro</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Push to Storyboard button -->
+<button class="w-full mt-1 py-1.5 px-space-xs rounded-lg bg-surface-container-high hover:bg-surface-bright text-on-surface border border-white/[0.06] font-label-sm text-[11px] flex items-center justify-center gap-1.5 transition-colors" type="button">
+<span class="material-symbols-outlined text-sm text-primary">movie</span>
+<span>Push Keyframes to Video Director</span>
+</button>
+</div>
+<!-- SECTION: AUDIO BED & SYNTHESIS WAVEFORM -->
+<div class="space-y-space-xs pt-space-xs border-t border-white/[0.05]">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline flex items-center gap-1">
+<span class="material-symbols-outlined text-xs text-secondary">graphic_eq</span>
+                Audio Bed Synthesis (Scene 43)
+              </span>
+<span class="text-[10px] text-emerald-400 font-mono">24-bit 48kHz</span>
+</div>
+<!-- AUDIO TRACKS LIST -->
+<div class="space-y-1.5 text-[10px] font-mono">
+<div class="p-2 rounded-lg bg-surface-container-low border border-white/[0.04] space-y-1">
+<div class="flex justify-between items-center text-on-surface">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-xs text-primary">volume_up</span>
+                    Electromagnetic Core Hum (60Hz Drone)
+                  </span>
+<span class="text-primary font-semibold">-4.2 dB</span>
+</div>
+<!-- Simulated frequency bars SVG -->
+<div class="h-6 w-full flex items-end gap-0.5 pt-1">
+<div class="w-full bg-surface-container-highest h-2 rounded-t-sm"></div>
+<div class="w-full bg-primary h-4 rounded-t-sm"></div>
+<div class="w-full bg-primary-container h-6 rounded-t-sm animate-pulse"></div>
+<div class="w-full bg-secondary h-3 rounded-t-sm"></div>
+<div class="w-full bg-surface-container-highest h-1 rounded-t-sm"></div>
+<div class="w-full bg-primary h-5 rounded-t-sm"></div>
+<div class="w-full bg-primary-container h-6 rounded-t-sm"></div>
+<div class="w-full bg-secondary-container h-4 rounded-t-sm"></div>
+<div class="w-full bg-surface-container-highest h-2 rounded-t-sm"></div>
+<div class="w-full bg-primary h-5 rounded-t-sm"></div>
+<div class="w-full bg-primary-container h-3 rounded-t-sm"></div>
+<div class="w-full bg-secondary h-2 rounded-t-sm"></div>
+</div>
+</div>
+<!-- Dialogue stems state -->
+<div class="p-2 rounded-lg bg-surface-container-low border border-white/[0.04] flex items-center justify-between text-on-surface-variant">
+<span>Vespera + Thorne Dialogue Stems</span>
+<span class="text-emerald-400 flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Synced
+                </span>
+</div>
+</div>
+</div>
+<!-- SECTION: EXTREME PRECISION TELEMETRY DONUT -->
+<div class="p-3 rounded-xl bg-surface-container-low border border-white/[0.05] space-y-2">
+<div class="flex items-center justify-between text-[10px] font-label-sm uppercase tracking-wider text-outline">
+<span>Scene 43 Coherence Index</span>
+<span class="text-primary font-mono font-bold">99.4%</span>
+</div>
+<div class="flex items-center gap-3">
+<!-- Mini SVG Radial Metric -->
+<div class="relative w-12 h-12 shrink-0">
+<svg class="w-full h-full -rotate-90" viewbox="0 0 36 36">
+<path class="text-surface-container-highest" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-width="3.5"></path>
+<path class="text-primary-container" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="99.4, 100" stroke-linecap="round" stroke-width="3.5"></path>
+</svg>
+<div class="absolute inset-0 flex items-center justify-center text-[9px] font-mono font-bold text-on-surface">
+                  99%
+                </div>
+</div>
+<div class="text-[10px] text-on-surface-variant leading-tight">
+                Harmonic coherence across narrative beats, acoustic timbre, and volumetric lighting tags.
+              </div>
+</div>
+</div>
+</div>
+<!-- Render node hardware badge -->
+<div class="mt-space-md p-2 rounded-lg bg-surface-container-lowest border border-white/[0.04] flex items-center justify-between text-[10px] font-mono text-outline">
+<span class="flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container"></span>
+            RTX-6000 Ada Array
+          </span>
+<span class="text-on-surface-variant">42.8 TFLOPS Synced</span>
+</div>
+</aside>
+</div>
+</div>
+<!-- INLINE CLIENT MICRO-INTERACTIONS -->
+<script>
+    // Spotlight Mouse Tracker for Interactive Cards
+    document.querySelectorAll('.interactive-spotlight-card').forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        card.style.setProperty('--mouse-x', `${x}px`);
+        card.style.setProperty('--mouse-y', `${y}px`);
+      });
+    });
+  </script>
+</div></main></div></body></html>

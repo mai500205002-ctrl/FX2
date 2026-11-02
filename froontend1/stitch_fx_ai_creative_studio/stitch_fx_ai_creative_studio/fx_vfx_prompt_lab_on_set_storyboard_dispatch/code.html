@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ar"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "secondary": "#7bd0ff", "primary-fixed": "#ffe088", "surface-container-high": "#272a30", "on-background": "#e1e2eb", "primary": "#f2ca50", "inverse-on-surface": "#2d3037", "on-error": "#690005", "on-surface-variant": "#d0c5af", "secondary-container": "#00a6e0", "tertiary-fixed-dim": "#bdc2ff", "tertiary-container": "#a5adff", "tertiary-fixed": "#e0e0ff", "on-secondary-fixed": "#001e2c", "on-surface": "#e1e2eb", "error-container": "#93000a", "on-tertiary-container": "#2d38a1", "background": "#101319", "primary-fixed-dim": "#e9c349", "primary-container": "#d4af37", "error": "#ffb4ab", "on-tertiary": "#131e8c", "surface-container-low": "#191c22", "surface-bright": "#363940", "tertiary": "#c7cbff", "on-primary-fixed-variant": "#574500", "on-tertiary-fixed-variant": "#2f3aa3", "surface-container": "#1d2026", "inverse-primary": "#735c00", "surface-tint": "#e9c349", "inverse-surface": "#e1e2eb", "on-primary-container": "#554300", "secondary-fixed": "#c4e7ff", "outline": "#99907c", "outline-variant": "#4d4635", "on-error-container": "#ffdad6", "surface-variant": "#32353b", "on-primary-fixed": "#241a00", "on-secondary": "#00354a", "surface": "#101319", "surface-dim": "#101319", "surface-container-lowest": "#0b0e14", "surface-container-highest": "#32353b", "on-secondary-fixed-variant": "#004c69", "on-secondary-container": "#00374d", "on-primary": "#3c2f00", "secondary-fixed-dim": "#7bd0ff", "on-tertiary-fixed": "#000767" }, "borderRadius": { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, "spacing": { "space-sm": "0.5rem", "margin-desktop": "2rem", "gutter-desktop": "1.5rem", "space-xs": "0.25rem", "space-xl": "2.5rem", "space-md": "1rem", "space-lg": "1.5rem", "gutter": "1rem", "margin": "1rem" }, "fontFamily": { "label-mono-md": [ "JetBrains Mono" ], "headline-md": [ "IBM Plex Sans Arabic", "IBM Plex Sans" ], "display-hero-mobile": [ "IBM Plex Sans Arabic", "IBM Plex Sans" ], "body-sm": [ "IBM Plex Sans Arabic", "IBM Plex Sans" ], "headline-lg": [ "IBM Plex Sans Arabic", "IBM Plex Sans" ], "body-md": [ "IBM Plex Sans Arabic", "IBM Plex Sans" ], "headline-sm": [ "IBM Plex Sans Arabic", "IBM Plex Sans" ], "label-mono-sm": [ "JetBrains Mono" ], "body-lg": [ "IBM Plex Sans Arabic", "IBM Plex Sans" ], "headline-lg-mobile": [ "IBM Plex Sans Arabic", "IBM Plex Sans" ], "display-hero": [ "IBM Plex Sans Arabic", "IBM Plex Sans" ] }, "fontSize": { "label-mono-md": [ "12px", { "lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "500" } ], "headline-md": [ "22px", { "lineHeight": "30px", "letterSpacing": "-0.01em", "fontWeight": "500" } ], "display-hero-mobile": [ "32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" } ], "body-sm": [ "12px", { "lineHeight": "18px", "letterSpacing": "0.01em", "fontWeight": "400" } ], "headline-lg": [ "32px", { "lineHeight": "42px", "letterSpacing": "-0.015em", "fontWeight": "600" } ], "body-md": [ "14px", { "lineHeight": "22px", "letterSpacing": "0", "fontWeight": "400" } ], "headline-sm": [ "18px", { "lineHeight": "26px", "letterSpacing": "0", "fontWeight": "500" } ], "label-mono-sm": [ "10px", { "lineHeight": "14px", "letterSpacing": "0.06em", "fontWeight": "500" } ], "body-lg": [ "16px", { "lineHeight": "26px", "letterSpacing": "0", "fontWeight": "400" } ], "headline-lg-mobile": [ "24px", { "lineHeight": "32px", "letterSpacing": "0", "fontWeight": "600" } ], "display-hero": [ "48px", { "lineHeight": "60px", "letterSpacing": "-0.02em", "fontWeight": "600" } ] } } } };</script></head><body class="bg-surface-container-lowest font-body-md text-body-md text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-container min-h-screen"><aside class="fixed right-0 top-0 h-full w-64 bg-surface-container-lowest z-50 flex flex-col justify-between py-space-md shadow-[0_0_24px_rgba(0,0,0,0.85)]"><div class="flex flex-col gap-space-lg px-space-md"><div class="flex items-center gap-space-sm px-space-xs"><div class="w-9 h-9 rounded-lg bg-surface-container-high flex items-center justify-center font-headline-md text-headline-sm text-primary shadow-[0_0_12px_rgba(212,175,55,0.2)]">FX</div><div class="flex flex-col"><span class="font-headline-sm text-body-md font-bold tracking-tight text-on-surface">جناح الإخراج</span><span class="font-label-mono-sm text-label-mono-sm text-primary uppercase">DIRECTOR SUITE</span></div></div><div class="px-space-xs"><div class="p-space-sm rounded-lg bg-surface-container-low flex flex-col gap-space-xs"><div class="flex items-center justify-between"><span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant">المشروع النشط</span><span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span></div><span class="font-body-sm text-body-sm text-on-surface font-medium truncate">سكب الوعي 2026</span><span class="font-label-mono-sm text-label-mono-sm text-outline">SMPTE 24.00 FPS</span></div></div><nav class="flex flex-col gap-space-xs" data-active-classes="bg-surface-container-high text-primary font-medium rounded-lg shadow-[inset_0_0_8px_rgba(212,175,55,0.15)]"><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="overview" href="#"><span class="font-body-md text-body-md">غرفة العمليات المركزية</span><span class="material-symbols-outlined text-body-lg">dashboard</span></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="genesis-brief" href="#"><span class="font-body-md text-body-md">الموجز الإبداعي</span><span class="material-symbols-outlined text-body-lg">history_edu</span></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="strategic-vision" href="#"><span class="font-body-md text-body-md">الرؤية الاستراتيجية</span><span class="material-symbols-outlined text-body-lg">psychology</span></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="concept-lab" href="#"><span class="font-body-md text-body-md">مختبر الأفكار واللوحات</span><span class="material-symbols-outlined text-body-lg">lightbulb</span></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="cinematic-slate" href="#"><span class="font-body-md text-body-md">السيناريو السينمائي</span><span class="material-symbols-outlined text-body-lg">movie_edit</span></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="render-queue" href="#"><span class="font-body-md text-body-md">طابور المعالجة العصبية</span><span class="material-symbols-outlined text-body-lg">memory</span></a></nav></div><div class="px-space-md flex flex-col gap-space-sm"><div class="p-space-sm rounded-lg bg-surface-container-low flex items-center justify-between"><div class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-secondary text-body-lg">neurology</span><span class="font-label-mono-sm text-label-mono-sm text-on-surface">محرك FX Neural</span></div><span class="font-label-mono-sm text-label-mono-sm text-secondary bg-surface-container-high px-space-xs py-0.5 rounded">99.8%</span></div><div class="flex items-center justify-between px-space-xs pt-space-xs"><div class="flex items-center gap-space-sm"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><div class="flex flex-col"><span class="font-body-sm text-body-sm text-on-surface font-semibold">طارق المخرج</span><span class="font-label-mono-sm text-label-mono-sm text-outline">CREATIVE LEAD</span></div></div><button class="text-on-surface-variant hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-body-lg">tune</span></button></div></div></aside><div class="pr-64"><header class="fixed top-0 right-64 left-0 h-36 bg-surface-container-lowest/90 backdrop-blur-xl z-40 shadow-[0_4px_20px_rgba(0,0,0,0.6)] flex flex-col justify-between"><div class="h-16 px-space-lg flex items-center justify-between"><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs bg-surface-container-high px-space-sm py-1 rounded-lg"><span class="font-label-mono-sm text-label-mono-sm text-primary">إصدار 2.4</span><span class="font-body-sm text-body-sm text-on-surface-variant">|</span><span class="font-body-sm text-body-sm text-on-surface font-medium">مشروع: سكب الوعي — حملة ترطيب العقل 2026</span></div><div class="flex items-center gap-space-xs px-space-sm py-1 rounded-lg bg-surface-container-low"><span class="w-1.5 h-1.5 rounded-full bg-primary"></span><span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant">جلسة نشطة • مسودة محفوظة</span></div><div class="flex items-center gap-space-xs px-space-sm py-1 rounded-lg bg-surface-container-high shadow-[0_0_12px_rgba(212,175,55,0.25)]"><span class="relative flex h-2 w-2"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span></span><span class="font-body-sm text-body-sm text-primary font-bold">الذكاء الاصطناعي: إعادة تفكير راديكالي قيد المعالجة (Radical Lateral Mode: Active)</span><span class="font-label-mono-sm text-label-mono-sm bg-primary-container text-on-primary-container px-1 rounded font-bold">AI AGENT</span></div></div><div class="flex items-center gap-space-sm"><button class="flex items-center gap-space-xs px-space-md py-1.5 rounded-lg bg-surface-container text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-body-md">search</span><span class="font-body-sm text-body-sm">لوحة الأوامر</span><kbd class="font-label-mono-sm text-label-mono-sm bg-surface-container-lowest px-1.5 py-0.5 rounded text-outline">⌘K</kbd></button><div class="flex items-center gap-space-xs"><button class="px-space-md py-1.5 rounded-lg bg-surface-container text-on-surface font-body-sm text-body-sm hover:bg-surface-container-high transition-colors flex items-center gap-space-xs"><span class="material-symbols-outlined text-body-md">ios_share</span><span class="">مشاركة</span></button><button class="px-space-md py-1.5 rounded-lg bg-surface-container text-on-surface font-body-sm text-body-sm hover:bg-surface-container-high transition-colors flex items-center gap-space-xs"><span class="material-symbols-outlined text-body-md">download</span><span class="">تصدير Final Draft</span></button><button class="px-space-md py-1.5 rounded-lg bg-primary-container text-on-primary-container font-body-sm text-body-sm font-semibold hover:bg-primary transition-colors flex items-center gap-space-xs shadow-[0_0_12px_rgba(212,175,55,0.25)]"><span class="material-symbols-outlined text-body-md">save</span><span class="">حفظ نهائي</span></button></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div><div class="h-20 px-space-lg flex items-center justify-between bg-surface-container-low/70"><div class="flex items-center gap-space-sm flex-1"><div class="flex items-center gap-space-xs px-space-md py-2 rounded-lg bg-surface-container-lowest"><span class="material-symbols-outlined text-primary text-body-md">check_circle</span><div class="flex flex-col"><span class="font-label-mono-sm text-label-mono-sm text-primary">المرحلة ٠١</span><span class="font-body-sm text-body-sm text-on-surface font-medium">الموجز (The Genesis)</span></div></div><span class="text-outline font-label-mono-sm text-label-mono-sm">←</span><div class="flex items-center gap-space-xs px-space-md py-2 rounded-lg bg-surface-container-lowest"><span class="material-symbols-outlined text-primary text-body-md">check_circle</span><div class="flex flex-col"><span class="font-label-mono-sm text-label-mono-sm text-primary">المرحلة ٠٢</span><span class="font-body-sm text-body-sm text-on-surface font-medium">الرؤية (Strategic Mind)</span></div></div><span class="text-outline font-label-mono-sm text-label-mono-sm">←</span><div class="flex items-center gap-space-xs px-space-md py-2 rounded-lg bg-surface-container-lowest"><span class="material-symbols-outlined text-primary text-body-md">check_circle</span><div class="flex flex-col"><span class="font-label-mono-sm text-label-mono-sm text-primary">المرحلة ٠٣</span><span class="font-body-sm text-body-sm text-on-surface font-medium">الفكرة (Concept Lab)</span></div></div><span class="text-outline font-label-mono-sm text-label-mono-sm">←</span><div class="flex items-center gap-space-xs px-space-md py-2 rounded-lg bg-surface-container-high shadow-[0_0_12px_rgba(212,175,55,0.15)]"><span class="material-symbols-outlined text-primary text-body-md animate-pulse">radio_button_checked</span><div class="flex flex-col"><span class="font-label-mono-sm text-label-mono-sm text-primary font-bold">المرحلة ٠٤ • قيد التحرير</span><span class="font-body-sm text-body-sm text-on-surface font-bold">السيناريو (Cinematic Slate)</span></div></div></div><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs px-space-sm py-1.5 rounded-lg bg-surface-container-lowest shadow-inner"><span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant">الجرأة الإبداعية:</span><button class="font-label-mono-sm text-label-mono-sm px-2 py-0.5 rounded text-on-surface-variant hover:text-on-surface transition-colors">منضبط</button><button class="font-label-mono-sm text-label-mono-sm px-2 py-0.5 rounded text-on-surface-variant hover:text-on-surface transition-colors">متوازن</button><button class="font-label-mono-sm text-label-mono-sm px-2 py-0.5 rounded bg-primary text-on-primary font-bold shadow-[0_0_10px_rgba(212,175,55,0.4)] animate-pulse">راديكالي ⚡ [نشط]</button></div><div class="flex items-center gap-space-xs px-space-sm py-1.5 rounded-lg bg-surface-container-lowest"><span class="material-symbols-outlined text-outline text-body-md">timeline</span><span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant">المشهد ٠٤ / ١٢</span><span class="font-label-mono-sm text-label-mono-sm text-primary">00:04:12:00</span></div></div></div><div class="w-full bg-surface-container-high border-y border-outline-variant/30 px-space-lg py-1.5 flex flex-wrap items-center justify-between gap-space-sm shadow-md"><div class="flex items-center gap-space-md"><div class="flex items-center gap-1.5 text-primary"><span class="material-symbols-outlined text-body-md animate-spin">sync</span><span class="font-label-mono-sm text-label-mono-sm font-bold">محرك الاستكشاف الجانبي (DE BONO LATERAL AGENT): قيد المعالجة التوليدية الراديكالية</span></div><div class="hidden md:flex items-center gap-space-xs text-outline font-label-mono-sm text-label-mono-sm"><span class="">الدورة: <strong class="text-on-surface">2 / 3</strong></span><span class="">•</span><span class="">الكمون: <strong class="text-secondary">240ms (Vertex AI)</strong></span><span class="">•</span><span class="">درجة التدقيق الاستراتيجي: <strong class="text-primary">88% ➔ 96%</strong></span></div></div><div class="flex items-center gap-space-xs"><span class="px-2 py-0.5 rounded bg-surface-container text-primary font-label-mono-sm text-label-mono-sm border border-primary/20 animate-pulse">الوضع: كسر القيود (Constraint Breaker)</span><button class="px-2 py-0.5 rounded bg-surface-container hover:bg-surface-bright text-on-surface font-label-mono-sm text-label-mono-sm flex items-center gap-1 transition-colors"><span class="material-symbols-outlined text-body-sm text-secondary">terminal</span><span class="">سجل التفكير المباشر</span></button></div></div></header><main class="relative w-full pt-36 bg-surface-container-lowest px-space-lg py-space-lg"><div class="flex flex-col w-full">
+<!-- Top Command Hub / Breadcrumb & Status HUD -->
+<div class="flex flex-col gap-space-md mb-space-lg">
+<!-- Header Context Strip -->
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md bg-surface-container-low p-space-md rounded-xl shadow-md">
+<div class="flex items-center gap-space-md">
+<div class="w-12 h-12 rounded-lg bg-surface-container-high flex items-center justify-center text-primary shadow-[0_0_16px_rgba(212,175,55,0.25)]">
+<span class="material-symbols-outlined text-[28px]">movie_filter</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs">
+<span class="font-label-mono-sm text-label-mono-sm text-primary uppercase">PRODUCTION PIPELINE // STAGE 04</span>
+<span class="font-label-mono-sm text-label-mono-sm text-outline">•</span>
+<span class="font-label-mono-sm text-label-mono-sm text-secondary">ACEScg COLOR PIPELINE</span>
+</div>
+<h1 class="font-headline-lg text-headline-md lg:text-headline-lg font-bold text-on-surface tracking-tight">
+            FX — استوديو المؤثرات البصرية وتفريغ الستوريبورد الميداني
+          </h1>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            حملة «سكب الوعي 2026 — لحظة الصمت السائل (The Liquid Pause)» • تفريغ اللقطات للمخرج وطاقم الـ VFX
+          </p>
+</div>
+</div>
+<!-- Quick Set Actions & Timecode Sync -->
+<div class="flex flex-wrap items-center gap-space-sm">
+<div class="flex items-center gap-space-xs bg-surface-container px-space-md py-2 rounded-lg">
+<span class="material-symbols-outlined text-secondary text-body-md animate-pulse">videocam</span>
+<div class="flex flex-col text-right">
+<span class="font-label-mono-sm text-label-mono-sm text-outline">ARRI MASTER TC</span>
+<span class="font-label-mono-md text-label-mono-md text-on-surface font-semibold" id="master-tc">00:04:12:00</span>
+</div>
+</div>
+<button class="flex items-center gap-space-xs px-space-md py-2 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors" id="dispatch-alert-btn">
+<span class="material-symbols-outlined text-primary text-body-md">cell_tower</span>
+<span class="font-body-sm text-body-sm font-medium">بث التحديثات للميدان</span>
+</button>
+<button class="flex items-center gap-space-xs px-space-md py-2 rounded-lg bg-primary-container hover:bg-primary text-on-primary-container font-semibold transition-all shadow-[0_0_14px_rgba(212,175,55,0.3)]">
+<span class="material-symbols-outlined text-body-md">bolt</span>
+<span class="font-body-sm text-body-sm">توليد حزمة Previz المجمعة</span>
+</button>
+</div>
+</div>
+<!-- HUD Real-Time Metrics Strip (4 Technical Nodes) -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-space-md">
+<!-- Metric 1: Shots count -->
+<div class="bg-surface-container p-space-md rounded-xl flex items-center justify-between shadow-sm relative overflow-hidden">
+<div class="flex flex-col gap-space-xs z-10">
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant uppercase">لقطات الـ VFX المعتمدة</span>
+<div class="flex items-baseline gap-space-xs">
+<span class="font-headline-lg text-headline-lg font-bold text-primary">3</span>
+<span class="font-body-sm text-body-sm text-outline">مشاهد / 7 ألواح (Plates)</span>
+</div>
+<span class="font-label-mono-sm text-label-mono-sm text-secondary">توليد 100% متوافق مع RAW</span>
+</div>
+<div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-primary z-10">
+<span class="material-symbols-outlined text-body-lg">filter_drama</span>
+</div>
+<div class="absolute -left-6 -bottom-6 w-24 h-24 bg-primary/5 rounded-full blur-xl pointer-events-none"></div>
+</div>
+<!-- Metric 2: Neural Core Engine -->
+<div class="bg-surface-container p-space-md rounded-xl flex items-center justify-between shadow-sm relative overflow-hidden">
+<div class="flex flex-col gap-space-xs z-10">
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant uppercase">المحرك العصبي المزدوج</span>
+<div class="flex items-baseline gap-space-xs">
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface">ComfyUI + Sora 2</span>
+</div>
+<div class="flex items-center gap-1 font-label-mono-sm text-label-mono-sm text-secondary">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary animate-ping"></span>
+<span>Unreal Engine 5.4 Live Link</span>
+</div>
+</div>
+<div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-secondary z-10">
+<span class="material-symbols-outlined text-body-lg">neurology</span>
+</div>
+<div class="absolute -left-6 -bottom-6 w-24 h-24 bg-secondary/5 rounded-full blur-xl pointer-events-none"></div>
+</div>
+<!-- Metric 3: Fluid Simulation -->
+<div class="bg-surface-container p-space-md rounded-xl flex items-center justify-between shadow-sm relative overflow-hidden">
+<div class="flex flex-col gap-space-xs z-10">
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant uppercase">محاكاة السوائل (FLIP Fluids)</span>
+<div class="flex items-baseline gap-space-xs">
+<span class="font-headline-sm text-headline-sm font-bold text-primary">120 FPS</span>
+<span class="font-label-mono-sm text-label-mono-sm text-outline">Bake Cache</span>
+</div>
+<span class="font-label-mono-sm text-label-mono-sm px-1.5 py-0.5 rounded bg-surface-container-highest text-primary w-fit">
+            RENDER QUEUE: READY
+          </span>
+</div>
+<div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-primary z-10">
+<span class="material-symbols-outlined text-body-lg">water_drop</span>
+</div>
+<div class="absolute -left-6 -bottom-6 w-24 h-24 bg-primary/5 rounded-full blur-xl pointer-events-none"></div>
+</div>
+<!-- Metric 4: Hardware & Optics Sync -->
+<div class="bg-surface-container p-space-md rounded-xl flex items-center justify-between shadow-sm relative overflow-hidden">
+<div class="flex flex-col gap-space-xs z-10">
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant uppercase">مزامنة الكاميرا والعدسات</span>
+<div class="flex items-baseline gap-space-xs">
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface">Alexa 65</span>
+<span class="font-body-sm text-body-sm text-outline">+ Cooke Anamorphic</span>
+</div>
+<span class="font-label-mono-sm text-label-mono-sm text-secondary">
+            SMPTE 24.00 FPS • Genlock Synced
+          </span>
+</div>
+<div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-secondary z-10">
+<span class="material-symbols-outlined text-body-lg">lens</span>
+</div>
+<div class="absolute -left-6 -bottom-6 w-24 h-24 bg-secondary/5 rounded-full blur-xl pointer-events-none"></div>
+</div>
+</div>
+</div>
+<!-- Main Workspace Grid: Storyboard Slate (Right/Center RTL) + Live Director Sync Console (Left RTL) -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-space-lg items-start">
+<!-- PRIMARY REGION (Storyboard Slates & Prompts) - Span 8 -->
+<div class="xl:col-span-8 flex flex-col gap-space-lg">
+<!-- Slate Header with View Selector -->
+<div class="flex flex-wrap items-center justify-between gap-space-md bg-surface-container-low px-space-md py-space-sm rounded-xl">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary text-body-lg">view_carousel</span>
+<h2 class="font-headline-sm text-headline-sm font-bold text-on-surface">
+            تفريغ الستوريبورد الميداني (VFX Storyboard Slate)
+          </h2>
+<span class="font-label-mono-sm text-label-mono-sm bg-surface-container px-2 py-0.5 rounded text-outline">
+            3 SEQUENCE BOARDS
+          </span>
+</div>
+<div class="flex items-center gap-space-xs bg-surface-container-lowest p-1 rounded-lg">
+<button class="px-space-sm py-1 rounded bg-surface-container-high text-primary font-label-mono-sm text-label-mono-sm font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">grid_view</span>
+<span>عرض تفصيلي</span>
+</button>
+<button class="px-space-sm py-1 rounded text-on-surface-variant hover:text-on-surface font-label-mono-sm text-label-mono-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">table_rows</span>
+<span>قائمة اللقطات (Shot List)</span>
+</button>
+<button class="px-space-sm py-1 rounded text-on-surface-variant hover:text-on-surface font-label-mono-sm text-label-mono-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">layers</span>
+<span>طبقات التوليد (Passes)</span>
+</button>
+</div>
+</div>
+<!-- SCENE 01 CARD -->
+<div class="bg-surface-container rounded-xl overflow-hidden shadow-md transition-all hover:shadow-[0_0_24px_rgba(212,175,55,0.12)]">
+<!-- Scene Meta Top Strip -->
+<div class="bg-surface-container-high px-space-md py-space-sm flex flex-wrap items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-md">
+<div class="flex items-center gap-space-xs">
+<span class="w-2.5 h-2.5 rounded-full bg-primary animate-pulse"></span>
+<span class="font-label-mono-md text-label-mono-md font-bold text-primary">المشهد ٠١ // SCENE 01</span>
+</div>
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface">انكسار الصمت (The Breaking Silence)</span>
+</div>
+<div class="flex items-center gap-space-xs font-label-mono-sm text-label-mono-sm">
+<span class="px-2 py-0.5 rounded bg-surface-container-lowest text-secondary">00:00:00:00 ➔ 00:00:08:00 (8 ثوانٍ)</span>
+<span class="px-2 py-0.5 rounded bg-primary-container/20 text-primary font-semibold">PASS 1: WATER SIM</span>
+</div>
+</div>
+<div class="p-space-md grid grid-cols-1 lg:grid-cols-12 gap-space-md">
+<!-- Storyboard Artwork Visual & Passes -->
+<div class="lg:col-span-5 flex flex-col gap-space-sm">
+<div class="relative w-full h-56 rounded-lg overflow-hidden bg-surface-container-lowest group">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Hyper-detailed extreme macro cinematic shot of a single crystal-clear mineral water droplet suspended weightlessly in mid-air within a deep obsidian void. Perfect refractive light beam cutting through the fluid at 120fps, subtle air micro-bubbles frozen in time, Cooke anamorphic lens flares in deep amber gold and cold cyan, 8k resolution, photorealistic master grade." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXF_xLLHo7oQTk6xY7P10pOkxeDBsGlrjPkP0oPL8AzIjtBGXsB6J9_LcbDZwJFtNwMfYdpgZkFTY71vWLuFE3upUABWZsap9Fqd0Vhs-n2V3bfOOG1tRA4dOUVzNKE9IunBN3lfo4S0_RGEQp919ybB3UG8v2NSJMv0Wp2qsiFSFMzl8x6NYPsZTTOKtuEfk5WntLeJKXCLzGU1kABJwMQ599LfQA0gXf9NPpzE35u9XsrhX5bPUW"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-transparent to-transparent opacity-80"></div>
+<!-- Frame Overlay Marks -->
+<div class="absolute top-2 right-2 flex items-center gap-1 bg-surface-container-lowest/80 backdrop-blur-md px-2 py-0.5 rounded">
+<span class="font-label-mono-sm text-label-mono-sm text-primary">SLATE #01-A</span>
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+</div>
+<div class="absolute bottom-2 right-2 left-2 flex items-center justify-between text-on-surface font-label-mono-sm text-label-mono-sm">
+<span class="bg-surface-container-lowest/90 px-2 py-0.5 rounded text-secondary">120 FPS HIGH-SPEED</span>
+<span class="bg-surface-container-lowest/90 px-2 py-0.5 rounded text-outline">MACRO EXT. 24mm</span>
+</div>
+</div>
+<!-- Plate Sub-Pass Thumbnails -->
+<div class="grid grid-cols-3 gap-space-xs">
+<div class="bg-surface-container-low p-1.5 rounded text-center flex flex-col items-center">
+<span class="font-label-mono-sm text-label-mono-sm text-outline">DIFFUSE</span>
+<span class="font-label-mono-sm text-label-mono-sm text-primary font-bold">100% OK</span>
+</div>
+<div class="bg-surface-container-low p-1.5 rounded text-center flex flex-col items-center">
+<span class="font-label-mono-sm text-label-mono-sm text-outline">DEPTH Z</span>
+<span class="font-label-mono-sm text-label-mono-sm text-secondary font-bold">CONTROLNET</span>
+</div>
+<div class="bg-surface-container-low p-1.5 rounded text-center flex flex-col items-center">
+<span class="font-label-mono-sm text-label-mono-sm text-outline">VELOCITY</span>
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface font-bold">FLIP 120f</span>
+</div>
+</div>
+</div>
+<!-- Technical Specs & Directing Prompts -->
+<div class="lg:col-span-7 flex flex-col justify-between gap-space-md">
+<!-- Narrative Context & Lighting -->
+<div class="flex flex-col gap-space-xs">
+<div class="flex flex-wrap items-center gap-space-xs text-on-surface-variant font-label-mono-sm text-label-mono-sm">
+<span class="px-2 py-0.5 rounded bg-surface-container-low text-primary">العدسة: Macro Extreme 24mm Cooke</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-low text-on-surface">إضاءة: High Contrast Moody 5600K</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-low text-secondary">حركة: Dolly-In Z: 0.8m/s</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface leading-relaxed mt-1">
+<strong class="text-primary font-medium">سرد المشهد:</strong> قطرة ماء نقية فائقة المايكرو معلقة في فراغ لزج، انكسار ضوئي فيزياوي دقيق بمعدل 120 إطار في الثانية، تجميد تام للحركة وحبيبات الهواء الصامتة قبل ملامسة شفتي البطل.
+              </p>
+</div>
+<!-- Raw Prompt Box -->
+<div class="bg-surface-container-lowest p-space-sm rounded-lg flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-mono-sm text-label-mono-sm text-outline uppercase">AI Neural VFX Prompt (ComfyUI SVD)</span>
+<div class="flex items-center gap-2">
+<span class="font-label-mono-sm text-label-mono-sm text-secondary">Seed: 948102377</span>
+<span class="font-label-mono-sm text-label-mono-sm text-primary">CFG: 7.5</span>
+</div>
+</div>
+<code class="font-label-mono-sm text-label-mono-sm text-on-surface-variant bg-surface-container-low p-2 rounded block overflow-x-auto text-left" dir="ltr">
+                ultra macro 120fps fluid simulation, single pure water drop suspended in weightless void, optical caustics, pristine crystal refraction, volumetric light beams 5600k, hyperrealistic surface tension, anamorphic bokeh, negative space --ar 2.39:1 --style raw
+              </code>
+<div class="flex items-center justify-between pt-1">
+<span class="font-label-mono-sm text-label-mono-sm text-error">
+                  Negative: [no motion blur, no artificial glare, no running athletes, no splash chaotic debris]
+                </span>
+<button class="flex items-center gap-1 font-label-mono-sm text-label-mono-sm text-primary hover:text-primary-fixed transition-colors" onclick="navigator.clipboard.writeText('ultra macro 120fps fluid simulation, single pure water drop suspended in weightless void, optical caustics, pristine crystal refraction, volumetric light beams 5600k, hyperrealistic surface tension, anamorphic bokeh, negative space --ar 2.39:1 --style raw'); alert('تم نسخ أمر التوليد بدقة!');">
+<span class="material-symbols-outlined text-[14px]">content_copy</span>
+<span>نسخ الأمر</span>
+</button>
+</div>
+</div>
+<!-- Action Strip for Scene 01 -->
+<div class="flex flex-wrap items-center justify-between gap-space-sm pt-2">
+<div class="flex items-center gap-space-xs">
+<button class="px-space-md py-1.5 rounded-lg bg-surface-container-high hover:bg-surface-bright text-on-surface font-body-sm text-body-sm flex items-center gap-1.5 transition-colors">
+<span class="material-symbols-outlined text-secondary text-body-md">visibility</span>
+<span>معاينة الطبقات (Depth / Velocity)</span>
+</button>
+<button class="px-space-md py-1.5 rounded-lg bg-surface-container-high hover:bg-surface-bright text-on-surface font-body-sm text-body-sm flex items-center gap-1.5 transition-colors">
+<span class="material-symbols-outlined text-primary text-body-md">play_arrow</span>
+<span>Previz 3D</span>
+</button>
+</div>
+<button class="px-space-md py-1.5 rounded-lg bg-primary text-on-primary font-body-sm text-body-sm font-bold hover:bg-primary-fixed transition-colors flex items-center gap-1.5 shadow-[0_0_10px_rgba(212,175,55,0.25)]">
+<span class="material-symbols-outlined text-body-md">send</span>
+<span>إرسال لطابور الرندرة (Render Queue)</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- SCENE 02 CARD -->
+<div class="bg-surface-container rounded-xl overflow-hidden shadow-md transition-all hover:shadow-[0_0_24px_rgba(212,175,55,0.12)]">
+<!-- Scene Meta Top Strip -->
+<div class="bg-surface-container-high px-space-md py-space-sm flex flex-wrap items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-md">
+<div class="flex items-center gap-space-xs">
+<span class="w-2.5 h-2.5 rounded-full bg-secondary animate-pulse"></span>
+<span class="font-label-mono-md text-label-mono-md font-bold text-secondary">المشهد ٠٢ // SCENE 02</span>
+</div>
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface">انغمار الحواس (Sensory Immersion)</span>
+</div>
+<div class="flex items-center gap-space-xs font-label-mono-sm text-label-mono-sm">
+<span class="px-2 py-0.5 rounded bg-surface-container-lowest text-secondary">00:00:08:00 ➔ 00:00:20:00 (12 ثانية)</span>
+<span class="px-2 py-0.5 rounded bg-secondary-container/20 text-secondary font-semibold">PASS 2: LORA HYDRATION</span>
+</div>
+</div>
+<div class="p-space-md grid grid-cols-1 lg:grid-cols-12 gap-space-md">
+<!-- Storyboard Artwork Visual & Passes -->
+<div class="lg:col-span-5 flex flex-col gap-space-sm">
+<div class="relative w-full h-56 rounded-lg overflow-hidden bg-surface-container-lowest group">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Cinematic medium close-up of a contemplative protagonist drinking crystalline water during golden hour. Gentle ripples form as the liquid touches lips, micro droplets floating gracefully in warm 3200k amber sidelight, soft volumetric haze, 35mm prime lens dolly-in, cinematic depth of field, master color grade, zero foam, pure fluid elegance." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBnm_uIE_MxpTcr2s8ZWbu8czSVrHuIQ-D1xLhaPAfDVyyRJ4B0BhxCAX10jSi2l8HhTktbP6nxEYLyk_MF64FrqGIyYsdI3peSGRmMgslG2W30i1NiJ9BBmdbeH80FuQ_9awPGMWY-J7Sm4URBd-x50Wd7ck2Ru3Bl6sWitbLFsXvXpoUFnBy5LAkvB3h5DW0TdWtYEeG4-Jsy3YM6-a15ohy7BJFbkRc2qLwu4ZmBmIoeAgAtWp5a"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-transparent to-transparent opacity-80"></div>
+<!-- Frame Overlay Marks -->
+<div class="absolute top-2 right-2 flex items-center gap-1 bg-surface-container-lowest/80 backdrop-blur-md px-2 py-0.5 rounded">
+<span class="font-label-mono-sm text-label-mono-sm text-secondary">SLATE #02-B</span>
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+</div>
+<div class="absolute bottom-2 right-2 left-2 flex items-center justify-between text-on-surface font-label-mono-sm text-label-mono-sm">
+<span class="bg-surface-container-lowest/90 px-2 py-0.5 rounded text-primary">LORA WEIGHT: 0.85</span>
+<span class="bg-surface-container-lowest/90 px-2 py-0.5 rounded text-outline">35mm PRIME DOLLY</span>
+</div>
+</div>
+<!-- Plate Sub-Pass Thumbnails -->
+<div class="grid grid-cols-3 gap-space-xs">
+<div class="bg-surface-container-low p-1.5 rounded text-center flex flex-col items-center">
+<span class="font-label-mono-sm text-label-mono-sm text-outline">CONTROLNET</span>
+<span class="font-label-mono-sm text-label-mono-sm text-secondary font-bold">DEPTH 1.2</span>
+</div>
+<div class="bg-surface-container-low p-1.5 rounded text-center flex flex-col items-center">
+<span class="font-label-mono-sm text-label-mono-sm text-outline">SKIN SSS</span>
+<span class="font-label-mono-sm text-label-mono-sm text-primary font-bold">NATURAL</span>
+</div>
+<div class="bg-surface-container-low p-1.5 rounded text-center flex flex-col items-center">
+<span class="font-label-mono-sm text-label-mono-sm text-outline">MIST PARTICLES</span>
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface font-bold">NIAGARA UE5</span>
+</div>
+</div>
+</div>
+<!-- Technical Specs & Directing Prompts -->
+<div class="lg:col-span-7 flex flex-col justify-between gap-space-md">
+<!-- Narrative Context & Lighting -->
+<div class="flex flex-col gap-space-xs">
+<div class="flex flex-wrap items-center gap-space-xs text-on-surface-variant font-label-mono-sm text-label-mono-sm">
+<span class="px-2 py-0.5 rounded bg-surface-container-low text-primary">العدسة: 35mm Prime Dolly-in (Slow Speed)</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-low text-on-surface">إضاءة: Golden Hour Ambient Soft 3200K</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-low text-secondary">الحزمة: LoRA Cinematic Hydration v2.1</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface leading-relaxed mt-1">
+<strong class="text-secondary font-medium">سرد المشهد:</strong> حركة بطيئة ومستقرة؛ ملامسة السائل البارد للشفاه مع انتشار تموجات هوائية بلورية ناعمة، محاكاة حركة جزيئات الرذاذ العائم في الهواء المحيط دون أي رغوة اصطناعية أو فوران مشتت.
+              </p>
+</div>
+<!-- Raw Prompt Box -->
+<div class="bg-surface-container-lowest p-space-sm rounded-lg flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-mono-sm text-label-mono-sm text-outline uppercase">AI Neural VFX Prompt (Sora 2 / ComfyUI)</span>
+<div class="flex items-center gap-2">
+<span class="font-label-mono-sm text-label-mono-sm text-secondary">LoRA: 0.85</span>
+<span class="font-label-mono-sm text-label-mono-sm text-primary">Steps: 45 (Euler)</span>
+</div>
+</div>
+<code class="font-label-mono-sm text-label-mono-sm text-on-surface-variant bg-surface-container-low p-2 rounded block overflow-x-auto text-left" dir="ltr">
+                cinematic slow-motion 35mm lens, liquid touching human lips, pristine water dispersion, soft golden hour rim light 3200k, natural calm expression, floating micro mist particles in backlight, peaceful sensory satisfaction, high dynamic range --v 6.1 --stylize 350
+              </code>
+<div class="flex items-center justify-between pt-1">
+<span class="font-label-mono-sm text-label-mono-sm text-error">
+                  Negative: [sweat droplets, exaggerated sports gulps, plastic bottle reflections, heavy foam, artificial cartoonish lighting]
+                </span>
+<button class="flex items-center gap-1 font-label-mono-sm text-label-mono-sm text-primary hover:text-primary-fixed transition-colors" onclick="navigator.clipboard.writeText('cinematic slow-motion 35mm lens, liquid touching human lips, pristine water dispersion, soft golden hour rim light 3200k, natural calm expression, floating micro mist particles in backlight, peaceful sensory satisfaction, high dynamic range --v 6.1 --stylize 350'); alert('تم نسخ أمر التوليد للمشهد ٠٢!');">
+<span class="material-symbols-outlined text-[14px]">content_copy</span>
+<span>نسخ الأمر</span>
+</button>
+</div>
+</div>
+<!-- Action Strip for Scene 02 -->
+<div class="flex flex-wrap items-center justify-between gap-space-sm pt-2">
+<div class="flex items-center gap-space-xs">
+<button class="px-space-md py-1.5 rounded-lg bg-surface-container-high hover:bg-surface-bright text-on-surface font-body-sm text-body-sm flex items-center gap-1.5 transition-colors">
+<span class="material-symbols-outlined text-secondary text-body-md">tune</span>
+<span>ضبط وزن الـ LoRA</span>
+</button>
+<button class="px-space-md py-1.5 rounded-lg bg-surface-container-high hover:bg-surface-bright text-on-surface font-body-sm text-body-sm flex items-center gap-1.5 transition-colors">
+<span class="material-symbols-outlined text-primary text-body-md">play_arrow</span>
+<span>Previz 3D</span>
+</button>
+</div>
+<button class="px-space-md py-1.5 rounded-lg bg-primary text-on-primary font-body-sm text-body-sm font-bold hover:bg-primary-fixed transition-colors flex items-center gap-1.5 shadow-[0_0_10px_rgba(212,175,55,0.25)]">
+<span class="material-symbols-outlined text-body-md">send</span>
+<span>إرسال لطابور الرندرة (Render Queue)</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- SCENE 03 CARD -->
+<div class="bg-surface-container rounded-xl overflow-hidden shadow-md transition-all hover:shadow-[0_0_24px_rgba(212,175,55,0.12)]">
+<!-- Scene Meta Top Strip -->
+<div class="bg-surface-container-high px-space-md py-space-sm flex flex-wrap items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-md">
+<div class="flex items-center gap-space-xs">
+<span class="w-2.5 h-2.5 rounded-full bg-primary animate-pulse"></span>
+<span class="font-label-mono-md text-label-mono-md font-bold text-primary">المشهد ٠٣ // SCENE 03</span>
+</div>
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface">سيادة الوضوح (Sovereignty of Clarity)</span>
+</div>
+<div class="flex items-center gap-space-xs font-label-mono-sm text-label-mono-sm">
+<span class="px-2 py-0.5 rounded bg-surface-container-lowest text-secondary">00:00:20:00 ➔ 00:00:30:00 (10 ثوانٍ)</span>
+<span class="px-2 py-0.5 rounded bg-primary-container/20 text-primary font-semibold">PASS 3: GLASS 3D EMBED</span>
+</div>
+</div>
+<div class="p-space-md grid grid-cols-1 lg:grid-cols-12 gap-space-md">
+<!-- Storyboard Artwork Visual & Passes -->
+<div class="lg:col-span-5 flex flex-col gap-space-sm">
+<div class="relative w-full h-56 rounded-lg overflow-hidden bg-surface-container-lowest group">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Wide epic cinematic shot at dawn, cold horizon with first golden light beam touching the horizon. Subtle refractive 3D glass brand typography elegantly integrated into the atmosphere with zero opacity harshness. The calm protagonist stands overlooking the vast tranquil desert landscape, Cooke 50mm anamorphic wide, ultra clean cinematic clarity, master finish." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD0z58hbqGE7_2mrPUiilpGU_T4-zLGfFy1N3EcGa-DcmvD7tVOix515UwIxwsIHYiukTaWTSSKG6K7KZlunUwt6Lx4BueFGQUkfZyZGwP5BLmrQ1jTEyTSb8hwEG6RbyIN1Pmz-C7AF9lknj6L6V89HDUPUXa3j6iSJv8lik1c6tY0oEIJGNgqO6ylJFGGnae1gr39YzmPxyOtlfq7T-pFcbeFd-gbCPtn5tKMx6kVvU8mBFGztvUD"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-transparent to-transparent opacity-80"></div>
+<!-- Frame Overlay Marks -->
+<div class="absolute top-2 right-2 flex items-center gap-1 bg-surface-container-lowest/80 backdrop-blur-md px-2 py-0.5 rounded">
+<span class="font-label-mono-sm text-label-mono-sm text-primary">SLATE #03-C</span>
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+</div>
+<div class="absolute bottom-2 right-2 left-2 flex items-center justify-between text-on-surface font-label-mono-sm text-label-mono-sm">
+<span class="bg-surface-container-lowest/90 px-2 py-0.5 rounded text-secondary">GLASS EMBED 3D</span>
+<span class="bg-surface-container-lowest/90 px-2 py-0.5 rounded text-outline">50mm ANAMORPHIC</span>
+</div>
+</div>
+<!-- Plate Sub-Pass Thumbnails -->
+<div class="grid grid-cols-3 gap-space-xs">
+<div class="bg-surface-container-low p-1.5 rounded text-center flex flex-col items-center">
+<span class="font-label-mono-sm text-label-mono-sm text-outline">3D TRACKING</span>
+<span class="font-label-mono-sm text-label-mono-sm text-primary font-bold">PFTRACK 0.02e</span>
+</div>
+<div class="bg-surface-container-low p-1.5 rounded text-center flex flex-col items-center">
+<span class="font-label-mono-sm text-label-mono-sm text-outline">REFRACTION</span>
+<span class="font-label-mono-sm text-label-mono-sm text-secondary font-bold">RAYTRACED</span>
+</div>
+<div class="bg-surface-container-low p-1.5 rounded text-center flex flex-col items-center">
+<span class="font-label-mono-sm text-label-mono-sm text-outline">GRADE LUT</span>
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface font-bold">ACES_GOLD.cube</span>
+</div>
+</div>
+</div>
+<!-- Technical Specs & Directing Prompts -->
+<div class="lg:col-span-7 flex flex-col justify-between gap-space-md">
+<!-- Narrative Context & Lighting -->
+<div class="flex flex-col gap-space-xs">
+<div class="flex flex-wrap items-center gap-space-xs text-on-surface-variant font-label-mono-sm text-label-mono-sm">
+<span class="px-2 py-0.5 rounded bg-surface-container-low text-primary">العدسة: 50mm Anamorphic Wide Horizon</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-low text-on-surface">إضاءة: Dawn Cold Horizon + Pure Gold Sunbeam</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-low text-secondary">مؤثرات: Glass Refraction 3D Logo Embed</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface leading-relaxed mt-1">
+<strong class="text-primary font-medium">سرد المشهد:</strong> دمج هوية البراند بنعومة زجاجية ثلاثية الأبعاد (Glass Refraction 3D Logo Embed) في الأفق المفتوح، شروق شمس صامت وانعكاسات نقية على وجه الممثل تؤكد سيادة العقل الصافي.
+              </p>
+</div>
+<!-- Raw Prompt Box -->
+<div class="bg-surface-container-lowest p-space-sm rounded-lg flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-mono-sm text-label-mono-sm text-outline uppercase">AI Neural VFX Prompt (Unreal Live Link)</span>
+<div class="flex items-center gap-2">
+<span class="font-label-mono-sm text-label-mono-sm text-secondary">Focal: 50mm Anamorphic</span>
+<span class="font-label-mono-sm text-label-mono-sm text-primary">ACEScg LUT</span>
+</div>
+</div>
+<code class="font-label-mono-sm text-label-mono-sm text-on-surface-variant bg-surface-container-low p-2 rounded block overflow-x-auto text-left" dir="ltr">
+                wide dawn horizon landscape, pristine silence, pure morning cold-to-warm light gradation, integrated transparent glass typographic sculpture reflecting morning sun rays, cinematic stillness, arri alexa 65 look, 2.39:1 cinemascope --no loud branding --film grain subtle
+              </code>
+<div class="flex items-center justify-between pt-1">
+<span class="font-label-mono-sm text-label-mono-sm text-error">
+                  Negative: [oversaturated sky, heavy clouds, corporate vector logo overlays, fast cuts, noisy compression]
+                </span>
+<button class="flex items-center gap-1 font-label-mono-sm text-label-mono-sm text-primary hover:text-primary-fixed transition-colors" onclick="navigator.clipboard.writeText('wide dawn horizon landscape, pristine silence, pure morning cold-to-warm light gradation, integrated transparent glass typographic sculpture reflecting morning sun rays, cinematic stillness, arri alexa 65 look, 2.39:1 cinemascope --no loud branding --film grain subtle'); alert('تم نسخ أمر التوليد للمشهد ٠٣!');">
+<span class="material-symbols-outlined text-[14px]">content_copy</span>
+<span>نسخ الأمر</span>
+</button>
+</div>
+</div>
+<!-- Action Strip for Scene 03 -->
+<div class="flex flex-wrap items-center justify-between gap-space-sm pt-2">
+<div class="flex items-center gap-space-xs">
+<button class="px-space-md py-1.5 rounded-lg bg-surface-container-high hover:bg-surface-bright text-on-surface font-body-sm text-body-sm flex items-center gap-1.5 transition-colors">
+<span class="material-symbols-outlined text-secondary text-body-md">view_in_ar</span>
+<span>معاينة مجسم الـ 3D Logo</span>
+</button>
+<button class="px-space-md py-1.5 rounded-lg bg-surface-container-high hover:bg-surface-bright text-on-surface font-body-sm text-body-sm flex items-center gap-1.5 transition-colors">
+<span class="material-symbols-outlined text-primary text-body-md">play_arrow</span>
+<span>Previz 3D</span>
+</button>
+</div>
+<button class="px-space-md py-1.5 rounded-lg bg-primary text-on-primary font-body-sm text-body-sm font-bold hover:bg-primary-fixed transition-colors flex items-center gap-1.5 shadow-[0_0_10px_rgba(212,175,55,0.25)]">
+<span class="material-symbols-outlined text-body-md">send</span>
+<span>إرسال لطابور الرندرة (Render Queue)</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- SECONDARY REGION: Neural Prompt Console & On-Set Hardware Dispatch (Left RTL) - Span 4 -->
+<div class="xl:col-span-4 flex flex-col gap-space-lg">
+<!-- Neural Prompt Engineering Console -->
+<div class="bg-surface-container rounded-xl p-space-md shadow-md flex flex-col gap-space-md">
+<div class="flex items-center justify-between pb-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-body-lg">terminal</span>
+<h3 class="font-headline-sm text-headline-sm font-bold text-on-surface">
+              وحدة التحكم بالأوامر العصبية (Prompt Lab)
+            </h3>
+</div>
+<span class="font-label-mono-sm text-label-mono-sm text-secondary bg-surface-container-high px-2 py-0.5 rounded">
+            LIVE ENGINE
+          </span>
+</div>
+<!-- Master Positive Prompt Section -->
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<label class="font-label-mono-sm text-label-mono-sm text-on-surface font-semibold flex items-center gap-1">
+<span>الموجه الأساسي السينمائي (Master Positive Prompt)</span>
+</label>
+<span class="font-label-mono-sm text-label-mono-sm text-primary">PROMPT v2.4</span>
+</div>
+<textarea class="w-full bg-surface-container-lowest p-space-sm rounded-lg font-label-mono-sm text-label-mono-sm text-on-surface focus:outline-none focus:ring-1 focus:ring-primary transition-all resize-none" dir="ltr" rows="4">ultra cinematic, anamorphic lens 2.39:1, liquid pause hydration campaign 2026, meditative pristine stillness, hyper-detailed caustics, ACEScg color gamut, Cooke spherical bokeh, arri alexa 65 master plate, volumetric subtle golden dust, zero noise, high-precision physics simulation</textarea>
+<span class="font-body-sm text-body-sm text-outline">
+            توجيه إخراجي: موجه مصمم للجمع بين دقة محاكاة FLIP Fluids وأناقة الإضاءة السينمائية 5600K.
+          </span>
+</div>
+<!-- Strict Negative Constraints Section -->
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<label class="font-label-mono-sm text-label-mono-sm text-error font-semibold flex items-center gap-1">
+<span>الموجه السلبي المقيد للكليشيهات (Strict Negative)</span>
+</label>
+<span class="font-label-mono-sm text-label-mono-sm text-error bg-error-container/20 px-1.5 rounded">ENFORCED</span>
+</div>
+<textarea class="w-full bg-surface-container-lowest p-space-sm rounded-lg font-label-mono-sm text-label-mono-sm text-on-surface-variant focus:outline-none focus:ring-1 focus:ring-error transition-all resize-none" dir="ltr" rows="3">commercial beverage clichés, explosive water splashes, sweat dripping athletes, aggressive dynamic gym motion blur, low quality render, cartoonish shaders, CGI artifacts, plastic sheen, oversaturated blue</textarea>
+</div>
+<!-- Engine Parameter Steppers -->
+<div class="bg-surface-container-low p-space-sm rounded-lg flex flex-col gap-space-sm">
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant uppercase">معايير التصوير والمحاكاة (Camera Matrix)</span>
+<div class="grid grid-cols-2 gap-space-sm">
+<div class="flex flex-col gap-1 bg-surface-container-lowest p-2 rounded">
+<span class="font-label-mono-sm text-label-mono-sm text-outline">FRAME RATE</span>
+<div class="flex items-center justify-between">
+<span class="font-label-mono-md text-label-mono-md text-primary font-bold">120.00 FPS</span>
+<span class="material-symbols-outlined text-outline text-[16px]">speed</span>
+</div>
+</div>
+<div class="flex flex-col gap-1 bg-surface-container-lowest p-2 rounded">
+<span class="font-label-mono-sm text-label-mono-sm text-outline">ASPECT RATIO</span>
+<div class="flex items-center justify-between">
+<span class="font-label-mono-md text-label-mono-md text-on-surface font-bold">2.39:1 Scope</span>
+<span class="material-symbols-outlined text-outline text-[16px]">aspect_ratio</span>
+</div>
+</div>
+<div class="flex flex-col gap-1 bg-surface-container-lowest p-2 rounded">
+<span class="font-label-mono-sm text-label-mono-sm text-outline">COLOR SPACE</span>
+<div class="flex items-center justify-between">
+<span class="font-label-mono-md text-label-mono-md text-secondary font-bold">ACEScg / DaVinci</span>
+<span class="material-symbols-outlined text-outline text-[16px]">palette</span>
+</div>
+</div>
+<div class="flex flex-col gap-1 bg-surface-container-lowest p-2 rounded">
+<span class="font-label-mono-sm text-label-mono-sm text-outline">SAMPLING MODEL</span>
+<div class="flex items-center justify-between">
+<span class="font-label-mono-md text-label-mono-md text-on-surface font-bold">Euler A / 50s</span>
+<span class="material-symbols-outlined text-outline text-[16px]">tune</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Master Generation Buttons -->
+<div class="flex flex-col gap-space-xs pt-1">
+<button class="w-full py-2.5 rounded-lg bg-primary-container hover:bg-primary text-on-primary-container font-semibold transition-all shadow-[0_0_16px_rgba(212,175,55,0.3)] flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-body-lg">auto_videocam</span>
+<span class="font-body-md text-body-md">توليد جميع اختبارات الـ Previz (Batch VFX)</span>
+</button>
+<button class="w-full py-2 rounded-lg bg-surface-container-high hover:bg-surface-bright text-on-surface font-body-sm text-body-sm transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-secondary text-body-md">file_download</span>
+<span class="">تصدير حزمة المخرج الميدانية (Director's Slate Package)</span>
+</button>
+</div>
+</div>
+<!-- Live Set Dispatch & Hardware Sync Console -->
+<div class="bg-surface-container rounded-xl p-space-md shadow-md flex flex-col gap-space-md">
+<div class="flex items-center justify-between pb-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-body-lg">router</span>
+<h3 class="font-headline-sm text-headline-sm font-bold text-on-surface">
+              مزامنة الطاقم والشاشات الميدانية
+            </h3>
+</div>
+<span class="flex h-2 w-2 relative">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-secondary"></span>
+</span>
+</div>
+<!-- Connected Video Village Monitors -->
+<div class="flex flex-col gap-space-xs">
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant uppercase">شاشات المخرج المتصلة (On-Set Monitors)</span>
+<div class="space-y-space-xs">
+<!-- Monitor 1 -->
+<div class="flex items-center justify-between bg-surface-container-lowest p-2 rounded-lg">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[18px]">desktop_windows</span>
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm text-on-surface font-medium">Atomos Shogun 7 (Director Mon)</span>
+<span class="font-label-mono-sm text-label-mono-sm text-outline">12G-SDI 4K • 0ms Delay</span>
+</div>
+</div>
+<span class="font-label-mono-sm text-label-mono-sm px-1.5 py-0.5 rounded bg-surface-container-high text-primary">LIVE</span>
+</div>
+<!-- Monitor 2 -->
+<div class="flex items-center justify-between bg-surface-container-lowest p-2 rounded-lg">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-[18px]">tablet_mac</span>
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm text-on-surface font-medium">SmallHD Cine 13 (DoP Rig)</span>
+<span class="font-label-mono-sm text-label-mono-sm text-outline">Wireless Teradek Bolt 4K</span>
+</div>
+</div>
+<span class="font-label-mono-sm text-label-mono-sm px-1.5 py-0.5 rounded bg-surface-container-high text-secondary">LOCKED</span>
+</div>
+<!-- Monitor 3 -->
+<div class="flex items-center justify-between bg-surface-container-lowest p-2 rounded-lg">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-on-surface-variant text-[18px]">smartphone</span>
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm text-on-surface font-medium">iPad Pro M4 (Script Supervisor)</span>
+<span class="font-label-mono-sm text-label-mono-sm text-outline">Frame.io Live C2C Link</span>
+</div>
+</div>
+<span class="font-label-mono-sm text-label-mono-sm px-1.5 py-0.5 rounded bg-surface-container-high text-on-surface-variant">ACTIVE</span>
+</div>
+</div>
+</div>
+<!-- LUT & Audio Pre-load Status -->
+<div class="bg-surface-container-low p-space-sm rounded-lg flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface font-semibold">حزمة المعايرة 3D LUT:</span>
+<span class="font-label-mono-sm text-label-mono-sm text-primary">LiquidPause_ACES_Gold.cube</span>
+</div>
+<div class="w-full bg-surface-container-lowest h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-full"></div>
+</div>
+<div class="flex items-center justify-between pt-1">
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface font-semibold">المسار الصوتي التجريبي (432Hz Audio Stem):</span>
+<span class="font-label-mono-sm text-label-mono-sm text-secondary">LOADED (Timecode Synced)</span>
+</div>
+</div>
+<!-- Set Export Quick Ribbons -->
+<div class="grid grid-cols-2 gap-space-xs">
+<button class="p-2 rounded bg-surface-container-high hover:bg-surface-bright text-on-surface font-body-sm text-body-sm flex items-center justify-center gap-1 transition-colors">
+<span class="material-symbols-outlined text-[16px] text-primary">description</span>
+<span>تصدير Shot-List CSV</span>
+</button>
+<button class="p-2 rounded bg-surface-container-high hover:bg-surface-bright text-on-surface font-body-sm text-body-sm flex items-center justify-center gap-1 transition-colors">
+<span class="material-symbols-outlined text-[16px] text-secondary">print</span>
+<span>طباعة Storyboard PDF</span>
+</button>
+</div>
+</div>
+<!-- Live Director Sound Waveform Ambient Widget -->
+<div class="bg-surface-container rounded-xl p-space-md shadow-md flex flex-col gap-space-xs relative overflow-hidden">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1 text-primary">
+<span class="material-symbols-outlined text-[18px]">graphic_eq</span>
+<span class="font-label-mono-sm text-label-mono-sm font-bold uppercase">432Hz Liquid Silence Track</span>
+</div>
+<span class="font-label-mono-sm text-label-mono-sm text-outline">-14 LUFS INTEGRATED</span>
+</div>
+<!-- Inline SVG Sound Waveform Chart -->
+<div class="w-full h-12 flex items-center pt-2">
+<svg class="w-full h-full text-secondary opacity-80" fill="none" preserveaspectratio="none" viewbox="0 0 300 40">
+<path d="M0 20 Q 15 5, 30 20 T 60 20 T 90 20 T 120 5 T 150 35 T 180 15 T 210 25 T 240 10 T 270 30 T 300 20" stroke="currentColor" stroke-linecap="round" stroke-width="2"></path>
+<path d="M0 20 Q 15 12, 30 20 T 60 20 T 90 20 T 120 10 T 150 30 T 180 18 T 210 22 T 240 15 T 270 25 T 300 20" opacity="0.6" stroke="#f2ca50" stroke-dasharray="2 3" stroke-width="1.5"></path>
+</svg>
+</div>
+<div class="flex items-center justify-between font-label-mono-sm text-label-mono-sm text-outline pt-1">
+<span>00:00:00:00</span>
+<span class="text-primary font-bold">PLAYHEAD: 00:04:12:00</span>
+<span>00:00:30:00</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Micro Interaction Script for Director Suite Experience -->
+<script>
+    // Live SMPTE Running Timecode Simulator
+    let frames = 0;
+    let seconds = 12;
+    let minutes = 4;
+    const tcEl = document.getElementById('master-tc');
+
+    setInterval(() => {
+      frames++;
+      if (frames >= 24) {
+        frames = 0;
+        seconds++;
+        if (seconds >= 60) {
+          seconds = 0;
+          minutes++;
+        }
+      }
+      const pad = (n) => n.toString().padStart(2, '0');
+      if (tcEl) {
+        tcEl.textContent = `00:${pad(minutes)}:${pad(seconds)}:${pad(frames)}`;
+      }
+    }, 1000 / 24);
+
+    // Set Dispatch Alert Interaction
+    const dispatchBtn = document.getElementById('dispatch-alert-btn');
+    if (dispatchBtn) {
+      dispatchBtn.addEventListener('click', () => {
+        dispatchBtn.classList.add('bg-primary', 'text-on-primary');
+        dispatchBtn.innerHTML = `
+          <span class="material-symbols-outlined text-[16px] animate-spin">sync</span>
+          <span class="font-body-sm text-body-sm">تم إرسال الإشعار لـ 3 شاشات</span>
+        `;
+        setTimeout(() => {
+          dispatchBtn.classList.remove('bg-primary', 'text-on-primary');
+          dispatchBtn.innerHTML = `
+            <span class="material-symbols-outlined text-primary text-body-md">cell_tower</span>
+            <span class="font-body-sm text-body-sm font-medium">بث التحديثات للميدان</span>
+          `;
+        }, 2200);
+      });
+    }
+  </script>
+</div></main></div>
+</body></html>

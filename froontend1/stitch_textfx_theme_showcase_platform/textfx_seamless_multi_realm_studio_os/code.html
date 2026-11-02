@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="web_standard" name="shell-type"/>
+<title>TextFX Studio OS — Multi-Realm Generative Suite</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&amp;family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&amp;family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;family=Outfit:wght@500;600;700;800&amp;family=Playfair+Display:ital,wght@0,600;0,700;1,400;1,600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<style>
+    @layer base {
+      html, body { margin: 0; padding: 0; }
+      body { overscroll-behavior: none; }
+    }
+    ::-webkit-scrollbar { display: none; }
+    .realm-view {
+      transition: opacity 0.32s cubic-bezier(0.16, 1, 0.3, 1), transform 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .realm-view.hidden-realm {
+      display: none !important;
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    .realm-view.active-realm {
+      display: flex !important;
+      opacity: 1;
+      transform: translateY(0);
+    }
+    /* Matrix scanline background texture for quantum */
+    .scanlines {
+      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.35) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 120, 0.01), rgba(0, 0, 255, 0.03));
+      background-size: 100% 3px, 6px 100%;
+    }
+    .paper-texture {
+      background-color: #faf7f2;
+      background-image: radial-gradient(#d3cbbf 0.75px, transparent 0.75px);
+      background-size: 16px 16px;
+    }
+  </style>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "noir-bg": "#07080a",
+            "noir-surface": "#0f1115",
+            "noir-card": "#15181e",
+            "noir-amber": "#f59e0b",
+            "noir-amber-glow": "#ffb95f",
+            "editorial-bg": "#f6f3ee",
+            "editorial-card": "#ffffff",
+            "editorial-border": "#e2ded6",
+            "editorial-ink": "#111215",
+            "editorial-oxblood": "#7a171d",
+            "editorial-gold": "#967540",
+            "quantum-bg": "#030708",
+            "quantum-surface": "#061214",
+            "quantum-emerald": "#10b981",
+            "quantum-cyan": "#06b6d4",
+            "quantum-border": "#0e2d2a",
+            // Standard system fallback colors
+            "surface-dim": "#121316",
+            "surface-container": "#1e2022",
+            "surface-container-high": "#292a2d",
+            "surface-container-lowest": "#0d0e11",
+            "primary": "#ffc174",
+            "primary-container": "#f59e0b",
+            "on-surface": "#e3e2e5",
+            "on-surface-variant": "#d8c3ad"
+          },
+          fontFamily: {
+            "display-hero": ["Outfit", "sans-serif"],
+            "body-md": ["Inter", "sans-serif"],
+            "label-mono": ["JetBrains Mono", "monospace"],
+            "serif-monocle": ["Playfair Display", "serif"],
+            "serif-didot": ["Cinzel", "serif"],
+            "serif-body": ["Cormorant Garamond", "serif"]
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-noir-bg font-body-md text-on-surface antialiased min-h-screen flex flex-col selection:bg-noir-amber selection:text-black transition-colors duration-500" id="app-body">
+<!-- ========================================================================= -->
+<!-- TOP UNIFIED HEADER WITH INTERACTIVE REALM SWITCHER                        -->
+<!-- ========================================================================= -->
+<header class="fixed top-0 left-0 w-full z-50 bg-[#0a0c10]/90 backdrop-blur-xl border-b border-white/5 transition-all duration-300" id="main-header">
+<div class="h-16 w-full px-5 lg:px-8 flex items-center justify-between gap-4">
+<!-- Brand & Project -->
+<div class="flex items-center gap-6 shrink-0">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-gradient-to-br from-amber-500 to-amber-700 flex items-center justify-center font-bold text-black shadow-lg shadow-amber-500/20 text-sm" id="brand-indicator">
+            TX
+          </div>
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5">
+<span class="font-display-hero text-base font-bold text-white tracking-wide leading-none" id="brand-title">TextFX</span>
+<span class="text-[9px] font-label-mono uppercase tracking-widest px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-400 font-bold border border-amber-500/30" id="realm-badge-pill">STUDIO OS</span>
+</div>
+<span class="font-label-mono text-[11px] text-zinc-400 tracking-wider" id="realm-subtitle">Aesthetic Paradigm Engine v5.0</span>
+</div>
+</div>
+<!-- Navigation Links -->
+<nav class="hidden 2xl:flex items-center gap-1 pl-4 border-l border-zinc-800">
+<a class="px-3 py-1.5 rounded-lg text-sm font-medium text-amber-400 bg-amber-500/10 border border-amber-500/20 transition-colors" href="#">Workbench</a>
+<a class="px-3 py-1.5 rounded-lg text-sm text-zinc-400 hover:text-white transition-colors" href="#">Model Pipelines</a>
+<a class="px-3 py-1.5 rounded-lg text-sm text-zinc-400 hover:text-white transition-colors" href="#">Prompt Forge</a>
+<a class="px-3 py-1.5 rounded-lg text-sm text-zinc-400 hover:text-white transition-colors" href="#">Assets Vault</a>
+</nav>
+</div>
+<!-- CENTER: SEAMLESS REALM SWITCHER PILL -->
+<div class="flex items-center justify-center flex-1 max-w-2xl px-2">
+<div class="bg-black/60 p-1.5 rounded-full border border-white/10 flex items-center gap-1 shadow-2xl backdrop-blur-md" id="switcher-container">
+<!-- TAB 1: DIRECTOR'S NOIR -->
+<button class="realm-toggle-btn px-4 py-2 rounded-full font-label-mono text-xs flex items-center gap-2 transition-all duration-300 font-semibold bg-amber-500 text-black shadow-lg shadow-amber-500/30 cursor-pointer" id="tab-noir" onclick="switchRealm('noir')" title="Director's Noir (Press 1)">
+<span class="text-sm">🎬</span>
+<span class="tracking-wide">Director's Noir</span>
+<span class="text-[10px] opacity-75 font-mono px-1 rounded bg-black/20">1</span>
+</button>
+<!-- TAB 2: HAUTE EDITORIAL -->
+<button class="realm-toggle-btn px-4 py-2 rounded-full font-label-mono text-xs flex items-center gap-2 transition-all duration-300 font-medium text-zinc-400 hover:text-white hover:bg-white/5 cursor-pointer" id="tab-editorial" onclick="switchRealm('editorial')" title="Haute Editorial (Press 2)">
+<span class="text-sm">🖋️</span>
+<span class="tracking-wide">Haute Editorial</span>
+<span class="text-[10px] opacity-60 font-mono px-1 rounded bg-white/10">2</span>
+</button>
+<!-- TAB 3: QUANTUM DECK -->
+<button class="realm-toggle-btn px-4 py-2 rounded-full font-label-mono text-xs flex items-center gap-2 transition-all duration-300 font-medium text-zinc-400 hover:text-white hover:bg-white/5 cursor-pointer" id="tab-quantum" onclick="switchRealm('quantum')" title="Quantum Deck (Press 3)">
+<span class="text-sm">⚡</span>
+<span class="tracking-wide">Quantum Deck</span>
+<span class="text-[10px] opacity-60 font-mono px-1 rounded bg-white/10">3</span>
+</button>
+</div>
+</div>
+<!-- Header End: Meta & Profile -->
+<div class="flex items-center gap-4 shrink-0">
+<div class="hidden md:flex items-center gap-2 px-3 py-1.5 bg-black/40 rounded-full border border-white/5" id="header-telemetry">
+<span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" id="header-status-dot"></span>
+<span class="font-label-mono text-xs text-zinc-300 uppercase" id="header-status-text">4x H100 ONLINE</span>
+<span class="font-label-mono text-xs text-amber-400">14ms</span>
+</div>
+<button class="relative p-2 rounded-lg text-zinc-400 hover:text-white hover:bg-white/5 transition-colors" title="Studio Notifications" type="button">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-amber-500" id="header-bell-badge"></span>
+</button>
+<div class="flex items-center gap-2.5 pl-2 border-l border-zinc-800">
+<div class="relative">
+<img alt="Alex Vance" class="w-8 h-8 rounded-full object-cover ring-1 ring-amber-500/40" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAdChO7WR2B9KuIc2MKmeibOoWrEXeWUIJBthhqvdwmPL4TDUZcaYAwc7-8U_C-ggL--4vJehA8wYvuJCi0Ed-r-o2tC6HKqXzvYoAjHOA-NjD845ORLaHsTPSGz9qn3yUfgD92T-36uMEjl6VSLZwcA2PCc-5Z3fDG6UV4c18g09J2z8NWyTfF2Wm7h4efxyR61ZSmCGTCvaTQa-J2crlo8BerPYOzN3JUog5o5_wfdM0L9YZLtw0jvA"/>
+<span class="absolute -bottom-1 -right-1 px-1 bg-amber-500 text-black font-label-mono text-[8px] font-bold rounded uppercase" id="user-badge">PRO</span>
+</div>
+<div class="hidden lg:flex flex-col">
+<span class="text-xs text-white font-medium leading-none">Alex Vance</span>
+<span class="font-label-mono text-[10px] text-amber-400/90 leading-none mt-1" id="user-role">Directeur Auteur</span>
+</div>
+</div>
+</div>
+</div>
+</header>
+<!-- ========================================================================= -->
+<!-- MAIN OS WORKBENCH REALMS (ONLY ACTIVE REALM IS RENDERED/VISIBLE)          -->
+<!-- ========================================================================= -->
+<main class="w-full pt-20 flex-1 flex flex-col relative overflow-x-hidden">
+<!-- --------------------------------------------------------------------- -->
+<!-- REALM 1: DIRECTOR'S NOIR WORKBENCH (CINEMATIC 35MM)                   -->
+<!-- --------------------------------------------------------------------- -->
+<div class="realm-view active-realm flex-col w-full max-w-[1720px] mx-auto px-5 lg:px-8 py-6 gap-6" id="realm-noir">
+<!-- Realm Context Bar -->
+<div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 p-4 rounded-2xl bg-noir-card/60 border border-amber-500/20 backdrop-blur-md">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 text-xl">
+            🎬
+          </div>
+<div>
+<div class="flex items-center gap-2">
+<h2 class="font-display-hero text-lg font-bold text-white tracking-tight">Director's Noir 35mm Atelier</h2>
+<span class="px-2 py-0.5 rounded bg-amber-500/20 text-amber-400 font-label-mono text-[11px] font-semibold border border-amber-500/30 uppercase">ANAMORPHIC T1.8</span>
+<span class="text-xs text-zinc-500">•</span>
+<span class="text-xs text-zinc-400 font-label-mono">KODAK 5219 VISION3</span>
+</div>
+<p class="text-xs text-zinc-400">Volumetric 3200K tungsten luminescence, anamorphic depth falloff, and photorealistic 65mm grain synthesis.</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<div class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-black/60 border border-zinc-800 text-zinc-400 font-label-mono text-xs">
+<span class="w-2 h-2 rounded-full bg-amber-400"></span>
+<span>RATIO: 2.39:1 CinemaScope</span>
+</div>
+<button class="px-3 py-1.5 rounded-lg bg-zinc-800/80 hover:bg-zinc-700 text-xs text-zinc-300 font-medium flex items-center gap-1.5 border border-zinc-700 transition-colors">
+<span class="material-symbols-outlined text-[16px]">tune</span>
+<span>Lens Presets</span>
+</button>
+</div>
+</div>
+<!-- Main Studio 2-Column Split -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-6 items-start">
+<!-- Left: Prompt Forge & Director Controls (7 cols) -->
+<div class="xl:col-span-7 flex flex-col gap-6">
+<!-- Cinematic Directive Card -->
+<div class="bg-noir-card rounded-2xl p-5 border border-amber-500/20 shadow-xl shadow-black/60 flex flex-col gap-4 relative overflow-hidden">
+<div class="absolute -top-20 -left-20 w-60 h-60 rounded-full bg-amber-500/10 blur-[80px] pointer-events-none"></div>
+<div class="flex items-center justify-between">
+<span class="font-label-mono text-xs font-semibold uppercase tracking-wider text-amber-400 flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+                Scene Script // Ext. Neo-Shibuya Rainy Night
+              </span>
+<span class="text-xs font-label-mono text-zinc-400">TOKENS: 52/75 • CFG: 6.8</span>
+</div>
+<!-- Textarea -->
+<div class="bg-black/80 rounded-xl p-4 border border-zinc-800 focus-within:border-amber-500/60 transition-all">
+<textarea class="w-full bg-transparent resize-none border-none outline-none font-body-md text-sm text-zinc-100 placeholder:text-zinc-600 leading-relaxed" rows="4">Cinematic medium wide tracking shot of Detective Vance wearing a tailored heavy shearling coat walking along rain-slicked pavement. Amber streetlight refractions over black puddles, neon kanji signs flickering in thick mist. 35mm anamorphic Cooke S4 flares, authentic grain, ultra-photorealistic volumetric smoke.</textarea>
+<div class="flex flex-wrap items-center justify-between gap-2 pt-3 border-t border-zinc-800/80 mt-2">
+<div class="flex flex-wrap gap-1.5">
+<span class="px-2 py-0.5 rounded bg-zinc-800/80 hover:bg-zinc-700 text-amber-300 font-label-mono text-[11px] cursor-pointer border border-zinc-700/60">--ar 2.39:1</span>
+<span class="px-2 py-0.5 rounded bg-zinc-800/80 hover:bg-zinc-700 text-amber-300 font-label-mono text-[11px] cursor-pointer border border-zinc-700/60">--film Kodak 5219</span>
+<span class="px-2 py-0.5 rounded bg-zinc-800/80 hover:bg-zinc-700 text-amber-300 font-label-mono text-[11px] cursor-pointer border border-zinc-700/60">--grain 16</span>
+<span class="px-2 py-0.5 rounded bg-zinc-800/80 hover:bg-zinc-700 text-amber-300 font-label-mono text-[11px] cursor-pointer border border-zinc-700/60">--shutter 1/48</span>
+</div>
+<div class="flex items-center gap-1.5">
+<button class="p-1 rounded text-zinc-400 hover:text-amber-400 hover:bg-white/5 transition-colors" title="AI Script Enhancer">
+<span class="material-symbols-outlined text-[18px]">auto_fix_high</span>
+</button>
+<button class="p-1 rounded text-zinc-400 hover:text-amber-400 hover:bg-white/5 transition-colors" title="Load Negative Prompts">
+<span class="material-symbols-outlined text-[18px]">block</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Foley & Stem Waveform -->
+<div class="bg-black/50 rounded-xl p-3 border border-zinc-800/80 flex flex-col gap-2">
+<div class="flex justify-between items-center text-xs font-label-mono text-zinc-400">
+<span class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[14px] text-amber-400">graphic_eq</span>
+                  DIRECTORIAL FOLEY &amp; SOUNDSTAGE SYNC
+                </span>
+<span class="text-amber-400 font-bold">TIMECODE: 00:04:18:12</span>
+</div>
+<div class="h-9 w-full flex items-center gap-1 overflow-hidden">
+<svg class="w-full h-8 text-amber-500/80" preserveaspectratio="none" viewbox="0 0 200 40">
+<rect fill="currentColor" height="12" rx="1" width="3" x="0" y="14"></rect>
+<rect fill="currentColor" height="20" rx="1" width="3" x="5" y="10"></rect>
+<rect fill="currentColor" height="28" rx="1" width="3" x="10" y="6"></rect>
+<rect fill="currentColor" height="16" rx="1" width="3" x="15" y="12"></rect>
+<rect fill="currentColor" height="24" rx="1" width="3" x="20" y="8"></rect>
+<rect fill="currentColor" height="8" rx="1" width="3" x="25" y="16"></rect>
+<rect fill="currentColor" height="32" rx="1" width="3" x="30" y="4"></rect>
+<rect fill="currentColor" height="22" rx="1" width="3" x="35" y="9"></rect>
+<rect fill="currentColor" height="10" rx="1" width="3" x="40" y="15"></rect>
+<rect fill="currentColor" height="18" rx="1" width="3" x="45" y="11"></rect>
+<rect fill="currentColor" height="30" rx="1" width="3" x="50" y="5"></rect>
+<rect fill="currentColor" height="14" rx="1" width="3" x="55" y="13"></rect>
+<rect fill="currentColor" height="20" rx="1" width="3" x="60" y="10"></rect>
+<rect fill="currentColor" height="26" rx="1" width="3" x="65" y="7"></rect>
+<rect fill="currentColor" height="16" rx="1" width="3" x="70" y="12"></rect>
+<rect fill="currentColor" height="22" rx="1" width="3" x="80" y="9"></rect>
+<rect fill="currentColor" height="34" rx="1" width="3" x="85" y="3"></rect>
+<rect fill="currentColor" height="16" rx="1" width="3" x="90" y="12"></rect>
+<rect fill="currentColor" height="24" rx="1" width="3" x="95" y="8"></rect>
+<rect fill="currentColor" height="28" rx="1" width="3" x="105" y="6"></rect>
+<rect fill="currentColor" height="18" rx="1" width="3" x="110" y="11"></rect>
+<rect fill="currentColor" height="30" rx="1" width="3" x="120" y="5"></rect>
+<rect fill="currentColor" height="22" rx="1" width="3" x="125" y="9"></rect>
+<rect fill="currentColor" height="14" rx="1" width="3" x="130" y="13"></rect>
+<rect fill="currentColor" height="26" rx="1" width="3" x="135" y="7"></rect>
+<rect fill="currentColor" height="32" rx="1" width="3" x="145" y="4"></rect>
+<rect fill="currentColor" height="24" rx="1" width="3" x="150" y="8"></rect>
+<rect fill="currentColor" height="28" rx="1" width="3" x="160" y="6"></rect>
+<rect fill="currentColor" height="20" rx="1" width="3" x="165" y="10"></rect>
+<rect fill="currentColor" height="22" rx="1" width="3" x="175" y="9"></rect>
+<rect fill="currentColor" height="30" rx="1" width="3" x="180" y="5"></rect>
+<rect fill="currentColor" height="16" rx="1" width="3" x="185" y="12"></rect>
+<rect fill="currentColor" height="18" rx="1" width="3" x="195" y="11"></rect>
+</svg>
+</div>
+</div>
+<!-- Sliders Grid -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+<div class="bg-black/60 p-3 rounded-xl border border-zinc-800 flex flex-col justify-between">
+<span class="text-[10px] font-label-mono text-zinc-400 uppercase">CFG Guidance</span>
+<span class="text-base font-label-mono font-bold text-amber-400 mt-1">6.8</span>
+<span class="text-[9px] text-zinc-500 font-label-mono">Fidelity Band</span>
+</div>
+<div class="bg-black/60 p-3 rounded-xl border border-zinc-800 flex flex-col justify-between">
+<span class="text-[10px] font-label-mono text-zinc-400 uppercase">Aperture</span>
+<span class="text-base font-label-mono font-bold text-amber-400 mt-1">ƒ/1.4 STOP</span>
+<span class="text-[9px] text-zinc-500 font-label-mono">Cooke S4 Prime</span>
+</div>
+<div class="bg-black/60 p-3 rounded-xl border border-zinc-800 flex flex-col justify-between">
+<span class="text-[10px] font-label-mono text-zinc-400 uppercase">Diffusion Steps</span>
+<span class="text-base font-label-mono font-bold text-amber-400 mt-1">38 Steps</span>
+<span class="text-[9px] text-zinc-500 font-label-mono">Euler Ancestral</span>
+</div>
+<div class="bg-black/60 p-3 rounded-xl border border-zinc-800 flex flex-col justify-between">
+<span class="text-[10px] font-label-mono text-zinc-400 uppercase">Grain Ratio</span>
+<span class="text-base font-label-mono font-bold text-amber-400 mt-1">0.14 Kodak</span>
+<span class="text-[9px] text-zinc-500 font-label-mono">35mm Halation</span>
+</div>
+</div>
+<!-- Multi-Modal Conditioners -->
+<div class="flex flex-col gap-2 pt-2">
+<span class="text-xs font-label-mono text-zinc-400 uppercase tracking-wider">Multi-Modal Conditioners (IP-Adapter &amp; Depth)</span>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+<div class="bg-black/60 rounded-xl p-2 border border-zinc-800 flex flex-col gap-1.5">
+<img class="w-full h-20 object-cover rounded-lg" data-alt="Tungsten color palette swatch" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBA1ni7TRLU93XdELa2pJLQWemgJYZSKiWKOg8ygXJojR1YoL7yX6Q_-pN-vnPvRKxehEVd9G5QVutWUGQorcXenq-pOVHjiuUMAVyL2O-GvZJV_5M1m3uxXbfHuTH34Bu_83Wgh9sqfFFzgM6vktvYBnzgan3lQo1LfN_Yse78vWzMTiqZbRgSI9U9t2qxQ6U5wRLwgjQWf7W5pyM5e-BXU1hQuaMCuRDxoCwAfszHPIna1hgcHsyvmA"/>
+<div class="flex justify-between text-[11px] font-label-mono">
+<span class="text-zinc-300">Palette</span>
+<span class="text-amber-400 font-bold">0.85 Wgt</span>
+</div>
+</div>
+<div class="bg-black/60 rounded-xl p-2 border border-zinc-800 flex flex-col gap-1.5">
+<img class="w-full h-20 object-cover rounded-lg" data-alt="Rainy night ambient lighting map" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCMOjGRV88SQauYhT75fk6ssHvUYhNYI-g0g5B8_IvXjveDr8tmpf6sN5_0RPAnBAHPMNIpaPUCbR3VK8MuqbSw6gBfbkm8rVyRnIQ12Ab7OkItqVjlHabaHYT6vE4cW5u70VdjxiIljkSHWE1HJtcT3kR9NRIwJHaGr1tS4B1QChIuTuWAn57e7tHyUJ4A6J4cXHYAd_GN_lqX0HxmfgMWwiK5bcAjegmk8dYooNHfniaH_0dWZdgpEw"/>
+<div class="flex justify-between text-[11px] font-label-mono">
+<span class="text-zinc-300">Light Map</span>
+<span class="text-amber-400 font-bold">0.60 Wgt</span>
+</div>
+</div>
+<div class="bg-black/60 rounded-xl p-2 border border-zinc-800 flex flex-col gap-1.5">
+<img class="w-full h-20 object-cover rounded-lg" data-alt="Monochrome pose depth map" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD3ZDjuYrOkXBzGF73hycwUhiKscyGOEXrCDCD3plD60MEG_TtwkRBxsLhpW10uh3iNogTMQ83A3j2E-BwQQasBeNBNT8UBR_X78XUAJdm9RfXMlFMl0vVdeS_GHY2KxkKNExUHNCdh-QSnaXuk_ILvevmry7sPr6kw4PR297BKzN_o0SFlYgDXQ0kPApcpmusx6-NOP5lUeMAUmDI8hnWW4lc84aBvCH5WgViAfRvZiZnJkn0dJGIF8A"/>
+<div class="flex justify-between text-[11px] font-label-mono">
+<span class="text-zinc-300">Depth / Pose</span>
+<span class="text-amber-400 font-bold">0.90 Wgt</span>
+</div>
+</div>
+<div class="rounded-xl border border-dashed border-zinc-800 hover:border-amber-500/50 flex flex-col items-center justify-center p-2 text-zinc-500 hover:text-amber-400 cursor-pointer transition-colors bg-black/40">
+<span class="material-symbols-outlined text-[24px]">add_photo_alternate</span>
+<span class="text-[10px] font-label-mono mt-1">Add Latent Ref</span>
+</div>
+</div>
+</div>
+<!-- CTA Actions -->
+<div class="flex items-center justify-between pt-3 border-t border-zinc-800/80">
+<div class="text-xs text-zinc-400 font-label-mono flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+<span>Ready to compile • EST: 1.84s</span>
+</div>
+<div class="flex items-center gap-3">
+<button class="px-4 py-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-sm font-medium text-white transition-colors cursor-pointer">
+                  Queue Variations
+                </button>
+<button class="px-6 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-black font-semibold text-sm flex items-center gap-2 shadow-lg shadow-amber-500/25 transition-all cursor-pointer">
+<span class="material-symbols-outlined text-[18px]">play_arrow</span>
+<span>Generate Master Cut</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Right: 4K UHD Screening Viewport & Iterations (5 cols) -->
+<div class="xl:col-span-5 flex flex-col gap-5">
+<div class="bg-noir-card rounded-2xl p-5 border border-amber-500/20 shadow-xl flex flex-col gap-4">
+<div class="flex items-center justify-between">
+<span class="font-display-hero text-sm font-semibold text-white flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-amber-500"></span>
+                Screening Viewport // 4K UHD Master
+              </span>
+<span class="px-2 py-0.5 rounded bg-black/70 text-amber-400 text-[10px] font-label-mono font-bold border border-amber-500/30">
+                PRORES 4444 XQ
+              </span>
+</div>
+<!-- Hero Image Preview -->
+<div class="relative rounded-xl overflow-hidden aspect-[16/10] bg-black group border border-zinc-800">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Neo-Shibuya rain cinematic master film plate" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBKRkjJIR2H4PPPtPfW1l9MjYhlJ9V89ceFtBmtm_hW2khQtQT-KtnAejjoqi78uNCvpmqxAEyL5-ZQmpg96V6iqtS6Zv8ggGGE0MbRI6ECpLMDTmU_BlY6wtWhsD25xCmCn768WhWfrqz9HnlFyNmTQAJqz79KxINfLDweOnNylQuWjig4aM6XtBlWimZ3YEU1TQNCFzMKhjUdQ-ifsbIH0YcoavfG4W2XzuEIyJOCytoz5U7BD1_m7g"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-black/30 opacity-0 group-hover:opacity-100 transition-opacity p-4 flex flex-col justify-between">
+<div class="flex justify-between items-center">
+<span class="font-label-mono text-xs px-2 py-1 bg-black/80 rounded text-amber-400">FRAME #00129</span>
+<div class="flex items-center gap-1 bg-black/80 rounded p-1">
+<button class="p-1 text-zinc-300 hover:text-white"><span class="material-symbols-outlined text-[16px]">fullscreen</span></button>
+</div>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-xs text-zinc-300 font-label-mono">3840 × 1608 • 24.000 fps</span>
+<div class="flex gap-2">
+<button class="px-3 py-1 bg-zinc-800/90 hover:bg-zinc-700 text-xs text-white rounded font-medium">Remix</button>
+<button class="px-3 py-1 bg-amber-500 hover:bg-amber-400 text-xs text-black font-semibold rounded">Export OpenEXR</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Iteration Strip -->
+<div class="flex flex-col gap-2">
+<div class="flex justify-between items-center text-xs font-label-mono text-zinc-400">
+<span>LATENT ITERATION STRIP</span>
+<span class="text-amber-400 cursor-pointer hover:underline">View 24 Takes</span>
+</div>
+<div class="grid grid-cols-4 gap-2">
+<div class="relative rounded-lg overflow-hidden aspect-video border-2 border-amber-500 cursor-pointer">
+<img class="w-full h-full object-cover" data-alt="Take 1" src="https://lh3.googleusercontent.com/aida-public/AB6AXuANmMP-A4hPkC9vUTp6im-13j-s3tHDUTVZmst9cdhwBFnzYbnT3mDt0nDKkkBqO-SUGyG2EKGB1x-kDtGb3eB4q9Uhb5CgfOOSiLgHc472reEmk3kL48Vy6FXgspZEq85wGMBxSP5iFreZxzC_kkCFED_uc5pZEB1DQ3VuN0R79xR4Uwc46k3gZqZB5ZQGRTKy11I6XAbkl7_GwF6IttZyg3S5jYFGkEXcyg7KYEH9UozUxjlU1cj3rw"/>
+<span class="absolute bottom-1 right-1 font-label-mono text-[9px] px-1 bg-black/80 text-amber-400 rounded">v1</span>
+</div>
+<div class="relative rounded-lg overflow-hidden aspect-video border border-zinc-800 opacity-70 hover:opacity-100 transition-opacity cursor-pointer">
+<img class="w-full h-full object-cover" data-alt="Take 2" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDelPoWlMMqFOY8qYTQiA0dy6E_o0f0K5wejU3O8XzPZnv-VYGV0rXinPKVbLIUJZ_tZ41ecbw0b7ATyZb4_ZQoV4n3f7CBdGSEkfP3ViJjciVF8FCQQpVqAsErXwReHfdMvQl-ysAaTi5cGTN0C3pePnXb1bbf_rdyDheM0-AKcv8thikinu7mcUC5U1pwqHABZV4yKxVx-iyN8vb0SwEPcl0E8a8jKhyqrc5oYE6B1EvpkWMvcqRalg"/>
+<span class="absolute bottom-1 right-1 font-label-mono text-[9px] px-1 bg-black/80 text-zinc-300 rounded">v2</span>
+</div>
+<div class="relative rounded-lg overflow-hidden aspect-video border border-zinc-800 opacity-70 hover:opacity-100 transition-opacity cursor-pointer">
+<img class="w-full h-full object-cover" data-alt="Take 3" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCFWIQOsQHOz8yTq28zrKlfxwBQWg1JH1MCSyUk7v-dEUWPSdZAYVUtj42fmiJIe_0WsM5bQLAxo6mvZTihoj189-lUwvnarkWtERjhtaxOY28d151zGCItY6Bb8KGE9O2wSXfRmivxd33ua51eaj28KDR_ydtZgpTJ6_t6HWQUhvlvKRwxBTpGYXC8r89NMTXAr1CPHHJDfkITnEjF7tciAomndok5Rar0dICJleqEP1ear1sFqU7-3Q"/>
+<span class="absolute bottom-1 right-1 font-label-mono text-[9px] px-1 bg-black/80 text-zinc-300 rounded">v3</span>
+</div>
+<div class="relative rounded-lg overflow-hidden aspect-video border border-zinc-800 opacity-70 hover:opacity-100 transition-opacity cursor-pointer">
+<img class="w-full h-full object-cover" data-alt="Take 4" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBn_i0Al0qevKRVAJaDtvKDxg9D-b0NgEQzsHnJCvYymbBKLZWvxeTQ0vY6lejhQ4z9kpo-Y6UZ--bVyYxDH20EUutnC1YgnnaIqA2skL776r5P7JEAp5tOvl5EUc9vVsysp9xL4ebLH49ik0Go2-Q4GQ6cJ1gNpdZoIpxa5a_SoutfmMxD8MtuNHvslQlN8_t1h1zfkEN1Od4Xx2nTvqzD0Zhz6ly6P5OligJMByjOFujpevagnOz5Sg"/>
+<span class="absolute bottom-1 right-1 font-label-mono text-[9px] px-1 bg-black/80 text-zinc-300 rounded">v4</span>
+</div>
+</div>
+</div>
+<!-- Telemetry Chip -->
+<div class="bg-black/60 rounded-xl p-3 border border-zinc-800 text-xs font-label-mono flex flex-col gap-1.5">
+<div class="flex justify-between text-zinc-400">
+<span>VRAM TENSOR BANDWIDTH</span>
+<span class="text-amber-400 font-bold">3.2 TB/s • 88%</span>
+</div>
+<div class="w-full h-1.5 bg-zinc-800 rounded-full overflow-hidden">
+<div class="h-full bg-amber-500 rounded-full w-[88%]"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- --------------------------------------------------------------------- -->
+<!-- REALM 2: HAUTE EDITORIAL WORKBENCH (REVUE & TYPOGRAPHIC ATELIER)      -->
+<!-- --------------------------------------------------------------------- -->
+<div class="realm-view hidden-realm flex-col w-full max-w-[1720px] mx-auto px-5 lg:px-8 py-6 gap-6 text-[#16171a]" id="realm-editorial">
+<!-- Haute Atelier Header Banner -->
+<div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 p-5 rounded-none bg-editorial-card border border-editorial-border shadow-sm">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-none bg-[#7a171d]/10 border border-[#7a171d]/30 flex items-center justify-center text-[#7a171d] text-2xl font-serif-didot">
+            🖋
+          </div>
+<div>
+<div class="flex items-center gap-2">
+<span class="font-serif-didot text-xl font-bold tracking-wider text-[#111215] uppercase">Atelier Revue Typographique</span>
+<span class="px-2 py-0.5 bg-[#7a171d] text-white font-label-mono text-[10px] tracking-widest uppercase">Édition No. 44</span>
+<span class="text-xs text-[#7a171d] font-serif-body italic">Paris • Automne-Hiver</span>
+</div>
+<p class="text-xs text-zinc-600 font-serif-body italic text-base mt-0.5">Stark Didot serif matrices, bespoke typographic metrics, deckle-edge galleys and auteur screenplays.</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<span class="text-xs font-label-mono uppercase tracking-widest text-zinc-500">Grid: 6-Col Golden Ratio</span>
+<button class="px-4 py-2 border border-[#111215] bg-transparent hover:bg-[#111215] hover:text-white text-xs font-serif-didot uppercase tracking-widest transition-colors font-bold">
+            Export Galley Proof
+          </button>
+</div>
+</div>
+<!-- Haute Editorial 3-Column Atelier -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+<!-- Col 1: Typographic Foundry (3 cols) -->
+<div class="lg:col-span-3 bg-editorial-card p-5 border border-editorial-border shadow-sm flex flex-col gap-5">
+<div class="border-b border-editorial-border pb-3 flex items-center justify-between">
+<span class="font-serif-didot text-sm font-bold uppercase tracking-widest text-[#111215]">Foundry Controls</span>
+<span class="font-label-mono text-[10px] text-[#7a171d] uppercase font-bold">Grid 1.618</span>
+</div>
+<!-- Font Selectors -->
+<div class="flex flex-col gap-3">
+<label class="text-xs font-serif-didot font-semibold uppercase tracking-wider text-zinc-700">Display Face</label>
+<div class="p-3 bg-[#fbf9f6] border border-editorial-border flex items-center justify-between cursor-pointer hover:border-[#111215] transition-colors">
+<span class="font-serif-monocle text-lg text-[#111215]">Didot Parisien Bold</span>
+<span class="text-xs font-label-mono text-zinc-400">72pt</span>
+</div>
+<label class="text-xs font-serif-didot font-semibold uppercase tracking-wider text-zinc-700 mt-2">Body Serif Face</label>
+<div class="p-3 bg-[#fbf9f6] border border-editorial-border flex items-center justify-between cursor-pointer hover:border-[#111215] transition-colors">
+<span class="font-serif-body text-base italic text-[#111215]">Bodoni Old Style Italic</span>
+<span class="text-xs font-label-mono text-zinc-400">11pt</span>
+</div>
+</div>
+<!-- Micro Typographic Sliders -->
+<div class="flex flex-col gap-4 pt-2 border-t border-editorial-border">
+<div class="flex flex-col gap-1">
+<div class="flex justify-between text-xs font-label-mono">
+<span class="text-zinc-600">PARAGRAPH KERNING</span>
+<span class="font-bold text-[#7a171d]">+0.04 EM</span>
+</div>
+<input class="w-full accent-[#7a171d] bg-zinc-300 h-1 cursor-pointer" max="0.1" min="-0.05" step="0.01" type="range" value="0.04"/>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex justify-between text-xs font-label-mono">
+<span class="text-zinc-600">LEADING / LINE HEIGHT</span>
+<span class="font-bold text-[#7a171d]">1.42 RATIO</span>
+</div>
+<input class="w-full accent-[#7a171d] bg-zinc-300 h-1 cursor-pointer" max="2.0" min="1.0" step="0.05" type="range" value="1.42"/>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex justify-between text-xs font-label-mono">
+<span class="text-zinc-600">INK DENSITY SATURATION</span>
+<span class="font-bold text-[#7a171d]">94% HEAVY</span>
+</div>
+<input class="w-full accent-[#7a171d] bg-zinc-300 h-1 cursor-pointer" max="100" min="50" step="1" type="range" value="94"/>
+</div>
+</div>
+<!-- Pigment Palette Selection -->
+<div class="flex flex-col gap-2 pt-2 border-t border-editorial-border">
+<span class="text-xs font-serif-didot font-semibold uppercase tracking-wider text-zinc-700">Artisan Pigment Inks</span>
+<div class="grid grid-cols-3 gap-2">
+<div class="p-2 border-2 border-[#111215] bg-[#111215] text-white flex flex-col items-center justify-center text-center cursor-pointer">
+<span class="text-[10px] font-label-mono uppercase">Carbon</span>
+<span class="text-[9px] text-zinc-400">100% K</span>
+</div>
+<div class="p-2 border border-editorial-border bg-[#7a171d] text-white flex flex-col items-center justify-center text-center cursor-pointer">
+<span class="text-[10px] font-label-mono uppercase">Oxblood</span>
+<span class="text-[9px] text-rose-200">Rouge</span>
+</div>
+<div class="p-2 border border-editorial-border bg-[#967540] text-white flex flex-col items-center justify-center text-center cursor-pointer">
+<span class="text-[10px] font-label-mono uppercase">Vellum</span>
+<span class="text-[9px] text-amber-100">Bistre</span>
+</div>
+</div>
+</div>
+<div class="p-3 bg-[#faf7f2] border border-editorial-border text-xs font-serif-body italic text-zinc-600">
+            “True typographical composition resides in the tension between negative white space and the razor-sharp cut of French punchcut matrices.”
+          </div>
+</div>
+<!-- Col 2: Auteur Manuscript & Generative Prompt Forge (5 cols) -->
+<div class="lg:col-span-5 bg-editorial-card p-6 border border-editorial-border shadow-sm flex flex-col gap-5">
+<div class="border-b border-editorial-border pb-3 flex items-center justify-between">
+<div>
+<span class="font-serif-didot text-sm font-bold uppercase tracking-widest text-[#111215]">Auteur Manuscript Forge</span>
+<span class="block text-xs font-serif-body italic text-zinc-500">Folio 44 — Salon d’Automne</span>
+</div>
+<span class="font-label-mono text-xs px-2 py-0.5 bg-[#7a171d]/10 text-[#7a171d] font-bold">98.4% RHETORICAL POLISH</span>
+</div>
+<!-- Manuscript Input -->
+<div class="flex flex-col gap-2">
+<label class="text-xs font-serif-didot uppercase tracking-widest text-zinc-600">Lead Manifesto Draft // Scene VII</label>
+<div class="bg-[#faf8f5] p-5 border border-editorial-border flex flex-col gap-3">
+<p class="font-serif-body text-xl text-[#111215] italic leading-relaxed">
+                “The architecture of silence in modern brutalist cinema speaks louder than the symphonies of digital spectacle. Here, in the damp Parisian morning, concrete remembers what light forgot.”
+              </p>
+<div class="flex items-center justify-between text-xs font-label-mono text-zinc-500 pt-2 border-t border-editorial-border">
+<span>RHYTHM: DACTYLIC HEXAMETER</span>
+<span class="text-[#7a171d] font-bold">METAPHOR DEPTH: 88%</span>
+</div>
+</div>
+</div>
+<!-- Prompt Forge For Editorial Illustration -->
+<div class="flex flex-col gap-2">
+<label class="text-xs font-serif-didot uppercase tracking-widest text-zinc-600">Synthesis Latent Directive (Print Engraving)</label>
+<textarea class="w-full bg-[#faf8f5] border border-editorial-border p-3 font-serif-body text-base text-[#111215] resize-none outline-none focus:border-[#7a171d] transition-colors leading-relaxed" rows="3">High-contrast black and white editorial portrait of an auteur in tailored wool coat standing in a minimalist travertine gallery. Sharp Didot typography overlay, natural diffused French daylight, crisp architectural grain.</textarea>
+</div>
+<!-- Editorial Layout Modes -->
+<div class="grid grid-cols-2 gap-3">
+<div class="p-3 border-2 border-[#7a171d] bg-[#fbf9f6] flex flex-col gap-1 cursor-pointer">
+<span class="font-serif-didot text-xs font-bold uppercase tracking-wider text-[#7a171d]">Spread Pattern No. 8</span>
+<span class="text-xs font-serif-body italic text-zinc-600">Asymmetrical lead with bleed hero plate</span>
+</div>
+<div class="p-3 border border-editorial-border hover:border-[#111215] bg-[#fbf9f6] flex flex-col gap-1 cursor-pointer transition-colors">
+<span class="font-serif-didot text-xs font-bold uppercase tracking-wider text-zinc-800">Folio Double Col</span>
+<span class="text-xs font-serif-body italic text-zinc-600">Symmetrical justification with illuminated drop-caps</span>
+</div>
+</div>
+<!-- Action Button -->
+<button class="w-full py-3.5 bg-[#7a171d] hover:bg-[#601217] text-white font-serif-didot font-bold text-sm tracking-widest uppercase transition-all shadow-md cursor-pointer flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">menu_book</span>
+<span>Typeset &amp; Synthesize Spread</span>
+</button>
+</div>
+<!-- Col 3: Monocle Proof Viewport (4 cols) -->
+<div class="lg:col-span-4 bg-editorial-card p-5 border border-editorial-border shadow-sm flex flex-col gap-4">
+<div class="border-b border-editorial-border pb-3 flex items-center justify-between">
+<span class="font-serif-didot text-sm font-bold uppercase tracking-widest text-[#111215]">Monocle Proof Viewport</span>
+<span class="font-label-mono text-[10px] text-zinc-500 uppercase">1:1 Scale Print</span>
+</div>
+<!-- Editorial Double Spread Graphic Mockup -->
+<div class="w-full bg-[#f4f1ea] border border-editorial-border p-4 shadow-inner flex flex-col gap-3">
+<div class="flex justify-between items-center text-[10px] font-serif-didot tracking-widest border-b border-zinc-300 pb-1 text-zinc-500">
+<span>FOLIO 44 • MONOCLE PARIS</span>
+<span>PAGE 18 — 19</span>
+</div>
+<!-- Double Page Spread Preview -->
+<div class="grid grid-cols-2 gap-3 bg-white p-3 border border-zinc-300 shadow-sm min-h-[260px]">
+<!-- Left Page: Text & Dropcap -->
+<div class="flex flex-col gap-2">
+<span class="font-serif-didot text-xs uppercase tracking-widest font-bold text-[#7a171d]">Manifeste</span>
+<div class="flex gap-2">
+<span class="font-serif-monocle text-4xl font-bold leading-none text-[#111215]">T</span>
+<p class="font-serif-body text-[11px] leading-snug text-zinc-700 italic">
+                    he silence of concrete echoes in the dawn of modern cinema.
+                  </p>
+</div>
+<p class="font-serif-body text-[10px] leading-relaxed text-zinc-600 text-justify">
+                  Every auteur understands that the frame does not enclose truth; it excludes distraction. Travertine surfaces and stark lines define the new narrative order.
+                </p>
+<div class="mt-auto pt-2 border-t border-zinc-200 text-[8px] font-label-mono text-zinc-400">
+                  METRIC KERNING: 1.618
+                </div>
+</div>
+<!-- Right Page: Monochrome Portrait Image -->
+<div class="flex flex-col gap-2">
+<div class="relative w-full h-full rounded overflow-hidden bg-black/10">
+<img class="w-full h-full object-cover grayscale contrast-125" data-alt="Monochrome haute couture portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD3ZDjuYrOkXBzGF73hycwUhiKscyGOEXrCDCD3plD60MEG_TtwkRBxsLhpW10uh3iNogTMQ83A3j2E-BwQQasBeNBNT8UBR_X78XUAJdm9RfXMlFMl0vVdeS_GHY2KxkKNExUHNCdh-QSnaXuk_ILvevmry7sPr6kw4PR297BKzN_o0SFlYgDXQ0kPApcpmusx6-NOP5lUeMAUmDI8hnWW4lc84aBvCH5WgViAfRvZiZnJkn0dJGIF8A"/>
+</div>
+<span class="text-[9px] font-serif-body italic text-zinc-500 text-right">Fig. 2 — Vance à Paris</span>
+</div>
+</div>
+<div class="flex justify-between items-center text-[10px] font-label-mono text-zinc-500 pt-1">
+<span>CMYK DENSITY: C:12 M:88 Y:74 K:42</span>
+<span class="text-[#7a171d] font-bold">READY FOR PRESS</span>
+</div>
+</div>
+<!-- Printing Press Actions -->
+<div class="flex flex-col gap-2 pt-2">
+<button class="w-full py-2.5 border border-[#111215] bg-[#111215] hover:bg-black text-white font-serif-didot text-xs font-bold uppercase tracking-widest transition-colors cursor-pointer">
+              Dispatch To Print House
+            </button>
+<div class="flex justify-between text-[11px] font-serif-body italic text-zinc-500 px-1">
+<span>Binding: French Fold</span>
+<span>Paper: 180gsm Mohawk Superfine</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- --------------------------------------------------------------------- -->
+<!-- REALM 3: QUANTUM DECK WORKBENCH (CYBERNETIC TELEMETRY)                -->
+<!-- --------------------------------------------------------------------- -->
+<div class="realm-view hidden-realm flex-col w-full max-w-[1720px] mx-auto px-5 lg:px-8 py-6 gap-6 font-label-mono text-zinc-100 scanlines" id="realm-quantum">
+<!-- Quantum Telemetry Ribbon -->
+<div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 p-4 rounded-xl bg-quantum-surface/90 border border-emerald-500/40 shadow-xl shadow-emerald-950/20 backdrop-blur-md">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-emerald-500/10 border border-emerald-500/50 flex items-center justify-center text-emerald-400 text-xl font-bold">
+            ⚡
+          </div>
+<div>
+<div class="flex items-center gap-2">
+<span class="text-base font-bold text-emerald-400 tracking-wider uppercase">QUANTUM TELEMETRY CLUSTER // NODE-88</span>
+<span class="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 text-[10px] font-semibold border border-emerald-500/40 animate-pulse">NODE: ONLINE [99.8%]</span>
+<span class="text-xs text-cyan-400">FP8_E4M3 ENABLED</span>
+</div>
+<p class="text-xs text-zinc-400 mt-0.5">Real-time H100 matrix tensor compute, phosphor emerald telemetry, and direct latent vector manipulation.</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="text-right">
+<span class="text-[10px] text-zinc-400 block uppercase">SYSTEM THROUGHPUT</span>
+<span class="text-sm font-bold text-cyan-400">194.8 TFLOPS</span>
+</div>
+<div class="h-8 w-px bg-emerald-500/30"></div>
+<div class="text-right">
+<span class="text-[10px] text-zinc-400 block uppercase">EPOCH LATENCY</span>
+<span class="text-sm font-bold text-emerald-400">14.1 ms P99</span>
+</div>
+</div>
+</div>
+<!-- Quantum 3-Column Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+<!-- Left Col: Code Terminal & Vector Prompt (5 cols) -->
+<div class="lg:col-span-5 bg-quantum-surface/90 rounded-xl p-5 border border-emerald-500/30 shadow-2xl flex flex-col gap-4">
+<div class="flex items-center justify-between border-b border-emerald-500/20 pb-3">
+<span class="text-xs font-bold text-emerald-400 flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+              QUANTUM EMBEDDING VECTOR TERMINAL
+            </span>
+<span class="text-[11px] text-cyan-400 font-mono">DIM: 4096</span>
+</div>
+<!-- Code Editor Console Box -->
+<div class="bg-black/90 p-4 rounded-lg border border-emerald-500/30 font-mono text-xs flex flex-col gap-2 relative overflow-hidden">
+<div class="flex justify-between text-zinc-500 text-[10px] border-b border-zinc-800 pb-1">
+<span>bash - tensor_run.py</span>
+<span class="text-emerald-400">CUDA:0</span>
+</div>
+<pre class="text-emerald-400 leading-relaxed overflow-x-auto">&gt; exec.diffuse(
+    latent_domain="biomech_cyberpunk",
+    seed=83912903,
+    cfg=7.4,
+    steps=45,
+    precision="FP8_E4M3",
+    spectral_bias="cyan_emerald_phosphor",
+    cross_attention=True
+)
+[OK] Initializing UNet Tensor Core pipeline...
+[OK] Latent Matrix: [1, 4, 128, 128] allocated on H100.</pre>
+</div>
+<!-- Interactive CLI Command Bar -->
+<div class="flex flex-col gap-1">
+<span class="text-[11px] text-zinc-400 uppercase">Interactive Command Ingestion</span>
+<div class="flex items-center gap-2 bg-black/80 p-2 rounded-lg border border-emerald-500/40">
+<span class="text-emerald-400 font-bold">&gt;</span>
+<input class="w-full bg-transparent border-none outline-none text-xs text-cyan-300 font-mono" type="text" value="override.denoise_curve(spectral=0.82, k_euler=True)"/>
+</div>
+</div>
+<!-- Sampler & Hyper-Parameter Matrix -->
+<div class="grid grid-cols-2 gap-3 pt-2">
+<div class="bg-black/60 p-3 rounded-lg border border-emerald-500/20 flex flex-col justify-between">
+<span class="text-[10px] text-zinc-400">K-SAMPLER</span>
+<span class="text-sm font-bold text-emerald-400">DPM++ 2M</span>
+<span class="text-[9px] text-zinc-500">Ancestral Karras</span>
+</div>
+<div class="bg-black/60 p-3 rounded-lg border border-emerald-500/20 flex flex-col justify-between">
+<span class="text-[10px] text-zinc-400">SCHEDULER</span>
+<span class="text-sm font-bold text-cyan-400">KARRAS EXP</span>
+<span class="text-[9px] text-zinc-500">Exponential Falloff</span>
+</div>
+</div>
+<!-- Quantum Command Button -->
+<button class="w-full py-3.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-black font-mono font-bold text-sm uppercase tracking-wider shadow-lg shadow-emerald-500/30 transition-all cursor-pointer flex items-center justify-center gap-2">
+<span>⚡</span>
+<span>&gt; INITIATE TENSOR DIFFUSION</span>
+</button>
+</div>
+<!-- Middle Col: Live Radar Pulse, Diagnostics & Visual (4 cols) -->
+<div class="lg:col-span-4 bg-quantum-surface/90 rounded-xl p-5 border border-emerald-500/30 shadow-2xl flex flex-col gap-4">
+<div class="flex items-center justify-between border-b border-emerald-500/20 pb-3">
+<span class="text-xs font-bold text-cyan-400">LIVE TELEMETRY RADAR</span>
+<span class="text-[10px] text-emerald-400">STREAMING</span>
+</div>
+<!-- Radar Pulse Circular Telemetry -->
+<div class="bg-black/80 rounded-xl p-4 border border-emerald-500/20 flex items-center justify-center relative min-h-[180px]">
+<!-- Radar Circle -->
+<div class="relative w-36 h-36 rounded-full border border-emerald-500/30 flex items-center justify-center">
+<div class="w-24 h-24 rounded-full border border-cyan-500/30 flex items-center justify-center">
+<div class="w-12 h-12 rounded-full border border-emerald-400/40 flex items-center justify-center">
+<span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+</div>
+</div>
+<!-- Crosshairs -->
+<div class="absolute w-full h-px bg-emerald-500/20"></div>
+<div class="absolute h-full w-px bg-emerald-500/20"></div>
+</div>
+<div class="absolute bottom-3 left-4 text-[10px] text-zinc-400">
+              POLAR AZIMUTH: <span class="text-emerald-400 font-bold">142.8°</span>
+</div>
+<div class="absolute bottom-3 right-4 text-[10px] text-zinc-400">
+              FLUX: <span class="text-cyan-400 font-bold">0.994</span>
+</div>
+</div>
+<!-- VRAM Allocation Gauge -->
+<div class="bg-black/80 rounded-xl p-4 border border-emerald-500/20 flex flex-col gap-2">
+<div class="flex justify-between items-center text-xs">
+<span class="text-zinc-400">VRAM ALLOCATION</span>
+<span class="text-emerald-400 font-bold">70.4 / 80.0 GB (88%)</span>
+</div>
+<div class="w-full h-2 bg-zinc-900 rounded-full overflow-hidden border border-zinc-800">
+<div class="h-full bg-gradient-to-r from-emerald-500 to-cyan-400 rounded-full w-[88%]"></div>
+</div>
+<div class="flex justify-between text-[10px] text-zinc-500 pt-1">
+<span>HBM3e Memory Pool</span>
+<span>Temp: 44°C (Nominal)</span>
+</div>
+</div>
+<!-- Direct Latent View -->
+<div class="relative rounded-lg overflow-hidden border border-emerald-500/30 aspect-video group">
+<img class="w-full h-full object-cover contrast-125" data-alt="Cybernetic quantum diffusion visual" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBKRkjJIR2H4PPPtPfW1l9MjYhlJ9V89ceFtBmtm_hW2khQtQT-KtnAejjoqi78uNCvpmqxAEyL5-ZQmpg96V6iqtS6Zv8ggGGE0MbRI6ECpLMDTmU_BlY6wtWhsD25xCmCn768WhWfrqz9HnlFyNmTQAJqz79KxINfLDweOnNylQuWjig4aM6XtBlWimZ3YEU1TQNCFzMKhjUdQ-ifsbIH0YcoavfG4W2XzuEIyJOCytoz5U7BD1_m7g"/>
+<div class="absolute inset-0 bg-emerald-950/20 pointer-events-none"></div>
+<span class="absolute bottom-1 right-2 text-[10px] text-emerald-300 font-mono bg-black/80 px-1 rounded">LATENT SLICE: 2160p</span>
+</div>
+</div>
+<!-- Right Col: Tensor Hardware Nodes & Status (3 cols) -->
+<div class="lg:col-span-3 bg-quantum-surface/90 rounded-xl p-5 border border-emerald-500/30 shadow-2xl flex flex-col gap-4">
+<div class="flex items-center justify-between border-b border-emerald-500/20 pb-3">
+<span class="text-xs font-bold text-emerald-400 uppercase">GPU Telemetry Rig</span>
+<span class="text-[10px] text-zinc-400 font-mono">SX-88</span>
+</div>
+<!-- Micro Node Cards -->
+<div class="flex flex-col gap-2.5">
+<div class="bg-black/70 p-3 rounded-lg border border-emerald-500/20 flex items-center justify-between">
+<div class="flex flex-col">
+<span class="text-xs font-bold text-zinc-200">NODE 01 — H100</span>
+<span class="text-[10px] text-zinc-500">Tensor Core: 94%</span>
+</div>
+<span class="text-xs font-bold text-emerald-400">ACTIVE</span>
+</div>
+<div class="bg-black/70 p-3 rounded-lg border border-emerald-500/20 flex items-center justify-between">
+<div class="flex flex-col">
+<span class="text-xs font-bold text-zinc-200">NODE 02 — H100</span>
+<span class="text-[10px] text-zinc-500">Tensor Core: 91%</span>
+</div>
+<span class="text-xs font-bold text-emerald-400">ACTIVE</span>
+</div>
+<div class="bg-black/70 p-3 rounded-lg border border-emerald-500/20 flex items-center justify-between">
+<div class="flex flex-col">
+<span class="text-xs font-bold text-zinc-200">NODE 03 — H100</span>
+<span class="text-[10px] text-zinc-500">Tensor Core: 86%</span>
+</div>
+<span class="text-xs font-bold text-emerald-400">ACTIVE</span>
+</div>
+<div class="bg-black/70 p-3 rounded-lg border border-emerald-500/20 flex items-center justify-between">
+<div class="flex flex-col">
+<span class="text-xs font-bold text-zinc-200">NODE 04 — H100</span>
+<span class="text-[10px] text-zinc-500">Tensor Core: 89%</span>
+</div>
+<span class="text-xs font-bold text-emerald-400">ACTIVE</span>
+</div>
+</div>
+<!-- Diagnostic Check List -->
+<div class="p-3 bg-black/60 rounded-lg border border-zinc-800 text-[11px] flex flex-col gap-1 text-zinc-400">
+<div class="flex justify-between"><span class="text-zinc-500">NVLink Bandwidth:</span> <span class="text-cyan-400">900 GB/s</span></div>
+<div class="flex justify-between"><span class="text-zinc-500">Precision:</span> <span class="text-emerald-400">FP8 Transformer</span></div>
+<div class="flex justify-between"><span class="text-zinc-500">Queue State:</span> <span class="text-zinc-200">0 Items Pending</span></div>
+</div>
+<button class="w-full py-2 bg-transparent border border-cyan-500/50 hover:bg-cyan-500/10 text-cyan-400 text-xs font-mono font-semibold rounded transition-colors">
+            Synchronize Cluster State
+          </button>
+</div>
+</div>
+</div>
+</main>
+<!-- ========================================================================= -->
+<!-- FOOTER STATUS & HOTKEY HUD                                               -->
+<!-- ========================================================================= -->
+<footer class="w-full bg-[#07090c] border-t border-white/5 z-40 py-3 px-5 lg:px-8 mt-auto" id="main-footer">
+<div class="w-full flex flex-col md:flex-row items-center justify-between gap-3 text-xs font-label-mono text-zinc-400">
+<div class="flex items-center gap-4">
+<span class="flex items-center gap-1.5 text-zinc-300">
+<span class="w-2 h-2 rounded-full bg-emerald-400" id="footer-pulse"></span>
+<span>CLUSTER: US-EAST-H100</span>
+</span>
+<span class="hidden sm:inline text-zinc-600">|</span>
+<span class="hidden sm:inline">LATENCY: 14MS</span>
+<span class="hidden sm:inline text-zinc-600">|</span>
+<span class="text-amber-400 uppercase font-semibold" id="footer-realm-label">REALM: DIRECTOR'S NOIR</span>
+</div>
+<div class="flex items-center gap-4">
+<!-- Hotkey hints -->
+<div class="hidden md:flex items-center gap-3 text-[11px] text-zinc-400">
+<span class="flex items-center gap-1"><kbd class="px-1.5 py-0.5 rounded bg-zinc-800 text-zinc-300 border border-zinc-700">1</kbd> Noir</span>
+<span class="flex items-center gap-1"><kbd class="px-1.5 py-0.5 rounded bg-zinc-800 text-zinc-300 border border-zinc-700">2</kbd> Editorial</span>
+<span class="flex items-center gap-1"><kbd class="px-1.5 py-0.5 rounded bg-zinc-800 text-zinc-300 border border-zinc-700">3</kbd> Quantum</span>
+<span class="flex items-center gap-1"><kbd class="px-1.5 py-0.5 rounded bg-zinc-800 text-zinc-300 border border-zinc-700">Tab</kbd> Cycle</span>
+</div>
+<span class="text-zinc-600">© 2025 TextFX Studio OS</span>
+</div>
+</div>
+</footer>
+<!-- ========================================================================= -->
+<!-- VANILLA JAVASCRIPT REALM TRANSFORMATION ENGINE                            -->
+<!-- ========================================================================= -->
+<script>
+    const realms = ['noir', 'editorial', 'quantum'];
+    let currentRealm = 'noir';
+
+    function switchRealm(target) {
+      if (!realms.includes(target)) return;
+      currentRealm = target;
+
+      const body = document.getElementById('app-body');
+      const header = document.getElementById('main-header');
+      const footer = document.getElementById('main-footer');
+      const brandIndicator = document.getElementById('brand-indicator');
+      const brandTitle = document.getElementById('brand-title');
+      const realmBadgePill = document.getElementById('realm-badge-pill');
+      const realmSubtitle = document.getElementById('realm-subtitle');
+      const headerStatusText = document.getElementById('header-status-text');
+      const headerStatusDot = document.getElementById('header-status-dot');
+      const headerBellBadge = document.getElementById('header-bell-badge');
+      const userBadge = document.getElementById('user-badge');
+      const userRole = document.getElementById('user-role');
+      const footerRealmLabel = document.getElementById('footer-realm-label');
+      const footerPulse = document.getElementById('footer-pulse');
+
+      // Containers
+      const noirContainer = document.getElementById('realm-noir');
+      const editorialContainer = document.getElementById('realm-editorial');
+      const quantumContainer = document.getElementById('realm-quantum');
+
+      // Tabs
+      const tabNoir = document.getElementById('tab-noir');
+      const tabEditorial = document.getElementById('tab-editorial');
+      const tabQuantum = document.getElementById('tab-quantum');
+
+      // Reset all buttons to inactive state
+      [tabNoir, tabEditorial, tabQuantum].forEach(btn => {
+        btn.className = 'realm-toggle-btn px-4 py-2 rounded-full font-label-mono text-xs flex items-center gap-2 transition-all duration-300 font-medium text-zinc-400 hover:text-white hover:bg-white/5 cursor-pointer';
+      });
+
+      // Hide all realm views
+      [noirContainer, editorialContainer, quantumContainer].forEach(c => {
+        c.classList.remove('active-realm');
+        c.classList.add('hidden-realm');
+      });
+
+      if (target === 'noir') {
+        // Body & Background styling
+        body.className = 'bg-noir-bg font-body-md text-on-surface antialiased min-h-screen flex flex-col selection:bg-noir-amber selection:text-black transition-colors duration-500';
+        header.className = 'fixed top-0 left-0 w-full z-50 bg-[#0a0c10]/90 backdrop-blur-xl border-b border-amber-500/20 transition-all duration-300';
+        footer.className = 'w-full bg-[#07090c] border-t border-amber-500/10 z-40 py-3 px-5 lg:px-8 mt-auto';
+
+        // Branding
+        brandIndicator.className = 'w-8 h-8 rounded-lg bg-gradient-to-br from-amber-500 to-amber-700 flex items-center justify-center font-bold text-black shadow-lg shadow-amber-500/20 text-sm';
+        brandTitle.innerText = 'TextFX';
+        realmBadgePill.innerText = 'STUDIO OS';
+        realmBadgePill.className = 'text-[9px] font-label-mono uppercase tracking-widest px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-400 font-bold border border-amber-500/30';
+        realmSubtitle.innerText = 'Director’s Noir 35mm Paradigm';
+        userRole.innerText = 'Directeur Auteur';
+        userRole.className = 'font-label-mono text-[10px] text-amber-400/90 leading-none mt-1';
+        userBadge.className = 'absolute -bottom-1 -right-1 px-1 bg-amber-500 text-black font-label-mono text-[8px] font-bold rounded uppercase';
+        headerBellBadge.className = 'absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-amber-500';
+        headerStatusDot.className = 'w-2 h-2 rounded-full bg-amber-400 animate-pulse';
+        headerStatusText.innerText = '4X H100 ONLINE';
+        footerRealmLabel.innerText = "REALM: DIRECTOR'S NOIR (35MM)";
+        footerRealmLabel.className = 'text-amber-400 uppercase font-semibold';
+        footerPulse.className = 'w-2 h-2 rounded-full bg-amber-400';
+
+        // Active Tab Button
+        tabNoir.className = 'realm-toggle-btn px-4 py-2 rounded-full font-label-mono text-xs flex items-center gap-2 transition-all duration-300 font-semibold bg-amber-500 text-black shadow-lg shadow-amber-500/30 cursor-pointer';
+
+        // Show Noir View
+        noirContainer.classList.remove('hidden-realm');
+        noirContainer.classList.add('active-realm');
+      } 
+      else if (target === 'editorial') {
+        // Body & Background styling
+        body.className = 'bg-[#f5f2eb] paper-texture font-serif-body text-[#111215] antialiased min-h-screen flex flex-col selection:bg-[#7a171d] selection:text-white transition-colors duration-500';
+        header.className = 'fixed top-0 left-0 w-full z-50 bg-[#faf8f5]/95 backdrop-blur-xl border-b border-[#ded7cb] transition-all duration-300 text-[#111215] shadow-sm';
+        footer.className = 'w-full bg-[#f0ece3] border-t border-[#ded7cb] text-[#2c2e35] z-40 py-3 px-5 lg:px-8 mt-auto';
+
+        // Branding
+        brandIndicator.className = 'w-8 h-8 rounded-none bg-[#7a171d] text-white flex items-center justify-center font-bold font-serif-didot shadow-md text-sm';
+        brandTitle.innerText = 'REVUE ÉDITION';
+        realmBadgePill.innerText = 'PARIS FOLIO';
+        realmBadgePill.className = 'text-[9px] font-serif-didot uppercase tracking-widest px-1.5 py-0.5 bg-[#7a171d] text-white font-bold';
+        realmSubtitle.innerText = 'Atelier Typographique & Auteur Press';
+        userRole.innerText = 'Éditeur en Chef';
+        userRole.className = 'font-serif-didot text-[10px] text-[#7a171d] font-bold leading-none mt-1';
+        userBadge.className = 'absolute -bottom-1 -right-1 px-1 bg-[#7a171d] text-white font-serif-didot text-[8px] font-bold uppercase';
+        headerBellBadge.className = 'absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-[#7a171d]';
+        headerStatusDot.className = 'w-2 h-2 rounded-full bg-[#7a171d]';
+        headerStatusText.innerText = 'PRESS PROOF V5';
+        footerRealmLabel.innerText = 'REALM: HAUTE EDITORIAL (ATELIER)';
+        footerRealmLabel.className = 'text-[#7a171d] uppercase font-bold';
+        footerPulse.className = 'w-2 h-2 rounded-full bg-[#7a171d]';
+
+        // Active Tab Button
+        tabEditorial.className = 'realm-toggle-btn px-4 py-2 rounded-full font-label-mono text-xs flex items-center gap-2 transition-all duration-300 font-semibold bg-[#7a171d] text-white shadow-lg shadow-[#7a171d]/30 cursor-pointer';
+
+        // Show Editorial View
+        editorialContainer.classList.remove('hidden-realm');
+        editorialContainer.classList.add('active-realm');
+      }
+      else if (target === 'quantum') {
+        // Body & Background styling
+        body.className = 'bg-quantum-bg font-label-mono text-zinc-100 antialiased min-h-screen flex flex-col selection:bg-emerald-500 selection:text-black transition-colors duration-500';
+        header.className = 'fixed top-0 left-0 w-full z-50 bg-[#03080a]/90 backdrop-blur-xl border-b border-emerald-500/30 transition-all duration-300';
+        footer.className = 'w-full bg-[#020507] border-t border-emerald-500/20 z-40 py-3 px-5 lg:px-8 mt-auto';
+
+        // Branding
+        brandIndicator.className = 'w-8 h-8 rounded bg-emerald-500 text-black flex items-center justify-center font-bold font-mono shadow-lg shadow-emerald-500/30 text-sm';
+        brandTitle.innerText = 'QUANTUM.OS';
+        realmBadgePill.innerText = 'TENSOR 88';
+        realmBadgePill.className = 'text-[9px] font-mono uppercase tracking-widest px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-bold border border-emerald-500/40';
+        realmSubtitle.innerText = 'Hyper-Tensor Vector Telemetry Engine';
+        userRole.innerText = 'Kernel Architect';
+        userRole.className = 'font-mono text-[10px] text-emerald-400 leading-none mt-1';
+        userBadge.className = 'absolute -bottom-1 -right-1 px-1 bg-emerald-500 text-black font-mono text-[8px] font-bold rounded uppercase';
+        headerBellBadge.className = 'absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-emerald-400';
+        headerStatusDot.className = 'w-2 h-2 rounded-full bg-emerald-400 animate-ping';
+        headerStatusText.innerText = 'SX-88 ONLINE [FP8]';
+        footerRealmLabel.innerText = 'REALM: QUANTUM DECK (DIFFUSION)';
+        footerRealmLabel.className = 'text-emerald-400 uppercase font-bold';
+        footerPulse.className = 'w-2 h-2 rounded-full bg-emerald-400';
+
+        // Active Tab Button
+        tabQuantum.className = 'realm-toggle-btn px-4 py-2 rounded-full font-label-mono text-xs flex items-center gap-2 transition-all duration-300 font-semibold bg-emerald-500 text-black shadow-lg shadow-emerald-500/30 cursor-pointer';
+
+        // Show Quantum View
+        quantumContainer.classList.remove('hidden-realm');
+        quantumContainer.classList.add('active-realm');
+      }
+    }
+
+    // Keyboard Shortcuts for Instant Realm Switching
+    document.addEventListener('keydown', (e) => {
+      // Don't trigger if user is actively typing in a textarea or input
+      if (['TEXTAREA', 'INPUT'].includes(document.activeElement.tagName)) {
+        return;
+      }
+      if (e.key === '1') {
+        switchRealm('noir');
+      } else if (e.key === '2') {
+        switchRealm('editorial');
+      } else if (e.key === '3') {
+        switchRealm('quantum');
+      } else if (e.key === 'Tab') {
+        e.preventDefault();
+        const nextIndex = (realms.indexOf(currentRealm) + 1) % realms.length;
+        switchRealm(realms[nextIndex]);
+      }
+    });
+  </script>
+</body></html>
