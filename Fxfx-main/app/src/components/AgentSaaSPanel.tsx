@@ -1,6 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import type { BrowserAttachment } from './BrowserAgentPanel'
-import { backendFetch } from '../backend-fetch'
 
 interface AgentRunResponse {
   runId: string
@@ -13,7 +12,7 @@ interface AgentRunResponse {
     acceptanceCriteria: string[]
     risks: string[]
     estimatedMinutes: number
-    mode: string
+    mode: 'Gemini' | 'Gemini (not configured)'
   }
   evaluation?: {
     score: number
@@ -23,7 +22,7 @@ interface AgentRunResponse {
     nextActions: string[]
   }
   runtime: {
-    mode: string
+    mode: 'Gemini' | 'Gemini (not configured)'
     tenantId?: string
     timestamp: string
   }
@@ -68,7 +67,7 @@ interface SaaSStatus {
 
 interface AgentStatus {
   ok: boolean
-  mode: string
+  mode: 'Gemini' | 'Gemini (not configured)'
   readyForSaaS: boolean
   capabilities: string[]
   counts: {
@@ -80,7 +79,7 @@ interface AgentStatus {
     runId: string
     goal: string
     status: string
-    mode: string
+    mode: 'Gemini' | 'Gemini (not configured)'
     score?: number
     verdict?: 'ready' | 'needs-review' | 'blocked'
     updatedAt: string
@@ -93,7 +92,7 @@ interface AgentStatus {
 }
 
 function jsonFetch(input: RequestInfo | URL, init?: RequestInit) {
-  return backendFetch(input, {
+  return fetch(input, {
     ...init,
     headers: {
       'Content-Type': 'application/json',
@@ -177,7 +176,7 @@ export default function AgentSaaSPanel({ apiBase, browserAttachment }: { apiBase
     try {
       const res = await jsonFetch(`${apiBase}/api/agent/run`, {
         method: 'POST',
-        headers: browserAttachment ? { 'X-TextFX-Browser-Token': `Bearer ${browserAttachment.token}` } : {},
+        headers: browserAttachment ? { Authorization: `Bearer ${browserAttachment.token}` } : {},
         body: JSON.stringify({
           goal,
           browserResearchId: browserAttachment?.runId,

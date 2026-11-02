@@ -1,84 +1,227 @@
-# AI Provider Setup
+## Current implementation status (2026-10-25)
 
-The backend has server-side adapters for Gemini, OpenAI, OpenRouter, and
-xAI/Grok. Configure one or more credentials in Codespaces Secrets or the
-backend server environment. A configured key is not proof of a working
-connection; the provider is live only after a real request succeeds.
+The current backend uses a Gemini-only gateway. `GEMINI_API_KEY` is required for live generation; missing credentials fail explicitly. There is no active mock fallback, Vertex adapter, or OpenAI adapter in the current source. The provider proposals below are historical setup notes, not implemented capabilities.
 
-## Required secret names
+Model routing is configurable by `GEMINI_MODEL_CANDIDATE_GENERATION`, `GEMINI_MODEL_CRITIQUE`, `GEMINI_MODEL_FINAL_ARTIFACT`, and `GEMINI_MODEL_UTILITY`; unset values inherit `GEMINI_MODEL` (default `gemini-3.1-flash-lite`). The versioned policy and per-call model provenance are exposed by backend gateway metrics.
 
-Set any providers you intend to use:
+`GEMINI_CALL_BUDGET_USD` defaults to `0.5` and `GEMINI_RUN_BUDGET_USD` defaults to `10`. Reservations are process-local, reserve the maximum configured retry envelope before provider access, reconcile successful usage, and charge the reservation when provider usage is uncertain. These limits are not atomic across multiple backend processes.
 
-| Provider | Backend secret |
-|---|---|
-| Google Gemini API | `GEMINI_API_KEY` |
-| OpenAI API | `OPENAI_API_KEY` |
-| OpenRouter API | `OPENROUTER_API_KEY` |
-| xAI / Grok API | `XAI_API_KEY` |
+## 1️⃣ Mock Mode (حالياً مفعّل)
+# 🤖 AI Provider Integration Guide
 
-Do not send keys in chat, add them to `.env.example`, frontend variables, source
-files, logs, or Git. `.env.example` contains names and non-secret defaults only.
+التطبيق يدعم **3 أوضاع** للـ AI:
 
-## Provider and model settings
+## 1️⃣ Mock Mode (حالياً مفعّل)
 
-| Setting | Default / behavior |
-|---|---|
-| `AI_AUTO_PROVIDER_ORDER` | `gemini,openrouter,openai,grok` |
-| `GEMINI_MODEL` | `gemini-3.1-flash-lite` |
-| `OPENAI_MODEL` | `gpt-4o-mini` |
-| `OPENROUTER_MODEL` | `openai/gpt-4o-mini` |
-| `XAI_MODEL` | `grok-3-mini` |
-| `*_MODELS` | Optional comma-separated model allow-list for that provider |
-| `*_MODEL_CANDIDATE_GENERATION` | Optional task-specific model |
-| `*_MODEL_CRITIQUE` | Optional task-specific model |
-| `*_MODEL_FINAL_ARTIFACT` | Optional task-specific model |
-| `*_MODEL_UTILITY` | Optional task-specific model |
-| `AI_TEMPERATURE` | `0.8` (must be between 0 and 2) |
-| `AI_MAX_OUTPUT_TOKENS` | `512` |
-| `GEMINI_RUN_BUDGET_USD` | `10` process-local estimated run budget |
-| `GEMINI_CALL_BUDGET_USD` | `0.5` process-local estimated call budget |
+**للتطوير والاختبار بدون API keys**
 
-For task-specific model settings, replace `*` with `GEMINI`, `OPENAI`,
-`OPENROUTER`, or `XAI`. A requested model must be enabled by the provider's
-model list. The frontend cannot submit API credentials.
+- جميع الـ endpoints تعمل بـ mock responses
+- لا تحتاج credentials
+- شغّل: `npm run dev`
 
-`OPENROUTER_SITE_URL` is an optional attribution header, not a credential.
-Optional `*_INPUT_COST_USD_PER_1K` and `*_OUTPUT_COST_USD_PER_1K` settings
-adjust the non-Gemini estimated rates. These budget estimates are not billing
-caps, and the in-memory accounting is not shared across backend processes.
+```bash
+curl -X POST http://localhost:4000/api/full-pipeline \
+  -H "Content-Type: application/json" \
+  -d '{"brief":"Your brief here"}'
+```
 
-## Auto mode and request behavior
+---
 
-Auto selects configured providers in `AI_AUTO_PROVIDER_ORDER`. If a provider
-is explicitly selected, the gateway does not silently switch to another
-provider. Auto fallback is allowed only after an explicit HTTP 400, 401, 403,
-404, or 422 rejection. The gateway does not retry/fallback after timeouts,
-network errors, 5xx responses, malformed responses, or cancellation because
-the initial provider may have processed and billed the request.
+## 2️⃣ Google Vertex AI Integration
 
-Each outbound call uses an abortable timeout. The gateway validates provider
-responses, rejects missing or truncated text, tracks usage/provenance, and
-does not expose keys in provider status or request provenance.
+### المتطلبات:
 
-## Local setup and validation
+1. **Google Cloud Project**
+   - اذهب إلى: https://console.cloud.google.com
+   - أنشئ project جديد
+   - فعّل "Vertex AI API"
 
-1. Copy `backend/.env.example` to a local `backend/.env` if using a local
-   environment, then set the provider secrets there. Never commit that file.
-2. Install dependencies and start the backend from a clean checkout:
-
-   ```sh
-   npm ci
-   npm --workspace backend run build
-   npm --workspace backend start
+2. **Authentication**
+   ```bash
+   # Setup gcloud CLI
+   gcloud auth application-default login
+   gcloud config set project YOUR_PROJECT_ID
    ```
 
-3. Use the application's provider/model selectors or call the backend API
-   with a selected provider. A provider is live only when its real generation
-   request returns successfully. `/api/health` is not a provider health check;
-   the gateway/provider status reports configuration, while call provenance
-   records which provider/model actually handled completed calls.
+3. **Environment Variables**
+   ```bash
+   export GOOGLE_CLOUD_PROJECT=your-project-id
+   export VERTEX_PROJECT_ID=your-project-id
+   export VERTEX_LOCATION=us-central1
+   export VERTEX_MODEL=gemini-pro
+   ```
 
-The automated gateway tests use controlled HTTP fixtures, not real provider
-accounts. They prove routing and failure handling, not connectivity or model
-quality. Browser research is read-only and separate; see the Browser Agent
-documentation for its host allow-list and browser setup.
+4. **Install SDK**
+   ```bash
+   npm install @google-cloud/vertexai
+   ```
+
+### تفعيل في الـ Code
+
+في `backend/src/modules/insight-generator.ts`:
+
+```typescript
+import { generateCreativeText, initializeVertexAI } from '../providers/googleVertexProvider'
+
+// أضف في generateInsight():
+const config = initializeVertexAI()
+const systemPrompt = getLateralThinkingSystemPrompt()
+const aiInsight = await generateCreativeText(prompt, systemPrompt, config)
+```
+
+### اختبار الـ Connection:
+
+```bash
+curl http://localhost:4000/api/providers/status
+```
+
+الـ response يجب تظهر:
+```json
+{
+  "vertexAI": {
+    "configured": true,
+    "projectId": "your-project-id",
+    "model": "gemini-pro"
+  }
+}
+```
+
+---
+
+## 3️⃣ OpenAI Integration
+
+### المتطلبات:
+
+1. **OpenAI API Key**
+   - اذهب إلى: https://platform.openai.com/api/keys
+   - أنشئ secret key جديد
+   - اختر GPT-4 (للـ creative) أو GPT-3.5-turbo (للـ speed)
+
+2. **Environment Variables**
+   ```bash
+   export OPENAI_API_KEY=sk-your-key-here
+   export OPENAI_MODEL=gpt-4
+   export OPENAI_TEMPERATURE=0.8
+   export OPENAI_MAX_TOKENS=2000
+   ```
+
+3. **Install SDK**
+   ```bash
+   npm install openai
+   ```
+
+### تفعيل في الـ Code
+
+في `backend/src/modules/insight-generator.ts`:
+
+```typescript
+import { generateCreativeText, initializeOpenAI } from '../providers/openaiProvider'
+
+// أضف في generateInsight():
+const config = initializeOpenAI()
+const systemPrompt = getLateralThinkingSystemPrompt()
+const aiInsight = await generateCreativeText(prompt, systemPrompt, config)
+```
+
+### اختبار الـ Connection:
+
+```bash
+curl -X POST http://localhost:4000/api/full-pipeline \
+  -H "Content-Type: application/json" \
+  -d '{"brief":"Product: Smart app. Challenge: Users forget. Goal: Create habit."}'
+```
+
+---
+
+## 📊 مقارنة الـ Providers
+
+| الخاصية | Mock | Vertex AI | OpenAI |
+|--------|------|-----------|--------|
+| **التكلفة** | مجاني | رخيص-متوسط | متوسط-غالي |
+| **الجودة** | جيد للتطوير | عالي جداً | عالي جداً |
+| **السرعة** | فوري | سريع | متوسط |
+| **للإنتاج** | ❌ | ✅ | ✅ |
+| **Setup** | ✅ | معقد قليلاً | سهل |
+
+---
+
+## 🔄 التبديل بين الـ Providers
+
+### Priority Order (الترتيب الافتراضي):
+1. إذا `OPENAI_API_KEY` موجود → استخدم OpenAI
+2. إذا `GOOGLE_CLOUD_PROJECT` موجود → استخدم Vertex AI
+3. وإلا → استخدم Mock Mode
+
+### اختبر الـ Current Provider:
+
+```bash
+curl http://localhost:4000/api/providers/status | jq '.currentMode'
+```
+
+---
+
+## 💡 نصائح للإنتاج
+
+### Vertex AI (الأفضل للـ Arabic + Creative)
+- استخدم `gemini-pro` للـ best quality
+- أرخص من OpenAI لـ high volume
+- أفضل support للـ multilingual
+
+### OpenAI (الأفضل للـ Reliability)
+- GPT-4 للـ premium creative
+- GPT-3.5-turbo للـ budget-conscious
+- أسرع للـ real-time applications
+
+### Mock Mode (للـ Development)
+- جيد للاختبار والتطوير
+- لا تحتاج credentials
+- أداء سريع جداً
+
+---
+
+## 🚀 الخطوة التالية
+
+بعد تثبيت credentials:
+
+1. شغّل البرنامج:
+   ```bash
+   npm run dev
+   ```
+
+2. اختبر الـ full pipeline:
+   ```bash
+   curl -X POST http://localhost:4000/api/full-pipeline \
+     -H "Content-Type: application/json" \
+     -d '{"brief":"Premium water bottle for health-conscious millennials. Challenge: Hydration is boring. Goal: Make it celebratory."}'
+   ```
+
+3. شوف الـ system prompt:
+   ```bash
+   curl http://localhost:4000/api/system-prompt | jq '.systemPrompt'
+   ```
+
+---
+
+## ⚠️ Troubleshooting
+
+### "Cannot read properties of undefined"
+- تأكد من تثبيت جميع الـ dependencies: `npm install`
+
+### "OPENAI_API_KEY is required"
+- Set the environment variable: `export OPENAI_API_KEY=sk-your-key`
+
+### "GOOGLE_CLOUD_PROJECT not found"
+- تأكد من تشغيل: `gcloud auth application-default login`
+
+### Response بطيئة جداً؟
+- استخدم `gpt-3.5-turbo` بدل `gpt-4`
+- أو استخدم `gemini-pro` في Vertex AI
+
+---
+
+## 📚 الموارد
+
+- [Google Vertex AI Docs](https://cloud.google.com/vertex-ai/docs)
+- [OpenAI API Reference](https://platform.openai.com/docs/api-reference)
+- [TextFX Lateral Thinking Guide](./ADVANCED_LATERAL_THINKING.md)
+- [System Prompt Details](./PROMPT_TEMPLATES.md)

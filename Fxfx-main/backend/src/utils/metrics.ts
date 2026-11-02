@@ -82,15 +82,7 @@ export function recordRequest(
  * Safe to call at any frequency — read-only, no mutations.
  */
 export function getMetrics(): object {
-  const configuredProviders = [
-    ['Gemini', process.env.GEMINI_API_KEY],
-    ['OpenAI', process.env.OPENAI_API_KEY],
-    ['OpenRouter', process.env.OPENROUTER_API_KEY],
-    ['Grok', process.env.XAI_API_KEY],
-  ].filter(([, key]) => typeof key === 'string' && !!key.trim()).map(([label]) => label)
-  const providerMode = configuredProviders.length
-    ? `Auto (${configuredProviders.join(', ')})`
-    : 'Auto (no provider configured)'
+  const providerMode = process.env.GEMINI_API_KEY?.trim() ? 'Gemini' : 'Gemini (not configured)'
 
   const routes: Record<string, object> = {}
   for (const [route, s] of routeStats) {

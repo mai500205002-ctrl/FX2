@@ -1,5 +1,3 @@
-import { backendFetch } from '../backend-fetch'
-
 import { useEffect, useState } from 'react'
 
 interface ProviderStats {
@@ -19,10 +17,7 @@ interface GatewayStats {
   inflight: number
   providers: Record<string, ProviderStats>
   budgets?: { chargedUsd: number; reservedUsd: number; runCount: number; storage: string }
-  routing?: {
-    version: string
-    providers?: Array<{ id: string; label: string; configured: boolean }>
-  }
+  routing?: { version: string }
 }
 
 interface MetricsPayload {
@@ -40,7 +35,7 @@ export default function GatewayMetricsPanel({ apiBase, language }: { apiBase: st
 
     const refresh = async () => {
       try {
-        const response = await backendFetch(`${apiBase}/api/metrics`, { cache: 'no-store' })
+        const response = await fetch(`${apiBase}/api/metrics`, { cache: 'no-store' })
         if (!response.ok) throw new Error('Metrics request failed')
         const payload = await response.json() as MetricsPayload
         if (!payload.gateway || typeof payload.gateway.totalCalls !== 'number') throw new Error('Invalid metrics response')
@@ -63,19 +58,12 @@ export default function GatewayMetricsPanel({ apiBase, language }: { apiBase: st
   }, [apiBase])
 
   const labels = language === 'ar'
-    ? { title: 'مراقبة البوابة', calls: 'الطلبات', cacheRate: 'معدل إصابة الذاكرة', cacheHits: 'إصابات الذاكرة', cacheSize: 'حجم الذاكرة', dedupHits: 'طلبات مدمجة', active: 'قيد التنفيذ', inflight: 'طلبات جارية', queued: 'في الانتظار', spent: 'إنفاق مقدر ($)', reserved: 'محجوز ($)', unavailable: 'المقاييس غير متاحة', ready: 'سليم', configured: 'مفتاح مضبوط', notConfigured: 'لا يوجد مزود مضبوط', routing: 'سياسة التوجيه' }
-    : { title: 'Gateway telemetry', calls: 'Requests', cacheRate: 'Cache hit rate', cacheHits: 'Cache hits', cacheSize: 'Cache size', dedupHits: 'Deduplicated', active: 'Active', inflight: 'In flight', queued: 'Queued', spent: 'Estimated spend ($)', reserved: 'Reserved ($)', unavailable: 'Metrics unavailable', ready: 'Healthy', configured: 'Provider configured', notConfigured: 'No provider configured', routing: 'Routing policy' }
+    ? { title: 'مراقبة البوابة', calls: 'الطلبات', cacheRate: 'معدل إصابة الذاكرة', cacheHits: 'إصابات الذاكرة', cacheSize: 'حجم الذاكرة', dedupHits: 'طلبات مدمجة', active: 'قيد التنفيذ', inflight: 'طلبات جارية', queued: 'في الانتظار', spent: 'إنفاق مقدر ($)', reserved: 'محجوز ($)', unavailable: 'المقاييس غير متاحة', ready: 'سليم', configured: 'المفتاح مضبوط', notConfigured: 'المفتاح غير مضبوط', routing: 'سياسة التوجيه' }
+    : { title: 'Gateway telemetry', calls: 'Requests', cacheRate: 'Cache hit rate', cacheHits: 'Cache hits', cacheSize: 'Cache size', dedupHits: 'Deduplicated', active: 'Active', inflight: 'In flight', queued: 'Queued', spent: 'Estimated spend ($)', reserved: 'Reserved ($)', unavailable: 'Metrics unavailable', ready: 'Healthy', configured: 'Key configured', notConfigured: 'Key not configured', routing: 'Routing policy' }
 
   const gateway = metrics?.gateway
-  const configuredProviders = gateway?.routing?.providers?.filter(provider => provider.configured) || []
-  const healthy = configuredProviders.some(provider => gateway?.providers[provider.label]?.healthy !== false)
-  const statusLabel = unavailable
-    ? labels.unavailable
-    : !configuredProviders.length
-      ? labels.notConfigured
-      : healthy
-        ? labels.ready
-        : labels.unavailable
+  const configured = metrics?.providerMode === 'Gemini'
+  const providerHealthy = gateway?.providers.Gemini?.healthy
 
   const values = [
     { label: labels.calls, value: gateway?.totalCalls ?? '—' },
@@ -94,9 +82,9 @@ export default function GatewayMetricsPanel({ apiBase, language }: { apiBase: st
     <section className="stage gateway-metrics" aria-labelledby="gateway-metrics-title" dir={language === 'ar' ? 'rtl' : 'ltr'}>
       <div className="stage-header">
         <h2 className="stage-title" id="gateway-metrics-title">{labels.title}</h2>
-        <span className={`gateway-provider${!healthy || unavailable ? ' is-unavailable' : ''}`} aria-live="polite">
+        <span className={`gateway-provider${providerHealthy === false || unavailable ? ' is-unavailable' : ''}`} aria-live="polite">
           <span className="gateway-provider-dot" aria-hidden="true" />
-          {metrics?.providerMode || 'AI Gateway'} · {statusLabel}
+          Gemini · {unavailable ? labels.unavailable : !configured ? labels.notConfigured : providerHealthy === false ? labels.unavailable : providerHealthy ? labels.ready : labels.configured}
         </span>
       </div>
       {gateway?.routing && <p className="gateway-routing">{labels.routing}: {gateway.routing.version}</p>}

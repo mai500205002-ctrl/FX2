@@ -5,7 +5,7 @@ import { BROWSER_LIMITS, deleteBrowserResearch, loadBrowserResearch, runBrowserR
 const router = express.Router()
 router.use((_req, res, next) => { res.setHeader('Cache-Control', 'no-store'); next() })
 router.use((req: Request, res: Response, next: NextFunction) => {
-  try { authorizeBrowser(req.header('x-textfx-browser-token') || req.header('authorization')); next() }
+  try { authorizeBrowser(req.header('authorization')); next() }
   catch (error) { sendError(res, error) }
 })
 function sendError(res: Response, error: unknown) {

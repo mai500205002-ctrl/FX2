@@ -32,24 +32,13 @@ import { generateInsight }  from './modules/insight-generator'
 import { mapConcept }       from './modules/concept-mapper'
 import { writeScript }      from './modules/script-writer'
 import { getLateralThinkingSystemPrompt, SYSTEM_PROMPT_VERSION } from './modules/lateral-thinking-agent'
-import {
-  createGatewayBudgetContext,
-  GatewayBudgetExceededError,
-  gateway,
-  getActiveProviderLabel,
-  getGatewayCallHistory,
-  getGatewayStats,
-} from './gateway/llm-gateway'
-import { getProviderStatus, ProviderConfigurationError, ProviderRequestError, type ProviderSelection } from './gateway/provider-adapters'
+import { assertGeminiConfigured, createGatewayBudgetContext, GatewayBudgetExceededError, gateway, getActiveProviderLabel, getGatewayStats } from './gateway/llm-gateway'
 import { resolveLanguage } from './utils/generation'
 import agentRoutes from './agent/agent-route'
 import saasRoutes  from './saas/saas-route'
 import browserRoutes from './browser/browser-route'
 import { recordRequest, getMetrics } from './utils/metrics'
-import { apiAuthenticationMiddleware, policyCheck, redactText, sanitize } from './utils/security'
-import { authorizeBrowser, BrowserError, getBrowserPolicy, validateBrowserUrl } from './browser/browser-policy'
-import { loadBrowserResearch, verifyEvidenceIntegrity } from './browser/browser-service'
-import { extractEvidenceReferences, type BrowserEvidenceReference } from './browser/reference-context'
+import { authenticateApi, policyCheck, redactText, sanitize } from './utils/security'
 
 // ─── CLI arg parser ───────────────────────────────────────────────────────────
 function getArg(name: string, fallback?: string): string | undefined {
@@ -114,15 +103,13 @@ function spawnAgent(id: string): void {
 }
 
 // ─── Timeout wrapper ──────────────────────────────────────────────────────────
-function withTimeout<T>(promise: Promise<T>, ms: number, label: string, abort?: () => void): Promise<T> {
-  let timer: NodeJS.Timeout
-  const timeout = new Promise<T>((_, reject) => {
-    timer = setTimeout(() => {
-      abort?.()
-      reject(new Error(`${label} timed out after ${ms}ms`))
-    }, ms)
-  })
-  return Promise.race([promise, timeout]).finally(() => clearTimeout(timer))
+function withTimeout<T>(promise: Promise<T>, ms: number, label: string): Promise<T> {
+  return Promise.race([
+    promise,
+    new Promise<T>((_, reject) =>
+      setTimeout(() => reject(new Error(`${label} timed out after ${ms}ms`)), ms)
+    ),
+  ])
 }
 
 // ─── Express app ──────────────────────────────────────────────────────────────
@@ -130,14 +117,10 @@ const app = express()
 
 // CORS — allow configured origin (Vite proxy dev) or custom prod origin
 const CORS_ORIGIN = process.env.CORS_ORIGIN || 'http://localhost:5000'
-const ALLOWED_CORS_ORIGINS = new Set(CORS_ORIGIN.split(',').map(value => {
-  try { return new URL(value.trim()).origin } catch { return '' }
-}).filter(Boolean))
 app.use(cors({
-  origin: (origin, callback) => callback(null, !origin || ALLOWED_CORS_ORIGINS.has(origin)),
+  origin: CORS_ORIGIN,
   methods: ['GET', 'POST', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-Request-ID', 'Idempotency-Key', 'X-Tenant-ID', 'X-TextFX-Browser-Token'],
-  credentials: true,
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Request-ID', 'Idempotency-Key', 'X-Tenant-ID'],
 }))
 
 // Security headers (no external package required)
@@ -174,143 +157,24 @@ const llmLimiter = rateLimit({
   message:         { error: 'rate limit exceeded — max 60 req/min' },
 })
 
-const sessionLimiter = rateLimit({
-  windowMs: 15 * 60_000,
-  max: 10,
-  standardHeaders: true,
-  legacyHeaders: false,
-  skip: req => req.method !== 'POST',
-  message: { error: 'Authentication attempts temporarily limited' },
-})
-app.use('/api/session', sessionLimiter)
-import { createApiSession, destroyApiSession, getApiSessionStatus, isTrustedApiOrigin } from './utils/api-session'
-if (process.env.TRUST_PROXY?.trim()) app.set('trust proxy', process.env.TRUST_PROXY.trim())
-
 // Server-side API key authentication boundary (enforced when TEXTFX_API_KEY is set in environment)
 app.use('/api', (req: Request, res: Response, next: NextFunction) => {
-  if (
-    req.path === '/health' || req.path === '/healthz' || req.path === '/key-status' ||
-    req.path === '/browser' || req.path.startsWith('/browser/')
-  ) {
+  if (req.path === '/health' || req.path === '/healthz' || req.path === '/key-status') {
     return next()
   }
-  apiAuthenticationMiddleware(req, res, next)
+  if (!authenticateApi(req)) {
+    return void res.status(401).json({ error: 'Unauthorized: valid API key required' })
+  }
+  next()
 })
 
-const PROVIDER_SELECTIONS: ProviderSelection[] = ['auto', 'gemini', 'openai', 'openrouter', 'grok']
-
-function requestBudgetContext(req: Request, res: Response) {
-  const body = req.body && typeof req.body === 'object' && !Array.isArray(req.body)
-    ? req.body as Record<string, unknown>
-    : {}
-  const provider = body.provider === undefined ? 'auto' : body.provider
-  if (typeof provider !== 'string' || !PROVIDER_SELECTIONS.includes(provider as ProviderSelection)) {
-    res.status(400).json({ error: 'provider must be auto, gemini, openai, openrouter, or grok.' })
-    return undefined
-  }
-  const model = body.model
-  if (model !== undefined && (typeof model !== 'string' || !model.trim() || model.length > 200)) {
-    res.status(400).json({ error: 'model must be a non-empty string of at most 200 characters.' })
-    return undefined
-  }
-  if (model !== undefined && provider === 'auto') {
-    res.status(400).json({ error: 'Choose a provider before selecting a specific model.' })
-    return undefined
-  }
-
-  const controller = new AbortController()
-  req.once('aborted', () => controller.abort())
-  res.once('close', () => {
-    if (!res.writableEnded) controller.abort()
-  })
+function requestBudgetContext(req: Request) {
   const runId = req.header('x-request-id') || crypto.randomUUID()
-  const context = createGatewayBudgetContext(runId, {
-    promptVersion: SYSTEM_PROMPT_VERSION,
-    providerId: provider as ProviderSelection,
-    model: model as string | undefined,
-    signal: controller.signal,
-  })
-  return Object.assign(context, { abort: (reason?: unknown) => controller.abort(reason) })
-}
-
-async function loadRequestEvidence(req: Request, researchId: unknown): Promise<{
-  references: BrowserEvidenceReference[]
-  promptData: string
-} | undefined> {
-  if (researchId === undefined) return undefined
-  if (typeof researchId !== 'string' || !researchId.trim()) {
-    throw new BrowserError('INVALID_ID', 'Browser research ID must be a non-empty string.')
-  }
-  authorizeBrowser(req.header('x-textfx-browser-token'))
-  const research = await loadBrowserResearch(researchId)
-  if (!research.evidence.length || research.status === 'failed') {
-    throw new BrowserError('EMPTY_RESEARCH', 'Research has no usable page excerpts.', 422)
-  }
-
-  const allowedHosts = getBrowserPolicy().allowedHosts
-  const verified = research.evidence.map(item => {
-    if (item.reviewStatus !== 'unreviewed' || item.trust !== 'untrusted-web-content') {
-      throw new BrowserError('EVIDENCE_INVALID', 'Research evidence does not meet the unreviewed source contract.', 422)
-    }
-    const url = validateBrowserUrl(item.sourceUrl, allowedHosts)
-    if (url.href !== item.sourceUrl || !verifyEvidenceIntegrity(item).ok) {
-      throw new BrowserError('EVIDENCE_INVALID', 'Research evidence failed source or integrity validation.', 422)
-    }
-    return item
-  })
-  const references = extractEvidenceReferences({
-    evidenceReferences: verified.map(item => ({
-      evidenceId: item.evidenceId,
-      sourceUrl: item.sourceUrl,
-      title: item.title,
-      text: item.text,
-      retrievedAt: item.retrievedAt,
-      contentHash: item.contentHash,
-      reviewStatus: item.reviewStatus,
-    })),
-  })
-  const promptData = JSON.stringify(references.map(reference => ({
-    evidenceId: reference.evidenceId,
-    sourceUrl: reference.sourceUrl,
-    title: reference.title,
-    excerpt: reference.text.slice(0, 2500),
-    excerptTruncated: reference.text.length > 2500,
-    retrievedAt: reference.retrievedAt,
-    contentHash: reference.contentHash,
-    reviewStatus: reference.reviewStatus,
-  })))
-  return { references, promptData }
-}
-
-function generationSummary(runId: string) {
-  const calls = getGatewayCallHistory(500).filter(item => item.runId === runId && item.status === 'succeeded')
-  return {
-    mode: 'provider-response',
-    providers: [...new Set(calls.map(item => item.provider))],
-    models: [...new Set(calls.map(item => item.model))],
-    calls: calls.map(({ requestId, provider, model, task }) => ({ requestId, provider, model, task })),
-  }
+  return createGatewayBudgetContext(runId, { promptVersion: SYSTEM_PROMPT_VERSION })
 }
 
 function sendGenerationError(res: Response, error: unknown): void {
   if (error instanceof GatewayBudgetExceededError) {
-    res.status(error.status).json({ error: error.message, code: error.code })
-    return
-  }
-  if (error instanceof ProviderConfigurationError) {
-    res.status(error.status).json({ error: error.message, code: error.code })
-    return
-  }
-  if (error instanceof ProviderRequestError) {
-    res.status(502).json({
-      error: error.message,
-      code: 'PROVIDER_REQUEST_FAILED',
-      provider: error.provider,
-      upstreamStatus: error.status,
-    })
-    return
-  }
-  if (error instanceof BrowserError) {
     res.status(error.status).json({ error: error.message, code: error.code })
     return
   }
@@ -350,40 +214,38 @@ app.post('/agent/run', (req: Request, res: Response) => {
 
 // ── POST /llm ─────────────────────────────────────────────────────────────────
 app.post('/llm', llmLimiter, async (req: Request, res: Response) => {
-  const input = req.body?.input
-  if (typeof input !== 'string') return void res.status(400).json({ error: 'input must be a string' })
+  const { input } = req.body as { input?: string }
 
-  const san = sanitize(input)
+  const san = sanitize(input ?? '')
   if (!san.ok) {
-    log('warn', 'sanitizer rejected', { reason: san.reason, hash: hashStr(input) })
+    log('warn', 'sanitizer rejected', { reason: san.reason, hash: hashStr(input ?? '') })
     return void res.status(400).json({ error: san.reason })
   }
 
-  const pol = policyCheck(input)
+  const pol = policyCheck(input!)
   if (!pol.allowed) {
-    log('warn', 'policy blocked', { reason: pol.reason, hash: hashStr(input) })
+    log('warn', 'policy blocked', { reason: pol.reason, hash: hashStr(input!) })
     return void res.status(403).json({ error: `Policy blocked: ${pol.reason}` })
   }
 
-  const budgetContext = requestBudgetContext(req, res)
-  if (!budgetContext) return
-  log('info', 'llm call', { hash: hashStr(input), policy: 'pass' })
+  log('info', 'llm call', { hash: hashStr(input!), policy: 'pass' })
   try {
-    const language = resolveLanguage(input, 'en')
+    assertGeminiConfigured()
+    const language = resolveLanguage(input!, 'en')
     const response = await gateway.generateCreativeText(
-      input,
+      input!,
       getLateralThinkingSystemPrompt({
         domain: 'general',
-        problem: input,
+        problem: input!,
         target: 'the user',
         language,
         archetype: 'The Sage',
       }),
-      budgetContext,
+      requestBudgetContext(req),
     )
     const result = response.text
     log('info', 'llm ok', { outHash: hashStr(result) })
-    res.json({ ok: true, result, generation: { mode: 'provider-response', provider: response.provider, model: response.model } })
+    res.json({ ok: true, result })
   } catch (err: unknown) {
     const msg = err instanceof Error ? err.message : String(err)
     log('error', 'llm fetch error', { msg })
@@ -410,27 +272,13 @@ app.get('/api/system-prompt', (_req, res) => res.json({ systemPrompt: getLateral
 
 app.post('/api/insight', async (req, res) => {
   const { brief, archetype, brandVoice, language } = req.body || {}
-  if (typeof brief !== 'string' || !brief.trim()) return void res.status(400).json({ error: 'brief must be a non-empty string' })
-  if (brief.length > 8000) return void res.status(400).json({ error: 'brief exceeds 8000 characters' })
+  if (!brief) return void res.status(400).json({ error: 'brief required' })
   const san = sanitize(brief)
   if (!san.ok) return void res.status(400).json({ error: san.reason })
   const pol = policyCheck(brief)
   if (!pol.allowed) return void res.status(403).json({ error: `Policy blocked: ${pol.reason}` })
-  const budgetContext = requestBudgetContext(req, res)
-  if (!budgetContext) return
   try {
-    const attachment = await loadRequestEvidence(req, req.body?.browserResearchId)
-    const result = await withTimeout(
-      generateInsight(brief, archetype, brandVoice, language, budgetContext, attachment?.promptData),
-      180_000,
-      'insight',
-      budgetContext.abort,
-    )
-    res.json({
-      ...result,
-      evidenceReferences: attachment?.references || [],
-      generation: generationSummary(budgetContext.runId),
-    })
+    res.json(await withTimeout(generateInsight(brief, archetype, brandVoice, language, requestBudgetContext(req)), 180_000, 'insight'))
   } catch (e: unknown) { sendGenerationError(res, e) }
 })
 
@@ -444,11 +292,8 @@ app.post('/api/concept', async (req, res) => {
   if (!san.ok) return void res.status(400).json({ error: san.reason })
   const pol = policyCheck(validationInput)
   if (!pol.allowed) return void res.status(403).json({ error: `Policy blocked: ${pol.reason}` })
-  const budgetContext = requestBudgetContext(req, res)
-  if (!budgetContext) return
   try {
-    const result = await withTimeout(mapConcept(insight, buildCtx({ archetype, brandVoice, language }, budgetContext)), 90_000, 'concept', budgetContext.abort)
-    res.json({ ...result, generation: generationSummary(budgetContext.runId) })
+    res.json(await withTimeout(mapConcept(insight, buildCtx({ archetype, brandVoice, language }, requestBudgetContext(req))), 90_000, 'concept'))
   } catch (e: unknown) { sendGenerationError(res, e) }
 })
 
@@ -462,39 +307,25 @@ app.post('/api/script', async (req, res) => {
   if (!san.ok) return void res.status(400).json({ error: san.reason })
   const pol = policyCheck(validationInput)
   if (!pol.allowed) return void res.status(403).json({ error: `Policy blocked: ${pol.reason}` })
-  const budgetContext = requestBudgetContext(req, res)
-  if (!budgetContext) return
   try {
-    const result = await withTimeout(writeScript(concept, buildCtx({ archetype, brandVoice, language }, budgetContext)), 90_000, 'script', budgetContext.abort)
-    res.json({ ...result, generation: generationSummary(budgetContext.runId) })
+    res.json(await withTimeout(writeScript(concept, buildCtx({ archetype, brandVoice, language }, requestBudgetContext(req))), 90_000, 'script'))
   } catch (e: unknown) { sendGenerationError(res, e) }
 })
 
 app.post('/api/full-pipeline', async (req, res) => {
   const { brief, archetype, brandVoice, language } = req.body || {}
-  if (typeof brief !== 'string' || !brief.trim()) return void res.status(400).json({ error: 'brief must be a non-empty string' })
-  if (brief.length > 8000) return void res.status(400).json({ error: 'brief exceeds 8000 characters' })
+  if (!brief) return void res.status(400).json({ error: 'brief required' })
   const san = sanitize(brief)
   if (!san.ok) return void res.status(400).json({ error: san.reason })
   const pol = policyCheck(brief)
   if (!pol.allowed) return void res.status(403).json({ error: `Policy blocked: ${pol.reason}` })
-  const budgetContext = requestBudgetContext(req, res)
-  if (!budgetContext) return
   try {
-    const attachment = await loadRequestEvidence(req, req.body?.browserResearchId)
+    const budgetContext = requestBudgetContext(req)
     const ctx     = buildCtx({ archetype, brandVoice, language }, budgetContext)
-    const generatedInsight = await withTimeout(generateInsight(brief, archetype, brandVoice, language, budgetContext, attachment?.promptData), 180_000, 'insight', budgetContext.abort)
-    const insight = { ...generatedInsight, evidenceReferences: attachment?.references || [] }
-    const concept = await withTimeout(mapConcept(insight, ctx), 90_000, 'concept', budgetContext.abort)
-    const script  = await withTimeout(writeScript(concept, ctx), 90_000, 'script', budgetContext.abort)
-    res.json({
-      brief,
-      insight,
-      concept: { ...concept, generation: generationSummary(budgetContext.runId) },
-      script: { ...script, generation: generationSummary(budgetContext.runId) },
-      generation: generationSummary(budgetContext.runId),
-      pipelineStatus: 'complete',
-    })
+    const insight = await withTimeout(generateInsight(brief, archetype, brandVoice, language, budgetContext), 180_000, 'insight')
+    const concept = await withTimeout(mapConcept(insight, ctx), 90_000, 'concept')
+    const script  = await withTimeout(writeScript(concept, ctx), 90_000, 'script')
+    res.json({ brief, insight, concept, script, pipelineStatus: 'complete' })
   } catch (e: unknown) { sendGenerationError(res, e) }
 })
 
@@ -505,37 +336,12 @@ app.use('/api/browser', browserRoutes)
 
 // ── GET /api/metrics ──────────────────────────────────────────────────────────
 app.get('/api/metrics', (_req, res) => {
-  res.json({ ...getMetrics(), providerMode: getActiveProviderLabel(), gateway: getGatewayStats() })
+  res.json({ ...getMetrics(), gateway: getGatewayStats() })
 })
 
 // ── GET /api/key-status  (check if key is configured — never returns the key) ─
 app.get('/api/key-status', async (_req: Request, res: Response) => {
-
-  app.get('/api/session', (req: Request, res: Response) => {
-    res.setHeader('Cache-Control', 'no-store')
-    res.json(getApiSessionStatus(req))
-  })
-
-  app.post('/api/session', (req: Request, res: Response) => {
-    res.setHeader('Cache-Control', 'no-store')
-    if (!createApiSession(req, res, req.body?.apiKey)) {
-      return void res.status(401).json({ error: 'Authentication failed' })
-    }
-    res.json({ authRequired: true, authenticated: true })
-  })
-
-  app.delete('/api/session', (req: Request, res: Response) => {
-    res.setHeader('Cache-Control', 'no-store')
-    if (!isTrustedApiOrigin(req)) return void res.status(403).json({ error: 'Request origin is not allowed' })
-    destroyApiSession(req, res)
-    res.status(204).end()
-  })
-  const providers = getProviderStatus()
-  res.json({
-    configured: providers.some(provider => provider.configured),
-    provider: getActiveProviderLabel(),
-    providers,
-  })
+  res.json({ configured: !!process.env.GEMINI_API_KEY?.trim(), provider: 'Gemini' })
 })
 
 // Global error handler
@@ -547,50 +353,50 @@ app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
 
 // ─── Startup environment validation ──────────────────────────────────────────
 function logStartupConfig(): void {
-  const configuredProviders = getProviderStatus().filter(provider => provider.configured).map(provider => provider.label)
+  const hasGemini = !!process.env.GEMINI_API_KEY?.trim()
   log('info', 'startup config', {
     port:        PORT,
     bind:        '127.0.0.1',
     provider:    getActiveProviderLabel(),
-    priority:    process.env.AI_AUTO_PROVIDER_ORDER || 'gemini,openrouter,openai,grok',
-    configuredProviders,
+    priority:    'Gemini only',
+    gemini:      hasGemini ? 'configured' : 'GEMINI_API_KEY not set',
     corsOrigin:  CORS_ORIGIN,
     rateLimits:  'general=120/min LLM=60/min',
   })
-  if (!configuredProviders.length) {
-    log('warn', 'No AI provider API key is configured; generation requests will fail explicitly', {})
+  if (!hasGemini) {
+    log('warn', 'GEMINI_API_KEY is missing; generation requests will fail explicitly', {})
   }
 }
 
 // ─── Server bind (127.0.0.1 ONLY) ────────────────────────────────────────────
-export { app }
+let server: https.Server | http.Server
 
-if (require.main === module) {
-  const server = CERT_PATH && KEY_PATH && fs.existsSync(CERT_PATH) && fs.existsSync(KEY_PATH)
-    ? https.createServer({ cert: fs.readFileSync(CERT_PATH), key: fs.readFileSync(KEY_PATH) }, app)
-    : http.createServer(app)
-
+if (CERT_PATH && KEY_PATH && fs.existsSync(CERT_PATH) && fs.existsSync(KEY_PATH)) {
+  server = https.createServer({ cert: fs.readFileSync(CERT_PATH), key: fs.readFileSync(KEY_PATH) }, app)
   server.listen(PORT, '127.0.0.1', () => {
-    if (server instanceof https.Server) {
-      log('info', 'HTTPS ready', { port: PORT, bind: '127.0.0.1' })
-    } else {
-      log('warn', 'HTTP only — pass --cert/--key for HTTPS', { port: PORT })
-    }
+    log('info', 'HTTPS ready', { port: PORT, bind: '127.0.0.1' })
     logStartupConfig()
   })
-
-  function shutdown(signal: string) {
-    log('info', `${signal} — shutting down`)
-    for (const [id, { proc, timer }] of agents) {
-      clearTimeout(timer)
-      try { proc.kill('SIGKILL') } catch { /* ignore */ }
-      log('info', 'killed agent', { id })
-    }
-    agents.clear()
-    server.close(() => { log('info', 'clean exit'); process.exit(0) })
-    setTimeout(() => process.exit(1), 10_000)
-  }
-  process.on('SIGTERM', () => shutdown('SIGTERM'))
-  process.on('SIGINT', () => shutdown('SIGINT'))
-  process.on('uncaughtException', error => { log('error', 'uncaught', { msg: error.message }); shutdown('uncaughtException') })
+} else {
+  server = http.createServer(app)
+  server.listen(PORT, '127.0.0.1', () => {
+    log('warn', 'HTTP only — pass --cert/--key for HTTPS', { port: PORT })
+    logStartupConfig()
+  })
 }
+
+// ─── Graceful shutdown ────────────────────────────────────────────────────────
+function shutdown(signal: string) {
+  log('info', `${signal} — shutting down`)
+  for (const [id, { proc, timer }] of agents) {
+    clearTimeout(timer)
+    try { proc.kill('SIGKILL') } catch { /* ignore */ }
+    log('info', 'killed agent', { id })
+  }
+  agents.clear()
+  server.close(() => { log('info', 'clean exit'); process.exit(0) })
+  setTimeout(() => process.exit(1), 10_000)
+}
+process.on('SIGTERM',           () => shutdown('SIGTERM'))
+process.on('SIGINT',            () => shutdown('SIGINT'))
+process.on('uncaughtException', (e) => { log('error', 'uncaught', { msg: e.message }); shutdown('uncaughtException') })

@@ -77,8 +77,5 @@
   },
   "dependencies": {
     "tree-kill": "^1.2.2"
-  },
-  "overrides": {
-    "tar": "^7.5.21"
   }
 }

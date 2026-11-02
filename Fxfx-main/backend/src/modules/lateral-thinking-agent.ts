@@ -27,7 +27,6 @@ export interface LateralThinkingContext {
   promptVersion?: string
   useRealAI?: boolean
   knowledgePrompt?: string
-  untrustedReferenceData?: string
   archetype?: string
   brandVoice?: {
     formalLevel: number
@@ -152,12 +151,6 @@ ${trendBlock}${reworkBlock}
 Return JSON only.`
 }
 
-export function appendUntrustedReferenceData(prompt: string, context: LateralThinkingContext): string {
-  return context.untrustedReferenceData?.trim()
-    ? `${prompt}\n\n${context.untrustedReferenceData}`
-    : prompt
-}
-
 async function generateJson<T extends object = Record<string, unknown>>(
   context: LateralThinkingContext,
   label: string,
@@ -165,10 +158,10 @@ async function generateJson<T extends object = Record<string, unknown>>(
   requiredFields: string[]
 ): Promise<T> {
   if (!context.provider || typeof context.provider.generateCreativeText !== 'function') {
-    throw new Error(`${label}: an AI provider is required.`)
+    throw new Error(`${label}: Gemini provider is required.`)
   }
   const response = await context.provider.generateCreativeText(
-    appendUntrustedReferenceData(prompt, context),
+    prompt,
     getLateralThinkingSystemPrompt({ ...context, useRealAI: true }),
     withGatewayTask(context.providerConfig, 'candidate-generation')
   )
@@ -181,11 +174,11 @@ async function generateJson<T extends object = Record<string, unknown>>(
         ? value.length > 0
         : !!value && typeof value === 'object'
     if (!valid) {
-      throw new Error(`${label}: provider omitted required field "${field}".`)
+      throw new Error(`${label}: Gemini omitted required field "${field}".`)
     }
   }
   assertLanguageMatch(parsed, context.language || 'en', label)
-  return parsed as T
+  return parsed as unknown as T
 }
 
 // ─────────────────────────────────────────────
@@ -205,10 +198,7 @@ export async function generateAnalogies(c: LateralThinkingContext): Promise<Anal
     ['analogies'])
   if (!Array.isArray(result.analogies) || !result.analogies.length) throw new Error('Analogy generation: Gemini returned no analogies.')
   for (const analogy of result.analogies) {
-    if (!analogy || typeof analogy !== 'object' || ['sourceField', 'sharedPrinciple', 'application', 'metaphor'].some(field => {
-      const value = (analogy as Record<string, unknown>)[field]
-      return typeof value !== 'string' || !value.trim()
-    })) {
+    if (!analogy || typeof analogy !== 'object' || ['sourceField', 'sharedPrinciple', 'application', 'metaphor'].some(field => typeof (analogy as Record<string, unknown>)[field] !== 'string')) {
       throw new Error('Analogy generation: Gemini returned an invalid analogy.')
     }
   }
@@ -242,56 +232,16 @@ async function runAgentDebate(
   raw: Omit<LateralThinkingOutput, 'agentDebate' | 'visualPrompt'>,
   ctx: LateralThinkingContext
 ): Promise<AgentDebateResult> {
-  const debateContext = {
-    synthesizedInsight: raw.synthesizedInsight,
-    creativeBreakthrough: raw.creativeBreakthrough,
-    provocation: raw.provocation.creativeInsight,
-    analogy: raw.analogies[0].metaphor,
-    unexpectedAngle: raw.randomStimulus.unexpectedAngle,
-    paradox: raw.oppositeThinking.paradox,
-    reversedConstraint: raw.constraintReversal.insight,
-  }
   const result = await generateJson<AgentDebateResult>(ctx, 'Creative debate',
-    `Create a concise debate between Creative Rebel, Strategy Master, and Picky Client. Use only the following validated strategic inputs: ${JSON.stringify(debateContext)}. Keep every natural-language value to at most 8 words; use empty strings only for live-event fields when no event exists. Return exactly this JSON shape, with the three named voices in order and every other field a non-empty string:\n{"voices":[{"agent":"Creative Rebel","stance":"...","sharpCritique":"...","contribution":"..."},{"agent":"Strategy Master","stance":"...","sharpCritique":"...","contribution":"...","trendAngle":"...","liveEventCite":"..."},{"agent":"Picky Client","stance":"...","sharpCritique":"...","contribution":"..."}],"conflictPoint":"...","resolution":"...","debateSummary":"...","trendConnection":"...","liveEventUsed":"","finalMasterpiece":{"headline":"...","tagline":"...","coreIdea":"...","emotionalTruth":"...","creativeDevice":"...","visualNotes":"..."}}. All natural-language values must follow the requested output language.`,
+    `Create a useful internal debate between Creative Rebel, Strategy Master, and Picky Client based on this context: ${JSON.stringify({ context: { domain: ctx.domain, problem: ctx.problem, target: ctx.target, trends: ctx.currentTrends }, outputs: raw })}.\nReturn exactly this JSON shape; preserve every property name in English and fill every placeholder with generated content:\n{"voices":[{"agent":"Creative Rebel","stance":"...","sharpCritique":"...","contribution":"..."},{"agent":"Strategy Master","stance":"...","sharpCritique":"...","contribution":"...","trendAngle":"...","liveEventCite":"..."},{"agent":"Picky Client","stance":"...","sharpCritique":"...","contribution":"..."}],"conflictPoint":"...","resolution":"...","debateSummary":"...","trendConnection":"...","liveEventUsed":"...","finalMasterpiece":{"headline":"...","tagline":"...","coreIdea":"...","emotionalTruth":"...","creativeDevice":"...","visualNotes":"..."}}. All natural-language values must follow the requested output language.`,
     ['voices', 'conflictPoint', 'resolution', 'debateSummary', 'trendConnection', 'finalMasterpiece'])
-  if (!Array.isArray(result.voices) || result.voices.length !== 3) {
-    throw new Error('Creative debate: provider must return exactly three voices.')
+  if (!Array.isArray(result.voices) || result.voices.length < 3) {
+    throw new Error('Creative debate: Gemini must return three voices.')
   }
-  const voiceFields = ['stance', 'sharpCritique', 'contribution']
-  const expectedAgents = ['Creative Rebel', 'Strategy Master', 'Picky Client']
-  result.voices.forEach((value, index) => {
-    if (!value || typeof value !== 'object' || value.agent !== expectedAgents[index]) {
-      throw new Error(`Creative debate: voice ${index + 1} has an invalid agent.`)
-    }
-    for (const field of voiceFields) {
-      const fieldValue = value[field as keyof AgentVoice]
-      if (typeof fieldValue !== 'string' || !fieldValue.trim()) {
-        throw new Error(`Creative debate: voice ${index + 1} omitted ${field}.`)
-      }
-    }
-  })
-  const strategyVoice = result.voices[1]
-  for (const field of ['trendAngle', 'liveEventCite'] as const) {
-    if (typeof strategyVoice[field] !== 'string') {
-      throw new Error(`Creative debate: Strategy Master omitted ${field}.`)
-    }
-  }
-  for (const field of ['conflictPoint', 'resolution', 'debateSummary', 'trendConnection'] as const) {
-    if (typeof result[field] !== 'string' || !result[field].trim()) {
-      throw new Error(`Creative debate: provider omitted ${field}.`)
-    }
-  }
-  if (typeof result.liveEventUsed !== 'string') {
-    throw new Error('Creative debate: provider omitted liveEventUsed.')
-  }
-  const masterpiece = result.finalMasterpiece
-  if (!masterpiece || typeof masterpiece !== 'object') {
-    throw new Error('Creative debate: provider omitted finalMasterpiece.')
-  }
+  const masterpiece = result.finalMasterpiece as Record<string, unknown>
   for (const field of ['headline', 'tagline', 'coreIdea', 'emotionalTruth', 'creativeDevice', 'visualNotes']) {
-    const value = masterpiece[field as keyof typeof masterpiece]
-    if (typeof value !== 'string' || !value.trim()) {
-      throw new Error(`Creative debate: provider omitted finalMasterpiece.${field}.`)
+    if (typeof masterpiece[field] !== 'string' || !masterpiece[field]) {
+      throw new Error(`Creative debate: Gemini omitted finalMasterpiece.${field}.`)
     }
   }
   return result
@@ -307,38 +257,16 @@ export async function synthesizeLateralThinking(
   const language = resolveLanguage([ctx.domain, ctx.problem, ctx.target].join('\n'), ctx.language)
   const generationContext = { ...ctx, language, useRealAI: true }
 
-  const parentSignal = generationContext.providerConfig?.signal as AbortSignal | undefined
-  const controller = new AbortController()
-  const abortFromParent = () => controller.abort(parentSignal?.reason)
-  parentSignal?.addEventListener('abort', abortFromParent, { once: true })
-  const taskContext = {
-    ...generationContext,
-    providerConfig: generationContext.providerConfig
-      ? { ...generationContext.providerConfig, signal: controller.signal }
-      : generationContext.providerConfig,
-  }
-  let provocation: ProvocationResult
-  let analogies: AnalogyResult[]
-  let randomStimulus: RandomStimulusResult
-  let oppositeThinking: OppositeThinkingResult
-  let constraintReversal: ConstraintReversalResult
-  try {
-    [provocation, analogies, randomStimulus, oppositeThinking, constraintReversal] = await Promise.all([
-      generateProvocation(taskContext),
-      generateAnalogies(taskContext),
-      generateRandomStimulus(taskContext),
-      generateOppositeThinking(taskContext),
-      generateConstraintReversal(taskContext),
-    ])
-  } catch (error) {
-    controller.abort(error)
-    throw error
-  } finally {
-    parentSignal?.removeEventListener('abort', abortFromParent)
-  }
+  const [provocation, analogies, randomStimulus, oppositeThinking, constraintReversal] = await Promise.all([
+    generateProvocation(generationContext),
+    generateAnalogies(generationContext),
+    generateRandomStimulus(generationContext),
+    generateOppositeThinking(generationContext),
+    generateConstraintReversal(generationContext),
+  ])
 
   const synthesis = await generateJson<{ synthesizedInsight: string; creativeBreakthrough: string }>(
-    taskContext,
+    generationContext,
     'Insight synthesis',
     `Synthesize these five lateral-thinking outputs into one coherent strategic insight and one original creative breakthrough: ${JSON.stringify({ provocation, analogies, randomStimulus, oppositeThinking, constraintReversal })}.\nReturn JSON with non-empty string fields synthesizedInsight and creativeBreakthrough.`,
     ['synthesizedInsight', 'creativeBreakthrough']
@@ -346,12 +274,12 @@ export async function synthesizeLateralThinking(
 
   const raw = { provocation, analogies, randomStimulus, oppositeThinking, constraintReversal, ...synthesis }
 
-  const agentDebate = await runAgentDebate(raw, taskContext)
+  const agentDebate = await runAgentDebate(raw, generationContext)
 
   const mp = agentDebate.finalMasterpiece
   const visualPrompt = await generateVisualPrompt(
     { title: mp.headline, tagline: mp.tagline, coreIdea: mp.coreIdea, visualNotes: mp.visualNotes, emotionalArc: mp.emotionalTruth },
-    taskContext
+    generationContext
   )
 
   return { ...raw, agentDebate, visualPrompt }

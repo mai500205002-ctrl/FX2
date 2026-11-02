@@ -174,7 +174,7 @@ router.post('/run', async (req: Request, res: Response) => {
 
   try {
     if (body.browserResearchId !== undefined) {
-      authorizeBrowser(req.header('x-textfx-browser-token') || req.header('authorization'))
+      authorizeBrowser(req.header('authorization'))
       if (typeof body.browserResearchId !== 'string') throw new BrowserError('INVALID_ID', 'Research ID must be a string.')
       if (body.tenantId || req.header('x-tenant-id')) throw new BrowserError('TENANT_UNSUPPORTED', 'Browser references are local single-user only.', 403)
     }

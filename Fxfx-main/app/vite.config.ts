@@ -1,12 +1,7 @@
-import { resolve } from 'node:path'
-import { defineConfig, loadEnv } from 'vite'
+import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-export default defineConfig(({ mode }) => {
-  const appEnv = loadEnv(mode, process.cwd(), 'TEXTFX_BACKEND_PROXY_URL')
-  const backendTarget = process.env.TEXTFX_BACKEND_PROXY_URL?.trim() || appEnv.TEXTFX_BACKEND_PROXY_URL?.trim() || 'http://localhost:3001'
-
-  return {
+export default defineConfig({
   base: './',
 
   plugins: [react()],
@@ -17,7 +12,7 @@ export default defineConfig(({ mode }) => {
     allowedHosts: 'all',
     proxy: {
       '/api': {
-        target: backendTarget,
+        target: 'http://localhost:3001',
         changeOrigin: true,
       },
       '/health': {
@@ -43,5 +38,4 @@ export default defineConfig(({ mode }) => {
     sourcemap: false,
     minify: 'esbuild',
   },
-  }
 })

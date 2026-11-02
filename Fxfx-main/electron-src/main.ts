@@ -19,7 +19,6 @@ import {
 import path       from 'path'
 import fs         from 'fs'
 import https      from 'https'
-import type { ClientRequest, IncomingMessage } from 'http'
 import { execFile, ChildProcess } from 'child_process'
 import crypto     from 'crypto'
 import net        from 'net'
@@ -38,8 +37,6 @@ let backendProcess:   ChildProcess  | null = null
 let backendPort       = 0
 let certFingerprint   = ''
 let isQuitting        = false
-let backendSessionCookie = ''
-const activeBackendRequests = new Map<string, ClientRequest>()
 
 // ── Paths ─────────────────────────────────────────────────────────────────────
 function getCertsDir(): string {
@@ -51,109 +48,6 @@ function getBackendExe(): string {
     return path.join(process.resourcesPath, 'backend', 'fx-server.exe')
   }
   return path.join(__dirname, '..', 'release', 'backend', 'fx-server.exe')
-}
-
-interface RendererBackendRequest {
-  requestId: string
-  path: string
-  method: 'GET' | 'POST' | 'DELETE'
-  headers: Record<string, string>
-  body?: string
-}
-
-function proxyBackendRequest(request: RendererBackendRequest): Promise<{ status: number; headers: Record<string, string>; body: string }> {
-  if (!request || typeof request !== 'object') return Promise.reject(new Error('Invalid backend request'))
-  if (!/^[a-f0-9-]{36}$/i.test(request.requestId)) return Promise.reject(new Error('Invalid request ID'))
-  if (!['GET', 'POST', 'DELETE'].includes(request.method)) return Promise.reject(new Error('Unsupported backend method'))
-  if (typeof request.path !== 'string' || request.path.startsWith('//') || request.path.includes('\\') ||
-      !/\/(?:api\/session|api\/key-status|api\/insight|api\/concept|api\/script|api\/metrics|api\/agent\/(?:status|run)|api\/saas\/(?:status|plans|register)|api\/browser\/(?:status|research|runs\/[a-zA-Z0-9_-]{1,64}))(?:\?.*)?$/.test(request.path)) {
-    return Promise.reject(new Error('Unsupported backend path'))
-  }
-  const pathWithoutQuery = request.path.split('?')[0]
-  const allowedMethods: Record<string, string[]> = {
-    '/api/session': ['GET', 'POST', 'DELETE'],
-    '/api/key-status': ['GET'],
-    '/api/insight': ['POST'],
-    '/api/concept': ['POST'],
-    '/api/script': ['POST'],
-    '/api/metrics': ['GET'],
-    '/api/agent/status': ['GET'],
-    '/api/agent/run': ['POST'],
-    '/api/saas/status': ['GET'],
-    '/api/saas/plans': ['GET'],
-    '/api/saas/register': ['POST'],
-    '/api/browser/status': ['GET'],
-    '/api/browser/research': ['POST'],
-  }
-  const runPath = /^\/api\/browser\/runs\/[a-zA-Z0-9_-]{1,64}$/.test(pathWithoutQuery)
-  if (!(runPath ? ['GET', 'DELETE'] : allowedMethods[pathWithoutQuery] || []).includes(request.method)) {
-    return Promise.reject(new Error('Unsupported backend method for path'))
-  }
-  if (request.body !== undefined && (typeof request.body !== 'string' || Buffer.byteLength(request.body) > 512 * 1024)) {
-    return Promise.reject(new Error('Backend request body exceeds the allowed size'))
-  }
-
-  const headers: Record<string, string> = {}
-  for (const [name, value] of Object.entries(request.headers || {})) {
-    const normalized = name.toLowerCase()
-    if (['content-type', 'x-textfx-browser-token', 'x-request-id', 'idempotency-key'].includes(normalized) && typeof value === 'string') {
-      headers[normalized] = value.slice(0, 2048)
-    }
-  }
-  if (backendSessionCookie && !(request.path.split('?')[0] === '/api/session' && request.method === 'POST')) {
-    headers.cookie = backendSessionCookie
-  }
-  headers.origin = (process.env.CORS_ORIGIN || 'http://localhost:5000').split(',')[0].trim()
-  const certPath = path.join(getCertsDir(), 'fx-cert.pem')
-  const trustedCert = fs.readFileSync(certPath)
-
-  return new Promise((resolve, reject) => {
-    const clientRequest = https.request({
-      hostname: '127.0.0.1',
-      port: backendPort,
-      path: request.path,
-      method: request.method,
-      headers,
-      ca: trustedCert,
-      rejectUnauthorized: true,
-      checkServerIdentity: (_hostname, certificate) => {
-        const fingerprint = crypto.createHash('sha256').update(certificate.raw).digest('hex')
-        return fingerprint === certFingerprint ? undefined : new Error('Backend TLS certificate fingerprint mismatch')
-      },
-    }, (response: IncomingMessage) => {
-      if (request.path.split('?')[0] === '/api/session') {
-        if (request.method === 'DELETE') backendSessionCookie = ''
-        if (request.method === 'POST') {
-          const setCookie = response.headers['set-cookie']?.[0]
-          if (setCookie) backendSessionCookie = setCookie.split(';', 1)[0]
-        }
-      }
-      const chunks: Buffer[] = []
-      let totalBytes = 0
-      response.on('data', (chunk: Buffer) => {
-        totalBytes += chunk.length
-        if (totalBytes > 2 * 1024 * 1024) {
-          clientRequest.destroy(new Error('Backend response exceeds the allowed size'))
-          return
-        }
-        chunks.push(chunk)
-      })
-      response.on('end', () => resolve({
-        status: response.statusCode || 502,
-        headers: { 'content-type': String(response.headers['content-type'] || 'application/json') },
-        body: Buffer.concat(chunks).toString('utf8'),
-      }))
-    })
-    activeBackendRequests.set(request.requestId, clientRequest)
-    const cleanup = () => {
-      if (activeBackendRequests.get(request.requestId) === clientRequest) activeBackendRequests.delete(request.requestId)
-    }
-    clientRequest.once('error', error => reject(error))
-    clientRequest.once('close', cleanup)
-    clientRequest.setTimeout(180_000, () => clientRequest.destroy(new Error('Backend request timed out')))
-    if (request.body) clientRequest.write(request.body)
-    clientRequest.end()
-  })
 }
 
 // ── Self-signed cert generation (via openssl CLI) ─────────────────────────────
@@ -325,16 +219,6 @@ ipcMain.handle('fx:get-backend-info', () => ({
   protocol:        'https',
   host:            '127.0.0.1',
 }))
-
-ipcMain.handle('fx:backend-fetch', (event, request: RendererBackendRequest) => {
-  if (!mainWindow || event.sender !== mainWindow.webContents) throw new Error('Backend proxy is only available to the application window')
-  return proxyBackendRequest(request)
-})
-
-ipcMain.on('fx:backend-cancel', (event, requestId: unknown) => {
-  if (!mainWindow || event.sender !== mainWindow.webContents || typeof requestId !== 'string') return
-  activeBackendRequests.get(requestId)?.destroy(new Error('Backend request cancelled'))
-})
 
 // ── App lifecycle ─────────────────────────────────────────────────────────────
 app.on('ready', async () => {

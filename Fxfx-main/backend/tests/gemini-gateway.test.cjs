@@ -2,18 +2,33 @@
 
 const test = require('node:test')
 const assert = require('node:assert/strict')
-const originalFetch = global.fetch
-const providerRequests = []
-global.fetch = async (url, options) => {
-  const body = JSON.parse(options.body)
-  providerRequests.push({ url: String(url), headers: options.headers, body })
-  await new Promise(resolve => setTimeout(resolve, 20))
-  return new Response(JSON.stringify({
-    candidates: [{ content: { parts: [{ text: `generated:${body.contents[0].parts[0].text}` }] }, finishReason: 'STOP' }],
-    usageMetadata: { promptTokenCount: 4, candidatesTokenCount: 3, totalTokenCount: 7 },
-  }), { status: 200, headers: { 'Content-Type': 'application/json' } })
+const Module = require('node:module')
+const originalLoad = Module._load
+const sdkRequests = []
+
+Module._load = function(request, parent, isMain) {
+  if (request === '@google/genai') {
+    return {
+      GoogleGenAI: class GoogleGenAI {
+        constructor({ apiKey }) {
+          assert.equal(apiKey, 'test-gemini-key')
+          this.models = {
+            generateContent: async request => {
+              sdkRequests.push(request)
+              await new Promise(resolve => setTimeout(resolve, 20))
+              return {
+                text: `generated:${request.contents}`,
+                candidates: [{ finishReason: 'STOP' }],
+                usageMetadata: { promptTokenCount: 4, candidatesTokenCount: 3, totalTokenCount: 7 },
+              }
+            },
+          }
+        }
+      },
+    }
+  }
+  return originalLoad.call(this, request, parent, isMain)
 }
-test.after(() => { global.fetch = originalFetch })
 
 process.env.GEMINI_API_KEY = 'test-gemini-key'
 process.env.GEMINI_MODEL = 'gemini-2.5-flash'
@@ -41,11 +56,10 @@ test('Gemini gateway routes requests and counts cache hits and in-flight dedupli
   assert.equal(concurrent[0].cacheHit, false)
   assert.equal(concurrent[1].cacheHit, false)
 
-  assert.equal(providerRequests.length, 2, 'cache and deduplication avoid duplicate Gemini requests')
-  assert.ok(providerRequests.every(request => request.url.endsWith('/gemini-2.5-flash:generateContent')))
-  assert.ok(providerRequests.every(request => request.headers['x-goog-api-key'] === 'test-gemini-key'))
-  assert.ok(providerRequests.every(request => request.body.generationConfig.temperature === 0.25))
-  assert.ok(providerRequests.every(request => request.body.generationConfig.maxOutputTokens === 128))
+  assert.equal(sdkRequests.length, 2, 'cache and deduplication avoid duplicate Gemini requests')
+  assert.ok(sdkRequests.every(request => request.model === 'gemini-2.5-flash'))
+  assert.ok(sdkRequests.every(request => request.config.temperature === 0.25))
+  assert.ok(sdkRequests.every(request => request.config.maxOutputTokens === 128))
 
   const stats = getGatewayStats()
   assert.equal(stats.totalCalls, 4)
@@ -66,16 +80,16 @@ test('Gemini model routing is configurable by task and recorded in call provenan
     utility: ['GEMINI_MODEL_UTILITY', 'utility-model-test'],
   }
   for (const [envName, model] of Object.values(taskModels)) process.env[envName] = model
-  const start = providerRequests.length
+  const start = sdkRequests.length
   const historyStart = getGatewayCallHistory(500).length
   for (const task of Object.keys(taskModels)) {
     const context = withGatewayTask(createGatewayBudgetContext(`routing-${task}`, { promptVersion: 'prompt-routing-test' }), task)
     const response = await callLLM(`routing prompt ${task}`, 'routing system', context)
     assert.equal(response.model, taskModels[task][1])
   }
-  assert.deepEqual(providerRequests.slice(start).map(request => decodeURIComponent(request.url.split('/models/')[1].split(':')[0])), Object.values(taskModels).map(([, model]) => model))
+  assert.deepEqual(sdkRequests.slice(start).map(request => request.model), Object.values(taskModels).map(([, model]) => model))
   const records = getGatewayCallHistory(500).slice(historyStart)
   assert.deepEqual(records.map(item => item.task), Object.keys(taskModels))
   assert.ok(records.every(item => item.promptVersion === 'prompt-routing-test'))
-  assert.equal(getGatewayStats().routing.version, 'multi-provider-task-routing-v1')
+  assert.equal(getGatewayStats().routing.version, 'gemini-task-routing-v1')
 })

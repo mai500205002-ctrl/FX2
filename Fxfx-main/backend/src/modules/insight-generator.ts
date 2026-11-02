@@ -49,14 +49,8 @@ export async function generateInsight(
       : ''
 
     // Inject retrieved knowledge, explicitly untrusted web evidence, and personality into context.
-    const contextWithKnowledge = {
-      ...context,
-      knowledgePrompt,
-      untrustedReferenceData: researchPrompt,
-      archetype,
-      brandVoice,
-      language: outputLanguage,
-    }
+    const combinedKnowledgePrompt = [knowledgePrompt, researchPrompt].filter(Boolean).join('\n\n')
+    const contextWithKnowledge = { ...context, knowledgePrompt: combinedKnowledgePrompt, archetype, brandVoice, language: outputLanguage }
 
     // Run all 5 lateral thinking techniques
     // All AI calls routed through the centralized LLM Gateway

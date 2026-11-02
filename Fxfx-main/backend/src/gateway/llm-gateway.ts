@@ -1,13 +1,13 @@
 /**
- * TextFX v5 — Multi-provider LLM Gateway
+ * TextFX v5 — Gemini-only LLM Gateway
  * ─────────────────────────────────────────────────────
  * Single entrypoint for ALL AI provider calls.
  *
  * Features:
- *  - Gemini, OpenAI, OpenRouter, and xAI/Grok server-side adapters
- *  - No automatic retry after a provider request; safe Auto fallback only on
- *    explicit rejection responses that cannot have generated a completion
- *  - 30 s abortable timeout per provider request
+ *  - Singleton Gemini client (initialized once, reused)
+ *  - Gemini-only retries; errors are surfaced without provider fallback
+ *  - Retry with exponential backoff (up to 2 retries per provider)
+ *  - 30 s timeout per attempt
  *  - Provider health tracking (mark unhealthy after 3 consecutive failures; recover after 60 s)
  *  - Concurrency limiter (max 10 parallel LLM calls, queued)
  *  - Token accounting (provider usage with an estimate when unavailable)
@@ -18,24 +18,13 @@
  */
 
 import { createHash, randomUUID } from 'node:crypto'
-import {
-  assertAnyProviderConfigured,
-  callOpenAICompatible,
-  getProviderCostRates,
-  getProviderStatus,
-  ProviderRequestError,
-  resolveProviderCandidates,
-  type ProviderCandidate,
-  type ProviderId,
-  type ProviderLabel,
-  type ProviderSelection,
-} from './provider-adapters'
+import { GoogleGenAI } from '@google/genai'
 
 // ─── Unified types ────────────────────────────────────────────────────────────
 
 export interface GatewayResponse {
   text:              string
-  provider:          ProviderLabel
+  provider:          'Gemini'
   model:             string
   latencyMs:         number
   usage: {
@@ -46,7 +35,6 @@ export interface GatewayResponse {
   cacheHit:          boolean
   retries:           number
   estimatedCostUsd:  number
-  usageEstimated?:   boolean
   requestId?:         string
   runId?:             string
   promptVersion?:     string
@@ -58,9 +46,6 @@ export interface GatewayBudgetContext {
   requestId?: string
   promptVersion?: string
   task?: GatewayTask
-  providerId?: ProviderSelection
-  model?: string
-  signal?: AbortSignal
   runBudgetUsd: number
   callBudgetUsd: number
 }
@@ -76,7 +61,6 @@ interface BudgetReservation {
   runId: string
   requestId: string
   reservedUsd: number
-  candidateReservedUsd: Record<string, number>
   fingerprint: string
   settled: boolean
 }
@@ -93,13 +77,12 @@ interface RunBudgetState {
 export interface GatewayCallProvenance {
   requestId: string
   runId: string
-  provider: ProviderLabel
+  provider: 'Gemini'
   model: string
   task: GatewayTask
   promptVersion?: string
   status: 'succeeded' | 'failed'
   usage?: GatewayResponse['usage']
-  usageEstimated?: boolean
   estimatedCostUsd?: number
   chargedCostUsd: number
   retries: number
@@ -163,6 +146,17 @@ function isHealthy(name: string): boolean {
   return false
 }
 
+// ─── Singleton clients ────────────────────────────────────────────────────────
+
+let _geminiClient: GoogleGenAI | null = null
+function getGeminiClient(): GoogleGenAI {
+  if (!_geminiClient) {
+    const apiKey = assertGeminiConfigured()
+    _geminiClient = new GoogleGenAI({ apiKey })
+  }
+  return _geminiClient
+}
+
 export function assertGeminiConfigured(): string {
   const apiKey = process.env.GEMINI_API_KEY?.trim()
   if (!apiKey || /^(replace_me|your_|<)/i.test(apiKey)) {
@@ -171,22 +165,18 @@ export function assertGeminiConfigured(): string {
   return apiKey
 }
 
-export { assertAnyProviderConfigured, getProviderStatus }
-
 // ─── Cost estimation ──────────────────────────────────────────────────────────
 // Very rough USD/token estimates — updated for common models
 
-const GEMINI_COST_PER_1K: Record<string, { input: number; output: number }> = {
+const COST_PER_1K: Record<string, { input: number; output: number }> = {
   'gemini-3.1-flash-lite': { input: 0.00025, output: 0.0005 },
   'gemini-2.5-flash':    { input: 0.0003, output: 0.0025  },
   'gemini-2.5-pro':      { input: 0.00125, output: 0.01   },
   'default':             { input: 0.001,   output: 0.002   },
 }
 
-function estimateCost(provider: ProviderId, model: string, promptTokens: number, completionTokens: number): number {
-  const rates = provider === 'gemini'
-    ? GEMINI_COST_PER_1K[model] ?? GEMINI_COST_PER_1K['default']
-    : getProviderCostRates(provider)
+function estimateCost(model: string, promptTokens: number, completionTokens: number): number {
+  const rates = COST_PER_1K[model] ?? COST_PER_1K['default']
   return (promptTokens / 1000) * rates.input + (completionTokens / 1000) * rates.output
 }
 
@@ -200,13 +190,13 @@ function estimateTokens(text: string): number {
 const MAX_CONCURRENT = 10
 let   activeCalls    = 0
 const queue: Array<() => void> = []
+const RETRY_DELAYS = [500, 1000]   // ms between retry attempts
 const DEFAULT_RUN_BUDGET_USD = 10
 const DEFAULT_CALL_BUDGET_USD = 0.5
 const MAX_BUDGET_RUNS = 1000
 const MAX_CALLS_PER_RUN = 1000
 const BUDGET_RUN_IDLE_MS = 24 * 60 * 60 * 1000
 const MAX_CALL_PROVENANCE = 500
-const COST_EPSILON_USD = 1e-9
 const runBudgets = new Map<string, RunBudgetState>()
 const budgetReservations = new Map<string, BudgetReservation>()
 const callProvenance: GatewayCallProvenance[] = []
@@ -217,25 +207,12 @@ function readBudgetLimit(value: unknown, envName: string, fallback: number): num
   return parsed
 }
 
-export function createGatewayBudgetContext(
-  runId: string,
-  overrides: {
-    runBudgetUsd?: number
-    callBudgetUsd?: number
-    promptVersion?: string
-    providerId?: ProviderSelection
-    model?: string
-    signal?: AbortSignal
-  } = {},
-): GatewayBudgetContext {
+export function createGatewayBudgetContext(runId: string, overrides: { runBudgetUsd?: number; callBudgetUsd?: number; promptVersion?: string } = {}): GatewayBudgetContext {
   if (!runId.trim()) throw new Error('Gateway budget context requires a run ID.')
   return {
     runId,
     promptVersion: overrides.promptVersion,
     task: 'final-artifact',
-    providerId: overrides.providerId,
-    model: overrides.model,
-    signal: overrides.signal,
     runBudgetUsd: readBudgetLimit(overrides.runBudgetUsd, 'GEMINI_RUN_BUDGET_USD', DEFAULT_RUN_BUDGET_USD),
     callBudgetUsd: readBudgetLimit(overrides.callBudgetUsd, 'GEMINI_CALL_BUDGET_USD', DEFAULT_CALL_BUDGET_USD),
   }
@@ -248,21 +225,30 @@ export function withGatewayTask(context: unknown, task: GatewayTask, requestId =
     requestId,
     promptVersion: base?.promptVersion,
     task,
-    providerId: base?.providerId,
-    model: base?.model,
-    signal: base?.signal,
     runBudgetUsd: readBudgetLimit(base?.runBudgetUsd, 'GEMINI_RUN_BUDGET_USD', DEFAULT_RUN_BUDGET_USD),
     callBudgetUsd: readBudgetLimit(base?.callBudgetUsd, 'GEMINI_CALL_BUDGET_USD', DEFAULT_CALL_BUDGET_USD),
   }
 }
 
+const MODEL_ENV_BY_TASK: Record<GatewayTask, string> = {
+  'candidate-generation': 'GEMINI_MODEL_CANDIDATE_GENERATION',
+  critique: 'GEMINI_MODEL_CRITIQUE',
+  'final-artifact': 'GEMINI_MODEL_FINAL_ARTIFACT',
+  utility: 'GEMINI_MODEL_UTILITY',
+}
+
+function resolveModel(task: GatewayTask): string {
+  return process.env[MODEL_ENV_BY_TASK[task]]?.trim() || process.env.GEMINI_MODEL?.trim() || 'gemini-3.1-flash-lite'
+}
+
 export function getModelRoutingPolicy() {
-  return {
-    version: 'multi-provider-task-routing-v1',
-    autoProviderOrder: process.env.AI_AUTO_PROVIDER_ORDER || 'gemini,openrouter,openai,grok',
-    providers: getProviderStatus().map(({ id, label, configured, models }) => ({ id, label, configured, models })),
-    tasks: ['candidate-generation', 'critique', 'final-artifact', 'utility'] as GatewayTask[],
+  const tasks: Record<GatewayTask, { env: string; model: string; configured: boolean }> = {} as Record<GatewayTask, { env: string; model: string; configured: boolean }>
+  for (const task of Object.keys(MODEL_ENV_BY_TASK) as GatewayTask[]) {
+    const taskModel = process.env[MODEL_ENV_BY_TASK[task]]?.trim()
+    const defaultModel = process.env.GEMINI_MODEL?.trim()
+    tasks[task] = { env: MODEL_ENV_BY_TASK[task], model: taskModel || defaultModel || 'gemini-3.1-flash-lite', configured: !!taskModel || !!defaultModel }
   }
+  return { version: 'gemini-task-routing-v1', provider: 'Gemini', tasks }
 }
 
 function pruneBudgetRuns(): void {
@@ -277,10 +263,10 @@ function pruneBudgetRuns(): void {
   }
 }
 
-function reserveBudget(context: GatewayBudgetContext, prompt: string, systemPrompt: string, candidates: ProviderCandidate[], maxTokens: number): BudgetReservation {
+function reserveBudget(context: GatewayBudgetContext, prompt: string, systemPrompt: string, model: string, maxTokens: number): BudgetReservation {
   const requestId = context.requestId || randomUUID()
   const requestKey = `${context.runId}:${requestId}`
-  const fingerprint = createHash('sha256').update(JSON.stringify([candidates.map(item => [item.id, item.model]), maxTokens, systemPrompt, prompt])).digest('hex')
+  const fingerprint = createHash('sha256').update(JSON.stringify([model, maxTokens, systemPrompt, prompt])).digest('hex')
   const existing = budgetReservations.get(requestKey)
   if (existing) {
     if (existing.fingerprint !== fingerprint) throw new GatewayBudgetExceededError('Idempotency key was already reserved for different model input.')
@@ -292,12 +278,8 @@ function reserveBudget(context: GatewayBudgetContext, prompt: string, systemProm
   if (state && (state.limitUsd !== context.runBudgetUsd || state.callLimitUsd !== context.callBudgetUsd)) {
     throw new GatewayBudgetExceededError('Budget limits cannot change during a run.')
   }
-  const inputTokens = Buffer.byteLength(systemPrompt + prompt, 'utf8') + 64
-  const candidateReservedUsd = Object.fromEntries(candidates.map(candidate => [
-    candidate.id,
-    estimateCost(candidate.id, candidate.model, inputTokens, maxTokens),
-  ]))
-  const reservedUsd = Object.values(candidateReservedUsd).reduce((sum, amount) => sum + amount, 0)
+  const estimate = estimateCost(model, estimateTokens(systemPrompt + prompt), maxTokens)
+  const reservedUsd = estimate * (RETRY_DELAYS.length + 1)
   if (reservedUsd > context.callBudgetUsd) throw new GatewayBudgetExceededError(`Estimated call reservation $${reservedUsd.toFixed(6)} exceeds the $${context.callBudgetUsd.toFixed(6)} call budget.`)
   const current = state ?? { limitUsd: context.runBudgetUsd, callLimitUsd: context.callBudgetUsd, chargedUsd: 0, reservedUsd: 0, lastActivityAt: Date.now(), reservations: new Map<string, BudgetReservation>() }
   if (current.reservations.size >= MAX_CALLS_PER_RUN) throw new GatewayBudgetExceededError(`Run exceeded the ${MAX_CALLS_PER_RUN}-call budget reservation limit.`)
@@ -309,7 +291,7 @@ function reserveBudget(context: GatewayBudgetContext, prompt: string, systemProm
     runBudgets.set(context.runId, current)
   }
   current.lastActivityAt = Date.now()
-  const reservation: BudgetReservation = { runId: context.runId, requestId, reservedUsd, candidateReservedUsd, fingerprint, settled: false }
+  const reservation: BudgetReservation = { runId: context.runId, requestId, reservedUsd, fingerprint, settled: false }
   current.reservations.set(requestId, reservation)
   current.reservedUsd += reservedUsd
   budgetReservations.set(requestKey, reservation)
@@ -319,12 +301,9 @@ function reserveBudget(context: GatewayBudgetContext, prompt: string, systemProm
 function settleBudget(reservation: BudgetReservation, chargedUsd: number): void {
   if (reservation.settled) return
   const state = runBudgets.get(reservation.runId)
-  if (!state) throw new Error('Gateway budget reservation state is missing.')
-  if (!Number.isFinite(chargedUsd) || chargedUsd < 0 || chargedUsd > reservation.reservedUsd + COST_EPSILON_USD) {
-    throw new Error('Gateway charge exceeds its reserved estimate.')
-  }
+  if (!state) return
   state.reservedUsd = Math.max(0, state.reservedUsd - reservation.reservedUsd)
-  state.chargedUsd += Math.min(chargedUsd, reservation.reservedUsd)
+  state.chargedUsd += Math.min(reservation.reservedUsd, Math.max(0, chargedUsd))
   state.lastActivityAt = Date.now()
   reservation.settled = true
 }
@@ -383,9 +362,11 @@ interface CachedResponse {
 const responseCache = new Map<string, CachedResponse>()
 const inflightRequests = new Map<string, Promise<GatewayResponse>>()
 
-function makeRequestKey(prompt: string, systemPrompt: string, candidates: ProviderCandidate[], maxTokens: number, temperature: number, runId: string): string {
+function makeRequestKey(prompt: string, systemPrompt: string, model: string, runId: string): string {
+  const temperature = process.env.GEMINI_TEMPERATURE || '0.8'
+  const maxTokens = process.env.GEMINI_MAX_OUTPUT_TOKENS || '8192'
   return createHash('sha256')
-    .update(JSON.stringify([runId, candidates.map(item => [item.id, item.model]), temperature, maxTokens, systemPrompt, prompt]))
+    .update(JSON.stringify([runId, model, temperature, maxTokens, systemPrompt, prompt]))
     .digest('hex')
 }
 
@@ -425,134 +406,99 @@ export function getGatewayStats(): object {
   }
 }
 
-// ─── Individual provider calls ────────────────────────────────────────────────
+// ─── Timeout helper ───────────────────────────────────────────────────────────
 
-const CALL_TIMEOUT = 30_000
-
-function isRecord(value: unknown): value is Record<string, unknown> {
-  return !!value && typeof value === 'object' && !Array.isArray(value)
+function withTimeout<T>(promise: Promise<T>, ms: number): Promise<T> {
+  return new Promise((resolve, reject) => {
+    const t = setTimeout(() => reject(new Error(`LLM timeout after ${ms}ms`)), ms)
+    promise.then(v => { clearTimeout(t); resolve(v) }, e => { clearTimeout(t); reject(e) })
+  })
 }
 
-async function callGemini(
-  candidate: ProviderCandidate,
-  prompt: string,
-  systemPrompt: string,
-  temperature: number,
-  maxTokens: number,
-  signal: AbortSignal,
-) {
-  const startedAt = Date.now()
-  let response: Response
-  try {
-    response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(candidate.model)}:generateContent`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'x-goog-api-key': candidate.apiKey },
-      signal,
-      body: JSON.stringify({
-        contents: [{ role: 'user', parts: [{ text: prompt }] }],
-        systemInstruction: { parts: [{ text: systemPrompt }] },
-        generationConfig: { temperature, maxOutputTokens: maxTokens, candidateCount: 1 },
-      }),
-    })
-  } catch (error) {
-    if (signal.aborted) throw error
-    throw new ProviderRequestError(candidate.label)
-  }
-  if (!response.ok) {
-    const safeToFallback = [400, 401, 403, 404, 422].includes(response.status)
-    await response.body?.cancel().catch(() => {})
-    throw new ProviderRequestError(candidate.label, response.status, safeToFallback)
-  }
+// ─── Individual provider calls (no retry logic here) ─────────────────────────
 
-  let payload: unknown
-  try {
-    payload = await response.json()
-  } catch {
-    throw new ProviderRequestError(candidate.label, response.status, false, 'Gemini returned invalid JSON.')
-  }
-  if (!isRecord(payload)) throw new ProviderRequestError(candidate.label, response.status, false, 'Gemini returned an invalid response.')
-  const candidates = Array.isArray(payload.candidates) ? payload.candidates : []
-  const first = isRecord(candidates[0]) ? candidates[0] : undefined
-  const content = first && isRecord(first.content) ? first.content : undefined
-  const parts = content && Array.isArray(content.parts) ? content.parts : []
-  const text = parts.map(part => isRecord(part) && typeof part.text === 'string' ? part.text : '').join('')
-  const finishReason = first?.finishReason
-  if (finishReason !== 'STOP') {
-    if (finishReason === 'MAX_TOKENS') {
-      throw new ProviderRequestError(candidate.label, response.status, false, `Gemini response was truncated at ${maxTokens} output tokens.`)
-    }
-    const reason = typeof finishReason === 'string' && finishReason ? finishReason : 'unknown'
-    throw new ProviderRequestError(candidate.label, response.status, false, `Gemini response was incomplete (finish reason: ${reason}).`)
-  }
-  if (!text.trim()) throw new ProviderRequestError(candidate.label, response.status, false, 'Gemini returned no text.')
+async function callGemini(prompt: string, systemPrompt: string, model: string): Promise<GatewayResponse> {
+  const client    = getGeminiClient()
+  const temp      = parseFloat(process.env.GEMINI_TEMPERATURE || '0.8')
+  const maxTokens = parseInt(process.env.GEMINI_MAX_OUTPUT_TOKENS || '8192', 10)
+  const t0        = Date.now()
 
-  const usage = isRecord(payload.usageMetadata) ? payload.usageMetadata : {}
-  const promptTokens = typeof usage.promptTokenCount === 'number' && Number.isSafeInteger(usage.promptTokenCount) && usage.promptTokenCount >= 0
-    ? usage.promptTokenCount
-    : undefined
-  const completionTokens = typeof usage.candidatesTokenCount === 'number' && Number.isSafeInteger(usage.candidatesTokenCount) && usage.candidatesTokenCount >= 0
-    ? usage.candidatesTokenCount
-    : undefined
+  const resp = await client.models.generateContent({
+    model,
+    contents: prompt,
+    config: {
+      systemInstruction: systemPrompt,
+      temperature: temp,
+      maxOutputTokens: maxTokens,
+      candidateCount: 1,
+    },
+  })
+
+  const text = resp.text ?? ''
+  const finishReason = resp.candidates?.[0]?.finishReason
+  if (finishReason === 'MAX_TOKENS') {
+    throw new Error(`Gemini response was truncated at ${maxTokens} output tokens; increase GEMINI_MAX_OUTPUT_TOKENS.`)
+  }
+  if (!text.trim()) throw new Error(`Gemini returned no text (finish reason: ${finishReason || 'unknown'}).`)
+  const promptTokens = resp.usageMetadata?.promptTokenCount ?? estimateTokens(systemPrompt + prompt)
+  const completionTokens = resp.usageMetadata?.candidatesTokenCount ?? estimateTokens(text)
+  const totalTokens = resp.usageMetadata?.totalTokenCount ?? (promptTokens + completionTokens)
+  const costUsd = estimateCost(model, promptTokens, completionTokens)
+
   return {
     text,
-    model: candidate.model,
-    latencyMs: Date.now() - startedAt,
-    promptTokens: promptTokens ?? 0,
-    completionTokens: completionTokens ?? 0,
-    usageAvailable: promptTokens !== undefined && completionTokens !== undefined && completionTokens > 0,
+    provider: 'Gemini',
+    model,
+    latencyMs: Date.now() - t0,
+    usage: { promptTokens, completionTokens, totalTokens },
+    cacheHit: false,
+    retries: 0,
+    estimatedCostUsd: costUsd,
   }
 }
 
-async function callProvider(
-  candidate: ProviderCandidate,
+type ProviderName = 'Gemini'
+
+// ─── Core Gemini call (with retries) ──────────────────────────────────────────
+
+const CALL_TIMEOUT = 30_000         // 30 s per attempt
+
+async function executeWithRetry(
+  name: ProviderName,
   prompt: string,
   systemPrompt: string,
-  temperature: number,
-  maxTokens: number,
-  parentSignal?: AbortSignal,
+  model: string,
 ): Promise<GatewayResponse> {
-  if (parentSignal?.aborted) throw new Error('Provider request cancelled before it started.')
-  const controller = new AbortController()
-  const abortFromParent = () => controller.abort(parentSignal?.reason)
-  parentSignal?.addEventListener('abort', abortFromParent, { once: true })
-  const timer = setTimeout(() => controller.abort(new Error('Provider request timed out.')), CALL_TIMEOUT)
-  try {
-    const result = candidate.id === 'gemini'
-      ? await callGemini(candidate, prompt, systemPrompt, temperature, maxTokens, controller.signal)
-      : await callOpenAICompatible(candidate, prompt, systemPrompt, temperature, maxTokens, controller.signal)
-    const maxPromptTokens = Buffer.byteLength(systemPrompt + prompt, 'utf8') + 64
-    if (result.usageAvailable && (result.promptTokens > maxPromptTokens || result.completionTokens > maxTokens)) {
-      throw new ProviderRequestError(candidate.label, undefined, false, `${candidate.label} reported token usage outside the request limits.`)
+  const h = getHealth(name)
+  let lastErr: Error | null = null
+  let retriesUsed = 0
+
+  for (let attempt = 0; attempt <= RETRY_DELAYS.length; attempt++) {
+    if (attempt > 0) {
+      const delay = RETRY_DELAYS[attempt - 1]
+      await new Promise(r => setTimeout(r, delay))
+      retriesUsed++
+      h.totalRetries++
     }
-    const usageAvailable = result.usageAvailable
-      && result.promptTokens > 0
-    const promptTokens = usageAvailable ? result.promptTokens : estimateTokens(systemPrompt + prompt)
-    const completionTokens = usageAvailable ? result.completionTokens : estimateTokens(result.text)
-    return {
-      text: result.text,
-      provider: candidate.label,
-      model: result.model,
-      latencyMs: result.latencyMs,
-      usage: {
-        promptTokens,
-        completionTokens,
-        totalTokens: promptTokens + completionTokens,
-      },
-      cacheHit: false,
-      retries: 0,
-      estimatedCostUsd: estimateCost(candidate.id, result.model, promptTokens, completionTokens),
-      usageEstimated: !usageAvailable,
+
+    try {
+      const resp = await withTimeout(callGemini(prompt, systemPrompt, model), CALL_TIMEOUT)
+
+      resp.retries = retriesUsed
+      markSuccess(name)
+      return resp
+    } catch (err) {
+      const isTimeout = err instanceof Error && err.message.startsWith('LLM timeout')
+      markFailure(name, isTimeout)
+      lastErr = err instanceof Error ? err : new Error(String(err))
+
+      if (!isHealthy(name)) break   // unhealthy — stop retrying this provider
     }
-  } catch (error) {
-    if (parentSignal?.aborted) throw new Error('Provider request cancelled.')
-    if (controller.signal.aborted) {
-      throw new ProviderRequestError(candidate.label, undefined, false, `${candidate.label} request timed out after ${CALL_TIMEOUT}ms.`)
-    }
-    throw error
-  } finally {
-    clearTimeout(timer)
-    parentSignal?.removeEventListener('abort', abortFromParent)
   }
+
+  const failure = lastErr ?? new Error(`Provider ${name} failed`)
+  Object.assign(failure, { retries: retriesUsed })
+  throw failure
 }
 
 // ─── Public API ───────────────────────────────────────────────────────────────
@@ -566,6 +512,12 @@ export async function callLLM(
   budgetContext?: GatewayBudgetContext,
 ): Promise<GatewayResponse> {
   gatewayTotalCalls++
+  assertGeminiConfigured()
+
+  const maxTokens = Number.parseInt(process.env.GEMINI_MAX_OUTPUT_TOKENS || '8192', 10)
+  if (!Number.isSafeInteger(maxTokens) || maxTokens <= 0) throw new Error('GEMINI_MAX_OUTPUT_TOKENS must be a positive safe integer.')
+  const temperature = Number.parseFloat(process.env.GEMINI_TEMPERATURE || '0.8')
+  if (!Number.isFinite(temperature) || temperature < 0 || temperature > 2) throw new Error('GEMINI_TEMPERATURE must be between 0 and 2.')
 
   const context = budgetContext || createGatewayBudgetContext(`gateway-${randomUUID()}`)
   if (typeof context.runId !== 'string' || !context.runId.trim()) throw new Error('Gateway budget context requires a run ID.')
@@ -573,18 +525,11 @@ export async function callLLM(
   const runBudgetUsd = readBudgetLimit(context.runBudgetUsd, 'GEMINI_RUN_BUDGET_USD', DEFAULT_RUN_BUDGET_USD)
   const callBudgetUsd = readBudgetLimit(context.callBudgetUsd, 'GEMINI_CALL_BUDGET_USD', DEFAULT_CALL_BUDGET_USD)
   const task = context.task || 'final-artifact'
-  if (!['candidate-generation', 'critique', 'final-artifact', 'utility'].includes(task)) throw new Error('Gateway task is not supported.')
-  const outputTokenSetting = process.env.AI_MAX_OUTPUT_TOKENS || process.env.GEMINI_MAX_OUTPUT_TOKENS || '512'
-  if (!/^[1-9]\d*$/.test(outputTokenSetting)) throw new Error('AI_MAX_OUTPUT_TOKENS must be an integer between 1 and 512.')
-  const maxTokens = Number(outputTokenSetting)
-  if (!Number.isSafeInteger(maxTokens) || maxTokens > 512) throw new Error('AI_MAX_OUTPUT_TOKENS must be an integer between 1 and 512.')
-  const temperature = Number(process.env.AI_TEMPERATURE || process.env.GEMINI_TEMPERATURE || '0.8')
-  if (!Number.isFinite(temperature) || temperature < 0 || temperature > 2) throw new Error('AI_TEMPERATURE must be between 0 and 2.')
-  const candidates = resolveProviderCandidates(context.providerId, context.model, task)
-  const autoMode = (context.providerId || 'auto') === 'auto'
+  if (!Object.prototype.hasOwnProperty.call(MODEL_ENV_BY_TASK, task)) throw new Error('Gateway task is not supported.')
+  const model = resolveModel(task)
   const requestId = context.requestId || randomUUID()
   const callContext = { ...context, requestId }
-  const requestKey = makeRequestKey(prompt, systemPrompt, candidates, maxTokens, temperature, context.runId)
+  const requestKey = makeRequestKey(prompt, systemPrompt, model, context.runId)
   pruneExpiredCache()
   const cached = responseCache.get(requestKey)
   if (cached) {
@@ -599,76 +544,24 @@ export async function callLLM(
   }
 
   const validatedContext = { ...callContext, runBudgetUsd, callBudgetUsd }
-  const reservation = reserveBudget(validatedContext, prompt, systemPrompt, candidates, maxTokens)
+  const reservation = reserveBudget(validatedContext, prompt, systemPrompt, model, maxTokens)
 
   const request = (async () => {
     if (activeCalls >= MAX_CONCURRENT) gatewayQueuedCalls++
     await acquireSlot()
-    const failedAttempts: Array<{ candidate: ProviderCandidate; error: Error }> = []
-    const attemptedCandidates = new Set<string>()
-    let response: GatewayResponse | undefined
-    let selectedCandidate: ProviderCandidate | undefined
-    let lastError: Error = new Error('No configured provider could complete the request.')
     try {
-      for (const candidate of candidates) {
-        if (context.signal?.aborted) throw new Error('Provider request cancelled.')
-        const providerHealth = getHealth(candidate.label)
-        if (!isHealthy(candidate.label)) {
-          lastError = new ProviderRequestError(candidate.label, undefined, autoMode, `${candidate.label} is temporarily unavailable.`)
-          if (autoMode) continue
-          throw lastError
-        }
-
-        providerHealth.totalCalls++
-        attemptedCandidates.add(candidate.id)
-        try {
-          response = await callProvider(candidate, prompt, systemPrompt, temperature, maxTokens, context.signal)
-          selectedCandidate = candidate
-          const candidateReservation = reservation.candidateReservedUsd[candidate.id]
-          if (response.usageEstimated) {
-            response.estimatedCostUsd = candidateReservation
-          } else if (response.estimatedCostUsd > candidateReservation + COST_EPSILON_USD) {
-            throw new GatewayBudgetExceededError('Provider usage estimate exceeded its reservation; the result was withheld.')
-          }
-          markSuccess(candidate.label)
-          providerHealth.totalTokens += response.usage.totalTokens
-          providerHealth.totalCostUsd += response.estimatedCostUsd
-          break
-        } catch (error) {
-          const failure = error instanceof Error ? error : new Error('Provider request failed.')
-          markFailure(candidate.label, failure.message.includes('timed out'))
-          failedAttempts.push({ candidate, error: failure })
-          lastError = failure
-          if (autoMode && failure instanceof ProviderRequestError && failure.safeToFallback) continue
-          throw failure
-        }
-      }
-
-      if (!response || !selectedCandidate) throw lastError
+      const providerHealth = getHealth('Gemini')
+      providerHealth.totalCalls++
+      const response = await executeWithRetry('Gemini', prompt, systemPrompt, model)
       response.requestId = requestId
       response.runId = context.runId
       response.promptVersion = context.promptVersion
-      for (const failed of failedAttempts) {
-        const chargedCostUsd = reservation.candidateReservedUsd[failed.candidate.id]
-        recordCallProvenance({
-          requestId, runId: context.runId, provider: failed.candidate.label, model: failed.candidate.model,
-          task, promptVersion: context.promptVersion, status: 'failed', usageEstimated: true,
-          chargedCostUsd, retries: 0,
-          recordedAt: new Date().toISOString(),
-        })
-      }
-      const failedCostUsd = failedAttempts.reduce((sum, item) => sum + reservation.candidateReservedUsd[item.candidate.id], 0)
-      const successfulCostUsd = response.usageEstimated
-        ? reservation.candidateReservedUsd[selectedCandidate.id]
-        : response.estimatedCostUsd
-      settleBudget(reservation, failedCostUsd + successfulCostUsd)
-      recordCallProvenance({
-        requestId, runId: context.runId, provider: selectedCandidate.label, model: response.model, task,
-        promptVersion: context.promptVersion, status: 'succeeded', usage: response.usage,
-        usageEstimated: response.usageEstimated,
-        estimatedCostUsd: response.estimatedCostUsd, chargedCostUsd: successfulCostUsd, retries: 0,
-        recordedAt: new Date().toISOString(),
-      })
+      providerHealth.totalTokens += response.usage.totalTokens
+      providerHealth.totalCostUsd += response.estimatedCostUsd
+      const attemptReservationUsd = reservation.reservedUsd / (RETRY_DELAYS.length + 1)
+      const chargedCostUsd = Math.min(reservation.reservedUsd, response.estimatedCostUsd + response.retries * attemptReservationUsd)
+      settleBudget(reservation, chargedCostUsd)
+      recordCallProvenance({ requestId, runId: context.runId, provider: 'Gemini', model: response.model, task, promptVersion: context.promptVersion, status: 'succeeded', usage: response.usage, estimatedCostUsd: response.estimatedCostUsd, chargedCostUsd, retries: response.retries, recordedAt: new Date().toISOString() })
 
       pruneExpiredCache()
       if (responseCache.size >= MAX_CACHE_ENTRIES) {
@@ -678,32 +571,11 @@ export async function callLLM(
       responseCache.set(requestKey, { response, expiresAt: Date.now() + CACHE_TTL_MS })
       return response
     } catch (error) {
-      const finalError = error instanceof Error ? error : new Error('Provider request failed.')
-      const chargedCostUsd = [...attemptedCandidates].reduce(
-        (sum, candidateId) => sum + reservation.candidateReservedUsd[candidateId],
-        0,
-      )
-      settleBudget(reservation, chargedCostUsd)
-      for (const failed of failedAttempts) {
-        const failedCostUsd = reservation.candidateReservedUsd[failed.candidate.id]
-        recordCallProvenance({
-          requestId, runId: context.runId, provider: failed.candidate.label, model: failed.candidate.model,
-          task, promptVersion: context.promptVersion, status: 'failed',
-          usageEstimated: true, chargedCostUsd: failedCostUsd, retries: 0,
-          recordedAt: new Date().toISOString(),
-        })
-      }
-      if (selectedCandidate && !failedAttempts.some(item => item.candidate.id === selectedCandidate?.id)) {
-        recordCallProvenance({
-          requestId, runId: context.runId, provider: selectedCandidate.label, model: selectedCandidate.model,
-          task, promptVersion: context.promptVersion, status: 'failed',
-          usageEstimated: true,
-          chargedCostUsd: reservation.candidateReservedUsd[selectedCandidate.id],
-          retries: 0,
-          recordedAt: new Date().toISOString(),
-        })
-      }
-      throw finalError
+      settleBudget(reservation, reservation.reservedUsd)
+      const retries = error && typeof error === 'object' && 'retries' in error && typeof error.retries === 'number' ? error.retries : 0
+      recordCallProvenance({ requestId, runId: context.runId, provider: 'Gemini', model, task, promptVersion: context.promptVersion, status: 'failed', chargedCostUsd: reservation.reservedUsd, retries, recordedAt: new Date().toISOString() })
+      const message = error instanceof Error ? error.message : String(error)
+      throw new Error(`Gemini generation failed: ${message}`)
     } finally {
       releaseSlot()
     }
@@ -727,20 +599,13 @@ export const gateway = {
     prompt:       string,
     systemPrompt: string,
     config?:      unknown,
-  ): Promise<{ text: string; provider: ProviderLabel; model: string; usage?: { promptTokens: number; completionTokens: number; totalTokens: number } }> => {
+  ): Promise<{ text: string; model: string; usage?: { promptTokens: number; completionTokens: number; totalTokens: number } }> => {
     const resp = await callLLM(prompt, systemPrompt, config as GatewayBudgetContext | undefined)
-    return { text: resp.text, provider: resp.provider, model: resp.model, usage: resp.usage }
+    return { text: resp.text, model: resp.model, usage: resp.usage }
   },
 }
 
 // ─── Current active provider label (for startup logs / metrics) ───────────────
 export function getActiveProviderLabel(): string {
-  const selected = process.env.AI_PROVIDER?.trim().toLowerCase()
-  const statuses = getProviderStatus()
-  if (selected && selected !== 'auto') {
-    const provider = statuses.find(item => item.id === selected)
-    if (provider) return provider.configured ? provider.label : `${provider.label} (not configured)`
-  }
-  const configured = statuses.filter(item => item.configured).map(item => item.label)
-  return configured.length ? `Auto (${configured.join(', ')})` : 'Auto (no provider configured)'
+  return process.env.GEMINI_API_KEY?.trim() ? 'Gemini' : 'Gemini (not configured)'
 }

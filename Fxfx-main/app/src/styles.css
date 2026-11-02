@@ -19,13 +19,6 @@ button{font:inherit;color:inherit;cursor:pointer;background:none;border:0}
 button:disabled{cursor:not-allowed;opacity:.45}
 :focus-visible{outline:2px solid var(--gold);outline-offset:2px}
 .app-root{min-height:100vh}
-.auth-gate{min-height:100vh;width:min(520px,calc(100% - 40px));margin:0 auto;display:flex;flex-direction:column;justify-content:center;align-items:stretch;gap:18px;padding:48px 0;color:var(--text)}
-.auth-gate .stage-title{flex:none;color:var(--gold)}
-.auth-gate>p{color:var(--muted);line-height:1.6}
-.auth-form{display:grid;gap:12px}
-.auth-form label{font-size:13px;color:var(--gold)}
-.auth-form input{width:100%;background:var(--surface);color:var(--text);border:1px solid var(--line-hi);padding:14px 16px;font:inherit}
-.auth-gate .error-banner{width:100%;margin:0}
 
 /* NAV */
 .nav{position:fixed;top:0;inset-inline:0;z-index:100;display:flex;justify-content:space-between;align-items:center;gap:16px;

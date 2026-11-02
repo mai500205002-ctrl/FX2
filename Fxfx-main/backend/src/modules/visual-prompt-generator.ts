@@ -8,7 +8,8 @@
  *   - trendInfluence field includes live headline source
  */
 
-import { appendUntrustedReferenceData, LateralThinkingContext, getLateralThinkingSystemPrompt } from './lateral-thinking-agent'
+import { LateralThinkingContext } from './lateral-thinking-agent'
+import { getLateralThinkingSystemPrompt } from './lateral-thinking-agent'
 import { assertLanguageMatch, parseJsonObject, resolveLanguage } from '../utils/generation'
 import { withGatewayTask } from '../gateway/llm-gateway'
 
@@ -64,30 +65,22 @@ export async function generateVisualPrompt(
   concept: ConceptInput,
   context?: LateralThinkingContext
 ): Promise<VisualPrompt> {
-  if (!context?.provider) throw new Error('An AI provider is required for visual prompt generation.')
+  if (!context?.provider) throw new Error('Gemini provider is required for visual prompt generation.')
   const language = resolveLanguage(JSON.stringify(concept), context.language)
   const generationContext = { ...context, language, useRealAI: true }
   const archetypeStyle = ARCHETYPE_STYLE[context.archetype || ''] || DEFAULT_STYLE
   const response = await context.provider.generateCreativeText(
-    appendUntrustedReferenceData(
-      `Create visual aesthetics for this concept: ${JSON.stringify(concept)}. Brand archetype style guidance: ${archetypeStyle}. Trend context: ${JSON.stringify(context.currentTrends || null)}.\nReturn JSON with non-empty string fields midjourneyPrompt, negativePrompt, mood, version, trendInfluence; styleKeywords array with 3-5 strings; colorPalette array with 3-5 hex colors; and aspectRatio equal to 16:9, 9:16, 1:1, or 4:5. Write every natural-language field in ${language === 'ar' ? 'fluent Arabic' : 'English'}.`,
-      generationContext,
-    ),
+    `Create visual aesthetics for this concept: ${JSON.stringify(concept)}. Brand archetype style guidance: ${archetypeStyle}. Trend context: ${JSON.stringify(context.currentTrends || null)}.\nReturn JSON with non-empty string fields midjourneyPrompt, negativePrompt, mood, version, trendInfluence; styleKeywords array with 3-5 strings; colorPalette array with 3-5 hex colors; and aspectRatio equal to 16:9, 9:16, 1:1, or 4:5. Write every natural-language field in ${language === 'ar' ? 'fluent Arabic' : 'English'}.`,
     `${getLateralThinkingSystemPrompt(generationContext)}\n\nYou are the visual art director. Specify subject, environment, light direction, lens, textures, color temperature, and mood. Return valid JSON only.`,
     withGatewayTask(context.providerConfig, 'utility')
   )
   const parsed = parseJsonObject<Record<string, unknown>>(response.text, 'Visual prompt generation')
   for (const field of ['midjourneyPrompt', 'negativePrompt', 'mood', 'version', 'trendInfluence']) {
-    if (typeof parsed[field] !== 'string' || !parsed[field].trim()) {
+    if (typeof parsed[field] !== 'string' || !parsed[field]) {
       throw new Error(`Visual prompt generation: Gemini omitted required field "${field}".`)
     }
   }
-  const validStringArray = (value: unknown, minLength: number, maxLength: number): value is string[] =>
-    Array.isArray(value) && value.length >= minLength && value.length <= maxLength
-      && value.every(item => typeof item === 'string' && item.trim())
-  if (!validStringArray(parsed.styleKeywords, 3, 5)
-      || !validStringArray(parsed.colorPalette, 3, 5)
-      || !parsed.colorPalette.every(color => /^#[0-9a-f]{6}$/i.test(color))) {
+  if (!Array.isArray(parsed.styleKeywords) || !parsed.styleKeywords.length || !Array.isArray(parsed.colorPalette) || !parsed.colorPalette.length) {
     throw new Error('Visual prompt generation: Gemini returned incomplete visual arrays.')
   }
   if (!['16:9', '9:16', '1:1', '4:5'].includes(String(parsed.aspectRatio))) {

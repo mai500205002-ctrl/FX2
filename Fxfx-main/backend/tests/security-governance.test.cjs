@@ -29,12 +29,6 @@ const {
   validateAgentRunApproval,
 } = require('../dist/agent/agent-service.js')
 const {
-  createApiSession,
-  destroyApiSession,
-  getApiSessionStatus,
-} = require('../dist/utils/api-session.js')
-const {
-  apiAuthenticationMiddleware,
   authenticateApi,
   authorizeApproverToken,
   policyCheck,
@@ -42,9 +36,6 @@ const {
   sanitize,
   validateRunId,
 } = require('../dist/utils/security.js')
-const { getProviderStatus } = require('../dist/gateway/provider-adapters.js')
-const { getGatewayStats } = require('../dist/gateway/llm-gateway.js')
-const { getMetrics } = require('../dist/utils/metrics.js')
 const agentRoutes = require('../dist/agent/agent-route.js').default
 
 function createApp(options = {}) {
@@ -59,23 +50,18 @@ function createApp(options = {}) {
     next()
   })
 
-  app.use('/api', apiAuthenticationMiddleware)
+  // Optional API key enforcement
+  app.use('/api', (req, res, next) => {
+    if (req.path === '/health' || req.path === '/healthz' || req.path === '/key-status') {
+      return next()
+    }
+    if (!authenticateApi(req)) {
+      return res.status(401).json({ error: 'Unauthorized: valid API key required' })
+    }
+    next()
+  })
 
   app.get('/healthz', (_req, res) => res.json({ ok: true }))
-  app.get('/api/key-status', (_req, res) => res.json({ providers: getProviderStatus() }))
-  app.get('/api/metrics', (_req, res) => res.json({ metrics: getMetrics(), gateway: getGatewayStats() }))
-  app.get('/api/session', (req, res) => res.json(getApiSessionStatus(req)))
-  app.post('/api/session', (req, res) => {
-    if (!createApiSession(req, res, req.body?.apiKey)) return res.status(401).json({ error: 'Authentication failed' })
-    res.json({ authRequired: true, authenticated: true })
-  })
-  app.delete('/api/session', (req, res) => {
-    destroyApiSession(req, res)
-    res.status(204).end()
-  })
-  for (const stage of ['insight', 'concept', 'script']) {
-    app.post(`/api/${stage}`, (_req, res) => res.json({ stage, authorized: true }))
-  }
   app.use('/api/agent', agentRoutes)
 
   // Error handler
@@ -143,135 +129,6 @@ test('security: API key authentication protects /api endpoints when configured',
   } finally {
     delete process.env.TEXTFX_API_KEY
     server.close()
-  }
-})
-
-test('security: health, key-status, and usage responses do not disclose configured secrets', async () => {
-  const secretNames = ['TEXTFX_API_KEY', 'GEMINI_API_KEY', 'OPENAI_API_KEY', 'OPENROUTER_API_KEY', 'XAI_API_KEY']
-  const previous = new Map(secretNames.map(name => [name, process.env[name]]))
-  const secrets = secretNames.map(name => `${name}-fixture-secret-not-for-response`)
-  secretNames.forEach((name, index) => { process.env[name] = secrets[index] })
-  const app = createApp()
-  const server = http.createServer(app)
-  await new Promise(resolve => server.listen(0, '127.0.0.1', resolve))
-  const base = `http://127.0.0.1:${server.address().port}`
-
-  try {
-    const health = await fetch(`${base}/healthz`)
-    assert.equal(health.status, 200)
-    assert.equal(JSON.stringify(await health.json()).includes(secrets[0]), false)
-
-    const keyStatus = await fetch(`${base}/api/key-status`)
-    assert.equal(keyStatus.status, 200)
-    const keyStatusBody = await keyStatus.text()
-    assert.equal(keyStatusBody.includes('fixture-secret-not-for-response'), false)
-
-    const deniedMetrics = await fetch(`${base}/api/metrics`)
-    assert.equal(deniedMetrics.status, 401)
-    const metrics = await fetch(`${base}/api/metrics`, {
-      headers: { Authorization: `Bearer ${process.env.TEXTFX_API_KEY}` },
-    })
-    assert.equal(metrics.status, 200)
-    const metricsBody = await metrics.text()
-    assert.equal(metricsBody.includes('fixture-secret-not-for-response'), false)
-  } finally {
-    for (const [name, value] of previous) {
-      if (value === undefined) delete process.env[name]
-      else process.env[name] = value
-    }
-    await new Promise(resolve => server.close(resolve))
-  }
-})
-
-test('security: insight, concept, and script routes require backend authorization', async () => {
-  process.env.TEXTFX_API_KEY = 'test-secret-api-key-32chars-long!'
-  const app = createApp()
-  const server = http.createServer(app)
-  await new Promise(resolve => server.listen(0, '127.0.0.1', resolve))
-  const port = server.address().port
-
-  try {
-    for (const stage of ['insight', 'concept', 'script']) {
-      const url = `http://127.0.0.1:${port}/api/${stage}`
-      const denied = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: '{}' })
-      assert.equal(denied.status, 401, `${stage} rejects missing authorization`)
-
-      const allowed = await fetch(url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${process.env.TEXTFX_API_KEY}` },
-        body: '{}',
-      })
-      assert.equal(allowed.status, 200, `${stage} accepts the proxy-injected bearer`)
-      assert.deepEqual(await allowed.json(), { stage, authorized: true })
-    }
-  } finally {
-    delete process.env.TEXTFX_API_KEY
-    await new Promise(resolve => server.close(resolve))
-  }
-})
-
-test('security: API key exchange creates an origin-bound HttpOnly session without echoing the key', async () => {
-  const previousOrigin = process.env.CORS_ORIGIN
-  process.env.CORS_ORIGIN = 'http://localhost:5000'
-  process.env.TEXTFX_API_KEY = 'test-secret-api-key-32chars-long!'
-  const app = createApp()
-  const server = http.createServer(app)
-  await new Promise(resolve => server.listen(0, '127.0.0.1', resolve))
-  const port = server.address().port
-  const origin = 'http://localhost:5000'
-
-  try {
-    const status = await fetch(`http://127.0.0.1:${port}/api/session`)
-    assert.deepEqual(await status.json(), { authRequired: true, authenticated: false })
-
-    const badOrigin = await fetch(`http://127.0.0.1:${port}/api/session`, {
-      method: 'POST', headers: { Origin: 'https://attacker.example', 'Content-Type': 'application/json' },
-      body: JSON.stringify({ apiKey: process.env.TEXTFX_API_KEY }),
-    })
-    assert.equal(badOrigin.status, 401)
-
-    process.env.CORS_ORIGIN = 'http://frontend.example'
-    const insecureRemote = await fetch(`http://127.0.0.1:${port}/api/session`, {
-      method: 'POST', headers: { Origin: 'http://frontend.example', 'X-Forwarded-Proto': 'https', 'Content-Type': 'application/json' },
-      body: JSON.stringify({ apiKey: process.env.TEXTFX_API_KEY }),
-    })
-    assert.equal(insecureRemote.status, 401)
-    process.env.CORS_ORIGIN = origin
-
-    const login = await fetch(`http://127.0.0.1:${port}/api/session`, {
-      method: 'POST', headers: { Origin: origin, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ apiKey: process.env.TEXTFX_API_KEY }),
-    })
-    assert.equal(login.status, 200)
-    const payload = await login.json()
-    assert.deepEqual(payload, { authRequired: true, authenticated: true })
-    assert.equal(JSON.stringify(payload).includes(process.env.TEXTFX_API_KEY), false)
-    const cookie = login.headers.get('set-cookie')
-    assert.match(cookie, /textfx_session=/)
-    assert.match(cookie, /HttpOnly/i)
-    assert.match(cookie, /SameSite=Strict/i)
-
-    const allowed = await fetch(`http://127.0.0.1:${port}/api/insight`, {
-      method: 'POST', headers: { Cookie: cookie.split(';')[0], Origin: origin, 'Content-Type': 'application/json' }, body: '{}',
-    })
-    assert.equal(allowed.status, 200)
-
-    const crossOrigin = await fetch(`http://127.0.0.1:${port}/api/insight`, {
-      method: 'POST', headers: { Cookie: cookie.split(';')[0], Origin: 'https://attacker.example', 'Content-Type': 'application/json' }, body: '{}',
-    })
-    assert.equal(crossOrigin.status, 403)
-
-    const logout = await fetch(`http://127.0.0.1:${port}/api/session`, {
-      method: 'DELETE', headers: { Cookie: cookie.split(';')[0], Origin: origin },
-    })
-    assert.equal(logout.status, 204)
-    const afterLogout = await fetch(`http://127.0.0.1:${port}/api/insight`, { method: 'POST', body: '{}' })
-    assert.equal(afterLogout.status, 401)
-  } finally {
-    delete process.env.TEXTFX_API_KEY
-    if (previousOrigin === undefined) delete process.env.CORS_ORIGIN
-    else process.env.CORS_ORIGIN = previousOrigin
-    await new Promise(resolve => server.close(resolve))
   }
 })
 

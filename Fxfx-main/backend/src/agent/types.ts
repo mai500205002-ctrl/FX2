@@ -1,8 +1,7 @@
 import type { LateralThinkingContext } from '../modules/lateral-thinking-agent'
 import type { CreativeIR } from '../core/creative-ir'
-import type { ProviderLabel } from '../gateway/provider-adapters'
 
-export type AgentMode = ProviderLabel | `${ProviderLabel} (not configured)` | `Auto (${string})` | 'Auto (no provider configured)'
+export type AgentMode = 'Gemini' | 'Gemini (not configured)'
 export type AgentPhase = 'queued' | 'planning' | 'insight' | 'discovery' | 'metabolism' | 'entropy' | 'court' | 'concept' | 'script' | 'reviewing' | 'revising' | 'evaluating' | 'done' | 'failed' | 'interrupted'
 
 /** Idea-level verdicts live on candidates and court reviews only (see CreativeCandidate

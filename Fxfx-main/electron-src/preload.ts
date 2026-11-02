@@ -19,14 +19,6 @@ interface BackendInfo {
   host:            string
 }
 
-interface BackendRequest {
-  requestId: string
-  path: string
-  method: 'GET' | 'POST' | 'DELETE'
-  headers: Record<string, string>
-  body?: string
-}
-
 // ── Exposed API ───────────────────────────────────────────────────────────────
 contextBridge.exposeInMainWorld('fx', {
   /**
@@ -36,12 +28,6 @@ contextBridge.exposeInMainWorld('fx', {
    */
   getBackendInfo: (): Promise<BackendInfo> =>
     ipcRenderer.invoke('fx:get-backend-info'),
-
-  backendFetch: (request: BackendRequest): Promise<{ status: number; headers: Record<string, string>; body: string }> =>
-    ipcRenderer.invoke('fx:backend-fetch', request),
-
-  cancelBackendFetch: (requestId: string): void =>
-    ipcRenderer.send('fx:backend-cancel', requestId),
 
   /**
    * Generic IPC request router.

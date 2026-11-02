@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { backendFetch } from '../backend-fetch'
 
 export interface BrowserAttachment { runId: string; token: string }
 interface Research {
@@ -28,9 +27,9 @@ export default function BrowserAgentPanel({ apiBase, language, onAttach }: { api
     setBusy(true); setError(''); setAttached(false); onAttach(null)
     try {
       const id = action === 'delete' ? research?.runId : runId.trim()
-      const response = await backendFetch(`${apiBase}/api/browser/${action === 'run' ? 'research' : `runs/${encodeURIComponent(id || '')}`}`, {
+      const response = await fetch(`${apiBase}/api/browser/${action === 'run' ? 'research' : `runs/${encodeURIComponent(id || '')}`}`, {
         method: action === 'run' ? 'POST' : action === 'delete' ? 'DELETE' : 'GET',
-        headers: { 'Content-Type': 'application/json', 'X-TextFX-Browser-Token': `Bearer ${token}` },
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
         ...(action === 'run' ? { body: JSON.stringify({ goal, urls: urls.split('\n').map(s => s.trim()).filter(Boolean) }) } : {}),
       })
       if (action === 'delete' && response.status === 204) { setResearch(null); setRunId(''); return }

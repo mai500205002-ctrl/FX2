@@ -8,7 +8,16 @@ import { jsPDF } from 'jspdf'
 import AgentSaaSPanel from './components/AgentSaaSPanel'
 import BrowserAgentPanel, { type BrowserAttachment } from './components/BrowserAgentPanel'
 import GatewayMetricsPanel from './components/GatewayMetricsPanel'
-import { backendFetch } from './backend-fetch'
+
+// ── Electron window.fx bridge type ───────────────────────────────────────────
+declare global {
+  interface Window {
+    fx?: {
+      getBackendInfo(): Promise<{ port: number; certFingerprint: string; protocol: string; host: string }>
+      request(channel: string, payload?: unknown): Promise<unknown>
+    }
+  }
+}
 
 // ─────────────────────────────────────────────────────────────────────────────
 // ErrorBoundary
@@ -57,29 +66,6 @@ interface AgentDebate {
     emotionalTruth: string; creativeDevice: string; visualNotes: string
   }
 }
-type ProviderId = 'auto'|'openrouter'|'openai'|'gemini'|'grok'
-interface ProviderOption {
-  id: Exclude<ProviderId, 'auto'>
-  label: string
-  configured: boolean
-  models: string[]
-}
-interface EvidenceReference {
-  evidenceId: string
-  sourceUrl: string
-  title: string
-  text: string
-  retrievedAt: string
-  contentHash: string
-  reviewStatus: 'unreviewed'
-}
-interface GenerationInfo {
-  mode: string
-  providers?: string[]
-  models?: string[]
-  provider?: string
-  model?: string
-}
 interface InsightData {
   mainInsight: string
   lateralThinkingBreakdown: {
@@ -91,20 +77,14 @@ interface InsightData {
   }
   constraints: string[]; opportunities: string[]
   metaphoricFraming:string; emotionalTruth:string; creativeMethod:string
-  evidenceReferences?: EvidenceReference[]
-  generation?: GenerationInfo
 }
 interface ConceptData {
   title:string; tagline:string; coreIdea:string
   visualNotes:string; creativeDevice:string; emotionalArc:string; targetParadox:string
-  evidenceReferences?: EvidenceReference[]
-  generation?: GenerationInfo
 }
 interface ScriptData {
   script:string; beats:string[]; cameraLanguage:string
   narrativeStrategy:string; emotionalTurning:string
-  evidenceReferences?: EvidenceReference[]
-  generation?: GenerationInfo
 }
 type Iteration = {
   timestamp:number; brief:string; archetype:string
@@ -113,113 +93,31 @@ type Iteration = {
   insight:InsightData|null; concept:ConceptData|null; script:ScriptData|null
 }
 
-function isRecord(value: unknown): value is Record<string, unknown> {
-  return !!value && typeof value === 'object' && !Array.isArray(value)
-}
-
-function hasStrings(value: unknown, fields: string[]): boolean {
-  return isRecord(value) && fields.every(field => typeof value[field] === 'string')
-}
-
-function hasStringArray(value: unknown): value is string[] {
-  return Array.isArray(value) && value.every(item => typeof item === 'string')
-}
-
-function validGeneration(value: unknown): boolean {
-  return value === undefined || (isRecord(value) && typeof value.mode === 'string' &&
-    (value.provider === undefined || typeof value.provider === 'string') &&
-    (value.model === undefined || typeof value.model === 'string') &&
-    (value.providers === undefined || hasStringArray(value.providers)) &&
-    (value.models === undefined || hasStringArray(value.models)))
-}
-
-function validEvidenceReferences(value: unknown): boolean {
-  return value === undefined || (Array.isArray(value) && value.every(reference =>
-    hasStrings(reference, ['evidenceId', 'sourceUrl', 'title', 'text', 'retrievedAt', 'contentHash']) &&
-    isRecord(reference) && reference.reviewStatus === 'unreviewed'))
-}
-
-function validInsight(value: unknown): value is InsightData {
-  if (!isRecord(value) || typeof value.mainInsight !== 'string' ||
-      !hasStringArray(value.constraints) || !hasStringArray(value.opportunities) ||
-      !hasStrings(value, ['metaphoricFraming', 'emotionalTruth', 'creativeMethod']) ||
-      !validGeneration(value.generation) || !validEvidenceReferences(value.evidenceReferences)) return false
-  const breakdown = value.lateralThinkingBreakdown
-  if (!isRecord(breakdown) || !hasStrings(breakdown.provocation, ['provocation', 'reversal', 'opportunity']) ||
-      !Array.isArray(breakdown.analogies) || !breakdown.analogies.every(item => hasStrings(item, ['sourceField', 'metaphor'])) ||
-      !hasStrings(breakdown.randomStimulus, ['randomWord', 'unexpectedAngle', 'visualMetaphor']) ||
-      !hasStrings(breakdown.oppositeThinking, ['desirableMiddle', 'paradox'])) return false
-  const debate = breakdown.agentDebate
-  if (debate === undefined) return true
-  if (!isRecord(debate) || !Array.isArray(debate.voices) ||
-      !debate.voices.every(voice => hasStrings(voice, ['agent', 'stance', 'sharpCritique', 'contribution'])) ||
-      !hasStrings(debate, ['conflictPoint', 'resolution', 'debateSummary'])) return false
-  return debate.finalMasterpiece === undefined || hasStrings(debate.finalMasterpiece,
-    ['headline', 'tagline', 'coreIdea', 'emotionalTruth', 'creativeDevice', 'visualNotes'])
-}
-
-function validConcept(value: unknown): value is ConceptData {
-  return hasStrings(value, ['title', 'tagline', 'coreIdea', 'visualNotes', 'creativeDevice', 'emotionalArc', 'targetParadox']) &&
-    validGeneration(isRecord(value) ? value.generation : undefined) &&
-    validEvidenceReferences(isRecord(value) ? value.evidenceReferences : undefined)
-}
-
-function validScript(value: unknown): value is ScriptData {
-  return isRecord(value) && typeof value.script === 'string' && hasStringArray(value.beats) &&
-    hasStrings(value, ['cameraLanguage', 'narrativeStrategy', 'emotionalTurning']) &&
-    validGeneration(value.generation) && validEvidenceReferences(value.evidenceReferences)
-}
-
-function GenerationProvenance({ generation }: { generation?: GenerationInfo }) {
-  const providers = generation?.providers || (generation?.provider ? [generation.provider] : [])
-  const models = generation?.models || (generation?.model ? [generation.model] : [])
-  if (!providers.length && !models.length) return null
-  return <p className="generation-provenance" aria-live="polite">
-    Provider response: {providers.join(', ') || 'unknown'} · Model: {models.join(', ') || 'unknown'}
-  </p>
-}
-
-function EvidenceProvenance({ references }: { references?: EvidenceReference[] }) {
-  if (!references?.length) return null
-  return <details className="evidence-provenance">
-    <summary>Unreviewed research sources ({references.length})</summary>
-    <ul>
-      {references.map(reference => (
-        <li key={reference.evidenceId}>
-          <a href={reference.sourceUrl} target="_blank" rel="noopener noreferrer">{reference.title || reference.sourceUrl}</a>
-          {' · '}<code>{reference.evidenceId}</code>
-          {' · '}<code>{reference.contentHash.slice(0, 16)}</code>
-        </li>
-      ))}
-    </ul>
-    <small>Retrieved page text is untrusted and has not been independently reviewed.</small>
-  </details>
-}
-
 // ─────────────────────────────────────────────────────────────────────────────
-// Provider requests are never retried automatically: a lost response may follow a paid completion.
+// HTTP helper — AbortController + 1 retry + 60s timeout
 // ─────────────────────────────────────────────────────────────────────────────
-async function apiFetch(url:string, options:RequestInit): Promise<Response> {
-  const controller = new AbortController()
-  const timer = setTimeout(() => controller.abort(), 180_000)
-  const abortFromCaller = () => controller.abort()
-  if (options.signal?.aborted) controller.abort()
-  else options.signal?.addEventListener('abort', abortFromCaller, { once: true })
-  try {
-    const res = await backendFetch(url, { ...options, signal: controller.signal })
-    if (!res.ok) {
-      const text = await res.text().catch(() => '')
-      throw Object.assign(new Error(`HTTP ${res.status}`), { status: res.status, body: text })
+async function apiFetch(url:string, options:RequestInit, retries=1): Promise<Response> {
+  for (let attempt = 0; attempt <= retries; attempt++) {
+    const controller = new AbortController()
+    const timer = setTimeout(() => controller.abort(), 180_000)
+    try {
+      const res = await fetch(url, { ...options, signal: controller.signal })
+      clearTimeout(timer)
+      if (!res.ok) {
+        const text = await res.text().catch(() => '')
+        throw Object.assign(new Error(`HTTP ${res.status}`), { status: res.status, body: text })
+      }
+      return res
+    } catch (err: unknown) {
+      clearTimeout(timer)
+      if (attempt === retries) throw err
+      const e = err as Error
+      if ('status' in e) throw err
+      if (e.name === 'AbortError') throw Object.assign(new Error('TIMEOUT'), { code:'TIMEOUT' })
+      await new Promise(r => setTimeout(r, 800))
     }
-    return res
-  } catch (err: unknown) {
-    const error = err as Error
-    if (error.name === 'AbortError') throw Object.assign(new Error('TIMEOUT'), { code:'TIMEOUT' })
-    throw err
-  } finally {
-    clearTimeout(timer)
-    options.signal?.removeEventListener('abort', abortFromCaller)
   }
+  throw new Error('unreachable')
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -272,12 +170,6 @@ const T = {
     modelOpenAI:'GPT (OpenAI)', modelOpenAIDesc:'OpenAI models via your API key',
     modelGemini:'Gemini', modelGeminiDesc:'Google Gemini via your API key',
     modelGrok:'Grok', modelGrokDesc:'xAI Grok via your API key',
-    authTitle:'Connect to TextFX', authDescription:'Enter the server access key to start a secure session.',
-    authKeyLabel:'Server access key', authSubmit:'Continue', authChecking:'Checking server session…',
-    authRetry:'Retry connection', authFailure:'Authentication failed. Check the key and server origin.',
-    authSecureRequired:'Use HTTPS to enter a server key outside localhost.',
-    authUnavailable:'Could not connect to the authentication service.', authExpired:'Your session expired. Sign in again.',
-    authSignOut:'Sign out',
   },
   ar: {
     title:'TEXTFX', tagline:'المحرك الإبداعي النخبوي للتفكير الجانبي وصناعة المحتوى',
@@ -325,12 +217,6 @@ const T = {
     modelOpenAI:'جي بي تي (OpenAI)', modelOpenAIDesc:'موديلات OpenAI بمفتاحك الخاص',
     modelGemini:'Gemini', modelGeminiDesc:'جوجل Gemini بمفتاحك الخاص',
     modelGrok:'Grok', modelGrokDesc:'xAI Grok بمفتاحك الخاص',
-    authTitle:'الاتصال بـ TextFX', authDescription:'أدخل مفتاح وصول الخادم لبدء جلسة آمنة.',
-    authKeyLabel:'مفتاح وصول الخادم', authSubmit:'متابعة', authChecking:'جارٍ التحقق من جلسة الخادم…',
-    authRetry:'إعادة الاتصال', authFailure:'فشل تسجيل الدخول. تحقق من المفتاح وعنوان الخادم.',
-    authSecureRequired:'استخدم HTTPS لإدخال مفتاح الخادم خارج localhost.',
-    authUnavailable:'تعذر الاتصال بخدمة المصادقة.', authExpired:'انتهت الجلسة. سجّل الدخول مرة أخرى.',
-    authSignOut:'تسجيل الخروج',
   }
 } as const
 type Lang = keyof typeof T
@@ -385,14 +271,8 @@ function App() {
   }, [])
 
   const [brief,  setBrief]  = useState('')
+  type ProviderId = 'auto'|'openrouter'|'openai'|'gemini'|'grok'
   const [provider, setProvider] = useState<ProviderId>('auto')
-  const [providerOptions, setProviderOptions] = useState<ProviderOption[]>([])
-  const [sessionStatus, setSessionStatus] = useState<{ authRequired: boolean; authenticated: boolean } | null>(null)
-  const [authCheckAttempt, setAuthCheckAttempt] = useState(0)
-  const [apiKeyInput, setApiKeyInput] = useState('')
-  const [authError, setAuthError] = useState<string | null>(null)
-  const [authBusy, setAuthBusy] = useState(false)
-  const [model, setModel] = useState('')
   const [showModelPicker, setShowModelPicker] = useState(false)
   const modelPickerRef = useRef<HTMLDivElement>(null)
   useEffect(() => {
@@ -410,54 +290,6 @@ function App() {
   const [loading, setLoading] = useState(false)
   const [error,   setError]   = useState<string|null>(null)
   const [iterations, setIterations] = useState<Iteration[]>([])
-  const requestSequence = useRef(0)
-  const activeRequest = useRef<AbortController|null>(null)
-
-  useEffect(() => () => {
-    requestSequence.current++
-    activeRequest.current?.abort()
-    activeRequest.current = null
-  }, [])
-
-  useEffect(() => {
-    let disposed = false
-    backendFetch(`${API}/api/session`, { cache: 'no-store' })
-      .then(async response => {
-        if (!response.ok) throw new Error('Session status request failed')
-        const status = await response.json() as { authRequired?: unknown; authenticated?: unknown }
-        if (typeof status.authRequired !== 'boolean' || typeof status.authenticated !== 'boolean') {
-          throw new Error('Session status response was invalid')
-        }
-        if (!disposed) {
-          setSessionStatus({ authRequired: status.authRequired, authenticated: status.authenticated })
-          setAuthError(null)
-        }
-      })
-      .catch(() => {
-        if (!disposed) setAuthError(t.authUnavailable)
-      })
-    return () => { disposed = true }
-  }, [API, authCheckAttempt])
-
-  useEffect(() => {
-    let disposed = false
-    backendFetch(`${API}/api/key-status`, { cache: 'no-store' })
-      .then(async response => {
-        if (!response.ok) throw new Error(`Provider status request failed (${response.status}).`)
-        const payload = await response.json() as { providers?: ProviderOption[] }
-        if (!Array.isArray(payload.providers)) throw new Error('Provider status response was invalid.')
-        const options = payload.providers.filter(item =>
-          item && ['gemini', 'openai', 'openrouter', 'grok'].includes(item.id) &&
-          typeof item.configured === 'boolean' && Array.isArray(item.models) &&
-          item.models.every(value => typeof value === 'string'),
-        )
-        if (!disposed) setProviderOptions(options)
-      })
-      .catch(error => {
-        if (!disposed) console.warn('Provider status unavailable:', error instanceof Error ? error.message : 'unknown error')
-      })
-    return () => { disposed = true }
-  }, [API])
 
   const [dark, setDark] = useState<boolean>(() => {
     if (typeof window === 'undefined') return true
@@ -482,11 +314,6 @@ function App() {
 
   const t    = T[lang]
   const isRtl = lang === 'ar'
-  const selectedProvider = providerOptions.find(option => option.id === provider)
-  const selectedModel = provider === 'auto' ? undefined : model || selectedProvider?.models[0]
-  const browserHeaders: Record<string, string> = browserAttachment
-    ? { 'X-TextFX-Browser-Token': `Bearer ${browserAttachment.token}` }
-    : {}
 
   useEffect(() => {
     document.documentElement.dir  = isRtl ? 'rtl' : 'ltr'
@@ -506,12 +333,6 @@ function App() {
 
   function handleError(err: unknown) {
     const e = err as { code?:string; message?:string; status?:number; body?:string }
-    if (e?.status === 401 && sessionStatus?.authRequired) {
-      invalidatePipeline()
-      setSessionStatus({ authRequired: true, authenticated: false })
-      setAuthError(t.authExpired)
-      return
-    }
     if (e?.code === 'TIMEOUT' || e?.message === 'TIMEOUT') return setError(t.timeoutErr)
     if (e?.message?.includes('NETWORK') || e?.message?.includes('Failed to fetch')) return setError(t.networkErr)
     if (e?.body) {
@@ -524,149 +345,51 @@ function App() {
     console.error(JSON.stringify({ level:'error', ts:new Date().toISOString(), error: e?.message }))
   }
 
-  async function submitApiKey(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault()
-    if (!apiKeyInput.trim() || authBusy) return
-    const apiUrl = new URL(API || window.location.href, window.location.href)
-    const loopback = ['localhost', '127.0.0.1', '[::1]'].includes(apiUrl.hostname)
-    if (!window.fx && apiUrl.protocol !== 'https:' && !loopback) {
-      setApiKeyInput('')
-      setAuthError(t.authSecureRequired)
-      return
-    }
-    setAuthBusy(true)
-    setAuthError(null)
-    try {
-      const response = await backendFetch(`${API}/api/session`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ apiKey: apiKeyInput }),
-      })
-      if (!response.ok) throw new Error('AUTH_FAILED')
-      const status = await response.json() as { authRequired?: unknown; authenticated?: unknown }
-      if (status.authRequired !== true || status.authenticated !== true) throw new Error('AUTH_FAILED')
-      setApiKeyInput('')
-      setSessionStatus({ authRequired: true, authenticated: true })
-    } catch {
-      setApiKeyInput('')
-      setAuthError(t.authFailure)
-    } finally {
-      setAuthBusy(false)
-    }
-  }
-
-  async function signOut() {
-    try { await backendFetch(`${API}/api/session`, { method: 'DELETE' }) } catch { /* local UI still signs out */ }
-    invalidatePipeline()
-    setSessionStatus({ authRequired: true, authenticated: false })
-  }
-
-  function invalidatePipeline() {
-    requestSequence.current++
-    activeRequest.current?.abort()
-    activeRequest.current = null
-    setLoading(false)
-    setError(null)
-    setInsight(null)
-    setConcept(null)
-    setScript(null)
-  }
-
-  function beginRequest() {
-    activeRequest.current?.abort()
-    const controller = new AbortController()
-    const id = ++requestSequence.current
-    activeRequest.current = controller
-    setLoading(true)
-    setError(null)
-    return { id, controller }
-  }
-
-  function finishRequest(id: number) {
-    if (requestSequence.current !== id) return
-    activeRequest.current = null
-    setLoading(false)
-  }
-
-  function isCurrentRequest(id: number) {
-    return requestSequence.current === id
-  }
-
-  function isAbortError(error: unknown) {
-    return error instanceof Error && error.name === 'AbortError'
-  }
-
   const doGenerateInsight = async () => {
     lastAction.current = doGenerateInsight
-    const { id, controller } = beginRequest()
-    setInsight(null); setConcept(null); setScript(null)
+    setLoading(true); setError(null)
     try {
       const res = await apiFetch(`${API}/api/insight`, {
-        method:'POST', signal:controller.signal, headers:{'Content-Type':'application/json', ...browserHeaders},
-        body: JSON.stringify({
-          brief, archetype, language:lang, brandVoice:{ formalLevel,metaphorLevel,intensity },
-          provider, model:selectedModel, browserResearchId:browserAttachment?.runId,
-        })
+        method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({ brief, archetype, language:lang, brandVoice:{ formalLevel,metaphorLevel,intensity }, provider })
       })
-      const data: unknown = await res.json()
-      if (!isCurrentRequest(id)) return
-      if (!validInsight(data)) {
-        throw new Error('The server returned an invalid insight result.')
-      }
-      setInsight(data); setConcept(null); setScript(null)
+      setInsight(await res.json()); setConcept(null); setScript(null)
       scrollTo(insightRef)
-    } catch (e) { if (isCurrentRequest(id) && !isAbortError(e)) handleError(e) }
-    finally { finishRequest(id) }
+    } catch (e) { handleError(e) }
+    finally { setLoading(false) }
   }
 
   const doConvertConcept = async () => {
     lastAction.current = doConvertConcept
-    const { id, controller } = beginRequest()
-    setConcept(null); setScript(null)
+    setLoading(true); setError(null)
     try {
       const res = await apiFetch(`${API}/api/concept`, {
-        method:'POST', signal:controller.signal, headers:{'Content-Type':'application/json', ...browserHeaders},
-        body: JSON.stringify({
-          insight, archetype, language:lang, brandVoice:{ formalLevel,metaphorLevel,intensity },
-          provider, model:selectedModel, browserResearchId:browserAttachment?.runId,
-        })
+        method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({ insight, archetype, language:lang, brandVoice:{ formalLevel,metaphorLevel,intensity }, provider })
       })
-      const data: unknown = await res.json()
-      if (!isCurrentRequest(id)) return
-      if (!validConcept(data)) {
-        throw new Error('The server returned an invalid concept result.')
-      }
-      setConcept(data); setScript(null)
+      setConcept(await res.json()); setScript(null)
       scrollTo(conceptRef)
-    } catch (e) { if (isCurrentRequest(id) && !isAbortError(e)) handleError(e) }
-    finally { finishRequest(id) }
+    } catch (e) { handleError(e) }
+    finally { setLoading(false) }
   }
 
   const doWriteScript = async () => {
     lastAction.current = doWriteScript
-    const { id, controller } = beginRequest()
-    setScript(null)
+    setLoading(true); setError(null)
     try {
       const res = await apiFetch(`${API}/api/script`, {
-        method:'POST', signal:controller.signal, headers:{'Content-Type':'application/json', ...browserHeaders},
-        body: JSON.stringify({
-          concept, archetype, language:lang, brandVoice:{ formalLevel,metaphorLevel,intensity },
-          provider, model:selectedModel, browserResearchId:browserAttachment?.runId,
-        })
+        method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({ concept, archetype, language:lang, brandVoice:{ formalLevel,metaphorLevel,intensity }, provider })
       })
-      const data: unknown = await res.json()
-      if (!isCurrentRequest(id)) return
-      if (!validScript(data)) {
-        throw new Error('The server returned an invalid script result.')
-      }
+      const data: ScriptData = await res.json()
       setScript(data)
       const iter: Iteration = { timestamp:Date.now(), brief, archetype, language:lang, brandVoice:{formalLevel,metaphorLevel,intensity}, insight, concept, script:data }
       const updated = [iter, ...iterations].slice(0,10)
       setIterations(updated)
       localStorage.setItem('textfx_iterations', JSON.stringify(updated))
       scrollTo(scriptRef)
-    } catch (e) { if (isCurrentRequest(id) && !isAbortError(e)) handleError(e) }
-    finally { finishRequest(id) }
+    } catch (e) { handleError(e) }
+    finally { setLoading(false) }
   }
 
   const doCopy = async () => {
@@ -718,35 +441,6 @@ function App() {
 
   const mq = [...t.marquee, ...t.marquee, ...t.marquee, ...t.marquee]
 
-  if (!sessionStatus) {
-    return <div className={`app-root${dark ? ' dark' : ' light'}`} dir={isRtl ? 'rtl' : 'ltr'}>
-      <main className="auth-gate" role="main" aria-live="polite">
-        <h1 className="stage-title">{t.authTitle}</h1>
-        {authError
-          ? <><p role="alert">{authError}</p><button className="btn btn-primary" onClick={() => { setSessionStatus(null); setAuthError(null); setAuthCheckAttempt(value => value + 1) }}>{t.authRetry}</button></>
-          : <p role="status">{t.authChecking}</p>}
-      </main>
-    </div>
-  }
-
-  if (sessionStatus.authRequired && !sessionStatus.authenticated) {
-    return <div className={`app-root${dark ? ' dark' : ' light'}`} dir={isRtl ? 'rtl' : 'ltr'}>
-      <main className="auth-gate" role="main">
-        <h1 className="stage-title">{t.authTitle}</h1>
-        <p>{t.authDescription}</p>
-        {authError && <p className="error-banner" role="alert">{authError}</p>}
-        <form className="auth-form" onSubmit={event => void submitApiKey(event)}>
-          <label htmlFor="server-access-key">{t.authKeyLabel}</label>
-          <input id="server-access-key" className="textarea" type="password" autoComplete="off"
-            value={apiKeyInput} onChange={event => setApiKeyInput(event.target.value)} />
-          <button className="btn btn-primary" type="submit" disabled={authBusy || !apiKeyInput.trim()}>
-            {authBusy ? t.thinking : t.authSubmit}
-          </button>
-        </form>
-      </main>
-    </div>
-  }
-
   return (
     <>
     <div className={`app-root${dark ? ' dark' : ' light'}`} dir={isRtl ? 'rtl' : 'ltr'}>
@@ -770,7 +464,6 @@ function App() {
           ))}
         </div>
         <div className="nav-actions" role="toolbar" aria-label="App controls">
-          {sessionStatus.authRequired && <button className="nav-cta" onClick={() => void signOut()}>{t.authSignOut}</button>}
           <button className="nav-cta"
             aria-label={lang === 'en' ? 'Switch to Arabic' : 'Switch to English'}
             onClick={() => setLang(l => l === 'en' ? 'ar' : 'en')}>
@@ -881,10 +574,7 @@ function App() {
             <h2 className="stage-title" id="stage-02-title">{t.briefTitle}</h2>
           </div>
           <div className="pane">
-            <textarea className="textarea" value={brief} onChange={e => {
-              if (brief !== e.target.value) invalidatePipeline()
-              setBrief(e.target.value)
-            }}
+            <textarea className="textarea" value={brief} onChange={e => setBrief(e.target.value)}
               placeholder={t.briefPlaceholder} dir="auto" rows={6}
               aria-label={t.briefTitle} aria-required="true" />
             <div className="model-picker" ref={modelPickerRef}>
@@ -908,37 +598,11 @@ function App() {
                   ] as [ProviderId,string,string][]).map(([id, label, desc]) => (
                     <button key={id} type="button" role="option" aria-selected={provider === id}
                       className={`model-picker-opt${provider === id ? ' selected' : ''}`}
-                      onClick={() => {
-                        const nextModel = id === 'auto' ? '' : providerOptions.find(option => option.id === id)?.models[0] || ''
-                        if (provider !== id || model !== nextModel) invalidatePipeline()
-                        setProvider(id)
-                        setModel(nextModel)
-                        setShowModelPicker(false)
-                      }}>
-                      <span className="model-picker-opt-name">
-                        {label}{id !== 'auto' && providerOptions.find(option => option.id === id)?.configured === false ? ' · not configured' : ''}
-                      </span>
+                      onClick={() => { setProvider(id); setShowModelPicker(false) }}>
+                      <span className="model-picker-opt-name">{label}</span>
                       <span className="model-picker-opt-desc">{desc}</span>
                     </button>
                   ))}
-                  {provider !== 'auto' && (
-                    <label className="model-picker-model">
-                      <span>{t.modelPickerBtn}</span>
-                      <select
-                        aria-label={`${t.modelPickerBtn} ${selectedProvider?.label || provider}`}
-                        value={model}
-                        onChange={event => {
-                          if (model !== event.target.value) invalidatePipeline()
-                          setModel(event.target.value)
-                        }}
-                      >
-                        <option value="">Server default</option>
-                        {(selectedProvider?.models || []).map(availableModel => (
-                          <option key={availableModel} value={availableModel}>{availableModel}</option>
-                        ))}
-                      </select>
-                    </label>
-                  )}
                 </div>
               )}
             </div>
@@ -960,8 +624,6 @@ function App() {
             </div>
             <div className="pane">
               <blockquote className="insight-hero" dir="auto">{insight.mainInsight}</blockquote>
-              <GenerationProvenance generation={insight.generation} />
-              <EvidenceProvenance references={insight.evidenceReferences} />
 
               <div className="section-label">{t.enginesLabel}</div>
               <div className="tech-grid">
@@ -1033,8 +695,6 @@ function App() {
               <h2 className="stage-title" id="stage-04-title">{t.conceptTitle}</h2>
             </div>
             <div className="pane">
-              <GenerationProvenance generation={concept.generation} />
-              <EvidenceProvenance references={concept.evidenceReferences} />
               <h3 className="concept-title" dir="auto">{concept.title}</h3>
               <p className="concept-tagline" dir="auto">“{concept.tagline}”</p>
               <div className="concept-body" dir="auto"><p>{concept.coreIdea}</p></div>
@@ -1064,8 +724,6 @@ function App() {
               <h2 className="stage-title" id="stage-05-title">{t.scriptTitle}</h2>
             </div>
             <div className="pane">
-              <GenerationProvenance generation={script.generation} />
-              <EvidenceProvenance references={script.evidenceReferences} />
               <pre className="script-block" dir="auto" aria-label={t.scriptTitle}>{script.script}</pre>
               <div className="two-col" style={{marginTop:'24px'}}>
                 <div className="technique">
@@ -1106,7 +764,7 @@ function App() {
             <div className="archive-grid">
               {iterations.map(it => (
                 <button key={it.timestamp} className="archive-card"
-                  onClick={() => { invalidatePipeline(); setBrief(it.brief); setInsight(it.insight); setConcept(it.concept); setScript(it.script) }}
+                  onClick={() => { setBrief(it.brief); setInsight(it.insight); setConcept(it.concept); setScript(it.script) }}
                   aria-label={`${t.archiveEmpty}: ${it.brief.slice(0,40)}`}>
                   <span className="arc-time">{new Date(it.timestamp).toLocaleTimeString()}</span>
                   <span className="arc-brief" dir="auto">{it.brief.slice(0,40)}…</span>

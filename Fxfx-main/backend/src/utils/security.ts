@@ -1,6 +1,5 @@
-import type { NextFunction, Request, Response } from 'express'
+import type { Request } from 'express'
 import { redactText } from '../browser/redact'
-import { hasApiSession, isTrustedApiOrigin } from './api-session'
 
 // Prompt injection and harmful script regexes
 const DENY_RE = [
@@ -43,22 +42,6 @@ export function authenticateApi(req: Request): boolean {
   const authHeader = req.header('authorization')?.trim()
   const token = authHeader?.startsWith('Bearer ') ? authHeader.slice(7).trim() : authHeader
   return token === apiKey
-}
-
-export function apiAuthenticationMiddleware(req: Request, res: Response, next: NextFunction): void {
-  if (
-    req.path === '/health' || req.path === '/healthz' || req.path === '/key-status' ||
-    req.path === '/session' || req.path === '/browser' || req.path.startsWith('/browser/')
-  ) return next()
-  if (authenticateApi(req)) return next()
-  if (hasApiSession(req)) {
-    if (!['GET', 'HEAD', 'OPTIONS'].includes(req.method) && !isTrustedApiOrigin(req)) {
-      res.status(403).json({ error: 'Request origin is not allowed' })
-      return
-    }
-    return next()
-  }
-  res.status(401).json({ error: 'Unauthorized: valid API key required' })
 }
 
 export function authorizeApproverToken(req: Request): { authorized: boolean; reason?: string } {
