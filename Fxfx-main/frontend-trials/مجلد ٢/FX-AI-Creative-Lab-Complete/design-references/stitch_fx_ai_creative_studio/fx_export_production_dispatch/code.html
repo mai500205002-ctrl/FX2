@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ar"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "secondary": "#7bd0ff", "primary-fixed": "#ffe088", "surface-container-high": "#272a30", "on-background": "#e1e2eb", "primary": "#f2ca50", "inverse-on-surface": "#2d3037", "on-error": "#690005", "on-surface-variant": "#d0c5af", "secondary-container": "#00a6e0", "tertiary-fixed-dim": "#bdc2ff", "tertiary-container": "#a5adff", "tertiary-fixed": "#e0e0ff", "on-secondary-fixed": "#001e2c", "on-surface": "#e1e2eb", "error-container": "#93000a", "on-tertiary-container": "#2d38a1", "background": "#101319", "primary-fixed-dim": "#e9c349", "primary-container": "#d4af37", "error": "#ffb4ab", "on-tertiary": "#131e8c", "surface-container-low": "#191c22", "surface-bright": "#363940", "tertiary": "#c7cbff", "on-primary-fixed-variant": "#574500", "on-tertiary-fixed-variant": "#2f3aa3", "surface-container": "#1d2026", "inverse-primary": "#735c00", "surface-tint": "#e9c349", "inverse-surface": "#e1e2eb", "on-primary-container": "#554300", "secondary-fixed": "#c4e7ff", "outline": "#99907c", "outline-variant": "#4d4635", "on-error-container": "#ffdad6", "surface-variant": "#32353b", "on-primary-fixed": "#241a00", "on-secondary": "#00354a", "surface": "#101319", "surface-dim": "#101319", "surface-container-lowest": "#0b0e14", "surface-container-highest": "#32353b", "on-secondary-fixed-variant": "#004c69", "on-secondary-container": "#00374d", "on-primary": "#3c2f00", "secondary-fixed-dim": "#7bd0ff", "on-tertiary-fixed": "#000767" }, "borderRadius": { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, "spacing": { "space-sm": "0.5rem", "margin-desktop": "2rem", "gutter-desktop": "1.5rem", "space-xs": "0.25rem", "space-xl": "2.5rem", "space-md": "1rem", "space-lg": "1.5rem", "gutter": "1rem", "margin": "1rem" }, "fontFamily": { "label-mono-md": [ "JetBrains Mono" ], "headline-md": [ "IBM Plex Sans Arabic", "IBM Plex Sans" ], "display-hero-mobile": [ "IBM Plex Sans Arabic", "IBM Plex Sans" ], "body-sm": [ "IBM Plex Sans Arabic", "IBM Plex Sans" ], "headline-lg": [ "IBM Plex Sans Arabic", "IBM Plex Sans" ], "body-md": [ "IBM Plex Sans Arabic", "IBM Plex Sans" ], "headline-sm": [ "IBM Plex Sans Arabic", "IBM Plex Sans" ], "label-mono-sm": [ "JetBrains Mono" ], "body-lg": [ "IBM Plex Sans Arabic", "IBM Plex Sans" ], "headline-lg-mobile": [ "IBM Plex Sans Arabic", "IBM Plex Sans" ], "display-hero": [ "IBM Plex Sans Arabic", "IBM Plex Sans" ] }, "fontSize": { "label-mono-md": [ "12px", { "lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "500" } ], "headline-md": [ "22px", { "lineHeight": "30px", "letterSpacing": "-0.01em", "fontWeight": "500" } ], "display-hero-mobile": [ "32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" } ], "body-sm": [ "12px", { "lineHeight": "18px", "letterSpacing": "0.01em", "fontWeight": "400" } ], "headline-lg": [ "32px", { "lineHeight": "42px", "letterSpacing": "-0.015em", "fontWeight": "600" } ], "body-md": [ "14px", { "lineHeight": "22px", "letterSpacing": "0", "fontWeight": "400" } ], "headline-sm": [ "18px", { "lineHeight": "26px", "letterSpacing": "0", "fontWeight": "500" } ], "label-mono-sm": [ "10px", { "lineHeight": "14px", "letterSpacing": "0.06em", "fontWeight": "500" } ], "body-lg": [ "16px", { "lineHeight": "26px", "letterSpacing": "0", "fontWeight": "400" } ], "headline-lg-mobile": [ "24px", { "lineHeight": "32px", "letterSpacing": "0", "fontWeight": "600" } ], "display-hero": [ "48px", { "lineHeight": "60px", "letterSpacing": "-0.02em", "fontWeight": "600" } ] } } } };</script></head><body class="bg-surface-container-lowest font-body-md text-body-md text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-container min-h-screen"><aside class="fixed right-0 top-0 h-full w-64 bg-surface-container-lowest z-50 flex flex-col justify-between py-space-md shadow-[0_0_24px_rgba(0,0,0,0.85)]"><div class="flex flex-col gap-space-lg px-space-md"><div class="flex items-center gap-space-sm px-space-xs"><div class="w-9 h-9 rounded-lg bg-surface-container-high flex items-center justify-center font-headline-md text-headline-sm text-primary shadow-[0_0_12px_rgba(212,175,55,0.2)]">FX</div><div class="flex flex-col"><span class="font-headline-sm text-body-md font-bold tracking-tight text-on-surface">جناح الإخراج</span><span class="font-label-mono-sm text-label-mono-sm text-primary uppercase">DIRECTOR SUITE</span></div></div><div class="px-space-xs"><div class="p-space-sm rounded-lg bg-surface-container-low flex flex-col gap-space-xs"><div class="flex items-center justify-between"><span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant">المشروع النشط</span><span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span></div><span class="font-body-sm text-body-sm text-on-surface font-medium truncate">سكب الوعي 2026</span><span class="font-label-mono-sm text-label-mono-sm text-outline">SMPTE 24.00 FPS</span></div></div><nav class="flex flex-col gap-space-xs" data-active-classes="bg-surface-container-high text-primary font-medium rounded-lg shadow-[inset_0_0_8px_rgba(212,175,55,0.15)]"><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="overview" href="#"><span class="font-body-md text-body-md">غرفة العمليات المركزية</span><span class="material-symbols-outlined text-body-lg">dashboard</span></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="genesis-brief" href="#"><span class="font-body-md text-body-md">الموجز الإبداعي</span><span class="material-symbols-outlined text-body-lg">history_edu</span></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="strategic-vision" href="#"><span class="font-body-md text-body-md">الرؤية الاستراتيجية</span><span class="material-symbols-outlined text-body-lg">psychology</span></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="concept-lab" href="#"><span class="font-body-md text-body-md">مختبر الأفكار واللوحات</span><span class="material-symbols-outlined text-body-lg">lightbulb</span></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="cinematic-slate" href="#"><span class="font-body-md text-body-md">السيناريو السينمائي</span><span class="material-symbols-outlined text-body-lg">movie_edit</span></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="render-queue" href="#"><span class="font-body-md text-body-md">طابور المعالجة العصبية</span><span class="material-symbols-outlined text-body-lg">memory</span></a></nav></div><div class="px-space-md flex flex-col gap-space-sm"><div class="p-space-sm rounded-lg bg-surface-container-low flex items-center justify-between"><div class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-secondary text-body-lg">neurology</span><span class="font-label-mono-sm text-label-mono-sm text-on-surface">محرك FX Neural</span></div><span class="font-label-mono-sm text-label-mono-sm text-secondary bg-surface-container-high px-space-xs py-0.5 rounded">99.8%</span></div><div class="flex items-center justify-between px-space-xs pt-space-xs"><div class="flex items-center gap-space-sm"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><div class="flex flex-col"><span class="font-body-sm text-body-sm text-on-surface font-semibold">طارق المخرج</span><span class="font-label-mono-sm text-label-mono-sm text-outline">CREATIVE LEAD</span></div></div><button class="text-on-surface-variant hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-body-lg">tune</span></button></div></div></aside><div class="pr-64"><header class="fixed top-0 right-64 left-0 h-36 bg-surface-container-lowest/90 backdrop-blur-xl z-40 shadow-[0_4px_20px_rgba(0,0,0,0.6)] flex flex-col justify-between"><div class="h-16 px-space-lg flex items-center justify-between"><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs bg-surface-container-high px-space-sm py-1 rounded-lg"><span class="font-label-mono-sm text-label-mono-sm text-primary">إصدار 2.4</span><span class="font-body-sm text-body-sm text-on-surface-variant">|</span><span class="font-body-sm text-body-sm text-on-surface font-medium">مشروع: سكب الوعي — حملة ترطيب العقل 2026</span></div><div class="flex items-center gap-space-xs px-space-sm py-1 rounded-lg bg-surface-container-low"><span class="w-1.5 h-1.5 rounded-full bg-primary"></span><span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant">جلسة نشطة • مسودة محفوظة</span></div><div class="flex items-center gap-space-xs px-space-sm py-1 rounded-lg bg-surface-container-high shadow-[0_0_12px_rgba(212,175,55,0.25)]"><span class="relative flex h-2 w-2"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span></span><span class="font-body-sm text-body-sm text-primary font-bold">الذكاء الاصطناعي: إعادة تفكير راديكالي قيد المعالجة (Radical Lateral Mode: Active)</span><span class="font-label-mono-sm text-label-mono-sm bg-primary-container text-on-primary-container px-1 rounded font-bold">AI AGENT</span></div></div><div class="flex items-center gap-space-sm"><button class="flex items-center gap-space-xs px-space-md py-1.5 rounded-lg bg-surface-container text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-body-md">search</span><span class="font-body-sm text-body-sm">لوحة الأوامر</span><kbd class="font-label-mono-sm text-label-mono-sm bg-surface-container-lowest px-1.5 py-0.5 rounded text-outline">⌘K</kbd></button><div class="flex items-center gap-space-xs"><button class="px-space-md py-1.5 rounded-lg bg-surface-container text-on-surface font-body-sm text-body-sm hover:bg-surface-container-high transition-colors flex items-center gap-space-xs"><span class="material-symbols-outlined text-body-md">ios_share</span><span class="">مشاركة</span></button><button class="px-space-md py-1.5 rounded-lg bg-surface-container text-on-surface font-body-sm text-body-sm hover:bg-surface-container-high transition-colors flex items-center gap-space-xs"><span class="material-symbols-outlined text-body-md">download</span><span class="">تصدير Final Draft</span></button><button class="px-space-md py-1.5 rounded-lg bg-primary-container text-on-primary-container font-body-sm text-body-sm font-semibold hover:bg-primary transition-colors flex items-center gap-space-xs shadow-[0_0_12px_rgba(212,175,55,0.25)]"><span class="material-symbols-outlined text-body-md">save</span><span class="">حفظ نهائي</span></button></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div><div class="h-20 px-space-lg flex items-center justify-between bg-surface-container-low/70"><div class="flex items-center gap-space-sm flex-1"><div class="flex items-center gap-space-xs px-space-md py-2 rounded-lg bg-surface-container-lowest"><span class="material-symbols-outlined text-primary text-body-md">check_circle</span><div class="flex flex-col"><span class="font-label-mono-sm text-label-mono-sm text-primary">المرحلة ٠١</span><span class="font-body-sm text-body-sm text-on-surface font-medium">الموجز (The Genesis)</span></div></div><span class="text-outline font-label-mono-sm text-label-mono-sm">←</span><div class="flex items-center gap-space-xs px-space-md py-2 rounded-lg bg-surface-container-lowest"><span class="material-symbols-outlined text-primary text-body-md">check_circle</span><div class="flex flex-col"><span class="font-label-mono-sm text-label-mono-sm text-primary">المرحلة ٠٢</span><span class="font-body-sm text-body-sm text-on-surface font-medium">الرؤية (Strategic Mind)</span></div></div><span class="text-outline font-label-mono-sm text-label-mono-sm">←</span><div class="flex items-center gap-space-xs px-space-md py-2 rounded-lg bg-surface-container-lowest"><span class="material-symbols-outlined text-primary text-body-md">check_circle</span><div class="flex flex-col"><span class="font-label-mono-sm text-label-mono-sm text-primary">المرحلة ٠٣</span><span class="font-body-sm text-body-sm text-on-surface font-medium">الفكرة (Concept Lab)</span></div></div><span class="text-outline font-label-mono-sm text-label-mono-sm">←</span><div class="flex items-center gap-space-xs px-space-md py-2 rounded-lg bg-surface-container-high shadow-[0_0_12px_rgba(212,175,55,0.15)]"><span class="material-symbols-outlined text-primary text-body-md animate-pulse">radio_button_checked</span><div class="flex flex-col"><span class="font-label-mono-sm text-label-mono-sm text-primary font-bold">المرحلة ٠٤ • قيد التحرير</span><span class="font-body-sm text-body-sm text-on-surface font-bold">السيناريو (Cinematic Slate)</span></div></div></div><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs px-space-sm py-1.5 rounded-lg bg-surface-container-lowest shadow-inner"><span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant">الجرأة الإبداعية:</span><button class="font-label-mono-sm text-label-mono-sm px-2 py-0.5 rounded text-on-surface-variant hover:text-on-surface transition-colors">منضبط</button><button class="font-label-mono-sm text-label-mono-sm px-2 py-0.5 rounded text-on-surface-variant hover:text-on-surface transition-colors">متوازن</button><button class="font-label-mono-sm text-label-mono-sm px-2 py-0.5 rounded bg-primary text-on-primary font-bold shadow-[0_0_10px_rgba(212,175,55,0.4)] animate-pulse">راديكالي ⚡ [نشط]</button></div><div class="flex items-center gap-space-xs px-space-sm py-1.5 rounded-lg bg-surface-container-lowest"><span class="material-symbols-outlined text-outline text-body-md">timeline</span><span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant">المشهد ٠٤ / ١٢</span><span class="font-label-mono-sm text-label-mono-sm text-primary">00:04:12:00</span></div></div></div><div class="w-full bg-surface-container-high border-y border-outline-variant/30 px-space-lg py-1.5 flex flex-wrap items-center justify-between gap-space-sm shadow-md"><div class="flex items-center gap-space-md"><div class="flex items-center gap-1.5 text-primary"><span class="material-symbols-outlined text-body-md animate-spin">sync</span><span class="font-label-mono-sm text-label-mono-sm font-bold">محرك الاستكشاف الجانبي (DE BONO LATERAL AGENT): قيد المعالجة التوليدية الراديكالية</span></div><div class="hidden md:flex items-center gap-space-xs text-outline font-label-mono-sm text-label-mono-sm"><span class="">الدورة: <strong class="text-on-surface">2 / 3</strong></span><span class="">•</span><span class="">الكمون: <strong class="text-secondary">240ms (Vertex AI)</strong></span><span class="">•</span><span class="">درجة التدقيق الاستراتيجي: <strong class="text-primary">88% ➔ 96%</strong></span></div></div><div class="flex items-center gap-space-xs"><span class="px-2 py-0.5 rounded bg-surface-container text-primary font-label-mono-sm text-label-mono-sm border border-primary/20 animate-pulse">الوضع: كسر القيود (Constraint Breaker)</span><button class="px-2 py-0.5 rounded bg-surface-container hover:bg-surface-bright text-on-surface font-label-mono-sm text-label-mono-sm flex items-center gap-1 transition-colors"><span class="material-symbols-outlined text-body-sm text-secondary">terminal</span><span class="">سجل التفكير المباشر</span></button></div></div></header><main class="relative w-full pt-36 bg-surface-container-lowest px-space-lg py-space-lg"><div class="flex flex-col w-full gap-space-lg text-on-surface">
+<!-- Ambient Light Backdrops (Local Studio Glows) -->
+<div class="relative w-full">
+<div class="absolute -top-12 right-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl pointer-events-none"></div>
+<div class="absolute top-48 left-10 w-80 h-80 bg-secondary/5 rounded-full blur-3xl pointer-events-none"></div>
+<!-- Top Action & Dispatch Control Bar -->
+<div class="relative bg-surface-container-low rounded-xl p-space-md shadow-xl flex flex-col xl:flex-row items-start xl:items-center justify-between gap-space-md">
+<!-- Meta Information / Mode Indicator -->
+<div class="flex items-center gap-space-md min-w-0">
+<div class="w-12 h-12 rounded-lg bg-surface-container-high flex items-center justify-center text-primary shadow-[0_0_16px_rgba(212,175,55,0.2)]">
+<span class="material-symbols-outlined text-[28px]" style="font-variation-settings: 'FILL' 1;">print</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-space-xs flex-wrap">
+<span class="font-headline-sm text-headline-sm font-semibold text-on-surface">مركز التصدير ومزامنة الإنتاج الميداني</span>
+<span class="font-label-mono-sm text-label-mono-sm bg-primary/10 text-primary px-space-xs py-0.5 rounded font-medium">DISPATCH v3.4</span>
+<span class="font-label-mono-sm text-label-mono-sm bg-surface-container-high text-secondary px-space-xs py-0.5 rounded flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>
+              مشفر SMPTE-2067
+            </span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">
+            المشروع: <span class="text-on-surface font-medium">سكب الوعي 2026 (The Liquid Pause)</span> • الحزمة: وثيقة التدقيق الاستراتيجي واللوائح الفنية الكاملة
+          </p>
+</div>
+</div>
+<!-- Quick Export Actions Group -->
+<div class="flex items-center gap-space-sm flex-wrap w-full xl:w-auto justify-end">
+<!-- Multi-format Auxiliary Buttons -->
+<div class="flex items-center gap-space-xs bg-surface-container-lowest p-1 rounded-lg">
+<button class="px-space-sm py-1.5 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-body-sm text-body-sm flex items-center gap-space-xs transition-all" id="btn-summary" title="تصدير ملخص موجز من صفحتين للإدارة">
+<span class="material-symbols-outlined text-[18px] text-primary">description</span>
+<span>ملخص تنفيذي</span>
+</button>
+<button class="px-space-sm py-1.5 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-body-sm text-body-sm flex items-center gap-space-xs transition-all" id="btn-matrix" title="تصدير البيانات المنسقة لبرامج إدارة التصوير">
+<span class="material-symbols-outlined text-[18px] text-secondary">data_object</span>
+<span>مصفوفة JSON/CSV</span>
+</button>
+<button class="px-space-sm py-1.5 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-body-sm text-body-sm flex items-center gap-space-xs transition-all" id="btn-shotlist" title="قائمة اللقطات والكاميرات مدمجة">
+<span class="material-symbols-outlined text-[18px] text-tertiary">movie</span>
+<span>تفريغ المشاهد</span>
+</button>
+</div>
+<!-- Master Floating CTA: Director's Cut PDF -->
+<button class="relative group px-space-lg py-2.5 rounded-lg bg-primary text-on-primary font-body-md text-body-md font-semibold flex items-center gap-space-sm shadow-[0_0_20px_rgba(242,202,80,0.35)] hover:bg-primary-fixed transition-all hover:scale-[1.01] active:scale-[0.99]" id="btn-export-master">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">file_download</span>
+<span>تصدير PDF جاهز للطباعة السينمائية (Director's Slate)</span>
+<span class="font-label-mono-sm text-label-mono-sm bg-on-primary/20 text-on-primary px-1.5 py-0.5 rounded">300 DPI • CMYK</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Main Split Architecture: Live Preview Canvas (60%) & Dispatch Command Hub (40%) -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-start">
+<!-- ========================================================================= -->
+<!-- RIGHT SIDE: LIVE DOCUMENT PREVIEW CANVAS (7 Cols)                        -->
+<!-- ========================================================================= -->
+<div class="lg:col-span-7 flex flex-col gap-space-md">
+<!-- Preview Pane Toolbar -->
+<div class="bg-surface-container-low rounded-xl px-space-md py-space-sm flex items-center justify-between shadow-md">
+<div class="flex items-center gap-space-sm">
+<span class="w-2.5 h-2.5 rounded-full bg-primary animate-pulse"></span>
+<span class="font-headline-sm text-body-md font-medium text-on-surface">المعاينة الحية للتقرير الاستراتيجي الرسمي</span>
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant bg-surface-container-high px-2 py-0.5 rounded">A4 سينمائي • الصفحات 1-4</span>
+</div>
+<div class="flex items-center gap-space-xs">
+<button class="w-7 h-7 rounded bg-surface-container hover:bg-surface-bright flex items-center justify-center text-on-surface-variant hover:text-on-surface transition-colors" title="تكبير">
+<span class="material-symbols-outlined text-[16px]">zoom_in</span>
+</button>
+<button class="w-7 h-7 rounded bg-surface-container hover:bg-surface-bright flex items-center justify-center text-on-surface-variant hover:text-on-surface transition-colors" title="تصغير">
+<span class="material-symbols-outlined text-[16px]">zoom_out</span>
+</button>
+<button class="w-7 h-7 rounded bg-surface-container hover:bg-surface-bright flex items-center justify-center text-on-surface-variant hover:text-on-surface transition-colors" title="ملء الشاشة">
+<span class="material-symbols-outlined text-[16px]">fullscreen</span>
+</button>
+</div>
+</div>
+<!-- The Formal Sheet Wrapper (Simulating High-End Heavyweight Coated Stock in Dark Room) -->
+<div class="relative bg-surface-container-lowest rounded-xl p-space-xl shadow-[0_24px_50px_rgba(0,0,0,0.9)] overflow-hidden">
+<!-- Live Custom Watermark Overlay -->
+<div class="pointer-events-none absolute inset-0 flex items-center justify-center select-none z-10 rotate-[-24deg] opacity-10" id="preview-watermark">
+<span class="font-headline-lg text-display-hero font-bold tracking-widest text-primary uppercase">PRODUCTION LOCK • سري</span>
+</div>
+<!-- Document Header Section -->
+<div class="relative z-20 flex flex-col gap-space-md pb-space-lg">
+<div class="flex items-start justify-between gap-space-md">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center text-primary font-headline-md font-bold text-headline-sm shadow-md">
+                FX
+              </div>
+<div class="flex flex-col">
+<span class="font-label-mono-sm text-label-mono-sm text-primary tracking-wider uppercase">FX — AI CREATIVE LAB</span>
+<span class="font-headline-sm text-headline-sm font-semibold text-on-surface">تقرير التدقيق الاستراتيجي المقارن للحملة</span>
+<span class="font-label-mono-sm text-label-mono-sm text-outline">STRATEGIC GOVERNANCE AUDIT REPORT • V2.4-LOCK</span>
+</div>
+</div>
+<!-- Project Slate Stamp Box -->
+<div class="bg-surface-container-low px-space-md py-space-xs rounded-lg flex flex-col items-end">
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant">معرف المشهد الرئيسي</span>
+<span class="font-label-mono-md text-label-mono-md text-primary font-bold">CP-2026-SLATE-04</span>
+<span class="font-label-mono-sm text-label-mono-sm text-secondary">SMPTE 24.00 FPS • ARRI ALEXA 65</span>
+</div>
+</div>
+<!-- Project Title & Context Ribbon -->
+<div class="bg-surface-container p-space-md rounded-lg flex flex-wrap items-center justify-between gap-space-sm">
+<div class="flex flex-col">
+<span class="font-label-mono-sm text-label-mono-sm text-outline">اسم المشروع والاتجاه الإبداعي</span>
+<span class="font-headline-sm text-body-lg font-semibold text-on-surface">سكب الوعي 2026 — حملة ترطيب العقل (The Liquid Pause)</span>
+</div>
+<div class="flex items-center gap-space-md">
+<div class="flex flex-col items-end">
+<span class="font-label-mono-sm text-label-mono-sm text-outline">تاريخ الإغلاق</span>
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface font-medium">18 نوفمبر 2026 • 23:45 KSA</span>
+</div>
+<div class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Document Core: Visual Weighting Comparative Analysis -->
+<div class="relative z-20 flex flex-col gap-space-md py-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[20px]">balance</span>
+<span class="font-headline-sm text-body-md font-semibold text-on-surface">مصفوفة توزيع الأوزان: المتوازن التقليدي مقابل الراديكالي المعتمَد</span>
+</div>
+<span class="font-label-mono-sm text-label-mono-sm text-secondary bg-surface-container-high px-2 py-0.5 rounded">تطبيق خوارزمية DE BONO LATERAL</span>
+</div>
+<!-- Comparison Table with Micro-Bar Visualizers -->
+<div class="bg-surface-container-low rounded-lg overflow-hidden">
+<div class="grid grid-cols-12 bg-surface-container px-space-md py-space-xs font-label-mono-sm text-label-mono-sm text-on-surface-variant font-medium">
+<div class="col-span-4">الركن الاستراتيجي الإبداعي</div>
+<div class="col-span-3 text-center">النمط المتوازن (Standard)</div>
+<div class="col-span-3 text-center">النمط الراديكالي (Radical - Approved)</div>
+<div class="col-span-2 text-left">الانحراف التوليدي</div>
+</div>
+<!-- Row 1: Pattern Disruption -->
+<div class="grid grid-cols-12 items-center px-space-md py-space-sm bg-surface-container-low/60 hover:bg-surface-container transition-colors">
+<div class="col-span-4 flex flex-col">
+<span class="font-body-md text-body-sm font-medium text-on-surface">كسر النمط البصري (Pattern Break)</span>
+<span class="font-label-mono-sm text-label-mono-sm text-outline">تشويه التردد والقفز الزمني</span>
+</div>
+<div class="col-span-3 flex flex-col items-center">
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant">20.0%</span>
+<div class="w-24 h-1.5 rounded-full bg-surface-container-high overflow-hidden mt-1">
+<div class="h-full bg-outline w-1/5"></div>
+</div>
+</div>
+<div class="col-span-3 flex flex-col items-center">
+<span class="font-label-mono-sm text-label-mono-sm text-primary font-bold">40.0% [الوزن الأقصى]</span>
+<div class="w-24 h-1.5 rounded-full bg-surface-container-high overflow-hidden mt-1">
+<div class="h-full bg-primary w-2/5 shadow-[0_0_8px_rgba(242,202,80,0.5)]"></div>
+</div>
+</div>
+<div class="col-span-2 text-left font-label-mono-sm text-label-mono-sm text-primary font-semibold">
+                +100% ⚡
+              </div>
+</div>
+<!-- Row 2: Dramatic Tension -->
+<div class="grid grid-cols-12 items-center px-space-md py-space-sm bg-surface-container-low hover:bg-surface-container transition-colors">
+<div class="col-span-4 flex flex-col">
+<span class="font-body-md text-body-sm font-medium text-on-surface">التوتر الدرامي والسردي (Dramatic Tension)</span>
+<span class="font-label-mono-sm text-label-mono-sm text-outline">ضغط الصوت والظلال العميقة</span>
+</div>
+<div class="col-span-3 flex flex-col items-center">
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant">20.0%</span>
+<div class="w-24 h-1.5 rounded-full bg-surface-container-high overflow-hidden mt-1">
+<div class="h-full bg-outline w-1/5"></div>
+</div>
+</div>
+<div class="col-span-3 flex flex-col items-center">
+<span class="font-label-mono-sm text-label-mono-sm text-secondary font-bold">25.0%</span>
+<div class="w-24 h-1.5 rounded-full bg-surface-container-high overflow-hidden mt-1">
+<div class="h-full bg-secondary w-1/4"></div>
+</div>
+</div>
+<div class="col-span-2 text-left font-label-mono-sm text-label-mono-sm text-secondary font-semibold">
+                +25% ↗
+              </div>
+</div>
+<!-- Row 3: Product Hydration Lore -->
+<div class="grid grid-cols-12 items-center px-space-md py-space-sm bg-surface-container-low/60 hover:bg-surface-container transition-colors">
+<div class="col-span-4 flex flex-col">
+<span class="font-body-md text-body-sm font-medium text-on-surface">حضور هوية المنتج (Hydration Lore)</span>
+<span class="font-label-mono-sm text-label-mono-sm text-outline">سكب قطرة السائل كرمز تأملي</span>
+</div>
+<div class="col-span-3 flex flex-col items-center">
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant">20.0%</span>
+<div class="w-24 h-1.5 rounded-full bg-surface-container-high overflow-hidden mt-1">
+<div class="h-full bg-outline w-1/5"></div>
+</div>
+</div>
+<div class="col-span-3 flex flex-col items-center">
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface font-medium">15.0% (رمزية غير مباشرة)</span>
+<div class="w-24 h-1.5 rounded-full bg-surface-container-high overflow-hidden mt-1">
+<div class="h-full bg-tertiary w-[15%]"></div>
+</div>
+</div>
+<div class="col-span-2 text-left font-label-mono-sm text-label-mono-sm text-outline">
+                -25% ↘
+              </div>
+</div>
+<!-- Row 4: Emotional Catharsis -->
+<div class="grid grid-cols-12 items-center px-space-md py-space-sm bg-surface-container-low hover:bg-surface-container transition-colors">
+<div class="col-span-4 flex flex-col">
+<span class="font-body-md text-body-sm font-medium text-on-surface">التطهير الشعوري (Cathartic Resolution)</span>
+<span class="font-label-mono-sm text-label-mono-sm text-outline">السكينة بعد ضجيج المدينة</span>
+</div>
+<div class="col-span-3 flex flex-col items-center">
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant">20.0%</span>
+<div class="w-24 h-1.5 rounded-full bg-surface-container-high overflow-hidden mt-1">
+<div class="h-full bg-outline w-1/5"></div>
+</div>
+</div>
+<div class="col-span-3 flex flex-col items-center">
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface font-medium">20.0%</span>
+<div class="w-24 h-1.5 rounded-full bg-surface-container-high overflow-hidden mt-1">
+<div class="h-full bg-outline w-1/5"></div>
+</div>
+</div>
+<div class="col-span-2 text-left font-label-mono-sm text-label-mono-sm text-on-surface-variant">
+                0% =
+              </div>
+</div>
+</div>
+</div>
+<!-- Inline SVG Strategic Radar Comparison Chart -->
+<div class="relative z-20 grid grid-cols-1 md:grid-cols-2 gap-space-md py-space-sm bg-surface-container rounded-lg p-space-md my-space-sm">
+<div class="flex flex-col justify-center">
+<span class="font-label-mono-sm text-label-mono-sm text-primary uppercase">RADAR COMPLIANCE MATRIX</span>
+<span class="font-headline-sm text-body-md font-semibold text-on-surface">إثبات التفوق الراديكالي</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1 leading-relaxed">
+              تجاوزت الدورة التوليدية الثانية قيود التماثل الإعلاني النمطي عبر تكثيف التباين البصري، محققة أعلى معدل تفاعل مرتقب مع الفئة المستهدفة بنسبة استرجاع ذهني تصل إلى 88%.
+            </p>
+<div class="flex items-center gap-space-md mt-space-sm">
+<div class="flex items-center gap-1.5 font-label-mono-sm text-label-mono-sm text-outline">
+<span class="w-2.5 h-2.5 rounded-sm bg-outline"></span>
+<span>المتوازن (71.1%)</span>
+</div>
+<div class="flex items-center gap-1.5 font-label-mono-sm text-label-mono-sm text-primary font-bold">
+<span class="w-2.5 h-2.5 rounded-sm bg-primary"></span>
+<span>الراديكالي المعتمد (95.25%)</span>
+</div>
+</div>
+</div>
+<!-- Technical Vector Radar Graphic -->
+<div class="flex items-center justify-center py-space-xs">
+<svg class="w-full max-w-[210px] text-outline-variant" fill="none" viewbox="0 0 200 180" xmlns="http://www.w3.org/2000/svg">
+<!-- Concentric Pentagons -->
+<polygon opacity="0.3" points="100,10 185,72 153,165 47,165 15,72" stroke="currentColor" stroke-width="0.8"></polygon>
+<polygon opacity="0.2" points="100,35 158,78 136,143 64,143 42,78" stroke="currentColor" stroke-width="0.8"></polygon>
+<polygon opacity="0.15" points="100,60 131,85 119,122 81,122 69,85" stroke="currentColor" stroke-width="0.8"></polygon>
+<!-- Axes -->
+<line opacity="0.4" stroke="currentColor" stroke-width="0.5" x1="100" x2="100" y1="90" y2="10"></line>
+<line opacity="0.4" stroke="currentColor" stroke-width="0.5" x1="100" x2="185" y1="90" y2="72"></line>
+<line opacity="0.4" stroke="currentColor" stroke-width="0.5" x1="100" x2="153" y1="90" y2="165"></line>
+<line opacity="0.4" stroke="currentColor" stroke-width="0.5" x1="100" x2="47" y1="90" y2="165"></line>
+<line opacity="0.4" stroke="currentColor" stroke-width="0.5" x1="100" x2="15" y1="90" y2="72"></line>
+<!-- Polygon Baseline: Rejected Cycle (Gray) -->
+<polygon fill="#99907c" fill-opacity="0.15" points="100,45 145,80 128,135 68,130 50,82" stroke="#99907c" stroke-dasharray="2 2" stroke-width="1.2"></polygon>
+<!-- Polygon Approved: Radical Lateral (Gold Glow) -->
+<polygon fill="#f2ca50" fill-opacity="0.25" points="100,12 180,68 140,158 55,145 22,70" stroke="#f2ca50" stroke-width="2"></polygon>
+<!-- Nodes on Approved Path -->
+<circle cx="100" cy="12" fill="#f2ca50" r="3"></circle>
+<circle cx="180" cy="68" fill="#f2ca50" r="3"></circle>
+<circle cx="140" cy="158" fill="#f2ca50" r="3"></circle>
+<circle cx="55" cy="145" fill="#f2ca50" r="3"></circle>
+<circle cx="22" cy="70" fill="#f2ca50" r="3"></circle>
+</svg>
+</div>
+</div>
+<!-- Governance Cycles & Director's Lock Stamp Section -->
+<div class="relative z-20 pt-space-md flex flex-col md:flex-row items-center justify-between gap-space-lg bg-surface-container-low/70 p-space-md rounded-lg">
+<!-- Governance Audit History Summary -->
+<div class="flex flex-col gap-space-xs">
+<span class="font-label-mono-sm text-label-mono-sm text-outline">ملخص دورات الحوكمة والمطابقة</span>
+<div class="flex items-center gap-space-md">
+<div class="flex flex-col">
+<span class="font-label-mono-sm text-label-mono-sm text-error">الدورة ٠١ • مرفوضة</span>
+<span class="font-body-md text-body-sm text-on-surface font-medium line-through">71.10% امتثال</span>
+<span class="font-label-mono-sm text-label-mono-sm text-outline">رتابة إيقاعية عالية</span>
+</div>
+<span class="material-symbols-outlined text-outline text-[18px]">arrow_forward</span>
+<div class="flex flex-col">
+<span class="font-label-mono-sm text-label-mono-sm text-primary font-bold">الدورة ٠٢ • معتمدة</span>
+<span class="font-body-md text-body-sm text-primary font-bold">95.25% امتثال استراتيجي</span>
+<span class="font-label-mono-sm text-label-mono-sm text-secondary">إجازة إخراجية قطعية</span>
+</div>
+</div>
+</div>
+<!-- Official Director's Slate Stamp & Digital Certificate -->
+<div class="relative flex items-center gap-space-md p-space-sm rounded-lg bg-surface-container-high shadow-lg">
+<!-- Graphic Wax/Slate Stamp -->
+<div class="w-16 h-16 rounded-full bg-primary/10 flex flex-col items-center justify-center text-center p-1 shadow-[0_0_15px_rgba(242,202,80,0.2)]">
+<span class="material-symbols-outlined text-primary text-[20px]" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+<span class="font-label-mono-sm text-[8px] text-primary font-bold leading-tight uppercase">DIRECTOR LOCK</span>
+</div>
+<!-- Stamp Signature Metadata -->
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs">
+<span class="font-headline-sm text-body-sm font-bold text-on-surface">إجازة الإخراج: طارق الشريف</span>
+<span class="material-symbols-outlined text-primary text-[14px]">check_circle</span>
+</div>
+<span class="font-label-mono-sm text-label-mono-sm text-primary font-mono">HASH: 9F2A-881C-D4E0-B578</span>
+<span class="font-label-mono-sm text-label-mono-sm text-outline">توقيع رقمي معتمد • قفل الإنتاج الفعلي</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Quick Document Pagination Strip -->
+<div class="flex items-center justify-between px-space-xs text-on-surface-variant font-label-mono-sm text-label-mono-sm">
+<span>وثيقة رقم: FX-REP-2026-9042</span>
+<div class="flex items-center gap-space-xs">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span>جاهزة للرندرة والتصدير (Clean Slate Buffer Ready)</span>
+</div>
+<span>صفحة ١ من ٤ (الصفحات المتبقية: Shot-List, Tech Specs, Prompts)</span>
+</div>
+</div>
+<!-- ========================================================================= -->
+<!-- LEFT SIDE: DISPATCH & SHARE MODAL COMMAND HUB (5 Cols)                   -->
+<!-- ========================================================================= -->
+<div class="lg:col-span-5 flex flex-col gap-space-lg">
+<!-- Panel 1: Team Slate Dispatch & Real-Time Sync -->
+<div class="bg-surface-container-low rounded-xl p-space-lg shadow-xl flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-[22px]">group_work</span>
+<h2 class="font-headline-sm text-headline-sm font-semibold text-on-surface">مزامنة فريق الإنتاج (Slate Dispatch)</h2>
+</div>
+<span class="font-label-mono-sm text-label-mono-sm text-primary bg-primary/10 px-2 py-0.5 rounded font-bold">٤ أعضاء أساسيين</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+          قم بتحديد صلاحيات الوصول الفوري للتقرير قبل نشر رابط الأجهزة الميدانية أو إرسال الإشعارات.
+        </p>
+<!-- Crew Roles List -->
+<div class="flex flex-col gap-space-xs">
+<!-- Member 1: Creative Director -->
+<div class="flex items-center justify-between p-space-sm rounded-lg bg-surface-container hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="w-9 h-9 rounded-full bg-primary text-on-primary font-bold text-body-sm flex items-center justify-center shrink-0">
+                ط.ش
+              </div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-1">
+<span class="font-body-md text-body-sm font-semibold text-on-surface truncate">طارق الشريف</span>
+<span class="material-symbols-outlined text-primary text-[14px]">star</span>
+</div>
+<span class="font-label-mono-sm text-label-mono-sm text-outline truncate">المخرج الإبداعي (Creative Lead)</span>
+</div>
+</div>
+<span class="font-label-mono-sm text-label-mono-sm bg-primary/10 text-primary px-space-xs py-1 rounded font-semibold shrink-0">
+              تحكم كامل • إقفال
+            </span>
+</div>
+<!-- Member 2: Director of Photography -->
+<div class="flex items-center justify-between p-space-sm rounded-lg bg-surface-container hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="w-9 h-9 rounded-full bg-secondary-container text-on-secondary-container font-bold text-body-sm flex items-center justify-center shrink-0">
+                ع.م
+              </div>
+<div class="flex flex-col min-w-0">
+<span class="font-body-md text-body-sm font-semibold text-on-surface truncate">عمر مدني</span>
+<span class="font-label-mono-sm text-label-mono-sm text-outline truncate">مدير التصوير (DoP) • الكاميرا والإضاءة</span>
+</div>
+</div>
+<span class="font-label-mono-sm text-label-mono-sm bg-surface-container-high text-secondary px-space-xs py-1 rounded shrink-0">
+              معاينة + تفريغ فني
+            </span>
+</div>
+<!-- Member 3: Executive Producer -->
+<div class="flex items-center justify-between p-space-sm rounded-lg bg-surface-container hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="w-9 h-9 rounded-full bg-surface-bright text-on-surface font-bold text-body-sm flex items-center justify-center shrink-0">
+                س.خ
+              </div>
+<div class="flex flex-col min-w-0">
+<span class="font-body-md text-body-sm font-semibold text-on-surface truncate">سارة الخالدي</span>
+<span class="font-label-mono-sm text-label-mono-sm text-outline truncate">المنتج التنفيذي (Executive Producer)</span>
+</div>
+</div>
+<span class="font-label-mono-sm text-label-mono-sm bg-surface-container-high text-tertiary px-space-xs py-1 rounded shrink-0">
+              اعتماد التكاليف + PDF
+            </span>
+</div>
+<!-- Member 4: Client Lead -->
+<div class="flex items-center justify-between p-space-sm rounded-lg bg-surface-container hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="w-9 h-9 rounded-full bg-surface-container-highest text-on-surface-variant font-bold text-body-sm flex items-center justify-center shrink-0">
+                ف.ن
+              </div>
+<div class="flex flex-col min-w-0">
+<span class="font-body-md text-body-sm font-semibold text-on-surface truncate">فريق العميل (Agency Client Lead)</span>
+<span class="font-label-mono-sm text-label-mono-sm text-outline truncate">العلامة التجارية • شركة المشروبات</span>
+</div>
+</div>
+<span class="font-label-mono-sm text-label-mono-sm bg-surface-container-high text-on-surface-variant px-space-xs py-1 rounded shrink-0">
+              معاينة ملخص تنفيذي فقط
+            </span>
+</div>
+</div>
+<!-- Encrypted Direct Link & QR Box for On-Set iPads -->
+<div class="bg-surface-container p-space-md rounded-lg flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-headline-sm text-body-sm font-semibold text-on-surface flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary text-[18px]">key</span>
+              رابط المعاينة الميداني المشفر (On-Set Direct Slate)
+            </span>
+<span class="font-label-mono-sm text-label-mono-sm text-secondary bg-surface-container-high px-1.5 py-0.5 rounded">ينتهي خلال 48 ساعة</span>
+</div>
+<div class="flex items-center gap-space-sm">
+<div class="flex-1 bg-surface-container-lowest px-space-md py-2 rounded font-label-mono-sm text-label-mono-sm text-on-surface-variant truncate">
+              https://fx.director/slate/cp2026?token=x9a9f2a881cd4e0b578
+            </div>
+<button class="px-space-md py-2 rounded bg-surface-container-high hover:bg-surface-bright text-on-surface font-body-sm text-body-sm flex items-center gap-1 transition-all shrink-0" id="btn-copy-link">
+<span class="material-symbols-outlined text-[16px]">content_copy</span>
+<span>نسخ</span>
+</button>
+</div>
+<!-- QR Code Preview & Field Device Ping -->
+<div class="flex items-center justify-between pt-space-xs">
+<div class="flex items-center gap-space-sm">
+<!-- Visual QR Code Vector Matrix Simulation -->
+<div class="w-12 h-12 rounded bg-surface-container-lowest p-1 flex items-center justify-center shrink-0">
+<svg class="w-full h-full text-primary" fill="currentColor" viewbox="0 0 24 24">
+<path d="M2 2h8v8H2V2zm2 2v4h4V4H4zm-2 10h8v8H2v-8zm2 2v4h4v-4H4zm10-14h8v8h-8V2zm2 2v4h4V4h-4zm2 10h2v2h-2v-2zm-2 2h2v2h-2v-2zm4 0h2v2h-2v-2zm-2 2h2v4h-2v-4zm-2-2h-2v-2h2v2zm6 2h2v2h-2v-2zm0-4h2v2h-2v-2z"></path>
+</svg>
+</div>
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm font-medium text-on-surface">مسح سريع لأجهزة الشاشات الميدانية</span>
+<span class="font-label-mono-sm text-label-mono-sm text-outline">يدعم Apple iPad Pro و Atomos Monitor</span>
+</div>
+</div>
+<span class="font-label-mono-sm text-label-mono-sm text-primary font-bold">READY</span>
+</div>
+</div>
+<!-- Push Notifications: Instant Production Channels -->
+<div class="flex flex-col gap-space-xs pt-space-xs">
+<span class="font-label-mono-sm text-label-mono-sm text-outline">إشعار قنوات الطاقم فور الاعتماد</span>
+<div class="grid grid-cols-2 gap-space-sm">
+<button class="flex items-center justify-center gap-space-xs p-space-sm rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors">
+<span class="material-symbols-outlined text-[18px] text-secondary">forum</span>
+<span class="font-body-sm text-body-sm">قناة إنتاج Slack</span>
+</button>
+<button class="flex items-center justify-center gap-space-xs p-space-sm rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors">
+<span class="material-symbols-outlined text-[18px] text-primary">chat</span>
+<span class="font-body-sm text-body-sm">غرفة طوارئ WhatsApp</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Panel 2: Advanced Export Configuration & Presets -->
+<div class="bg-surface-container-low rounded-xl p-space-lg shadow-xl flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[22px]">tune</span>
+<h3 class="font-headline-sm text-headline-sm font-semibold text-on-surface">إعدادات تخصيص ملف التصدير</h3>
+</div>
+<span class="font-label-mono-sm text-label-mono-sm text-outline">PRESETS</span>
+</div>
+<!-- Watermark Selector -->
+<div class="flex flex-col gap-space-xs">
+<label class="font-body-sm text-body-sm font-medium text-on-surface">العلامة المائية المدمجة (Security Watermark)</label>
+<div class="grid grid-cols-3 gap-space-xs bg-surface-container p-1 rounded-lg">
+<button class="wm-toggle px-space-xs py-1.5 rounded text-center font-label-mono-sm text-label-mono-sm bg-primary text-on-primary font-bold transition-all" id="wm-confidential">
+              سري (Confidential)
+            </button>
+<button class="wm-toggle px-space-xs py-1.5 rounded text-center font-label-mono-sm text-label-mono-sm text-on-surface-variant hover:text-on-surface transition-all" id="wm-draft">
+              مسودة (Draft)
+            </button>
+<button class="wm-toggle px-space-xs py-1.5 rounded text-center font-label-mono-sm text-label-mono-sm text-on-surface-variant hover:text-on-surface transition-all" id="wm-final">
+              معتمد (Final Lock)
+            </button>
+</div>
+</div>
+<!-- Attachments & Appendices Checkboxes -->
+<div class="flex flex-col gap-space-sm">
+<span class="font-body-sm text-body-sm font-medium text-on-surface">إرفاق الملاحق التقنية وسجلات الذكاء الاصطناعي</span>
+<label class="flex items-center justify-between p-space-sm rounded bg-surface-container cursor-pointer hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-space-xs">
+<input checked="" class="w-4 h-4 rounded bg-surface-container-lowest text-primary accent-primary" type="checkbox"/>
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm text-on-surface font-medium">سجل تدقيق المحرك (Auditor Trace Log)</span>
+<span class="font-label-mono-sm text-label-mono-sm text-outline">يتضمن أسباب رفض الدورة الأولى 71.1% وملاحظات دي بونو</span>
+</div>
+</div>
+<span class="font-label-mono-sm text-label-mono-sm text-primary">+4 صفحات</span>
+</label>
+<label class="flex items-center justify-between p-space-sm rounded bg-surface-container cursor-pointer hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-space-xs">
+<input checked="" class="w-4 h-4 rounded bg-surface-container-lowest text-primary accent-primary" type="checkbox"/>
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm text-on-surface font-medium">حزم إعدادات الكاميرا والإضاءة (Camera / Lighting Specs)</span>
+<span class="font-label-mono-sm text-label-mono-sm text-outline">عدسات 35mm، ملفات LUTs، ودرجات حرارة الألوان 5600K</span>
+</div>
+</div>
+<span class="font-label-mono-sm text-label-mono-sm text-secondary">+2 صفحات</span>
+</label>
+<label class="flex items-center justify-between p-space-sm rounded bg-surface-container cursor-pointer hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-space-xs">
+<input class="w-4 h-4 rounded bg-surface-container-lowest text-primary accent-primary" type="checkbox"/>
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm text-on-surface font-medium">الأوامر التوليدية الأصلية (Prompt Engineering Raw Stems)</span>
+<span class="font-label-mono-sm text-label-mono-sm text-outline">النسخ الإنجليزية والموجهات السالبة للتوليد العصبي</span>
+</div>
+</div>
+<span class="font-label-mono-sm text-label-mono-sm text-tertiary">+1 صفحة</span>
+</label>
+</div>
+<!-- Render Feedback / Notification Bar -->
+<div class="p-space-sm rounded-lg bg-surface-container-lowest border border-primary/20 flex items-center justify-between transition-all" id="status-toast">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[18px] animate-spin">refresh</span>
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface">نظام المعالجة جاهز للتجميع والإخراج الفوري</span>
+</div>
+<span class="font-label-mono-sm text-label-mono-sm text-primary font-bold">100% BUFFER</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Visual Breadcrumb & Compliance Footer Strip -->
+<div class="w-full bg-surface-container-low rounded-xl px-space-lg py-space-sm flex flex-col sm:flex-row items-center justify-between gap-space-sm mt-space-sm">
+<div class="flex items-center gap-space-md flex-wrap">
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant">الترميز اللوني:</span>
+<div class="flex items-center gap-1.5 font-label-mono-sm text-label-mono-sm text-primary">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span>الذهب الإخراجي (Director's Approved)</span>
+</div>
+<div class="flex items-center gap-1.5 font-label-mono-sm text-label-mono-sm text-secondary">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span>السيان العصبي (Neural Trace)</span>
+</div>
+<div class="flex items-center gap-1.5 font-label-mono-sm text-label-mono-sm text-error">
+<span class="w-2 h-2 rounded-full bg-error"></span>
+<span>التباين المرفوض (Cycle 01 Reject)</span>
+</div>
+</div>
+<div class="flex items-center gap-space-sm">
+<span class="font-label-mono-sm text-label-mono-sm text-outline">محرك التصدير: FX-PDF High-Res Render Engine v2.4</span>
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface font-semibold">جاهز للإرسال الفوري</span>
+</div>
+</div>
+</div>
+<!-- Inline Interactive Script for Micro-Interactions -->
+<script>
+  (function initDirectorDispatch() {
+    const watermarkEl = document.getElementById('preview-watermark');
+    const toastEl = document.getElementById('status-toast');
+    const wmButtons = document.querySelectorAll('.wm-toggle');
+    const exportBtn = document.getElementById('btn-export-master');
+    const copyLinkBtn = document.getElementById('btn-copy-link');
+
+    // Watermark Switcher
+    if (wmButtons.length && watermarkEl) {
+      wmButtons.forEach(btn => {
+        btn.addEventListener('click', function() {
+          wmButtons.forEach(b => {
+            b.classList.remove('bg-primary', 'text-on-primary', 'font-bold');
+            b.classList.add('text-on-surface-variant');
+          });
+          this.classList.add('bg-primary', 'text-on-primary', 'font-bold');
+          this.classList.remove('text-on-surface-variant');
+
+          if (this.id === 'wm-confidential') {
+            watermarkEl.innerHTML = '<span class="font-headline-lg text-display-hero font-bold tracking-widest text-primary uppercase">PRODUCTION LOCK • سري</span>';
+          } else if (this.id === 'wm-draft') {
+            watermarkEl.innerHTML = '<span class="font-headline-lg text-display-hero font-bold tracking-widest text-outline uppercase">PRE-PRODUCTION DRAFT • مسودة</span>';
+          } else if (this.id === 'wm-final') {
+            watermarkEl.innerHTML = '<span class="font-headline-lg text-display-hero font-bold tracking-widest text-secondary uppercase">FINAL APPROVED • معتمد نهائياً</span>';
+          }
+        });
+      });
+    }
+
+    // Export Master Button Simulation
+    if (exportBtn && toastEl) {
+      exportBtn.addEventListener('click', function() {
+        const originalText = exportBtn.innerHTML;
+        exportBtn.innerHTML = `
+          <span class="material-symbols-outlined text-[20px] animate-spin">sync</span>
+          <span>جارٍ إعداد الـ PDF السينمائي (300 DPI)...</span>
+        `;
+        toastEl.innerHTML = `
+          <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-secondary text-[18px] animate-spin">memory</span>
+            <span class="font-label-mono-sm text-label-mono-sm text-secondary font-bold">يتم الآن دمج تفريغ المشاهد وسجلات التدقيق في ملف واحد...</span>
+          </div>
+          <span class="font-label-mono-sm text-label-mono-sm text-primary">PROCESSING</span>
+        `;
+
+        setTimeout(() => {
+          exportBtn.innerHTML = `
+            <span class="material-symbols-outlined text-[20px]">check_circle</span>
+            <span>اكتمل التصدير بنجاح! تم التنزيل</span>
+          `;
+          toastEl.innerHTML = `
+            <div class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-primary text-[18px]">verified</span>
+              <span class="font-label-mono-sm text-label-mono-sm text-on-surface font-bold">تم تنزيل الوثيقة الرسمية CONSCIOUS_POUR_SLATE_2026.pdf</span>
+            </div>
+            <span class="font-label-mono-sm text-label-mono-sm text-primary font-bold">DONE (18.4 MB)</span>
+          `;
+
+          setTimeout(() => {
+            exportBtn.innerHTML = originalText;
+          }, 3500);
+        }, 1800);
+      });
+    }
+
+    // Copy Link Clipboard Simulation
+    if (copyLinkBtn) {
+      copyLinkBtn.addEventListener('click', function() {
+        const originalHtml = copyLinkBtn.innerHTML;
+        copyLinkBtn.innerHTML = `
+          <span class="material-symbols-outlined text-[16px] text-primary">check</span>
+          <span class="text-primary font-bold">تم النسخ</span>
+        `;
+        setTimeout(() => {
+          copyLinkBtn.innerHTML = originalHtml;
+        }, 2000);
+      });
+    }
+  })();
+</script></main></div>
+</body></html>

@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ar"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "secondary": "#7bd0ff", "primary-fixed": "#ffe088", "surface-container-high": "#272a30", "on-background": "#e1e2eb", "primary": "#f2ca50", "inverse-on-surface": "#2d3037", "on-error": "#690005", "on-surface-variant": "#d0c5af", "secondary-container": "#00a6e0", "tertiary-fixed-dim": "#bdc2ff", "tertiary-container": "#a5adff", "tertiary-fixed": "#e0e0ff", "on-secondary-fixed": "#001e2c", "on-surface": "#e1e2eb", "error-container": "#93000a", "on-tertiary-container": "#2d38a1", "background": "#101319", "primary-fixed-dim": "#e9c349", "primary-container": "#d4af37", "error": "#ffb4ab", "on-tertiary": "#131e8c", "surface-container-low": "#191c22", "surface-bright": "#363940", "tertiary": "#c7cbff", "on-primary-fixed-variant": "#574500", "on-tertiary-fixed-variant": "#2f3aa3", "surface-container": "#1d2026", "inverse-primary": "#735c00", "surface-tint": "#e9c349", "inverse-surface": "#e1e2eb", "on-primary-container": "#554300", "secondary-fixed": "#c4e7ff", "outline": "#99907c", "outline-variant": "#4d4635", "on-error-container": "#ffdad6", "surface-variant": "#32353b", "on-primary-fixed": "#241a00", "on-secondary": "#00354a", "surface": "#101319", "surface-dim": "#101319", "surface-container-lowest": "#0b0e14", "surface-container-highest": "#32353b", "on-secondary-fixed-variant": "#004c69", "on-secondary-container": "#00374d", "on-primary": "#3c2f00", "secondary-fixed-dim": "#7bd0ff", "on-tertiary-fixed": "#000767" }, "borderRadius": { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, "spacing": { "space-sm": "0.5rem", "margin-desktop": "2rem", "gutter-desktop": "1.5rem", "space-xs": "0.25rem", "space-xl": "2.5rem", "space-md": "1rem", "space-lg": "1.5rem", "gutter": "1rem", "margin": "1rem" }, "fontFamily": { "label-mono-md": [ "JetBrains Mono" ], "headline-md": [ "IBM Plex Sans Arabic", "IBM Plex Sans" ], "display-hero-mobile": [ "IBM Plex Sans Arabic", "IBM Plex Sans" ], "body-sm": [ "IBM Plex Sans Arabic", "IBM Plex Sans" ], "headline-lg": [ "IBM Plex Sans Arabic", "IBM Plex Sans" ], "body-md": [ "IBM Plex Sans Arabic", "IBM Plex Sans" ], "headline-sm": [ "IBM Plex Sans Arabic", "IBM Plex Sans" ], "label-mono-sm": [ "JetBrains Mono" ], "body-lg": [ "IBM Plex Sans Arabic", "IBM Plex Sans" ], "headline-lg-mobile": [ "IBM Plex Sans Arabic", "IBM Plex Sans" ], "display-hero": [ "IBM Plex Sans Arabic", "IBM Plex Sans" ] }, "fontSize": { "label-mono-md": [ "12px", { "lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "500" } ], "headline-md": [ "22px", { "lineHeight": "30px", "letterSpacing": "-0.01em", "fontWeight": "500" } ], "display-hero-mobile": [ "32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" } ], "body-sm": [ "12px", { "lineHeight": "18px", "letterSpacing": "0.01em", "fontWeight": "400" } ], "headline-lg": [ "32px", { "lineHeight": "42px", "letterSpacing": "-0.015em", "fontWeight": "600" } ], "body-md": [ "14px", { "lineHeight": "22px", "letterSpacing": "0", "fontWeight": "400" } ], "headline-sm": [ "18px", { "lineHeight": "26px", "letterSpacing": "0", "fontWeight": "500" } ], "label-mono-sm": [ "10px", { "lineHeight": "14px", "letterSpacing": "0.06em", "fontWeight": "500" } ], "body-lg": [ "16px", { "lineHeight": "26px", "letterSpacing": "0", "fontWeight": "400" } ], "headline-lg-mobile": [ "24px", { "lineHeight": "32px", "letterSpacing": "0", "fontWeight": "600" } ], "display-hero": [ "48px", { "lineHeight": "60px", "letterSpacing": "-0.02em", "fontWeight": "600" } ] } } } };</script></head><body class="bg-surface-container-lowest font-body-md text-body-md text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-container min-h-screen"><aside class="fixed right-0 top-0 h-full w-64 bg-surface-container-lowest z-50 flex flex-col justify-between py-space-md shadow-[0_0_24px_rgba(0,0,0,0.85)]"><div class="flex flex-col gap-space-lg px-space-md"><div class="flex items-center gap-space-sm px-space-xs"><div class="w-9 h-9 rounded-lg bg-surface-container-high flex items-center justify-center font-headline-md text-headline-sm text-primary shadow-[0_0_12px_rgba(212,175,55,0.2)]">FX</div><div class="flex flex-col"><span class="font-headline-sm text-body-md font-bold tracking-tight text-on-surface">جناح الإخراج</span><span class="font-label-mono-sm text-label-mono-sm text-primary uppercase">DIRECTOR SUITE</span></div></div><div class="px-space-xs"><div class="p-space-sm rounded-lg bg-surface-container-low flex flex-col gap-space-xs"><div class="flex items-center justify-between"><span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant">المشروع النشط</span><span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span></div><span class="font-body-sm text-body-sm text-on-surface font-medium truncate">سكب الوعي 2026</span><span class="font-label-mono-sm text-label-mono-sm text-outline">SMPTE 24.00 FPS</span></div></div><nav class="flex flex-col gap-space-xs" data-active-classes="bg-surface-container-high text-primary font-medium rounded-lg shadow-[inset_0_0_8px_rgba(212,175,55,0.15)]"><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="overview" href="#"><span class="font-body-md text-body-md">غرفة العمليات المركزية</span><span class="material-symbols-outlined text-body-lg">dashboard</span></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="genesis-brief" href="#"><span class="font-body-md text-body-md">الموجز الإبداعي</span><span class="material-symbols-outlined text-body-lg">history_edu</span></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="strategic-vision" href="#"><span class="font-body-md text-body-md">الرؤية الاستراتيجية</span><span class="material-symbols-outlined text-body-lg">psychology</span></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="concept-lab" href="#"><span class="font-body-md text-body-md">مختبر الأفكار واللوحات</span><span class="material-symbols-outlined text-body-lg">lightbulb</span></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="cinematic-slate" href="#"><span class="font-body-md text-body-md">السيناريو السينمائي</span><span class="material-symbols-outlined text-body-lg">movie_edit</span></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="render-queue" href="#"><span class="font-body-md text-body-md">طابور المعالجة العصبية</span><span class="material-symbols-outlined text-body-lg">memory</span></a></nav></div><div class="px-space-md flex flex-col gap-space-sm"><div class="p-space-sm rounded-lg bg-surface-container-low flex items-center justify-between"><div class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-secondary text-body-lg">neurology</span><span class="font-label-mono-sm text-label-mono-sm text-on-surface">محرك FX Neural</span></div><span class="font-label-mono-sm text-label-mono-sm text-secondary bg-surface-container-high px-space-xs py-0.5 rounded">99.8%</span></div><div class="flex items-center justify-between px-space-xs pt-space-xs"><div class="flex items-center gap-space-sm"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><div class="flex flex-col"><span class="font-body-sm text-body-sm text-on-surface font-semibold">طارق المخرج</span><span class="font-label-mono-sm text-label-mono-sm text-outline">CREATIVE LEAD</span></div></div><button class="text-on-surface-variant hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-body-lg">tune</span></button></div></div></aside><div class="pr-64"><header class="fixed top-0 right-64 left-0 h-36 bg-surface-container-lowest/90 backdrop-blur-xl z-40 shadow-[0_4px_20px_rgba(0,0,0,0.6)] flex flex-col justify-between"><div class="h-16 px-space-lg flex items-center justify-between"><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs bg-surface-container-high px-space-sm py-1 rounded-lg"><span class="font-label-mono-sm text-label-mono-sm text-primary">إصدار 2.4</span><span class="font-body-sm text-body-sm text-on-surface-variant">|</span><span class="font-body-sm text-body-sm text-on-surface font-medium">مشروع: سكب الوعي — حملة ترطيب العقل 2026</span></div><div class="flex items-center gap-space-xs px-space-sm py-1 rounded-lg bg-surface-container-low"><span class="w-1.5 h-1.5 rounded-full bg-primary"></span><span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant">جلسة نشطة • مسودة محفوظة</span></div><div class="flex items-center gap-space-xs px-space-sm py-1 rounded-lg bg-surface-container-high shadow-[0_0_12px_rgba(212,175,55,0.25)]"><span class="relative flex h-2 w-2"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span></span><span class="font-body-sm text-body-sm text-primary font-bold">الذكاء الاصطناعي: إعادة تفكير راديكالي قيد المعالجة (Radical Lateral Mode: Active)</span><span class="font-label-mono-sm text-label-mono-sm bg-primary-container text-on-primary-container px-1 rounded font-bold">AI AGENT</span></div></div><div class="flex items-center gap-space-sm"><button class="flex items-center gap-space-xs px-space-md py-1.5 rounded-lg bg-surface-container text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-body-md">search</span><span class="font-body-sm text-body-sm">لوحة الأوامر</span><kbd class="font-label-mono-sm text-label-mono-sm bg-surface-container-lowest px-1.5 py-0.5 rounded text-outline">⌘K</kbd></button><div class="flex items-center gap-space-xs"><button class="px-space-md py-1.5 rounded-lg bg-surface-container text-on-surface font-body-sm text-body-sm hover:bg-surface-container-high transition-colors flex items-center gap-space-xs"><span class="material-symbols-outlined text-body-md">ios_share</span><span class="">مشاركة</span></button><button class="px-space-md py-1.5 rounded-lg bg-surface-container text-on-surface font-body-sm text-body-sm hover:bg-surface-container-high transition-colors flex items-center gap-space-xs"><span class="material-symbols-outlined text-body-md">download</span><span class="">تصدير Final Draft</span></button><button class="px-space-md py-1.5 rounded-lg bg-primary-container text-on-primary-container font-body-sm text-body-sm font-semibold hover:bg-primary transition-colors flex items-center gap-space-xs shadow-[0_0_12px_rgba(212,175,55,0.25)]"><span class="material-symbols-outlined text-body-md">save</span><span class="">حفظ نهائي</span></button></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div><div class="h-20 px-space-lg flex items-center justify-between bg-surface-container-low/70"><div class="flex items-center gap-space-sm flex-1"><div class="flex items-center gap-space-xs px-space-md py-2 rounded-lg bg-surface-container-lowest"><span class="material-symbols-outlined text-primary text-body-md">check_circle</span><div class="flex flex-col"><span class="font-label-mono-sm text-label-mono-sm text-primary">المرحلة ٠١</span><span class="font-body-sm text-body-sm text-on-surface font-medium">الموجز (The Genesis)</span></div></div><span class="text-outline font-label-mono-sm text-label-mono-sm">←</span><div class="flex items-center gap-space-xs px-space-md py-2 rounded-lg bg-surface-container-lowest"><span class="material-symbols-outlined text-primary text-body-md">check_circle</span><div class="flex flex-col"><span class="font-label-mono-sm text-label-mono-sm text-primary">المرحلة ٠٢</span><span class="font-body-sm text-body-sm text-on-surface font-medium">الرؤية (Strategic Mind)</span></div></div><span class="text-outline font-label-mono-sm text-label-mono-sm">←</span><div class="flex items-center gap-space-xs px-space-md py-2 rounded-lg bg-surface-container-lowest"><span class="material-symbols-outlined text-primary text-body-md">check_circle</span><div class="flex flex-col"><span class="font-label-mono-sm text-label-mono-sm text-primary">المرحلة ٠٣</span><span class="font-body-sm text-body-sm text-on-surface font-medium">الفكرة (Concept Lab)</span></div></div><span class="text-outline font-label-mono-sm text-label-mono-sm">←</span><div class="flex items-center gap-space-xs px-space-md py-2 rounded-lg bg-surface-container-high shadow-[0_0_12px_rgba(212,175,55,0.15)]"><span class="material-symbols-outlined text-primary text-body-md animate-pulse">radio_button_checked</span><div class="flex flex-col"><span class="font-label-mono-sm text-label-mono-sm text-primary font-bold">المرحلة ٠٤ • قيد التحرير</span><span class="font-body-sm text-body-sm text-on-surface font-bold">السيناريو (Cinematic Slate)</span></div></div></div><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs px-space-sm py-1.5 rounded-lg bg-surface-container-lowest shadow-inner"><span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant">الجرأة الإبداعية:</span><button class="font-label-mono-sm text-label-mono-sm px-2 py-0.5 rounded text-on-surface-variant hover:text-on-surface transition-colors">منضبط</button><button class="font-label-mono-sm text-label-mono-sm px-2 py-0.5 rounded text-on-surface-variant hover:text-on-surface transition-colors">متوازن</button><button class="font-label-mono-sm text-label-mono-sm px-2 py-0.5 rounded bg-primary text-on-primary font-bold shadow-[0_0_10px_rgba(212,175,55,0.4)] animate-pulse">راديكالي ⚡ [نشط]</button></div><div class="flex items-center gap-space-xs px-space-sm py-1.5 rounded-lg bg-surface-container-lowest"><span class="material-symbols-outlined text-outline text-body-md">timeline</span><span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant">المشهد ٠٤ / ١٢</span><span class="font-label-mono-sm text-label-mono-sm text-primary">00:04:12:00</span></div></div></div><div class="w-full bg-surface-container-high border-y border-outline-variant/30 px-space-lg py-1.5 flex flex-wrap items-center justify-between gap-space-sm shadow-md"><div class="flex items-center gap-space-md"><div class="flex items-center gap-1.5 text-primary"><span class="material-symbols-outlined text-body-md animate-spin">sync</span><span class="font-label-mono-sm text-label-mono-sm font-bold">محرك الاستكشاف الجانبي (DE BONO LATERAL AGENT): قيد المعالجة التوليدية الراديكالية</span></div><div class="hidden md:flex items-center gap-space-xs text-outline font-label-mono-sm text-label-mono-sm"><span class="">الدورة: <strong class="text-on-surface">2 / 3</strong></span><span class="">•</span><span class="">الكمون: <strong class="text-secondary">240ms (Vertex AI)</strong></span><span class="">•</span><span class="">درجة التدقيق الاستراتيجي: <strong class="text-primary">88% ➔ 96%</strong></span></div></div><div class="flex items-center gap-space-xs"><span class="px-2 py-0.5 rounded bg-surface-container text-primary font-label-mono-sm text-label-mono-sm border border-primary/20 animate-pulse">الوضع: كسر القيود (Constraint Breaker)</span><button class="px-2 py-0.5 rounded bg-surface-container hover:bg-surface-bright text-on-surface font-label-mono-sm text-label-mono-sm flex items-center gap-1 transition-colors"><span class="material-symbols-outlined text-body-sm text-secondary">terminal</span><span class="">سجل التفكير المباشر</span></button></div></div></header><main class="relative w-full pt-36 bg-surface-container-lowest px-space-lg py-space-lg"><div class="flex flex-col w-full gap-space-lg select-none">
+<!-- Cluster Overview & Global Synthesis Telemetry Strip -->
+<section class="flex flex-col gap-space-sm">
+<div class="flex flex-wrap items-center justify-between gap-space-md">
+<div class="flex flex-wrap items-center gap-space-sm">
+<div class="flex items-center gap-space-xs bg-surface-container px-space-md py-1.5 rounded-lg shadow-sm">
+<span class="w-2.5 h-2.5 rounded-full bg-primary animate-ping"></span>
+<span class="font-label-mono-md text-label-mono-md text-primary font-bold">مصفوفة H100 متزامنة (8x SXM5)</span>
+<span class="font-label-mono-sm text-label-mono-sm text-outline">| CLUSTER ID: FX-NEURAL-DELTA-09</span>
+</div>
+<div class="flex items-center gap-space-xs bg-surface-container-high px-space-sm py-1.5 rounded-lg">
+<span class="material-symbols-outlined text-secondary text-body-md" style="font-variation-settings: 'FILL' 1;">speed</span>
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant">الكمون البيني:</span>
+<span class="font-label-mono-sm text-label-mono-sm text-secondary font-semibold">41.8ms</span>
+</div>
+<div class="flex items-center gap-space-xs bg-surface-container-high px-space-sm py-1.5 rounded-lg">
+<span class="material-symbols-outlined text-primary text-body-md">lock_clock</span>
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant">تزامن الماستر:</span>
+<span class="font-label-mono-sm text-label-mono-sm text-primary font-bold">SMPTE 24.000 FPS TC LOCK</span>
+</div>
+</div>
+<div class="flex items-center gap-space-xs">
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant">حالة الدفعة الحية:</span>
+<span class="px-space-sm py-1 rounded bg-primary-container text-on-primary-container font-label-mono-sm text-label-mono-sm font-bold shadow-[0_0_12px_rgba(212,175,55,0.3)]">
+          BATCH 01-03 ACTIVE [68.4%]
+        </span>
+</div>
+</div>
+<!-- Cluster Hardware Metrics Bento Bar -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-space-sm">
+<!-- Card 1: VRAM Load -->
+<div class="bg-surface-container p-space-md rounded-xl flex flex-col justify-between shadow-sm relative overflow-hidden group">
+<div class="absolute -top-12 -left-12 w-24 h-24 bg-primary/10 rounded-full blur-xl pointer-events-none"></div>
+<div class="flex items-center justify-between">
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant">حِمل ذاكرة الفيديو (VRAM POOL)</span>
+<span class="material-symbols-outlined text-primary text-body-lg">memory</span>
+</div>
+<div class="flex items-baseline gap-space-xs my-space-xs">
+<span class="font-label-mono-md text-headline-md text-on-surface font-bold">501.8</span>
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant">/ 640 GB</span>
+<span class="mr-auto font-label-mono-sm text-label-mono-sm text-primary font-semibold">78.4%</span>
+</div>
+<div class="w-full bg-surface-container-lowest h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full transition-all duration-700" style="width: 78.4%"></div>
+</div>
+</div>
+<!-- Card 2: GPU Core Temp & Thermals -->
+<div class="bg-surface-container p-space-md rounded-xl flex flex-col justify-between shadow-sm relative overflow-hidden">
+<div class="flex items-center justify-between">
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant">الحرارة وتدفق السوائل (THERMAL JUNC)</span>
+<span class="material-symbols-outlined text-secondary text-body-lg">device_thermostat</span>
+</div>
+<div class="flex items-baseline gap-space-xs my-space-xs">
+<span class="font-label-mono-md text-headline-md text-on-surface font-bold">54.2°C</span>
+<span class="font-label-mono-sm text-label-mono-sm text-secondary">DELTA +1.1°C</span>
+<span class="mr-auto font-label-mono-sm text-label-mono-sm text-secondary font-semibold">تبريد سائل نشط</span>
+</div>
+<div class="w-full bg-surface-container-lowest h-1.5 rounded-full overflow-hidden">
+<div class="bg-secondary h-full rounded-full transition-all duration-700" style="width: 45.2%"></div>
+</div>
+</div>
+<!-- Card 3: Model Ingestion Throughput -->
+<div class="bg-surface-container p-space-md rounded-xl flex flex-col justify-between shadow-sm relative overflow-hidden">
+<div class="flex items-center justify-between">
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant">سرعة التوليد (INFERENCE VELOCITY)</span>
+<span class="material-symbols-outlined text-tertiary text-body-lg">bolt</span>
+</div>
+<div class="flex items-baseline gap-space-xs my-space-xs">
+<span class="font-label-mono-md text-headline-md text-on-surface font-bold">118.6</span>
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant">FPS (مستهدف 120)</span>
+<span class="mr-auto font-label-mono-sm text-label-mono-sm text-tertiary font-semibold">98.8% كفاءة</span>
+</div>
+<div class="w-full bg-surface-container-lowest h-1.5 rounded-full overflow-hidden">
+<div class="bg-tertiary h-full rounded-full transition-all duration-700" style="width: 98.8%"></div>
+</div>
+</div>
+<!-- Card 4: Node Health & Consensus -->
+<div class="bg-surface-container p-space-md rounded-xl flex flex-col justify-between shadow-sm relative overflow-hidden">
+<div class="flex items-center justify-between">
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant">عُقد المعالجة المتزامنة (NODE MESH)</span>
+<span class="material-symbols-outlined text-primary text-body-lg">hub</span>
+</div>
+<div class="flex items-baseline gap-space-xs my-space-xs">
+<span class="font-label-mono-md text-headline-md text-on-surface font-bold">16 / 16</span>
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant">عقدة متصلة</span>
+<span class="mr-auto font-label-mono-sm text-label-mono-sm text-primary font-semibold">صفر سقوط</span>
+</div>
+<div class="w-full bg-surface-container-lowest h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary-container h-full rounded-full transition-all duration-700" style="width: 100%"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Interactive Dual Split-Screen Master Viewport & Scope Analysis -->
+<section class="grid grid-cols-1 xl:grid-cols-12 gap-space-md">
+<!-- Center Live A/B Split Stage (8 Cols) -->
+<div class="xl:col-span-8 flex flex-col gap-space-sm bg-surface-container rounded-xl p-space-md shadow-md">
+<!-- Monitor Header Bar -->
+<div class="flex flex-wrap items-center justify-between gap-space-sm pb-space-xs">
+<div class="flex items-center gap-space-sm">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-bold">شاشة الرصد والمعاينة التفاعلية (A/B Wipe Plate)</span>
+<span class="font-label-mono-sm text-label-mono-sm bg-surface-container-high text-primary px-2 py-0.5 rounded font-medium">مشهد ٠٢: تماس قطرة الماء والشفاه</span>
+</div>
+<div class="flex items-center gap-space-xs">
+<button class="px-space-sm py-1 rounded bg-surface-container-high text-primary font-label-mono-sm text-label-mono-sm font-semibold transition-all shadow-sm" id="view-mode-split">مقارنة شطرية (Wipe)</button>
+<button class="px-space-sm py-1 rounded bg-surface-container text-on-surface-variant hover:text-on-surface font-label-mono-sm text-label-mono-sm transition-colors" id="view-mode-diff">مصفوفة الفرق (Diff)</button>
+<button class="px-space-sm py-1 rounded bg-surface-container text-on-surface-variant hover:text-on-surface font-label-mono-sm text-label-mono-sm transition-colors" id="view-mode-matte">قناع العمق (Depth Matte)</button>
+</div>
+</div>
+<!-- Split Canvas Viewport -->
+<div class="relative w-full aspect-video bg-surface-container-lowest rounded-lg overflow-hidden group shadow-inner">
+<!-- Background Layer: Raw Neural Generation (ComfyUI / Sora Plate) -->
+<div class="absolute inset-0 w-full h-full bg-cover bg-center" data-alt="Cinematic ultra high speed macro photography of a hyper-pure crystalline water droplet falling onto glowing lips in dark moody studio lighting, raw generative diffusion plate with soft subtle noise and atmospheric backlighting in deep carbon and amber tones." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBGIxmoQ1tA3QJeJADc9VliQE83Bzgc0rEW3Qp4vXTJGfRnSTzYrTv3nQa6t9siOohOTSJl_YVUoxxgaboAbpMJP5jx0xBAwfz7Li5f6eJ9r58lVGRhfx29zGazOVEqMxEpGKwRQYEUpnEy_CVEk6HY441eIu8WGooORqKB0aLNgooXYbGt-qJoQUQDTjIpjFn9fxVHxrh22brmWf1wut0Jv1lU6XBA3nUgFCQApPWNL8gTQKw5PlIh')">
+<div class="absolute top-space-sm right-space-sm bg-surface-container-lowest/80 backdrop-blur-md px-space-sm py-1 rounded font-label-mono-sm text-label-mono-sm text-secondary">
+            لوحة التوليد الخام (RAW NEURAL SEED #894201)
+          </div>
+</div>
+<!-- Foreground Layer: Composited ACEScg Color Graded Plate with Film Grain (Clipped by A/B wipe) -->
+<div class="absolute inset-y-0 right-0 w-1/2 overflow-hidden bg-cover bg-center shadow-[-2px_0_12px_rgba(0,0,0,0.8)]" data-alt="Master color graded cinematic shot of pristine water droplet refracting luxury liquid gold light onto lips, 35mm Cooke anamorphic lens grain, ACEScg color science, micro caustics refractions and hyper realistic velvet shadows." id="wipe-layer" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA5U_yAUwvZbsHGq-ljzKbRD5vlcUZWCxBs2AAUeKR34LPY7m8x4DZBha6Vfc4fGfDHzbN4dfOoca959tyvgZdHLeazYtROjazWrERxwx23LdIGgCGe1r5241JKjV6dh2NNkkO06fdzbu5c8NkrF6Dm86p8pIxO7u1Re-h7E0__P9FhSgexFFxvq-72MMxsA4wlf64KRiuTV1tv1CY6SI-YIMKxbJ_YHmwe_bD-nfDPGvCkc8aVZ9Ca')">
+<div class="absolute top-space-sm left-space-sm bg-surface-container-lowest/90 backdrop-blur-md px-space-sm py-1 rounded font-label-mono-sm text-label-mono-sm text-primary font-bold shadow-sm">
+            الماستر النهائي المركب (ACEScg LUT + 35mm COOKE GRAIN)
+          </div>
+</div>
+<!-- Interactive Vertical Split Wipe Handle -->
+<div class="absolute top-0 bottom-0 left-1/2 w-0.5 bg-primary cursor-ew-resize flex items-center justify-center -translate-x-1/2 group-hover:bg-primary-fixed shadow-[0_0_12px_rgba(242,202,80,0.8)]" id="wipe-divider">
+<div class="w-6 h-6 rounded-full bg-primary text-on-primary flex items-center justify-center shadow-lg font-label-mono-sm text-label-mono-sm">
+<span class="material-symbols-outlined text-[14px]">drag_indicator</span>
+</div>
+</div>
+<!-- Overlaid OSD Telemetry -->
+<div class="absolute bottom-space-sm right-space-sm bg-surface-container-lowest/80 backdrop-blur-md px-space-sm py-1 rounded flex items-center gap-space-sm font-label-mono-sm text-label-mono-sm text-on-surface">
+<span>REC 709 ➔ ACEScc</span>
+<span>|</span>
+<span class="text-primary">EVAL 10-BIT 4:4:4</span>
+<span>|</span>
+<span>DCI-P3 99.4%</span>
+</div>
+<!-- Center Target Reticle -->
+<div class="absolute inset-0 pointer-events-none flex items-center justify-center opacity-25">
+<div class="w-16 h-16 rounded-full border border-dashed border-primary"></div>
+</div>
+</div>
+<!-- Scrubber & Playhead Controller -->
+<div class="flex flex-col gap-space-xs bg-surface-container-lowest p-space-sm rounded-lg">
+<div class="flex items-center justify-between text-on-surface-variant font-label-mono-sm text-label-mono-sm">
+<div class="flex items-center gap-space-xs">
+<button class="w-6 h-6 rounded bg-surface-container flex items-center justify-center text-on-surface hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-body-sm">skip_previous</span>
+</button>
+<button class="w-7 h-7 rounded bg-primary text-on-primary flex items-center justify-center font-bold hover:bg-primary-fixed transition-colors" id="play-pause-btn">
+<span class="material-symbols-outlined text-body-md" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</button>
+<button class="w-6 h-6 rounded bg-surface-container flex items-center justify-center text-on-surface hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-body-sm">skip_next</span>
+</button>
+<span class="mr-space-sm font-bold text-primary">00:04:12:18</span>
+<span class="text-outline">/ 00:30:00:00</span>
+</div>
+<div class="flex items-center gap-space-md">
+<span>إطار: <strong class="text-on-surface">240 / 480</strong></span>
+<span>نسبة الإنجاز: <strong class="text-primary font-bold">50.0%</strong></span>
+<span class="text-secondary font-semibold">بث حي غير مضغوط</span>
+</div>
+</div>
+<!-- Custom Scrubber Slider Track -->
+<div class="relative w-full h-3 bg-surface-container rounded cursor-pointer group flex items-center">
+<div class="absolute left-0 top-0 bottom-0 bg-primary/30 rounded w-1/2"></div>
+<div class="absolute left-0 top-0 bottom-0 bg-primary rounded w-[45%]"></div>
+<div class="absolute left-[45%] w-3 h-3 rounded-full bg-primary ring-2 ring-primary-container -translate-x-1/2 shadow-[0_0_8px_rgba(212,175,55,0.8)]"></div>
+</div>
+</div>
+</div>
+<!-- Right Optical Scopes & Waveform Parade (4 Cols) -->
+<div class="xl:col-span-4 flex flex-col gap-space-sm bg-surface-container rounded-xl p-space-md shadow-md justify-between">
+<div class="flex items-center justify-between">
+<span class="font-headline-sm text-body-lg text-on-surface font-bold">محلل الطيف والإشارات (Scopes)</span>
+<span class="font-label-mono-sm text-label-mono-sm text-secondary bg-surface-container-high px-space-xs py-0.5 rounded">RGB PARADE + HISTOGRAM</span>
+</div>
+<!-- Live RGB Parade Synthetic Visualizer -->
+<div class="flex flex-col gap-space-xs bg-surface-container-lowest p-space-sm rounded-lg">
+<div class="flex items-center justify-between text-outline font-label-mono-sm text-label-mono-sm">
+<span>R (أحمر)</span>
+<span>G (أخضر)</span>
+<span>B (أزرق)</span>
+</div>
+<!-- Triple Waveform Graphs Inline SVG -->
+<div class="w-full h-32 flex items-end justify-between gap-1 overflow-hidden">
+<svg class="w-1/3 h-full text-error/80" preserveaspectratio="none" viewbox="0 0 100 100">
+<path d="M0,80 Q10,20 20,60 T40,40 T60,85 T80,30 T100,50 L100,100 L0,100 Z" fill="currentColor" opacity="0.3"></path>
+<path d="M0,80 Q10,20 20,60 T40,40 T60,85 T80,30 T100,50" fill="none" stroke="currentColor" stroke-width="1.5"></path>
+</svg>
+<svg class="w-1/3 h-full text-primary/80" preserveaspectratio="none" viewbox="0 0 100 100">
+<path d="M0,65 Q15,40 30,50 T50,25 T70,70 T90,35 T100,60 L100,100 L0,100 Z" fill="currentColor" opacity="0.3"></path>
+<path d="M0,65 Q15,40 30,50 T50,25 T70,70 T90,35 T100,60" fill="none" stroke="currentColor" stroke-width="1.5"></path>
+</svg>
+<svg class="w-1/3 h-full text-secondary/80" preserveaspectratio="none" viewbox="0 0 100 100">
+<path d="M0,90 Q12,15 25,45 T55,30 T75,80 T88,20 T100,75 L100,100 L0,100 Z" fill="currentColor" opacity="0.3"></path>
+<path d="M0,90 Q12,15 25,45 T55,30 T75,80 T88,20 T100,75" fill="none" stroke="currentColor" stroke-width="1.5"></path>
+</svg>
+</div>
+<div class="flex items-center justify-between font-label-mono-sm text-label-mono-sm text-on-surface-variant pt-1">
+<span>IRE: 0 IRE (BLACKS)</span>
+<span class="text-primary font-bold">100 IRE (PEAK LUX)</span>
+</div>
+</div>
+<!-- Shader & Latent Parameter Readout -->
+<div class="flex flex-col gap-space-xs bg-surface-container-low p-space-sm rounded-lg">
+<span class="font-label-mono-sm text-label-mono-sm text-primary font-bold">محددات المعالجة البصرية النشطة</span>
+<div class="grid grid-cols-2 gap-space-xs font-label-mono-sm text-label-mono-sm">
+<div class="bg-surface-container px-space-xs py-1 rounded flex justify-between">
+<span class="text-on-surface-variant">العدسة:</span>
+<span class="text-on-surface font-semibold">Cooke 35mm T2.0</span>
+</div>
+<div class="bg-surface-container px-space-xs py-1 rounded flex justify-between">
+<span class="text-on-surface-variant">التحكم بالعمق:</span>
+<span class="text-secondary font-semibold">MiDaS v3.1</span>
+</div>
+<div class="bg-surface-container px-space-xs py-1 rounded flex justify-between">
+<span class="text-on-surface-variant">وزن LoRA:</span>
+<span class="text-primary font-semibold">0.850 [LIP_VOL]</span>
+</div>
+<div class="bg-surface-container px-space-xs py-1 rounded flex justify-between">
+<span class="text-on-surface-variant">كثافة الحبيبات:</span>
+<span class="text-on-surface font-semibold">0.14 Kodak 5219</span>
+</div>
+</div>
+</div>
+<!-- Quick Action Utilities -->
+<div class="flex items-center gap-space-xs">
+<button class="flex-1 py-2 px-space-sm rounded bg-surface-container-high text-on-surface font-body-sm text-body-sm hover:bg-surface-bright transition-colors flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-body-sm text-secondary">tune</span>
+<span>ضبط LUT حي</span>
+</button>
+<button class="flex-1 py-2 px-space-sm rounded bg-surface-container-high text-on-surface font-body-sm text-body-sm hover:bg-surface-bright transition-colors flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-body-sm text-primary">grain</span>
+<span>طبقة الحبيبات</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Central Live Multi-Node Render Farm Grid (The Engine Pipeline) -->
+<section class="flex flex-col gap-space-md">
+<div class="flex flex-wrap items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary text-headline-sm">account_tree</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-bold">مصفوفة خطوط الإنتاج العصبي المتوازية (Active Node Pipeline)</h2>
+</div>
+<div class="flex items-center gap-space-xs">
+<button class="px-space-sm py-1 rounded bg-surface-container text-on-surface-variant hover:text-on-surface font-label-mono-sm text-label-mono-sm transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-body-sm text-primary">restart_alt</span>
+<span>إعادة تصفير الكاش العام (Clear VRAM)</span>
+</button>
+<button class="px-space-sm py-1 rounded bg-primary-container text-on-primary-container font-label-mono-sm text-label-mono-sm font-bold shadow-sm hover:bg-primary transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-body-sm">rocket_launch</span>
+<span>رفع الأولوية للماستر القصوى</span>
+</button>
+</div>
+</div>
+<!-- 4 Specialized Nodes Mosaic -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-space-md">
+<!-- Node 01: ComfyUI FLIP Fluids -->
+<div class="bg-surface-container rounded-xl p-space-md flex flex-col justify-between shadow-md relative overflow-hidden group hover:shadow-xl transition-all">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-mono-sm text-label-mono-sm text-secondary font-bold">العقدة ٠١ • FLIP FLUIDS</span>
+<span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+</div>
+<span class="font-headline-sm text-body-lg text-on-surface font-semibold">محاكاة قطرة الماء المايكرو</span>
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant">ComfyUI v0.3.12 + Eulerian Navier-Stokes</span>
+</div>
+<div class="my-space-md flex flex-col gap-space-xs">
+<div class="flex justify-between font-label-mono-sm text-label-mono-sm">
+<span class="text-on-surface-variant">مرحلة المعالجة:</span>
+<span class="text-primary font-bold">حساب الكاوستيك 4K (Caustics Pass)</span>
+</div>
+<div class="flex justify-between font-label-mono-sm text-label-mono-sm">
+<span class="text-on-surface-variant">معدل الإطارات:</span>
+<span class="text-on-surface">120 FPS High Surface Tension</span>
+</div>
+<div class="flex justify-between font-label-mono-sm text-label-mono-sm">
+<span class="text-on-surface-variant">الذاكرة المشغولة:</span>
+<span class="text-secondary font-semibold">68.2 GB / 80 GB</span>
+</div>
+<!-- Progress -->
+<div class="w-full bg-surface-container-lowest h-2 rounded-full overflow-hidden mt-1">
+<div class="bg-secondary h-full rounded-full transition-all duration-500" style="width: 84%"></div>
+</div>
+<div class="flex justify-between font-label-mono-sm text-label-mono-sm text-outline">
+<span>إطار 1008 / 1200</span>
+<span class="text-secondary">84.0%</span>
+</div>
+</div>
+<!-- Node Control Buttons -->
+<div class="flex items-center gap-space-xs pt-space-xs">
+<button class="flex-1 py-1 px-space-xs rounded bg-surface-container-high text-on-surface font-label-mono-sm text-label-mono-sm hover:bg-surface-bright transition-colors flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-[13px] text-primary">casino</span>
+<span>تغيير البذرة (Seed)</span>
+</button>
+<button class="w-7 h-7 rounded bg-surface-container-high text-on-surface-variant hover:text-error transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined text-body-sm">pause</span>
+</button>
+</div>
+</div>
+<!-- Node 02: Sora 2 Cinematic + ControlNet -->
+<div class="bg-surface-container rounded-xl p-space-md flex flex-col justify-between shadow-md relative overflow-hidden group hover:shadow-xl transition-all ring-1 ring-primary/40">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-mono-sm text-label-mono-sm text-primary font-bold">العقدة ٠٢ • SORA 2 + CONTROLNET</span>
+<span class="w-2 h-2 rounded-full bg-primary animate-ping"></span>
+</div>
+<span class="font-headline-sm text-body-lg text-on-surface font-semibold">تلامس الشفاه الحسي (Sensory)</span>
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant">Sora 2 Cinematic Engine + Depth LoRA</span>
+</div>
+<div class="my-space-md flex flex-col gap-space-xs">
+<div class="flex justify-between font-label-mono-sm text-label-mono-sm">
+<span class="text-on-surface-variant">مرحلة المعالجة:</span>
+<span class="text-primary font-bold">توليد الإطار الحركي (Rendering)</span>
+</div>
+<div class="flex justify-between font-label-mono-sm text-label-mono-sm">
+<span class="text-on-surface-variant">وزن التوجيه (LoRA):</span>
+<span class="text-on-surface">0.85 (Cooke 35mm Precision)</span>
+</div>
+<div class="flex justify-between font-label-mono-sm text-label-mono-sm">
+<span class="text-on-surface-variant">الذاكرة المشغولة:</span>
+<span class="text-primary font-semibold">74.6 GB / 80 GB</span>
+</div>
+<!-- Progress -->
+<div class="w-full bg-surface-container-lowest h-2 rounded-full overflow-hidden mt-1">
+<div class="bg-primary h-full rounded-full transition-all duration-500" style="width: 50%"></div>
+</div>
+<div class="flex justify-between font-label-mono-sm text-label-mono-sm text-outline">
+<span>إطار 240 / 480</span>
+<span class="text-primary">50.0% [النشط حالياً]</span>
+</div>
+</div>
+<!-- Node Control Buttons -->
+<div class="flex items-center gap-space-xs pt-space-xs">
+<button class="flex-1 py-1 px-space-xs rounded bg-surface-container-high text-on-surface font-label-mono-sm text-label-mono-sm hover:bg-surface-bright transition-colors flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-[13px] text-secondary">tune</span>
+<span>فحص الطبقات (Passes)</span>
+</button>
+<button class="w-7 h-7 rounded bg-surface-container-high text-on-surface-variant hover:text-error transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined text-body-sm">pause</span>
+</button>
+</div>
+</div>
+<!-- Node 03: Unreal Engine 5.4 Live Link -->
+<div class="bg-surface-container rounded-xl p-space-md flex flex-col justify-between shadow-md relative overflow-hidden group hover:shadow-xl transition-all">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-mono-sm text-label-mono-sm text-tertiary font-bold">العقدة ٠٣ • UE 5.4 NIAGARA</span>
+<span class="w-2 h-2 rounded-full bg-tertiary animate-pulse"></span>
+</div>
+<span class="font-headline-sm text-body-lg text-on-surface font-semibold">انكسار شعار الزجاج والضباب</span>
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant">Lumen RTX + Niagara Particle Solver</span>
+</div>
+<div class="my-space-md flex flex-col gap-space-xs">
+<div class="flex justify-between font-label-mono-sm text-label-mono-sm">
+<span class="text-on-surface-variant">مرحلة المعالجة:</span>
+<span class="text-tertiary font-bold">تتبع الأشعة (Raytrace 4 Bounces)</span>
+</div>
+<div class="flex justify-between font-label-mono-sm text-label-mono-sm">
+<span class="text-on-surface-variant">بيئة الألوان:</span>
+<span class="text-on-surface">ACEScg OCIO Config Loaded</span>
+</div>
+<div class="flex justify-between font-label-mono-sm text-label-mono-sm">
+<span class="text-on-surface-variant">الذاكرة المشغولة:</span>
+<span class="text-tertiary font-semibold">58.9 GB / 80 GB</span>
+</div>
+<!-- Progress -->
+<div class="w-full bg-surface-container-lowest h-2 rounded-full overflow-hidden mt-1">
+<div class="bg-tertiary h-full rounded-full transition-all duration-500" style="width: 72%"></div>
+</div>
+<div class="flex justify-between font-label-mono-sm text-label-mono-sm text-outline">
+<span>إطار 518 / 720</span>
+<span class="text-tertiary">72.0%</span>
+</div>
+</div>
+<!-- Node Control Buttons -->
+<div class="flex items-center gap-space-xs pt-space-xs">
+<button class="flex-1 py-1 px-space-xs rounded bg-surface-container-high text-on-surface font-label-mono-sm text-label-mono-sm hover:bg-surface-bright transition-colors flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-[13px] text-primary">link</span>
+<span>Live Link UE 5.4</span>
+</button>
+<button class="w-7 h-7 rounded bg-surface-container-high text-on-surface-variant hover:text-error transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined text-body-sm">pause</span>
+</button>
+</div>
+</div>
+<!-- Node 04: Neural Audio Synthesizer (432Hz) -->
+<div class="bg-surface-container rounded-xl p-space-md flex flex-col justify-between shadow-md relative overflow-hidden group hover:shadow-xl transition-all">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-mono-sm text-label-mono-sm text-secondary-container font-bold">العقدة ٠٤ • STABLE AUDIO 2</span>
+<span class="w-2 h-2 rounded-full bg-secondary-container animate-pulse"></span>
+</div>
+<span class="font-headline-sm text-body-lg text-on-surface font-semibold">الرنين الصوتي المحيطي 432Hz</span>
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant">Latent Audio Diffusion + Sub-Bass Inversion</span>
+</div>
+<div class="my-space-md flex flex-col gap-space-xs">
+<div class="flex justify-between font-label-mono-sm text-label-mono-sm">
+<span class="text-on-surface-variant">مرحلة المعالجة:</span>
+<span class="text-secondary font-bold">المعالجة المكانية (Binaural 3D Pass)</span>
+</div>
+<div class="flex justify-between font-label-mono-sm text-label-mono-sm">
+<span class="text-on-surface-variant">التردد الأساسي:</span>
+<span class="text-on-surface">432Hz Solfeggio Scale Sync</span>
+</div>
+<div class="flex justify-between font-label-mono-sm text-label-mono-sm">
+<span class="text-on-surface-variant">الذاكرة المشغولة:</span>
+<span class="text-secondary-container font-semibold">18.4 GB / 80 GB</span>
+</div>
+<!-- Progress -->
+<div class="w-full bg-surface-container-lowest h-2 rounded-full overflow-hidden mt-1">
+<div class="bg-secondary-container h-full rounded-full transition-all duration-500" style="width: 95%"></div>
+</div>
+<div class="flex justify-between font-label-mono-sm text-label-mono-sm text-outline">
+<span>إنجاز المقاطع الصوتية</span>
+<span class="text-secondary-container">95.0% [جاهز للدمج]</span>
+</div>
+</div>
+<!-- Node Control Buttons -->
+<div class="flex items-center gap-space-xs pt-space-xs">
+<button class="flex-1 py-1 px-space-xs rounded bg-surface-container-high text-on-surface font-label-mono-sm text-label-mono-sm hover:bg-surface-bright transition-colors flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-[13px] text-secondary">headphones</span>
+<span>استماع معزول (Solo)</span>
+</button>
+<button class="w-7 h-7 rounded bg-surface-container-high text-on-surface-variant hover:text-error transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined text-body-sm">pause</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Real-time Terminal stdout & Production Action Console -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-space-md">
+<!-- Live CUDA / PyTorch Stream Log (8 Cols) -->
+<div class="lg:col-span-8 bg-surface-container rounded-xl p-space-md flex flex-col justify-between shadow-md">
+<div class="flex items-center justify-between pb-space-xs">
+<div class="flex items-center gap-space-xs text-on-surface font-bold">
+<span class="material-symbols-outlined text-secondary text-body-md">terminal</span>
+<span class="font-headline-sm text-body-lg">سجل المخرجات المباشرة (STDOUT &amp; PyTorch Cluster Log)</span>
+</div>
+<div class="flex items-center gap-space-xs">
+<span class="w-2 h-2 rounded-full bg-primary animate-ping"></span>
+<span class="font-label-mono-sm text-label-mono-sm text-outline">LIVE SYNC @ 10Gbps NVLink</span>
+</div>
+</div>
+<!-- Simulated Terminal Code Block -->
+<div class="w-full bg-surface-container-lowest p-space-sm rounded-lg font-label-mono-sm text-label-mono-sm text-on-surface flex flex-col gap-1 overflow-x-auto shadow-inner h-48 overflow-y-auto">
+<div class="text-outline">[2026-03-30 04:12:00.112] [CUDA:0-7] NVLink topology verified: Full bisection bandwidth 900 GB/s.</div>
+<div class="text-secondary">[NODE-01] ComfyUI.FLIP_Solver: Fluid mesh reconstructed. Particles: 14,200,800. Surface tension: 0.0728 N/m.</div>
+<div class="text-primary">[NODE-02] Sora_2_Bridge: Ingestion of Slate 02 [Sensory Immersion]. ControlNet Depth guidance locked at step 28/50.</div>
+<div class="text-on-surface-variant">[AUDIT] Safety token validator: Zero hallucination, ethical likeness approved by Creative Lead.</div>
+<div class="text-secondary">[NODE-03] UnrealEngine5_Bridge: Niagara raytracing pass committed to frame buffer. VRAM allocated: 58.9GB.</div>
+<div class="text-outline">[2026-03-30 04:12:01.890] [ACEScg] LUT transform applied: S-Log3/S-Gamut3.Cine -&gt; ACEScc -&gt; Rec.709 ODT.</div>
+<div class="text-primary font-bold">[DE BONO ENGINE] Lateral provocation applied: Shift specular angle to +14 deg for hyper-sensory contrast.</div>
+<div class="text-secondary-container">[NODE-04] Audio Synth: Frequency resonance lock at 432.08 Hz. Generating 7.1.4 Dolby Atmos spatial stems.</div>
+<div class="text-primary animate-pulse">[RENDER_FARM] Writing tile chunk [Frame 240/480] to NVMe scratch /mnt/fast_nvme/slate_02_4k.exr...</div>
+</div>
+<!-- Quick Command Input -->
+<div class="flex items-center gap-space-xs pt-space-xs">
+<div class="flex-1 bg-surface-container-lowest px-space-sm py-1.5 rounded flex items-center gap-space-xs">
+<span class="font-label-mono-sm text-label-mono-sm text-primary">fx-terminal:~$</span>
+<input class="bg-transparent border-none text-on-surface font-label-mono-sm text-label-mono-sm w-full focus:outline-none" readonly="" type="text" value="eval --model sora2 --cfg 7.5 --seed 894201 --export-exr"/>
+</div>
+<button class="px-space-md py-1.5 rounded bg-surface-container-high text-on-surface font-label-mono-sm text-label-mono-sm hover:bg-surface-bright transition-colors">
+          تنفيذ الأمر
+        </button>
+</div>
+</div>
+<!-- Production Deliverables & NLE Push Tray (4 Cols) -->
+<div class="lg:col-span-4 bg-surface-container rounded-xl p-space-md flex flex-col justify-between shadow-md">
+<div class="flex flex-col gap-space-xs">
+<span class="font-headline-sm text-body-lg text-on-surface font-bold">بوابة التصدير والتسليم الاحترافي</span>
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant">تجهيز النسخ الرئيسية لعرض المخرج والإنتاج النهائي</span>
+</div>
+<div class="flex flex-col gap-space-sm my-space-md">
+<!-- Action 1: Master Package -->
+<button class="w-full p-space-sm rounded-lg bg-surface-container-high hover:bg-surface-bright text-on-surface flex items-center justify-between transition-colors group">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary text-headline-sm">folder_zip</span>
+<div class="flex flex-col text-right">
+<span class="font-body-md text-body-md font-semibold">تصدير حزمة الماستر الكاملة</span>
+<span class="font-label-mono-sm text-label-mono-sm text-outline">Apple ProRes 4444 XQ + EXR 32-bit</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">arrow_forward</span>
+</button>
+<!-- Action 2: Direct to DaVinci Resolve -->
+<button class="w-full p-space-sm rounded-lg bg-surface-container-high hover:bg-surface-bright text-on-surface flex items-center justify-between transition-colors group">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-secondary text-headline-sm">video_settings</span>
+<div class="flex flex-col text-right">
+<span class="font-body-md text-body-md font-semibold">دفع مباشر إلى DaVinci Resolve Studio</span>
+<span class="font-label-mono-sm text-label-mono-sm text-outline">Live XML Timeline + Color Conforming</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-secondary transition-colors">arrow_forward</span>
+</button>
+<!-- Action 3: Lateral Re-run -->
+<button class="w-full p-space-sm rounded-lg bg-surface-container-high hover:bg-surface-bright text-on-surface flex items-center justify-between transition-colors group">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-tertiary text-headline-sm">psychology</span>
+<div class="flex flex-col text-right">
+<span class="font-body-md text-body-md font-semibold">إعادة اختبار De Bono الراديكالي</span>
+<span class="font-label-mono-sm text-label-mono-sm text-outline">توليد 3 بدائل شاطحة خارج المألوف</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-tertiary transition-colors">arrow_forward</span>
+</button>
+</div>
+<!-- Emergency Flush Button -->
+<div class="pt-space-xs">
+<button class="w-full py-2 px-space-md rounded bg-error-container text-on-error-container hover:bg-error hover:text-on-error font-body-sm text-body-sm font-semibold transition-colors flex items-center justify-center gap-space-xs shadow-sm">
+<span class="material-symbols-outlined text-body-md">warning</span>
+<span>إيقاف اضطراري وتفريغ الطابور (Flush Queue)</span>
+</button>
+</div>
+</div>
+</section>
+</div>
+<!-- Interactive Client-side Script for Dual Viewport A/B Scrubber & Wipe -->
+<script>
+  (function initRenderStation() {
+    const divider = document.getElementById('wipe-divider');
+    const wipeLayer = document.getElementById('wipe-layer');
+    const container = divider ? divider.parentElement : null;
+
+    if (divider && wipeLayer && container) {
+      let isDragging = false;
+
+      function updateSplit(clientX) {
+        const rect = container.getBoundingClientRect();
+        const offsetX = Math.max(0, Math.min(clientX - rect.left, rect.width));
+        const percentage = (offsetX / rect.width) * 100;
+        
+        divider.style.left = percentage + '%';
+        wipeLayer.style.width = (100 - percentage) + '%';
+      }
+
+      divider.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        e.preventDefault();
+      });
+
+      window.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        updateSplit(e.clientX);
+      });
+
+      window.addEventListener('mouseup', () => {
+        isDragging = false;
+      });
+
+      // Touch screen support
+      divider.addEventListener('touchstart', () => { isDragging = true; }, { passive: true });
+      window.addEventListener('touchmove', (e) => {
+        if (!isDragging || !e.touches[0]) return;
+        updateSplit(e.touches[0].clientX);
+      }, { passive: true });
+      window.addEventListener('touchend', () => { isDragging = false; });
+    }
+
+    // Play/Pause button toggle micro-interaction
+    const playBtn = document.getElementById('play-pause-btn');
+    if (playBtn) {
+      let isPlaying = false;
+      playBtn.addEventListener('click', () => {
+        isPlaying = !isPlaying;
+        const icon = playBtn.querySelector('.material-symbols-outlined');
+        if (icon) {
+          icon.textContent = isPlaying ? 'pause' : 'play_arrow';
+        }
+      });
+    }
+  })();
+</script></main></div>
+</body></html>

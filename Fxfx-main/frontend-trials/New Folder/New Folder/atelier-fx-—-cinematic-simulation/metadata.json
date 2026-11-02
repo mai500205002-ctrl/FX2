@@ -1,0 +1,6 @@
+{
+  "name": "Atelier FX — Cinematic Simulation & Production Telemetry",
+  "description": "Elite cinematic narrative lab, anamorphic optical telemetry, photometric lighting design, and lithic acoustics simulator for Chrono Al-Ula.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

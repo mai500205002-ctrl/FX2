@@ -1,0 +1,160 @@
+@import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&family=Hanken+Grotesk:wght@300..700&family=DM+Mono:wght@400;500&family=Amiri:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600&family=Courier+Prime:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Archivo:wght@400..800&family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@400..600&display=swap');
+@import 'tailwindcss';
+
+@theme {
+  --font-display: 'Newsreader', 'Amiri', Georgia, serif;
+  --font-sans: 'Hanken Grotesk', 'IBM Plex Sans Arabic', system-ui, sans-serif;
+  --font-mono: 'DM Mono', ui-monospace, monospace;
+  --font-script: 'Courier Prime', ui-monospace, monospace;
+
+  --color-bg: #0a0908;
+  --color-panel: #12100e;
+  --color-raise: #1b1815;
+  --color-bone: #ede5d6;
+  --color-dim: #a39b8c;
+  --color-faint: #6e685d;
+  --color-signal: #ff5a2a;
+  --color-paper: #eae2d0;
+  --color-rule: rgb(237 229 214 / 0.14);
+  --color-rule-strong: rgb(237 229 214 / 0.32);
+}
+
+[dir='rtl'] {
+  --font-display: 'Amiri', Georgia, serif;
+  --font-sans: 'IBM Plex Sans Arabic', 'Hanken Grotesk', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Sans Arabic', system-ui, sans-serif;
+  --font-script: 'Amiri', Georgia, serif;
+}
+
+html {
+  background: var(--color-bg);
+  scrollbar-width: thin;
+  scrollbar-color: rgb(237 229 214 / 0.2) transparent;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-bone);
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 100;
+  opacity: 0.07;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+::selection {
+  background: var(--color-signal);
+  color: var(--color-bg);
+}
+
+[dir='rtl'] em {
+  font-style: normal;
+}
+
+.label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-dim);
+}
+[dir='rtl'] .label {
+  letter-spacing: 0;
+  text-transform: none;
+  font-size: 12px;
+}
+
+.editable {
+  cursor: text;
+  outline: none;
+  transition: background 0.2s;
+  border-radius: 1px;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+.editable:hover {
+  background: color-mix(in srgb, currentColor 7%, transparent);
+}
+.editable:focus {
+  background: color-mix(in srgb, var(--color-signal) 14%, transparent);
+  box-shadow: 0 0 0 1px var(--color-signal);
+}
+
+.field {
+  width: 100%;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--color-rule-strong);
+  padding: 8px 0 10px;
+  font-family: var(--font-display);
+  font-size: 21px;
+  color: var(--color-bone);
+  outline: none;
+  transition: border-color 0.25s;
+}
+.field:focus {
+  border-bottom-color: var(--color-signal);
+}
+
+.rise {
+  animation: rise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.pulse-dot {
+  animation: pulse 1.2s ease-in-out infinite;
+}
+@keyframes pulse {
+  50% {
+    opacity: 0.25;
+  }
+}
+
+.shimmer {
+  background: linear-gradient(90deg, rgb(237 229 214 / 0.05), rgb(237 229 214 / 0.14), rgb(237 229 214 / 0.05));
+  background-size: 200% 100%;
+  animation: shimmer 1.4s linear infinite;
+}
+@keyframes shimmer {
+  to {
+    background-position: -200% 0;
+  }
+}
+
+.caret::after {
+  content: '';
+  display: inline-block;
+  width: 7px;
+  height: 1em;
+  background: currentColor;
+  vertical-align: -0.15em;
+  margin-inline-start: 4px;
+  animation: pulse 1s steps(2) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rise,
+  .pulse-dot,
+  .shimmer,
+  .caret::after {
+    animation: none;
+  }
+}

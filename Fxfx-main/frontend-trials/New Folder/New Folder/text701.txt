@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="shell-type" content="web_dashboard" />
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+Arabic:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
+  
+  <style>
+    @layer base {
+      html, body { margin: 0; padding: 0; }
+      body { overscroll-behavior: none; background-color: #121315; color: #e3e2e5; font-family: 'Noto Sans Arabic', sans-serif; }
+      main > :first-child { margin-top: 0 !important; }
+      main > :last-child { margin-bottom: 0 !important; }
+    }
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #0d0e10; }
+    ::-webkit-scrollbar-thumb { background: #343537; border-radius: 2px; }
+    ::-webkit-scrollbar-thumb:hover { background: #4d4635; }
+    
+    /* Cinematic Grain Overlay */
+    .film-grain::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      opacity: 0.035;
+      pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+      mix-blend-mode: overlay;
+      z-index: 10;
+    }
+  </style>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "outline": "#99907c",
+            "on-error-container": "#ffdad6",
+            "surface-container-low": "#1b1c1e",
+            "error": "#ffb4ab",
+            "on-secondary-fixed": "#2b1700",
+            "on-primary": "#3c2f00",
+            "surface-container-highest": "#343537",
+            "surface-container-lowest": "#0d0e10",
+            "on-secondary": "#452b08",
+            "on-tertiary-container": "#47453f",
+            "secondary-fixed-dim": "#e9bf90",
+            "on-secondary-container": "#dab183",
+            "on-primary-fixed": "#241a00",
+            "surface-bright": "#38393b",
+            "on-tertiary-fixed": "#1c1c16",
+            "inverse-on-surface": "#303033",
+            "on-tertiary": "#32302a",
+            "on-primary-container": "#554300",
+            "tertiary-fixed-dim": "#cac6be",
+            "primary": "#f2ca50",
+            "secondary": "#e9bf90",
+            "on-tertiary-fixed-variant": "#484740",
+            "surface-variant": "#343537",
+            "surface-container-high": "#292a2c",
+            "on-surface-variant": "#d0c5af",
+            "tertiary-container": "#b6b3ab",
+            "on-primary-fixed-variant": "#574500",
+            "tertiary-fixed": "#e6e2d9",
+            "surface": "#121315",
+            "error-container": "#93000a",
+            "on-secondary-fixed-variant": "#5e411d",
+            "primary-container": "#d4af37",
+            "on-surface": "#e3e2e5",
+            "secondary-container": "#61431f",
+            "inverse-surface": "#e3e2e5",
+            "secondary-fixed": "#ffddb9",
+            "inverse-primary": "#735c00",
+            "primary-fixed": "#ffe088",
+            "on-background": "#e3e2e5",
+            "tertiary": "#d2cec6",
+            "outline-variant": "#4d4635",
+            "surface-tint": "#e9c349",
+            "background": "#121315",
+            "primary-fixed-dim": "#e9c349",
+            "surface-container": "#1f2022",
+            "surface-dim": "#121315",
+            "on-error": "#690005"
+          },
+          borderRadius: {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          spacing: {
+            "gutter": "1.5rem",
+            "space-md": "1rem",
+            "space-sm": "0.5rem",
+            "space-xs": "0.25rem",
+            "space-lg": "1.75rem",
+            "space-xl": "3rem"
+          },
+          fontFamily: {
+            "display-hero": ["Playfair Display", "serif"],
+            "title-editorial": ["Playfair Display", "serif"],
+            "headline-lg": ["Playfair Display", "serif"],
+            "headline-md": ["Playfair Display", "serif"],
+            "headline-sm": ["Noto Sans Arabic", "sans-serif"],
+            "body-lg": ["Noto Sans Arabic", "sans-serif"],
+            "body-md": ["Noto Sans Arabic", "sans-serif"],
+            "body-sm": ["Noto Sans Arabic", "sans-serif"],
+            "meta-mono": ["JetBrains Mono", "monospace"],
+            "meta-mono-sm": ["JetBrains Mono", "monospace"]
+          },
+          fontSize: {
+            "display-hero": ["64px", { lineHeight: "76px", letterSpacing: "-0.02em", fontWeight: "600" }],
+            "headline-lg": ["40px", { lineHeight: "52px", letterSpacing: "-0.015em", fontWeight: "500" }],
+            "headline-md": ["28px", { lineHeight: "38px", letterSpacing: "0em", fontWeight: "400" }],
+            "headline-sm": ["20px", { lineHeight: "28px", letterSpacing: "0.01em", fontWeight: "600" }],
+            "title-editorial": ["18px", { lineHeight: "26px", letterSpacing: "0.02em", fontWeight: "500" }],
+            "body-lg": ["16px", { lineHeight: "28px", letterSpacing: "0.01em", fontWeight: "400" }],
+            "body-md": ["14px", { lineHeight: "24px", letterSpacing: "0.01em", fontWeight: "400" }],
+            "body-sm": ["12px", { lineHeight: "20px", letterSpacing: "0.02em", fontWeight: "400" }],
+            "meta-mono": ["11px", { lineHeight: "16px", letterSpacing: "0.08em", fontWeight: "500" }],
+            "meta-mono-sm": ["10px", { lineHeight: "14px", letterSpacing: "0.1em", fontWeight: "400" }]
+          }
+        }
+      }
+    };
+  </script>
+</head>
+<body class="bg-background font-body-md text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-container min-h-screen film-grain flex">
+
+  <!-- Right Sidebar / Atelier Command Dock -->
+  <aside class="fixed right-0 top-0 h-full w-64 bg-surface-container-lowest z-50 flex flex-col justify-between py-6 border-l border-outline-variant/20 shadow-[0_1px_24px_rgba(0,0,0,0.4)]">
+    <div class="flex flex-col gap-6">
+      <div class="px-6 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <span class="text-primary font-headline-sm font-semibold tracking-wider">FX</span>
+          <span class="font-meta-mono-sm text-meta-mono-sm uppercase tracking-widest text-on-surface-variant/70">ATELIER</span>
+        </div>
+        <span class="font-meta-mono-sm text-meta-mono-sm text-on-surface-variant/50">v4.2</span>
+      </div>
+
+      <div class="px-6">
+        <div class="p-4 rounded border border-outline-variant/30 bg-surface-container-low flex flex-col gap-2">
+          <span class="font-meta-mono-sm text-meta-mono-sm text-on-surface-variant uppercase tracking-wider">مشروع نشط</span>
+          <span class="font-body-md text-body-md text-on-surface line-clamp-2 leading-relaxed font-medium">نيوم 2030: أفق الصمت والضوء</span>
+          <span class="font-meta-mono-sm text-meta-mono-sm text-primary/80 uppercase" dir="ltr">NEOM_CAMPAIGN_A1#</span>
+        </div>
+      </div>
+
+      <nav class="flex flex-col gap-1 px-4 mt-2">
+        <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all font-body-sm text-body-sm">
+          <span class="material-symbols-outlined text-[18px]">description</span>
+          <span>الموجز الإبداعي</span>
+        </a>
+        <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all font-body-sm text-body-sm">
+          <span class="material-symbols-outlined text-[18px]">insights</span>
+          <span>الرؤية الاستراتيجية</span>
+        </a>
+        <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all font-body-sm text-body-sm">
+          <span class="material-symbols-outlined text-[18px]">lightbulb</span>
+          <span>الفكرة الإبداعية</span>
+        </a>
+        <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded bg-surface-container-high text-primary font-semibold border-r-2 border-primary transition-all font-body-sm text-body-sm">
+          <span class="material-symbols-outlined text-[18px]">movie</span>
+          <span>السيناريو السينمائي</span>
+        </a>
+        <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all font-body-sm text-body-sm">
+          <span class="material-symbols-outlined text-[18px]">psychology</span>
+          <span>محركات التفكير</span>
+        </a>
+        <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all font-body-sm text-body-sm">
+          <span class="material-symbols-outlined text-[18px]">grid_view</span>
+          <span>لوحات الإخراج</span>
+        </a>
+      </nav>
+    </div>
+
+    <div class="px-6 flex flex-col gap-4">
+      <div class="p-4 rounded border border-outline-variant/30 bg-surface-container-low flex flex-col gap-3">
+        <div class="flex justify-between items-center">
+          <span class="font-meta-mono-sm text-meta-mono-sm text-on-surface-variant">طاقة المعالجة</span>
+          <span class="font-meta-mono-sm text-meta-mono-sm text-primary">74%</span>
+        </div>
+        <div class="w-full h-1 bg-surface-container-highest rounded-full overflow-hidden">
+          <div class="h-full bg-primary rounded-full shadow-[0_0_8px_rgba(242,202,80,0.6)]" style="width: 74%"></div>
+        </div>
+      </div>
+      <div class="flex items-center justify-between font-meta-mono-sm text-meta-mono-sm border-t border-outline-variant/20 pt-4">
+        <span class="text-primary flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>DIFFUSION ACTIVE</span>
+        <span class="text-on-surface-variant" dir="ltr">LATENCY: 18ms</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Content Wrapper -->
+  <div class="pr-64 w-full flex flex-col min-h-screen">
+    
+    <!-- Top Telemetry Header -->
+    <header class="sticky top-0 z-40 bg-surface-container-lowest/80 backdrop-blur-xl border-b border-outline-variant/20 h-16 flex items-center justify-between px-6">
+      <div class="flex items-center gap-6 font-meta-mono text-meta-mono text-on-surface-variant uppercase tracking-widest">
+        <span class="text-primary hover:text-primary-fixed cursor-pointer transition-colors flex items-center gap-2">
+          <span class="material-symbols-outlined text-[16px]">folder_open</span> المشاريع
+        </span>
+        <span class="text-outline-variant">›</span>
+        <span>نيوم 2030: أفق الصمت والضوء / حملة إطلاق سينمائية</span>
+      </div>
+      
+      <div class="flex items-center gap-6">
+        <div class="flex items-center gap-4 font-meta-mono-sm text-meta-mono-sm text-on-surface-variant" dir="ltr">
+          <span class="text-on-surface">CHIAROSCURO RIG</span>
+          <span class="text-outline-variant">•</span>
+          <span>ASPECT 2.39:1</span>
+          <span class="text-outline-variant">•</span>
+          <span class="text-primary font-medium tracking-widest">TC 01:24:18:04</span>
+        </div>
+        <div class="w-px h-6 bg-outline-variant/30"></div>
+        <button class="flex items-center justify-center w-8 h-8 rounded bg-surface-container hover:bg-surface-container-high text-on-surface-variant transition-colors">
+          <span class="material-symbols-outlined text-[18px]">search</span>
+        </button>
+        <button class="flex items-center gap-2 px-3 py-1.5 rounded border border-outline-variant/50 hover:bg-surface-container text-on-surface-variant font-meta-mono-sm text-meta-mono-sm transition-colors" dir="ltr">
+          ⌘K
+        </button>
+      </div>
+    </header>
+
+    <!-- Scrollable Workspace -->
+    <main class="flex-1 p-8 lg:p-12 flex flex-col gap-10 max-w-7xl mx-auto w-full">
+      
+      <!-- Stage Indicator & Title -->
+      <section class="flex flex-col gap-4">
+        <div class="flex items-center gap-3">
+          <span class="px-2.5 py-1 rounded bg-primary/10 border border-primary/20 text-primary font-meta-mono text-meta-mono tracking-widest uppercase">
+            STAGE_04 // TREATMENT
+          </span>
+          <span class="font-meta-mono text-meta-mono text-on-surface-variant uppercase tracking-wider" dir="ltr">
+            LUCID_AIR_SAPPHIRE_90S_HERO
+          </span>
+        </div>
+        <div class="flex flex-col gap-2">
+          <h4 class="font-meta-mono text-meta-mono text-secondary uppercase tracking-widest">PROJECTION TIMELINE — DIRECTORIAL SCREENPLAY TREATMENT</h4>
+          <h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight leading-tight">السيناريو السينمائي التفاعلي ولوحة المشاهد</h1>
+          <p class="font-body-lg text-body-lg text-on-surface-variant max-w-3xl leading-relaxed mt-2">
+            المحطة الرابعة: تحويل الفكرة الإبداعية إلى نص إخراجي متكامل، توقيت، حركة كاميرا، ومسار صوتي سينمائي فائق الدقة.
+          </p>
+        </div>
+      </section>
+
+      <!-- Production Metadata Ribbon -->
+      <section class="flex items-center justify-between p-1 bg-surface-container-low border border-outline-variant/20 rounded">
+        <div class="flex">
+          <div class="flex flex-col px-6 py-3 border-l border-outline-variant/20">
+            <span class="font-meta-mono-sm text-meta-mono-sm text-on-surface-variant uppercase mb-1">الطول الزمني الإجمالي</span>
+            <div class="flex items-baseline gap-2" dir="ltr">
+              <span class="font-meta-mono text-meta-mono text-primary font-semibold">90.00s</span>
+              <span class="font-meta-mono-sm text-meta-mono-sm text-on-surface-variant/60">(4 مشاهد)</span>
+            </div>
+          </div>
+          <div class="flex flex-col px-6 py-3 border-l border-outline-variant/20">
+            <span class="font-meta-mono-sm text-meta-mono-sm text-on-surface-variant uppercase mb-1">نسبة العرض البصري</span>
+            <div class="flex items-baseline gap-2" dir="ltr">
+              <span class="font-meta-mono text-meta-mono text-on-surface font-medium">2.39:1</span>
+              <span class="font-meta-mono-sm text-meta-mono-sm text-secondary">Anamorphic</span>
+            </div>
+          </div>
+          <div class="flex flex-col px-6 py-3 border-l border-outline-variant/20">
+            <span class="font-meta-mono-sm text-meta-mono-sm text-on-surface-variant uppercase mb-1">حزمة العدسات</span>
+            <span class="font-body-sm text-body-sm text-on-surface font-medium" dir="ltr">Panavision C-Series Vintage</span>
+          </div>
+          <div class="flex flex-col px-6 py-3 border-l border-outline-variant/20">
+            <span class="font-meta-mono-sm text-meta-mono-sm text-on-surface-variant uppercase mb-1">المحاكاة اللونية والمعايرة</span>
+            <span class="font-body-sm text-body-sm text-on-surface font-medium" dir="ltr">Kodak 5219 Warm Tungsten</span>
+          </div>
+          <div class="flex flex-col px-6 py-3">
+            <span class="font-meta-mono-sm text-meta-mono-sm text-on-surface-variant uppercase mb-1">سرعة الإطارات & الصوت</span>
+            <div class="flex items-baseline gap-2" dir="ltr">
+              <span class="font-meta-mono text-meta-mono text-primary font-semibold">24.00 FPS</span>
+              <span class="font-meta-mono-sm text-meta-mono-sm text-on-surface-variant">Dolby Atmos</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Scrubber Timeline Base -->
+      <section class="flex flex-col gap-2 relative">
+        <div class="flex items-center justify-between font-meta-mono-sm text-meta-mono-sm text-on-surface-variant uppercase" dir="ltr">
+          <span>PROLOGUE 00:00.00</span>
+          <span>COCKPIT INTERIOR 00:15.00</span>
+          <span>MARAYA CANYON ACCEL 00:40.00</span>
+          <span>SILENT APEX 01:15.00</span>
+          <span>RESOLUTION 01:30.00</span>
+        </div>
+        <div class="w-full h-2 rounded bg-surface-container-highest flex overflow-hidden">
+          <div class="h-full bg-primary/60 border-r border-background hover:bg-primary transition-colors cursor-pointer" style="width: 16.66%" title="SCENE 01"></div>
+          <div class="h-full bg-primary shadow-[0_0_8px_rgba(242,202,80,0.6)] border-r border-background hover:bg-primary transition-colors cursor-pointer" style="width: 27.77%" title="SCENE 02"></div>
+          <div class="h-full bg-secondary border-r border-background hover:bg-secondary-fixed-dim transition-colors cursor-pointer" style="width: 38.88%" title="SCENE 03"></div>
+          <div class="h-full bg-primary-container border-r border-background hover:bg-primary transition-colors cursor-pointer" style="width: 16.69%" title="SCENE 04"></div>
+        </div>
+      </section>
+
+      <!-- Workspace Split: Script Canvas vs Prompt Lab -->
+      <div class="grid grid-cols-1 xl:grid-cols-12 gap-8 items-start relative mt-4">
+        
+        <!-- Left Flank: Prompt Engineering Console (Fixed) -->
+        <aside class="xl:col-span-4 flex flex-col gap-6 sticky top-24">
+          <div class="bg-surface-container-low border border-outline-variant/30 rounded-lg p-6 shadow-xl flex flex-col gap-6 relative overflow-hidden">
+            <!-- Glow effect -->
+            <div class="absolute -top-16 -left-16 w-32 h-32 bg-primary/10 blur-[50px] rounded-full pointer-events-none"></div>
+
+            <div class="flex items-center justify-between border-b border-outline-variant/20 pb-4">
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary text-[20px]">terminal</span>
+                <h3 class="font-headline-sm text-headline-sm font-semibold text-on-surface">وحدة التحكم بالأوامر<br/><span class="text-sm font-normal text-on-surface-variant">العصبية (Prompt Lab)</span></h3>
+              </div>
+              <span class="px-2 py-1 rounded bg-surface-container-highest text-primary font-meta-mono-sm text-meta-mono-sm uppercase border border-primary/20">LIVE ENGINE</span>
+            </div>
+
+            <!-- Master Prompt -->
+            <div class="flex flex-col gap-3">
+              <div class="flex items-center justify-between">
+                <label class="font-meta-mono text-meta-mono-sm text-on-surface font-semibold uppercase">الموجه الأساسي السينمائي (Master Positive Prompt)</label>
+                <span class="font-meta-mono-sm text-meta-mono-sm text-primary">v2.4</span>
+              </div>
+              <textarea dir="ltr" rows="5" class="w-full bg-surface-container-highest border border-outline-variant/30 rounded p-3 font-meta-mono text-meta-mono text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all resize-none shadow-inner leading-relaxed">ultra cinematic, anamorphic lens 2.39:1, liquid pause hydration campaign 2026, meditative pristine stillness, hyper-detailed caustics, ACEScg color gamut, Cooke spherical bokeh, arri alexa 65 master plate, volumetric subtle golden dust, zero noise, high-precision physics simulation</textarea>
+              <span class="font-body-sm text-body-sm text-outline-variant leading-relaxed">توجيه إخراجي: موجه مصمم للجمع بين دقة محاكاة FLIP Fluids وأناقة الإضاءة السينمائية 5600K.</span>
+            </div>
+
+            <!-- Negative Prompt -->
+            <div class="flex flex-col gap-3">
+              <div class="flex items-center justify-between">
+                <label class="font-meta-mono text-meta-mono-sm text-error font-semibold uppercase">الموجه السلبي للمقيدات (Negative Strict)</label>
+                <span class="font-meta-mono-sm text-meta-mono-sm text-error bg-error-container/20 px-1.5 rounded">ENFORCED</span>
+              </div>
+              <textarea dir="ltr" rows="3" class="w-full bg-surface-container-highest border border-error/30 rounded p-3 font-meta-mono text-meta-mono text-on-surface-variant focus:outline-none focus:border-error focus:ring-1 focus:ring-error transition-all resize-none shadow-inner leading-relaxed opacity-80">commercial beverage clichés, explosive water splashes, sweat dripping athletes, aggressive dynamic gym motion blur, low quality render, cartoonish shaders, CGI artifacts</textarea>
+            </div>
+
+            <!-- Camera Matrix Grid -->
+            <div class="flex flex-col gap-3 pt-2">
+              <span class="font-meta-mono-sm text-meta-mono-sm text-on-surface-variant uppercase tracking-wider">معايير التصوير والمحاكاة (CAMERA MATRIX)</span>
+              <div class="grid grid-cols-2 gap-3">
+                <div class="bg-surface-container-highest border border-outline-variant/20 rounded p-3 flex flex-col gap-2">
+                  <span class="font-meta-mono-sm text-meta-mono-sm text-outline uppercase">ASPECT RATIO</span>
+                  <div class="flex items-center justify-between">
+                    <span class="font-meta-mono text-meta-mono text-on-surface font-semibold">Scope 2.39:1</span>
+                    <span class="material-symbols-outlined text-[16px] text-outline">aspect_ratio</span>
+                  </div>
+                </div>
+                <div class="bg-surface-container-highest border border-outline-variant/20 rounded p-3 flex flex-col gap-2">
+                  <span class="font-meta-mono-sm text-meta-mono-sm text-outline uppercase">FRAME RATE</span>
+                  <div class="flex items-center justify-between">
+                    <span class="font-meta-mono text-meta-mono text-primary font-semibold">FPS 120.00</span>
+                    <span class="material-symbols-outlined text-[16px] text-outline">speed</span>
+                  </div>
+                </div>
+                <div class="bg-surface-container-highest border border-outline-variant/20 rounded p-3 flex flex-col gap-2">
+                  <span class="font-meta-mono-sm text-meta-mono-sm text-outline uppercase">SAMPLING MODEL</span>
+                  <div class="flex items-center justify-between">
+                    <span class="font-meta-mono text-meta-mono text-on-surface font-semibold">Euler A / 50s</span>
+                    <span class="material-symbols-outlined text-[16px] text-outline">tune</span>
+                  </div>
+                </div>
+                <div class="bg-surface-container-highest border border-outline-variant/20 rounded p-3 flex flex-col gap-2">
+                  <span class="font-meta-mono-sm text-meta-mono-sm text-outline uppercase">COLOR SPACE</span>
+                  <div class="flex items-center justify-between">
+                    <span class="font-meta-mono text-meta-mono text-secondary font-semibold">ACEScg / DaVinci</span>
+                    <span class="material-symbols-outlined text-[16px] text-outline">palette</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="flex flex-col gap-3 mt-2">
+              <button class="w-full flex items-center justify-center gap-2 py-3 px-4 rounded bg-primary-container text-on-primary-container font-body-md text-body-md font-semibold hover:bg-primary transition-colors shadow-[0_0_12px_rgba(212,175,55,0.2)]">
+                <span class="material-symbols-outlined text-[20px]">auto_videocam</span>
+                <span>توليد جميع اختبارات الـ Previz (Batch VFX)</span>
+              </button>
+              <button class="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded border border-outline-variant/50 hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-colors font-body-sm text-body-sm">
+                <span class="material-symbols-outlined text-[18px]">download</span>
+                <span>تصدير حزمة المخرج الميدانية (Director's Slate Package)</span>
+              </button>
+            </div>
+          </div>
+        </aside>
+
+        <!-- Right Flank: Scenes Board (Scrollable) -->
+        <div class="xl:col-span-8 flex flex-col gap-8">
+          
+          <div class="flex items-center justify-between bg-surface-container-low border border-outline-variant/20 rounded px-5 py-3">
+            <div class="flex items-center gap-3">
+              <span class="material-symbols-outlined text-primary text-[20px]">view_carousel</span>
+              <h2 class="font-headline-sm text-headline-sm font-bold text-on-surface">تفريغ الستوريبورد الميداني (VFX Storyboard Slate)</h2>
+              <span class="font-meta-mono-sm text-meta-mono-sm text-outline uppercase ml-2">3 SEQUENCE BOARDS</span>
+            </div>
+            <div class="flex items-center gap-2 p-1 bg-surface-container-lowest rounded">
+              <button class="px-3 py-1 rounded bg-surface-container-high text-primary font-meta-mono-sm text-meta-mono-sm font-semibold flex items-center gap-1.5 border border-primary/20">
+                <span class="material-symbols-outlined text-[14px]">grid_view</span> عرض تفصيلي
+              </button>
+              <button class="px-3 py-1 rounded text-on-surface-variant hover:text-on-surface font-meta-mono-sm text-meta-mono-sm transition-colors flex items-center gap-1.5">
+                <span class="material-symbols-outlined text-[14px]">list</span> قائمة اللقطات (Shot List)
+              </button>
+              <button class="px-3 py-1 rounded text-on-surface-variant hover:text-on-surface font-meta-mono-sm text-meta-mono-sm transition-colors flex items-center gap-1.5">
+                <span class="material-symbols-outlined text-[14px]">layers</span> طبقات التوليد (Passes)
+              </button>
+            </div>
+          </div>
+
+          <!-- SCENE 01 -->
+          <article class="bg-surface-container-low border border-outline-variant/20 rounded-lg overflow-hidden flex flex-col shadow-lg transition-shadow hover:shadow-[0_0_20px_rgba(212,175,55,0.05)]">
+            <header class="bg-surface-container-highest px-6 py-3 flex items-center justify-between border-b border-outline-variant/20">
+              <div class="flex items-center gap-4">
+                <div class="flex items-center gap-2">
+                  <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                  <span class="font-meta-mono text-meta-mono text-primary font-bold">المشهد 01 // SCENE 01</span>
+                </div>
+                <h3 class="font-headline-sm text-headline-sm font-bold text-on-surface pr-4 border-r border-outline-variant/30">انكسار الصمت (The Breaking Silence)</h3>
+              </div>
+              <div class="flex items-center gap-3">
+                <span class="font-meta-mono-sm text-meta-mono-sm px-2 py-1 rounded bg-surface-container-lowest text-secondary border border-secondary/20" dir="ltr">00:00:00:00 ➔ 00:00:08:00 (8 ثوانٍ)</span>
+                <span class="font-meta-mono-sm text-meta-mono-sm px-2 py-1 rounded bg-primary-container/20 text-primary font-semibold border border-primary/20 uppercase" dir="ltr">PASS 1: WATER SIM</span>
+              </div>
+            </header>
+            
+            <div class="p-6 grid grid-cols-1 lg:grid-cols-12 gap-8">
+              <!-- Visuals Column -->
+              <div class="lg:col-span-5 flex flex-col gap-4">
+                <div class="relative w-full aspect-[4/3] rounded bg-surface-container-lowest overflow-hidden border border-outline-variant/20 group">
+                  <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXF_xLLHo7oQTk6xY7P10pOkxeDBsGlrjPkP0oPL8AzIjtBGXsB6J9_LcbDZwJFtNwMfYdpgZkFTY71vWLuFE3upUABWZsap9Fqd0Vhs-n2V3bfOOG1tRA4dOUVzNKE9IunBN3lfo4S0_RGEQp919ybB3UG8v2NSJMv0Wp2qsiFSFMzl8x6NYPsZTTOKtuEfk5WntLeJKXCLzGU1kABJwMQ599LfQA0gXf9NPpzE35u9XsrhX5bPUW" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Macro drop">
+                  <div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-transparent to-transparent opacity-60"></div>
+                  
+                  <div class="absolute top-3 right-3 px-2 py-1 rounded bg-surface-container-lowest/80 backdrop-blur text-primary font-meta-mono-sm text-meta-mono-sm border border-primary/20 flex items-center gap-2">
+                    <span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                    <span>SLATE #01-A</span>
+                  </div>
+                  
+                  <div class="absolute bottom-3 left-3 flex items-center gap-2">
+                    <span class="bg-surface-container-lowest/90 px-2 py-1 rounded border border-outline-variant/30 text-on-surface font-meta-mono-sm text-meta-mono-sm">MACRO EXT. 24mm</span>
+                  </div>
+                  <div class="absolute bottom-3 right-3">
+                    <span class="bg-surface-container-lowest/90 px-2 py-1 rounded border border-outline-variant/30 text-secondary font-meta-mono-sm text-meta-mono-sm font-bold">FPS HIGH-SPEED 120</span>
+                  </div>
+                </div>
+
+                <!-- Subpasses -->
+                <div class="grid grid-cols-3 gap-2">
+                  <div class="bg-surface-container-highest rounded p-2 flex flex-col items-center justify-center border border-outline-variant/10">
+                    <span class="font-meta-mono-sm text-meta-mono-sm text-outline uppercase mb-1">VELOCITY</span>
+                    <span class="font-meta-mono-sm text-meta-mono-sm text-on-surface font-bold">FLIP 120f</span>
+                  </div>
+                  <div class="bg-surface-container-highest rounded p-2 flex flex-col items-center justify-center border border-outline-variant/10">
+                    <span class="font-meta-mono-sm text-meta-mono-sm text-outline uppercase mb-1">DEPTH Z</span>
+                    <span class="font-meta-mono-sm text-meta-mono-sm text-secondary font-bold">CONTROLNET</span>
+                  </div>
+                  <div class="bg-surface-container-highest rounded p-2 flex flex-col items-center justify-center border border-outline-variant/10">
+                    <span class="font-meta-mono-sm text-meta-mono-sm text-outline uppercase mb-1">DIFFUSE</span>
+                    <span class="font-meta-mono-sm text-meta-mono-sm text-primary font-bold">OK 100%</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Editorial Column -->
+              <div class="lg:col-span-7 flex flex-col gap-6">
+                
+                <div class="flex flex-col gap-3 border-b border-outline-variant/20 pb-4">
+                  <div class="flex flex-wrap items-center gap-2 font-meta-mono-sm text-meta-mono-sm">
+                    <span class="px-2 py-1 rounded bg-surface-container-highest border border-outline-variant/20 text-primary">العدسة: Macro Extreme 24mm Cooke</span>
+                    <span class="px-2 py-1 rounded bg-surface-container-highest border border-outline-variant/20 text-on-surface">إضاءة: High Contrast Moody 5600K</span>
+                    <span class="px-2 py-1 rounded bg-surface-container-highest border border-outline-variant/20 text-secondary">حركة: Dolly-In Z: 0.8m/s</span>
+                  </div>
+                  <p class="font-body-md text-body-md text-on-surface leading-relaxed mt-2">
+                    <strong class="text-primary font-medium">سرد المشهد:</strong> قطرة ماء نقية فائقة المايكرو معلقة في فراغ لزج، انكسار ضوئي فيزياوي دقيق بمعدل 120 إطار في الثانية، تجميد تام للحركة وحبيبات الهواء الصامتة قبل ملامسة شفتي البطل.
+                  </p>
+                </div>
+
+                <div class="flex flex-col gap-2 bg-surface-container-highest p-4 rounded border border-outline-variant/20">
+                  <div class="flex items-center justify-between mb-2">
+                    <span class="font-meta-mono-sm text-meta-mono-sm text-outline uppercase">AI Neural VFX Prompt (ComfyUI SVD)</span>
+                    <div class="flex items-center gap-3 font-meta-mono-sm text-meta-mono-sm">
+                      <span class="text-secondary">Seed: 948102377</span>
+                      <span class="text-primary">CFG: 7.5</span>
+                    </div>
+                  </div>
+                  <code class="font-meta-mono-sm text-meta-mono-sm text-on-surface-variant bg-surface-container-low p-3 rounded block overflow-x-auto text-left border border-outline-variant/10 leading-relaxed" dir="ltr">ultra macro 120fps fluid simulation, single pure water drop suspended in weightless void, optical caustics, pristine crystal refraction, volumetric light beams 5600k, hyperrealistic surface tension, anamorphic bokeh, negative space --ar 2.39:1 --style raw</code>
+                  <div class="flex items-start justify-between mt-2 pt-2 border-t border-outline-variant/10">
+                    <span class="font-meta-mono-sm text-meta-mono-sm text-error leading-relaxed max-w-sm">Negative: [no motion blur, no artificial glare, no running athletes, no splash chaotic debris]</span>
+                    <button class="flex items-center gap-1 font-meta-mono-sm text-meta-mono-sm text-primary hover:text-primary-fixed transition-colors bg-primary/10 px-2 py-1 rounded">
+                      <span class="material-symbols-outlined text-[14px]">content_copy</span> نسخ الأمر
+                    </button>
+                  </div>
+                </div>
+
+                <div class="flex items-center justify-between mt-auto">
+                  <button class="px-4 py-2 rounded border border-outline-variant/30 bg-surface-container-highest hover:bg-surface-bright text-on-surface font-body-sm text-body-sm transition-colors flex items-center gap-2">
+                    <span class="material-symbols-outlined text-[16px] text-secondary">visibility</span> معاينة الطبقات (Depth / Velocity)
+                  </button>
+                  <div class="flex items-center gap-3">
+                    <button class="px-4 py-2 rounded border border-outline-variant/30 bg-surface-container-highest hover:bg-surface-bright text-on-surface font-body-sm text-body-sm transition-colors flex items-center gap-2">
+                      <span class="material-symbols-outlined text-[16px] text-primary">play_arrow</span> Previz 3D
+                    </button>
+                    <button class="px-5 py-2 rounded bg-primary text-on-primary font-body-sm text-body-sm font-bold shadow-[0_0_12px_rgba(212,175,55,0.25)] hover:bg-primary-fixed transition-colors flex items-center gap-2">
+                      <span class="material-symbols-outlined text-[16px]">send</span> إرسال لطابور الرندرة (Render Queue)
+                    </button>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </article>
+
+          <!-- SCENE 02 -->
+          <article class="bg-surface-container-low border border-primary/30 rounded-lg overflow-hidden flex flex-col shadow-[0_0_24px_rgba(212,175,55,0.08)] transition-shadow">
+            
+            <!-- Contextual Rewrite Bar -->
+            <div class="bg-primary-container text-on-primary-container px-6 py-2 flex items-center justify-between">
+              <div class="flex items-center gap-2 font-body-sm text-body-sm font-medium">
+                <span class="material-symbols-outlined text-[18px] animate-spin">sync</span>
+                <span>تعديل الكاميرا قيد التطبيق التوليدي: تعديل العدسة من 50mm إلى 24mm Anamorphic لتعزيز التوتر الدرامي والمجال المعماري</span>
+              </div>
+              <span class="px-2 py-0.5 bg-background text-primary rounded font-meta-mono-sm text-meta-mono-sm border border-primary/20">مسار راديكالي مُحدث</span>
+            </div>
+
+            <header class="bg-surface-container-highest px-6 py-3 flex items-center justify-between border-b border-outline-variant/20">
+              <div class="flex items-center gap-4">
+                <div class="flex items-center gap-2">
+                  <span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+                  <span class="font-meta-mono text-meta-mono text-secondary font-bold">المشهد 02 // SCENE 02</span>
+                </div>
+                <h3 class="font-headline-sm text-headline-sm font-bold text-on-surface pr-4 border-r border-outline-variant/30">انغمار الحواس (Sensory Immersion)</h3>
+              </div>
+              <div class="flex items-center gap-3">
+                <span class="font-meta-mono-sm text-meta-mono-sm px-2 py-1 rounded bg-surface-container-lowest text-secondary border border-secondary/20" dir="ltr">00:00:08:00 ➔ 00:00:20:00 (12 ثانية)</span>
+                <span class="font-meta-mono-sm text-meta-mono-sm px-2 py-1 rounded bg-secondary-container/20 text-secondary font-semibold border border-secondary/20 uppercase" dir="ltr">PASS 2: LORA HYDRATION</span>
+              </div>
+            </header>
+            
+            <div class="p-6 grid grid-cols-1 lg:grid-cols-12 gap-8">
+              <!-- Visuals Column -->
+              <div class="lg:col-span-5 flex flex-col gap-4">
+                <div class="relative w-full aspect-[4/3] rounded bg-surface-container-lowest overflow-hidden border border-outline-variant/20 group">
+                  <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZMkJhQjUZebbGK_2kKnT21c9gZ_n8pQo03gQtMMM17QPht6x-tQlEvF0mfDVImz3psLi4r7PLrl4lwMLMGmci1WSrn4RvvL5Tg7FukmmdAczLhJdQwm6XAcyP2Mu1qLO8MtN1B5T749OdJez2SlD2BmeFNI4LezpAtXQV-HUzRiJKpJRzohZlUu6-24br85yadPvIMowsAy5Xj6hEU1Pi7SG1USQR1obglO8onVMGb8i-_gFXmZmI" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Medium shot">
+                  <div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-transparent to-transparent opacity-60"></div>
+                  
+                  <div class="absolute top-3 right-3 px-2 py-1 rounded bg-surface-container-lowest/80 backdrop-blur text-secondary font-meta-mono-sm text-meta-mono-sm border border-secondary/20 flex items-center gap-2">
+                    <span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                    <span>SLATE #02-B</span>
+                  </div>
+                  
+                  <div class="absolute bottom-3 left-3 flex items-center gap-2">
+                    <span class="bg-surface-container-lowest/90 px-2 py-1 rounded border border-outline-variant/30 text-on-surface font-meta-mono-sm text-meta-mono-sm">35mm PRIME DOLLY</span>
+                  </div>
+                  <div class="absolute bottom-3 right-3">
+                    <span class="bg-surface-container-lowest/90 px-2 py-1 rounded border border-outline-variant/30 text-primary font-meta-mono-sm text-meta-mono-sm font-bold">LORA WEIGHT: 0.85</span>
+                  </div>
+                </div>
+
+                <!-- Subpasses -->
+                <div class="grid grid-cols-3 gap-2">
+                  <div class="bg-surface-container-highest rounded p-2 flex flex-col items-center justify-center border border-outline-variant/10">
+                    <span class="font-meta-mono-sm text-meta-mono-sm text-outline uppercase mb-1">MIST PARTICLES</span>
+                    <span class="font-meta-mono-sm text-meta-mono-sm text-on-surface font-bold">NIAGARA UE5</span>
+                  </div>
+                  <div class="bg-surface-container-highest rounded p-2 flex flex-col items-center justify-center border border-outline-variant/10">
+                    <span class="font-meta-mono-sm text-meta-mono-sm text-outline uppercase mb-1">SKIN SSS</span>
+                    <span class="font-meta-mono-sm text-meta-mono-sm text-secondary font-bold">NATURAL</span>
+                  </div>
+                  <div class="bg-surface-container-highest rounded p-2 flex flex-col items-center justify-center border border-outline-variant/10">
+                    <span class="font-meta-mono-sm text-meta-mono-sm text-outline uppercase mb-1">CONTROLNET</span>
+                    <span class="font-meta-mono-sm text-meta-mono-sm text-primary font-bold">DEPTH 1.2</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Editorial Column -->
+              <div class="lg:col-span-7 flex flex-col gap-6">
+                
+                <div class="flex flex-col gap-3 border-b border-outline-variant/20 pb-4">
+                  <div class="flex flex-wrap items-center gap-2 font-meta-mono-sm text-meta-mono-sm">
+                    <span class="px-2 py-1 rounded bg-surface-container-highest border border-outline-variant/20 text-primary">العدسة: 35mm Prime Dolly-in (Slow Speed)</span>
+                    <span class="px-2 py-1 rounded bg-surface-container-highest border border-outline-variant/20 text-on-surface">إضاءة: Golden Hour Ambient Soft 3200K</span>
+                    <span class="px-2 py-1 rounded bg-surface-container-highest border border-outline-variant/20 text-secondary">الحزمة: LoRA Cinematic Hydration v2.1</span>
+                  </div>
+                  <p class="font-body-md text-body-md text-on-surface leading-relaxed mt-2">
+                    <strong class="text-secondary font-medium">سرد المشهد:</strong> حركة بطيئة ومستقرة؛ ملامسة السائل البارد للشفاه مع انتشار تموجات هوائية بلورية ناعمة، محاكاة حركة جزيئات الرذاذ العائم في الهواء المحيط دون أي رغوة اصطناعية أو فوران مشتت.
+                  </p>
+                </div>
+
+                <div class="flex flex-col gap-2 bg-surface-container-highest p-4 rounded border border-outline-variant/20">
+                  <div class="flex items-center justify-between mb-2">
+                    <span class="font-meta-mono-sm text-meta-mono-sm text-outline uppercase">AI Neural VFX Prompt (Sora 2 / ComfyUI)</span>
+                    <div class="flex items-center gap-3 font-meta-mono-sm text-meta-mono-sm">
+                      <span class="text-secondary">LoRA: 0.85</span>
+                      <span class="text-primary">Steps: 45 (Euler)</span>
+                    </div>
+                  </div>
+                  <code class="font-meta-mono-sm text-meta-mono-sm text-on-surface-variant bg-surface-container-low p-3 rounded block overflow-x-auto text-left border border-outline-variant/10 leading-relaxed" dir="ltr">cinematic slow-motion 35mm lens, liquid touching human lips, pristine water dispersion, soft golden hour rim light 3200k, natural calm expression, floating micro mist particles in backlight, peaceful sensory satisfaction, high dynamic range --v 6.1 --stylize 350</code>
+                  <div class="flex items-start justify-between mt-2 pt-2 border-t border-outline-variant/10">
+                    <span class="font-meta-mono-sm text-meta-mono-sm text-error leading-relaxed max-w-sm">Negative: [sweat droplets, exaggerated sports gulps, plastic bottle reflections, heavy foam, artificial cartoonish lighting]</span>
+                    <button class="flex items-center gap-1 font-meta-mono-sm text-meta-mono-sm text-primary hover:text-primary-fixed transition-colors bg-primary/10 px-2 py-1 rounded">
+                      <span class="material-symbols-outlined text-[14px]">content_copy</span> نسخ الأمر
+                    </button>
+                  </div>
+                </div>
+
+                <div class="flex items-center justify-between mt-auto">
+                  <button class="px-4 py-2 rounded border border-outline-variant/30 bg-surface-container-highest hover:bg-surface-bright text-on-surface font-body-sm text-body-sm transition-colors flex items-center gap-2">
+                    <span class="material-symbols-outlined text-[16px] text-secondary">tune</span> ضبط وزن الـ LoRA
+                  </button>
+                  <div class="flex items-center gap-3">
+                    <button class="px-4 py-2 rounded border border-outline-variant/30 bg-surface-container-highest hover:bg-surface-bright text-on-surface font-body-sm text-body-sm transition-colors flex items-center gap-2">
+                      <span class="material-symbols-outlined text-[16px] text-primary">play_arrow</span> Previz 3D
+                    </button>
+                    <button class="px-5 py-2 rounded bg-primary text-on-primary font-body-sm text-body-sm font-bold shadow-[0_0_12px_rgba(212,175,55,0.25)] hover:bg-primary-fixed transition-colors flex items-center gap-2">
+                      <span class="material-symbols-outlined text-[16px]">send</span> إرسال لطابور الرندرة (Render Queue)
+                    </button>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </article>
+
+          <!-- SCENE 03 -->
+          <article class="bg-surface-container-low border border-outline-variant/20 rounded-lg overflow-hidden flex flex-col shadow-lg transition-shadow hover:shadow-[0_0_20px_rgba(212,175,55,0.05)] opacity-80 hover:opacity-100">
+            <header class="bg-surface-container-highest px-6 py-3 flex items-center justify-between border-b border-outline-variant/20">
+              <div class="flex items-center gap-4">
+                <div class="flex items-center gap-2">
+                  <span class="w-2 h-2 rounded-full bg-outline animate-pulse"></span>
+                  <span class="font-meta-mono text-meta-mono text-outline font-bold">المشهد 03 // SCENE 03</span>
+                </div>
+                <h3 class="font-headline-sm text-headline-sm font-bold text-on-surface pr-4 border-r border-outline-variant/30">سيادة الوضوح (Sovereignty of Clarity)</h3>
+              </div>
+              <div class="flex items-center gap-3">
+                <span class="font-meta-mono-sm text-meta-mono-sm px-2 py-1 rounded bg-surface-container-lowest text-outline border border-outline-variant/30" dir="ltr">00:00:20:00 ➔ 00:00:30:00 (10 ثوانٍ)</span>
+                <span class="font-meta-mono-sm text-meta-mono-sm px-2 py-1 rounded bg-surface-container-highest text-primary font-semibold border border-outline-variant/20 uppercase" dir="ltr">PASS 3: GLASS 3D EMBED</span>
+              </div>
+            </header>
+            
+            <div class="p-6 grid grid-cols-1 lg:grid-cols-12 gap-8">
+              <!-- Visuals Column -->
+              <div class="lg:col-span-5 flex flex-col gap-4">
+                <div class="relative w-full aspect-[4/3] rounded bg-surface-container-lowest overflow-hidden border border-outline-variant/20 group">
+                  <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAN9_6rcGZDS87SpaPPPFQmfecyxhSt2csgRGMjgcKof3kPEBikesxHfO3IEJFnd9udZzv6gmfRdPkxdaNJLGeDmoSS7XlF3Hf4gZQ7TcIBa_q2i6Mmbx3p9uAUFbk1TQPoTHKzRZQ6EQa6BG0fkZ6aOPEYrUL-JtEmGu819HqGNKo0-rzsDka3z6vWehOrfSdT15Nt7hnXvsnOJat94SYNOWof5gmU2-43mxUlGZhEtqwiGMXmpJiT" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Wide horizon">
+                  <div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-transparent to-transparent opacity-60"></div>
+                  
+                  <div class="absolute top-3 right-3 px-2 py-1 rounded bg-surface-container-lowest/80 backdrop-blur text-on-surface font-meta-mono-sm text-meta-mono-sm border border-outline-variant/30 flex items-center gap-2">
+                    <span class="w-1.5 h-1.5 rounded-full bg-outline"></span>
+                    <span>SLATE #03-C</span>
+                  </div>
+                  
+                  <div class="absolute bottom-3 left-3 flex items-center gap-2">
+                    <span class="bg-surface-container-lowest/90 px-2 py-1 rounded border border-outline-variant/30 text-on-surface font-meta-mono-sm text-meta-mono-sm">50mm ANAMORPHIC</span>
+                  </div>
+                  <div class="absolute bottom-3 right-3">
+                    <span class="bg-surface-container-lowest/90 px-2 py-1 rounded border border-outline-variant/30 text-primary font-meta-mono-sm text-meta-mono-sm font-bold">GLASS EMBED 3D</span>
+                  </div>
+                </div>
+
+                <!-- Subpasses -->
+                <div class="grid grid-cols-3 gap-2">
+                  <div class="bg-surface-container-highest rounded p-2 flex flex-col items-center justify-center border border-outline-variant/10">
+                    <span class="font-meta-mono-sm text-meta-mono-sm text-outline uppercase mb-1">GRADE LUT</span>
+                    <span class="font-meta-mono-sm text-meta-mono-sm text-on-surface font-bold">ACES_GOLD.cube</span>
+                  </div>
+                  <div class="bg-surface-container-highest rounded p-2 flex flex-col items-center justify-center border border-outline-variant/10">
+                    <span class="font-meta-mono-sm text-meta-mono-sm text-outline uppercase mb-1">REFRACTION</span>
+                    <span class="font-meta-mono-sm text-meta-mono-sm text-secondary font-bold">RAYTRACED</span>
+                  </div>
+                  <div class="bg-surface-container-highest rounded p-2 flex flex-col items-center justify-center border border-outline-variant/10">
+                    <span class="font-meta-mono-sm text-meta-mono-sm text-outline uppercase mb-1">3D TRACKING</span>
+                    <span class="font-meta-mono-sm text-meta-mono-sm text-primary font-bold">PFTRACK 0.02e</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Editorial Column -->
+              <div class="lg:col-span-7 flex flex-col gap-6">
+                
+                <div class="flex flex-col gap-3 border-b border-outline-variant/20 pb-4">
+                  <div class="flex flex-wrap items-center gap-2 font-meta-mono-sm text-meta-mono-sm">
+                    <span class="px-2 py-1 rounded bg-surface-container-highest border border-outline-variant/20 text-primary">العدسة: 50mm Anamorphic Wide Horizon</span>
+                    <span class="px-2 py-1 rounded bg-surface-container-highest border border-outline-variant/20 text-on-surface">إضاءة: Dawn Cold Horizon + Pure Gold Sunbeam</span>
+                    <span class="px-2 py-1 rounded bg-surface-container-highest border border-outline-variant/20 text-secondary">مؤثرات: Glass Refraction 3D Logo Embed</span>
+                  </div>
+                  <p class="font-body-md text-body-md text-on-surface leading-relaxed mt-2">
+                    <strong class="text-primary font-medium">سرد المشهد:</strong> دمج هوية البراند بنعومة زجاجية ثلاثية الأبعاد (Glass Refraction 3D Logo Embed) في الأفق المفتوح، شروق شمس صامت وانعكاسات نقية على وجه الممثل تؤكد سيادة العقل الصافي.
+                  </p>
+                </div>
+
+                <div class="flex flex-col gap-2 bg-surface-container-highest p-4 rounded border border-outline-variant/20">
+                  <div class="flex items-center justify-between mb-2">
+                    <span class="font-meta-mono-sm text-meta-mono-sm text-outline uppercase">AI Neural VFX Prompt (Unreal Live Link)</span>
+                    <div class="flex items-center gap-3 font-meta-mono-sm text-meta-mono-sm">
+                      <span class="text-secondary">Focal: 50mm Anamorphic</span>
+                      <span class="text-primary">ACEScg LUT</span>
+                    </div>
+                  </div>
+                  <code class="font-meta-mono-sm text-meta-mono-sm text-on-surface-variant bg-surface-container-low p-3 rounded block overflow-x-auto text-left border border-outline-variant/10 leading-relaxed" dir="ltr">wide dawn horizon landscape, pristine silence, pure morning cold-to-warm light gradation, integrated transparent glass typographic sculpture reflecting morning sun rays, cinematic stillness, arri alexa 65 look, 2.39:1 cinemascope --no loud branding --film grain subtle</code>
+                  <div class="flex items-start justify-between mt-2 pt-2 border-t border-outline-variant/10">
+                    <span class="font-meta-mono-sm text-meta-mono-sm text-error leading-relaxed max-w-sm">Negative: [oversaturated sky, heavy clouds, corporate vector logo overlays, fast cuts, noisy compression]</span>
+                    <button class="flex items-center gap-1 font-meta-mono-sm text-meta-mono-sm text-primary hover:text-primary-fixed transition-colors bg-primary/10 px-2 py-1 rounded">
+                      <span class="material-symbols-outlined text-[14px]">content_copy</span> نسخ الأمر
+                    </button>
+                  </div>
+                </div>
+
+                <div class="flex items-center justify-between mt-auto">
+                  <button class="px-4 py-2 rounded border border-outline-variant/30 bg-surface-container-highest hover:bg-surface-bright text-on-surface font-body-sm text-body-sm transition-colors flex items-center gap-2">
+                    <span class="material-symbols-outlined text-[16px] text-secondary">view_in_ar</span> معاينة مجسم الـ 3D Logo
+                  </button>
+                  <div class="flex items-center gap-3">
+                    <button class="px-4 py-2 rounded border border-outline-variant/30 bg-surface-container-highest hover:bg-surface-bright text-on-surface font-body-sm text-body-sm transition-colors flex items-center gap-2">
+                      <span class="material-symbols-outlined text-[16px] text-primary">play_arrow</span> Previz 3D
+                    </button>
+                    <button class="px-5 py-2 rounded bg-primary text-on-primary font-body-sm text-body-sm font-bold shadow-[0_0_12px_rgba(212,175,55,0.25)] hover:bg-primary-fixed transition-colors flex items-center gap-2">
+                      <span class="material-symbols-outlined text-[16px]">send</span> إرسال لطابور الرندرة (Render Queue)
+                    </button>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </article>
+
+        </div>
+
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Bottom Floating Directorial Dispatch Board (Left RTL) -->
+  <aside class="fixed bottom-6 left-6 w-[340px] z-50 flex flex-col gap-4">
+    
+    <!-- On-set Monitors Sync -->
+    <div class="bg-surface-container-highest/90 backdrop-blur-xl border border-outline-variant/20 rounded-xl p-5 shadow-[0_12px_36px_rgba(0,0,0,0.5)] flex flex-col gap-4">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-secondary text-[20px]">router</span>
+          <h4 class="font-headline-sm text-body-md font-semibold text-on-surface">مزامنة الطاقم والشاشات الميدانية</h4>
+        </div>
+      </div>
+      <div class="flex flex-col gap-2">
+        <span class="font-meta-mono-sm text-meta-mono-sm text-outline uppercase tracking-wider">شاشات المخرج المتصلة (ON-SET MONITORS)</span>
+        
+        <div class="flex items-center justify-between bg-surface-container-lowest/80 p-2 rounded border border-outline-variant/10">
+          <span class="px-1.5 py-0.5 rounded bg-primary-container/20 text-primary font-meta-mono-sm text-meta-mono-sm">LIVE</span>
+          <div class="flex flex-col items-end">
+            <span class="font-body-sm text-body-sm text-on-surface font-medium">Atomos Shogun 7 (Director Mon)</span>
+            <span class="font-meta-mono-sm text-meta-mono-sm text-outline">12G-SDI 4K • 0ms Delay</span>
+          </div>
+          <span class="material-symbols-outlined text-primary text-[16px]">desktop_windows</span>
+        </div>
+        
+        <div class="flex items-center justify-between bg-surface-container-lowest/80 p-2 rounded border border-outline-variant/10">
+          <span class="px-1.5 py-0.5 rounded bg-surface-container-high text-secondary font-meta-mono-sm text-meta-mono-sm">LOCKED</span>
+          <div class="flex flex-col items-end">
+            <span class="font-body-sm text-body-sm text-on-surface font-medium">SmallHD Cine 13 (DoP Rig)</span>
+            <span class="font-meta-mono-sm text-meta-mono-sm text-outline">Wireless Teradek Bolt 4K</span>
+          </div>
+          <span class="material-symbols-outlined text-secondary text-[16px]">tablet_mac</span>
+        </div>
+        
+        <div class="flex items-center justify-between bg-surface-container-lowest/80 p-2 rounded border border-outline-variant/10">
+          <span class="px-1.5 py-0.5 rounded bg-surface-container-high text-on-surface-variant font-meta-mono-sm text-meta-mono-sm">ACTIVE</span>
+          <div class="flex flex-col items-end">
+            <span class="font-body-sm text-body-sm text-on-surface font-medium">iPad Pro M4 (Script Supervisor)</span>
+            <span class="font-meta-mono-sm text-meta-mono-sm text-outline">Frame.io Live C2C Link</span>
+          </div>
+          <span class="material-symbols-outlined text-on-surface-variant text-[16px]">smartphone</span>
+        </div>
+
+      </div>
+
+      <div class="flex flex-col gap-2 pt-2 border-t border-outline-variant/10">
+        <div class="flex justify-between items-center">
+          <span class="font-meta-mono-sm text-meta-mono-sm text-outline">حزمة المعايرة 3D LUT:</span>
+          <span class="font-meta-mono-sm text-meta-mono-sm text-primary">LiquidPause_ACES_GOLD.cube</span>
+        </div>
+        <div class="flex justify-between items-center">
+          <span class="font-meta-mono-sm text-meta-mono-sm text-outline">المسار الصوتي التجريبي (432Hz Audio Stem):</span>
+          <span class="font-meta-mono-sm text-meta-mono-sm text-secondary">LOADED (Timecode Synced)</span>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2 pt-1">
+        <button class="flex-1 py-2 rounded bg-surface-container-high hover:bg-surface-bright text-on-surface font-body-sm text-body-sm flex items-center justify-center gap-1.5 transition-colors border border-outline-variant/20">
+          <span class="material-symbols-outlined text-[16px] text-primary">description</span> تصدير Shot-List CSV
+        </button>
+        <button class="flex-1 py-2 rounded bg-surface-container-high hover:bg-surface-bright text-on-surface font-body-sm text-body-sm flex items-center justify-center gap-1.5 transition-colors border border-outline-variant/20">
+          <span class="material-symbols-outlined text-[16px] text-secondary">print</span> طباعة Storyboard PDF
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Audio Waveform Monitor -->
+    <div class="bg-surface-container-lowest border border-outline-variant/20 rounded-xl p-4 shadow-2xl flex flex-col gap-2">
+      <div class="flex items-center justify-between">
+        <span class="font-meta-mono-sm text-meta-mono-sm text-outline">14-LUFS INTEGRATED</span>
+        <div class="flex items-center gap-1.5 text-primary">
+          <span class="font-meta-mono-sm text-meta-mono-sm uppercase font-bold tracking-widest">432Hz Liquid Silence Track</span>
+          <span class="material-symbols-outlined text-[16px]">graphic_eq</span>
+        </div>
+      </div>
+      <div class="h-8 w-full flex items-center overflow-hidden gap-0.5 opacity-80 mt-1" dir="ltr">
+        <div class="w-1.5 bg-primary/40 rounded-full h-[20%]"></div><div class="w-1.5 bg-primary/40 rounded-full h-[30%]"></div><div class="w-1.5 bg-primary/40 rounded-full h-[15%]"></div><div class="w-1.5 bg-primary/60 rounded-full h-[40%]"></div><div class="w-1.5 bg-primary/60 rounded-full h-[55%]"></div><div class="w-1.5 bg-primary rounded-full h-[80%]"></div><div class="w-1.5 bg-primary rounded-full h-[95%]"></div><div class="w-1.5 bg-primary/80 rounded-full h-[60%]"></div><div class="w-1.5 bg-primary/60 rounded-full h-[35%]"></div><div class="w-1.5 bg-primary/40 rounded-full h-[20%]"></div><div class="w-1.5 bg-secondary/40 rounded-full h-[10%]"></div><div class="w-1.5 bg-secondary/60 rounded-full h-[25%]"></div><div class="w-1.5 bg-secondary/80 rounded-full h-[45%]"></div><div class="w-1.5 bg-secondary rounded-full h-[70%]"></div><div class="w-1.5 bg-secondary rounded-full h-[85%]"></div><div class="w-1.5 bg-secondary/80 rounded-full h-[50%]"></div><div class="w-1.5 bg-secondary/60 rounded-full h-[30%]"></div><div class="w-1.5 bg-secondary/40 rounded-full h-[15%]"></div><div class="w-1.5 bg-primary/40 rounded-full h-[25%]"></div><div class="w-1.5 bg-primary/60 rounded-full h-[40%]"></div><div class="w-1.5 bg-primary/80 rounded-full h-[65%]"></div><div class="w-1.5 bg-primary rounded-full h-[90%]"></div><div class="w-1.5 bg-primary/80 rounded-full h-[75%]"></div><div class="w-1.5 bg-primary/60 rounded-full h-[45%]"></div><div class="w-1.5 bg-primary/40 rounded-full h-[20%]"></div><div class="w-1.5 bg-secondary/40 rounded-full h-[10%]"></div><div class="w-1.5 bg-secondary/40 rounded-full h-[15%]"></div><div class="w-1.5 bg-secondary/40 rounded-full h-[10%]"></div><div class="w-1.5 bg-secondary/40 rounded-full h-[15%]"></div><div class="w-1.5 bg-secondary/40 rounded-full h-[10%]"></div><div class="w-1.5 bg-secondary/40 rounded-full h-[15%]"></div><div class="w-1.5 bg-secondary/40 rounded-full h-[10%]"></div><div class="w-1.5 bg-secondary/40 rounded-full h-[15%]"></div><div class="w-1.5 bg-secondary/40 rounded-full h-[10%]"></div><div class="w-1.5 bg-secondary/40 rounded-full h-[15%]"></div>
+      </div>
+      <div class="flex items-center justify-between font-meta-mono-sm text-[9px] text-outline mt-1" dir="ltr">
+        <span>00:00:00:00</span>
+        <span class="text-primary font-bold">PLAYHEAD: 00:04:12:00</span>
+        <span>00:00:30:00</span>
+      </div>
+    </div>
+
+  </aside>
+
+</body></html>

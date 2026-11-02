@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "surface-container-low": "#1c1b1b", "on-primary": "#690003", "inverse-surface": "#e5e2e1", "on-primary-fixed-variant": "#930007", "on-error-container": "#ffdad6", "surface-variant": "#353534", "on-secondary-fixed-variant": "#862200", "primary-fixed": "#ffdad5", "surface-container-highest": "#353534", "surface-tint": "#ffb4aa", "primary": "#ffb4aa", "surface-bright": "#393939", "surface-container-high": "#2a2a2a", "secondary-fixed": "#ffdbd1", "on-secondary-fixed": "#3b0900", "error-container": "#93000a", "inverse-on-surface": "#313030", "primary-container": "#e50914", "surface-container-lowest": "#0e0e0e", "surface-container": "#201f1f", "on-surface-variant": "#e9bcb6", "surface-dim": "#131313", "secondary-container": "#d73b00", "on-primary-fixed": "#410001", "on-surface": "#e5e2e1", "surface": "#131313", "on-tertiary-fixed": "#410005", "secondary-fixed-dim": "#ffb5a0", "tertiary-fixed-dim": "#ffb3ae", "on-primary-container": "#fff7f6", "tertiary": "#ffb3ae", "outline-variant": "#5e3f3b", "on-tertiary": "#68000c", "inverse-primary": "#c0000c", "on-error": "#690005", "tertiary-container": "#e40b2b", "on-tertiary-container": "#fff7f6", "on-tertiary-fixed-variant": "#930016", "secondary": "#ffb5a0", "background": "#131313", "tertiary-fixed": "#ffdad7", "on-secondary-container": "#fffbff", "on-secondary": "#5f1500", "on-background": "#e5e2e1", "error": "#ffb4ab", "primary-fixed-dim": "#ffb4aa", "outline": "af8782" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "space-md": "1rem", "space-lg": "1.5rem", "margin-mobile": "1rem", "margin": "2rem", "gutter-mobile": "0.75rem", "gutter": "1.5rem", "space-xs": "0.25rem", "space-xl": "2.5rem", "space-sm": "0.5rem" }, "fontFamily": { "body-lg": ["Inter"], "headline-xl": ["Geist"], "body-sm": ["Inter"], "headline-md": ["Geist"], "body-md": ["Inter"], "headline-lg": ["Geist"], "headline-xl-mobile": ["Geist"], "headline-sm": ["Geist"], "headline-lg-mobile": ["Geist"], "label-md": ["Geist"], "label-sm": ["Geist"] }, "fontSize": { "body-lg": ["1rem", { "lineHeight": "1.6rem", "letterSpacing": "-0.005em", "fontWeight": "400" }], "headline-xl": ["3rem", { "lineHeight": "3.5rem", "letterSpacing": "-0.03em", "fontWeight": "600" }], "body-sm": ["0.75rem", { "lineHeight": "1.2rem", "letterSpacing": "0.01em", "fontWeight": "400" }], "headline-md": ["1.5rem", { "lineHeight": "2rem", "letterSpacing": "-0.015em", "fontWeight": "500" }], "body-md": ["0.875rem", { "lineHeight": "1.4rem", "letterSpacing": "0em", "fontWeight": "400" }], "headline-lg": ["2.25rem", { "lineHeight": "2.75rem", "letterSpacing": "-0.025em", "fontWeight": "600" }], "headline-xl-mobile": ["2rem", { "lineHeight": "2.5rem", "letterSpacing": "-0.02em", "fontWeight": "600" }], "headline-sm": ["1.125rem", { "lineHeight": "1.625rem", "letterSpacing": "-0.01em", "fontWeight": "500" }], "headline-lg-mobile": ["1.625rem", { "lineHeight": "2.125rem", "letterSpacing": "-0.02em", "fontWeight": "600" }], "label-md": ["0.8125rem", { "lineHeight": "1rem", "letterSpacing": "0.02em", "fontWeight": "500" }], "label-sm": ["0.6875rem", { "lineHeight": "0.875rem", "letterSpacing": "0.05em", "fontWeight": "600" }] } } } }</script></head><body class="bg-surface font-body-md text-body-md text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-container"><aside class="fixed left-0 top-0 h-full w-72 bg-surface-container-lowest z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.5)]"><div class="flex flex-col"><div class="h-16 px-space-lg flex items-center justify-between bg-surface-container-lowest"><div class="flex items-center gap-space-sm"><img alt="FX-2026 Brand Emblem" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD0VvF0aj0DHp2h98MzVkGo_27dTZN0fZVboahqbTwts6bbOXSloSCwpeAslIHSIj3GSXs0y7fPlxijH-s9UIVfsupKP4kEMYxrDTXtCfQb6LWhQ0GAd1R_MD5Shm68oN6Fg3usBRp4V1KVT_GQDBaTavk0qLlvCMT1KBNwQpvPtfydvuxh7e1IvZ2bpAzzdEV7j_98XtEH7Lj0kMukmwUsWrMh_BQtPc1hMVakrVNLWnvLQAkw2ig"/><span class="font-headline-sm text-headline-sm tracking-wider text-on-surface uppercase">FX-2026</span></div><span class="px-space-xs py-0.5 rounded bg-surface-container-high text-primary font-label-sm text-label-sm tracking-widest uppercase">Enterprise</span></div><div class="px-space-md pt-space-sm pb-space-xs"><button class="w-full flex items-center justify-between px-space-md py-space-sm rounded-lg bg-primary-container text-on-primary-container hover:bg-tertiary-container transition-all shadow-[0_4px_16px_rgba(229,9,20,0.25)]" type="button"><span class="flex items-center gap-space-xs font-label-md text-label-md tracking-wide"><span class="material-symbols-outlined text-lg">add_circle</span>New Prompt</span><kbd class="px-space-xs py-0.5 rounded bg-on-primary font-label-sm text-label-sm text-on-primary-container opacity-90">⌘K</kbd></button></div><div class="overflow-y-auto px-space-md py-space-xs space-y-space-md"><div class="space-y-space-xs"><span class="px-space-sm font-label-sm text-label-sm text-outline tracking-wider uppercase">Features</span><nav class="flex flex-col gap-0.5" data-active-classes="bg-surface-container-high text-on-surface font-label-md"><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="chat" href="#"><span class="material-symbols-outlined text-lg">chat_bubble</span><span>Chat</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="architect" href="#"><span class="material-symbols-outlined text-lg">architecture</span><span>Architect</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="memory" href="#"><span class="material-symbols-outlined text-lg">neurology</span><span>Memory</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="analytics" href="#"><span class="material-symbols-outlined text-lg">monitoring</span><span>Analytics</span></a></nav></div><div class="space-y-space-xs"><span class="px-space-sm font-label-sm text-label-sm text-outline tracking-wider uppercase">Workspaces</span><nav class="flex flex-col gap-0.5" data-active-classes="bg-surface-container-high text-on-surface font-label-md"><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="new-project" href="#"><span class="material-symbols-outlined text-lg">create_new_folder</span><span>New Project</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="image-generator" href="#"><span class="material-symbols-outlined text-lg">image</span><span>Image Generator</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="video-director" href="#"><span class="material-symbols-outlined text-lg">movie_filter</span><span>Video Director</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="audio-soundtrack" href="#"><span class="material-symbols-outlined text-lg">graphic_eq</span><span>Audio / Soundtrack</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="3d-assets" href="#"><span class="material-symbols-outlined text-lg">view_in_ar</span><span>3D Assets</span></a></nav></div><div class="space-y-space-xs"><span class="px-space-sm font-label-sm text-label-sm text-outline tracking-wider uppercase">Intelligence</span><nav class="flex flex-col gap-0.5" data-active-classes="bg-surface-container-high text-on-surface font-label-md"><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="neural-models" href="#"><span class="material-symbols-outlined text-lg">psychology</span><span>Neural Models</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="prompt-vault" href="#"><span class="material-symbols-outlined text-lg">lock</span><span>Prompt Vault</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="render-queue" href="#"><span class="material-symbols-outlined text-lg">layers</span><span>Render Queue</span></a></nav></div></div></div><div class="p-space-md space-y-space-sm bg-surface-container-lowest"><div class="p-space-md rounded-xl bg-surface-container-low shadow-[inset_0_0_24px_rgba(229,9,20,0.08)] flex flex-col gap-space-xs"><div class="flex items-center justify-between"><div class="flex items-center gap-space-xs text-primary"><span class="material-symbols-outlined text-base">diamond</span><span class="font-label-md text-label-md text-on-surface">Enterprise Tier</span></div><span class="font-label-sm text-label-sm text-outline uppercase">PRO</span></div><p class="font-body-sm text-body-sm text-on-surface-variant">Unlock full compute threads and unmetered batch rendering.</p><a class="mt-space-xs inline-flex items-center justify-center py-space-xs px-space-sm rounded bg-surface-container-high text-on-surface hover:bg-surface-bright hover:text-on-surface font-label-sm text-label-sm transition-colors" data-path="manage-plan" href="#">Manage Plan</a></div><div class="px-space-sm py-space-xs rounded bg-surface-container-lowest flex items-center gap-space-xs"><span class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></span><span class="font-label-sm text-label-sm text-outline truncate">Node: US-East GPU Cluster (RTX-6000 Ada)</span></div></div></aside><div class="pl-72"><header class="fixed top-0 left-72 right-0 h-16 bg-surface-container-lowest/90 backdrop-blur-xl z-40 px-space-lg flex items-center justify-between shadow-[0_1px_8px_rgba(0,0,0,0.5)]"><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs font-label-md text-label-md text-on-surface"><span class="text-outline">FX-2026 Studio</span><span class="text-outline">/</span><span class="font-medium text-on-surface">Creative Intelligence v4.2</span><span class="relative flex h-2 w-2 ml-1"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-container opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-primary-container"></span></span></div></div><div class="flex-1 max-w-md mx-space-lg"><div class="relative flex items-center"><span class="material-symbols-outlined absolute left-3 text-outline text-lg pointer-events-none">search</span><input class="w-full bg-surface-container py-space-xs pl-9 pr-12 rounded-lg text-on-surface placeholder:text-outline font-body-sm text-body-sm focus:outline-none focus:ring-1 focus:ring-primary" placeholder="Omni-Search workflows, models, nodes..." type="text"/><kbd class="absolute right-2 px-space-xs py-0.5 rounded bg-surface-container-high text-outline font-label-sm text-label-sm">⌘/</kbd></div></div><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs px-space-sm py-space-xs rounded-lg bg-surface-container-low"><span class="material-symbols-outlined text-primary text-base">speed</span><span class="font-label-sm text-label-sm text-outline">GPU:</span><span class="font-label-sm text-label-sm text-on-surface font-medium">42%</span><div class="w-12 h-1.5 bg-surface-container-high rounded-full overflow-hidden ml-1"><div class="h-full bg-primary-container w-[42%]"></div></div></div><button class="px-space-xs py-space-xs rounded text-outline hover:text-on-surface font-label-sm text-label-sm transition-colors" type="button">العربية / EN</button><button class="relative p-space-xs rounded-lg text-outline hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-lg">notifications</span><span class="absolute top-1.5 right-1.5 w-1.5 h-1.5 rounded-full bg-primary-container"></span></button><a class="p-space-xs rounded-lg text-outline hover:text-on-surface transition-colors" data-path="documentation" href="#" title="Documentation"><span class="material-symbols-outlined text-lg">menu_book</span></a><div class="flex items-center gap-space-xs pl-space-xs"><img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-1 ring-outline-variant" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCA84LSJo3PpfP2pWLm_Cw-072SStUGjZU-hzUD6ulEBNPdDfexoV9Qf9PIyBx9o99-kJwkFH20QyrFGhdNmCVguhmdcAhxwOImgXxKS4sIoFatPT7s-nyaHvHbsj5IJe-bWxyc6up8tbxS1HGVQTuS-KYNmxASO461Xz5h-1wCquC6sM4ka9q9lARBJSW4OR8Rvsnx5Gqrzl6NNUh9rDMxj_6OXoDUQuEk3_bgSs76nP2VMZLis20"/><span class="material-symbols-outlined text-outline text-base">expand_more</span></div></div></header><main class="w-full pt-16 bg-surface min-h-screen"><div class="flex flex-col w-full">
+<!-- Subtle Spatial Radiant Background Bloom -->
+<div class="relative w-full overflow-hidden">
+<div class="pointer-events-none absolute -top-40 right-1/4 h-96 w-96 rounded-full bg-primary-container/10 blur-[120px]"></div>
+<div class="pointer-events-none absolute top-1/3 left-1/3 h-80 w-80 rounded-full bg-secondary-container/5 blur-[100px]"></div>
+<!-- Top Workspace Sub-Header & Instrumentation Strip -->
+<div class="px-space-lg py-space-sm bg-surface-container-lowest/80 backdrop-blur-md flex flex-wrap items-center justify-between gap-space-md shadow-sm">
+<div class="flex items-center gap-space-md min-w-0">
+<div class="flex items-center gap-space-xs font-label-md text-label-md text-on-surface">
+<span class="text-outline uppercase tracking-wider">Workspace</span>
+<span class="text-outline">/</span>
+<span class="text-on-surface font-semibold tracking-tight">3D Asset &amp; Spatial Synthesis</span>
+<span class="px-space-xs py-0.5 ml-2 rounded bg-surface-container-high text-primary font-label-sm text-label-sm tracking-widest uppercase flex items-center gap-1.5 shadow-[inset_0_0_8px_rgba(229,9,20,0.2)]">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container animate-pulse"></span>
+            Spatial Cluster Online (16x H100)
+          </span>
+</div>
+<div class="hidden xl:flex items-center gap-space-xs px-space-sm py-0.5 rounded bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-sm text-outline">token</span>
+<span class="font-medium text-on-surface">Cybernetic Monolith XR</span>
+<span class="text-outline">#4092</span>
+</div>
+</div>
+<!-- Engine Selector & Pipeline Actions -->
+<div class="flex items-center gap-space-sm flex-wrap">
+<!-- Spatial Engine Switcher -->
+<div class="inline-flex p-0.5 rounded-lg bg-surface-container-low">
+<button class="px-space-sm py-1 rounded bg-surface-container text-on-surface font-label-sm text-label-sm shadow-[0_2px_8px_rgba(0,0,0,0.6)] flex items-center gap-1" type="button">
+<span class="material-symbols-outlined text-sm text-primary">blur_on</span>
+<span>Gaussian Splat 3DGS-v2</span>
+</button>
+<button class="px-space-sm py-1 rounded text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm transition-colors" type="button">
+            Neural SDF
+          </button>
+<button class="px-space-sm py-1 rounded text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm transition-colors" type="button">
+            PBR Retopo
+          </button>
+</div>
+<!-- Wireframe & LOD Presets -->
+<div class="flex items-center bg-surface-container-low rounded-lg p-0.5">
+<button class="p-1.5 rounded hover:bg-surface-container text-on-surface-variant hover:text-on-surface transition-colors" id="btn-wireframe" title="Toggle Wireframe Overlay" type="button">
+<span class="material-symbols-outlined text-base">grid_3x3</span>
+</button>
+<button class="p-1.5 rounded hover:bg-surface-container text-on-surface-variant hover:text-on-surface transition-colors" id="btn-shading" title="Cycle Material Render Mode" type="button">
+<span class="material-symbols-outlined text-base">palette</span>
+</button>
+<span class="px-space-xs font-label-sm text-label-sm text-outline">LOD0</span>
+</div>
+<!-- Quick Export Dropdown -->
+<div class="relative group">
+<button class="px-space-sm py-1.5 rounded-lg bg-surface-container-high hover:bg-surface-bright text-on-surface font-label-md text-label-md flex items-center gap-1.5 transition-colors" type="button">
+<span class="material-symbols-outlined text-sm">ios_share</span>
+<span>Export</span>
+<span class="font-label-sm text-label-sm text-outline">USDZ / GLTF</span>
+<span class="material-symbols-outlined text-xs text-outline">expand_more</span>
+</button>
+</div>
+<!-- Primary Synthesize CTA -->
+<button class="px-space-md py-1.5 rounded-lg bg-primary-container text-on-primary-container hover:bg-tertiary-container font-label-md text-label-md tracking-wide flex items-center gap-1.5 transition-all shadow-[0_0_20px_rgba(229,9,20,0.35)] active:scale-[0.98]" type="button">
+<span class="material-symbols-outlined text-base">bolt</span>
+<span>Synthesize Spatial</span>
+<kbd class="px-1 py-0.5 rounded bg-on-primary font-label-sm text-label-sm opacity-90 ml-1">⌘↵</kbd>
+</button>
+</div>
+</div>
+<!-- Main Workspace Stage Split: Canvas (Left 70%) & Inspector (Right 30%) -->
+<div class="p-space-lg grid grid-cols-1 xl:grid-cols-12 gap-gutter">
+<!-- Left Column: Spatial 3D Viewport + Floating Prompt Console (8 cols on desktop) -->
+<div class="xl:col-span-8 2xl:col-span-9 flex flex-col gap-gutter min-w-0">
+<!-- 3D Viewport Stage Container -->
+<div class="relative w-full h-[620px] rounded-xl bg-surface-container-lowest overflow-hidden shadow-2xl flex flex-col justify-between group select-none">
+<!-- Background Ambient 3D Perspective Grid & Depth Matrix -->
+<div class="absolute inset-0 pointer-events-none opacity-40 bg-[radial-gradient(circle_at_50%_45%,rgba(229,9,20,0.18)_0%,rgba(19,19,19,0.95)_75%)]"></div>
+<!-- Perspective Wireframe Horizon Grid -->
+<svg class="absolute inset-0 w-full h-full pointer-events-none opacity-30 text-outline-variant" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<lineargradient id="grid-fade" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="currentColor" stop-opacity="0"></stop>
+<stop offset="45%" stop-color="currentColor" stop-opacity="0.3"></stop>
+<stop offset="65%" stop-color="currentColor" stop-opacity="0.9"></stop>
+<stop offset="100%" stop-color="currentColor" stop-opacity="0.1"></stop>
+</lineargradient>
+</defs>
+<!-- Floor grid lines radiating to vanishing point (50%, 48%) -->
+<g stroke="url(#grid-fade)" stroke-width="0.75">
+<line x1="50%" x2="0%" y1="48%" y2="100%"></line>
+<line x1="50%" x2="10%" y1="48%" y2="100%"></line>
+<line x1="50%" x2="25%" y1="48%" y2="100%"></line>
+<line x1="50%" x2="40%" y1="48%" y2="100%"></line>
+<line x1="50%" x2="50%" y1="48%" y2="100%"></line>
+<line x1="50%" x2="60%" y1="48%" y2="100%"></line>
+<line x1="50%" x2="75%" y1="48%" y2="100%"></line>
+<line x1="50%" x2="90%" y1="48%" y2="100%"></line>
+<line x1="50%" x2="100%" y1="48%" y2="100%"></line>
+<!-- Horizontal spatial rings -->
+<ellipse cx="50%" cy="62%" fill="none" rx="180" ry="24"></ellipse>
+<ellipse cx="50%" cy="72%" fill="none" rx="320" ry="42"></ellipse>
+<ellipse cx="50%" cy="84%" fill="none" rx="490" ry="68"></ellipse>
+<ellipse cx="50%" cy="98%" fill="none" rx="680" ry="94"></ellipse>
+</g>
+</svg>
+<!-- Floating 3D Specimen in Viewport Center -->
+<div class="relative z-10 w-full flex-1 flex items-center justify-center p-space-md">
+<!-- Simulated Bounding Box Envelope with Glowing Corner Ticks -->
+<div class="relative w-80 h-96 md:w-96 md:h-[420px] flex items-center justify-center transition-transform duration-700 ease-out hover:scale-105">
+<!-- Bounding box brackets -->
+<div class="absolute inset-0 pointer-events-none opacity-60">
+<div class="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-primary"></div>
+<div class="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-primary"></div>
+<div class="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-primary"></div>
+<div class="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-primary"></div>
+<!-- Precision Monospace Spatial Axis Markings -->
+<span class="absolute -top-3 left-6 font-label-sm text-label-sm text-primary tracking-widest">BB_MAX: [0.92, 1.85, 0.92]</span>
+<span class="absolute -bottom-3 right-6 font-label-sm text-label-sm text-outline tracking-widest">ORIGIN: (0,0,0)</span>
+</div>
+<!-- Real-world Render Subject Placeholder (Obsidian & Glowing Magma Monolith) -->
+<div class="relative w-64 h-80 md:w-72 md:h-96 rounded-xl overflow-hidden shadow-[0_20px_60px_rgba(229,9,20,0.3)] group-hover:shadow-[0_24px_80px_rgba(229,9,20,0.5)] transition-all">
+<img alt="Cybernetic Monolith XR 3D Asset" class="w-full h-full object-cover select-none pointer-events-none" data-alt="Cinematic 3D render of a hyper-detailed cybernetic monolith relic sculpted from fractured black volcanic obsidian glass with glowing crimson magma veins pulsing inside, sharp geometric hard-surface bevels, futuristic alien glyphs etched on obsidian surfaces, rim-lit studio lighting with deep fiery red volumetric haze on an absolute black background, unreal engine 5 render, raytracing, subsurface scattering" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJyFZFrwkszH_mxT9l6ndtBzzM16nn2CHZonBKLiUD8d67tluTOFlp0KK29FFCqY9AfGT1gbpjbQ0sITSHVEQLA4LSgl8G7f3outSl8FSRpvRcOHNMBVn5IZMz9tB8svueqpNHKpzo-lx072i_E4yh1nhHorkZBHh8pCsP8Z3mo0FNP7xWcr9_0GtAWf6e5nsZbpoxcyn59F52EIfAssBYERc0YVx7RoyWrineOrsUCuJ8m0_jd2g"/>
+<!-- Subtle Scanning Pulse Line -->
+<div class="absolute inset-x-0 h-0.5 bg-gradient-to-r from-transparent via-primary-container to-transparent opacity-80 animate-pulse top-1/2 -translate-y-1/2 pointer-events-none"></div>
+</div>
+<!-- 3D Transform Gizmo at Origin Base -->
+<div class="absolute -bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-2 pointer-events-none bg-surface-container-lowest/80 px-space-sm py-0.5 rounded-full backdrop-blur-md shadow-md">
+<span class="flex items-center gap-0.5 font-label-sm text-label-sm text-primary-container font-bold"><span class="w-1.5 h-1.5 rounded-full bg-primary-container"></span>X</span>
+<span class="flex items-center gap-0.5 font-label-sm text-label-sm text-emerald-400 font-bold"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>Y</span>
+<span class="flex items-center gap-0.5 font-label-sm text-label-sm text-sky-400 font-bold"><span class="w-1.5 h-1.5 rounded-full bg-sky-400"></span>Z</span>
+</div>
+</div>
+</div>
+<!-- Top Viewport HUD Overlays (Absolute Overlay) -->
+<div class="absolute top-space-md left-space-md right-space-md flex items-start justify-between pointer-events-none z-20">
+<!-- Left HUD: Real-time Telemetry -->
+<div class="p-space-sm rounded-lg bg-surface-container-lowest/90 backdrop-blur-md pointer-events-auto shadow-lg flex flex-col gap-1">
+<div class="flex items-center justify-between gap-space-md">
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Telemetry</span>
+<span class="font-label-sm text-label-sm text-emerald-400 flex items-center gap-1 font-mono">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span> 120 FPS
+                </span>
+</div>
+<div class="grid grid-cols-2 gap-x-space-md gap-y-0.5 font-mono text-[11px] leading-tight text-on-surface-variant">
+<span>Triangles:</span>
+<span class="text-right text-on-surface font-semibold">2,418,900</span>
+<span>Vertices:</span>
+<span class="text-right text-on-surface">1,209,452</span>
+<span>VRAM Usage:</span>
+<span class="text-right text-primary">14.8 GB / 80 GB</span>
+<span>Shader Pipeline:</span>
+<span class="text-right text-on-surface">WebGPU v2.4</span>
+</div>
+</div>
+<!-- Right HUD: Orthographic & Camera Presets -->
+<div class="p-1 rounded-lg bg-surface-container-lowest/90 backdrop-blur-md pointer-events-auto shadow-lg flex items-center gap-1">
+<button class="px-space-xs py-1 rounded bg-surface-container text-on-surface font-label-sm text-label-sm shadow-sm" type="button">Perspective</button>
+<button class="px-space-xs py-1 rounded hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm transition-colors" type="button">Front</button>
+<button class="px-space-xs py-1 rounded hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm transition-colors" type="button">Top</button>
+<button class="px-space-xs py-1 rounded hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm transition-colors" type="button">Right</button>
+<span class="w-px h-4 bg-outline-variant mx-1"></span>
+<!-- Shading Mode Pill -->
+<div class="flex items-center gap-1 px-2 py-0.5 rounded bg-surface-container-low text-primary font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-xs">wb_incandescent</span>
+<span>Lit PBR</span>
+</div>
+</div>
+</div>
+<!-- Bottom Viewport Navigation Bar (Floating Dock) -->
+<div class="relative z-20 px-space-md py-space-sm bg-surface-container-lowest/90 backdrop-blur-md flex items-center justify-between gap-space-md shadow-md">
+<!-- Navigation Gizmo Buttons -->
+<div class="flex items-center gap-1">
+<button class="p-1.5 rounded-lg bg-surface-container text-primary hover:bg-surface-container-high transition-colors" title="Orbit Camera (L-Click Drag)" type="button">
+<span class="material-symbols-outlined text-base">360</span>
+</button>
+<button class="p-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" title="Pan (Middle Click)" type="button">
+<span class="material-symbols-outlined text-base">pan_tool</span>
+</button>
+<button class="p-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" title="Dolly / Zoom" type="button">
+<span class="material-symbols-outlined text-base">zoom_in</span>
+</button>
+<button class="p-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" title="First Person Walk (WASD)" type="button">
+<span class="material-symbols-outlined text-base">explore</span>
+</button>
+<span class="w-px h-4 bg-outline-variant mx-1"></span>
+<button class="p-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" title="Reset Viewport Origin" type="button">
+<span class="material-symbols-outlined text-base">restart_alt</span>
+</button>
+<button class="px-space-sm py-1 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface font-label-sm text-label-sm flex items-center gap-1 transition-colors" id="btn-turntable" type="button">
+<span class="material-symbols-outlined text-xs text-primary animate-spin">sync</span>
+<span>Turntable 360°</span>
+</button>
+</div>
+<!-- Lighting Environment Preset Selector -->
+<div class="flex items-center gap-space-xs font-label-sm text-label-sm text-outline">
+<span class="material-symbols-outlined text-sm">hdr_on</span>
+<span class="hidden sm:inline">HDR Stage:</span>
+<select class="bg-surface-container px-space-xs py-1 rounded text-on-surface font-label-sm text-label-sm focus:outline-none focus:ring-1 focus:ring-primary cursor-pointer">
+<option selected="">Crimson Obsidian Studio</option>
+<option>Deep Space Nebula</option>
+<option>Cyberpunk Neon Rain</option>
+<option>Subterranean Trench</option>
+</select>
+</div>
+<!-- Fullscreen / Capture -->
+<div class="flex items-center gap-1">
+<button class="p-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" title="Capture Render Snapshot" type="button">
+<span class="material-symbols-outlined text-base">photo_camera</span>
+</button>
+<button class="p-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" title="Expand Viewport Fullscreen" type="button">
+<span class="material-symbols-outlined text-base">fullscreen</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Generative Prompt Matrix & Multi-Modal Control Terminal -->
+<div class="rounded-xl bg-surface-container-low p-space-md shadow-xl flex flex-col gap-space-md relative overflow-hidden">
+<!-- Ambient glowing rim at top of prompt dock -->
+<div class="absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-primary-container to-transparent"></div>
+<!-- Modality Tabs -->
+<div class="flex items-center justify-between flex-wrap gap-space-sm">
+<div class="flex items-center gap-space-xs">
+<button class="px-space-md py-1.5 rounded-lg bg-primary-container text-on-primary-container font-label-md text-label-md flex items-center gap-1.5 shadow-sm" type="button">
+<span class="material-symbols-outlined text-sm">text_fields</span>
+<span>Text-to-3D Spatial</span>
+</button>
+<button class="px-space-md py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface font-label-md text-label-md flex items-center gap-1.5 transition-colors" type="button">
+<span class="material-symbols-outlined text-sm">photo_size_select_actual</span>
+<span>Image-to-MultiView</span>
+</button>
+<button class="px-space-md py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface font-label-md text-label-md flex items-center gap-1.5 transition-colors" type="button">
+<span class="material-symbols-outlined text-sm">grain</span>
+<span>Point Cloud to Mesh</span>
+</button>
+</div>
+<div class="flex items-center gap-space-xs font-label-sm text-label-sm text-outline">
+<span class="material-symbols-outlined text-sm text-primary">auto_fix_high</span>
+<span>Neural Weights: FX-Splat-v4.2 PRO</span>
+</div>
+</div>
+<!-- Unified Multi-modal Prompt Terminal -->
+<div class="relative flex flex-col md:flex-row items-stretch gap-space-sm rounded-xl bg-surface-container-lowest p-space-sm">
+<!-- Reference Multi-View Source Image Thumbnail -->
+<div class="relative w-20 h-20 md:w-24 md:h-24 rounded-lg overflow-hidden flex-shrink-0 bg-surface-container group cursor-pointer shadow-inner">
+<img alt="Reference Seed Thumbnail" class="w-full h-full object-cover group-hover:scale-105 transition-transform" data-alt="Orthographic multi-view render reference of a black geometric monolithic spire with intense glowing molten red fissures and ancient runes, sharp contrast photography studio render" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBe8lI9gxLmEoWX2OU8hHrn202thlKxKyj2oWFZQz00yoABbYiuevcoVw21KFIjWvXJtoz4RIBmNKWSI953mDanLBcqhicDF0eNdanwtriLpk2UOd3sH0GPKpd--6encSAy2PMSnks0POrkL3KgQ8Pdzs2LITFZgm8cyMx_3xmqNesJSgrm2zkO4AYWPVz0zVRRiyjnZt2fStKhHcXqGkkKJNW0hoY-hVFjwCzDMyDLLyZHQ9oiWNY"/>
+<div class="absolute inset-0 bg-surface-container-lowest/50 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-on-surface text-base">sync_alt</span>
+<span class="font-label-sm text-label-sm text-on-surface">Swap</span>
+</div>
+<span class="absolute bottom-1 left-1 px-1 rounded bg-surface-container-lowest/90 font-label-sm text-label-sm text-primary">SEED #884</span>
+</div>
+<!-- Text Prompt Input Area -->
+<div class="flex-1 flex flex-col justify-between min-w-0">
+<textarea class="w-full bg-transparent resize-none font-body-md text-body-md text-on-surface placeholder:text-outline focus:outline-none p-1" placeholder="Describe spatial geometry, obsidian textures, procedural magma fissures, volumetric lighting, and geometric symmetry..." rows="3">Monolithic cybernetic altar composed of fractured black obsidian stone with glowing magma vein fissures, intricate geometric hard-surface carved runes, 8k cinematic PBR textures, micro-bevels, zero non-manifold edges.</textarea>
+<!-- Inline Dynamic Parameter Chips -->
+<div class="flex items-center gap-space-xs flex-wrap pt-space-xs">
+<button class="px-space-xs py-1 rounded-md bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm flex items-center gap-1 transition-colors" type="button">
+<span class="material-symbols-outlined text-xs text-primary">filter_center_focus</span>
+<span>Symmetry: Radial 4x</span>
+</button>
+<button class="px-space-xs py-1 rounded-md bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm flex items-center gap-1 transition-colors" type="button">
+<span class="material-symbols-outlined text-xs text-primary">view_in_ar</span>
+<span>Mesh: Quad-Dominant</span>
+</button>
+<button class="px-space-xs py-1 rounded-md bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm flex items-center gap-1 transition-colors" type="button">
+<span class="material-symbols-outlined text-xs text-primary">texture</span>
+<span>Tex: 8192×8192 PBR</span>
+</button>
+<button class="px-space-xs py-1 rounded-md bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm flex items-center gap-1 transition-colors" type="button">
+<span class="material-symbols-outlined text-xs text-primary">straighten</span>
+<span>Auto-Seam UV</span>
+</button>
+</div>
+</div>
+<!-- Execute Action Floating Hub -->
+<div class="flex md:flex-col justify-between items-end gap-space-xs">
+<div class="flex items-center gap-1 text-outline font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-sm">memory</span>
+<span>8 Est. Credits</span>
+</div>
+<button class="px-space-lg py-space-sm rounded-xl bg-primary-container hover:bg-tertiary-container text-on-primary-container font-label-md text-label-md font-semibold tracking-wide flex items-center gap-2 shadow-[0_4px_24px_rgba(229,9,20,0.4)] transition-all" type="button">
+<span class="material-symbols-outlined text-lg">auto_awesome</span>
+<span>Generate 3D</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Spatial Generation Seed History Strip -->
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Spatial Iteration History &amp; Seed Bench</span>
+<a class="font-label-sm text-label-sm text-primary hover:underline" href="#">View All 18 Variations →</a>
+</div>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-space-md">
+<!-- Variation Card 1 (Active) -->
+<div class="rounded-xl bg-surface-container-low p-space-xs flex flex-col gap-space-xs shadow-md ring-1 ring-primary/40 relative">
+<div class="relative h-28 rounded-lg overflow-hidden bg-surface-container-lowest">
+<img alt="Spatial Seed 4092-A" class="w-full h-full object-cover" data-alt="Detailed perspective 3D model render of an obsidian futuristic obelisk with glowing crimson runes on dark stage" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0cHaXwqzwwEPJR-lUHQtLNU7OCKCnkTNEm4PdEbr7cYtOh1-GSwJPhzk2_PwhLT5VtmTD53AnXjiCphIfRSl1DSbjrcpbvdQm3EJM1g0RbGE_fLuPsrQkuhz66oPKe-NDBRopmuGlpLpPDUnOf62v3wR7egDC3Allf-ynKXgcWrkyzNYS2YlBuGT-CzfMRaY2IURom7bgXzliSUsKurujGuaVklqb7Z-lpln8f6g-BHD75xCTFhI"/>
+<span class="absolute top-1 left-1 px-1.5 py-0.5 rounded bg-primary-container text-on-primary-container font-label-sm text-label-sm font-semibold">Active</span>
+<span class="absolute bottom-1 right-1 px-1 rounded bg-surface-container-lowest/80 text-emerald-400 font-label-sm text-label-sm">98.4% Match</span>
+</div>
+<div class="px-1 flex items-center justify-between font-label-sm text-label-sm">
+<span class="text-on-surface truncate">Seed #4092-A</span>
+<span class="text-outline">2.4M polys</span>
+</div>
+</div>
+<!-- Variation Card 2 -->
+<div class="rounded-xl bg-surface-container-low p-space-xs flex flex-col gap-space-xs shadow-md hover:bg-surface-container transition-colors cursor-pointer">
+<div class="relative h-28 rounded-lg overflow-hidden bg-surface-container-lowest">
+<img alt="Spatial Seed 4092-B" class="w-full h-full object-cover" data-alt="3D wireframe and textured render of a cybernetic shard monolith glowing red lava veins from alternative side profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAdkdBRXUX-_AXD0LYOVHuNfGMay9O9DJ2hMvms99UOkJq0k3ttSK0nEpq1Qi43qo6VMV_GVH28AqXNEemn3Vc003Ggxe9S9QvYqW4uOOJXNWurzJLdL97eedNuXh8IpMFmSJsWKSSnYnkMz8YTjnrh2TpryP9CLz81PABCyfPo0MKiDn77TW2zKHigMPt45Y1wNhnt_ysUqO9S5gtlDsffTu92N4nG5K8WCzmWhoVNrExtPAGkMlI"/>
+<span class="absolute bottom-1 right-1 px-1 rounded bg-surface-container-lowest/80 text-emerald-400 font-label-sm text-label-sm">96.1% Match</span>
+</div>
+<div class="px-1 flex items-center justify-between font-label-sm text-label-sm">
+<span class="text-on-surface truncate">Seed #4092-B</span>
+<span class="text-outline">1.8M polys</span>
+</div>
+</div>
+<!-- Variation Card 3 -->
+<div class="rounded-xl bg-surface-container-low p-space-xs flex flex-col gap-space-xs shadow-md hover:bg-surface-container transition-colors cursor-pointer">
+<div class="relative h-28 rounded-lg overflow-hidden bg-surface-container-lowest">
+<img alt="Spatial Seed 4092-C" class="w-full h-full object-cover" data-alt="High tech alien artifact in 3D digital studio with intense molten orange lighting accents and quad topology display" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC5YPVGDrD7Yxs44oQQEEHvc6b8CdnSsYiZuyG3nCwcIGoyAah4yABYcYmcEA2RG5A0NBdcoAX6tfQerlTl1yqet9WKfAhIM1HVTpPZaGVUsX2BqSSdtXOUP9zSaIB8SbwmX_h0AfF2-sdzAomLSLpPd16GMO-ZwG3m3PogrfV96m-6y7wiTWeo2NPSTQDUFtUuEVFOgyRm0FTHjx97By_t64qJD2ari7MnIxwgIhWBK0nY3rVxp7s"/>
+<span class="absolute bottom-1 right-1 px-1 rounded bg-surface-container-lowest/80 text-emerald-400 font-label-sm text-label-sm">94.8% Match</span>
+</div>
+<div class="px-1 flex items-center justify-between font-label-sm text-label-sm">
+<span class="text-on-surface truncate">Seed #4092-C</span>
+<span class="text-outline">3.1M polys</span>
+</div>
+</div>
+<!-- Variation Card 4 -->
+<div class="rounded-xl bg-surface-container-low p-space-xs flex flex-col gap-space-xs shadow-md hover:bg-surface-container transition-colors cursor-pointer">
+<div class="relative h-28 rounded-lg overflow-hidden bg-surface-container-lowest">
+<img alt="Spatial Seed 4092-D" class="w-full h-full object-cover" data-alt="Biomechanical dark monolith 3D structure showing deep subsurface scattering and red energy conduits floating in space" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDRuQTe7Hfjrb5Yq038oYou-NzrQ7nbtvMyeHhvh4l_xu5RkO_NW8almAV53GhhEP2iU7Jy8d0Ba-Ues44SqAhVSiVRZvb1e71Z7kl7Eul9Nc_jUmbcVQlfDwZbbcqKqUcCQoeIMFSDrSbaGW9KlWjutleWca9TeOKE12rLqHcE33MbaZEeufTpD7ZT7EkHzWHczQC_Z3-_reLKNGFAOtEO13oodpcVkumRpZZU7JG2rKhvQ5byjtk"/>
+<span class="absolute bottom-1 right-1 px-1 rounded bg-surface-container-lowest/80 text-emerald-400 font-label-sm text-label-sm">91.3% Match</span>
+</div>
+<div class="px-1 flex items-center justify-between font-label-sm text-label-sm">
+<span class="text-on-surface truncate">Seed #4092-D</span>
+<span class="text-outline">2.0M polys</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Precision Inspector & Spatial Parameter Rig (4 cols on desktop) -->
+<div class="xl:col-span-4 2xl:col-span-3 flex flex-col gap-gutter">
+<!-- Inspector Card Container -->
+<div class="rounded-xl bg-surface-container-low p-space-md shadow-xl flex flex-col gap-space-md">
+<!-- Tabbed Inspector Switcher -->
+<div class="flex items-center justify-between border-b border-surface-container-high pb-space-xs">
+<button class="pb-2 font-label-md text-label-md font-semibold text-primary border-b-2 border-primary" type="button">Geometry</button>
+<button class="pb-2 font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" type="button">Materials (PBR)</button>
+<button class="pb-2 font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" type="button">Physics &amp; Rig</button>
+<button class="pb-2 font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" type="button">LODs</button>
+</div>
+<!-- Section 1: Mesh Topology & Voxel Resolution -->
+<div class="space-y-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Voxel Resolution Grid</span>
+<span class="font-mono font-label-sm text-label-sm text-on-surface">1024³ Grid</span>
+</div>
+<!-- Slider -->
+<div class="relative flex items-center">
+<input class="w-full accent-primary-container bg-surface-container-high h-1.5 rounded-lg appearance-none cursor-pointer" max="2048" min="256" step="256" type="range" value="1024"/>
+</div>
+<div class="flex justify-between font-mono text-[10px] text-outline">
+<span>512³ (Draft)</span>
+<span>1024³ (Production)</span>
+<span>2048³ (Cinematic)</span>
+</div>
+</div>
+<!-- Section 2: Polycount Target Decimation -->
+<div class="space-y-space-sm pt-space-xs border-t border-surface-container">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Decimation Target</span>
+<span class="font-mono font-label-sm text-label-sm text-primary">2,418,900 / 5.0M</span>
+</div>
+<div class="w-full bg-surface-container-high h-2 rounded-full overflow-hidden">
+<div class="bg-primary-container h-full w-[48%] rounded-full shadow-[0_0_12px_rgba(229,9,20,0.8)]"></div>
+</div>
+<div class="grid grid-cols-3 gap-space-xs">
+<button class="py-1 rounded bg-surface-container text-on-surface font-label-sm text-label-sm hover:bg-surface-container-high transition-colors" type="button">500K (Mobile)</button>
+<button class="py-1 rounded bg-primary-container/20 text-primary font-label-sm text-label-sm ring-1 ring-primary/30" type="button">2.4M (XR)</button>
+<button class="py-1 rounded bg-surface-container text-on-surface font-label-sm text-label-sm hover:bg-surface-container-high transition-colors" type="button">Raw Retopo</button>
+</div>
+</div>
+<!-- Section 3: Subsurface Scattering & Displacement Parameters -->
+<div class="space-y-space-sm pt-space-xs border-t border-surface-container">
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider block">PBR Shader Channels</span>
+<!-- Channel 1: Subsurface Glow -->
+<div class="flex items-center justify-between p-space-xs rounded bg-surface-container-lowest">
+<div class="flex items-center gap-space-xs">
+<span class="w-3.5 h-3.5 rounded-full bg-primary-container shadow-[0_0_8px_rgba(229,9,20,0.8)]"></span>
+<span class="font-label-sm text-label-sm text-on-surface">Subsurface Scatter</span>
+</div>
+<span class="font-mono font-label-sm text-label-sm text-on-surface-variant">Crimson #e50914 (1.8mm)</span>
+</div>
+<!-- Channel 2: Normal & Displacement -->
+<div class="space-y-1">
+<div class="flex justify-between font-label-sm text-label-sm">
+<span class="text-on-surface-variant">Displacement Height</span>
+<span class="font-mono text-on-surface">0.082m</span>
+</div>
+<input class="w-full accent-primary-container bg-surface-container-high h-1.5 rounded-lg appearance-none cursor-pointer" max="100" min="0" type="range" value="45"/>
+</div>
+<!-- Channel 3: Roughness / Metallic -->
+<div class="space-y-1">
+<div class="flex justify-between font-label-sm text-label-sm">
+<span class="text-on-surface-variant">Obsidian Roughness</span>
+<span class="font-mono text-on-surface">0.14 (Glossy Vitreous)</span>
+</div>
+<input class="w-full accent-primary-container bg-surface-container-high h-1.5 rounded-lg appearance-none cursor-pointer" max="100" min="0" type="range" value="14"/>
+</div>
+</div>
+<!-- Section 4: Physical Spatial Metrics & AR Scales -->
+<div class="space-y-space-sm pt-space-xs border-t border-surface-container">
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider block">Spatial Physics &amp; Scale</span>
+<div class="p-space-sm rounded-lg bg-surface-container-lowest space-y-space-xs font-mono text-[11px]">
+<div class="flex justify-between">
+<span class="text-outline">Real-World Scale:</span>
+<span class="text-on-surface font-semibold">1.85m × 0.92m × 0.92m</span>
+</div>
+<div class="flex justify-between">
+<span class="text-outline">Calculated Mass:</span>
+<span class="text-on-surface">1,420 kg (Obsidian Rock)</span>
+</div>
+<div class="flex justify-between">
+<span class="text-outline">Collision Hull:</span>
+<span class="text-primary font-medium">Convex Decomp (64 Hulls)</span>
+</div>
+<div class="flex justify-between">
+<span class="text-outline">Pivot Center:</span>
+<span class="text-on-surface">Base Center [0, 0, 0]</span>
+</div>
+</div>
+</div>
+<!-- Section 5: Batch Node Retopology Trigger -->
+<div class="pt-space-xs border-t border-surface-container flex flex-col gap-space-xs">
+<button class="w-full py-space-sm rounded-lg bg-surface-container-high hover:bg-surface-bright text-on-surface font-label-md text-label-md flex items-center justify-center gap-2 transition-colors" type="button">
+<span class="material-symbols-outlined text-base">auto_fix_normal</span>
+<span>Bake Normal &amp; Ambient Occlusion</span>
+</button>
+<button class="w-full py-space-sm rounded-lg bg-surface-container-lowest hover:bg-surface-container text-on-surface-variant hover:text-on-surface font-label-md text-label-md flex items-center justify-center gap-2 transition-colors" type="button">
+<span class="material-symbols-outlined text-base">visibility</span>
+<span>Launch AR WebXR Live Preview</span>
+</button>
+</div>
+</div>
+<!-- Compute Infrastructure Resource Card -->
+<div class="p-space-md rounded-xl bg-surface-container-low shadow-md flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<div class="w-9 h-9 rounded-lg bg-surface-container-lowest flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-xl">device_hub</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-semibold">H100 Node Cluster</span>
+<span class="font-label-sm text-label-sm text-outline">Compute Latency: 14ms (US-East)</span>
+</div>
+</div>
+<span class="w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-[0_0_10px_rgba(52,211,153,0.8)]"></span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+  // Interactive micro-behaviors for 3D Asset Workspace
+  (function() {
+    // Highlight active state in App Shell sidebar for 3D Assets
+    const activeSidebarLink = document.querySelector('aside [data-path="3d-assets"]');
+    if (activeSidebarLink) {
+      activeSidebarLink.classList.remove('text-on-surface-variant');
+      activeSidebarLink.classList.add('bg-surface-container-high', 'text-on-surface', 'font-semibold');
+      // Add red glowing indicator dot
+      const dot = document.createElement('span');
+      dot.className = 'w-1.5 h-1.5 rounded-full bg-primary-container shadow-[0_0_8px_rgba(229,9,20,0.8)] ml-auto';
+      activeSidebarLink.appendChild(dot);
+    }
+
+    // Toggle Turntable spin state
+    const turntableBtn = document.getElementById('btn-turntable');
+    if (turntableBtn) {
+      let active = false;
+      turntableBtn.addEventListener('click', function() {
+        active = !active;
+        if (active) {
+          turntableBtn.classList.add('bg-primary-container/20', 'text-primary');
+        } else {
+          turntableBtn.classList.remove('bg-primary-container/20', 'text-primary');
+        }
+      });
+    }
+
+    // Toggle Wireframe Mode
+    const wireframeBtn = document.getElementById('btn-wireframe');
+    if (wireframeBtn) {
+      let wire = false;
+      wireframeBtn.addEventListener('click', function() {
+        wire = !wire;
+        if (wire) {
+          wireframeBtn.classList.add('text-primary', 'bg-surface-container');
+        } else {
+          wireframeBtn.classList.remove('text-primary', 'bg-surface-container');
+        }
+      });
+    }
+  })();
+</script></main></div></body></html>

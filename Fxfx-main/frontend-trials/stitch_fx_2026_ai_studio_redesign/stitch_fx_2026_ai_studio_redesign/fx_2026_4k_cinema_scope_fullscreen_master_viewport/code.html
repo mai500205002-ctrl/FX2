@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&amp;family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-tertiary": "#68000c", "tertiary-fixed": "#ffdad7", "error-container": "#93000a", "surface-dim": "#131313", "on-primary-fixed": "#410001", "surface-container": "#201f1f", "surface-container-highest": "#353534", "surface-container-lowest": "#0e0e0e", "secondary-fixed-dim": "#ffb5a0", "on-primary": "#690003", "surface-bright": "#393939", "tertiary": "#ffb3ae", "on-tertiary-fixed-variant": "#930016", "on-surface-variant": "#e9bcb6", "on-primary-fixed-variant": "#930007", "primary": "#ffb4aa", "inverse-primary": "#c0000c", "on-secondary": "#5f1500", "on-secondary-container": "#fffbff", "surface-variant": "#353534", "on-surface": "#e5e2e1", "outline": "#af8782", "on-error": "#690005", "inverse-surface": "#e5e2e1", "background": "#131313", "inverse-on-surface": "#313030", "surface": "#131313", "on-secondary-fixed-variant": "#862200", "tertiary-fixed-dim": "#ffb3ae", "primary-container": "#e50914", "secondary-fixed": "#ffdbd1", "surface-tint": "#ffb4aa", "on-secondary-fixed": "#3b0900", "on-background": "#e5e2e1", "primary-fixed": "#ffdad5", "on-error-container": "#ffdad6", "on-tertiary-container": "#fff7f6", "error": "#ffb4ab", "secondary-container": "#d73b00", "primary-fixed-dim": "#ffb4aa", "on-tertiary-fixed": "#410005", "surface-container-low": "#1c1b1b", "tertiary-container": "#e40b2b", "surface-container-high": "#2a2a2a", "outline-variant": "#5e3f3b", "secondary": "#ffb5a0", "on-primary-container": "#fff7f6" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "margin": "2rem", "space-md": "1rem", "gutter-mobile": "0.75rem", "space-xs": "0.25rem", "space-lg": "1.5rem", "margin-mobile": "1rem", "space-sm": "0.5rem", "space-xl": "2.5rem", "gutter": "1.5rem" }, "fontFamily": { "label-md": ["Geist"], "headline-sm": ["Geist"], "headline-xl": ["Geist"], "headline-md": ["Geist"], "headline-xl-mobile": ["Geist"], "body-md": ["Inter"], "headline-lg": ["Geist"], "label-sm": ["Geist"], "body-sm": ["Inter"], "body-lg": ["Inter"], "headline-lg-mobile": ["Geist"] }, "fontSize": { "label-md": ["0.8125rem", { "lineHeight": "1rem", "letterSpacing": "0.02em", "fontWeight": "500" }], "headline-sm": ["1.125rem", { "lineHeight": "1.625rem", "letterSpacing": "-0.01em", "fontWeight": "500" }], "headline-xl": ["3rem", { "lineHeight": "3.5rem", "letterSpacing": "-0.03em", "fontWeight": "600" }], "headline-md": ["1.5rem", { "lineHeight": "2rem", "letterSpacing": "-0.015em", "fontWeight": "500" }], "headline-xl-mobile": ["2rem", { "lineHeight": "2.5rem", "letterSpacing": "-0.02em", "fontWeight": "600" }], "body-md": ["0.875rem", { "lineHeight": "1.4rem", "letterSpacing": "0em", "fontWeight": "400" }], "headline-lg": ["2.25rem", { "lineHeight": "2.75rem", "letterSpacing": "-0.025em", "fontWeight": "600" }], "label-sm": ["0.6875rem", { "lineHeight": "0.875rem", "letterSpacing": "0.05em", "fontWeight": "600" }], "body-sm": ["0.75rem", { "lineHeight": "1.2rem", "letterSpacing": "0.01em", "fontWeight": "400" }], "body-lg": ["1rem", { "lineHeight": "1.6rem", "letterSpacing": "-0.005em", "fontWeight": "400" }], "headline-lg-mobile": ["1.625rem", { "lineHeight": "2.125rem", "letterSpacing": "-0.02em", "fontWeight": "600" }] } } } };</script></head><body class="bg-background font-body-md text-body-md text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-container min-h-screen"><aside class="fixed left-0 top-0 h-full w-72 bg-surface-container-lowest z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.5)]"><div class="flex flex-col flex-1 overflow-y-auto"><div class="h-16 px-space-lg flex items-center gap-space-sm bg-surface-container-lowest"><div class="w-8 h-8 rounded-lg bg-primary-container flex items-center justify-center shadow-[0_0_16px_rgba(229,9,20,0.45)]"><span class="material-symbols-outlined text-on-primary-container text-[20px]">videocam</span></div><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-on-surface font-semibold tracking-tight">FX-2026</span><span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Studio Intelligence</span></div></div><div class="px-space-md py-space-sm"><div class="px-space-sm py-space-xs font-label-sm text-label-sm uppercase tracking-wider text-outline">Features</div><nav class="mt-space-xs flex flex-col gap-space-xs" data-active-classes="bg-primary-container text-on-primary-container shadow-[0_0_20px_rgba(229,9,20,0.35)]"><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all duration-200 group" data-path="screenplay-narrative" href="#"><span class="material-symbols-outlined text-[20px] transition-transform group-hover:scale-110">auto_stories</span><span class="font-body-md text-body-md font-medium">Screenplay &amp; Narrative</span></a><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all duration-200 group" data-path="storyboard-breakdown" href="#"><span class="material-symbols-outlined text-[20px] transition-transform group-hover:scale-110">view_kanban</span><span class="font-body-md text-body-md font-medium">Storyboard Breakdown</span></a><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all duration-200 group" data-path="video-director" href="#"><span class="material-symbols-outlined text-[20px] transition-transform group-hover:scale-110">movie_filter</span><span class="font-body-md text-body-md font-medium">Video Director</span></a><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all duration-200 group" data-path="3d-spatial-assets" href="#"><span class="material-symbols-outlined text-[20px] transition-transform group-hover:scale-110">view_in_ar</span><span class="font-body-md text-body-md font-medium">3D Spatial Assets</span></a><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all duration-200 group" data-path="concept-studio" href="#"><span class="material-symbols-outlined text-[20px] transition-transform group-hover:scale-110">palette</span><span class="font-body-md text-body-md font-medium">Concept Studio</span></a></nav></div><div class="px-space-md py-space-sm"><div class="px-space-sm py-space-xs font-label-sm text-label-sm uppercase tracking-wider text-outline">Intelligence</div><nav class="mt-space-xs flex flex-col gap-space-xs" data-active-classes="bg-primary-container text-on-primary-container shadow-[0_0_20px_rgba(229,9,20,0.35)]"><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all duration-200 group" data-path="neural-models" href="#"><span class="material-symbols-outlined text-[20px] transition-transform group-hover:scale-110">psychology</span><span class="font-body-md text-body-md font-medium">Neural Models</span></a><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all duration-200 group" data-path="prompt-vault" href="#"><span class="material-symbols-outlined text-[20px] transition-transform group-hover:scale-110">terminal</span><span class="font-body-md text-body-md font-medium">Prompt Vault</span></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all duration-200 group" data-path="render-queue" href="#"><div class="flex items-center gap-space-md"><span class="material-symbols-outlined text-[20px] transition-transform group-hover:scale-110">motion_blur</span><span class="font-body-md text-body-md font-medium">Render Queue</span></div><span class="w-2 h-2 rounded-full bg-secondary-container animate-pulse shadow-[0_0_8px_rgba(215,59,0,0.8)]"></span></a><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all duration-200 group" data-path="metrics-telemetry" href="#"><span class="material-symbols-outlined text-[20px] transition-transform group-hover:scale-110">speed</span><span class="font-body-md text-body-md font-medium">Metrics &amp; Telemetry</span></a><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all duration-200 group" data-path="c2pa-governance-vault" href="#"><span class="material-symbols-outlined text-[20px] transition-transform group-hover:scale-110">verified_user</span><span class="font-body-md text-body-md font-medium">C2PA Governance Vault</span></a></nav></div></div><div class="p-space-md bg-surface-container-lowest"><div class="p-space-sm rounded-lg bg-surface-container-low flex flex-col gap-space-xs"><div class="flex items-center justify-between"><span class="font-label-sm text-label-sm text-outline uppercase">VRAM Consumption</span><span class="font-label-sm text-label-sm text-primary font-mono">38.4 / 48 GB</span></div><div class="w-full h-1 bg-surface-container rounded-full overflow-hidden"><div class="h-full bg-primary-container rounded-full w-[80%] shadow-[0_0_8px_rgba(229,9,20,0.6)]"></div></div></div></div></aside><div class="pl-72"><header class="fixed top-0 left-72 right-0 h-16 bg-surface-container-lowest/80 backdrop-blur-xl z-40 flex items-center justify-between px-space-lg shadow-[0_1px_8px_rgba(0,0,0,0.3)]"><div class="flex items-center gap-space-lg"><div class="flex items-center gap-space-sm px-space-md py-space-xs bg-surface-container-low rounded-lg text-on-surface-variant cursor-pointer hover:bg-surface-container-high hover:text-on-surface transition-colors w-72 justify-between"><div class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-[18px] text-outline">search</span><span class="font-body-sm text-body-sm">Omni-Search workflows...</span></div><kbd class="px-space-xs py-0.5 rounded bg-surface-container font-mono font-label-sm text-label-sm text-outline">⌘K</kbd></div><div class="hidden xl:flex items-center gap-space-sm px-space-md py-space-xs rounded-full bg-surface-container-low"><span class="w-2 h-2 rounded-full bg-primary-container animate-ping"></span><span class="material-symbols-outlined text-[16px] text-primary">memory</span><span class="font-label-md text-label-md font-mono text-on-surface">RTX-6000 Ada</span><span class="text-outline font-label-md text-label-md">•</span><span class="font-label-md text-label-md text-secondary">Synced 99.8%</span></div></div><div class="flex items-center gap-space-md"><div class="flex items-center bg-surface-container-low rounded-lg p-0.5"><button class="px-space-sm py-0.5 rounded font-label-sm text-label-sm font-semibold bg-surface-container-highest text-on-surface shadow-sm">EN</button><button class="px-space-sm py-0.5 rounded font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface transition-colors font-semibold">العربية</button></div><button class="relative p-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-1 right-1 w-2 h-2 rounded-full bg-tertiary-container shadow-[0_0_6px_rgba(228,11,43,0.9)]"></span></button><div class="h-4 w-px bg-surface-container-high"></div><div class="flex items-center gap-space-sm"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center ring-2 ring-primary/20"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="relative pt-16 min-h-screen bg-background w-full px-space-lg"><div class="flex flex-col w-full relative -mt-4 pb-12 overflow-hidden selection:bg-primary-container selection:text-on-primary-container">
+<!-- Atmospheric Glow Backdrop Elements (Contained) -->
+<div class="absolute -top-24 left-1/2 -translate-x-1/2 w-[1100px] h-[340px] bg-gradient-to-b from-primary-container/15 via-secondary-container/5 to-transparent blur-[110px] pointer-events-none -z-10"></div>
+<div class="absolute top-96 right-12 w-[420px] h-[420px] bg-tertiary-container/10 blur-[140px] pointer-events-none -z-10"></div>
+<!-- Primary Cinematic Scope Stage: 2.39:1 DCI Anamorphic Canvas -->
+<div class="relative w-full rounded-xl overflow-hidden bg-surface-container-lowest shadow-[0_24px_60px_-12px_rgba(0,0,0,0.95)]">
+<!-- Cinema Scope Master Container (Letterbox / Optical Frame 2.39:1 Ratio) -->
+<div class="relative w-full aspect-[2.39/1] max-h-[839px] min-h-[540px] bg-black overflow-hidden flex items-center justify-center group" id="viewport-stage">
+<!-- Film Master Rendering: Scene 43 -->
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 ease-out group-hover:scale-[1.008]" data-alt="Cinematic ultra-wide 2.39 to 1 anamorphic film frame from a sci-fi motion picture. Scene 43 Synchrotron Core Divergence Chamber. Center stage features a titanic incandescent fusion plasma reactor pulsing with vivid amber, crimson, and radioactive violet horizontal lens flares. Two silhouetted scientists Dr. Thorne and Commander Vespera stand on a high industrial gantry surrounded by atmospheric condensing steam, suspended metallic catwalks, rich volumetric mist, deep obsidian shadows, and authentic Kodak Vision3 5219 500T 35mm motion picture film grain." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCauv6EdMmtcz9oaLx9GGK8461o-QrDh-hen3YnftOgSKYCWwbjkR-0T-D5FT1UsqPr49v6RUV04lVaoKIwkdWWiLzy-9GZ3bdoWVS-yGeEw1PCQlLq1zoakpV0CNt5jGpZmr4Los5FjGwndug8YMN6ZBqM3Waqq3GPiDTZmn-0qayTlovuYxpnCRtEAbBcVz8DqhLeZha80AAkW43UIWS5FWjPZ_c4srrL8Zr8rC_5SBZGRy4Y2yM')"></div>
+<!-- Precision Optical Framing Mask Overlays & Anamorphic Crosshairs -->
+<div class="absolute inset-0 pointer-events-none flex flex-col justify-between p-6">
+<!-- Top Crop Line / Optical Chamfers -->
+<div class="w-full flex justify-between items-start opacity-70">
+<div class="flex items-center gap-2 font-mono text-label-sm text-outline">
+<span class="inline-block w-3 h-[1px] bg-primary"></span>
+<span>FRAME SAFE 90%</span>
+<span class="text-on-surface-variant/40">/</span>
+<span>TITLE SAFE 80%</span>
+</div>
+<div class="flex items-center gap-3 font-mono text-label-sm text-primary">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container animate-ping"></span>
+<span class="tracking-widest">MASTER REC • DCI 4K STREAM</span>
+</div>
+</div>
+<!-- Center Reticle / Optical Center Mark -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none opacity-25">
+<svg class="text-on-surface" fill="none" height="48" viewbox="0 0 48 48" width="48">
+<line stroke="currentColor" stroke-width="0.75" x1="24" x2="24" y1="14" y2="21"></line>
+<line stroke="currentColor" stroke-width="0.75" x1="24" x2="24" y1="27" y2="34"></line>
+<line stroke="currentColor" stroke-width="0.75" x1="14" x2="21" y1="24" y2="24"></line>
+<line stroke="currentColor" stroke-width="0.75" x1="27" x2="34" y1="24" y2="24"></line>
+<circle cx="24" cy="24" r="5" stroke="currentColor" stroke-dasharray="1 2" stroke-width="0.5"></circle>
+</svg>
+</div>
+<!-- Anamorphic Scope Guides / Bottom Edge -->
+<div class="w-full flex justify-between items-end opacity-70 font-mono text-label-sm text-outline">
+<div class="flex items-center gap-2">
+<span class="text-on-surface-variant font-medium">SCENE 43 • SHOT 08B</span>
+<span class="text-on-surface-variant/40">•</span>
+<span>TAKE 04 [HERO COMP]</span>
+<span class="text-on-surface-variant/40">•</span>
+<span class="text-primary-fixed-dim">ACEScg EXR 16-BIT HALF FLOAT</span>
+</div>
+<div class="flex items-center gap-2">
+<span>2.39:1 DCI SCOPE (4096×1714)</span>
+<span class="inline-block w-3 h-[1px] bg-primary"></span>
+</div>
+</div>
+</div>
+<!-- Live Interactive False Color Canvas Overlay (Toggled via JS) -->
+<div class="absolute inset-0 pointer-events-none mix-blend-color opacity-0 transition-opacity duration-200 bg-gradient-to-r from-blue-700 via-emerald-600 via-amber-400 to-rose-700" id="false-color-layer"></div>
+<!-- TOP FLOATING HUD BAR (Translucent Glassmorphism) -->
+<div class="absolute top-4 left-4 right-4 flex items-center justify-between gap-4 pointer-events-auto z-20">
+<!-- Left Metadata Pill -->
+<div class="flex items-center gap-3 px-4 py-2 rounded-xl bg-surface-container-lowest/80 backdrop-blur-xl shadow-[0_8px_24px_rgba(0,0,0,0.6)]">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-container text-[18px]">videocam</span>
+<span class="font-headline-sm text-body-md text-on-surface font-semibold tracking-tight">CINEMA SCOPE 4K DCI</span>
+</div>
+<span class="w-1 h-3 bg-surface-container-highest rounded-full"></span>
+<div class="flex items-center gap-2 font-mono text-label-sm text-on-surface-variant">
+<span class="text-on-surface font-medium">4096×1714</span>
+<span class="text-outline">/</span>
+<span class="text-on-surface font-medium">24.000 FPS</span>
+<span class="text-outline">/</span>
+<span class="text-secondary font-semibold">SMPTE 00:02:14:18</span>
+</div>
+<span class="w-1 h-3 bg-surface-container-highest rounded-full"></span>
+<div class="flex items-center gap-1.5 font-mono text-label-sm">
+<span class="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.8)]"></span>
+<span class="text-on-surface">84.2 Mbps</span>
+<span class="text-outline-variant font-sans">(SRT/WebRTC 18ms)</span>
+</div>
+</div>
+<!-- Right Quick Controls Pill -->
+<div class="flex items-center gap-1.5 p-1.5 rounded-xl bg-surface-container-lowest/80 backdrop-blur-xl shadow-[0_8px_24px_rgba(0,0,0,0.6)]">
+<!-- Scope Lock Pill -->
+<div class="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-surface-container text-on-surface font-mono text-label-sm">
+<span class="material-symbols-outlined text-[15px] text-primary">aspect_ratio</span>
+<span>2.39:1 LOCKED</span>
+</div>
+<!-- ACES HDR Pill -->
+<div class="flex items-center gap-1 px-2.5 py-1 rounded-lg bg-surface-container text-on-surface font-mono text-label-sm">
+<span class="text-tertiary font-bold">HDR</span>
+<span class="text-on-surface-variant">1,000 NITS</span>
+</div>
+<!-- False Color Toggle Button -->
+<button class="flex items-center gap-1 px-2.5 py-1 rounded-lg bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors font-mono text-label-sm" id="toggle-false-color">
+<span class="material-symbols-outlined text-[15px]">contrast</span>
+<span>False Color</span>
+<span class="text-outline" id="fc-state">OFF</span>
+</button>
+<!-- Focus Peaking Pill -->
+<button class="flex items-center gap-1 px-2.5 py-1 rounded-lg bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors font-mono text-label-sm" id="toggle-peaking">
+<span class="material-symbols-outlined text-[15px] text-secondary">lens_blur</span>
+<span>Peak 85%</span>
+</button>
+<div class="h-4 w-px bg-surface-container-highest mx-1"></div>
+<!-- Exit Fullscreen Trigger -->
+<button class="flex items-center gap-1.5 px-3 py-1 rounded-lg bg-primary-container text-on-primary-container font-headline-sm text-label-md font-semibold hover:bg-tertiary-container shadow-[0_0_16px_rgba(229,9,20,0.4)] transition-all">
+<span class="material-symbols-outlined text-[16px]">fullscreen_exit</span>
+<span>Exit Fullscreen</span>
+<kbd class="ml-1 px-1 py-0.5 rounded bg-black/30 font-mono text-[10px]">ESC</kbd>
+</button>
+</div>
+</div>
+<!-- CENTER-BOTTOM FLOATING SCRUBBER & TRANSPORT BAR -->
+<div class="absolute bottom-6 left-1/2 -translate-x-1/2 w-[92%] max-w-5xl flex flex-col gap-2 p-3 rounded-2xl bg-surface-container-lowest/85 backdrop-blur-2xl shadow-[0_16px_48px_rgba(0,0,0,0.85)] z-20">
+<!-- Scrubber Track & Sub-Frame Precision Waveform Micro-Display -->
+<div class="relative w-full group/scrubber cursor-pointer pt-2 pb-1" id="scrubber-track">
+<!-- In / Out Region Highlight -->
+<div class="relative w-full h-2 rounded-full bg-surface-container-high overflow-hidden">
+<!-- Cached / Stream Buffering -->
+<div class="absolute left-0 top-0 bottom-0 w-[82%] bg-surface-container-highest rounded-full"></div>
+<!-- IN-to-OUT Marked Segment -->
+<div class="absolute left-[18%] right-[22%] top-0 bottom-0 bg-primary-container/30"></div>
+<!-- Progress Bar Filled -->
+<div class="absolute left-0 top-0 bottom-0 w-[44.5%] bg-gradient-to-r from-primary-container to-secondary-container shadow-[0_0_12px_rgba(229,9,20,0.7)]" id="playhead-fill"></div>
+</div>
+<!-- Micro-Frame Calibration Tickmarks (Sub-frame visual) -->
+<div class="w-full flex justify-between items-center px-1 mt-1 font-mono text-[9px] text-outline opacity-60 select-none">
+<span>00:00:00:00</span>
+<span>00:01:00:00 [IN: 43-A]</span>
+<span class="text-primary font-semibold">00:02:14:18 [PLAYHEAD]</span>
+<span>00:03:30:12 [OUT: 43-D]</span>
+<span>00:05:08:00</span>
+</div>
+<!-- Active Playhead Beacon Handle -->
+<div class="absolute top-1 left-[44.5%] -translate-x-1/2 w-4 h-4 rounded-full bg-on-surface shadow-[0_0_10px_rgba(255,180,170,0.9)] flex items-center justify-center pointer-events-none" id="playhead-handle">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container"></span>
+</div>
+</div>
+<!-- Transport Buttons & Telemetry Badges Bar -->
+<div class="flex items-center justify-between gap-4 pt-1">
+<!-- Transport Controls Left -->
+<div class="flex items-center gap-1.5">
+<!-- Step Back 1 Frame -->
+<button class="w-8 h-8 rounded-lg bg-surface-container-low hover:bg-surface-container flex items-center justify-center text-on-surface transition-colors" title="Step Back 1 Frame [Left Arrow]">
+<span class="material-symbols-outlined text-[18px]">skip_previous</span>
+</button>
+<!-- Rewind Fast -->
+<button class="w-8 h-8 rounded-lg bg-surface-container-low hover:bg-surface-container flex items-center justify-center text-on-surface transition-colors" title="Shuttle -2x [J]">
+<span class="material-symbols-outlined text-[18px]">fast_rewind</span>
+</button>
+<!-- Master Play / Pause Primary Button -->
+<button class="flex items-center gap-2 px-4 h-8 rounded-lg bg-primary-container text-on-primary-container font-headline-sm text-label-md font-bold shadow-[0_0_18px_rgba(229,9,20,0.45)] hover:shadow-[0_0_24px_rgba(229,9,20,0.7)] transition-all" id="btn-master-play">
+<span class="material-symbols-outlined text-[20px]" id="play-icon" style="font-variation-settings: 'FILL' 1;">pause</span>
+<span id="play-label">24 FPS LIVE</span>
+</button>
+<!-- Fast Forward -->
+<button class="w-8 h-8 rounded-lg bg-surface-container-low hover:bg-surface-container flex items-center justify-center text-on-surface transition-colors" title="Shuttle +2x [L]">
+<span class="material-symbols-outlined text-[18px]">fast_forward</span>
+</button>
+<!-- Step Next 1 Frame -->
+<button class="w-8 h-8 rounded-lg bg-surface-container-low hover:bg-surface-container flex items-center justify-center text-on-surface transition-colors" title="Step Next 1 Frame [Right Arrow]">
+<span class="material-symbols-outlined text-[18px]">skip_next</span>
+</button>
+<!-- Loop Toggle -->
+<button class="w-8 h-8 rounded-lg bg-surface-container text-primary flex items-center justify-center transition-colors" title="Loop Selection Active">
+<span class="material-symbols-outlined text-[18px]">repeat</span>
+</button>
+</div>
+<!-- Mid: Audio Master Peak Meter HUD -->
+<div class="flex items-center gap-3 px-3 py-1 rounded-xl bg-surface-container-low font-mono text-label-sm">
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant">volume_up</span>
+<div class="flex flex-col gap-0.5 w-32">
+<div class="flex justify-between text-[9px] text-outline">
+<span>L/R PEAK</span>
+<span class="text-primary-fixed">-23.8 LKFS</span>
+</div>
+<div class="w-full h-1.5 bg-surface-container rounded-full overflow-hidden flex gap-0.5">
+<div class="h-full bg-emerald-500 rounded-full w-[70%]"></div>
+<div class="h-full bg-amber-400 rounded-full w-[16%]"></div>
+<div class="h-full bg-primary-container rounded-full w-[4%] animate-pulse"></div>
+</div>
+</div>
+<button class="px-2 py-0.5 rounded bg-surface-container text-[10px] text-on-surface hover:text-primary transition-colors uppercase font-bold">
+              SOLO 7.1.4
+            </button>
+</div>
+<!-- Right: C2PA Hardware Sealed Provenance Vault Badge -->
+<div class="flex items-center gap-2 px-3 py-1 rounded-xl bg-surface-container-low">
+<span class="material-symbols-outlined text-primary text-[18px]">verified</span>
+<div class="flex flex-col text-left">
+<div class="flex items-center gap-1.5 font-mono text-[10px] text-on-surface font-semibold">
+<span>C2PA 2.1 HARDWARE SEALED</span>
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+</div>
+<div class="font-mono text-[9px] text-outline truncate max-w-[190px]">
+                Merkle: 0x3E8B890F...99C • AMD SEV-SNP
+              </div>
+</div>
+<!-- Arabic Certified Sub-tag -->
+<span class="px-1.5 py-0.5 rounded bg-surface-container text-on-surface-variant font-label-sm text-[9px] font-semibold">
+              موثق رقمياً
+            </span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Minimalist Retractable QC Telemetry Station (Studio Console Deck) -->
+<div class="mt-4 w-full flex flex-col gap-3">
+<!-- Dock Header with Toggle Status -->
+<div class="flex items-center justify-between px-2">
+<div class="flex items-center gap-3">
+<div class="w-2 h-2 rounded-full bg-primary-container shadow-[0_0_8px_rgba(229,9,20,0.8)]"></div>
+<span class="font-headline-sm text-label-md text-on-surface uppercase tracking-wider font-semibold">
+          Broadcast QC Master Telemetry &amp; Vector Instrumentation
+        </span>
+<span class="text-outline font-label-md">/</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">
+          محطة القياس الآني للجودة السينمائية
+        </span>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-mono text-label-sm text-outline">CALIBRATION:</span>
+<span class="px-2.5 py-0.5 rounded-full bg-surface-container-high text-on-surface font-mono text-label-sm font-semibold">
+          DCI-P3 / ST 2084 PQ HDR MASTER
+        </span>
+<button class="p-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-colors ml-2" id="toggle-dock">
+<span class="material-symbols-outlined text-[18px]" id="dock-chevron">expand_more</span>
+</button>
+</div>
+</div>
+<!-- Telemetry Instrumentation Grid (4-Column Bento Panel) -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 transition-all duration-300" id="telemetry-panel">
+<!-- Panel 1: RGB Waveform Parade (Inline Realtime Vector Visualizer) -->
+<div class="p-4 rounded-xl bg-surface-container-lowest flex flex-col justify-between shadow-[0_4px_16px_rgba(0,0,0,0.4)]">
+<div class="flex items-center justify-between pb-2">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary text-[16px]">stacked_line_chart</span>
+<span class="font-headline-sm text-body-sm text-on-surface font-medium">RGB Waveform Parade</span>
+</div>
+<span class="font-mono text-label-sm text-outline">IRE 0 - 100</span>
+</div>
+<!-- Inline Waveform SVG Visualizer -->
+<div class="w-full h-24 rounded-lg bg-surface-container-low p-2 flex items-center justify-center overflow-hidden">
+<svg class="w-full h-full" preserveaspectratio="none" viewbox="0 0 240 70">
+<!-- IRE Reference Lines -->
+<line stroke="#353534" stroke-dasharray="2 3" stroke-width="0.7" x1="0" x2="240" y1="10" y2="10"></line>
+<line stroke="#353534" stroke-dasharray="2 3" stroke-width="0.7" x1="0" x2="240" y1="35" y2="35"></line>
+<line stroke="#353534" stroke-dasharray="2 3" stroke-width="0.7" x1="0" x2="240" y1="60" y2="60"></line>
+<!-- Red Channel Trace -->
+<path d="M 5,58 Q 20,25 35,40 T 65,15 T 75,50" fill="none" opacity="0.85" stroke="#e50914" stroke-width="1.2"></path>
+<!-- Green Channel Trace -->
+<path d="M 85,62 Q 105,32 120,44 T 145,22 T 155,55" fill="none" opacity="0.8" stroke="#10b981" stroke-width="1.2"></path>
+<!-- Blue Channel Trace -->
+<path d="M 165,64 Q 185,42 200,48 T 225,18 T 235,58" fill="none" opacity="0.85" stroke="#3b82f6" stroke-width="1.2"></path>
+</svg>
+</div>
+<div class="flex justify-between items-center pt-2 font-mono text-[10px]">
+<span class="text-primary-container font-semibold">R: 890 nits</span>
+<span class="text-emerald-400 font-semibold">G: 640 nits</span>
+<span class="text-blue-400 font-semibold">B: 720 nits</span>
+</div>
+</div>
+<!-- Panel 2: Vectorscope & CIE 1931 Chromaticity Gamut Display -->
+<div class="p-4 rounded-xl bg-surface-container-lowest flex flex-col justify-between shadow-[0_4px_16px_rgba(0,0,0,0.4)]">
+<div class="flex items-center justify-between pb-2">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-secondary text-[16px]">radar</span>
+<span class="font-headline-sm text-body-sm text-on-surface font-medium">Vectorscope &amp; Gamut</span>
+</div>
+<span class="font-mono text-label-sm text-secondary">BT.2020 99.4%</span>
+</div>
+<!-- Vectorscope Reticle SVG -->
+<div class="w-full h-24 rounded-lg bg-surface-container-low p-1.5 flex items-center justify-center">
+<svg class="h-full aspect-square" viewbox="0 0 100 100">
+<!-- Circular Reticles -->
+<circle cx="50" cy="50" fill="none" r="42" stroke="#353534" stroke-width="0.8"></circle>
+<circle cx="50" cy="50" fill="none" r="28" stroke="#353534" stroke-width="0.8"></circle>
+<!-- Axis Crosses -->
+<line stroke="#353534" stroke-width="0.6" x1="50" x2="50" y1="8" y2="92"></line>
+<line stroke="#353534" stroke-width="0.6" x1="8" x2="92" y1="50" y2="50"></line>
+<!-- Hue Targets R, G, B, Cy, Mg, Yl -->
+<rect fill="none" height="4" stroke="#e50914" stroke-width="0.8" width="4" x="74" y="22"></rect>
+<rect fill="none" height="4" stroke="#10b981" stroke-width="0.8" width="4" x="22" y="24"></rect>
+<rect fill="none" height="4" stroke="#3b82f6" stroke-width="0.8" width="4" x="22" y="74"></rect>
+<rect fill="none" height="4" stroke="#ec4899" stroke-width="0.8" width="4" x="72" y="74"></rect>
+<!-- Active Color Cloud Dispersion -->
+<ellipse cx="62" cy="40" fill="rgba(229,9,20,0.3)" rx="14" ry="9" transform="rotate(-25 62 40)"></ellipse>
+<ellipse cx="44" cy="48" fill="rgba(255,181,160,0.25)" rx="8" ry="12"></ellipse>
+<circle cx="60" cy="38" fill="#ffb4aa" r="2"></circle>
+</svg>
+</div>
+<div class="flex justify-between items-center pt-2 font-mono text-[10px] text-outline">
+<span>WHITE POINT: D65</span>
+<span class="text-on-surface">DELTA-E: 0.42 (BROADCAST PASS)</span>
+</div>
+</div>
+<!-- Panel 3: Spatial Dolby Atmos 7.1.4 Peak Visualizers -->
+<div class="p-4 rounded-xl bg-surface-container-lowest flex flex-col justify-between shadow-[0_4px_16px_rgba(0,0,0,0.4)]">
+<div class="flex items-center justify-between pb-2">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary-container text-[16px]">surround_sound</span>
+<span class="font-headline-sm text-body-sm text-on-surface font-medium">Dolby Atmos 7.1.4 Spatial</span>
+</div>
+<span class="font-mono text-label-sm text-primary font-bold">12-CH SYNC</span>
+</div>
+<!-- 12 Channels Micro Graphic EQ Bars -->
+<div class="w-full h-24 rounded-lg bg-surface-container-low p-2.5 flex items-end justify-between gap-1">
+<!-- 12 Audio Channels: L, C, R, LFE, Lss, Rss, Lsr, Rsr, Ltf, Rtf, Ltr, Rtr -->
+<div class="flex-1 flex flex-col items-center gap-1 h-full justify-end">
+<div class="w-full bg-primary-container rounded-t h-[78%]"></div>
+<span class="text-[8px] font-mono text-outline">L</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-1 h-full justify-end">
+<div class="w-full bg-primary-container rounded-t h-[92%]"></div>
+<span class="text-[8px] font-mono text-outline">C</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-1 h-full justify-end">
+<div class="w-full bg-primary-container rounded-t h-[74%]"></div>
+<span class="text-[8px] font-mono text-outline">R</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-1 h-full justify-end">
+<div class="w-full bg-secondary-container rounded-t h-[86%] shadow-[0_0_6px_rgba(215,59,0,0.6)]"></div>
+<span class="text-[8px] font-mono text-secondary font-bold">LFE</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-1 h-full justify-end">
+<div class="w-full bg-emerald-500 rounded-t h-[58%]"></div>
+<span class="text-[8px] font-mono text-outline">LS</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-1 h-full justify-end">
+<div class="w-full bg-emerald-500 rounded-t h-[62%]"></div>
+<span class="text-[8px] font-mono text-outline">RS</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-1 h-full justify-end">
+<div class="w-full bg-emerald-500 rounded-t h-[52%]"></div>
+<span class="text-[8px] font-mono text-outline">B1</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-1 h-full justify-end">
+<div class="w-full bg-emerald-500 rounded-t h-[48%]"></div>
+<span class="text-[8px] font-mono text-outline">B2</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-1 h-full justify-end">
+<div class="w-full bg-primary rounded-t h-[68%]"></div>
+<span class="text-[8px] font-mono text-outline">T1</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-1 h-full justify-end">
+<div class="w-full bg-primary rounded-t h-[70%]"></div>
+<span class="text-[8px] font-mono text-outline">T2</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-1 h-full justify-end">
+<div class="w-full bg-primary rounded-t h-[54%]"></div>
+<span class="text-[8px] font-mono text-outline">T3</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-1 h-full justify-end">
+<div class="w-full bg-primary rounded-t h-[50%]"></div>
+<span class="text-[8px] font-mono text-outline">T4</span>
+</div>
+</div>
+<div class="flex justify-between items-center pt-2 font-mono text-[10px]">
+<span class="text-outline">DYNAMIC RANGE: 118 dB</span>
+<span class="text-emerald-400 font-semibold">TRUE PEAK PASS</span>
+</div>
+</div>
+<!-- Panel 4: Bitstream Integrity & Cryptographic Frame Hash -->
+<div class="p-4 rounded-xl bg-surface-container-lowest flex flex-col justify-between shadow-[0_4px_16px_rgba(0,0,0,0.4)]">
+<div class="flex items-center justify-between pb-2">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-emerald-400 text-[16px]">verified_user</span>
+<span class="font-headline-sm text-body-sm text-on-surface font-medium">Bitstream &amp; SHA-256</span>
+</div>
+<span class="px-2 py-0.5 rounded bg-emerald-950 text-emerald-400 font-mono text-label-sm font-semibold">
+            100% VALID
+          </span>
+</div>
+<!-- Verification Data Box -->
+<div class="w-full h-24 rounded-lg bg-surface-container-low p-2.5 flex flex-col justify-between font-mono text-label-sm">
+<div class="flex items-center justify-between">
+<span class="text-outline text-[10px]">FRAME LOSS / JITTER:</span>
+<span class="text-on-surface font-bold">0 FRAMES (0.00%)</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-outline text-[10px]">CURRENT BLOCK HASH:</span>
+<span class="text-primary truncate max-w-[130px] text-[10px]">9b47e2a...c014df</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-outline text-[10px]">SECURE ENCLAVE:</span>
+<span class="text-secondary text-[10px]">AMD SEV-SNP 5.2</span>
+</div>
+<div class="w-full h-1 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-emerald-400 w-full"></div>
+</div>
+</div>
+<div class="flex justify-between items-center pt-2 font-mono text-[10px]">
+<span class="text-outline">C2PA ASSET MANIFEST</span>
+<span class="text-primary-container font-semibold cursor-pointer hover:underline">
+            VIEW CHAIN →
+          </span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Client-side Interactive Behaviors -->
+<script>
+  (function initViewportController() {
+    // 1. False Color HUD Toggle
+    const fcBtn = document.getElementById('toggle-false-color');
+    const fcLayer = document.getElementById('false-color-layer');
+    const fcState = document.getElementById('fc-state');
+    let fcActive = false;
+
+    if (fcBtn && fcLayer && fcState) {
+      fcBtn.addEventListener('click', () => {
+        fcActive = !fcActive;
+        if (fcActive) {
+          fcLayer.classList.remove('opacity-0');
+          fcLayer.classList.add('opacity-45');
+          fcState.textContent = 'ON';
+          fcState.classList.remove('text-outline');
+          fcState.classList.add('text-primary');
+          fcBtn.classList.add('bg-primary-container/20');
+        } else {
+          fcLayer.classList.add('opacity-0');
+          fcLayer.classList.remove('opacity-45');
+          fcState.textContent = 'OFF';
+          fcState.classList.remove('text-primary');
+          fcState.classList.add('text-outline');
+          fcBtn.classList.remove('bg-primary-container/20');
+        }
+      });
+    }
+
+    // 2. Play / Pause State Toggle
+    const playBtn = document.getElementById('btn-master-play');
+    const playIcon = document.getElementById('play-icon');
+    const playLabel = document.getElementById('play-label');
+    let isPlaying = true;
+
+    if (playBtn && playIcon && playLabel) {
+      playBtn.addEventListener('click', () => {
+        isPlaying = !isPlaying;
+        if (isPlaying) {
+          playIcon.textContent = 'pause';
+          playLabel.textContent = '24 FPS LIVE';
+          playBtn.classList.add('bg-primary-container');
+          playBtn.classList.remove('bg-surface-container-high');
+        } else {
+          playIcon.textContent = 'play_arrow';
+          playLabel.textContent = 'PAUSED';
+          playBtn.classList.remove('bg-primary-container');
+          playBtn.classList.add('bg-surface-container-high');
+        }
+      });
+    }
+
+    // 3. QC Telemetry Dock Expand / Collapse
+    const dockBtn = document.getElementById('toggle-dock');
+    const telemetryPanel = document.getElementById('telemetry-panel');
+    const dockChevron = document.getElementById('dock-chevron');
+    let dockExpanded = true;
+
+    if (dockBtn && telemetryPanel && dockChevron) {
+      dockBtn.addEventListener('click', () => {
+        dockExpanded = !dockExpanded;
+        if (dockExpanded) {
+          telemetryPanel.classList.remove('hidden');
+          dockChevron.textContent = 'expand_more';
+        } else {
+          telemetryPanel.classList.add('hidden');
+          dockChevron.textContent = 'expand_less';
+        }
+      });
+    }
+
+    // 4. Interactive Scrubber Scrubbing Simulation
+    const scrubber = document.getElementById('scrubber-track');
+    const fill = document.getElementById('playhead-fill');
+    const handle = document.getElementById('playhead-handle');
+
+    if (scrubber && fill && handle) {
+      scrubber.addEventListener('click', (e) => {
+        const rect = scrubber.getBoundingClientRect();
+        const clickX = Math.max(0, Math.min(e.clientX - rect.left, rect.width));
+        const percentage = (clickX / rect.width) * 100;
+        fill.style.width = percentage + '%';
+        handle.style.left = percentage + '%';
+      });
+    }
+  })();
+</script></main></div></body></html>

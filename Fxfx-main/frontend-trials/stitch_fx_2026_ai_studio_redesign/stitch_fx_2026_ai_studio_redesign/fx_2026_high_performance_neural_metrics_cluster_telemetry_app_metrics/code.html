@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>
+@layer base{
+  html,body{margin:0;padding:0;}
+  body{overscroll-behavior:none;}
+  main>:first-child{margin-top:0!important;}
+  main>:last-child{margin-bottom:0!important;}
+}
+::-webkit-scrollbar{display:none;}
+
+/* Ultra-luxury Cinematic Lighting Keyframes & Ambient Motion */
+@keyframes atmosphericBreathing {
+  0%, 100% {
+    opacity: 0.65;
+    transform: translate(-50%, 0) scale(1);
+  }
+  50% {
+    opacity: 0.95;
+    transform: translate(-50%, -15px) scale(1.08);
+  }
+}
+
+@keyframes ctaPulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 16px rgba(229, 9, 20, 0.4), 0 0 32px rgba(215, 59, 0, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 26px rgba(229, 9, 20, 0.7), 0 0 48px rgba(215, 59, 0, 0.35);
+  }
+}
+
+@keyframes entranceFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.ambient-breathing-bloom {
+  animation: atmosphericBreathing 7s ease-in-out infinite;
+}
+
+.luxury-cta-glow {
+  animation: ctaPulseGlow 4s ease-in-out infinite;
+}
+
+/* Staggered entrance animation classes */
+.animate-entrance {
+  animation: entranceFadeUp 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Interactive Spotlight Card Glassmorphism & Mouse Tracking */
+.interactive-spotlight-card {
+  position: relative;
+  background: rgba(22, 22, 26, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s ease, background 0.35s ease;
+  will-change: transform, box-shadow;
+}
+
+.interactive-spotlight-card:hover {
+  transform: translateY(-5px) scale(1.01);
+  box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.8), 0 0 24px rgba(229, 9, 20, 0.22);
+  border-color: rgba(229, 9, 20, 0.3);
+}
+
+.interactive-spotlight-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(400px circle at var(--mouse-x, -500px) var(--mouse-y, -500px), rgba(229, 9, 20, 0.15), rgba(215, 59, 0, 0.05) 40%, transparent 80%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+}
+
+.interactive-spotlight-card:hover::before {
+  opacity: 1;
+}
+
+/* Disable or soften heavy transitions for prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .ambient-breathing-bloom,
+  .luxury-cta-glow,
+  .animate-entrance {
+    animation: none !important;
+  }
+  .interactive-spotlight-card {
+    transition: none !important;
+  }
+}
+</style><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "surface-container-low": "#1c1b1b", "on-primary": "#690003", "inverse-surface": "#e5e2e1", "on-primary-fixed-variant": "#930007", "on-error-container": "#ffdad6", "surface-variant": "#353534", "on-secondary-fixed-variant": "#862200", "primary-fixed": "#ffdad5", "surface-container-highest": "#353534", "surface-tint": "#ffb4aa", "primary": "#ffb4aa", "surface-bright": "#393939", "surface-container-high": "#2a2a2a", "secondary-fixed": "#ffdbd1", "on-secondary-fixed": "#3b0900", "error-container": "#93000a", "inverse-on-surface": "#313030", "primary-container": "#e50914", "surface-container-lowest": "#0e0e0e", "surface-container": "#201f1f", "on-surface-variant": "#a1a1aa", "surface-dim": "#131313", "secondary-container": "#d73b00", "on-primary-fixed": "#410001", "on-surface": "#f4f4f6", "surface": "#131313", "on-tertiary-fixed": "#410005", "secondary-fixed-dim": "#ffb5a0", "tertiary-fixed-dim": "#ffb3ae", "on-primary-container": "#fff7f6", "tertiary": "#ffb3ae", "outline-variant": "#5e3f3b", "on-tertiary": "#68000c", "inverse-primary": "#c0000c", "on-error": "#690005", "tertiary-container": "#e40b2b", "on-tertiary-container": "#fff7f6", "on-tertiary-fixed-variant": "#930016", "secondary": "#ffb5a0", "background": "#131313", "tertiary-fixed": "#ffdad7", "on-secondary-container": "#fffbff", "on-secondary": "#5f1500", "on-background": "#e5e2e1", "error": "#ffb4ab", "primary-fixed-dim": "#ffb4aa", "outline": "#af8782" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "space-md": "1rem", "space-lg": "1.5rem", "margin-mobile": "1rem", "margin": "2rem", "gutter-mobile": "0.75rem", "gutter": "1.5rem", "space-xs": "0.25rem", "space-xl": "2.5rem", "space-sm": "0.5rem" }, "fontFamily": { "body-lg": ["Inter"], "headline-xl": ["Geist"], "body-sm": ["Inter"], "headline-md": ["Geist"], "body-md": ["Inter"], "headline-lg": ["Geist"], "headline-xl-mobile": ["Geist"], "headline-sm": ["Geist"], "headline-lg-mobile": ["Geist"], "label-md": ["Geist"], "label-sm": ["Geist"] }, "fontSize": { "body-lg": ["1rem", { "lineHeight": "1.6rem", "letterSpacing": "-0.005em", "fontWeight": "400" }], "headline-xl": ["3rem", { "lineHeight": "3.5rem", "letterSpacing": "-0.03em", "fontWeight": "600" }], "body-sm": ["0.75rem", { "lineHeight": "1.2rem", "letterSpacing": "0.01em", "fontWeight": "400" }], "headline-md": ["1.5rem", { "lineHeight": "2rem", "letterSpacing": "-0.015em", "fontWeight": "500" }], "body-md": ["0.875rem", { "lineHeight": "1.4rem", "letterSpacing": "0em", "fontWeight": "400" }], "headline-lg": ["2.25rem", { "lineHeight": "2.75rem", "letterSpacing": "-0.025em", "fontWeight": "600" }], "headline-xl-mobile": ["2rem", { "lineHeight": "2.5rem", "letterSpacing": "-0.02em", "fontWeight": "600" }], "headline-sm": ["1.125rem", { "lineHeight": "1.625rem", "letterSpacing": "-0.01em", "fontWeight": "500" }], "headline-lg-mobile": ["1.625rem", { "lineHeight": "2.125rem", "letterSpacing": "-0.02em", "fontWeight": "600" }], "label-md": ["0.8125rem", { "lineHeight": "1rem", "letterSpacing": "0.02em", "fontWeight": "500" }], "label-sm": ["0.6875rem", { "lineHeight": "0.875rem", "letterSpacing": "0.05em", "fontWeight": "600" }] } } } }</script></head><body class="bg-surface font-body-md text-body-md text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-container"><aside class="fixed left-0 top-0 h-full w-72 bg-surface-container-lowest z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.5)]"><div class="flex flex-col"><div class="h-16 px-space-lg flex items-center justify-between bg-surface-container-lowest"><div class="flex items-center gap-space-sm"><img alt="FX-2026 Brand Emblem" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD0VvF0aj0DHp2h98MzVkGo_27dTZN0fZVboahqbTwts6bbOXSloSCwpeAslIHSIj3GSXs0y7fPlxijH-s9UIVfsupKP4kEMYxrDTXtCfQb6LWhQ0GAd1R_MD5Shm68oN6Fg3usBRp4V1KVT_GQDBaTavk0qLlvCMT1KBNwQpvPtfydvuxh7e1IvZ2bpAzzdEV7j_98XtEH7Lj0kMukmwUsWrMh_BQtPc1hMVakrVNLWnvLQAkw2ig"/><span class="font-headline-sm text-headline-sm tracking-wider text-on-surface uppercase">FX-2026</span></div><span class="px-space-xs py-0.5 rounded bg-surface-container-high text-primary font-label-sm text-label-sm tracking-widest uppercase">Enterprise</span></div><div class="px-space-md pt-space-sm pb-space-xs"><button class="luxury-cta-glow w-full flex items-center justify-between px-space-md py-space-sm rounded-lg bg-primary-container text-on-primary-container hover:bg-tertiary-container transition-all" type="button"><span class="flex items-center gap-space-xs font-label-md text-label-md tracking-wide"><span class="material-symbols-outlined text-lg">add_circle</span>New Prompt</span><kbd class="px-space-xs py-0.5 rounded bg-on-primary font-label-sm text-label-sm text-on-primary-container opacity-90">⌘K</kbd></button></div><div class="overflow-y-auto px-space-md py-space-xs space-y-space-md"><div class="space-y-space-xs"><span class="px-space-sm font-label-sm text-label-sm text-outline tracking-wider uppercase">Features</span><nav class="flex flex-col gap-0.5" data-active-classes="bg-surface-container-high text-on-surface font-label-md"><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="chat" href="#"><span class="material-symbols-outlined text-lg">chat_bubble</span><span>Chat</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="architect" href="#"><span class="material-symbols-outlined text-lg">architecture</span><span>Architect</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="memory" href="#"><span class="material-symbols-outlined text-lg">neurology</span><span>Memory</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="analytics" href="#"><span class="material-symbols-outlined text-lg">monitoring</span><span>Analytics</span></a></nav></div><div class="space-y-space-xs"><span class="px-space-sm font-label-sm text-label-sm text-outline tracking-wider uppercase">Workspaces</span><nav class="flex flex-col gap-0.5" data-active-classes="bg-surface-container-high text-on-surface font-label-md"><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="new-project" href="#"><span class="material-symbols-outlined text-lg">create_new_folder</span><span>New Project</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="image-generator" href="#"><span class="material-symbols-outlined text-lg">image</span><span>Image Generator</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="video-director" href="#"><span class="material-symbols-outlined text-lg">movie_filter</span><span>Video Director</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="audio-soundtrack" href="#"><span class="material-symbols-outlined text-lg">graphic_eq</span><span>Audio / Soundtrack</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="3d-assets" href="#"><span class="material-symbols-outlined text-lg">view_in_ar</span><span>3D Assets</span></a></nav></div><div class="space-y-space-xs"><span class="px-space-sm font-label-sm text-label-sm text-outline tracking-wider uppercase">Intelligence</span><nav class="flex flex-col gap-0.5" data-active-classes="bg-surface-container-high text-on-surface font-label-md"><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="neural-models" href="#"><span class="material-symbols-outlined text-lg">psychology</span><span>Neural Models</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="prompt-vault" href="#"><span class="material-symbols-outlined text-lg">lock</span><span>Prompt Vault</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="render-queue" href="#"><span class="material-symbols-outlined text-lg">layers</span><span>Render Queue</span></a></nav></div></div></div><div class="p-space-md space-y-space-sm bg-surface-container-lowest"><div class="p-space-md rounded-xl bg-surface-container-low shadow-[inset_0_0_24px_rgba(229,9,20,0.08)] flex flex-col gap-space-xs"><div class="flex items-center justify-between"><div class="flex items-center gap-space-xs text-primary"><span class="material-symbols-outlined text-base">diamond</span><span class="font-label-md text-label-md text-on-surface">Enterprise Tier</span></div><span class="font-label-sm text-label-sm text-outline uppercase">PRO</span></div><p class="font-body-sm text-body-sm text-on-surface-variant">Unlock full compute threads and unmetered batch rendering.</p><a class="mt-space-xs inline-flex items-center justify-center py-space-xs px-space-sm rounded bg-surface-container-high text-on-surface hover:bg-surface-bright hover:text-on-surface font-label-sm text-label-sm transition-colors" data-path="manage-plan" href="#">Manage Plan</a></div><div class="px-space-sm py-space-xs rounded bg-surface-container-lowest flex items-center gap-space-xs"><span class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></span><span class="font-label-sm text-label-sm text-outline truncate">Node: US-East GPU Cluster (RTX-6000 Ada)</span></div></div></aside><div class="pl-72"><header class="fixed top-0 left-72 right-0 h-16 bg-surface-container-lowest/90 backdrop-blur-xl z-40 px-space-lg flex items-center justify-between shadow-[0_1px_8px_rgba(0,0,0,0.5)]"><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs font-label-md text-label-md text-on-surface"><span class="text-outline">FX-2026 Studio</span><span class="text-outline">/</span><span class="font-medium text-on-surface">Creative Intelligence v4.2</span><span class="relative flex h-2 w-2 ml-1"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-container opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-primary-container"></span></span></div></div><div class="flex-1 max-w-md mx-space-lg"><div class="relative flex items-center"><span class="material-symbols-outlined absolute left-3 text-outline text-lg pointer-events-none">search</span><input class="w-full bg-surface-container py-space-xs pl-9 pr-12 rounded-lg text-on-surface placeholder:text-outline font-body-sm text-body-sm focus:outline-none focus:ring-1 focus:ring-primary" placeholder="Omni-Search workflows, models, nodes..." type="text"/><kbd class="absolute right-2 px-space-xs py-0.5 rounded bg-surface-container-high text-outline font-label-sm text-label-sm">⌘/</kbd></div></div><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs px-space-sm py-space-xs rounded-lg bg-surface-container-low"><span class="material-symbols-outlined text-primary text-base">speed</span><span class="font-label-sm text-label-sm text-outline">GPU:</span><span class="font-label-sm text-label-sm text-on-surface font-medium">42%</span><div class="w-12 h-1.5 bg-surface-container-high rounded-full overflow-hidden ml-1"><div class="h-full bg-primary-container w-[42%]"></div></div></div><button class="px-space-xs py-space-xs rounded text-outline hover:text-on-surface font-label-sm text-label-sm transition-colors" type="button">العربية / EN</button><button class="relative p-space-xs rounded-lg text-outline hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-lg">notifications</span><span class="absolute top-1.5 right-1.5 w-1.5 h-1.5 rounded-full bg-primary-container"></span></button><a class="p-space-xs rounded-lg text-outline hover:text-on-surface transition-colors" data-path="documentation" href="#" title="Documentation"><span class="material-symbols-outlined text-lg">menu_book</span></a><div class="flex items-center gap-space-xs pl-space-xs"><img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-1 ring-outline-variant" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCA84LSJo3PpfP2pWLm_Cw-072SStUGjZU-hzUD6ulEBNPdDfexoV9Qf9PIyBx9o99-kJwkFH20QyrFGhdNmCVguhmdcAhxwOImgXxKS4sIoFatPT7s-nyaHvHbsj5IJe-bWxyc6up8tbxS1HGVQTuS-KYNmxASO461Xz5h-1wCquC6sM4ka9q9lARBJSW4OR8Rvsnx5Gqrzl6NNUh9rDMxj_6OXoDUQuEk3_bgSs76nP2VMZLis20"/><span class="material-symbols-outlined text-outline text-base">expand_more</span></div></div></header><main class="w-full pt-16 bg-surface min-h-screen"><div class="flex flex-col w-full relative">
+<!-- Ambient Atmospheric Radiant Bloom Layer -->
+<div class="pointer-events-none absolute -top-16 left-1/2 -translate-x-1/2 w-[980px] h-[340px] bg-gradient-to-b from-primary-container/15 via-secondary-container/5 to-transparent blur-[110px] ambient-breathing-bloom -z-10"></div>
+<!-- Workspace Container: Max bounded with consistent margins -->
+<div class="px-space-lg py-space-md flex flex-col gap-space-lg w-full max-w-[1720px] mx-auto animate-entrance">
+<!-- 1. Header & Technical Instrumentation Breadcrumbs -->
+<header class="flex flex-col lg:flex-row lg:items-end justify-between gap-space-md bg-surface-container-low/70 backdrop-blur-xl p-space-lg rounded-xl shadow-xl">
+<div class="flex flex-col gap-space-xs">
+<div class="flex flex-wrap items-center gap-space-xs font-label-sm text-label-sm tracking-wider uppercase text-outline">
+<span class="text-primary font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">hub</span>
+            ATLAS CORE
+          </span>
+<span>/</span>
+<span class="text-on-surface-variant font-mono">app/metrics/page.tsx</span>
+<span>/</span>
+<span class="px-space-xs py-0.5 rounded bg-surface-container-highest text-secondary font-mono text-[10px]">
+            TELEMETRY &amp; COMPUTE ENGINE V4.8
+          </span>
+</div>
+<div class="flex flex-col sm:flex-row sm:items-baseline gap-space-sm mt-1">
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight font-semibold flex items-center gap-space-xs">
+            High-Performance Neural Metrics &amp; Cluster Telemetry
+          </h1>
+<span class="font-body-sm text-body-sm text-outline font-medium tracking-normal" dir="rtl">
+            محرك المقاييس والأداء العالي لعناقيد المعالجة العصبية
+          </span>
+</div>
+<!-- Telemetry Status Pills -->
+<div class="flex flex-wrap items-center gap-space-xs mt-space-xs">
+<div class="flex items-center gap-1.5 px-space-sm py-1 rounded-lg bg-surface-container-high/80 text-on-surface font-label-sm text-label-sm">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-container opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-primary-container"></span>
+</span>
+<span class="text-outline uppercase">Cluster:</span>
+<span class="text-on-surface font-semibold text-primary">OPTIMAL</span>
+</div>
+<div class="flex items-center gap-1.5 px-space-sm py-1 rounded-lg bg-surface-container-high/80 text-on-surface font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-primary text-sm">bolt</span>
+<span class="text-outline uppercase">Throughput:</span>
+<span class="font-mono text-on-surface font-medium">482.4 TFLOPS</span>
+</div>
+<div class="flex items-center gap-1.5 px-space-sm py-1 rounded-lg bg-surface-container-high/80 text-on-surface font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-secondary text-sm">memory</span>
+<span class="text-outline uppercase">VRAM Allocated:</span>
+<span class="font-mono text-on-surface font-medium">512 GB <span class="text-outline font-normal">/ 640 GB</span> (80%)</span>
+</div>
+<div class="flex items-center gap-1.5 px-space-sm py-1 rounded-lg bg-surface-container-high/80 text-on-surface font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-primary text-sm">developer_board</span>
+<span class="text-outline uppercase">Active Synthesis:</span>
+<span class="font-mono text-primary font-semibold">14 Nodes Live</span>
+</div>
+</div>
+</div>
+<!-- Action Instrument Controls -->
+<div class="flex flex-wrap items-center gap-space-sm">
+<!-- Live Interval Toggle -->
+<div class="flex items-center bg-surface-container-lowest px-1.5 py-1 rounded-lg">
+<button class="px-space-xs py-0.5 rounded bg-primary-container text-on-primary-container font-label-sm text-label-sm font-semibold transition-all shadow-sm" type="button">
+            Live 1s
+          </button>
+<button class="px-space-xs py-0.5 rounded text-outline hover:text-on-surface font-label-sm text-label-sm transition-colors" type="button">
+            5s
+          </button>
+<button class="px-space-xs py-0.5 rounded text-outline hover:text-on-surface font-label-sm text-label-sm transition-colors" type="button">
+            30s
+          </button>
+</div>
+<button class="flex items-center gap-1.5 px-space-md py-space-xs rounded-lg bg-surface-container-high hover:bg-surface-bright text-on-surface font-label-md text-label-md transition-colors shadow-sm" type="button">
+<span class="material-symbols-outlined text-base text-primary">health_and_safety</span>
+<span>Health Diagnostic</span>
+</button>
+<button class="luxury-cta-glow flex items-center gap-1.5 px-space-md py-space-xs rounded-lg bg-primary-container hover:bg-tertiary-container text-on-primary-container font-label-md text-label-md font-semibold transition-all" type="button">
+<span class="material-symbols-outlined text-base">download_for_offline</span>
+<span>Export Telemetry Deck</span>
+<span class="text-xs px-1 rounded bg-black/30 font-mono">CSV/JSON</span>
+</button>
+</div>
+</header>
+<!-- 2. KPI Metrics Strip: 4 Precision Responsive Glass Cards -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-space-md">
+<!-- KPI Card 1: Tensor Core Throughput -->
+<div class="interactive-spotlight-card rounded-xl p-space-md flex flex-col justify-between shadow-lg">
+<div class="flex items-start justify-between">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-outline tracking-wider uppercase">Tensor Core Compute</span>
+<div class="flex items-baseline gap-space-xs mt-1">
+<span class="font-headline-lg text-headline-lg font-bold font-mono text-on-surface tracking-tight">1,420.8</span>
+<span class="font-label-sm text-label-sm text-primary font-mono">GFLOPS/s</span>
+</div>
+</div>
+<span class="flex items-center gap-0.5 px-space-xs py-0.5 rounded bg-primary-container/20 text-primary font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-xs">trending_up</span>
+            +12.4%
+          </span>
+</div>
+<!-- Inline Mini Sparkline (CSS/SVG) -->
+<div class="mt-space-md pt-space-xs flex items-end justify-between gap-1 h-9">
+<div class="flex-1 bg-surface-container-high rounded-t-sm h-[38%] transition-all"></div>
+<div class="flex-1 bg-surface-container-high rounded-t-sm h-[48%] transition-all"></div>
+<div class="flex-1 bg-surface-container-high rounded-t-sm h-[65%] transition-all"></div>
+<div class="flex-1 bg-surface-container-high rounded-t-sm h-[58%] transition-all"></div>
+<div class="flex-1 bg-surface-container-high rounded-t-sm h-[75%] transition-all"></div>
+<div class="flex-1 bg-surface-container-high rounded-t-sm h-[70%] transition-all"></div>
+<div class="flex-1 bg-surface-container-high rounded-t-sm h-[88%] transition-all"></div>
+<div class="flex-1 bg-primary-container rounded-t-sm h-[94%] transition-all"></div>
+<div class="flex-1 bg-secondary-container rounded-t-sm h-[100%] transition-all"></div>
+</div>
+<div class="flex items-center justify-between text-outline font-body-sm text-body-sm mt-space-xs">
+<span class="font-mono text-[11px]">Baseline: 1,264 GFLOPS</span>
+<span class="text-primary font-label-sm text-label-sm font-medium">Peak Efficiency 99.4%</span>
+</div>
+</div>
+<!-- KPI Card 2: Neural Latency & TTFT -->
+<div class="interactive-spotlight-card rounded-xl p-space-md flex flex-col justify-between shadow-lg">
+<div class="flex items-start justify-between">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-outline tracking-wider uppercase">Neural Latency &amp; TTFT</span>
+<div class="flex items-baseline gap-space-xs mt-1">
+<span class="font-headline-lg text-headline-lg font-bold font-mono text-on-surface tracking-tight">14.8</span>
+<span class="font-label-sm text-label-sm text-primary font-mono">ms</span>
+</div>
+</div>
+<span class="flex items-center gap-0.5 px-space-xs py-0.5 rounded bg-surface-container-highest text-secondary-fixed-dim font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-xs">speed</span>
+            Low-Jitter
+          </span>
+</div>
+<!-- Latency Micro Visualization -->
+<div class="mt-space-md flex items-center justify-between gap-space-xs">
+<div class="flex-1 bg-surface-container-lowest h-2 rounded-full overflow-hidden p-0.5">
+<div class="bg-gradient-to-r from-primary-container via-secondary-container to-secondary h-full rounded-full w-[28%]"></div>
+</div>
+<span class="font-mono text-xs text-outline">0.4ms σ</span>
+</div>
+<div class="flex items-center justify-between text-outline font-body-sm text-body-sm mt-space-xs">
+<span class="font-mono text-[11px]">Time to First Token: 9.1ms</span>
+<span class="text-on-surface-variant font-label-sm text-label-sm">Under SLA Limit (50ms)</span>
+</div>
+</div>
+<!-- KPI Card 3: Multi-Node VRAM Saturation -->
+<div class="interactive-spotlight-card rounded-xl p-space-md flex flex-col justify-between shadow-lg">
+<div class="flex items-start justify-between">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-outline tracking-wider uppercase">Cluster VRAM Saturation</span>
+<div class="flex items-baseline gap-space-xs mt-1">
+<span class="font-headline-lg text-headline-lg font-bold font-mono text-on-surface tracking-tight">82.6</span>
+<span class="font-label-sm text-label-sm text-secondary font-mono">%</span>
+</div>
+</div>
+<span class="flex items-center gap-0.5 px-space-xs py-0.5 rounded bg-surface-container-highest text-outline font-label-sm text-label-sm font-mono">
+            Peak: 91.2%
+          </span>
+</div>
+<!-- Dual-tone Allocation Bar -->
+<div class="mt-space-md flex flex-col gap-1">
+<div class="w-full bg-surface-container-lowest h-2.5 rounded-full overflow-hidden flex">
+<div class="bg-primary-container h-full w-[62%]" title="Active Diffusion Tensors"></div>
+<div class="bg-secondary-container h-full w-[20.6%]" title="Shared Memory Cache"></div>
+<div class="bg-surface-container-high h-full w-[17.4%]" title="Free Reserve Pool"></div>
+</div>
+<div class="flex justify-between text-[10px] font-mono text-outline">
+<span class="flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-primary-container"></span> Weights (396GB)</span>
+<span class="flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-secondary-container"></span> Cache (116GB)</span>
+<span>Reserve (128GB)</span>
+</div>
+</div>
+<div class="flex items-center justify-between text-outline font-body-sm text-body-sm mt-space-xs">
+<span class="font-mono text-[11px]">Paged Overflows: 0</span>
+<span class="text-primary font-label-sm text-label-sm">Zero Swap Out</span>
+</div>
+</div>
+<!-- KPI Card 4: Diffusion Step Velocity -->
+<div class="interactive-spotlight-card rounded-xl p-space-md flex flex-col justify-between shadow-lg">
+<div class="flex items-start justify-between">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-outline tracking-wider uppercase">Diffusion Step Velocity</span>
+<div class="flex items-baseline gap-space-xs mt-1">
+<span class="font-headline-lg text-headline-lg font-bold font-mono text-on-surface tracking-tight">124</span>
+<span class="font-label-sm text-label-sm text-primary font-mono">Steps/s</span>
+</div>
+</div>
+<span class="flex items-center gap-0.5 px-space-xs py-0.5 rounded bg-surface-container-high text-primary font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-xs">verified</span>
+            16x H100 SXM5
+          </span>
+</div>
+<!-- Frequency Radial Pulse Indicator -->
+<div class="mt-space-md flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="relative flex h-3 w-3">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-container opacity-75"></span>
+<span class="relative inline-flex rounded-full h-3 w-3 bg-primary-container"></span>
+</span>
+<span class="font-mono text-xs text-on-surface font-medium">Batch Size: 64 Iterations</span>
+</div>
+<span class="font-mono text-xs text-secondary">0 Frame Dropped</span>
+</div>
+<div class="flex items-center justify-between text-outline font-body-sm text-body-sm mt-space-xs">
+<span class="font-mono text-[11px]">Checkpoint Interval: 2.0s</span>
+<span class="text-outline font-label-sm text-label-sm">99.98% SLA</span>
+</div>
+</div>
+</div>
+<!-- 3. Main Telemetry Area (2 Columns layout: 65% Main / 35% Sidebar) -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-start">
+<!-- Left / Main Column (lg:col-span-8 ~ 66%) -->
+<div class="lg:col-span-8 flex flex-col gap-space-lg">
+<!-- a. Real-time Cluster Compute & Latency Waveform Graph -->
+<div class="interactive-spotlight-card rounded-xl p-space-lg flex flex-col gap-space-md shadow-xl">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm pb-space-xs">
+<div class="flex flex-col">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-xl">show_chart</span>
+<h2 class="font-headline-md text-headline-md text-on-surface font-semibold tracking-tight">
+                  Real-time Neural Waveform &amp; Latency Stream
+                </h2>
+</div>
+<p class="font-body-sm text-body-sm text-outline mt-0.5">
+                Dynamic aggregation across unified GPU fabric with zero-delay sampling
+              </p>
+</div>
+<!-- Waveform View Filter Toggles -->
+<div class="flex flex-wrap items-center gap-1 bg-surface-container-lowest p-1 rounded-lg">
+<button class="px-space-xs py-1 rounded bg-surface-container-high text-on-surface font-label-sm text-label-sm font-semibold transition-colors" type="button">
+                All Nodes
+              </button>
+<button class="px-space-xs py-1 rounded text-outline hover:text-on-surface font-label-sm text-label-sm transition-colors" type="button">
+                Node-East-01
+              </button>
+<button class="px-space-xs py-1 rounded text-outline hover:text-on-surface font-label-sm text-label-sm transition-colors" type="button">
+                Node-West-02
+              </button>
+<button class="px-space-xs py-1 rounded text-outline hover:text-on-surface font-label-sm text-label-sm transition-colors" type="button">
+                Latent Ingest
+              </button>
+</div>
+</div>
+<!-- Waveform Legend -->
+<div class="flex items-center gap-space-md text-xs font-mono">
+<div class="flex items-center gap-1.5">
+<span class="w-3 h-0.5 bg-primary-container"></span>
+<span class="text-on-surface font-medium">Synthesis Throughput (TFLOPS)</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="w-3 h-0.5 border-b-2 border-dotted border-secondary"></span>
+<span class="text-outline">Latency Jitter (ms)</span>
+</div>
+<div class="ml-auto text-outline text-[11px]">
+              Sampling: <span class="text-primary font-semibold">1,000 Hz</span>
+</div>
+</div>
+<!-- SVG Real-Time Telemetry Graph -->
+<div class="relative w-full h-72 bg-surface-container-lowest/90 rounded-lg overflow-hidden flex flex-col justify-between p-space-sm shadow-[inset_0_2px_12px_rgba(0,0,0,0.8)]">
+<!-- Background Matrix Grid Lines -->
+<div class="absolute inset-0 flex flex-col justify-between pointer-events-none p-space-sm opacity-25">
+<div class="w-full h-px bg-surface-variant"></div>
+<div class="w-full h-px bg-surface-variant"></div>
+<div class="w-full h-px bg-surface-variant"></div>
+<div class="w-full h-px bg-surface-variant"></div>
+<div class="w-full h-px bg-surface-variant"></div>
+</div>
+<svg class="w-full h-full overflow-visible relative z-10" preserveaspectratio="none" viewbox="0 0 1000 240">
+<defs>
+<!-- Crimson Gradient Fill -->
+<lineargradient id="primaryWaveFill" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#e50914" stop-opacity="0.38"></stop>
+<stop offset="65%" stop-color="#e50914" stop-opacity="0.08"></stop>
+<stop offset="100%" stop-color="#e50914" stop-opacity="0"></stop>
+</lineargradient>
+</defs>
+<!-- Synthesis Area Fill -->
+<path d="M 0,160 Q 60,140 120,150 T 240,110 T 360,130 T 480,85 T 600,105 T 720,60 T 840,95 T 920,45 L 1000,52 L 1000,240 L 0,240 Z" fill="url(#primaryWaveFill)"></path>
+<!-- Synthesis Throughput Stroke (Solid Crimson) -->
+<path d="M 0,160 Q 60,140 120,150 T 240,110 T 360,130 T 480,85 T 600,105 T 720,60 T 840,95 T 920,45 L 1000,52" fill="none" stroke="#e50914" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path>
+<!-- Latency Jitter Stroke (Dotted Burnt-Orange) -->
+<path d="M 0,195 Q 80,185 160,200 T 320,175 T 480,190 T 640,165 T 800,180 T 960,155 L 1000,150" fill="none" stroke="#ffb5a0" stroke-dasharray="4,4" stroke-linecap="round" stroke-width="1.8"></path>
+<!-- Interactive Live Marker Point at Head -->
+<circle cx="1000" cy="52" fill="#fff" r="4.5" stroke="#e50914" stroke-width="2.5"></circle>
+<circle class="animate-ping" cx="1000" cy="52" fill="none" opacity="0.6" r="8" stroke="#ff2a3a" stroke-width="1.5"></circle>
+</svg>
+<!-- Bottom Timeline Axis -->
+<div class="relative z-10 flex justify-between text-[10px] font-mono text-outline pt-1">
+<span>-60s</span>
+<span>-45s</span>
+<span>-30s</span>
+<span>-15s</span>
+<span class="text-primary font-bold">NOW [STREAM LIVE]</span>
+</div>
+</div>
+</div>
+<!-- b. Active GPU Node Array & Health Matrix -->
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between px-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-lg">grid_view</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold tracking-tight">
+                Active Node Array &amp; Compute Allocation
+              </h3>
+</div>
+<span class="font-mono text-xs text-outline">6 Cluster Nodes Online</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-space-md">
+<!-- Node Card 1 -->
+<div class="interactive-spotlight-card rounded-xl p-space-md flex flex-col justify-between shadow-md">
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<span class="font-mono text-xs font-semibold text-on-surface">Node-01</span>
+<span class="px-space-xs py-0.5 rounded bg-primary-container/20 text-primary font-label-sm text-label-sm font-semibold flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container animate-pulse"></span>
+                    RENDERING 96%
+                  </span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant font-medium">NVIDIA H100 SXM5 (80GB)</span>
+</div>
+<!-- Metrics meters -->
+<div class="flex flex-col gap-space-xs my-space-sm">
+<div>
+<div class="flex justify-between font-mono text-xs text-outline mb-1">
+<span>VRAM</span>
+<span class="text-on-surface">76.8 GB / 80 GB</span>
+</div>
+<div class="w-full bg-surface-container-lowest h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary-container h-full w-[96%]"></div>
+</div>
+</div>
+<div class="flex items-center justify-between font-mono text-xs text-outline pt-1">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-xs text-secondary">device_thermostat</span> 64°C</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-xs">mode_fan</span> 72%</span>
+<span class="text-primary font-semibold">3.1 kW</span>
+</div>
+</div>
+<div class="pt-space-xs bg-surface-container-lowest/60 p-2 rounded-lg">
+<span class="font-label-sm text-label-sm text-outline uppercase block text-[10px]">Active Execution Job</span>
+<span class="font-mono text-xs text-on-surface truncate block font-medium">Diffusion Shot #9021 (Cinematic 8K)</span>
+</div>
+</div>
+<!-- Node Card 2 -->
+<div class="interactive-spotlight-card rounded-xl p-space-md flex flex-col justify-between shadow-md">
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<span class="font-mono text-xs font-semibold text-on-surface">Node-02</span>
+<span class="px-space-xs py-0.5 rounded bg-primary-container/20 text-primary font-label-sm text-label-sm font-semibold flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container animate-pulse"></span>
+                    RENDERING 89%
+                  </span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant font-medium">NVIDIA H100 SXM5 (80GB)</span>
+</div>
+<div class="flex flex-col gap-space-xs my-space-sm">
+<div>
+<div class="flex justify-between font-mono text-xs text-outline mb-1">
+<span>VRAM</span>
+<span class="text-on-surface">71.2 GB / 80 GB</span>
+</div>
+<div class="w-full bg-surface-container-lowest h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary-container h-full w-[89%]"></div>
+</div>
+</div>
+<div class="flex items-center justify-between font-mono text-xs text-outline pt-1">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-xs text-secondary">device_thermostat</span> 61°C</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-xs">mode_fan</span> 66%</span>
+<span class="text-primary font-semibold">2.9 kW</span>
+</div>
+</div>
+<div class="pt-space-xs bg-surface-container-lowest/60 p-2 rounded-lg">
+<span class="font-label-sm text-label-sm text-outline uppercase block text-[10px]">Active Execution Job</span>
+<span class="font-mono text-xs text-on-surface truncate block font-medium">Latent Vector Ingestion Batch #4</span>
+</div>
+</div>
+<!-- Node Card 3 -->
+<div class="interactive-spotlight-card rounded-xl p-space-md flex flex-col justify-between shadow-md">
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<span class="font-mono text-xs font-semibold text-on-surface">Node-03</span>
+<span class="px-space-xs py-0.5 rounded bg-surface-container-highest text-secondary font-label-sm text-label-sm font-semibold flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                    SYNTHESIS 74%
+                  </span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant font-medium">RTX 6000 Ada (48GB)</span>
+</div>
+<div class="flex flex-col gap-space-xs my-space-sm">
+<div>
+<div class="flex justify-between font-mono text-xs text-outline mb-1">
+<span>VRAM</span>
+<span class="text-on-surface">35.5 GB / 48 GB</span>
+</div>
+<div class="w-full bg-surface-container-lowest h-1.5 rounded-full overflow-hidden">
+<div class="bg-secondary-container h-full w-[74%]"></div>
+</div>
+</div>
+<div class="flex items-center justify-between font-mono text-xs text-outline pt-1">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-xs text-secondary">device_thermostat</span> 57°C</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-xs">mode_fan</span> 54%</span>
+<span class="text-on-surface font-semibold">1.4 kW</span>
+</div>
+</div>
+<div class="pt-space-xs bg-surface-container-lowest/60 p-2 rounded-lg">
+<span class="font-label-sm text-label-sm text-outline uppercase block text-[10px]">Active Execution Job</span>
+<span class="font-mono text-xs text-on-surface truncate block font-medium">Anamorphic VAE Upscale v2</span>
+</div>
+</div>
+<!-- Node Card 4 -->
+<div class="interactive-spotlight-card rounded-xl p-space-md flex flex-col justify-between shadow-md">
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<span class="font-mono text-xs font-semibold text-on-surface">Node-04</span>
+<span class="px-space-xs py-0.5 rounded bg-primary-container/20 text-primary font-label-sm text-label-sm font-semibold flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container animate-pulse"></span>
+                    PEAK 91%
+                  </span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant font-medium">RTX 6000 Ada (48GB)</span>
+</div>
+<div class="flex flex-col gap-space-xs my-space-sm">
+<div>
+<div class="flex justify-between font-mono text-xs text-outline mb-1">
+<span>VRAM</span>
+<span class="text-primary font-semibold">43.7 GB / 48 GB</span>
+</div>
+<div class="w-full bg-surface-container-lowest h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary-container h-full w-[91%]"></div>
+</div>
+</div>
+<div class="flex items-center justify-between font-mono text-xs text-outline pt-1">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-xs text-primary">device_thermostat</span> 69°C</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-xs">mode_fan</span> 82%</span>
+<span class="text-primary font-semibold">1.8 kW</span>
+</div>
+</div>
+<div class="pt-space-xs bg-surface-container-lowest/60 p-2 rounded-lg">
+<span class="font-label-sm text-label-sm text-outline uppercase block text-[10px]">Active Execution Job</span>
+<span class="font-mono text-xs text-on-surface truncate block font-medium">Multi-View 3D Splat Mesh #108</span>
+</div>
+</div>
+<!-- Node Card 5 -->
+<div class="interactive-spotlight-card rounded-xl p-space-md flex flex-col justify-between shadow-md">
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<span class="font-mono text-xs font-semibold text-on-surface">Node-05</span>
+<span class="px-space-xs py-0.5 rounded bg-surface-container-high text-outline font-label-sm text-label-sm font-semibold flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-outline"></span>
+                    ONLINE 52%
+                  </span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant font-medium">Tensor L40S (48GB)</span>
+</div>
+<div class="flex flex-col gap-space-xs my-space-sm">
+<div>
+<div class="flex justify-between font-mono text-xs text-outline mb-1">
+<span>VRAM</span>
+<span class="text-on-surface">24.9 GB / 48 GB</span>
+</div>
+<div class="w-full bg-surface-container-lowest h-1.5 rounded-full overflow-hidden">
+<div class="bg-secondary-fixed-dim/60 h-full w-[52%]"></div>
+</div>
+</div>
+<div class="flex items-center justify-between font-mono text-xs text-outline pt-1">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-xs text-secondary">device_thermostat</span> 52°C</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-xs">mode_fan</span> 48%</span>
+<span class="text-on-surface font-semibold">1.1 kW</span>
+</div>
+</div>
+<div class="pt-space-xs bg-surface-container-lowest/60 p-2 rounded-lg">
+<span class="font-label-sm text-label-sm text-outline uppercase block text-[10px]">Active Execution Job</span>
+<span class="font-mono text-xs text-on-surface truncate block font-medium">Audio Soundtrack Spectral Diff</span>
+</div>
+</div>
+<!-- Node Card 6 -->
+<div class="interactive-spotlight-card rounded-xl p-space-md flex flex-col justify-between shadow-md">
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<span class="font-mono text-xs font-semibold text-on-surface">Node-06</span>
+<span class="px-space-xs py-0.5 rounded bg-surface-container-high text-outline font-label-sm text-label-sm font-semibold flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-outline"></span>
+                    IDLE / READY
+                  </span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant font-medium">Tensor L40S (48GB)</span>
+</div>
+<div class="flex flex-col gap-space-xs my-space-sm">
+<div>
+<div class="flex justify-between font-mono text-xs text-outline mb-1">
+<span>VRAM</span>
+<span class="text-on-surface">8.1 GB / 48 GB</span>
+</div>
+<div class="w-full bg-surface-container-lowest h-1.5 rounded-full overflow-hidden">
+<div class="bg-outline/40 h-full w-[17%]"></div>
+</div>
+</div>
+<div class="flex items-center justify-between font-mono text-xs text-outline pt-1">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-xs text-secondary">device_thermostat</span> 44°C</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-xs">mode_fan</span> 35%</span>
+<span class="text-on-surface font-semibold">0.4 kW</span>
+</div>
+</div>
+<div class="pt-space-xs bg-surface-container-lowest/60 p-2 rounded-lg">
+<span class="font-label-sm text-label-sm text-outline uppercase block text-[10px]">Active Execution Job</span>
+<span class="font-mono text-xs text-outline truncate block">Standby / Warm-Pool Allocator</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column (lg:col-span-4 ~ 34%) -->
+<div class="lg:col-span-4 flex flex-col gap-space-lg">
+<!-- a. Pipeline Queue & Resource Bottleneck Inspector -->
+<div class="interactive-spotlight-card rounded-xl p-space-lg flex flex-col gap-space-md shadow-xl">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-xl">account_tree</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold tracking-tight">
+                Pipeline Stage Inspector
+              </h3>
+</div>
+<span class="font-mono text-xs text-primary font-semibold">17.2ms Total</span>
+</div>
+<!-- Stacked Pipeline Latency Bar -->
+<div class="flex flex-col gap-1.5">
+<div class="w-full bg-surface-container-lowest h-3 rounded-full overflow-hidden flex">
+<div class="bg-secondary h-full w-[7%]" title="Prompt Encoding (1.2ms)"></div>
+<div class="bg-primary-container h-full w-[69%]" title="Vector Denoising (11.8ms)"></div>
+<div class="bg-secondary-container h-full w-[20%]" title="Anamorphic VAE (3.4ms)"></div>
+<div class="bg-outline h-full w-[4%]" title="Audio Sync (0.8ms)"></div>
+</div>
+<span class="text-[11px] font-mono text-outline text-right">Weighted Denoising Step Load: 68.6%</span>
+</div>
+<!-- Individual Pipeline Stage Breakdown Cards -->
+<div class="space-y-space-xs">
+<div class="flex items-center justify-between p-space-xs rounded-lg bg-surface-container-lowest/80">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-label-md text-label-md text-on-surface">Prompt Embedding &amp; CLIP</span>
+</div>
+<div class="flex items-center gap-space-xs font-mono text-xs">
+<span class="text-on-surface">1.2 ms</span>
+<span class="text-outline text-[11px]">(-0.1ms)</span>
+</div>
+</div>
+<div class="flex items-center justify-between p-space-xs rounded-lg bg-surface-container-lowest/80">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+<span class="font-label-md text-label-md text-on-surface font-semibold">Vector Denoising Steps</span>
+</div>
+<div class="flex items-center gap-space-xs font-mono text-xs">
+<span class="text-primary font-bold">11.8 ms</span>
+<span class="text-primary text-[11px]">[HEAVY]</span>
+</div>
+</div>
+<div class="flex items-center justify-between p-space-xs rounded-lg bg-surface-container-lowest/80">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-secondary-container"></span>
+<span class="font-label-md text-label-md text-on-surface">Anamorphic VAE Upscale</span>
+</div>
+<div class="flex items-center gap-space-xs font-mono text-xs">
+<span class="text-on-surface">3.4 ms</span>
+<span class="text-outline text-[11px]">(Norm)</span>
+</div>
+</div>
+<div class="flex items-center justify-between p-space-xs rounded-lg bg-surface-container-lowest/80">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-outline"></span>
+<span class="font-label-md text-label-md text-on-surface">Audio Waveform Sync</span>
+</div>
+<div class="flex items-center gap-space-xs font-mono text-xs">
+<span class="text-on-surface">0.8 ms</span>
+<span class="text-secondary text-[11px]">[FAST]</span>
+</div>
+</div>
+</div>
+</div>
+<!-- b. Cluster Autonomous Optimization Agent ("Director Atlas Telemetry Copilot") -->
+<div class="interactive-spotlight-card rounded-xl p-space-lg flex flex-col gap-space-md shadow-xl bg-gradient-to-b from-surface-container/90 via-surface-container-low/90 to-surface-container-lowest/90">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-xl">smart_toy</span>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold tracking-tight">Atlas Telemetry Copilot</span>
+<span class="font-mono text-[10px] text-outline uppercase tracking-wider">Autonomous Resource Balancer</span>
+</div>
+</div>
+<span class="px-space-xs py-0.5 rounded bg-primary-container text-on-primary-container font-label-sm text-label-sm font-semibold">
+              ACTIVE
+            </span>
+</div>
+<div class="p-space-md rounded-lg bg-surface-container-lowest/90 flex flex-col gap-space-xs">
+<div class="flex items-center gap-1.5 text-primary">
+<span class="material-symbols-outlined text-sm">warning</span>
+<span class="font-label-sm text-label-sm font-semibold uppercase tracking-wider">Dynamic Bottleneck Detected</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+<strong class="text-on-surface font-medium">Node-04</strong> is operating at <strong class="text-primary font-bold">91% VRAM</strong> saturation during 8K ProRes generation. Rebalancing batch queue to idle <strong class="text-secondary font-medium">Node-02</strong> will reduce overall jitter by <strong class="text-primary font-semibold">~18%</strong>.
+            </p>
+</div>
+<div class="flex items-center gap-space-sm pt-space-xs">
+<button class="luxury-cta-glow flex-1 flex items-center justify-center gap-1.5 py-space-xs px-space-md rounded-lg bg-primary-container hover:bg-tertiary-container text-on-primary-container font-label-md text-label-md font-semibold transition-all" type="button">
+<span class="material-symbols-outlined text-base">alt_route</span>
+<span>Auto-Rebalance Cluster</span>
+</button>
+<button class="py-space-xs px-space-md rounded-lg bg-surface-container-high hover:bg-surface-bright text-outline hover:text-on-surface font-label-md text-label-md transition-colors" type="button">
+              Dismiss
+            </button>
+</div>
+</div>
+<!-- c. Audit & SLA Compliance Logs -->
+<div class="interactive-spotlight-card rounded-xl p-space-lg flex flex-col gap-space-md shadow-xl">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-outline text-xl">terminal</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold tracking-tight">
+                Live Engine Stream Logs
+              </h3>
+</div>
+<span class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></span>
+</div>
+<!-- Micro-Terminal Scroll Area -->
+<div class="bg-surface-container-lowest p-space-md rounded-lg font-mono text-[11px] leading-5 space-y-2 max-h-56 overflow-y-auto">
+<div class="text-outline">
+<span class="text-secondary">[08:42:11]</span>
+<span class="text-on-surface-variant font-semibold">NODE_01:</span>
+<span>ACEScg Color Buffer Sync ACK (0.1ms)</span>
+</div>
+<div class="text-outline">
+<span class="text-secondary">[08:41:59]</span>
+<span class="text-primary font-semibold">SCHEDULER:</span>
+<span>Batch #9021 dispatches to Pod-Alpha [16 Tensor Threads]</span>
+</div>
+<div class="text-outline">
+<span class="text-secondary">[08:41:42]</span>
+<span class="text-on-surface-variant font-semibold">MEM_DAEMON:</span>
+<span>Reclaimed 14.2 GB shared latent tensors from cache</span>
+</div>
+<div class="text-outline">
+<span class="text-secondary">[08:41:19]</span>
+<span class="text-outline font-semibold">TELEMETRY:</span>
+<span>Node-06 entering standby zero-power state [44°C]</span>
+</div>
+<div class="text-outline">
+<span class="text-secondary">[08:40:55]</span>
+<span class="text-primary font-semibold">CUDA_STREAM:</span>
+<span>Non-blocking NVLink interconnect verified at 900 GB/s</span>
+</div>
+</div>
+<div class="flex items-center justify-between text-outline font-body-sm text-body-sm pt-space-xs">
+<span class="font-mono text-[11px]">Status: 0 Fatal / 0 Warnings</span>
+<a class="text-primary hover:underline font-label-sm text-label-sm" href="#">View Complete Kernel Log</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Interactive Dynamic Lighting & Mouse Spotlight Script -->
+<script>
+    (function initTelemetrySpotlights() {
+      const cards = document.querySelectorAll('.interactive-spotlight-card');
+      
+      cards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          card.style.setProperty('--mouse-x', `${x}px`);
+          card.style.setProperty('--mouse-y', `${y}px`);
+        });
+      });
+    })();
+  </script>
+</div></main></div></body></html>
