@@ -1,6 +1,0 @@
-{
-  "name": "Atelier FX",
-  "description": "Cinematic editorial AI film staging and latent parameter grading studio.",
-  "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
-}

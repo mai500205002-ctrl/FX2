@@ -1,4 +1,0 @@
-{
-  "instructions": "Copy this file, replace the empty array with ratings from blind human reviewers, and use only random artifact IDs during scoring. Keep the version mapping hidden until ratings are finalized.",
-  "ratings": []
-}
