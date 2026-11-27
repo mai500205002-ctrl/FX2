@@ -9,7 +9,7 @@ Evidence rule: “Present” means visible in inspected source. “Not verified�
 | Priority | Area | Observed state | Gap / risk | Decision |
 |---|---|---|---|---|
 | P0 | Reproducible baseline | Several historical reports exist | Totals conflict (167/168/185/206); no current GitHub check runs | Re-run from clean checkout and pin commit, runtime and package-manager path |
-| P0 | Primary product pipeline | Main UI calls Insight, Concept and Script separately; Agent panel calls /api/agent/run | Users can experience a different pipeline from the full creative engine | Define one canonical generation contract and route primary UX through orchestrator without breaking compatibility |
+| P0 | Multiple generation paths | Main UI calls Insight, Concept and Script separately; /api/full-pipeline runs a legacy sequential flow; Agent panel calls /api/agent/run | Three paths can produce different behavior and provenance | Inventory contracts and define backend compatibility policy; defer client migration until backend acceptance |
 | P0 | Fallback governance | Court and script-review fallbacks are labelled; Agent flow continues with a draft | Ensure fallback-derived output cannot be marked ready or approved | Add fail-closed approval invariant and regression tests |
 | P0 | Provider reliability | Gemini/OpenAI/OpenRouter/xAI adapters present | Groq adapter absent; old provider probes incomplete | Decide supported providers; if Groq is required, add a distinct adapter with model allowlist, usage and budget tests |
 | P1 | Strategic diversity | Five technique-specific lenses exist | Five techniques do not guarantee different strategic territories or mechanisms | Add a pre-generation Strategic Territory/Challenge compiler |
