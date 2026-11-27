@@ -18,7 +18,7 @@ The repository contains a React/Vite/TypeScript frontend, an Express/TypeScript 
 - app/src/components/BrowserAgentPanel.tsx — browser research UI.
 - app/src/components/GatewayMetricsPanel.tsx — gateway telemetry UI.
 
-Important integration finding: App.tsx calls POST /api/insight, then POST /api/concept, then POST /api/script as separate requests. AgentSaaSPanel separately calls POST /api/agent/run. The full creative-agent pipeline exists in the backend, but the primary step-by-step UI flow does not currently use that orchestrator as its single source of truth.
+Important integration finding: three backend generation paths coexist. App.tsx calls POST /api/insight, then POST /api/concept, then POST /api/script as separate requests. POST /api/full-pipeline performs a legacy sequential Insight → Concept → Script flow. AgentSaaSPanel separately calls POST /api/agent/run, which invokes the full creative-agent orchestration. The primary UI flow does not currently use the Agent orchestrator as its single source of truth. Treat this as a contract/architecture finding; frontend migration is deferred by the controlling roadmap.
 
 ### Backend
 - backend/src/index.ts — Express app, middleware, health, auth, provider and metrics wiring.
