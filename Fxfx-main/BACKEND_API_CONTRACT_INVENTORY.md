@@ -1,91 +1,84 @@
-# Backend API and Contract Inventory
+# Backend API and Contract Inventory — BE-02
 
-Status: PRELIMINARY STATIC INVENTORY  
-Baseline HEAD: 8e7771ef49d8ea0af94b9594488f9b9fe619ce6d  
-Date: 2026-11-27
+Status: static route and boundary inventory; request/response contracts are not fully verified
+Repository: mai500205002-ctrl/FX2
+Branch / HEAD inspected: `main` / `fa6192628e08d6f7064851328e75dad802b196a0`
+Date: 2026-11-28
+Evidence: `backend/src/index.ts`, `agent/agent-route.ts`, `browser/browser-route.ts`, `saas/saas-route.ts`, and `utils/security.ts`.
 
-This inventory is based on route declarations in backend/src/index.ts and mounted route files. It does not replace request/response schema validation or runtime authorization tests.
+This is a map of handlers and observed boundaries, not runtime proof or a complete schema specification. `POST /api/full-pipeline` is distinct from the Agent orchestrator. BE-04 must turn this inventory into an executable request/response/error compatibility matrix.
 
-## Core HTTP routes
+## Direct routes
 
-| Method | Path | Purpose | Boundary / notes |
+| Method | Path | Observed behavior / input checks | Auth / side effects / error handling |
 |---|---|---|---|
-| GET | /health | Liveness | Public health endpoint |
-| GET | /healthz | Liveness/readiness probe | Public health endpoint |
-| POST | /agent/run | Retired legacy endpoint | Returns 410 and points to /api/agent/run |
-| POST | /llm | Raw LLM generation | Strict LLM rate limit; API auth boundary must be verified |
-| GET | /api/system-prompt | Current system prompt/version | /api authentication |
-| POST | /api/insight | Generate Insight | /api authentication; provider budget context |
-| POST | /api/concept | Generate Concept | /api authentication; provider budget context |
-| POST | /api/script | Generate Script | /api authentication; provider budget context |
-| POST | /api/full-pipeline | Legacy sequential Insight → Concept → Script | /api authentication; not the Agent orchestration |
-| GET | /api/metrics | Gateway/runtime metrics | /api authentication |
-| GET | /api/key-status | Provider configuration status | Explicitly exempt from /api authentication; must never expose key values |
-| GET/POST/DELETE | /api/session | Session status/login/logout | Session-specific limiter and origin/session rules |
+| GET | `/healthz` | Liveness JSON. | Public; global rate limiter skips this health path. Not a readiness/dependency probe. |
+| GET | `/health` | Liveness JSON. | Public; global rate limiter skips this health path. |
+| POST | `/agent/run` | Retired compatibility handler. | Returns 410 with replacement `/api/agent/run`. |
+| POST | `/llm` | Requires string `input`; sanitize and policy checks; accepts optional provider/model via request budget context. | Outside `/api` auth middleware; general and 60/minute LLM limiters apply. Server binds to loopback in normal startup. Provider/budget errors mapped by `sendGenerationError`. |
+| GET | `/api/system-prompt` | Returns system prompt and version. | `/api` auth boundary unless the key is unset and socket is not loopback. |
+| POST | `/api/insight` | Requires non-empty `brief` <= 8,000 characters; sanitize/policy; optional `browserResearchId`; returns generation summary. | `/api` auth; provider calls and optional Browser snapshot read. Errors mapped through `sendGenerationError`. |
+| POST | `/api/concept` | Requires `insight`; validates the string or known insight text before sanitize/policy. | `/api` auth; provider call; structured provider/budget errors. |
+| POST | `/api/script` | Requires `concept`; validates selected text before sanitize/policy. | `/api` auth; provider call; structured provider/budget errors. |
+| POST | `/api/full-pipeline` | Requires non-empty `brief` <= 8,000 chars; sequential Insight → Concept → Script. Optional `browserResearchId`. | `/api` auth; multiple model calls. Not the Agent pipeline; `sendGenerationError` maps failures. |
+| GET | `/api/metrics` | Returns request metrics, provider label and Gateway stats. | `/api` auth; metric/Gateway data is process-local. |
+| GET | `/api/session` | Returns auth-required/authenticated status; `Cache-Control: no-store`. | Session-specific limiter skips non-POST. |
+| POST | `/api/session` | Reads `apiKey`; returns authenticated state or 401; no key echo. | Session limiter (10/15 min); requires configured API key and trusted origin inside `createApiSession`. |
+| DELETE | `/api/session` | Destroys cookie session and returns 204. | Requires trusted Origin; `Cache-Control: no-store`. |
+| GET | `/api/key-status` | Returns provider configured booleans/models/labels, not key values. | Explicit `/api` auth exemption. |
 
-## Agent routes mounted at /api/agent
+## Agent routes (`/api/agent`)
 
-| Method | Path | Purpose |
-|---|---|---|
-| GET | /api/agent/status | Agent readiness and counts |
-| GET | /api/agent/runs | List runs |
-| GET | /api/agent/runs/:runId | Fetch run |
-| GET | /api/agent/runs/:runId/candidates | Candidate archive |
-| GET | /api/agent/runs/:runId/events | JSON lifecycle events |
-| GET | /api/agent/runs/:runId/approval | Approval status/validation |
-| POST | /api/agent/runs/:runId/approve | Create approval |
-| POST | /api/agent/runs/:runId/execute-action | Consequential action gate |
-| DELETE | /api/agent/runs/:runId | Delete run |
-| GET | /api/agent/audit | Audit events |
-| POST | /api/agent/run | Full Agent orchestration |
+All routes below are behind the global `/api` authentication boundary, subject to loopback behavior when `TEXTFX_API_KEY` is unset.
 
-## Browser routes mounted at /api/browser
-
-| Method | Path | Purpose | Boundary |
+| Method | Path | Observed handler behavior / validation | Extra authorization / outcome |
 |---|---|---|---|
-| GET | /api/browser/status | Browser policy/status | Browser-specific policy |
-| POST | /api/browser/research | Read-only research | Requires browser token and enabled policy |
-| GET | /api/browser/runs/:runId | Load research record | Browser-specific policy |
-| DELETE | /api/browser/runs/:runId | Delete research record | Browser-specific policy |
+| GET | `/status` | Agent mode, counts, recent runs/audit and capability labels. | Read-only. |
+| GET | `/runs` | Lists in-memory Agent runs. | Read-only. |
+| GET | `/runs/:runId` | Validates run ID then loads run. | 400 invalid ID; 404 absent. |
+| GET | `/runs/:runId/candidates` | Validates ID and loads candidate archive. | 400 invalid ID; 404 no archive. |
+| GET | `/runs/:runId/events` | Validates ID and reconstructs lifecycle from event log. | 400 invalid ID; 404 no events. JSON endpoint, not SSE. |
+| GET | `/runs/:runId/approval` | Validates ID and reports approval plus validation. | 400 invalid ID; 404 absent run. |
+| POST | `/runs/:runId/approve` | Validates ID and requires non-empty `approvedBy`; optional `policyVersion`. | `authorizeApproverToken`; then creates content/version/policy/evidence-bound approval. |
+| POST | `/runs/:runId/execute-action` | Validates ID and non-empty `action`; optional `policyVersion`. | Requires valid approval; currently returns 501 because no consequential-action executor is configured. |
+| DELETE | `/runs/:runId` | Validates ID and deletes run/archive. | 400 invalid ID; 404 when not found. |
+| GET | `/audit` | `limit` clamped to 1..50 (default 20). | Read-only. |
+| POST | `/run` | Requires `goal` <= 2,000 chars; optional `brief` <= 8,000, `archetype` <= 100, `language` <= 10; sanitize/policy and idempotency-key consistency checks. | `/api` auth; optional Browser token for research; errors translated in route. Invokes Agent Orchestrator. |
 
-The /api authentication middleware exempts /api/browser paths; browser-route.ts applies its own authorizeBrowser middleware. This exception must remain independently tested.
+## Browser routes (`/api/browser`)
 
-## SaaS routes mounted at /api/saas
+These paths are exempt from global `/api` authentication, but `browser-route.ts` applies `authorizeBrowser` to the entire router, including status/read/delete. Requires opt-in, exact allowed host configuration and a token of at least 32 characters.
 
-| Method | Path | Purpose |
-|---|---|---|
-| GET | /api/saas/status | SaaS scaffold status |
-| GET | /api/saas/plans | Plan metadata |
-| POST | /api/saas/register | Registration scaffold |
-| GET | /api/saas/usage/:tenantId | Usage scaffold |
+| Method | Path | Observed behavior / input checks | Error / data boundary |
+|---|---|---|---|
+| GET | `/status` | Returns enabled/mode/allowlist/limits metadata. | Requires Browser authorization. |
+| POST | `/research` | `parseBrowserRequest` allows only `goal` and 1-3 unique URLs; goal <= 1,000 chars. Read-only research. | 201 on returned research; Browser-specific errors. |
+| GET | `/runs/:runId` | Loads and integrity-checks saved research snapshot. | Browser-specific errors. |
+| DELETE | `/runs/:runId` | Deletes research snapshot. | 204 on success; Browser-specific errors. |
 
-SaaS endpoints exist in source, but the controlling roadmap limits the active project to single-user backend completion. Do not expand SaaS behavior or claim multi-tenant readiness.
+## SaaS routes (`/api/saas`)
 
-## Middleware and security observations
+Routes are behind global `/api` auth. State currently reports `billingReady: false`, `authReady: false`, and `in-memory-demo`; this is not production SaaS or multi-tenant readiness.
 
-- Express JSON body limit is 512 KB.
-- General rate limiter is 120 requests/minute; raw LLM limiter is 60/minute; session POST limiter is 10 attempts per 15 minutes.
-- API authentication is applied to /api routes, with explicit health/key-status/session/browser exceptions.
-- If TEXTFX_API_KEY is unset, authenticateApi permits loopback requests only; the server binds to 127.0.0.1.
-- Session-cookie access is accepted only while TEXTFX_API_KEY is configured and origin checks pass for state-changing requests.
-- Browser routes use a separate browser token and allowlist policy.
-- Approver operations use a separate approver/admin token or the API key fallback.
-- The legacy /agent/run route returns 410; the active Agent endpoint is /api/agent/run.
+| Method | Path | Observed behavior / input checks | Boundary |
+|---|---|---|---|
+| GET | `/status` | Returns scaffold status and sanitized tenant summaries. | Process-local Maps. |
+| GET | `/plans` | Returns plan metadata. | Plan limits are metadata; enforcement not established by this route. |
+| POST | `/register` | Requires `companyName`; optional `planId`. Mints tenant and API key. | Returns newly created tenant/key in registration response; route casts planId to broad type and state selects starter for unknown plan values. |
+| GET | `/usage/:tenantId` | Returns usage and a tenant view with `apiKey` removed. | 404 unknown tenant; process-local usage. |
 
-These are static code observations. BE-05/BE-06 must test missing, invalid, expired and valid credentials, route exemptions, Origin/CORS behavior, approval replay and privilege boundaries.
+## Global middleware and shared contract notes
 
-## Contract inventory still required
+- Middleware order in `index.ts`: CORS → security headers → `express.json({ limit: '512kb' })` → general 120/minute limiter → session POST limiter → `/api` auth boundary → request ID/access log/metrics → handlers/routers → global error handler.
+- CORS allows configured origins and methods GET/POST/DELETE/OPTIONS; credentials are enabled.
+- `/api` global-auth exemptions in `index.ts`: `/health`, `/healthz`, `/key-status`, `/browser`, and `/browser/*`. `/api/session` has its own internal rules. `apiAuthenticationMiddleware` also exempts `/session`.
+- When `TEXTFX_API_KEY` is absent, source `authenticateApi` allows loopback socket requests only. Server startup binds to `127.0.0.1`. Proxy/TLS deployment assumptions have not been runtime-verified here.
+- General limiter is 120/minute except `/health` and `/healthz`; `/llm` adds 60/minute; session POST adds 10 per 15 minutes.
+- Provider/model selection and budget validation are implemented in `requestBudgetContext`/Gateway; this inventory does not certify every route’s effective provider selection or cost.
+- Route-specific and global errors are not yet normalized into one response schema. The inventory intentionally records observed behavior rather than asserting uniformity.
 
-For each route, BE-04 must document:
-- request schema and maximum sizes;
-- response schema/version;
-- authentication and authorization rule;
-- validation and sanitization;
-- rate-limit behavior;
-- timeout/cancellation behavior;
-- idempotency semantics;
-- error status/code contract;
-- provider/model/budget side effects;
-- compatibility tests.
+## BE-04 contract work still required
 
-No API behavior should be changed solely from this inventory.
+For each registered method/path, specify and test: request schema and bounds; response shape/version; auth principal/exemption; sanitization; rate limit; timeout/cancellation; idempotency; exact status/error codes; provider/budget/storage side effects; unsupported methods and body-parser errors; backward compatibility.
+
+No behavior change is authorized by this inventory.

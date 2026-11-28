@@ -5,15 +5,17 @@ const assert = require('node:assert/strict')
 const fs = require('node:fs')
 const os = require('node:os')
 const path = require('node:path')
+const { spawn, spawnSync } = require('node:child_process')
 const express = require('express')
 const http = require('node:http')
+const net = require('node:net')
 const originalFetch = global.fetch
 const providerRequests = []
 let usageFixture = { promptTokenCount: 4, candidatesTokenCount: 3, totalTokenCount: 7 }
 let waitForAbort = false
 const environmentNames = [
   'GEMINI_API_KEY', 'OPENAI_API_KEY', 'OPENROUTER_API_KEY', 'XAI_API_KEY',
-  'AI_MAX_OUTPUT_TOKENS',
+  'AI_MAX_OUTPUT_TOKENS', 'GEMINI_MAX_OUTPUT_TOKENS',
 ]
 const savedEnvironment = new Map(environmentNames.map(name => [name, process.env[name]]))
 for (const name of environmentNames) delete process.env[name]
@@ -46,7 +48,7 @@ process.env.GEMINI_API_KEY = 'budget-test-key'
 process.env.GEMINI_MODEL = 'gemini-2.5-flash'
 process.env.GEMINI_MAX_OUTPUT_TOKENS = '128'
 
-const { callLLM, createGatewayBudgetContext, getGatewayCallHistory, getGatewayStats } = require('../dist/gateway/llm-gateway.js')
+const { callLLM, createGatewayBudgetContext, getGatewayCallHistory, getGatewayStats, getMaxOutputTokens } = require('../dist/gateway/llm-gateway.js')
 
 test.beforeEach(() => {
   for (const name of environmentNames) delete process.env[name]
@@ -182,6 +184,249 @@ test('invalid token configuration fails before SDK access and public budget stat
   const budgetStats = JSON.stringify(getGatewayStats().budgets)
   assert.ok(!budgetStats.includes('retry-success-run'))
   assert.ok(!budgetStats.includes('budget-run'))
+})
+
+test('output token limit accepts the configured bounds and rejects invalid settings', () => {
+  const previous = process.env.AI_MAX_OUTPUT_TOKENS
+  try {
+    process.env.AI_MAX_OUTPUT_TOKENS = '1'
+    assert.equal(getMaxOutputTokens(), 1)
+    process.env.AI_MAX_OUTPUT_TOKENS = '512'
+    assert.equal(getMaxOutputTokens(), 512)
+    process.env.AI_MAX_OUTPUT_TOKENS = '513'
+    assert.throws(getMaxOutputTokens, {
+      message: 'AI_MAX_OUTPUT_TOKENS must be an integer between 1 and 512.',
+    })
+  } finally {
+    if (previous === undefined) delete process.env.AI_MAX_OUTPUT_TOKENS
+    else process.env.AI_MAX_OUTPUT_TOKENS = previous
+  }
+})
+
+test('backend startup rejects an invalid output token limit without exposing its value', () => {
+  const secretValue = '513'
+  const result = spawnSync(process.execPath, [path.join(__dirname, '../dist/index.js')], {
+    cwd: path.join(__dirname, '..'),
+    encoding: 'utf8',
+    timeout: 5000,
+    env: { ...process.env, AI_MAX_OUTPUT_TOKENS: secretValue },
+  })
+  const output = `${result.stdout || ''}${result.stderr || ''}`
+
+  assert.notEqual(result.status, 0)
+  assert.match(output, /AI_MAX_OUTPUT_TOKENS must be an integer between 1 and 512/)
+  assert.ok(!output.includes(secretValue))
+})
+
+async function assertBackendStartsWithOutputTokenLimit(value) {
+  const reservation = net.createServer()
+  await new Promise((resolve, reject) => {
+    reservation.once('error', reject)
+    reservation.listen(0, '127.0.0.1', resolve)
+  })
+  const port = reservation.address().port
+  await new Promise((resolve, reject) => {
+    reservation.close(error => error ? reject(error) : resolve())
+  })
+
+  const backend = spawn(process.execPath, [path.join(__dirname, '../dist/index.js')], {
+    cwd: path.join(__dirname, '..'),
+    stdio: 'ignore',
+    env: {
+      ...process.env,
+      PORT: String(port),
+      AI_MAX_OUTPUT_TOKENS: value,
+      GEMINI_API_KEY: '',
+      OPENAI_API_KEY: '',
+      OPENROUTER_API_KEY: '',
+      XAI_API_KEY: '',
+    },
+  })
+
+  try {
+    const deadline = Date.now() + 5000
+    let response
+    while (Date.now() < deadline) {
+      if (backend.exitCode !== null || backend.signalCode !== null) {
+        assert.fail(`backend exited before becoming healthy (exit=${backend.exitCode}, signal=${backend.signalCode})`)
+      }
+      try {
+        response = await fetch(`http://127.0.0.1:${port}/healthz`)
+        if (response.status === 200) break
+      } catch {
+        await new Promise(resolve => setTimeout(resolve, 50))
+      }
+    }
+
+    assert.equal(response?.status, 200, `backend should start with AI_MAX_OUTPUT_TOKENS=${value}`)
+    assert.equal((await response.json()).ok, true)
+  } finally {
+    if (backend.exitCode === null && backend.signalCode === null) {
+      await new Promise(resolve => {
+        backend.once('exit', resolve)
+        backend.kill('SIGTERM')
+      })
+    }
+  }
+}
+
+test('backend startup succeeds with AI_MAX_OUTPUT_TOKENS=1', async () => {
+  await assertBackendStartsWithOutputTokenLimit('1')
+})
+
+test('backend startup succeeds with AI_MAX_OUTPUT_TOKENS=512', async () => {
+  await assertBackendStartsWithOutputTokenLimit('512')
+})
+
+async function createShutdownTestBackend(t, responseDelayMs = 300) {
+  const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'textfx-shutdown-test-'))
+  const reservation = net.createServer()
+  await new Promise((resolve, reject) => {
+    reservation.once('error', reject)
+    reservation.listen(0, '127.0.0.1', resolve)
+  })
+  const port = reservation.address().port
+  await new Promise((resolve, reject) => {
+    reservation.close(error => error ? reject(error) : resolve())
+  })
+
+  const preloadPath = path.join(directory, 'shutdown-preload.cjs')
+  fs.writeFileSync(preloadPath, `
+    const http = require('node:http')
+    const createServer = http.createServer
+    http.createServer = function (app, ...args) {
+      app.get('/__shutdown_test/inflight', (_req, res) => {
+        res.status(200)
+        res.flushHeaders()
+        setTimeout(() => res.end('request-finished'), Number(process.env.SHUTDOWN_TEST_DELAY_MS))
+      })
+      const server = createServer.call(this, app, ...args)
+      const close = server.close
+      server.close = function (callback) {
+        process.stderr.write('SHUTDOWN_CLOSE_CALLED\\n')
+        return close.call(this, callback)
+      }
+      return server
+    }
+  `)
+
+  const backend = spawn(process.execPath, [
+    '--require', preloadPath,
+    path.join(__dirname, '../dist/index.js'),
+  ], {
+    cwd: path.join(__dirname, '..'),
+    stdio: ['ignore', 'ignore', 'pipe'],
+    env: {
+      ...process.env,
+      HOME: directory,
+      PORT: String(port),
+      SHUTDOWN_TEST_DELAY_MS: String(responseDelayMs),
+      AI_MAX_OUTPUT_TOKENS: '512',
+      GEMINI_API_KEY: '',
+      OPENAI_API_KEY: '',
+      OPENROUTER_API_KEY: '',
+      XAI_API_KEY: '',
+    },
+  })
+  let stderr = ''
+  const outputWaiters = []
+  backend.stderr.on('data', chunk => {
+    stderr += chunk.toString()
+    for (let index = outputWaiters.length - 1; index >= 0; index--) {
+      if (stderr.includes(outputWaiters[index].text)) {
+        outputWaiters[index].resolve()
+        outputWaiters.splice(index, 1)
+      }
+    }
+  })
+
+  async function waitForOutput(text, timeoutMs = 5000) {
+    if (stderr.includes(text)) return
+    await new Promise((resolve, reject) => {
+      const waiter = { text, resolve: undefined, reject: undefined }
+      const timer = setTimeout(() => {
+        const index = outputWaiters.indexOf(waiter)
+        if (index >= 0) outputWaiters.splice(index, 1)
+        reject(new Error(`Timed out waiting for backend output: ${text}`))
+      }, timeoutMs)
+      waiter.resolve = () => { clearTimeout(timer); resolve() }
+      waiter.reject = reject
+      outputWaiters.push(waiter)
+    })
+  }
+
+  async function waitForHealth() {
+    const deadline = Date.now() + 5000
+    while (Date.now() < deadline) {
+      if (backend.exitCode !== null || backend.signalCode !== null) {
+        assert.fail(`backend exited before health check (exit=${backend.exitCode}, signal=${backend.signalCode})`)
+      }
+      try {
+        const response = await fetch(`http://127.0.0.1:${port}/healthz`)
+        if (response.status === 200) return
+      } catch {
+        await new Promise(resolve => setTimeout(resolve, 50))
+      }
+    }
+    assert.fail('backend did not become healthy')
+  }
+
+  async function waitForExit(timeoutMs = 5000) {
+    if (backend.exitCode !== null || backend.signalCode !== null) return
+    await new Promise((resolve, reject) => {
+      const timer = setTimeout(() => reject(new Error('Timed out waiting for backend exit')), timeoutMs)
+      backend.once('exit', () => { clearTimeout(timer); resolve() })
+    })
+  }
+
+  t.after(async () => {
+    if (backend.exitCode === null && backend.signalCode === null) {
+      backend.kill('SIGKILL')
+      await waitForExit().catch(() => {})
+    }
+    fs.rmSync(directory, { recursive: true, force: true })
+  })
+
+  return { backend, port, waitForHealth, waitForOutput, waitForExit }
+}
+
+for (const signal of ['SIGTERM', 'SIGINT']) {
+  test(`backend ${signal} stops accepting connections and drains an active request`, async t => {
+    const { backend, port, waitForHealth, waitForOutput, waitForExit } = await createShutdownTestBackend(t)
+    await waitForHealth()
+
+    const activeResponse = await fetch(`http://127.0.0.1:${port}/__shutdown_test/inflight`)
+    const activeBody = activeResponse.text()
+    backend.kill(signal)
+    await waitForOutput('SHUTDOWN_CLOSE_CALLED')
+
+    const newConnection = await new Promise((resolve, reject) => {
+      const request = http.get(`http://127.0.0.1:${port}/healthz`, { agent: false }, response => {
+        response.resume()
+        reject(new Error('server accepted a new connection during shutdown'))
+      })
+      request.once('error', resolve)
+    })
+    assert.ok(['ECONNREFUSED', 'ECONNRESET'].includes(newConnection.code))
+    assert.equal(activeResponse.status, 200)
+    assert.equal(await activeBody, 'request-finished')
+    await waitForExit()
+    assert.equal(backend.exitCode, 0)
+  })
+}
+
+test('backend exits with failure when graceful shutdown exceeds its configured 10-second timeout', async t => {
+  const { backend, port, waitForHealth, waitForOutput, waitForExit } = await createShutdownTestBackend(t, 30_000)
+  await waitForHealth()
+
+  const activeResponse = await fetch(`http://127.0.0.1:${port}/__shutdown_test/inflight`)
+  const activeBody = activeResponse.text().catch(() => undefined)
+  backend.kill('SIGTERM')
+  await waitForOutput('SHUTDOWN_CLOSE_CALLED')
+  await waitForExit(12_000)
+
+  assert.equal(backend.exitCode, 1)
+  await activeBody
 })
 
 test('agent HTTP route returns 429 for an exhausted call budget before provider access', async t => {

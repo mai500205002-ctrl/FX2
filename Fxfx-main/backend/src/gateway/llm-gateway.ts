@@ -67,6 +67,14 @@ export interface GatewayBudgetContext {
 
 export type GatewayTask = 'candidate-generation' | 'critique' | 'final-artifact' | 'utility'
 
+export function getMaxOutputTokens(): number {
+  const outputTokenSetting = process.env.AI_MAX_OUTPUT_TOKENS || process.env.GEMINI_MAX_OUTPUT_TOKENS || '512'
+  if (!/^[1-9]\d*$/.test(outputTokenSetting)) throw new Error('AI_MAX_OUTPUT_TOKENS must be an integer between 1 and 512.')
+  const maxTokens = Number(outputTokenSetting)
+  if (!Number.isSafeInteger(maxTokens) || maxTokens > 512) throw new Error('AI_MAX_OUTPUT_TOKENS must be an integer between 1 and 512.')
+  return maxTokens
+}
+
 export class GatewayBudgetExceededError extends Error {
   readonly code = 'BUDGET_EXCEEDED'
   readonly status = 429
@@ -574,10 +582,7 @@ export async function callLLM(
   const callBudgetUsd = readBudgetLimit(context.callBudgetUsd, 'GEMINI_CALL_BUDGET_USD', DEFAULT_CALL_BUDGET_USD)
   const task = context.task || 'final-artifact'
   if (!['candidate-generation', 'critique', 'final-artifact', 'utility'].includes(task)) throw new Error('Gateway task is not supported.')
-  const outputTokenSetting = process.env.AI_MAX_OUTPUT_TOKENS || process.env.GEMINI_MAX_OUTPUT_TOKENS || '512'
-  if (!/^[1-9]\d*$/.test(outputTokenSetting)) throw new Error('AI_MAX_OUTPUT_TOKENS must be an integer between 1 and 512.')
-  const maxTokens = Number(outputTokenSetting)
-  if (!Number.isSafeInteger(maxTokens) || maxTokens > 512) throw new Error('AI_MAX_OUTPUT_TOKENS must be an integer between 1 and 512.')
+  const maxTokens = getMaxOutputTokens()
   const temperature = Number(process.env.AI_TEMPERATURE || process.env.GEMINI_TEMPERATURE || '0.8')
   if (!Number.isFinite(temperature) || temperature < 0 || temperature > 2) throw new Error('AI_TEMPERATURE must be between 0 and 2.')
   const candidates = resolveProviderCandidates(context.providerId, context.model, task)

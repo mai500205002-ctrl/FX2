@@ -39,6 +39,7 @@ import {
   getActiveProviderLabel,
   getGatewayCallHistory,
   getGatewayStats,
+  getMaxOutputTokens,
 } from './gateway/llm-gateway'
 import { getProviderStatus, ProviderConfigurationError, ProviderRequestError, type ProviderSelection } from './gateway/provider-adapters'
 import { resolveLanguage } from './utils/generation'
@@ -563,6 +564,8 @@ function logStartupConfig(): void {
 export { app }
 
 if (require.main === module) {
+  getMaxOutputTokens()
+
   const server = CERT_PATH && KEY_PATH && fs.existsSync(CERT_PATH) && fs.existsSync(KEY_PATH)
     ? https.createServer({ cert: fs.readFileSync(CERT_PATH), key: fs.readFileSync(KEY_PATH) }, app)
     : http.createServer(app)

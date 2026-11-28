@@ -184,7 +184,7 @@ test('creative entropy regenerates the more redundant pair member, not merely th
   const candidates = [
     entropyCandidate('networked-direction', 95, 'alpha bravo charlie delta echo foxtrot'),
     entropyCandidate('lower-score-direction', 60, 'alpha bravo charlie delta echo golf'),
-    entropyCandidate('external-neighbor', 80, 'alpha bravo charlie juliet kilo lima'),
+    entropyCandidate('external-neighbor', 80, 'alpha bravo charlie foxtrot juliet kilo lima'),
   ]
   let generationTarget = ''
   const originalMapConcept = conceptMapper.mapConcept

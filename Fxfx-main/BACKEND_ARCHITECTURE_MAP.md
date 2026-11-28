@@ -1,12 +1,16 @@
 # Backend Architecture Map
 
-Status: PRELIMINARY / STATIC REVIEW  
-Baseline HEAD: 8e7771ef49d8ea0af94b9594488f9b9fe619ce6d  
-Review date: 2026-11-27
+Status: BE-01 source inspection complete; not runtime-certified
+Current HEAD inspected: fa6192628e08d6f7064851328e75dad802b196a0
+Review date: 2026-11-28
 
-The detailed source-backed architecture map is maintained at:
+The historical architecture snapshot is maintained at:
 
 - docs/engineering/FX2_ARCHITECTURE_MAP.md
+
+The current BE-01 backend execution map is:
+
+- docs/engineering/BE-01_BACKEND_EXECUTION_MAP.md
 
 The map covers:
 - Express entrypoint, middleware and route registration.
@@ -16,10 +20,10 @@ The map covers:
 - Run snapshots, append-only event log and idempotency store.
 - Primary frontend API flow versus the separate Agent panel.
 
-Evidence status:
+Evidence status for the current BE-01 map:
 - Source paths inspected: PRESENT.
-- Route-to-module wiring: PARTIALLY TRACED.
+- Route-to-module wiring: TRACED by static inspection.
 - Runtime execution on this HEAD: NOT RUN.
-- TypeScript/build/test verification on this HEAD: NOT RUN.
+- TypeScript/build/test verification during BE-01: NOT RUN.
 
-This document is not a runtime certification. Complete BE-01 under MASTER_ENGINEERING_ROADMAP.md before marking the architecture map VERIFIED.
+The previous architecture snapshot records commit 8e7771ef49d8ea0af94b9594488f9b9fe619ce6d and is historical, not verification of the current HEAD. The current map is a source-inspection result, not a runtime or security certification.

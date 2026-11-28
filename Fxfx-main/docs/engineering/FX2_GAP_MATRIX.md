@@ -1,4 +1,6 @@
-# FX2 Gap Matrix — Evidence-Based Decisions
+# FX2 Gap Matrix — Historical Research and Product Backlog
+
+> Historical document dated 2026-11-27 and based on an older SHA. Its creative-engine proposals are not the current implementation order. The BE-02 source-backed backend gap matrix and ordered execution proposal are maintained in [`../../BACKEND_GAP_MATRIX.md`](../../BACKEND_GAP_MATRIX.md); use that document with the controlling `MASTER_ENGINEERING_ROADMAP.md`.
 
 Date: 2026-11-27  
 Baseline: main at 8e7771ef49d8ea0af94b9594488f9b9fe619ce6d  
